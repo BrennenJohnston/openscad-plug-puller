@@ -1,0 +1,12 @@
+# OpenSCAD backup files
+*.scad.bak
+*-backup.scad
+
+# Local exports and scratch renders
+*.3mf
+/exports/
+/tmp/
+
+# OS cruft
+Thumbs.db
+.DS_Store
