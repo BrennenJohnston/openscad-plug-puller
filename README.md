@@ -37,6 +37,14 @@ fat round plugs are gripped between two serrated clamshell plates.
 > **v1.0** public milestone. The geometry and guides are complete and
 > print-tested; expect small refinements before 1.0.
 
+> ### 🌐 Customize in your browser — no install
+>
+> **[Open the Plug Puller in the OpenSCAD Playground](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_SingleFile.scad)**
+> — the full customizer form runs in your web browser, nothing to
+> install, works on a phone. The
+> **[Web Customizer Guide](docs/guides/web-customizer.md)** walks
+> through it step by step.
+
 > ### I'm new — start here
 >
 > You don't need to know OpenSCAD (or any 3D modeling) to make a Plug
@@ -47,7 +55,8 @@ fat round plugs are gripped between two serrated clamshell plates.
 >    measurements and exactly how to take them (≈ 5 minutes)
 > 2. **[Quick Start for Beginners](docs/guides/quick-start-beginner.md)**
 >    — install → type numbers → export the print file, every click
->    spelled out
+>    spelled out — or skip the install with the
+>    **[Web Customizer Guide](docs/guides/web-customizer.md)**
 > 3. **[Fit Troubleshooting](docs/guides/fit-troubleshooting.md)** —
 >    if the print is snug or loose, which one number to nudge
 > 4. **[Try Before You Print](docs/guides/print-preview-outlines.md)** —
@@ -131,6 +140,16 @@ PDF: [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf
 minutes with the [Measuring Guide](docs/guides/measuring-guide.md) and
 the Customizer instead.
 
+## Customize in your browser
+
+No install needed — the
+**[OpenSCAD Playground](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_SingleFile.scad)**
+runs the full customizer form in your web browser (including on a
+phone). The **[Web Customizer Guide](docs/guides/web-customizer.md)**
+covers it click by click, including the manual load path and phone
+usage notes. It loads the flattened single-file build,
+[`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad).
+
 ## Publishing to MakerWorld
 
 MakerWorld's Parametric Model Maker runs OpenSCAD files directly:
@@ -144,6 +163,14 @@ MakerWorld's Parametric Model Maker runs OpenSCAD files directly:
    power sections, and the "(Custom size only)" expert sections).
 3. Test the customizer behaviour first via **Creator Portal → Open SCAD
    File** before publishing.
+
+Draft listing text (title, description, print settings, licensing
+notes) is prepared in
+[`docs/makerworld-listing.md`](docs/makerworld-listing.md). Note the
+licensing decision recorded there: publishing on MakerWorld requires
+granting MakerWorld's platform license terms alongside this repo's
+PolyForm NC 1.0.0 — the listing stays unpublished until the maintainer
+signs off on that.
 
 ## Features
 
@@ -290,6 +317,7 @@ Organized by audience — start in the row that matches you.
 | Document | Description |
 | -------- | ----------- |
 | [`docs/guides/quick-start-beginner.md`](docs/guides/quick-start-beginner.md) | Zero-experience walkthrough: install OpenSCAD, type your measurements, export the STL |
+| [`docs/guides/web-customizer.md`](docs/guides/web-customizer.md) | The same walkthrough with zero install: customize and export in your web browser (works on a phone) |
 | [`docs/guides/measuring-guide.md`](docs/guides/measuring-guide.md) | The plug and hand measurements, how to take each one, printable worksheet |
 | [`docs/guides/measuring-template.svg`](docs/guides/measuring-template.svg) | Printable 1:1 sheet (A4 / Letter): calibration square, mm ruler, finger-sizing circles |
 | [`docs/Plug_Puller_Measuring_Template.pdf`](docs/Plug_Puller_Measuring_Template.pdf) | The same measuring template as a printable PDF |

@@ -60,6 +60,11 @@ simply the same number.)
 
 ## Step B — Install OpenSCAD
 
+> **Don't want to install anything?** The whole flow also runs in your
+> web browser (even on a phone) — see the
+> **[Web Customizer Guide](web-customizer.md)**, then rejoin this guide
+> at Step G to print.
+
 OpenSCAD is the free program that turns your numbers into a printable
 file. You only use one panel of it — you never touch code.
 
