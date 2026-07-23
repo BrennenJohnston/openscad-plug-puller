@@ -40,12 +40,18 @@ Write your numbers into the worksheet at the bottom as you go.
 > it decides which tool you get. Force either tool with `tool_style` if
 > you prefer.
 
-<!-- TODO(photos): one photo per measurement below — ruler from wall
-     plate to the plug's back face, caliper across the plug body at the
-     wall end and at the cord end, caliper on the cord, the four
-     wall-plate styles side by side, caliper on a middle-finger knuckle,
-     ruler across four knuckles. The text descriptions are written to
-     stand alone until the photos land. -->
+This is the heavy-duty clamshell on the kind of fat round plug it is
+measured for — the two thickness numbers below are what routes you to
+it:
+
+![The assembled heavy-duty clamshell zip-tied around a thick round extension-cord plug](../images/clamshell-assembled-on-plug.jpg)
+
+<!-- TODO(photos): still wanted — one close-up photo per measurement
+     below: ruler from wall plate to the plug's back face, caliper
+     across the plug body at the wall end and at the cord end, caliper
+     on the cord, the four wall-plate styles side by side, caliper on a
+     middle-finger knuckle, ruler across four knuckles. These need
+     manual capture; the text descriptions stand alone until they land. -->
 
 ---
 
@@ -224,7 +230,10 @@ Two extra choices sit under Step 3:
 > extension-cord plugs) can slip in the pocket. Thread a zip tie down
 > one of the tool's zip-tie holes, around the plug barrel, and back up
 > the opposite hole, then cinch it — the 2×2 hole grid doubles as a
-> clamp anchor.
+> clamp anchor. (For the clamshell, the zip ties go plate-to-plate the
+> same way:)
+>
+> ![Zip ties threaded through both clamshell plates around the plug barrel](../images/clamshell-assembly-zip-ties.jpg)
 
 > **Safety:** the tool touches only the plug's **sides and back** —
 > never between the plug face and the wall. For extra grip on a slick

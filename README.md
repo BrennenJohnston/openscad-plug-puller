@@ -33,6 +33,8 @@ marked "(Custom size only)"). Smooth-sided round plugs are held by the
 pocket walls plus a zip tie cinched through the existing zip-tie holes;
 fat round plugs are gripped between two serrated clamshell plates.
 
+![The printed heavy-duty clamshell in use at a wall outlet — fingers through both holes, pulling the plug straight out](docs/images/clamshell-in-use-outlet.jpg)
+
 > **Version 0.8** — this is the first public release, approaching a
 > **v1.0** public milestone. The geometry and guides are complete and
 > print-tested; expect small refinements before 1.0.
@@ -268,8 +270,9 @@ openscad-plug-puller/
     Plug_Puller_Complete_Guide.pdf # printable complete guide
     Plug_Puller_Measuring_Template.pdf  # printable 1:1 measuring template
     Plug_Puller_Outline_Sheets.pdf # all twelve 1:1 outline sheets as one printable PDF
-    guides/                        # beginner guides: quick start, measuring, fit troubleshooting
+    guides/                        # beginner guides: quick start, web customizer, measuring, fit troubleshooting
       outline-sheets/              # printable 1:1 outline sheets (one per quick-select combo)
+    images/                        # guide photos and model preview renders
   parameter_mapping.json           # full Customizer schema (103 parameters)
   CHANGELOG.md
   LICENSE                          # PolyForm Noncommercial 1.0.0

@@ -25,10 +25,10 @@ keep reading — the next sentence tells you exactly what to press.
 > thin printable **finger-sizing stencil** if you'd rather not cut out
 > the template's paper circles.
 
-<!-- TODO(photos): add one screenshot per numbered step below (per-OS
-     installer, the Customizer panel location, the Step 1-3 groups,
-     the render progress bar, the export dialog). The text is written to
-     stand alone until the screenshots land. -->
+<!-- TODO(photos): still wanted — OpenSCAD GUI screenshots (per-OS
+     installer, the Customizer panel location, the export dialog).
+     These need manual capture; model renders and device photos are
+     embedded below and the text stands alone without the rest. -->
 
 ---
 
@@ -106,6 +106,10 @@ things:
    for fat ones (one serrated plate — print it **twice**, flip one copy
    over, and zip-tie the pair around the plug). Force **Flat tool** or
    **Heavy-duty clamshell** only if you want to override.
+
+   ![The heavy-duty clamshell plate in the preview — a flat plate with two finger holes and two serrated gripping arms](../images/clamshell-plate-render.png)
+
+   ![Two printed clamshell plates beside a heavy-duty extension-cord plug — the same plate printed twice, one copy flipped](../images/clamshell-plates-and-plug.jpg)
 1. **Step 1 - Your Plug** — pick a **plug preset** (or leave it on
    **Measure my plug** and type the numbers from your worksheet). Every
    field's tooltip repeats how to measure it. (These are always active —
@@ -135,7 +139,11 @@ things:
 
 **How to know it worked:** the preview shows a green tag reading
 `MEDIUM: …` (or your size) next to the model — that is the model
-confirming your numbers were applied. If you instead see **red text**,
+confirming your numbers were applied:
+
+![The flat tool in the preview with the green confirmation tag reading "Medium: 25x25.5 plug, 20mm finger" floating beside it](../images/flat-tool-medium-render.png)
+
+If you instead see **red text**,
 one of your numbers looks wrong (for example, inches instead of
 millimetres). The red text names which measurement to re-check — fix it
 before printing. The **[Fit Troubleshooting Guide](fit-troubleshooting.md)**
@@ -168,6 +176,15 @@ Load the STL into your slicer with these settings (details in the
 Attach the puller to your plug (zip ties or a Velcro strap through the
 holes), hook the cord in the J-slot, put two fingers in the holes, and
 pull.
+
+For the heavy-duty clamshell: thread the zip ties through both plates'
+slots, sandwich the plug between the serrated arms, and cinch —
+
+![Two clamshell plates being zip-tied face to face around a heavy-duty plug](../images/clamshell-assembly-zip-ties.jpg)
+
+![The assembled clamshell cinched around the plug, finger holes clear of the cord](../images/clamshell-assembled-on-plug.jpg)
+
+![The clamshell in use at a wall outlet — fingers through both holes, pulling the plug straight out](../images/clamshell-in-use-outlet.jpg)
 
 If anything is snug, loose, or uncomfortable, open the
 **[Fit Troubleshooting Guide](fit-troubleshooting.md)**. Every fix is a
