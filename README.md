@@ -50,6 +50,9 @@ fat round plugs are gripped between two serrated clamshell plates.
 >    spelled out
 > 3. **[Fit Troubleshooting](docs/guides/fit-troubleshooting.md)** —
 >    if the print is snug or loose, which one number to nudge
+> 4. **[Try Before You Print](docs/guides/print-preview-outlines.md)** —
+>    1:1 paper outline sheets for every quick-select combination, plus
+>    a printable finger-sizing stencil
 >
 > Or skip straight to the [ready-to-print STLs](#ready-to-print-stls)
 > below.
@@ -112,17 +115,20 @@ For web customizers that require a single file, use the flattened build
 ## Ready-to-print STLs
 
 No OpenSCAD needed — three pre-rendered flat tools with default
-settings live in [`stl/`](stl):
+settings live in [`stl/`](stl), plus a finger-sizing stencil:
 
 | File | Size | Fits |
 | ---- | ---- | ---- |
 | [`stl/Plug_Puller_Small.stl`](stl/Plug_Puller_Small.stl) | Small | ≈ 5th-percentile female hand |
 | [`stl/Plug_Puller_Medium.stl`](stl/Plug_Puller_Medium.stl) | Medium | the reference size — start here |
 | [`stl/Plug_Puller_Large.stl`](stl/Plug_Puller_Large.stl) | Large | ≈ 95th-percentile male hand |
+| [`stl/Finger_Sizing_Stencil.stl`](stl/Finger_Sizing_Stencil.stl) | — | a thin gauge plate with all 18 finger-sizing holes (Ø 15–32 mm) — find your finger size without scissors |
 
-For a tool matched to *your* plug and hand, spend five minutes with the
-[Measuring Guide](docs/guides/measuring-guide.md) and the Customizer
-instead.
+Not sure which size? Print a **[1:1 paper outline sheet](docs/guides/print-preview-outlines.md)**
+of any quick-select combination first and test it against your real
+plug and hand. For a tool matched to *your* plug and hand, spend five
+minutes with the [Measuring Guide](docs/guides/measuring-guide.md) and
+the Customizer instead.
 
 ## Publishing to MakerWorld
 
@@ -158,6 +164,7 @@ MakerWorld's Parametric Model Maker runs OpenSCAD files directly:
 | Auto-fit | Every feature is bounds-clamped against the body envelope so measured sizes never self-intersect; in Custom mode every clamp is reported in the console (`(clamped from …)`) with a preview HUD notice |
 | In-model validation | Red warning tag printed flat on the bed next to the part when a check trips (flat tool W-1…W-19; clamshell WC-1…WC-9), including hole-collision checks; messages name the *measurement* to fix; a preview-only green tag confirms your numbers were applied |
 | Render mode dispatch | Single SCAD renders the full model, the clamshell plate, body only, isolated cutouts, or a 2D cutout overlay |
+| Try-before-you-print previews | [1:1 dimensioned outline sheets](docs/guides/print-preview-outlines.md) for every quick-select combination (cut out, hold against the plug, try the finger holes) plus a printable [finger-sizing stencil](Finger_Sizing_Stencil.scad) |
 
 ## Sizes
 
@@ -218,6 +225,7 @@ The hidden `render_mode` parameter controls which subset of geometry is built:
 ```
 openscad-plug-puller/
   Plug_Puller.scad                 # root entry point — open this in OpenSCAD
+  Finger_Sizing_Stencil.scad       # standalone printable finger-sizing stencil
   src/
     Plug_Puller_Parametric.scad    # flat tool + heavy-duty clamshell
     presets.scad                   # PRESET_MEDIUM reference table + routing
@@ -226,12 +234,13 @@ openscad-plug-puller/
     Plug_Puller_SingleFile.scad    # flattened single-file build (MakerWorld / web)
   presets/
     Plug_Puller_Parametric.json    # example saved Customizer parameter sets
-  stl/                             # ready-to-print Small / Medium / Large samples
+  stl/                             # ready-to-print samples + the sizing stencil
   docs/
     Plug_Puller_Reference.md       # exhaustive engineering reference
     Plug_Puller_Complete_Guide.pdf # printable complete guide
     Plug_Puller_Measuring_Template.pdf  # printable 1:1 measuring template
     guides/                        # beginner guides: quick start, measuring, fit troubleshooting
+      outline-sheets/              # printable 1:1 outline sheets (one per quick-select combo)
   parameter_mapping.json           # full Customizer schema (103 parameters)
   CHANGELOG.md
   LICENSE                          # PolyForm Noncommercial 1.0.0
@@ -282,6 +291,7 @@ Organized by audience — start in the row that matches you.
 | [`docs/guides/measuring-guide.md`](docs/guides/measuring-guide.md) | The plug and hand measurements, how to take each one, printable worksheet |
 | [`docs/guides/measuring-template.svg`](docs/guides/measuring-template.svg) | Printable 1:1 sheet (A4 / Letter): calibration square, mm ruler, finger-sizing circles |
 | [`docs/Plug_Puller_Measuring_Template.pdf`](docs/Plug_Puller_Measuring_Template.pdf) | The same measuring template as a printable PDF |
+| [`docs/guides/print-preview-outlines.md`](docs/guides/print-preview-outlines.md) | Try before you print: 1:1 outline sheets for every quick-select combination + the finger-sizing stencil |
 | [`docs/guides/fit-troubleshooting.md`](docs/guides/fit-troubleshooting.md) | Symptom → which measurement to nudge → by how much; warning-tag decoder |
 | [`docs/Plug_Puller_Complete_Guide.pdf`](docs/Plug_Puller_Complete_Guide.pdf) | The complete guide as a single printable PDF |
 

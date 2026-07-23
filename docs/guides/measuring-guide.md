@@ -16,7 +16,10 @@ You need:
 There is also a **[printable measuring template](measuring-template.svg)**
 with a mm ruler and finger-sizing circles — print it at 100 % scale
 ("actual size", no "fit to page") and check the calibration square
-before trusting it.
+before trusting it. Prefer not to cut out paper circles? Print the
+**[finger-sizing stencil](print-preview-outlines.md#the-finger-sizing-stencil)**
+([`stl/Finger_Sizing_Stencil.stl`](../../stl/Finger_Sizing_Stencil.stl))
+instead — the same 18 circles as real through-holes in a thin plate.
 
 Write your numbers into the worksheet at the bottom as you go.
 
@@ -171,6 +174,12 @@ the middle knuckle), not the fingertip.
 > from Ø 15 to Ø 32 mm. Find the smallest circle your middle finger
 > passes through comfortably, then **subtract 5** from its Ø number —
 > that's your finger width. (Passes Ø 26 → enter 21.)
+>
+> **Or skip the scissors:** print
+> [`stl/Finger_Sizing_Stencil.stl`](../../stl/Finger_Sizing_Stencil.stl)
+> — a thin plate with the same 18 circles as real through-holes, each
+> labeled. Same rule: smallest comfortable hole, minus 5. See the
+> [Try Before You Print guide](print-preview-outlines.md#the-finger-sizing-stencil).
 
 - Typical range: 16–24 mm
 - Example: ≈ 22 mm

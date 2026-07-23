@@ -18,6 +18,13 @@ extension-cord plug it switches you to the **heavy-duty clamshell**.
 This guide walks you through every click. If a word looks technical,
 keep reading — the next sentence tells you exactly what to press.
 
+> **Want to test the fit before printing?** Every quick-select
+> combination has a printable **[1:1 outline sheet](print-preview-outlines.md)**
+> — cut out the tool's true-size silhouette, hold it against your plug
+> on the wall, and try the finger holes on paper first. There is also a
+> thin printable **finger-sizing stencil** if you'd rather not cut out
+> the template's paper circles.
+
 <!-- TODO(photos): add one screenshot per numbered step below (per-OS
      installer, the Customizer panel location, the Step 1-3 groups,
      the render progress bar, the export dialog). The text is written to

@@ -9,6 +9,27 @@ Versions below 1.0.0 are public preview releases: the model is complete
 and print-tested, but small refinements are expected before the **v1.0
 public milestone**.
 
+## [Unreleased]
+
+### Added
+
+- **Try-before-you-print outline sheets**
+  (`docs/guides/outline-sheets/`, 12 SVGs): a printable 1:1
+  dimensioned silhouette of every quick-select combination — the three
+  `plug_preset` families × Small / Medium / Large for the flat tool,
+  plus the heavy-duty clamshell plate at all three sizes. Each sheet
+  has CAD-style dimension lines, a 50 × 50 mm calibration square, the
+  matching Customizer settings in the title block, and a how-to strip.
+  Guide: `docs/guides/print-preview-outlines.md`.
+- **Finger-sizing stencil** (`Finger_Sizing_Stencil.scad` at the repo
+  root, pre-rendered `stl/Finger_Sizing_Stencil.stl`): a thin
+  parametric plate with the measuring template's 18 finger-sizing
+  circles (Ø 15–32 mm) as labeled through-holes — the no-scissors way
+  to find `measure_finger_width`. A `split_halves` option splits it
+  into two smaller plates for tight beds.
+- README, measuring guide, and quick-start cross-links to the new
+  sheets and stencil.
+
 ## [0.8.0] - 2026-07-22
 
 First public release.
