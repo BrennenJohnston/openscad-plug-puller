@@ -39,6 +39,7 @@ on:
       - "parameter_mapping.json"
       - "requirements-dev.txt"
       - "pytest.ini"
+      - "ruff.toml"
       - ".github/workflows/stl-validation.yml"
   pull_request:
     branches: [main, master, develop]
