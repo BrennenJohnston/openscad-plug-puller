@@ -1,0 +1,23 @@
+# Plug Puller development dependencies.
+# Installs everything the pytest suite, the parameter schema validator, and
+# the build scripts (scripts/) need on a CI runner or contributor laptop.
+
+# --- Core test framework -----------------------------------------------------
+pytest>=7,<9
+# Honours the `timeout` / `timeout_method` settings in pytest.ini so a runaway
+# OpenSCAD render in CI gets killed instead of stalling the whole job.
+pytest-timeout>=2.2
+
+# --- Mesh comparison (tests/mesh_comparison.py) ------------------------------
+trimesh>=4,<5
+numpy>=1.24
+
+# --- Section/outline geometry (tests/test_clamshell_parity.py,
+# --- scripts/generate_outline_sheets.py) --------------------------------------
+shapely>=2
+
+# --- Schema validation (tests/validate_parameter_schema.py) ------------------
+# Standard library `json` + `re` only; no extra packages required here.
+
+# --- Linters used in CI's quick lane (.github/workflows/stl-validation.yml) --
+ruff>=0.4

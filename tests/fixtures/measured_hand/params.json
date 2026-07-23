@@ -1,0 +1,18 @@
+{
+  "description": "Measure-my-hand size with the realistic US vacuum-plug vector (straight-sided plug 34 wide x 16 thick at both stations, 38 mm long, 5 mm cord, Decora plate, 22 mm finger / 88 mm hand). Pins the measurement-driven path away from the Medium parity point; the same vector is checked formula-level by tests/test_fit_derivations.py.",
+  "parameters": {
+    "size": "Measure my hand",
+    "attachment": "Zip ties",
+    "measure_plug_length": 38,
+    "measure_plug_width_wall": 34,
+    "measure_plug_width_cable": 34,
+    "measure_plug_thickness_wall": 16,
+    "measure_plug_thickness_cable": 16,
+    "measure_cord_thickness": 5,
+    "measure_wall_plate_style": "Rocker / Decora",
+    "measure_finger_width": 22,
+    "measure_hand_width": 88,
+    "render_mode": "Full",
+    "quality": 64
+  }
+}

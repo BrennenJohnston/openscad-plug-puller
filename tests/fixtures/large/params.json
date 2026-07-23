@@ -1,0 +1,9 @@
+{
+  "description": "Large size / Full render — the v6 geometry scaled for bigger hands (ANSUR-II size table pair finger 23 / hand 96), default plug measurements.",
+  "parameters": {
+    "size": "Large",
+    "attachment": "Zip ties",
+    "render_mode": "Full",
+    "quality": 64
+  }
+}

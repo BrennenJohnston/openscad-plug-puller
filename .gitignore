@@ -6,7 +6,25 @@
 *.3mf
 /exports/
 /tmp/
+tmp_renders/
+
+# Test/scratch outputs at repo root
+/test_*.stl
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# IDEs
+.vscode/
+.idea/
 
 # OS cruft
 Thumbs.db
 .DS_Store
+
+# AI coding assistants
+.cursor/

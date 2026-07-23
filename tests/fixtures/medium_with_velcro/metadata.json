@@ -1,0 +1,32 @@
+{
+  "fixture": "medium_with_velcro",
+  "generated_at_utc": "2026-07-23T20:05:13.917093+00:00",
+  "openscad_version": "OpenSCAD version 2026.01.03",
+  "manifold_backend": true,
+  "render_duration_seconds": 0.76,
+  "stl_size_bytes": 4655404,
+  "trimesh_properties": {
+    "volume_mm3": 11739.94170777624,
+    "surface_area_mm2": 7364.487055555299,
+    "bounding_box_mm": [
+      [
+        -35.35115846246481,
+        0.0,
+        0.0
+      ],
+      [
+        35.3389580398798,
+        65.5,
+        6.3469404587611375
+      ]
+    ],
+    "is_watertight": true
+  },
+  "parameters": {
+    "size": "Medium",
+    "attachment": "Zip ties + Velcro",
+    "velcro_style": "Classic slot",
+    "render_mode": "Full",
+    "quality": 64
+  }
+}

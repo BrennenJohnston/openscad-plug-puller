@@ -1,0 +1,20 @@
+# STLs (shipped models + golden test fixtures) are committed as plain
+# binary files — no Git LFS, so clones and CI need no extra tooling.
+*.stl binary
+*.3mf binary
+*.pdf binary
+
+# Ensure consistent line endings
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+*.scad text eol=lf
+*.sh text eol=lf
+*.svg text eol=lf
+
+# Windows batch files should use CRLF
+*.bat text eol=crlf
+*.ps1 text eol=crlf

@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Plug Puller v5 STL Comparison Configuration",
+  "description": "Tolerances and required checks for OpenSCAD-vs-golden-fixture mesh comparison. Tight thresholds reflect single-generator determinism (OpenSCAD + Manifold backend).",
+  "version": "1.0.0",
+  "last_updated": "2026-05-31",
+  "profile": "baseline",
+
+  "tolerances": {
+    "volume": {
+      "percent": 1.0,
+      "description": "Maximum allowed volume drift vs golden fixture, as a percentage of the reference volume."
+    },
+    "surface_area": {
+      "percent": 0.5,
+      "description": "Maximum allowed surface-area drift vs golden fixture, as a percentage."
+    },
+    "bounding_box": {
+      "mm": 0.1,
+      "description": "Maximum allowed bounding-box extent drift in millimetres (max per-axis |refExtent - testExtent|)."
+    }
+  },
+
+  "required_checks": {
+    "watertightness": {
+      "required": true,
+      "must_match": true,
+      "require_test_watertight": false,
+      "description": "Compare test mesh's watertight state to the reference (regression guard). Set `require_test_watertight: true` in a strict profile to forbid any non-watertight output regardless of the reference state. Since the v5.1 fillet rework (slice-based rim flares replaced the minkowski shells) every shipped fixture reference is watertight."
+    },
+    "volume": {
+      "required": true,
+      "description": "Volume parity is mandatory."
+    },
+    "surface_area": {
+      "required": true,
+      "description": "Surface-area parity is mandatory."
+    },
+    "bounding_box": {
+      "required": true,
+      "description": "Bounding-box extent parity is mandatory."
+    },
+    "face_count": {
+      "required": false,
+      "report_only": true,
+      "description": "Face count varies legitimately with tessellation noise; informational only."
+    },
+    "vertex_count": {
+      "required": false,
+      "report_only": true,
+      "description": "Vertex count varies legitimately with tessellation noise; informational only."
+    }
+  },
+
+  "tool_versions": {
+    "openscad": {
+      "ci_version": "2026.01.03",
+      "local_min_version": "2021.01",
+      "note": "2026 nightly with the Manifold backend is required for fixture-byte reproducibility. CGAL builds may render geometrically equivalent meshes that differ in vertex order and face count."
+    },
+    "python_packages": {
+      "trimesh": ">=4",
+      "numpy": ">=1.24"
+    }
+  },
+
+  "notes": [
+    "Plug-puller has a single generator (OpenSCAD itself); these tolerances guard against toolchain drift, not cross-generator semantic differences.",
+    "If a future OpenSCAD release legitimately changes one of these metrics by more than the tolerance, regenerate the golden fixtures (see scripts/README.md) and bump the `last_updated` date in this file."
+  ]
+}

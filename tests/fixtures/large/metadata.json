@@ -1,0 +1,31 @@
+{
+  "fixture": "large",
+  "generated_at_utc": "2026-07-23T20:05:10.052587+00:00",
+  "openscad_version": "OpenSCAD version 2026.01.03",
+  "manifold_backend": true,
+  "render_duration_seconds": 0.76,
+  "stl_size_bytes": 4723884,
+  "trimesh_properties": {
+    "volume_mm3": 17757.101623647395,
+    "surface_area_mm2": 8661.049874591074,
+    "bounding_box_mm": [
+      [
+        -39.184704534709454,
+        0.0,
+        0.0
+      ],
+      [
+        39.1957321614027,
+        67.64999999850988,
+        7.146940458761138
+      ]
+    ],
+    "is_watertight": true
+  },
+  "parameters": {
+    "size": "Large",
+    "attachment": "Zip ties",
+    "render_mode": "Full",
+    "quality": 64
+  }
+}

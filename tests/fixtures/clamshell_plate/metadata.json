@@ -1,0 +1,30 @@
+{
+  "fixture": "clamshell_plate",
+  "generated_at_utc": "2026-07-23T20:05:09.068434+00:00",
+  "openscad_version": "OpenSCAD version 2026.01.03",
+  "manifold_backend": true,
+  "render_duration_seconds": 1.757,
+  "stl_size_bytes": 7662626,
+  "trimesh_properties": {
+    "volume_mm3": 6745.810463867948,
+    "surface_area_mm2": 6478.995232762107,
+    "bounding_box_mm": [
+      [
+        -33.49566102027893,
+        0.0,
+        0.0
+      ],
+      [
+        33.49566102027893,
+        73.79566103219986,
+        4.0
+      ]
+    ],
+    "is_watertight": true
+  },
+  "parameters": {
+    "plug_preset": "Heavy-duty extension cord - NEMA 5-15",
+    "render_mode": "Clamshell Plate",
+    "quality": 64
+  }
+}

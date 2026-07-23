@@ -1,0 +1,10 @@
+{
+  "description": "Medium size with attachment = Zip ties + Velcro and velcro_style = Classic slot — pins the classic-slot velcro fallback (two rectangular slots leaning parallel to the body side edges), distinct from the default wing cutouts used by the `medium` fixture.",
+  "parameters": {
+    "size": "Medium",
+    "attachment": "Zip ties + Velcro",
+    "velcro_style": "Classic slot",
+    "render_mode": "Full",
+    "quality": 64
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "description": "Medium size / Full render — the v6 Plug Puller (v6.0/CAD/v6.0.stl, 'Plug Puller 3.1 - B'). All plug measurements at their defaults; values route through FIT_MEASURED, which reproduces PRESET_MEDIUM exactly (the Medium-parity invariant, cross-checked against the reference mesh by tests/test_reference_parity.py).",
+  "parameters": {
+    "size": "Medium",
+    "attachment": "Zip ties + Velcro",
+    "render_mode": "Full",
+    "quality": 64
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "description": "Medium size / Body Only render mode — the pocketed body with all cutouts but no Steps plate fills. Pins the render-mode dispatch path.",
+  "parameters": {
+    "size": "Medium",
+    "attachment": "Zip ties",
+    "render_mode": "Body Only",
+    "quality": 64
+  }
+}
