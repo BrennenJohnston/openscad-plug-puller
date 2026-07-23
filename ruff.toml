@@ -1,0 +1,11 @@
+# Ruff configuration for the plug-puller test suite and build scripts.
+#
+# The rule set is pinned explicitly (ruff's historical defaults: pycodestyle
+# errors + pyflakes) so lint results are deterministic across ruff releases —
+# a newer ruff on CI must not fail on rules the pinned code never opted into
+# (e.g. the pyupgrade typing modernization added to newer defaults).
+
+target-version = "py311"
+
+[lint]
+select = ["E4", "E7", "E9", "F"]
