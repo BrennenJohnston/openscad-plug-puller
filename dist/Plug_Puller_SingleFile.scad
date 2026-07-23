@@ -2,7 +2,7 @@
 // Plug_Puller_SingleFile.scad — GENERATED FILE, DO NOT EDIT
 // =============================================================================
 //
-// Flattened single-file build of the Plug Puller 0.8 parametric model, with
+// Flattened single-file build of the Plug Puller 0.9 parametric model, with
 // fit_measured.scad and presets.scad inlined. Generated from the canonical
 // sources in src/ — edit those files, not this one.
 //
@@ -20,7 +20,7 @@
 //   permitted. Contact the maintainer for commercial use.
 // =============================================================================
 
-// Plug Puller 0.8 — Unified Parametric Generator (Flat tool + Heavy-duty clamshell)
+// Plug Puller 0.9 — Unified Parametric Generator (Flat tool + Heavy-duty clamshell)
 // One model, two tools, chosen with the Step 0 `tool_style` selector:
 //   - Flat tool: the reworked v6 flat puller — a slab with a two-level plug
 //     pocket whose side walls follow a parametric "plug side rail", plus

@@ -61,7 +61,7 @@ SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
 STL_DIR = PROJECT_ROOT / "tmp_renders" / "outline_sheets"
 DEFAULT_OUT = PROJECT_ROOT / "docs" / "guides" / "outline-sheets"
 
-MODEL_VERSION = "0.8"
+MODEL_VERSION = "0.9"
 
 # ---------------------------------------------------------------------------
 # The quick-select matrix

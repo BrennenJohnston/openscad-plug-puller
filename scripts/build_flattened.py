@@ -55,7 +55,7 @@ HEADER = """\
 // Plug_Puller_SingleFile.scad — GENERATED FILE, DO NOT EDIT
 // =============================================================================
 //
-// Flattened single-file build of the Plug Puller 0.8 parametric model, with
+// Flattened single-file build of the Plug Puller 0.9 parametric model, with
 // fit_measured.scad and presets.scad inlined. Generated from the canonical
 // sources in src/ — edit those files, not this one.
 //
