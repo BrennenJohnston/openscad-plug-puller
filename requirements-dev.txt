@@ -15,6 +15,9 @@ numpy>=1.24
 # --- Section/outline geometry (tests/test_clamshell_parity.py,
 # --- scripts/generate_outline_sheets.py) --------------------------------------
 shapely>=2
+# trimesh's Trimesh.section() path handling needs scipy's csgraph traversal;
+# without it every clamshell-parity cross-section test errors at setup.
+scipy>=1.10
 
 # --- Schema validation (tests/validate_parameter_schema.py) ------------------
 # Standard library `json` + `re` only; no extra packages required here.
