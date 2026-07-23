@@ -2,7 +2,7 @@
 
 [![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20NC%201.0.0-blue.svg)](LICENSE)
 [![OpenSCAD](https://img.shields.io/badge/OpenSCAD-2021.01%2B-orange.svg)](https://openscad.org/downloads.html)
-[![Version](https://img.shields.io/badge/version-0.9.0-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.10.0-brightgreen.svg)](CHANGELOG.md)
 [![CI: STL Validation](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml/badge.svg)](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml)
 
 Parametric OpenSCAD model of the **Plug Puller** — a handheld assistive
@@ -36,7 +36,7 @@ fat round plugs are gripped between two serrated clamshell plates.
 
 ![The printed heavy-duty clamshell in use at a wall outlet — fingers through both holes, pulling the plug straight out](docs/images/clamshell-in-use-outlet.jpg)
 
-> **Version 0.9** — one step from the **v1.0** public milestone. The
+> **Version 0.10** — one step from the **v1.0** public milestone. The
 > geometry and guides are complete and print-tested, the shipped STLs
 > are CI-validated against golden fixtures, and the model is
 > customizable in the browser with nothing to install.
@@ -53,7 +53,16 @@ fat round plugs are gripped between two serrated clamshell plates.
 >
 > You don't need to know OpenSCAD (or any 3D modeling) to make a Plug
 > Puller that fits **your** plug and **your** hand. Measure a few
-> things with a ruler, type them into a form, export, print:
+> things with a ruler, type them into a form, export, print.
+>
+> **The one page to start from is the
+> [Starter Guide](docs/guides/starter-guide.md)** — match your plug
+> against the measuring stencil (or measure it), fill in the steps,
+> print. Also available as a printable PDF with a built-in 1:1 paper
+> stencil sheet:
+> [`docs/Plug_Puller_Starter_Guide.pdf`](docs/Plug_Puller_Starter_Guide.pdf).
+>
+> The deep dives it points into:
 >
 > 1. **[Measuring Guide](docs/guides/measuring-guide.md)** — the
 >    measurements and exactly how to take them (≈ 5 minutes)
@@ -65,7 +74,8 @@ fat round plugs are gripped between two serrated clamshell plates.
 >    if the print is snug or loose, which one number to nudge
 > 4. **[Try Before You Print](docs/guides/print-preview-outlines.md)** —
 >    1:1 paper outline sheets for every quick-select combination, plus
->    a printable finger-sizing stencil
+>    a printable measuring stencil (plug silhouettes, ruler, cord gauge,
+>    finger holes)
 >
 > Or skip straight to the [ready-to-print STLs](#ready-to-print-stls)
 > below.
@@ -89,10 +99,9 @@ fat round plugs are gripped between two serrated clamshell plates.
 
 ## Quick start
 
-1. Open [`Plug_Puller.scad`](Plug_Puller.scad) at the repo root in
-   OpenSCAD (v2021.01 or later; recent builds with the Manifold backend
-   render fastest). It is a thin wrapper around the source in
-   [`src/`](src).
+1. Open [`src/Plug_Puller_Parametric.scad`](src/Plug_Puller_Parametric.scad)
+   in OpenSCAD (v2021.01 or later; recent builds with the Manifold
+   backend render fastest).
 2. Open the **Customizer** panel (`View ▸ Hide Customizer` unchecked;
    older builds: `Window ▸ Customizer`).
    - **Step 0 - Tool Style**: `Auto from plug` (default) picks the
@@ -106,10 +115,11 @@ fat round plugs are gripped between two serrated clamshell plates.
      `Small` / `Large`, or pick `Measure my hand` and fill in the two
      hand measurements below the dropdown.
    - **Step 3 - Attachment**: `Zip ties + Velcro` (default), `Zip ties`,
-     `Velcro strap`, or `None`; `velcro_style` is `Wing` (default) or
-     `Classic slot`.
-   - **Step 4 - Cord Hook**: `hook_hand` = `Right` (the reference
-     device) or `Left`.
+     `Velcro strap`, or `None` — shapes both tools (flat-tool hole grid /
+     wing slots, clamshell zip stations / arm slots); `velcro_style` is
+     `Wing` (default) or `Classic slot` (flat tool only).
+   - **Step 4 - Cord Hook - Flat Tool**: `hook_hand` = `Right` (the
+     reference device) or `Left`; ignored by the clamshell.
 3. Press **F6** to render, then `File ▸ Export ▸ STL` to save the
    print file. (The heavy-duty clamshell is a single plate — print it
    twice and flip one copy over, then zip-tie the pair face to face
@@ -120,22 +130,21 @@ sections hold placement overrides and clamshell tuning, and the
 `(Custom size only)` sections only apply when `size = Custom` — see the
 [Power User Guide](docs/guides/power-user-guide.md).
 
-For direct access to the source (e.g. when working on the model
-itself), open [`src/Plug_Puller_Parametric.scad`](src/Plug_Puller_Parametric.scad).
-For web customizers that require a single file, use the flattened build
-[`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad).
+Prefer a single file (e.g. for the MakerWorld customizer or offline
+sharing)? Use [`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad)
+— the same model flattened into one file.
 
 ## Ready-to-print STLs
 
 No OpenSCAD needed — three pre-rendered flat tools with default
-settings live in [`stl/`](stl), plus a finger-sizing stencil:
+settings live in [`stl/`](stl), plus the measuring stencil:
 
 | File | Size | Fits |
 | ---- | ---- | ---- |
 | [`stl/Plug_Puller_Small.stl`](stl/Plug_Puller_Small.stl) | Small | ≈ 5th-percentile female hand |
 | [`stl/Plug_Puller_Medium.stl`](stl/Plug_Puller_Medium.stl) | Medium | the reference size — start here |
 | [`stl/Plug_Puller_Large.stl`](stl/Plug_Puller_Large.stl) | Large | ≈ 95th-percentile male hand |
-| [`stl/Finger_Sizing_Stencil.stl`](stl/Finger_Sizing_Stencil.stl) | — | a thin gauge plate with all 18 finger-sizing holes (Ø 15–32 mm) — find your finger size without scissors |
+| [`stl/Measuring_Stencil.stl`](stl/Measuring_Stencil.stl) | — | thin measuring cards: plug-preset silhouettes (P1–P3), a tactile mm ruler (R1), a cord gauge (C1), and all 18 finger-sizing holes (F1/F2) — answer the worksheet without a caliper |
 
 Not sure which size? Print a **[1:1 paper outline sheet](docs/guides/print-preview-outlines.md)**
 of any quick-select combination first and test it against your real
@@ -194,9 +203,9 @@ signs off on that.
 | Wing velcro slots | Default `Wing` style: curved triangular cutouts filling the dead space between finger hole, pocket, side edge, and zip holes, sized to `strap_width`; a `Classic slot` fallback keeps rectangular slots |
 | Round-plug retention | Smooth-sided round plugs are held by the pocket walls plus a zip tie cinched through the existing zip-tie hole grid |
 | Auto-fit | Every feature is bounds-clamped against the body envelope so measured sizes never self-intersect; in Custom mode every clamp is reported in the console (`(clamped from …)`) with a preview HUD notice |
-| In-model validation | Red warning tag printed flat on the bed next to the part when a check trips (flat tool W-1…W-19; clamshell WC-1…WC-9), including hole-collision checks; messages name the *measurement* to fix; a preview-only green tag confirms your numbers were applied |
+| In-model validation | Red warning tag printed flat on the bed next to the part when a check trips (flat tool W-1…W-19; clamshell WC-1…WC-11), including hole-collision checks; messages name the *measurement* to fix; a preview-only green tag confirms your numbers were applied |
 | Render mode dispatch | Single SCAD renders the full model, the clamshell plate, body only, isolated cutouts, or a 2D cutout overlay |
-| Try-before-you-print previews | [1:1 dimensioned outline sheets](docs/guides/print-preview-outlines.md) for every quick-select combination (cut out, hold against the plug, try the finger holes) plus a printable [finger-sizing stencil](Finger_Sizing_Stencil.scad) |
+| Try-before-you-print previews | [1:1 dimensioned outline sheets](docs/guides/print-preview-outlines.md) for every quick-select combination (cut out, hold against the plug, try the finger holes) plus a printable [measuring stencil](Measuring_Stencil.scad) with plug silhouettes, ruler, cord gauge, and finger holes |
 
 ## Sizes
 
@@ -256,10 +265,9 @@ The hidden `render_mode` parameter controls which subset of geometry is built:
 
 ```
 openscad-plug-puller/
-  Plug_Puller.scad                 # root entry point — open this in OpenSCAD
-  Finger_Sizing_Stencil.scad       # standalone printable finger-sizing stencil
+  Measuring_Stencil.scad           # standalone printable measuring stencil
   src/
-    Plug_Puller_Parametric.scad    # flat tool + heavy-duty clamshell
+    Plug_Puller_Parametric.scad    # flat tool + heavy-duty clamshell — open this in OpenSCAD
     presets.scad                   # PRESET_MEDIUM reference table + routing
     fit_measured.scad              # measurement -> parameter derivations
   dist/
@@ -321,12 +329,15 @@ Organized by audience — start in the row that matches you.
 
 | Document | Description |
 | -------- | ----------- |
+| [`docs/guides/starter-guide.md`](docs/guides/starter-guide.md) | **Start here** — the whole path on one page: match your plug against the stencil cards (or measure it), fill in the Customizer steps, print |
+| [`docs/Plug_Puller_Starter_Guide.pdf`](docs/Plug_Puller_Starter_Guide.pdf) | The starter guide as a printable PDF, ending with the 1:1 paper stencil sheet |
+| [`docs/guides/stencil-sheet.svg`](docs/guides/stencil-sheet.svg) | The 1:1 paper stencil sheet on its own (A4 / Letter): calibration square, P1–P3 plug silhouettes, mm ruler, finger circles |
 | [`docs/guides/quick-start-beginner.md`](docs/guides/quick-start-beginner.md) | Zero-experience walkthrough: install OpenSCAD, type your measurements, export the STL |
 | [`docs/guides/web-customizer.md`](docs/guides/web-customizer.md) | The same walkthrough with zero install: customize and export in your web browser (works on a phone) |
 | [`docs/guides/measuring-guide.md`](docs/guides/measuring-guide.md) | The plug and hand measurements, how to take each one, printable worksheet |
 | [`docs/guides/measuring-template.svg`](docs/guides/measuring-template.svg) | Printable 1:1 sheet (A4 / Letter): calibration square, mm ruler, finger-sizing circles |
 | [`docs/Plug_Puller_Measuring_Template.pdf`](docs/Plug_Puller_Measuring_Template.pdf) | The same measuring template as a printable PDF |
-| [`docs/guides/print-preview-outlines.md`](docs/guides/print-preview-outlines.md) | Try before you print: 1:1 outline sheets for every quick-select combination + the finger-sizing stencil |
+| [`docs/guides/print-preview-outlines.md`](docs/guides/print-preview-outlines.md) | Try before you print: 1:1 outline sheets for every quick-select combination + the measuring stencil |
 | [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf) | All twelve 1:1 outline sheets in one printable PDF with a cover index |
 | [`docs/guides/fit-troubleshooting.md`](docs/guides/fit-troubleshooting.md) | Symptom → which measurement to nudge → by how much; warning-tag decoder |
 | [`docs/Plug_Puller_Complete_Guide.pdf`](docs/Plug_Puller_Complete_Guide.pdf) | The complete guide as a single printable PDF |

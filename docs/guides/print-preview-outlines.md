@@ -1,10 +1,10 @@
-# Try Before You Print — 1:1 Outline Sheets and the Finger-Sizing Stencil
+# Try Before You Print — 1:1 Outline Sheets and the Measuring Stencil
 
 Not sure which quick-select combination to print? You can test the fit
 **on paper first**. This folder of printable sheets and one thin
-3D-printable stencil let you check a tool against your real plug, your
-real wall plate, and your real fingers before you spend hours printing
-the actual tool.
+3D-printable stencil set let you check a tool against your real plug,
+your real wall plate, and your real fingers before you spend hours
+printing the actual tool.
 
 Two things live here:
 
@@ -14,10 +14,12 @@ Two things live here:
    hold it against your plug, and try the finger holes. All twelve
    sheets are also bundled into one printable PDF with a cover index:
    **[`docs/Plug_Puller_Outline_Sheets.pdf`](../Plug_Puller_Outline_Sheets.pdf)**.
-2. **[`Finger_Sizing_Stencil.stl`](../../stl/Finger_Sizing_Stencil.stl)** —
-   a thin printable plate with all 18 finger-sizing circles from the
-   measuring template as real through-holes. The no-scissors way to find
-   your `measure_finger_width`.
+2. **[`Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)** — a
+   printable set of thin measuring cards: plug-preset silhouettes
+   (P1/P2/P3), a tactile mm ruler (R1), a cord gauge (C1), and the 18
+   finger-sizing holes (F1/F2). The no-scissors, no-caliper way to
+   answer the whole measuring worksheet — see the
+   [Starter Guide](starter-guide.md) for the card legend.
 
 ---
 
@@ -71,7 +73,7 @@ matters:
    bottom channel.
 3. **Try the finger holes.** If they feel wrong, try the neighbouring
    size's sheet — or skip the scissors and print the
-   [finger-sizing stencil](#the-finger-sizing-stencil) below.
+   [measuring stencil](#the-measuring-stencil) below.
 4. Found your combination? Open the Customizer, set the values from the
    sheet's title block, and follow the
    [Quick Start](quick-start-beginner.md) to export and print the real
@@ -83,15 +85,21 @@ matters:
 
 ---
 
-## The finger-sizing stencil
+## The measuring stencil
 
-[`Finger_Sizing_Stencil.stl`](../../stl/Finger_Sizing_Stencil.stl)
-(source: [`Finger_Sizing_Stencil.scad`](../../Finger_Sizing_Stencil.scad)
-at the repo root) is a 1.2 mm plate with the 18 sizing circles
-(Ø 15–32 mm) from the
-[measuring template](measuring-template.svg) as real through-holes,
-each labeled with its diameter, plus the sizing rule debossed on the
-plate:
+[`Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)
+(source: [`Measuring_Stencil.scad`](../../Measuring_Stencil.scad)
+at the repo root) is a set of 1.2 mm measuring cards, each with a
+raised 2-character ID you can read by touch:
+
+| ID | Card | Worksheet numbers it answers |
+| -- | ---- | ---------------------------- |
+| **P1 / P2 / P3** | Plug preset silhouettes (lamp / standard 3-prong / heavy-duty). Hold your plug in the **W** (width) and **T** (thickness) cutouts — if it fills them and the cord passes the round hole, that preset fits: pick it in Step 1 and skip measuring | all of 1–6, by preset match |
+| **R1** | Tactile mm ruler — raised ticks, edge notches every 10 mm | 1–5 |
+| **C1** | Cord gauge — through-holes Ø 3–9 mm | 6 |
+| **F1 / F2** | The 18 finger-sizing circles (Ø 15–32 mm) from the [measuring template](measuring-template.svg) as real through-holes | 8 |
+
+The finger rule is debossed on the F cards:
 
 > **finger width = hole number − 5** (your middle finger passes Ø 26
 > comfortably → enter `measure_finger_width = 21`).
@@ -102,20 +110,26 @@ for several people.
 
 ### Print settings
 
-- **Footprint:** ≈ 157 × 156 mm. Bed smaller than that? Open the
-  `.scad` in OpenSCAD and set **`split_halves = true`** in the
-  Customizer to get two half-plates (≈ 157 × 80 and 145 × 96 mm), then
-  render (F6) and export your own STL.
+- **Footprint:** the cards pack onto sheets automatically. On a
+  200 × 200 mm bed the set is two sheets. Smaller bed? Open the `.scad`
+  in OpenSCAD, set **`bed_width` / `bed_depth`** to your bed, and
+  render **`part_index`** = 1, 2, … to export one sheet at a time
+  (`part_index = 0` previews every sheet; the console lists which
+  cards land on which sheet).
 - **Material:** PETG or PLA — anything rigid.
-- **Layer height:** 0.2 mm (the plate is 6 layers).
-- **Supports:** none. **Infill:** any (the plate is solid at this
+- **Layer height:** 0.2 mm (the cards are 6 layers).
+- **Supports:** none. **Infill:** any (the cards are solid at this
   thickness). **Walls:** 2 is plenty.
-- The labels are debossed 0.6 mm into the top face — they print
-  cleanly with no bridging.
+- The labels are debossed 0.6 mm into the top face and the card IDs
+  are raised 0.8 mm — both print cleanly with no bridging.
 
 ### Using it
 
-Find the **smallest hole your middle finger passes through
-comfortably** (down to the middle knuckle, no forcing). Subtract 5 from
-that hole's number and enter the result as `measure_finger_width` in
-the Customizer (Step 2, size = `Measure my hand`).
+Start with the plug cards: if your plug fills a P card's cutouts, pick
+that preset in Step 1 — done. Otherwise measure with R1 (lengths and
+widths), C1 (cord), and the worksheet in the
+[Measuring Guide](measuring-guide.md). For your finger, find the
+**smallest hole your middle finger passes through comfortably** (down
+to the middle knuckle, no forcing) on F1/F2, subtract 5 from that
+hole's number, and enter the result as `measure_finger_width` in the
+Customizer (Step 2, size = `Measure my hand`).

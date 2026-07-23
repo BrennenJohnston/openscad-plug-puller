@@ -719,7 +719,7 @@ def build_flat_sheet(
             "1. Print at 100% and measure the calibration square — it must be exactly 50 × 50 mm.",
             "2. Cut along the SOLID outline. Dashed lines are holes and the plug pocket — poke through the two big finger circles.",
             "3. Hold the cutout on your plug at the wall: the plug fits the dashed pocket, the top notch straddles the wall plate.",
-            f"4. Try the finger holes ({size_word} size). Wrong size? Try a neighbouring sheet, or print stl/Finger_Sizing_Stencil.stl.",
+            f"4. Try the finger holes ({size_word} size). Wrong size? Try a neighbouring sheet, or print stl/Measuring_Stencil.stl.",
             "5. Happy? Open the Customizer with the title-block settings and export your STL (docs/guides/quick-start-beginner.md).",
         ],
         footprint=(W, L),

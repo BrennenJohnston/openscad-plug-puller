@@ -70,7 +70,7 @@
 //   "… (Custom size only)"       expert sliders, active only in Size = Custom
 
 /* [Step 0 - Tool Style] */
-// START HERE, then work down the numbered Steps. Leave this on "Auto from plug": after you fill in Step 1 the model picks for you - thick round plugs get the heavy-duty clamshell (two serrated plates that zip-tie around the plug), everything else gets the flat tool (the classic slab with a plug pocket). Pick "Flat tool" or "Heavy-duty clamshell" only to override the automatic choice.
+// START HERE, then work down the numbered Steps. Leave this on "Auto from plug": after you fill in Step 1 the model picks for you - thick round plugs get the heavy-duty clamshell (two serrated plates that zip-tie around the plug), everything else gets the flat tool (the classic slab with a plug pocket). Pick "Flat tool" or "Heavy-duty clamshell" only to override the automatic choice. Each step says which tool it shapes; settings for the other tool are ignored.
 tool_style = "Auto from plug"; // [Auto from plug, Flat tool, Heavy-duty clamshell]
 
 // MAINTAINER NOTE: dropdown option labels must not contain parentheses — the
@@ -104,15 +104,15 @@ measure_finger_width = 20; // [14:0.5:32]
 measure_hand_width = 85; // [60:1:110]
 
 /* [Step 3 - Attachment] */
-// How the tool straps onto the plug so it stays put between uses (flat tool only - the clamshell always has its own zip-tie holes). Zip ties = the 4-hole grid. Velcro strap = the angled wing slots. The original device uses both, so both is the default.
+// How the tool attaches to the plug - this shapes BOTH tools. On the flat tool: Zip ties = the 4-hole grid, Velcro strap = the angled wing slots. On the clamshell: Zip ties = the 3 zip-tie stations per arm that cinch the two plates together around the plug, Velcro strap = a strap slot through each arm. The original device uses both, so both is the default. Note: on the clamshell, zip ties are what hold the two plates together - pick a choice that includes them unless you have another plan.
 attachment = "Zip ties + Velcro"; // [Zip ties, Velcro strap, Zip ties + Velcro, None]
-// Shape of the velcro strap opening. Wing = the curved openings of the original (bigger opening, less plastic). Classic slot = a simple rectangular slot.
+// Flat tool only - shape of the velcro strap opening. Wing = the curved openings of the original (bigger opening, less plastic). Classic slot = a simple rectangular slot. The clamshell's strap slot is always a plain rounded slot.
 velcro_style = "Wing"; // [Wing, Classic slot]
-// Width of the hook-and-loop strap you'll thread through the openings - check the strap's packaging (ONE-WRAP comes in 10/13/16/20/25 mm). The opening is sized to clear it. (mm)
+// Width of the hook-and-loop strap you'll thread through the openings - check the strap's packaging (ONE-WRAP comes in 10/13/16/20/25 mm). Sizes the flat tool's wing opening AND the length of the clamshell's arm slot so the strap clears either one. (mm)
 strap_width = 15; // [10:1:25]
 
-/* [Step 4 - Cord Hook] */
-// Which way the cord catch faces (flat tool only). Right = the original device. Pick whichever lets you hook the cord with your preferred hand - the hook is mirrored, nothing else changes.
+/* [Step 4 - Cord Hook - Flat Tool] */
+// Which way the flat tool's cord catch faces. Right = the original device. Pick whichever lets you hook the cord with your preferred hand - the hook is mirrored, nothing else changes. The clamshell has no cord hook, so this step is ignored there.
 hook_hand = "Right"; // [Right, Left]
 
 /* [Advanced - Zip Tie Placement - Flat Tool] */
@@ -424,6 +424,14 @@ _resolved_tool_style =
         ? (_eff_plug_thickness >= 24 ? "Heavy-duty clamshell" : "Flat tool")
         : tool_style;
 _is_clamshell = _resolved_tool_style == "Heavy-duty clamshell";
+
+// Console transparency: report which tool the Steps resolved to, and when
+// the clamshell is being built list the flat-tool-only settings it ignores
+// so a changed-but-inert dial is never a mystery.
+echo(str("TOOL: ", _resolved_tool_style,
+         tool_style == "Auto from plug" ? " - chosen automatically from your plug" : " - chosen in Step 0"));
+if (_is_clamshell)
+    echo("CLAMSHELL BUILD - these flat-tool-only settings are ignored: velcro_style, hook_hand, wall plate style, the Advanced zip-tie and velcro placement tabs");
 
 // --- Body ---
 puller_length         = preset_value(_p, "puller_length",         custom_puller_length);
@@ -1073,7 +1081,11 @@ _clam_tip_cy = _clam_length - _clam_tip_r;                                 // ~6
 // Zip stations along the arm (Y from the cord end). Auto: rear beside the
 // cable channel, mid just past the plug's back end (where the throat mouth
 // ends), tip centered in the arm tip. Manual uses the dials.
+// Step 3's `attachment` gates the stations on/off (zip ties are what cinch
+// the two plates together); `clam_zip_hole_diameter` stays the sizing dial
+// and 0 still disables them.
 _clam_zip_r      = clam_zip_hole_diameter / 2;
+_clam_zip_on     = _attach_zip && clam_zip_hole_diameter > 0;
 // Rear station: beside the cable channel, but never closer than a 1.6 mm
 // (+ boost) radial wall to the finger bore (small hands pull the bore down
 // toward it).
@@ -1101,7 +1113,11 @@ _clam_zip_y      = (clam_zip_placement == "Manual") ? _clam_zip_manual : _clam_z
 _clam_slot_y0_raw = _clam_zip_y[1] + _clam_zip_r + 2 + clam_wall_boost;
 _clam_slot_y1_raw = _clam_zip_y[2] - _clam_zip_r - 2 - clam_wall_boost;
 _clam_slot_window = _clam_slot_y1_raw - _clam_slot_y0_raw;
-_clam_slot_len    = min(clam_velcro_slot_length, max(6, _clam_slot_window));
+// The Step 3 strap threads through this slot along its length, so the
+// requested slot length is floored at strap_width_eff + 1.5 mm of clearance
+// (defaults: 28 >= 16.5, so default geometry is unchanged).
+_clam_slot_len    = min(max(clam_velcro_slot_length, strap_width_eff + 1.5),
+                        max(6, _clam_slot_window));
 _clam_velcro_y    = (_clam_slot_y0_raw + _clam_slot_y1_raw) / 2;
 _clam_slot_top_y  = _clam_velcro_y + _clam_slot_len / 2;
 // Width capped so the slot plus its inner (tooth-root) and outer walls fits
@@ -1112,7 +1128,10 @@ _clam_slot_w      = min(clam_velcro_slot_width,
                             - _clam_slot_in_wall - _clam_slot_out_wall);
 _clam_velcro_x    = _clam_inner_x(_clam_slot_top_y) + _clam_slot_in_wall
                         + _clam_slot_w / 2;
-_clam_slot_on     = clam_velcro_slot_width > 0 && _clam_slot_w >= 3;
+// Step 3's `attachment` gates the slot; `clam_velcro_slot_width` stays the
+// sizing dial (0 still disables it, and the arm slims automatically).
+_clam_slot_on     = _attach_velcro && clam_velcro_slot_width > 0
+                        && _clam_slot_w >= 3;
 
 // Mid-arm bulge: a hull control circle wrapped _clam_slot_out_wall outside
 // the slot's top cap, so the tapered arm always carries the slot with a
@@ -2062,7 +2081,7 @@ function _vw_wing_web_collapsed() =
     enable_velcro_holes && _resolved_velcro_style == "Wing"
     && (_vw_wing_opening() < 2);
 
-// -- WC-1 … WC-9: heavy-duty clamshell checks ----------------------------------
+// -- WC-1 … WC-11: heavy-duty clamshell checks ---------------------------------
 // Cord doesn't fit the cable channel with clearance to spare.
 function _vw_clam_cord_channel() =
     _clam_cable_gap - _eff_cord_thickness < 0.5;
@@ -2077,12 +2096,12 @@ function _vw_clam_plate_thin() =
     clam_plate_thickness < 2;
 // A zip station sits off the arm (before the cord end or past the tip).
 function _vw_clam_zip_off_arm() =
-    clam_zip_hole_diameter > 0
+    _clam_zip_on
     && min([for (y = _clam_zip_y) min(y - _clam_zip_r,
                                       _clam_length - y - _clam_zip_r)]) < 0;
 // Two zip stations overlap each other (mis-set Manual positions).
 function _vw_clam_zip_overlap() =
-    clam_zip_hole_diameter > 0
+    _clam_zip_on
     && min([for (i = [0 : 1], j = [i + 1 : 2])
                 let (dx = _clam_zip_pts[i][0] - _clam_zip_pts[j][0],
                      dy = _clam_zip_pts[i][1] - _clam_zip_pts[j][1])
@@ -2091,7 +2110,7 @@ function _vw_clam_zip_overlap() =
 // A zip station breaks into the velcro slot (Manual placements; Auto derives
 // the slot window between the mid and tip stations, so it cannot collide).
 function _vw_clam_zip_hits_slot() =
-    clam_zip_hole_diameter > 0 && _clam_slot_on
+    _clam_zip_on && _clam_slot_on
     && min([for (p = _clam_zip_pts) _clam_slot_zip_clear(p)])
        < _clam_zip_r + 0.5;
 // The plug body pushed the derived arm run past a printable plate length
@@ -2104,6 +2123,15 @@ function _vw_clam_plug_too_long() =
 function _vw_clam_taper_steep() =
     abs(_eff_plug_thickness_wall - _eff_plug_thickness_cable) / 2
         > tan(20) * max(1, _eff_plug_length);
+// WC-10 — Step 3 turned the zip stations off on a clamshell build. Zip ties
+// are what cinch the two plates together, so without them nothing holds the
+// sandwich closed.
+function _vw_clam_no_zip_attachment() =
+    _is_clamshell && !_attach_zip;
+// WC-11 — the strap is wider than the slot window the arm can offer, so the
+// Step 3 strap won't thread through even after the strap-width floor.
+function _vw_clam_strap_too_wide() =
+    _clam_slot_on && _clam_slot_len < strap_width_eff + 1;
 
 module validation_warnings() {
     _messages = [
@@ -2285,6 +2313,10 @@ module clamshell_warnings() {
              "PLUG TOO LONG - PLATE OVER 120MM, CHECK PLUG LENGTH"],
             [_vw_clam_taper_steep(),
              "PLUG THICKNESS TAPER LOOKS WRONG - RECHECK BOTH ENDS"],
+            [_vw_clam_no_zip_attachment(),
+             "STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER"],
+            [_vw_clam_strap_too_wide(),
+             "STRAP WIDER THAN ARM SLOT WINDOW - NARROW THE STRAP"],
         ]) if (entry[0]) entry[1]
     ];
 
@@ -2443,8 +2475,8 @@ module clamshell_plate_3d() {
                 if (_fr > 0)
                     fillet_ring(_clam_finger_dia / 2, _fr);
             }
-        // Zip stations (3 per arm).
-        if (clam_zip_hole_diameter > 0)
+        // Zip stations (3 per arm), gated by Step 3's attachment choice.
+        if (_clam_zip_on)
             for (s = [-1, 1])
                 for (p = _clam_zip_pts)
                     translate([s * p[0], p[1], -eps])

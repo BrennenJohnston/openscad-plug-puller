@@ -11,8 +11,8 @@ Quick lane (no OpenSCAD):
 
 Render lane (``@requires_openscad``):
 
-* ``Finger_Sizing_Stencil.scad`` still renders watertight and
-  mesh-equivalent to the shipped ``stl/Finger_Sizing_Stencil.stl``.
+* ``Measuring_Stencil.scad`` still renders watertight and
+  mesh-equivalent to the shipped ``stl/Measuring_Stencil.stl``.
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -30,7 +30,7 @@ SHIPPED_STLS = [
     "Plug_Puller_Small.stl",
     "Plug_Puller_Medium.stl",
     "Plug_Puller_Large.stl",
-    "Finger_Sizing_Stencil.stl",
+    "Measuring_Stencil.stl",
 ]
 
 # Shipped size STL -> golden fixture rendered from the same parameters.
@@ -83,7 +83,7 @@ def test_shipped_stl_matches_golden_fixture(
 def test_stencil_render_matches_shipped_stl(
     openscad_runner, mesh_comparator, tmp_path: Path
 ) -> None:
-    scad = PROJECT_ROOT / "Finger_Sizing_Stencil.scad"
+    scad = PROJECT_ROOT / "Measuring_Stencil.scad"
     assert scad.exists(), f"Stencil SCAD missing: {scad}"
 
     output = tmp_path / "stencil_render.stl"
@@ -97,12 +97,12 @@ def test_stencil_render_matches_shipped_stl(
     mesh = trimesh.load(output, force="mesh")
     assert mesh.is_watertight, "Fresh stencil render is not watertight."
 
-    comparison = mesh_comparator.compare(STL_DIR / "Finger_Sizing_Stencil.stl", output)
+    comparison = mesh_comparator.compare(STL_DIR / "Measuring_Stencil.stl", output)
     if not comparison.passed:
         details = "\n".join(f"  - {f}" for f in comparison.failures)
         pytest.fail(
             f"Fresh stencil render no longer matches the shipped "
-            f"stl/Finger_Sizing_Stencil.stl:\n{details}\n"
+            f"stl/Measuring_Stencil.stl:\n{details}\n"
             f"If the stencil changed intentionally, re-render the shipped STL."
         )
 

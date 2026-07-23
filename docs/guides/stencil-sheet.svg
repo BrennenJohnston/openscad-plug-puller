@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="279mm" viewBox="0 0 210 279">
+<rect x="0" y="0" width="210" height="279" fill="white"/>
+<text x="105.000" y="14.000" font-family="Helvetica, Arial, sans-serif" font-size="5.5" font-weight="bold" text-anchor="middle" fill="black">Plug Puller — Measuring Stencil Sheet</text>
+<text x="105.000" y="19.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="middle" fill="black">Print at 100% scale / “Actual size” — never “fit to page”. Check the calibration square before trusting anything on this sheet.</text>
+<rect x="14" y="26" width="50" height="50" fill="none" stroke="black" stroke-width="0.4"/>
+<text x="39.000" y="49.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">CALIBRATION</text>
+<text x="39.000" y="54.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="normal" text-anchor="middle" fill="black">50 × 50 mm</text>
+<text x="72.000" y="32.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">1. Measure this square with a ruler.</text>
+<text x="72.000" y="36.500" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">It must be exactly 50 × 50 mm — if not, your</text>
+<text x="72.000" y="41.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">print was scaled: re-print at 100%.</text>
+<text x="72.000" y="47.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="#444444">Card legend: docs/guides/starter-guide.md</text>
+<text x="72.000" y="52.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="#444444">Works on A4 and US Letter paper.</text>
+<text x="76.000" y="58.500" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">R1 — ruler (mm): plug length, widths, thicknesses, hand width</text>
+<line x1="76.000" y1="64.000" x2="176.000" y2="64.000" stroke="black" stroke-width="0.4"/>
+<line x1="76.000" y1="64.000" x2="76.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="76.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">0</text>
+<line x1="77.000" y1="64.000" x2="77.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="78.000" y1="64.000" x2="78.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="79.000" y1="64.000" x2="79.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="80.000" y1="64.000" x2="80.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="81.000" y1="64.000" x2="81.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="82.000" y1="64.000" x2="82.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="83.000" y1="64.000" x2="83.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="84.000" y1="64.000" x2="84.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="85.000" y1="64.000" x2="85.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="86.000" y1="64.000" x2="86.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="86.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">10</text>
+<line x1="87.000" y1="64.000" x2="87.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="88.000" y1="64.000" x2="88.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="89.000" y1="64.000" x2="89.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="90.000" y1="64.000" x2="90.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="91.000" y1="64.000" x2="91.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="92.000" y1="64.000" x2="92.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="93.000" y1="64.000" x2="93.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="94.000" y1="64.000" x2="94.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="95.000" y1="64.000" x2="95.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="96.000" y1="64.000" x2="96.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="96.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">20</text>
+<line x1="97.000" y1="64.000" x2="97.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="98.000" y1="64.000" x2="98.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="99.000" y1="64.000" x2="99.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="100.000" y1="64.000" x2="100.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="101.000" y1="64.000" x2="101.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="102.000" y1="64.000" x2="102.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="103.000" y1="64.000" x2="103.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="104.000" y1="64.000" x2="104.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="105.000" y1="64.000" x2="105.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="106.000" y1="64.000" x2="106.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="106.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">30</text>
+<line x1="107.000" y1="64.000" x2="107.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="108.000" y1="64.000" x2="108.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="109.000" y1="64.000" x2="109.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="110.000" y1="64.000" x2="110.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="111.000" y1="64.000" x2="111.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="112.000" y1="64.000" x2="112.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="113.000" y1="64.000" x2="113.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="114.000" y1="64.000" x2="114.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="115.000" y1="64.000" x2="115.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="116.000" y1="64.000" x2="116.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="116.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">40</text>
+<line x1="117.000" y1="64.000" x2="117.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="118.000" y1="64.000" x2="118.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="119.000" y1="64.000" x2="119.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="120.000" y1="64.000" x2="120.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="121.000" y1="64.000" x2="121.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="122.000" y1="64.000" x2="122.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="123.000" y1="64.000" x2="123.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="124.000" y1="64.000" x2="124.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="125.000" y1="64.000" x2="125.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="126.000" y1="64.000" x2="126.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="126.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">50</text>
+<line x1="127.000" y1="64.000" x2="127.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="128.000" y1="64.000" x2="128.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="129.000" y1="64.000" x2="129.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="130.000" y1="64.000" x2="130.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="131.000" y1="64.000" x2="131.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="132.000" y1="64.000" x2="132.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="133.000" y1="64.000" x2="133.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="134.000" y1="64.000" x2="134.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="135.000" y1="64.000" x2="135.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="136.000" y1="64.000" x2="136.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="136.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">60</text>
+<line x1="137.000" y1="64.000" x2="137.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="138.000" y1="64.000" x2="138.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="139.000" y1="64.000" x2="139.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="140.000" y1="64.000" x2="140.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="141.000" y1="64.000" x2="141.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="142.000" y1="64.000" x2="142.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="143.000" y1="64.000" x2="143.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="144.000" y1="64.000" x2="144.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="145.000" y1="64.000" x2="145.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="146.000" y1="64.000" x2="146.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="146.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">70</text>
+<line x1="147.000" y1="64.000" x2="147.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="148.000" y1="64.000" x2="148.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="149.000" y1="64.000" x2="149.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="150.000" y1="64.000" x2="150.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="151.000" y1="64.000" x2="151.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="152.000" y1="64.000" x2="152.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="153.000" y1="64.000" x2="153.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="154.000" y1="64.000" x2="154.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="155.000" y1="64.000" x2="155.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="156.000" y1="64.000" x2="156.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="156.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">80</text>
+<line x1="157.000" y1="64.000" x2="157.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="158.000" y1="64.000" x2="158.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="159.000" y1="64.000" x2="159.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="160.000" y1="64.000" x2="160.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="161.000" y1="64.000" x2="161.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="162.000" y1="64.000" x2="162.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="163.000" y1="64.000" x2="163.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="164.000" y1="64.000" x2="164.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="165.000" y1="64.000" x2="165.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="166.000" y1="64.000" x2="166.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="166.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">90</text>
+<line x1="167.000" y1="64.000" x2="167.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="168.000" y1="64.000" x2="168.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="169.000" y1="64.000" x2="169.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="170.000" y1="64.000" x2="170.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="171.000" y1="64.000" x2="171.000" y2="68.500" stroke="black" stroke-width="0.3"/>
+<line x1="172.000" y1="64.000" x2="172.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="173.000" y1="64.000" x2="173.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="174.000" y1="64.000" x2="174.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="175.000" y1="64.000" x2="175.000" y2="67.000" stroke="black" stroke-width="0.2"/>
+<line x1="176.000" y1="64.000" x2="176.000" y2="70.000" stroke="black" stroke-width="0.3"/>
+<text x="176.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">100</text>
+<text x="14.000" y="86.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">2. Plug silhouettes (1:1) — hold your plug against W (wide side) and T (thin side); if it matches, pick that preset in Step 1.</text>
+<polygon points="9.000,137.000 34.000,137.000 27.100,100.000 15.900,100.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<polygon points="37.000,137.000 55.600,137.000 50.600,100.000 42.000,100.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<circle cx="60.400" cy="135.200" r="1.800" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="21.500" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
+<text x="46.300" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
+<text x="60.400" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
+<text x="9.000" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P1</text>
+<text x="17.500" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Lamp 2-prong NEMA 1-15</text>
+<polygon points="66.700,137.000 93.300,137.000 86.700,90.800 73.300,90.800" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<polygon points="96.300,137.000 115.200,137.000 113.250,90.800 98.250,90.800" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<circle cx="121.700" cy="133.500" r="3.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="80.000" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
+<text x="105.750" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
+<text x="121.700" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
+<text x="66.700" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P2</text>
+<text x="75.200" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Standard 3-prong NEMA 5-15</text>
+<polygon points="129.700,137.000 155.500,137.000 153.550,93.200 131.650,93.200" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<polygon points="158.500,137.000 185.500,137.000 185.500,93.200 158.500,93.200" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<circle cx="192.600" cy="132.900" r="4.100" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="142.600" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
+<text x="172.000" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
+<text x="192.600" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
+<text x="129.700" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P3</text>
+<text x="138.200" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Heavy-duty cord NEMA 5-15</text>
+<text x="14.000" y="152.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">3. F1 / F2 — finger circles: smallest circle your middle finger passes through, minus 5 = finger width.</text>
+<circle cx="47.500" cy="164.000" r="7.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="47.500" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">15</text>
+<circle cx="68.000" cy="164.000" r="8.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="68.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">16</text>
+<circle cx="89.500" cy="164.000" r="8.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="89.500" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">17</text>
+<circle cx="112.000" cy="164.000" r="9.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="112.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">18</text>
+<circle cx="135.500" cy="164.000" r="9.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="135.500" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">19</text>
+<circle cx="160.000" cy="164.000" r="10.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="160.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">20</text>
+<text x="14.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F1</text>
+<circle cx="48.000" cy="189.000" r="10.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="48.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">21</text>
+<circle cx="74.500" cy="189.000" r="11.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="74.500" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">22</text>
+<circle cx="102.000" cy="189.000" r="11.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="102.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">23</text>
+<circle cx="130.500" cy="189.000" r="12.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="130.500" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">24</text>
+<circle cx="160.000" cy="189.000" r="12.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="160.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">25</text>
+<text x="14.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F1</text>
+<circle cx="55.500" cy="218.000" r="13.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="55.500" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">26</text>
+<circle cx="87.000" cy="218.000" r="13.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="87.000" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">27</text>
+<circle cx="119.500" cy="218.000" r="14.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="119.500" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">28</text>
+<circle cx="153.000" cy="218.000" r="14.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="153.000" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">29</text>
+<text x="14.000" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F2</text>
+<circle cx="68.500" cy="250.000" r="15.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="68.500" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">30</text>
+<circle cx="104.000" cy="250.000" r="15.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="104.000" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">31</text>
+<circle cx="140.500" cy="250.000" r="16.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="140.500" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">32</text>
+<text x="14.000" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F2</text>
+<text x="105.000" y="274.500" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#444444">openscad-plug-puller · measuring stencil sheet · scale 1:1 · prefer plastic? print stl/Measuring_Stencil.stl</text>
+</svg>

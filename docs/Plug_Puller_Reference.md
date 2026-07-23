@@ -4,7 +4,7 @@
 > **File**: `src/Plug_Puller_Parametric.scad` (`include`s
 > `src/fit_measured.scad` then `src/presets.scad` — order matters,
 > see [Section 8.4](#84-include-order))
-> **Root entry point**: `Plug_Puller.scad` (thin wrapper)
+> **Entry point**: `src/Plug_Puller_Parametric.scad` (open this in OpenSCAD)
 > **Flat-tool heritage**: `v6.0/CAD/v6.0.stl` ("Plug Puller 3.1 - B")
 > **Clamshell reference**: `plug references/3 Prong Heavy Ideal Sample/…Plug_Bottom.stl`
 > **Last Updated**: 2026-07-12
@@ -115,7 +115,9 @@ Steps (beginner path), the `Advanced -` sections (power users), and the
 /* [Step 2 - Size] */          size = Small | Medium | Large |
                                Measure my hand | Custom + hand sliders
 /* [Step 3 - Attachment] */    attachment, velcro_style, strap_width
-/* [Step 4 - Cord Hook] */     hook_hand
+                               (attachment + strap_width shape BOTH tools;
+                               velcro_style is flat-tool only)
+/* [Step 4 - Cord Hook - Flat Tool] */  hook_hand
 ── Advanced tier ──────────────────────────────────────────────────────
 /* [Advanced - Zip Tie Placement - Flat Tool] */  zip_placement dials
 /* [Advanced - Velcro Placement - Flat Tool] */   velcro_placement dials
@@ -260,7 +262,12 @@ hole placement. Zip stations (`_clam_zip_pts`): rear beside the cable
 channel (finger-web capped), mid just past the plug's back end, tip
 centered in the arm tip. The velcro slot spans the window *between* the
 mid and tip stations (2 mm web each) so Auto placement can never
-collide. Modules:
+collide. Step 3 gates both features: `_clam_zip_on = _attach_zip &&
+clam_zip_hole_diameter > 0` switches the stations, and `_clam_slot_on`
+requires `_attach_velcro` as well as a printable slot width; the slot's
+length is floored at `strap_width_eff + 1.5` so the Step 3 strap always
+threads through. The `clam_*` dials remain the sizing overrides.
+Modules:
 
 - `clamshell_half_outline_2d()` — one arm; 2D hull of the goggle lobe,
   mid-arm bulge, and rounded tip circle, minus the inner V gap; the knee
@@ -352,13 +359,16 @@ the part itself is never altered.
   zip rows also *derive* around the finger keep-out (`_zip_t_max`),
   compressing the row spacing instead of punching into the bores; the
   warnings then only fire for Manual placements.
-- **Clamshell** — WC-1…WC-9: `CORD TOO THICK FOR CABLE CHANNEL`, `PLUG TOO
+- **Clamshell** — WC-1…WC-11: `CORD TOO THICK FOR CABLE CHANNEL`, `PLUG TOO
   THICK - ARMS BULGE PAST FINGER LOBES`, `NO GRIP BITE - PLUG WONT BE
   HELD`, `PLATE THINNER THAN 2MM - TOO FLIMSY`, `ZIP STATION OFF THE ARM`,
   `ZIP STATIONS OVERLAP EACH OTHER`, `ZIP STATION HITS VELCRO SLOT`,
   `PLUG TOO LONG - PLATE OVER 120MM` (the derived arm run outgrew a
   printable plate), `PLUG THICKNESS TAPER LOOKS WRONG` (stations more
-  than ~20° apart per side).
+  than ~20° apart per side), `STEP 3 DISABLED ZIP HOLES` (WC-10: a
+  clamshell build with no zip attachment — nothing cinches the two
+  plates together), `STRAP WIDER THAN ARM SLOT WINDOW` (WC-11: the
+  Step 3 strap can't thread the achievable slot length).
 
 ## 11. Source data authority
 

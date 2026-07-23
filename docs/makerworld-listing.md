@@ -102,7 +102,8 @@ involved. Inspect prints for cracks before use; reprint if damaged.
 ### More resources (GitHub)
 
 Full measuring guide with per-measurement photos, printable 1:1
-try-before-you-print outline sheets, a finger-sizing stencil, fit
+try-before-you-print outline sheets, a printable measuring stencil
+(plug silhouettes, ruler, cord gauge, finger holes), fit
 troubleshooting, and the engineering reference live in the source
 repository: <https://github.com/BrennenJohnston/openscad-plug-puller>
 

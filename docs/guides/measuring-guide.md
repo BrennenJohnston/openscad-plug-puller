@@ -16,10 +16,13 @@ You need:
 There is also a **[printable measuring template](measuring-template.svg)**
 with a mm ruler and finger-sizing circles — print it at 100 % scale
 ("actual size", no "fit to page") and check the calibration square
-before trusting it. Prefer not to cut out paper circles? Print the
-**[finger-sizing stencil](print-preview-outlines.md#the-finger-sizing-stencil)**
-([`stl/Finger_Sizing_Stencil.stl`](../../stl/Finger_Sizing_Stencil.stl))
-instead — the same 18 circles as real through-holes in a thin plate.
+before trusting it. Prefer not to cut paper? Print the
+**[measuring stencil](print-preview-outlines.md#the-measuring-stencil)**
+([`stl/Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl))
+instead — plug-preset silhouette cards (P1/P2/P3), a tactile mm ruler
+(R1), a cord gauge (C1), and the 18 finger circles as real
+through-holes (F1/F2). The [Starter Guide](starter-guide.md) maps each
+card to the worksheet numbers below.
 
 Write your numbers into the worksheet at the bottom as you go.
 
@@ -182,10 +185,10 @@ the middle knuckle), not the fingertip.
 > that's your finger width. (Passes Ø 26 → enter 21.)
 >
 > **Or skip the scissors:** print
-> [`stl/Finger_Sizing_Stencil.stl`](../../stl/Finger_Sizing_Stencil.stl)
-> — a thin plate with the same 18 circles as real through-holes, each
-> labeled. Same rule: smallest comfortable hole, minus 5. See the
-> [Try Before You Print guide](print-preview-outlines.md#the-finger-sizing-stencil).
+> [`stl/Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)
+> — its F1/F2 cards carry the same 18 circles as real through-holes,
+> each labeled. Same rule: smallest comfortable hole, minus 5. See the
+> [Try Before You Print guide](print-preview-outlines.md#the-measuring-stencil).
 
 - Typical range: 16–24 mm
 - Example: ≈ 22 mm
@@ -203,28 +206,32 @@ across the knuckles at the widest point.
 
 ## Step 3 — pick an attachment (no measuring needed)
 
-How the tool straps onto the plug so it stays put between uses:
+How the tool attaches to the plug so it stays put between uses. This
+step shapes **both tools** — each choice does something on whichever
+tool Step 0 resolves to:
 
-| Pick this | You get |
-| --------- | ------- |
-| **Zip ties** | The four small holes — thread two zip ties around the plug body |
-| **Velcro strap** | Angled wing slots for a hook-and-loop strap |
-| **Zip ties + Velcro** (default) | Both sets of openings (the v6 device is hybrid) |
-| **None** | A clean body (hold the tool on the plug by hand) |
+| Pick this | Flat tool gets | Clamshell gets |
+| --------- | -------------- | -------------- |
+| **Zip ties** | The four small holes — thread two zip ties around the plug body | 3 zip-tie stations per arm — the ties cinch the two plates together |
+| **Velcro strap** | Angled wing slots for a hook-and-loop strap | A strap slot through each arm |
+| **Zip ties + Velcro** (default) | Both sets of openings (the v6 device is hybrid) | Both zip stations and arm slots |
+| **None** | A clean body (hold the tool on the plug by hand) | Solid arms — **not recommended**: zip ties are what hold the two clamshell plates together, so the model warns you |
 
 Two extra choices sit under Step 3:
 
-- **`velcro_style`** — `Wing` (default: the v6 curved openings, bigger
-  slot, less plastic) or `Classic slot` (the older rectangular slot).
+- **`velcro_style`** — flat tool only: `Wing` (default: the v6 curved
+  openings, bigger slot, less plastic) or `Classic slot` (the older
+  rectangular slot). The clamshell's strap slot is always a plain
+  rounded slot.
 - **`strap_width`** — the width of the hook-and-loop strap you'll thread
-  through (10–25 mm; ONE-WRAP comes in 10/13/16/20/25). The wing opening
-  is sized to clear it.
+  through (10–25 mm; ONE-WRAP comes in 10/13/16/20/25). Sizes the flat
+  tool's wing opening AND the length of the clamshell's arm slot.
 
-## Step 4 — cord hook
+## Step 4 — cord hook (flat tool only)
 
 | Setting | What it does |
 | ------- | ------------ |
-| `hook_hand` = **Right / Left** | Which way the J-hook cord catch faces (Right = the reference) |
+| `hook_hand` = **Right / Left** | Which way the flat tool's J-hook cord catch faces (Right = the reference). The clamshell has no cord hook, so it ignores this step |
 
 > **Round / smooth plugs:** smooth-sided round cord ends (thick
 > extension-cord plugs) can slip in the pocket. Thread a zip tie down

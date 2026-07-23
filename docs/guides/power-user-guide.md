@@ -123,6 +123,14 @@ bores from the Step 2 hand. The `clam_*` dials tune that result. The
 defaults carry the field-tested **T3 grip profile** (2 mm teeth, 2.8 mm
 pitch, 1 mm bite, grip bite −1) with the serration span on auto.
 
+Step 3's `attachment` dropdown is authoritative for the clamshell too:
+it switches the 3 zip-tie stations per arm and the arm strap slot on or
+off (`clam_zip_hole_diameter` and `clam_velcro_slot_width` stay the
+sizing dials — 0 still disables the feature). `strap_width` floors the
+arm slot's length so the strap always threads through. Turning zip ties
+off on a clamshell trips the `WC-10` warning: the ties are what cinch
+the two plates together.
+
 ### Strength recipes
 
 | Goal | Dial(s) |
@@ -182,7 +190,7 @@ Anything genuinely wrong prints a **red warning tag** flat on the bed
 next to the part (so an exported file physically shows its own defect)
 and echoes the same message to the console. The
 [Fit Troubleshooting guide](fit-troubleshooting.md) decodes every tag —
-flat-tool tags `W-1…W-19`, clamshell tags `WC-1…WC-9`.
+flat-tool tags `W-1…W-19`, clamshell tags `WC-1…WC-11`.
 
 Preview-only (never exported): the green `MEDIUM: …` / `MEASURED: …`
 confirmation tag, and the orange HUD notices for ignored custom sliders

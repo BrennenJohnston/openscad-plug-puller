@@ -77,6 +77,8 @@ These appear only when you're building the clamshell (a thick plug, or
 | `ZIP STATION HITS VELCRO SLOT` | A manual clamshell zip position broke into the velcro slot | Move `clam_zip_pos_2/3` — in `Auto` placement the slot always keeps clear of the stations |
 | `PLUG TOO LONG - PLATE OVER 120MM, CHECK PLUG LENGTH` | The arms grow with the plug, and this plug length pushed the plate past 120 mm | Re-measure plug length (wall plate to the plug's back face — not including the cord) |
 | `PLUG THICKNESS TAPER LOOKS WRONG - RECHECK BOTH ENDS` | The two thickness measurements are more than ~20° of taper apart — almost certainly a mis-measurement | Re-measure plug thickness near the wall and near the cord |
+| `STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER` | Step 3's attachment choice removed the zip-tie stations, but zip ties are what cinch the two clamshell plates together | Pick `Zip ties` or `Zip ties + Velcro` in Step 3 (or plan another way to hold the sandwich closed) |
+| `STRAP WIDER THAN ARM SLOT WINDOW - NARROW THE STRAP` | Your `strap_width` is wider than the slot length the arm can offer between the zip stations | Use a narrower strap, or raise `clam_velcro_slot_length` / rearrange manual `clam_zip_pos_*` to widen the window |
 
 > **Clamshell feels too flimsy?** Raise `clam_wall_boost` (the first
 > slider in the **Advanced - Heavy Duty Clamshell** section): it thickens

@@ -18,12 +18,18 @@ extension-cord plug it switches you to the **heavy-duty clamshell**.
 This guide walks you through every click. If a word looks technical,
 keep reading — the next sentence tells you exactly what to press.
 
+> **Prefer the short version?** The **[Starter Guide](starter-guide.md)**
+> is the whole path on one page — match your plug against the printed
+> measuring stencil (or measure it), fill in the steps, print. It also
+> ships as a printable PDF with a built-in 1:1 paper stencil sheet.
+
 > **Want to test the fit before printing?** Every quick-select
 > combination has a printable **[1:1 outline sheet](print-preview-outlines.md)**
 > — cut out the tool's true-size silhouette, hold it against your plug
 > on the wall, and try the finger holes on paper first. There is also a
-> thin printable **finger-sizing stencil** if you'd rather not cut out
-> the template's paper circles.
+> thin printable **measuring stencil** (plug silhouettes, mm ruler,
+> cord gauge, finger holes) if you'd rather not cut out the template's
+> paper circles — see the [Starter Guide](starter-guide.md).
 
 <!-- TODO(photos): still wanted — OpenSCAD GUI screenshots (per-OS
      installer, the Customizer panel location, the export dialog).
@@ -82,8 +88,9 @@ file. You only use one panel of it — you never touch code.
    (Alternative: download just the single file
    `dist/Plug_Puller_SingleFile.scad` — it is the whole model in one
    file.)
-2. Double-click **`Plug_Puller.scad`** in the unzipped folder (or open
-   it from inside OpenSCAD with `File ▸ Open`).
+2. Open **`src/Plug_Puller_Parametric.scad`** from the unzipped folder
+   (double-click it, or open it from inside OpenSCAD with
+   `File ▸ Open`).
 3. You may see a wall of code in an editor pane. **Ignore it.** You
    will not touch it.
 
@@ -118,12 +125,15 @@ things:
    pick **Small** / **Large** for smaller or bigger hands. If you
    measured your hand, pick **Measure my hand** and type the two hand
    numbers just below the dropdown.
-3. **Step 3 - Attachment** — how the tool straps to the plug:
-   **Zip ties + Velcro** (default), **Zip ties**, **Velcro strap**, or
-   **None**. Leave `velcro_style` on **Wing** unless you prefer the old
-   rectangular slot.
-4. **Step 4 - Cord Hook** — leave `hook_hand` on **Right** (the
-   reference device) or pick **Left** to mirror the cord catch.
+3. **Step 3 - Attachment** — how the tool attaches to the plug (shapes
+   both tools: the flat tool's hole grid / wing slots, and the
+   clamshell's zip stations / arm slots): **Zip ties + Velcro**
+   (default), **Zip ties**, **Velcro strap**, or **None**. Leave
+   `velcro_style` on **Wing** unless you prefer the old rectangular
+   slot (flat tool only).
+4. **Step 4 - Cord Hook - Flat Tool** — leave `hook_hand` on **Right**
+   (the reference device) or pick **Left** to mirror the cord catch.
+   The clamshell ignores this step.
 5. **You're done — no need to scroll further.** Everything below Step 4
    is optional: the **`Advanced -`** sections are power dials (manual
    hole placement, clamshell tuning) and the **`(Custom size only)`**
