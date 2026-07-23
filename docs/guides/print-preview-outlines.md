@@ -11,7 +11,9 @@ Two things live here:
 1. **[Outline sheets](outline-sheets/)** — one printable page per
    quick-select combination. Each page shows that tool's exact
    silhouette at **1:1 scale** with CAD-style dimensions: cut it out,
-   hold it against your plug, and try the finger holes.
+   hold it against your plug, and try the finger holes. All twelve
+   sheets are also bundled into one printable PDF with a cover index:
+   **[`docs/Plug_Puller_Outline_Sheets.pdf`](../Plug_Puller_Outline_Sheets.pdf)**.
 2. **[`Finger_Sizing_Stencil.stl`](../../stl/Finger_Sizing_Stencil.stl)** —
    a thin printable plate with all 18 finger-sizing circles from the
    measuring template as real through-holes. The no-scissors way to find
@@ -32,6 +34,10 @@ plate's finger holes follow the Size selection too):
 | Standard 3-prong plug (NEMA 5-15) | [sheet](outline-sheets/outline_standard-3-prong_small.svg) | [sheet](outline-sheets/outline_standard-3-prong_medium.svg) | [sheet](outline-sheets/outline_standard-3-prong_large.svg) |
 | Heavy-duty extension cord (NEMA 5-15), flat tool | [sheet](outline-sheets/outline_heavy-duty-round_small.svg) | [sheet](outline-sheets/outline_heavy-duty-round_medium.svg) | [sheet](outline-sheets/outline_heavy-duty-round_large.svg) |
 | Heavy-duty clamshell plate | [sheet](outline-sheets/outline_heavy-duty-clamshell_small.svg) | [sheet](outline-sheets/outline_heavy-duty-clamshell_medium.svg) | [sheet](outline-sheets/outline_heavy-duty-clamshell_large.svg) |
+
+Prefer one file? **[`docs/Plug_Puller_Outline_Sheets.pdf`](../Plug_Puller_Outline_Sheets.pdf)**
+bundles all twelve sheets behind a cover page with a page index — open
+it, print just the page you need (at 100 %), done.
 
 Each sheet fits both **A4 and US Letter** paper and contains:
 

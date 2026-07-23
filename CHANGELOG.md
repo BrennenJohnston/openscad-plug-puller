@@ -20,7 +20,10 @@ public milestone**.
   plus the heavy-duty clamshell plate at all three sizes. Each sheet
   has CAD-style dimension lines, a 50 × 50 mm calibration square, the
   matching Customizer settings in the title block, and a how-to strip.
-  Guide: `docs/guides/print-preview-outlines.md`.
+  Guide: `docs/guides/print-preview-outlines.md`. All twelve sheets are
+  also bundled as one printable PDF with a cover index
+  (`docs/Plug_Puller_Outline_Sheets.pdf`), page size 210 × 279 mm so it
+  prints 1:1 on both A4 and US Letter.
 - **Finger-sizing stencil** (`Finger_Sizing_Stencil.scad` at the repo
   root, pre-rendered `stl/Finger_Sizing_Stencil.stl`): a thin
   parametric plate with the measuring template's 18 finger-sizing

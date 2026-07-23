@@ -126,7 +126,8 @@ settings live in [`stl/`](stl), plus a finger-sizing stencil:
 
 Not sure which size? Print a **[1:1 paper outline sheet](docs/guides/print-preview-outlines.md)**
 of any quick-select combination first and test it against your real
-plug and hand. For a tool matched to *your* plug and hand, spend five
+plug and hand — all twelve sheets are also bundled as one printable
+PDF: [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf). For a tool matched to *your* plug and hand, spend five
 minutes with the [Measuring Guide](docs/guides/measuring-guide.md) and
 the Customizer instead.
 
@@ -239,6 +240,7 @@ openscad-plug-puller/
     Plug_Puller_Reference.md       # exhaustive engineering reference
     Plug_Puller_Complete_Guide.pdf # printable complete guide
     Plug_Puller_Measuring_Template.pdf  # printable 1:1 measuring template
+    Plug_Puller_Outline_Sheets.pdf # all twelve 1:1 outline sheets as one printable PDF
     guides/                        # beginner guides: quick start, measuring, fit troubleshooting
       outline-sheets/              # printable 1:1 outline sheets (one per quick-select combo)
   parameter_mapping.json           # full Customizer schema (103 parameters)
@@ -292,6 +294,7 @@ Organized by audience — start in the row that matches you.
 | [`docs/guides/measuring-template.svg`](docs/guides/measuring-template.svg) | Printable 1:1 sheet (A4 / Letter): calibration square, mm ruler, finger-sizing circles |
 | [`docs/Plug_Puller_Measuring_Template.pdf`](docs/Plug_Puller_Measuring_Template.pdf) | The same measuring template as a printable PDF |
 | [`docs/guides/print-preview-outlines.md`](docs/guides/print-preview-outlines.md) | Try before you print: 1:1 outline sheets for every quick-select combination + the finger-sizing stencil |
+| [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf) | All twelve 1:1 outline sheets in one printable PDF with a cover index |
 | [`docs/guides/fit-troubleshooting.md`](docs/guides/fit-troubleshooting.md) | Symptom → which measurement to nudge → by how much; warning-tag decoder |
 | [`docs/Plug_Puller_Complete_Guide.pdf`](docs/Plug_Puller_Complete_Guide.pdf) | The complete guide as a single printable PDF |
 
