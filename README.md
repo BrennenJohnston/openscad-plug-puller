@@ -144,7 +144,8 @@ settings live in [`stl/`](stl), plus the measuring stencil:
 | [`stl/Plug_Puller_Small.stl`](stl/Plug_Puller_Small.stl) | Small | ≈ 5th-percentile female hand |
 | [`stl/Plug_Puller_Medium.stl`](stl/Plug_Puller_Medium.stl) | Medium | the reference size — start here |
 | [`stl/Plug_Puller_Large.stl`](stl/Plug_Puller_Large.stl) | Large | ≈ 95th-percentile male hand |
-| [`stl/Measuring_Stencil.stl`](stl/Measuring_Stencil.stl) | — | thin measuring cards: plug-preset silhouettes (P1–P3), a tactile mm ruler (R1), a cord gauge (C1), and all 18 finger-sizing holes (F1/F2) — answer the worksheet without a caliper |
+| [`stl/Measuring_Stencil.stl`](stl/Measuring_Stencil.stl) | — | thin measuring cards: plug-preset silhouettes (P1–P3), a tactile mm ruler (R1), an open-slot cord gauge that slides onto an installed cord (C1), and all 18 finger-sizing holes (F1/F2) — answer the worksheet without a caliper |
+| [`stl/Measuring_Stencil_Tactile.stl`](stl/Measuring_Stencil_Tactile.stl) | — | the same cards with **Tactile labels**: raised ADA-size characters plus a fold-flat Grade 2 braille title flap on every card (snap off the support fins, fold each flap back until flat — see the [Starter Guide](docs/guides/starter-guide.md#tactile-version-raised-characters--braille)) |
 
 Not sure which size? Print a **[1:1 paper outline sheet](docs/guides/print-preview-outlines.md)**
 of any quick-select combination first and test it against your real

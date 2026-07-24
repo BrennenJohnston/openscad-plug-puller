@@ -94,9 +94,9 @@ raised 2-character ID you can read by touch:
 
 | ID | Card | Worksheet numbers it answers |
 | -- | ---- | ---------------------------- |
-| **P1 / P2 / P3** | Plug preset silhouettes (lamp / standard 3-prong / heavy-duty). Hold your plug in the **W** (width) and **T** (thickness) cutouts — if it fills them and the cord passes the round hole, that preset fits: pick it in Step 1 and skip measuring | all of 1–6, by preset match |
+| **P1 / P2 / P3** | Plug preset silhouettes (lamp / standard 3-prong / heavy-duty). Hold your plug in the **W** (width) and **T** (thickness) cutouts — if it fills them and the cord slips sideways into the open cord slot, that preset fits: pick it in Step 1 and skip measuring | all of 1–6, by preset match |
 | **R1** | Tactile mm ruler — raised ticks, edge notches every 10 mm | 1–5 |
-| **C1** | Cord gauge — through-holes Ø 3–9 mm | 6 |
+| **C1** | Cord gauge — open slots Ø 3–9 mm through the bottom edge; slides onto an installed cord from the side | 6 |
 | **F1 / F2** | The 18 finger-sizing circles (Ø 15–32 mm) from the [measuring template](measuring-template.svg) as real through-holes | 8 |
 
 The finger rule is debossed on the F cards:
@@ -107,6 +107,14 @@ The finger rule is debossed on the F cards:
 It replaces cutting out the template's paper circles, and it is
 reusable — handy for occupational therapists or anyone sizing tools
 for several people.
+
+A **Tactile** version
+([`stl/Measuring_Stencil_Tactile.stl`](../../stl/Measuring_Stencil_Tactile.stl),
+or the `label_mode = Tactile` Customizer preset) swaps the debossed
+lettering for raised ADA-size characters and adds a fold-flat
+**Grade 2 braille title flap** to every card — see the
+[Starter Guide](starter-guide.md#tactile-version-raised-characters--braille)
+for the post-print fold steps.
 
 ### Print settings
 

@@ -12,7 +12,10 @@ Quick lane (no OpenSCAD):
 Render lane (``@requires_openscad``):
 
 * ``Measuring_Stencil.scad`` still renders watertight and
-  mesh-equivalent to the shipped ``stl/Measuring_Stencil.stl``.
+  mesh-equivalent to the shipped ``stl/Measuring_Stencil.stl`` (Visual
+  labels) and ``stl/Measuring_Stencil_Tactile.stl`` (``label_mode=Tactile``:
+  raised ADA characters + braille flaps) — the Tactile case doubles as the
+  render smoke test for that mode.
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -31,6 +34,13 @@ SHIPPED_STLS = [
     "Plug_Puller_Medium.stl",
     "Plug_Puller_Large.stl",
     "Measuring_Stencil.stl",
+    "Measuring_Stencil_Tactile.stl",
+]
+
+# Shipped stencil STL -> the label_mode it was rendered with.
+STENCIL_MODE_PAIRS = [
+    ("Measuring_Stencil.stl", "Visual"),
+    ("Measuring_Stencil_Tactile.stl", "Tactile"),
 ]
 
 # Shipped size STL -> golden fixture rendered from the same parameters.
@@ -80,29 +90,38 @@ def test_shipped_stl_matches_golden_fixture(
 
 @pytest.mark.requires_openscad
 @pytest.mark.slow
+@pytest.mark.parametrize(("stl_name", "label_mode"), STENCIL_MODE_PAIRS)
 def test_stencil_render_matches_shipped_stl(
-    openscad_runner, mesh_comparator, tmp_path: Path
+    stl_name: str, label_mode: str, openscad_runner, mesh_comparator, tmp_path: Path
 ) -> None:
     scad = PROJECT_ROOT / "Measuring_Stencil.scad"
     assert scad.exists(), f"Stencil SCAD missing: {scad}"
 
-    output = tmp_path / "stencil_render.stl"
-    result = openscad_runner.generate_stl(scad_file=scad, output_stl=output)
-    assert result.success, (
-        f"Stencil render failed (returncode={result.returncode}):\n{result.stderr}"
+    output = tmp_path / f"stencil_render_{label_mode.lower()}.stl"
+    result = openscad_runner.generate_stl(
+        scad_file=scad,
+        output_stl=output,
+        parameters={"label_mode": label_mode},
     )
+    assert result.success, (
+        f"Stencil render ({label_mode}) failed "
+        f"(returncode={result.returncode}):\n{result.stderr}"
+    )
+    assert output.stat().st_size > 0, f"Stencil render ({label_mode}) is empty."
 
     import trimesh
 
     mesh = trimesh.load(output, force="mesh")
-    assert mesh.is_watertight, "Fresh stencil render is not watertight."
+    assert mesh.is_watertight, (
+        f"Fresh stencil render ({label_mode}) is not watertight."
+    )
 
-    comparison = mesh_comparator.compare(STL_DIR / "Measuring_Stencil.stl", output)
+    comparison = mesh_comparator.compare(STL_DIR / stl_name, output)
     if not comparison.passed:
         details = "\n".join(f"  - {f}" for f in comparison.failures)
         pytest.fail(
-            f"Fresh stencil render no longer matches the shipped "
-            f"stl/Measuring_Stencil.stl:\n{details}\n"
+            f"Fresh stencil render ({label_mode}) no longer matches the "
+            f"shipped stl/{stl_name}:\n{details}\n"
             f"If the stencil changed intentionally, re-render the shipped STL."
         )
 

@@ -11,6 +11,61 @@ public milestone**.
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-07-23
+
+Makes the measuring stencil work one-handed on an installed cord (the
+gauges open through the card edge) and fully non-visual: a Tactile
+label mode with raised ADA-size characters and a fold-flat Grade 2
+braille title flap on every card.
+
+### Added
+
+- **Tactile label mode** (`label_mode = Tactile`, new `[Labels]`
+  Customizer tab with a `Visual (default)` / `Tactile (raised +
+  braille)` preset pair in `Measuring_Stencil.json`, pre-rendered
+  `stl/Measuring_Stencil_Tactile.stl`): every debossed label becomes a
+  raised uppercase character at ADA 703.2 size (16 mm nominal, 0.8 mm
+  proud), and every card grows a **Grade 2 braille title flap**
+  (ADA 703.3) past its top edge. The flap prints leaning back at 75° —
+  the CHI 2024 sweet spot where braille dots print crispest — joined
+  to the card by a living hinge (`hinge_thickness`, the only other new
+  parameter) and held by break-away support fins with snap-off bridges
+  and a bed brim (the braille-wedge-card technique). Post-print: snap
+  the fins off and fold each flap away from the card until flat — the
+  braille lands face-up beyond the card's top edge. Tactile R1 drops
+  the numerals (an ADA digit cannot fit the 10 mm tick pitch) and C1's
+  slot pitch widens so the ADA digits stay separated; the sheet packer
+  accounts for every flap's printed footprint.
+- **Braille translation pipeline**
+  (`scripts/generate_braille_labels.mjs` + committed
+  `scripts/braille_labels.json`): card titles pre-translated to UEB
+  Grade 2 Unicode braille with Liblouis
+  (`unicode.dis,en-ueb-g2.ctb`), hardcoded into the SCAD as
+  `BRAILLE_LABELS` — no user-facing braille settings.
+  `tests/test_braille_labels.py` drift-locks the SCAD copy against the
+  generator output, validates every codepoint is Unicode braille, and
+  asserts every line fits its card's width.
+- **Shipped-STL coverage**: `stl/Measuring_Stencil_Tactile.stl` joins
+  the watertight/winding guards, and the stencil render-parity test is
+  parametrized over both label modes (the Tactile case doubles as the
+  render smoke test for the new geometry).
+
+### Changed
+
+- **C1 cord gauge is now open-throat** (both label modes): the Ø 3–9 mm
+  through-holes became U-slots opening through the card's bottom edge,
+  so the card slides sideways onto an *installed* cord — no free cord
+  end needed. Usage is now "the smallest slot that slips over the cord
+  is the cord thickness".
+- **P1–P3 cord holes opened the same way**: each plug card's round
+  cord hole gained a channel through the bottom edge (the numeric cord
+  caption moved just left of the channel in Visual mode).
+- **README, starter guide, measuring guide, and outlines guide**
+  updated for the open-slot gauge usage, the two label-mode presets
+  (ADA 703 naming: modes named by modality, Visual/Tactile), the
+  Tactile post-print fold steps, and a hinge material note (PETG/PP
+  folds more reliably than PLA; fold once, gently).
+
 ## [0.10.0] - 2026-07-23
 
 Makes Step 3 shape both tools, replaces the finger stencil with a full
@@ -171,6 +226,7 @@ First public release.
   (`docs/Plug_Puller_Reference.md`).
 - Ready-to-print Small / Medium / Large sample STLs in `stl/`.
 
+[0.11.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.11.0
 [0.10.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.10.0
 [0.9.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.9.0
 [0.8.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.8.0

@@ -1,0 +1,12 @@
+{
+  "fileFormatVersion": "1",
+  "parameterSets": {
+    "Visual (default)": {
+      "label_mode": "Visual"
+    },
+    "Tactile (raised + braille)": {
+      "label_mode": "Tactile",
+      "hinge_thickness": "0.6"
+    }
+  }
+}

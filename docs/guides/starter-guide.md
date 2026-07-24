@@ -28,13 +28,33 @@ raised two-letter ID you can find by touch:
 - **P3** — plug silhouette card: **heavy-duty extension cord** (NEMA 5-15)
 - **R1** — **ruler**: raised mm ticks, numerals every 10 mm, and edge
   notches every 10 mm you can count by touch
-- **C1** — **cord gauge**: through-holes Ø 3–9 mm
+- **C1** — **cord gauge**: open slots Ø 3–9 mm through the bottom
+  edge — slide the card sideways onto the installed cord; the smallest
+  slot that slips over it is the cord thickness
 - **F1 / F2** — **finger sizing**: the 18 labeled finger holes
   (Ø 15–25 on F1, Ø 26–32 on F2)
 
 Each P card has three openings: **W** (the plug's width outline),
-**T** (its thickness outline), and a round cord hole. The card is a
-"does my plug match this preset?" test — no numbers involved.
+**T** (its thickness outline), and an open cord slot that slides onto
+the cord from the side. The card is a "does my plug match this
+preset?" test — no numbers involved.
+
+### Tactile version (raised characters + braille)
+
+The stencil ships in two label styles, switchable in the Customizer
+(`label_mode`, with matching presets in the dropdown):
+
+- **Visual** (default, [`stl/Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)) —
+  debossed print lettering.
+- **Tactile** ([`stl/Measuring_Stencil_Tactile.stl`](../../stl/Measuring_Stencil_Tactile.stl)) —
+  every label becomes a raised uppercase character at ADA 703.2 size,
+  and every card grows a **Grade 2 braille title flap** on its top
+  edge. The flap prints leaning back at 75° (the angle braille prints
+  crispest at) held by break-away support fins. After printing:
+  **snap the fins off**, then **fold each flap away from the card**
+  (like a door falling backward) until it lies flat — the braille
+  lands face-up beyond the card's top edge. Fold once, gently; a PETG
+  or PP hinge folds more reliably than PLA.
 
 ### Printing the stencil on a small bed
 
@@ -53,8 +73,8 @@ in the console and placed alone on its own sheet.
 
 1. Take the **P1**, **P2**, and **P3** cards to your plug.
 2. Hold each card's **W** cutout over the plug (looking at its wide
-   side), then the **T** cutout (looking at its thin side). Try the
-   cord in the round hole.
+   side), then the **T** cutout (looking at its thin side). Slide the
+   card's open cord slot sideways onto the cord.
 3. **If the plug fills one card's openings** — snug, no big gaps —
    that preset is your plug:
    - P1 → Step 1 `plug_preset` = `Flat 2-prong lamp plug - NEMA 1-15`
@@ -76,7 +96,7 @@ worksheet's own numbering. Which card answers which number:
 | 1 | Plug length | **R1** — wall plate to the plug's back face |
 | 2–3 | Plug width near the wall / near the cord | **R1** — hold the notched edge against the plug body |
 | 4–5 | Plug thickness near the wall / near the cord | **R1** — same, across the thin direction |
-| 6 | Cord thickness | **C1** — smallest hole the cord slides through |
+| 6 | Cord thickness | **C1** — slide it onto the cord from the side; smallest slot that slips over |
 | 7 | Wall plate style | your eyes — it's a picture quiz, see the [Measuring Guide](measuring-guide.md#7-wall-plate-style-a-picture-quiz-not-a-measurement) |
 | 8 | Finger knuckle width | **F1 / F2** — smallest comfortable hole, **minus 5** |
 | 9 | Hand width | **R1** — across the four knuckles, flat hand |

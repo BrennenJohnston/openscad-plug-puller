@@ -127,6 +127,10 @@ Flat lamp cord: measure the narrow way. Round cord: the diameter.
 The cord must slide sideways into the tool's hook slot, so measure
 where the hook will actually grab — a few centimetres behind the plug.
 
+With the stencil: **C1**'s slots open through the card's bottom edge,
+so slide the card sideways onto the installed cord — no free cord end
+needed. The smallest slot that slips over the cord is this number.
+
 - Typical range: 3–7 mm
 - Example: ≈ 5 mm
 
