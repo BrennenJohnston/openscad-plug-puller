@@ -190,5 +190,5 @@
 <circle cx="140.500" cy="250.000" r="16.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
 <text x="140.500" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">32</text>
 <text x="14.000" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F2</text>
-<text x="105.000" y="274.500" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#444444">openscad-plug-puller · measuring stencil sheet · scale 1:1 · prefer plastic? print stl/Measuring_Stencil.stl</text>
+<text x="105.000" y="274.500" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#444444">openscad-plug-puller · measuring stencil sheet · scale 1:1 · prefer plastic? print stl/Measuring-Stencil/</text>
 </svg>

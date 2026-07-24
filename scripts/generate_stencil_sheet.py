@@ -237,7 +237,7 @@ def build_sheet() -> Svg:
     svg.text(
         PAGE_W / 2, 274.5,
         "openscad-plug-puller · measuring stencil sheet · scale 1:1 · "
-        "prefer plastic? print stl/Measuring_Stencil.stl",
+        "prefer plastic? print stl/Measuring-Stencil/",
         2.4, anchor="middle", fill="#444444",
     )
     return svg

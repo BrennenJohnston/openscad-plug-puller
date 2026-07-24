@@ -119,5 +119,5 @@ The Playground works on mobile browsers, with caveats:
   [Publishing to MakerWorld](../../README.md#publishing-to-makerworld)
   in the README).
 - **Ready-to-print STLs** — no customization at all: grab a
-  pre-rendered Small / Medium / Large from
-  [`stl/`](../../stl) and print.
+  pre-rendered tool for your plug and hand size from
+  [`stl/`](../../stl) (see [`stl/README.md`](../../stl/README.md)) and print.

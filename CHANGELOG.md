@@ -11,6 +11,36 @@ public milestone**.
 
 ## [Unreleased]
 
+### Added
+
+- **`export_card` selector on the measuring stencil** (`Measuring_Stencil.scad`,
+  new `[Export]` Customizer tab): `All cards` keeps the normal packed-sheet
+  layout, while picking a card ID (P1/P2/P3/R1/C1/F1/F2) renders just that one
+  stencil at the origin so it can be uploaded as a standalone model. This is
+  what lets the release build ship every card as its own file.
+- **`scripts/build_release_stls.py`**: one command renders the entire
+  committed ready-to-print library under `stl/` — 9 plug tools (the 3
+  `plug_preset` families × Small/Medium/Large) and 16 measuring-stencil
+  cards (Visual/Tactile full sets plus every individual card) — each
+  watertight-checked. `--only plug-puller` / `--only stencil` rebuild one
+  group.
+- **`stl/README.md`**: an index of the library that maps every file to the
+  plug family, hand size, and stencil card it prints.
+
+### Changed
+
+- **Reorganized `stl/` into a self-describing tree** so there is a single,
+  unambiguous home for downloads. The old flat, default-plug samples
+  (`stl/Plug_Puller_{Small,Medium,Large}.stl`,
+  `stl/Measuring_Stencil{,_Tactile}.stl`) are replaced by
+  `stl/Plug-Puller/…` and `stl/Measuring-Stencil/{Visual,Tactile}/…`, whose
+  filenames name the plug preset, size, and stencil card. README and the
+  beginner guides now link the new paths.
+- **`tests/test_shipped_stls.py`** guards the whole library by reusing
+  `build_release_stls.py`'s job catalog: every shipped STL is checked
+  watertight (quick lane) and re-rendered mesh-equivalent to its source
+  (render lane), so the downloads can never silently drift from the model.
+
 ## [0.11.0] - 2026-07-23
 
 Makes the measuring stencil work one-handed on an installed cord (the

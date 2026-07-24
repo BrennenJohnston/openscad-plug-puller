@@ -19,8 +19,9 @@ either the printed **measuring stencil** or a ruler with mm markings.
 
 ## The measuring stencil — card legend
 
-Print [`stl/Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)
-(1.2 mm cards, no supports, any rigid filament). Each card has a
+Print [`stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl`](../../stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl)
+(1.2 mm cards, no supports, any rigid filament — or print just one card from
+[`stl/Measuring-Stencil/`](../../stl/Measuring-Stencil)). Each card has a
 raised two-letter ID you can find by touch:
 
 - **P1** — plug silhouette card: **flat 2-prong lamp plug** (NEMA 1-15)
@@ -44,9 +45,9 @@ preset?" test — no numbers involved.
 The stencil ships in two label styles, switchable in the Customizer
 (`label_mode`, with matching presets in the dropdown):
 
-- **Visual** (default, [`stl/Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)) —
+- **Visual** (default, [`stl/Measuring-Stencil/Visual/`](../../stl/Measuring-Stencil/Visual)) —
   debossed print lettering.
-- **Tactile** ([`stl/Measuring_Stencil_Tactile.stl`](../../stl/Measuring_Stencil_Tactile.stl)) —
+- **Tactile** ([`stl/Measuring-Stencil/Tactile/`](../../stl/Measuring-Stencil/Tactile)) —
   every label becomes a raised uppercase character at ADA 703.2 size,
   and every card grows a **Grade 2 braille title flap** on its top
   edge. The flap prints leaning back at 75° (the angle braille prints

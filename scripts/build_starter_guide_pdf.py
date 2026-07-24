@@ -55,7 +55,7 @@ def page_one() -> str:
 
   <h2>What you need</h2>
   <p>The plug you want to pull (in its outlet), and either the printed
-  <b>measuring stencil</b> (<span class="mono">stl/Measuring_Stencil.stl</span>,
+  <b>measuring stencil</b> (<span class="mono">stl/Measuring-Stencil/</span>,
   1.2 mm cards, no supports) or the paper stencil sheet at the back of this
   document.</p>
 

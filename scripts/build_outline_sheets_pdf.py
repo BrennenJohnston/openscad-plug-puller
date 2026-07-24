@@ -123,8 +123,8 @@ def cover_html() -> str:
     <li>Happy? Open the Customizer with the settings printed in the sheet's title
         block and export your STL (docs/guides/quick-start-beginner.md).</li>
   </ol>
-  <p class="hint">Finger holes feel wrong on every sheet? Print
-  <span class="mono">stl/Measuring_Stencil.stl</span> — its F1/F2 cards carry all 18
+  <p class="hint">Finger holes feel wrong on every sheet? Print the cards in
+  <span class="mono">stl/Measuring-Stencil/</span> — their F1/F2 cards carry all 18
   finger-sizing holes (Ø 15–32 mm) — and measure your finger instead
   (docs/guides/print-preview-outlines.md).</p>
   <p class="footer">openscad-plug-puller · 1:1 outline sheets · works on A4 and US Letter ·

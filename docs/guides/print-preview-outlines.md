@@ -14,7 +14,7 @@ Two things live here:
    hold it against your plug, and try the finger holes. All twelve
    sheets are also bundled into one printable PDF with a cover index:
    **[`docs/Plug_Puller_Outline_Sheets.pdf`](../Plug_Puller_Outline_Sheets.pdf)**.
-2. **[`Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)** — a
+2. **[`Measuring-Stencil` STLs](../../stl/Measuring-Stencil)** — a
    printable set of thin measuring cards: plug-preset silhouettes
    (P1/P2/P3), a tactile mm ruler (R1), a cord gauge (C1), and the 18
    finger-sizing holes (F1/F2). The no-scissors, no-caliper way to
@@ -87,10 +87,13 @@ matters:
 
 ## The measuring stencil
 
-[`Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)
-(source: [`Measuring_Stencil.scad`](../../Measuring_Stencil.scad)
-at the repo root) is a set of 1.2 mm measuring cards, each with a
-raised 2-character ID you can read by touch:
+The measuring stencil
+([`stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl`](../../stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl)
+for the full packed set, or grab a single card from
+[`stl/Measuring-Stencil/`](../../stl/Measuring-Stencil); source:
+[`Measuring_Stencil.scad`](../../Measuring_Stencil.scad) at the repo root)
+is a set of 1.2 mm measuring cards, each with a raised 2-character ID you
+can read by touch:
 
 | ID | Card | Worksheet numbers it answers |
 | -- | ---- | ---------------------------- |
@@ -109,7 +112,7 @@ reusable — handy for occupational therapists or anyone sizing tools
 for several people.
 
 A **Tactile** version
-([`stl/Measuring_Stencil_Tactile.stl`](../../stl/Measuring_Stencil_Tactile.stl),
+([`stl/Measuring-Stencil/Tactile/`](../../stl/Measuring-Stencil/Tactile),
 or the `label_mode = Tactile` Customizer preset) swaps the debossed
 lettering for raised ADA-size characters and adds a fold-flat
 **Grade 2 braille title flap** to every card — see the

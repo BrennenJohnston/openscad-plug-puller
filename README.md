@@ -136,16 +136,42 @@ sharing)? Use [`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.s
 
 ## Ready-to-print STLs
 
-No OpenSCAD needed — three pre-rendered flat tools with default
-settings live in [`stl/`](stl), plus the measuring stencil:
+No OpenSCAD needed — the [`stl/`](stl) folder ships a pre-rendered copy of
+every default configuration, named so you can grab yours without opening the
+Customizer. [`stl/README.md`](stl/README.md) is a one-line index of the whole
+library; the two groups are:
 
-| File | Size | Fits |
-| ---- | ---- | ---- |
-| [`stl/Plug_Puller_Small.stl`](stl/Plug_Puller_Small.stl) | Small | ≈ 5th-percentile female hand |
-| [`stl/Plug_Puller_Medium.stl`](stl/Plug_Puller_Medium.stl) | Medium | the reference size — start here |
-| [`stl/Plug_Puller_Large.stl`](stl/Plug_Puller_Large.stl) | Large | ≈ 95th-percentile male hand |
-| [`stl/Measuring_Stencil.stl`](stl/Measuring_Stencil.stl) | — | thin measuring cards: plug-preset silhouettes (P1–P3), a tactile mm ruler (R1), an open-slot cord gauge that slides onto an installed cord (C1), and all 18 finger-sizing holes (F1/F2) — answer the worksheet without a caliper |
-| [`stl/Measuring_Stencil_Tactile.stl`](stl/Measuring_Stencil_Tactile.stl) | — | the same cards with **Tactile labels**: raised ADA-size characters plus a fold-flat Grade 2 braille title flap on every card (snap off the support fins, fold each flap back until flat — see the [Starter Guide](docs/guides/starter-guide.md#tactile-version-raised-characters--braille)) |
+### Plug pullers — [`stl/Plug-Puller/`](stl/Plug-Puller)
+
+Pick your plug family, then your hand size (`Small` / `Medium` / `Large` —
+Medium is the reference device, so start there; Small ≈ 5th-percentile female
+hand, Large ≈ 95th-percentile male hand).
+
+| Plug family | Files (`_Small` / `_Medium` / `_Large`) | Tool |
+| ----------- | --------------------------------------- | ---- |
+| Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_*.stl` | flat tool |
+| Standard 3-prong — NEMA 5-15 | `Plug-Puller_Standard-3-Prong-NEMA-5-15_*.stl` | flat tool |
+| Heavy-duty round cord — NEMA 5-15 | `Plug-Puller_Heavy-Duty-Cord-NEMA-5-15_Clamshell-Plate_*.stl` | clamshell plate — **print two per tool**, flip one, zip-tie them face to face |
+
+### Measuring stencil — [`stl/Measuring-Stencil/`](stl/Measuring-Stencil)
+
+Thin measuring cards that answer the fit worksheet without a caliper. Print the
+full packed set (`..._All-Cards.stl`) or just the one card you need, in either
+label mode:
+
+- **Visual** ([`Measuring-Stencil/Visual/`](stl/Measuring-Stencil/Visual)) — debossed printed labels.
+- **Tactile** ([`Measuring-Stencil/Tactile/`](stl/Measuring-Stencil/Tactile)) — raised ADA-size characters plus a fold-flat Grade 2 braille title flap on every card (snap off the support fins, fold each flap back until flat — see the [Starter Guide](docs/guides/starter-guide.md#tactile-version-raised-characters--braille)).
+
+| Card | Purpose |
+| ---- | ------- |
+| `All-Cards` | the full packed set — every card on one plate |
+| `P1_Lamp-Plug-Gauge` / `P2_Standard-3-Prong-Gauge` / `P3_Heavy-Duty-Cord-Gauge` | plug-preset silhouettes |
+| `R1_Ruler-100mm` | a tactile 100 mm ruler |
+| `C1_Cord-Gauge` | open-slot cord gauge that slides onto an installed cord |
+| `F1_Finger-Sizing-15-25mm` / `F2_Finger-Sizing-26-32mm` | all 18 finger-sizing holes |
+
+The whole library is regenerated from source by
+[`scripts/build_release_stls.py`](scripts/build_release_stls.py).
 
 Not sure which size? Print a **[1:1 paper outline sheet](docs/guides/print-preview-outlines.md)**
 of any quick-select combination first and test it against your real
@@ -275,7 +301,9 @@ openscad-plug-puller/
     Plug_Puller_SingleFile.scad    # flattened single-file build (MakerWorld / web)
   presets/
     Plug_Puller_Parametric.json    # example saved Customizer parameter sets
-  stl/                             # ready-to-print samples + the sizing stencil
+  stl/                             # ready-to-print library (see stl/README.md)
+    Plug-Puller/                   # 9 tools: 3 plug families x 3 hand sizes
+    Measuring-Stencil/             # sizing cards, in Visual/ and Tactile/ label modes
   docs/
     Plug_Puller_Reference.md       # exhaustive engineering reference
     Plug_Puller_Complete_Guide.pdf # printable complete guide

@@ -87,6 +87,10 @@ bed_depth = 200; // [80:5:400]
 // Which sheet to render. 0 = preview every sheet at once, separated by 15 mm; 1-9 = render only that sheet for export.
 part_index = 0; // [0:1:9]
 
+/* [Export] */
+// Upload helper. "All cards" lays every card onto print sheets (the normal layout, honouring the Print Bed sizes and part_index above). Pick a single card by its ID to render just that one stencil on its own at the origin - the way each card is uploaded as its own standalone model. A single card ignores the Print Bed / part_index settings. The list follows the fixed card order (P1/P2/P3 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing), so it still selects the right card even if you rename an ID above.
+export_card = "All cards"; // [All cards, P1, P2, P3, R1, C1, F1, F2]
+
 /* [Hidden] */
 eps = 0.01;
 
@@ -768,12 +772,27 @@ if (IS_TACTILE)
                          " MM CARD WIDTH - SHORTEN THE SOURCE STRING"));
 
 // ── Render ───────────────────────────────────────────────────────────────────
-// part_index = 0: every sheet at once, each sheet offset along Y by the bed
-// depth + 15 mm. part_index = N: only sheet N, at the origin, for export.
-for (p = PLACEMENTS) {
-    if (part_index == 0 || p[1] == part_index - 1) {
-        sheet_dy = (part_index == 0) ? p[1] * (bed_depth + 15) : 0;
-        translate([p[2], p[3] + sheet_dy, 0])
-            card(p[0]);
+// export_card = a single ID: render just that card at the origin, so it can be
+// exported and uploaded as a standalone stencil (the Print Bed / part_index
+// layout is bypassed). Otherwise lay the whole set out on sheets: part_index =
+// 0 previews every sheet at once (offset along Y by the bed depth + 15 mm);
+// part_index = N exports only sheet N at the origin.
+_EXPORT_CARD_INDEX =
+    export_card == "P1" ? 0 :
+    export_card == "P2" ? 1 :
+    export_card == "P3" ? 2 :
+    export_card == "R1" ? 3 :
+    export_card == "C1" ? 4 :
+    export_card == "F1" ? 5 :
+    export_card == "F2" ? 6 : -1;
+
+if (_EXPORT_CARD_INDEX >= 0)
+    card(_EXPORT_CARD_INDEX);
+else
+    for (p = PLACEMENTS) {
+        if (part_index == 0 || p[1] == part_index - 1) {
+            sheet_dy = (part_index == 0) ? p[1] * (bed_depth + 15) : 0;
+            translate([p[2], p[3] + sheet_dy, 0])
+                card(p[0]);
+        }
     }
-}

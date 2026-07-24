@@ -18,7 +18,7 @@ with a mm ruler and finger-sizing circles — print it at 100 % scale
 ("actual size", no "fit to page") and check the calibration square
 before trusting it. Prefer not to cut paper? Print the
 **[measuring stencil](print-preview-outlines.md#the-measuring-stencil)**
-([`stl/Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl))
+([`stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl`](../../stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl))
 instead — plug-preset silhouette cards (P1/P2/P3), a tactile mm ruler
 (R1), a cord gauge (C1), and the 18 finger circles as real
 through-holes (F1/F2). The [Starter Guide](starter-guide.md) maps each
@@ -189,7 +189,7 @@ the middle knuckle), not the fingertip.
 > that's your finger width. (Passes Ø 26 → enter 21.)
 >
 > **Or skip the scissors:** print
-> [`stl/Measuring_Stencil.stl`](../../stl/Measuring_Stencil.stl)
+> [`stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl`](../../stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl)
 > — its F1/F2 cards carry the same 18 circles as real through-holes,
 > each labeled. Same rule: smallest comfortable hole, minus 5. See the
 > [Try Before You Print guide](print-preview-outlines.md#the-measuring-stencil).
