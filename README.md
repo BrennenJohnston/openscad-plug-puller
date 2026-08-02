@@ -206,11 +206,18 @@ MakerWorld's Parametric Model Maker runs OpenSCAD files directly:
 
 Draft listing text (title, description, print settings, licensing
 notes) is prepared in
-[`docs/makerworld-listing.md`](docs/makerworld-listing.md). Note the
-licensing decision recorded there: publishing on MakerWorld requires
-granting MakerWorld's platform license terms alongside this repo's
-PolyForm NC 1.0.0 — the listing stays unpublished until the maintainer
-signs off on that.
+[`docs/makerworld-listing.md`](docs/makerworld-listing.md), and the user
+guide that goes with it is
+[`docs/MAKERWORLD_QUICK_START.md`](docs/MAKERWORLD_QUICK_START.md) —
+measuring routes, hand sizing, how to read the on-model warning tags, and
+the OpenSCAD Playground alternative for people who cannot use MakerWorld's
+customizer. Both follow the shared
+[Accessible MakerWorld Documentation Standard](https://github.com/BrennenJohnston/accessible-makerworld-doc-standard/blob/main/ACCESSIBLE_MAKERWORLD_DOC_STANDARD.md).
+
+Note the licensing decision recorded in the listing: publishing on
+MakerWorld requires granting MakerWorld's platform license terms alongside
+this repo's PolyForm NC 1.0.0 — the listing stays unpublished until the
+maintainer signs off on that.
 
 ## Features
 
