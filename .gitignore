@@ -28,3 +28,6 @@ Thumbs.db
 
 # AI coding assistants
 .cursor/
+
+# OpenSCAD scad-check output
+build/
