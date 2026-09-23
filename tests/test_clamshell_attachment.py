@@ -99,14 +99,14 @@ def _plate_stats(stl_path: Path) -> Dict[str, Any]:
 
 @pytest.fixture(scope="module")
 def attachment_renders(
-    scad_file: Path, openscad_runner, tmp_path_factory
+    two_sided_scad_file: Path, openscad_runner, tmp_path_factory
 ) -> Dict[str, Dict[str, Any]]:
     out_dir = tmp_path_factory.mktemp("clamshell_attachment")
     stats: Dict[str, Dict[str, Any]] = {}
     for label, choice in ATTACHMENT_CHOICES.items():
         out = out_dir / f"plate_{label}.stl"
         result = openscad_runner.generate_stl(
-            scad_file=scad_file,
+            scad_file=two_sided_scad_file,
             output_stl=out,
             parameters={
                 "plug_preset": HD_PRESET,

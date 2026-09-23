@@ -106,12 +106,12 @@ def ideal_dims() -> Dict[str, Any]:
 
 
 @pytest.fixture(scope="module")
-def rendered_dims(scad_file: Path, openscad_runner, tmp_path_factory) -> Dict[str, Any]:
+def rendered_dims(two_sided_scad_file: Path, openscad_runner, tmp_path_factory) -> Dict[str, Any]:
     import trimesh
 
     out = tmp_path_factory.mktemp("clamshell_parity") / "plate.stl"
     result = openscad_runner.generate_stl(
-        scad_file=scad_file,
+        scad_file=two_sided_scad_file,
         output_stl=out,
         parameters={
             "plug_preset": HD_PRESET,
