@@ -1,7 +1,8 @@
 """Build the flattened single-file SCAD artifact for web customizers.
 
-Deterministically inlines the include tree (``fit_measured.scad`` +
-``presets.scad``) into ``dist/Plug_Puller_SingleFile.scad`` so the model
+Deterministically inlines the include tree (``fit_sizes.scad`` +
+``fit_measured.scad`` + ``presets.scad``) into
+``dist/Plug_Puller_SingleFile.scad`` so the model
 can be loaded by front-ends that do not support local ``include <>`` trees:
 
 * MakerWorld Parametric Model Maker (single ``.scad`` upload only), and
@@ -44,9 +45,9 @@ MAIN_SCAD = SRC_DIR / "Plug_Puller_Parametric.scad"
 OUTPUT_FILE = PROJECT_ROOT / "dist" / "Plug_Puller_SingleFile.scad"
 
 # The exact include graph this script knows how to flatten. Order matters
-# (fit_measured must precede presets — see the include-order note in the
-# main SCAD); the script asserts the source agrees.
-EXPECTED_INCLUDES = ["fit_measured.scad", "presets.scad"]
+# (fit_sizes, then fit_measured, then presets — see the include-order note in
+# the main SCAD); the script asserts the source agrees.
+EXPECTED_INCLUDES = ["fit_sizes.scad", "fit_measured.scad", "presets.scad"]
 
 INCLUDE_RE = re.compile(r"^\s*(include|use)\s*<([^>]+)>\s*;?\s*$")
 
@@ -56,8 +57,8 @@ HEADER = """\
 // =============================================================================
 //
 // Flattened single-file build of the Plug Puller 0.9 parametric model, with
-// fit_measured.scad and presets.scad inlined. Generated from the canonical
-// sources in src/ — edit those files, not this one.
+// fit_sizes.scad, fit_measured.scad and presets.scad inlined. Generated from
+// the canonical sources in src/ — edit those files, not this one.
 //
 // Purpose: web customizers (MakerWorld Parametric Model Maker,
 // openscad-playground `?src=` loading) accept only a single .scad file with
@@ -131,8 +132,8 @@ def build_flattened_source() -> str:
     if seen_includes != EXPECTED_INCLUDES:
         raise RuntimeError(
             f"Include graph mismatch: expected {EXPECTED_INCLUDES} in order, "
-            f"found {seen_includes}. fit_measured.scad must be included "
-            f"before presets.scad (FIT_MEASURED assignment order)."
+            f"found {seen_includes}. fit_sizes.scad, fit_measured.scad and "
+            f"presets.scad must be included in that order (assignment order)."
         )
 
     flattened = HEADER + "".join(out_lines)

@@ -342,9 +342,9 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 // device) for one render.
 //
 // Include order matters (top-level assignments evaluate in source order):
-// fit_measured.scad consumes the effective plug measurements + `size` inputs
-// and must build FIT_MEASURED before presets.scad's `preset_value()` can
-// route to it.
+// fit_sizes.scad (sizes) → fit_measured.scad, which consumes the size table,
+// the effective plug measurements and the `size` inputs, and must build
+// FIT_MEASURED before presets.scad's `preset_value()` can route to it.
 
 // --- Step 1 plug preset -> effective plug measurements ---------------------
 // A chosen plug preset overrides the Step 1 sliders (except when Size =
@@ -410,6 +410,7 @@ _eff_plug_thickness = max(_eff_plug_thickness_wall, _eff_plug_thickness_cable);
 // Plug presets don't change the wall-plate style (that's an outlet property).
 _eff_wall_plate_style = measure_wall_plate_style;
 
+include <fit_sizes.scad>
 include <fit_measured.scad>
 include <presets.scad>
 

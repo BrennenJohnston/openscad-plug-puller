@@ -13,9 +13,10 @@ after the v5.1 size/attachment rework:
    its fallback argument (so "Custom" preserves the user's slider value).
 4. ``preset_lookup`` / ``preset_value`` return ``undef``/``fallback`` for
    unknown keys and route "Custom" / "Medium Defaults" correctly.
-5. The include order (fit_measured before presets) is pinned — OpenSCAD
-   evaluates top-level assignments in source order, so FIT_MEASURED must
-   exist before ``preset_value()`` first resolves against it.
+5. The include order (fit_sizes, then fit_measured, then presets) is
+   pinned — OpenSCAD evaluates top-level assignments in source order, so the
+   size table must exist before the derivations read it, and FIT_MEASURED
+   must exist before ``preset_value()`` first resolves against it.
 
 All assertions parse source files; no OpenSCAD render is required, so the
 quick CI lane can run them in well under a second.
@@ -272,13 +273,21 @@ class TestFitMeasuredTable:
     def test_main_scad_includes_fit_measured_before_presets(
         self, scad_source: str
     ) -> None:
-        """Include-order contract: FIT_MEASURED must be assigned before
+        """Include-order contract: the size table (fit_sizes.scad) must be
+        assigned before fit_measured.scad reads it, and FIT_MEASURED before
         presets.scad's `preset_value()` references it (OpenSCAD evaluates
         top-level assignments in source order)."""
+        sizes_idx = scad_source.find("include <fit_sizes.scad>")
         fit_idx = scad_source.find("include <fit_measured.scad>")
         presets_idx = scad_source.find("include <presets.scad>")
+        assert sizes_idx != -1, "Main SCAD no longer includes fit_sizes.scad."
         assert fit_idx != -1, "Main SCAD no longer includes fit_measured.scad."
         assert presets_idx != -1, "Main SCAD no longer includes presets.scad."
+        assert sizes_idx < fit_idx, (
+            "`include <fit_sizes.scad>` must precede `include "
+            "<fit_measured.scad>` — otherwise the size table and "
+            "FIT_GRIP_CLEARANCE are undef when D-1/D-2 and D-9 read them."
+        )
         assert fit_idx < presets_idx, (
             "`include <fit_measured.scad>` must precede `include "
             "<presets.scad>` — otherwise FIT_MEASURED is undef when "

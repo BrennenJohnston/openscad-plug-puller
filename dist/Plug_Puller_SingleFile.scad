@@ -3,8 +3,8 @@
 // =============================================================================
 //
 // Flattened single-file build of the Plug Puller 0.9 parametric model, with
-// fit_measured.scad and presets.scad inlined. Generated from the canonical
-// sources in src/ — edit those files, not this one.
+// fit_sizes.scad, fit_measured.scad and presets.scad inlined. Generated from
+// the canonical sources in src/ — edit those files, not this one.
 //
 // Purpose: web customizers (MakerWorld Parametric Model Maker,
 // openscad-playground `?src=` loading) accept only a single .scad file with
@@ -364,9 +364,9 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 // device) for one render.
 //
 // Include order matters (top-level assignments evaluate in source order):
-// fit_measured.scad consumes the effective plug measurements + `size` inputs
-// and must build FIT_MEASURED before presets.scad's `preset_value()` can
-// route to it.
+// fit_sizes.scad (sizes) → fit_measured.scad, which consumes the size table,
+// the effective plug measurements and the `size` inputs, and must build
+// FIT_MEASURED before presets.scad's `preset_value()` can route to it.
 
 // --- Step 1 plug preset -> effective plug measurements ---------------------
 // A chosen plug preset overrides the Step 1 sliders (except when Size =
@@ -433,6 +433,40 @@ _eff_plug_thickness = max(_eff_plug_thickness_wall, _eff_plug_thickness_cable);
 _eff_wall_plate_style = measure_wall_plate_style;
 
 // ── ===========================================================================
+// ── BEGIN: fit_sizes.scad (inlined by scripts/build_flattened.py)
+// ── ===========================================================================
+// =============================================================================
+// fit_sizes.scad — size table and finger clearance shared by both tool files
+// =============================================================================
+//
+// The Small / Medium / Large hand pairs and the finger-hole clearance, kept in
+// one small file so the two-sided puller can use them without including the
+// one-sided puller's derivation layer.
+//
+// Include order: every main file includes this file FIRST (before
+// fit_measured.scad), because OpenSCAD evaluates top-level assignments in
+// source order and the derivations read these constants.
+//
+// Keep tests/fit_formulas.py (FIT_SIZE_TABLE, FIT_GRIP_CLEARANCE) in sync.
+//
+// License: PolyForm Noncommercial 1.0.0
+
+/* [Hidden] */
+
+// Finger-hole bore = knuckle width + this. Reference: 1" bore (25.4) for the
+// designer's 20 mm finger -> +5.4. Also absorbs FDM hole undersizing.
+FIT_GRIP_CLEARANCE = 5.4;
+
+// Size table: hand pair per size (ANSUR II 2012 hand breadth + Rogers 2008
+// PIP-joint breadth). Small ~5th %ile female, Medium = calibration anchor
+// (~combined 50th %ile), Large ~95th %ile male.
+FIT_SIZE_FINGER_S = 16.5;  FIT_SIZE_HAND_S = 72;
+FIT_SIZE_FINGER_M = 20;    FIT_SIZE_HAND_M = 85;
+FIT_SIZE_FINGER_L = 23;    FIT_SIZE_HAND_L = 96;
+// ── ===========================================================================
+// ── END: fit_sizes.scad (inlined by scripts/build_flattened.py)
+// ── ===========================================================================
+// ── ===========================================================================
 // ── BEGIN: fit_measured.scad (inlined by scripts/build_flattened.py)
 // ── ===========================================================================
 // =============================================================================
@@ -455,8 +489,8 @@ _eff_wall_plate_style = measure_wall_plate_style;
 //     (`v6.0/CAD/v6.0.stl` = "Plug Puller 3.1 - B", measured by
 //     scripts/extract_reference_dims.py + scripts/analyze_v6*.py). The
 //     reference is inch-native: 1/4" slab, 1" finger bores, 3/16" cord stem.
-//   - The size table (Small / Medium / Large hand pairs, ANSUR-II grounded)
-//     and the "Measure my hand" passthrough.
+//   - The "Measure my hand" passthrough; the size table itself (Small /
+//     Medium / Large hand pairs, ANSUR-II grounded) lives in fit_sizes.scad.
 //   - Derivations mapping the always-active plug measurements plus the hand
 //     pair to every geometry parameter — including the v6 additions:
 //     J-hook cord catch (D-37..D-40), wing velcro (D-41..D-42), zip
@@ -484,10 +518,6 @@ _eff_wall_plate_style = measure_wall_plate_style;
 // ---------------------------------------------------------------------------
 // Clearance and design constants (v6-calibrated)
 // ---------------------------------------------------------------------------
-
-// Finger-hole bore = knuckle width + this. Reference: 1" bore (25.4) for the
-// designer's 20 mm finger -> +5.4. Also absorbs FDM hole undersizing.
-FIT_GRIP_CLEARANCE = 5.4;
 
 // Bridge of material between the two finger holes: spacing 33 - bore 25.4.
 FIT_FINGER_WEB = 7.6;
@@ -612,12 +642,8 @@ FIT_ZIP_COUNTERSINK = 0.9;  // Ø5.1 -> ~Ø6.9 flare at the top face
 // unchanged at default measurements.
 FIT_ZIP_FINGER_WEB = 2.5;
 
-// Size table: hand pair per size (ANSUR II 2012 hand breadth + Rogers 2008
-// PIP-joint breadth). Small ~5th %ile female, Medium = calibration anchor
-// (~combined 50th %ile), Large ~95th %ile male.
-FIT_SIZE_FINGER_S = 16.5;  FIT_SIZE_HAND_S = 72;
-FIT_SIZE_FINGER_M = 20;    FIT_SIZE_HAND_M = 85;
-FIT_SIZE_FINGER_L = 23;    FIT_SIZE_HAND_L = 96;
+// The size table and FIT_GRIP_CLEARANCE live in fit_sizes.scad, which the
+// main file includes first.
 
 function _fit_clamp(v, lo, hi) = max(lo, min(v, hi));
 function _fit_round05(v) = floor(v * 20 + 0.5) / 20;
