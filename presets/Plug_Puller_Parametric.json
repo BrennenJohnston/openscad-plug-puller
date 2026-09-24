@@ -21,12 +21,6 @@
             "attachment": "Zip ties + Velcro",
             "quality": "64"
         },
-        "Heavy-duty round cord (NEMA 5-15)": {
-            "plug_preset": "Heavy-duty extension cord - NEMA 5-15",
-            "size": "Medium",
-            "attachment": "Zip ties + Velcro",
-            "quality": "64"
-        },
         "Small hands": {
             "plug_preset": "Measure my plug",
             "size": "Small",

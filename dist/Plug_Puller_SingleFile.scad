@@ -21,24 +21,19 @@
 //   permitted. Contact the maintainer for commercial use.
 // =============================================================================
 
-// Plug Puller 0.9 — Unified Parametric Generator (Flat tool + Heavy-duty clamshell)
-// One model, two tools, chosen with the Step 0 `tool_style` selector:
-//   - Flat tool: the reworked v6 flat puller — a slab with a two-level plug
-//     pocket whose side walls follow a parametric "plug side rail", plus
-//     rail-placed zip-tie holes and velcro slots, finger bores, and a chiral
-//     J-hook cord catch. Its Medium defaults descend from the v6 Plug Puller
-//     ("Plug Puller 3.1 - B") but are no longer a sub-mm mesh clone.
-//   - Heavy-duty clamshell: two identical flat plates whose serrated V-edges
-//     grip a thick plug's tapered sides just behind the head; zip ties cinch
-//     plate-to-plate, and a thin cable strip bridges the halves at the cord.
+// Plug Puller 0.9 — Parametric Generator for the one-sided puller
+// The one-sided puller is the reworked v6 flat puller: a slab with a
+// two-level plug pocket whose side walls follow a parametric "plug side
+// rail", plus rail-placed zip-tie holes and velcro slots, finger bores, and a
+// chiral J-hook cord catch. Its Medium defaults descend from the v6 Plug
+// Puller ("Plug Puller 3.1 - B") but are no longer a sub-mm mesh clone.
+// The two-sided puller (two plates that zip-tie around a plug) is its own file: src/Plug_Puller_Two_Sided.scad.
 //
 // ── Quick Start (the numbered Steps are all a beginner needs) ───────────────
 //   1. Open this file in OpenSCAD (v2021.01 or later recommended)
 //   2. Show the Customizer panel: View ▸ Hide Customizer — make sure it is
 //      UNCHECKED (older builds: Window ▸ Customizer)
 //   3. Fill in the numbered Steps top to bottom:
-//        Step 0: Tool style — leave on "Auto from plug"; the model picks the
-//                right tool from your plug numbers.
 //        Step 1: Your plug — pick a plug preset, or measure your plug
 //                (docs/guides/measuring-guide.md shows every measurement).
 //        Step 2: Size — Medium is the reference; Small / Large for other
@@ -48,33 +43,28 @@
 //   4. Press F6 to render, then File ▸ Export ▸ STL to save your print file
 //
 //   The Customizer is organized in three tiers:
-//     "Step 0" … "Step 4"       the guided path — beginners stop here
-//     "Advanced - …" sections   power dials: manual zip/velcro placement,
-//                               clamshell tuning and strength, render quality
+//     "Step 1" … "Step 4"       the guided path — beginners stop here
+//     "Advanced - …" sections   power dials: manual zip/velcro placement and
+//                               render quality
 //                               (see docs/guides/power-user-guide.md)
 //     "… (Custom size only)"    expert geometry sliders, active only when
 //                               Size = Custom (all measurements are ignored)
 // ─────────────────────────────────────────────────────────────────────────────
 //
-// Coordinate frame (flat tool):
+// Coordinate frame:
 //   X = 0 at horizontal midline (symmetric)
 //   Y = 0 at cord/T-hook end (narrow end), positive toward plug end
 //   Z = 0 at print bed, positive upward
 //
-// Coordinate frame (clamshell plate):
-//   X = 0 at the mirror line between the two arms
-//   Y = 0 at the cord end, positive toward the plug end
-//   Z = 0 at the print bed (contact face), positive toward the outer face
-//
 // Plug side rail (the "few dials, max agency" concept):
 //   A 2D line describing the plug's side edge inside the tool, defined by the
 //   pocket half-width at the plug face and one `pocket_side_angle` taper.
-//   Zip stations, velcro slots (flat tool) and the clamshell arm inner edge
-//   are all positioned as (t, d) = (mm along the rail from the plug face,
+//   Zip stations and velcro slots are positioned as (t, d) = (mm along the
+//   rail from the plug face,
 //   mm outward-normal offset) so one slider slides a feature coherently along
 //   the plug's side. See rail_point()/rail_feature_center() below.
 //
-// Architecture (flat tool):
+// Architecture:
 //   1. Body slab: octagonal control polygon; when `body_round_bottom_only`
 //      is set, the cord half is opened (offset-rounded) into the organic
 //      blob of the original while the plug end stays crisp
@@ -87,14 +77,10 @@
 // CUSTOMIZER PARAMETERS
 // ═══════════════════════════════════════════════════════════════════════════════
 // UI tiers (file order = Customizer order):
-//   Steps 0-4                    the guided beginner path
+//   Steps 1-4                    the guided beginner path
 //   "Advanced - …"               power dials for experienced users
 //   [Hidden]                     programmatic switches, not shown in the UI
 //   "… (Custom size only)"       expert sliders, active only in Size = Custom
-
-/* [Step 0 - Tool Style] */
-// START HERE, then work down the numbered Steps. Leave this on "Auto from plug": after you fill in Step 1 the model picks for you - thick round plugs get the heavy-duty clamshell (two serrated plates that zip-tie around the plug), everything else gets the flat tool (the classic slab with a plug pocket). Pick "Flat tool" or "Heavy-duty clamshell" only to override the automatic choice. Each step says which tool it shapes; settings for the other tool are ignored.
-tool_style = "Auto from plug"; // [Auto from plug, Flat tool, Heavy-duty clamshell]
 
 // MAINTAINER NOTE: dropdown option labels must not contain parentheses — the
 // OpenSCAD Customizer fails to parse such enum values and silently reverts
@@ -127,15 +113,15 @@ measure_finger_width = 20; // [14:0.5:32]
 measure_hand_width = 85; // [60:1:110]
 
 /* [Step 3 - Attachment] */
-// How the tool attaches to the plug - this shapes BOTH tools. On the flat tool: Zip ties = the 4-hole grid, Velcro strap = the angled wing slots. On the clamshell: Zip ties = the 3 zip-tie stations per arm that cinch the two plates together around the plug, Velcro strap = a strap slot through each arm. The original device uses both, so both is the default. Note: on the clamshell, zip ties are what hold the two plates together - pick a choice that includes them unless you have another plan.
+// How the tool attaches to the plug. Zip ties = the 4-hole grid, Velcro strap = the angled wing slots. The original device uses both, so both is the default.
 attachment = "Zip ties + Velcro"; // [Zip ties, Velcro strap, Zip ties + Velcro, None]
-// Flat tool only - shape of the velcro strap opening. Wing = the curved openings of the original (bigger opening, less plastic). Classic slot = a simple rectangular slot. The clamshell's strap slot is always a plain rounded slot.
+// Shape of the velcro strap opening. Wing = the curved openings of the original (bigger opening, less plastic). Classic slot = a simple rectangular slot.
 velcro_style = "Wing"; // [Wing, Classic slot]
-// Width of the hook-and-loop strap you'll thread through the openings - check the strap's packaging (ONE-WRAP comes in 10/13/16/20/25 mm). Sizes the flat tool's wing opening AND the length of the clamshell's arm slot so the strap clears either one. (mm)
+// Width of the hook-and-loop strap you'll thread through the openings - check the strap's packaging (ONE-WRAP comes in 10/13/16/20/25 mm). Sizes the wing opening so the strap clears it. (mm)
 strap_width = 15; // [10:1:25]
 
 /* [Step 4 - Cord Hook - Flat Tool] */
-// Which way the flat tool's cord catch faces. Right = the original device. Pick whichever lets you hook the cord with your preferred hand - the hook is mirrored, nothing else changes. The clamshell has no cord hook, so this step is ignored there.
+// Which way the tool's cord catch faces. Right = the original device. Pick whichever lets you hook the cord with your preferred hand - the hook is mirrored, nothing else changes.
 hook_hand = "Right"; // [Right, Left]
 
 /* [Advanced - Zip Tie Placement - Flat Tool] */
@@ -158,62 +144,12 @@ velcro_placement = "Auto"; // [Auto, Manual]
 // Manual placement only: slot distance along the plug side rail, measured from the plug face toward the cord. (mm)
 velcro_pos = 12; // [0:0.5:55]
 
-/* [Advanced - Heavy Duty Clamshell] */
-// STRENGTH DIAL - the one clamshell slider worth knowing even as a beginner. Adds this many millimetres of plastic to EVERY wall around the plate's inner openings at once (finger-hole walls, cord-channel web, velcro-slot walls, zip-tie webs). The plate outline grows and the openings shift or shrink automatically so nothing collides - one slider makes the whole plate denser and stronger. 0 = the reference walls. (mm)
-clam_wall_boost = 0; // [0:0.25:5]
-// Plate thickness of each half. The tool is TWO copies of the SAME plate - print it twice, flip one over, and zip-tie them face to face around the plug. The finished sandwich is twice this. (mm)
-clam_plate_thickness = 4; // [2:0.25:8]
-// Grip clearance per side against the plug thickness. NEGATIVE squeezes the plug so the teeth bite (recommended); 0 = exact fit; positive = loose. The arm gap follows the plug's own two-station thickness profile + 2x this. (mm)
-clam_grip_bite = -1; // [-2:0.1:2]
-// Extra width added to the cord channel beyond the measured cord thickness, so the cord slides in freely. (mm)
-clam_cable_clearance = 0.8; // [0:0.1:5]
-// Finger-hole fit: bore = your finger width + this. Kept tighter than the flat tool so the pull is secure. (mm)
-clam_finger_fit = 1; // [0:0.25:8]
-// Wall of plastic around each finger hole out to the plate edge - sets the size of the rounded finger lobes. clam_wall_boost is added on top. (mm)
-clam_finger_wall = 5.0; // [3:0.25:12]
-// Inner wall between the cord channel and each finger hole. clam_wall_boost is added on top. (mm)
-clam_finger_inner_wall = 3.0; // [1:0.25:8]
-// Diameter of each gripper tooth along the plug-contact edge. 0 = smooth edge with no teeth. (mm)
-clam_tooth_diameter = 2; // [0:0.1:4]
-// Center-to-center spacing of the gripper teeth. (mm)
-clam_tooth_pitch = 2.8; // [0.5:0.1:5]
-// How deep each tooth bites into the arm's gripping edge. Deeper teeth grip soft plug bodies harder. (mm)
-clam_tooth_depth = 1; // [0:0.05:1.5]
-// Where the toothed zone begins, measured back from the arm tips toward the cord. (mm)
-clam_grip_zone_start = 4; // [0:0.5:25]
-// Length of the toothed zone along each arm. 0 = auto (recommended): the teeth cover the full plug body span, however long your plug is. Set a value to override the span manually. (mm)
-clam_grip_zone_length = 0; // [0:1:60]
-// Extra opening of the grip gap right at the arm tips (total, across both arms) so the plug head can enter the V before the teeth bite. (mm)
-clam_tip_flare = 0.7; // [0:0.1:4]
-// Width of each arm at its rounded tip. (mm)
-clam_arm_tip_width = 11; // [5:0.5:16]
-// Roundover radius of the plate's outer-face edge for comfort; the plug-contact face stays square. 0 = sharp. (mm)
-clam_edge_rounding = 1.2; // [0:0.1:2]
-// Thickness of the thin cable strip that bridges the cord channel on the outer face and keeps the two arms tied together. 0 = no strip. (mm)
-clam_strip_thickness = 1; // [0:0.25:4]
-// Diameter of the clamshell zip-tie holes (3 per arm). 0 = no zip holes. (mm)
-clam_zip_hole_diameter = 4; // [0:0.1:8]
-// Where the 3 zip-tie stations per arm sit. Auto (recommended) spaces them along the arm and keeps them clear of everything else; Manual uses the position dials below.
-clam_zip_placement = "Auto"; // [Auto, Manual]
-// Manual placement only: zip station 1 distance from the cord end along the arm. (mm)
-clam_zip_pos_1 = 4; // [0:0.5:80]
-// Manual placement only: zip station 2 distance from the cord end. (mm)
-clam_zip_pos_2 = 32; // [0:0.5:80]
-// Manual placement only: zip station 3 distance from the cord end. (mm)
-clam_zip_pos_3 = 63; // [0:0.5:80]
-// Wall of plastic between the toothed gripping edge and the velcro slot beside it, measured from the DEEPEST tooth bite - so enlarging the teeth never silently thins this wall. Raise it to beef up that boundary alone. clam_wall_boost is added on top. (mm)
-clam_slot_inner_wall = 2.2; // [1:0.1:8]
-// Width of the velcro / material-reduction slot in each arm. 0 = no slot. (mm)
-clam_velcro_slot_width = 9.3; // [0:0.25:20]
-// Length of the velcro / material-reduction slot along the arm. (mm)
-clam_velcro_slot_length = 28; // [5:1:60]
-
 /* [Advanced - Render Quality] */
 // How many segments make up each circle. The default 64 is already print-ready; drop to 32 for faster previews, raise to 96+ only for very large exports. Higher = smoother but slower to render.
 quality = 64; // [24:8:128]
 
 /* [Hidden] */
-render_mode = "Full"; // [Full, Body Only, Body No Cutouts, Only Finger Holes, Only T Hook, Only Plug Wall Notch, Only Zip Tie Holes, Only Velcro Strap Holes, Cutouts Only 2D, Clamshell Plate]
+render_mode = "Full"; // [Full, Body Only, Body No Cutouts, Only Finger Holes, Only T Hook, Only Plug Wall Notch, Only Zip Tie Holes, Only Velcro Strap Holes, Cutouts Only 2D]
 
 // Epsilon — tiny overlap added wherever two solid faces would otherwise be
 // perfectly coincident (coplanar). Without it, the OpenSCAD CGAL kernel can
@@ -384,8 +320,8 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 //   lamp       = 37.0 / 25.0-11.2 / 18.6-8.6  / 3.6
 //   standard   = 46.2 / 26.6-13.4 / 18.9-15.0 / 7.0
 //   heavy-duty = 43.8 / 25.8-21.9 / 27.0-27.0 / 8.2
-// The clamshell grips across the plug THICKNESS, so the heavy-duty 27.0
-// sets the arm gap at the head.
+// The heavy-duty plug is 27.0 mm thick, past W-20's 24 mm limit: it belongs
+// to the two-sided puller file.
 
 /* [Hidden] */
 _pp_active = (plug_preset != "Measure my plug");
@@ -427,8 +363,9 @@ _eff_cord_thickness =
 _eff_plug_side_angle =
     atan(((_eff_plug_width_wall - _eff_plug_width_cable) / 2)
          / max(1, _eff_plug_length));
-// Overall plug thickness: the fatter of the two stations. Drives the
-// "Auto from plug" tool choice and the flat tool's pocket floor recesses.
+// Overall plug thickness: the fatter of the two stations. Drives the pocket
+// floor recesses and W-20 (a plug 24 mm or thicker belongs to the two-sided
+// puller file).
 _eff_plug_thickness = max(_eff_plug_thickness_wall, _eff_plug_thickness_cable);
 // Plug presets don't change the wall-plate style (that's an outlet property).
 _eff_wall_plate_style = measure_wall_plate_style;
@@ -1059,23 +996,6 @@ function preset_value(p, key, fallback) =
 _p = (size == "Custom" && reset_custom_to_medium) ? "Medium Defaults" : size;
 _auto_fit = (_p == "Custom") ? custom_enable_auto_fit : true;
 
-// Tool style: "Auto from plug" builds the heavy-duty clamshell for fat plugs
-// (effective plug thickness >= 24 mm, which the heavy-duty preset trips at
-// 27 mm) and the flat tool otherwise. An explicit choice always wins.
-_resolved_tool_style =
-    tool_style == "Auto from plug"
-        ? (_eff_plug_thickness >= 24 ? "Heavy-duty clamshell" : "Flat tool")
-        : tool_style;
-_is_clamshell = _resolved_tool_style == "Heavy-duty clamshell";
-
-// Console transparency: report which tool the Steps resolved to, and when
-// the clamshell is being built list the flat-tool-only settings it ignores
-// so a changed-but-inert dial is never a mystery.
-echo(str("TOOL: ", _resolved_tool_style,
-         tool_style == "Auto from plug" ? " - chosen automatically from your plug" : " - chosen in Step 0"));
-if (_is_clamshell)
-    echo("CLAMSHELL BUILD - these flat-tool-only settings are ignored: velcro_style, hook_hand, wall plate style, the Advanced zip-tie and velcro placement tabs");
-
 // --- Body ---
 puller_length         = preset_value(_p, "puller_length",         custom_puller_length);
 puller_bottom_width   = preset_value(_p, "puller_bottom_width",   custom_puller_bottom_width);
@@ -1618,205 +1538,6 @@ _velcro_y_eff  = _velcro_slide ? _pocket_front_y - velcro_pos : velcro_hole_y_ce
 _velcro_xc_eff = _velcro_slide
     ? rail_x(velcro_pos) + (velcro_hole_x_center - pocket_width / 2)
     : velcro_hole_x_center;
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// CLAMSHELL DERIVED VALUES
-// ═══════════════════════════════════════════════════════════════════════════════
-// Local plate frame: X mirrored about 0, Y = 0 at the cord end, +Y toward the
-// plug/arm tip; extruded +Z to clam_plate_thickness (Z = 0 = the OUTER face,
-// Z = thickness = the plug-contact face). Calibrated to the idealized
-// heavy-duty plate (66.6 x 73.7 x 4.5, goggle lobes tangent to Y = 0, arms
-// tapering to ~9 mm rounded tips); see scripts/measure_clamshell_ideal.py.
-
-// Finger width recovered from the routed flat-tool bore (bore = finger width +
-// FIT_GRIP_CLEARANCE) so the clamshell fit still tracks the Size selection.
-_clam_finger_width = max(10, finger_hole_diameter - FIT_GRIP_CLEARANCE);
-_clam_finger_dia   = _clam_finger_width + clam_finger_fit;                 // ~21.0
-
-// Effective walls — the clam_wall_boost strength dial is added to EVERY
-// wall/web around the inner openings, so one slider densifies the whole
-// plate: the outline grows outward while the openings shift or shrink to
-// keep their (boosted) webs. The velcro slot's inner wall is additionally
-// measured from the deepest tooth bite (the serrations scallop
-// clam_tooth_depth into the very edge the slot sits behind), so
-// clam_slot_inner_wall is a true tooth-root-to-slot thickness.
-_clam_teeth_on        = clam_tooth_diameter > 0 && clam_tooth_depth > 0;
-_clam_finger_wall_eff = clam_finger_wall + clam_wall_boost;
-_clam_inner_wall_eff  = clam_finger_inner_wall + clam_wall_boost;
-_clam_slot_in_wall    = clam_slot_inner_wall + clam_wall_boost
-                        + (_clam_teeth_on ? clam_tooth_depth : 0);
-_clam_slot_out_wall   = 2.2 + clam_wall_boost;
-
-// Inner-edge gaps. The cord channel hugs the cord; the plug zone hugs the
-// plug's OWN two-station thickness profile with a (usually negative) bite so
-// the arms squeeze it: half-gap at the head (arm tips = the wall end of the
-// plug) comes from thickness_wall, half-gap at the plug's back end from
-// thickness_cable, interpolated linearly in between. Each station is floored
-// 1 mm outside the cable channel so the V can never pinch shut on the cord.
-_clam_cable_gap = max(2, _eff_cord_thickness + clam_cable_clearance);      // ~9.0
-_clam_cable_hw  = _clam_cable_gap / 2;
-_clam_hw_wall   = max(_clam_cable_hw + 1,
-                      _eff_plug_thickness_wall / 2 + clam_grip_bite);      // ~12.5 (HD)
-_clam_hw_cable  = max(_clam_cable_hw + 1,
-                      _eff_plug_thickness_cable / 2 + clam_grip_bite);
-
-// Finger ("goggle") lobe at the cord end. The lobe radius is the finger bore
-// radius + wall, and the lobe center sits exactly one lobe radius above Y = 0,
-// so the lobe is tangent to the cord-end edge — as on the ideal plate.
-_clam_lobe_r   = _clam_finger_dia / 2 + _clam_finger_wall_eff;             // ~15.5
-_clam_finger_y = _clam_lobe_r;                                             // ~15.5
-_clam_finger_x = _clam_cable_hw + _clam_inner_wall_eff + _clam_finger_dia / 2;
-_clam_outer_x  = _clam_finger_x + _clam_finger_dia / 2 + _clam_finger_wall_eff; // ~33.5
-
-// Inner-edge V zones (from the cord end): cable channel -> throat ramp ->
-// the plug's own thickness profile, with a slight flare at the tip so the
-// plug head can enter the V. The plug body spans [_clam_y_back, _clam_length]
-// (its wall face rides at the arm tips), so the throat — where the V closes
-// down to the cable channel — derives from where the plug actually ends
-// instead of sitting at a fixed run from the cord end. The arm length grows
-// with the plug: at least a (throat_y0 + 2) cord/mouth run below the plug's
-// back end, and at least the room the (manual) serration zone asks for.
-_clam_throat_y0 = _clam_finger_y + _clam_finger_dia / 2 + 2;               // ~28.0
-_clam_y_back_min = _clam_throat_y0 + 2;                                    // ~30.0
-_clam_length    = max(_clam_y_back_min + clam_grip_zone_start
-                          + (clam_grip_zone_length > 0
-                                 ? clam_grip_zone_length : 0) + 12,
-                      _eff_plug_length + 11,
-                      _clam_y_back_min + _eff_plug_length);                // ~73.8 (HD)
-_clam_y_back    = _clam_length - _eff_plug_length;                         // ~30.0 (HD)
-// Serration span: 0 = auto — cover the full plug body span (back end up to
-// clam_grip_zone_start behind the tips); a positive slider value overrides.
-_clam_grip_len_eff = (clam_grip_zone_length > 0)
-    ? clam_grip_zone_length
-    : max(0, _clam_length - clam_grip_zone_start - _clam_y_back);
-_clam_grip_y0   = max(_clam_y_back,
-                      _clam_length - clam_grip_zone_start - _clam_grip_len_eff);
-_clam_tip_hw    = _clam_hw_wall + clam_tip_flare / 2;                      // ~12.9
-
-// Plug-profile half-gap at a given Y (valid on [_clam_y_back, _clam_length]):
-// the plug's own thickness interpolated between the two Step 1 stations,
-// plus the grip bite per side.
-function _clam_plug_hw(y) =
-    let (f = (y - _clam_y_back) / max(eps, _eff_plug_length))
-    _clam_hw_cable + (_clam_hw_wall - _clam_hw_cable) * f;
-
-// Right-half arm inner-edge X at a given Y: cable channel, then the throat
-// ramp up to the plug's back end, then the plug profile (+ tip flare from
-// the serration-zone start).
-function _clam_inner_x(y) =
-    (y <= _clam_throat_y0) ? _clam_cable_hw :
-    (y <= _clam_y_back)    ? _clam_cable_hw
-        + (_clam_plug_hw(_clam_y_back) - _clam_cable_hw)
-            * (y - _clam_throat_y0) / max(eps, _clam_y_back - _clam_throat_y0) :
-    _clam_plug_hw(y)
-        + ((y > _clam_grip_y0)
-               ? (clam_tip_flare / 2) * (y - _clam_grip_y0)
-                     / max(eps, _clam_length - _clam_grip_y0)
-               : 0);
-
-// Arm tip: a rounded tip hugging the flared inner edge. The arm is the 2D
-// hull of the goggle lobe, the mid-arm bulge circle (below), and this tip
-// circle, so it tapers like the ideal.
-_clam_tip_r  = clam_arm_tip_width / 2;                                     // ~5.5
-_clam_tip_cx = _clam_tip_hw + _clam_tip_r;                                 // ~18.4
-_clam_tip_cy = _clam_length - _clam_tip_r;                                 // ~68.3
-
-// Zip stations along the arm (Y from the cord end). Auto: rear beside the
-// cable channel, mid just past the plug's back end (where the throat mouth
-// ends), tip centered in the arm tip. Manual uses the dials.
-// Step 3's `attachment` gates the stations on/off (zip ties are what cinch
-// the two plates together); `clam_zip_hole_diameter` stays the sizing dial
-// and 0 still disables them.
-_clam_zip_r      = clam_zip_hole_diameter / 2;
-_clam_zip_on     = _attach_zip && clam_zip_hole_diameter > 0;
-// Rear station: beside the cable channel, but never closer than a 1.6 mm
-// (+ boost) radial wall to the finger bore (small hands pull the bore down
-// toward it).
-_clam_zip_rear_x    = _clam_cable_hw + _clam_zip_r + 2.6 + clam_wall_boost;
-_clam_zip_rear_keep = _clam_finger_dia / 2 + _clam_zip_r + 1.6 + clam_wall_boost;
-_clam_zip_rear_dx   = _clam_finger_x - _clam_zip_rear_x;
-_clam_zip_rear_ymax = _clam_finger_y
-    - sqrt(max(0, _clam_zip_rear_keep * _clam_zip_rear_keep
-                  - _clam_zip_rear_dx * _clam_zip_rear_dx));
-_clam_zip_auto   = [
-    max(_clam_zip_r + 1.5, min(0.05 * _clam_length, _clam_zip_rear_ymax)),
-    _clam_y_back + _clam_zip_r + 0.5,
-    _clam_length - _clam_tip_r - _clam_zip_r - 0.6,
-];
-_clam_zip_manual = [clam_zip_pos_1, clam_zip_pos_2, clam_zip_pos_3];
-_clam_zip_y      = (clam_zip_placement == "Manual") ? _clam_zip_manual : _clam_zip_auto;
-
-// Velcro / material-reduction slot: a stadium anchored just outboard of the
-// serrated inner edge at the slot's TOP end (the arm's narrowest
-// cross-section within the slot span), spanning the window BETWEEN the mid
-// and tip zip stations (2 mm + boost web to each) so the slot can never
-// collide with a zip hole in Auto placement. The requested length is
-// honored when the window allows it. The inner offset is the effective
-// tooth-root wall (_clam_slot_in_wall).
-_clam_slot_y0_raw = _clam_zip_y[1] + _clam_zip_r + 2 + clam_wall_boost;
-_clam_slot_y1_raw = _clam_zip_y[2] - _clam_zip_r - 2 - clam_wall_boost;
-_clam_slot_window = _clam_slot_y1_raw - _clam_slot_y0_raw;
-// The Step 3 strap threads through this slot along its length, so the
-// requested slot length is floored at strap_width_eff + 1.5 mm of clearance
-// (defaults: 28 >= 16.5, so default geometry is unchanged).
-_clam_slot_len    = min(max(clam_velcro_slot_length, strap_width_eff + 1.5),
-                        max(6, _clam_slot_window));
-_clam_velcro_y    = (_clam_slot_y0_raw + _clam_slot_y1_raw) / 2;
-_clam_slot_top_y  = _clam_velcro_y + _clam_slot_len / 2;
-// Width capped so the slot plus its inner (tooth-root) and outer walls fits
-// inside the plate's half-width at the goggle lobe (the bulge below never
-// widens the envelope).
-_clam_slot_w      = min(clam_velcro_slot_width,
-                        _clam_outer_x - _clam_inner_x(_clam_slot_top_y)
-                            - _clam_slot_in_wall - _clam_slot_out_wall);
-_clam_velcro_x    = _clam_inner_x(_clam_slot_top_y) + _clam_slot_in_wall
-                        + _clam_slot_w / 2;
-// Step 3's `attachment` gates the slot; `clam_velcro_slot_width` stays the
-// sizing dial (0 still disables it, and the arm slims automatically).
-_clam_slot_on     = _attach_velcro && clam_velcro_slot_width > 0
-                        && _clam_slot_w >= 3;
-
-// Mid-arm bulge: a hull control circle wrapped _clam_slot_out_wall outside
-// the slot's top cap, so the tapered arm always carries the slot with a
-// printable wall. The ideal plate's outer edge has the same convex bulge
-// around its slots.
-_clam_mid_r  = _clam_slot_w / 2 + _clam_slot_out_wall;
-_clam_mid_cx = _clam_velcro_x;
-_clam_mid_cy = _clam_slot_top_y - _clam_slot_w / 2;
-
-// Outer-edge X at a given Y: piecewise chord lobe -> bulge -> tip. The true
-// hull boundary lies slightly outboard of these chords, so this is a safe
-// (conservative) inner bound for keeping holes inside the tapered arm.
-function _clam_outer_x_at(y) =
-    let (x1 = _clam_outer_x,               y1 = _clam_finger_y,
-         xm = _clam_slot_on ? _clam_mid_cx + _clam_mid_r : x1,
-         ym = _clam_slot_on ? _clam_mid_cy : y1,
-         x3 = _clam_tip_cx + _clam_tip_r,  y3 = _clam_tip_cy)
-    (y <= y1) ? x1 :
-    (_clam_slot_on && y <= ym)
-        ? x1 + (xm - x1) * (y - y1) / max(eps, ym - y1) :
-    (y >= y3) ? x3 :
-    xm + (x3 - xm) * (y - max(ym, y1)) / max(eps, y3 - max(ym, y1));
-
-// Station X: rear/mid hug the inner edge with a printable web (+ boost);
-// the tip station centers on the arm axis. Every station is capped inside
-// the tapered outer edge; if the arm is too narrow, the hole centers in it.
-function _clam_zip_x(i, y) =
-    let (xin  = _clam_inner_x(y) + _clam_zip_r + 2.6 + clam_wall_boost,
-         xout = _clam_outer_x_at(y) - _clam_zip_r - 2.0 - clam_wall_boost,
-         xc   = (_clam_inner_x(y) + _clam_outer_x_at(y)) / 2)
-    (xout <= xin) ? (xin + xout) / 2 :
-    (i == 2)      ? min(max(xc, xin), xout) :
-                    min(xin, xout);
-_clam_zip_pts = [for (i = [0 : 2]) [_clam_zip_x(i, _clam_zip_y[i]), _clam_zip_y[i]]];
-
-// Signed clearance from a point to the slot's stadium boundary (negative =
-// inside). Used by the WC overlap warning for Manual zip placements.
-function _clam_slot_zip_clear(p) =
-    let (seg = max(0, _clam_slot_len / 2 - _clam_slot_w / 2),
-         dx  = p[0] - _clam_velcro_x,
-         dy  = max(abs(p[1] - _clam_velcro_y) - seg, 0))
-    sqrt(dx * dx + dy * dy) - _clam_slot_w / 2;
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // 2D PROFILES
@@ -2560,6 +2281,7 @@ module plug_puller_single_feature(feature) {
 //   W-17 zip rows overlapping each other (merged bores)
 //   W-18 zip hole breaking into a classic velcro slot
 //   W-19 two-station width taper steeper than the plug rail window
+//   W-20 plug 24 mm or thicker: a job for the two-sided puller file
 //
 // Auto-fit (always on for the measured sizes) clamps most inputs into safe
 // ranges, so warnings should be quiet under normal use. In the measured
@@ -2591,6 +2313,11 @@ function _vw_finger_vs_hand() =
 
 function _vw_plug_too_wide() =
     _eff_plug_width_wall + 2 * FIT_SLIDE_CLEARANCE > 40;
+
+// W-20: the one-sided puller cannot hold a plug this thick; the two-sided
+// puller file can.
+function _vw_plug_too_thick_for_one_sided() =
+    _vw_measured && _eff_plug_thickness >= 24;
 
 // W-4: the pocket was actually truncated — the plug is longer than the
 // depth budget left inside the 120 mm body ceiling (D-19).
@@ -2724,58 +2451,6 @@ function _vw_wing_web_collapsed() =
     enable_velcro_holes && _resolved_velcro_style == "Wing"
     && (_vw_wing_opening() < 2);
 
-// -- WC-1 … WC-11: heavy-duty clamshell checks ---------------------------------
-// Cord doesn't fit the cable channel with clearance to spare.
-function _vw_clam_cord_channel() =
-    _clam_cable_gap - _eff_cord_thickness < 0.5;
-// Plug so thick the tapered arm inverts (tip circle outboard of the lobes).
-function _vw_clam_arm_thin() =
-    _clam_tip_cx + _clam_tip_r > _clam_outer_x - 1;
-// No interference bite — a non-negative bite means the plug isn't squeezed.
-function _vw_clam_no_bite() =
-    clam_grip_bite >= 0;
-// Plate too thin to be stiff / printable as a grip.
-function _vw_clam_plate_thin() =
-    clam_plate_thickness < 2;
-// A zip station sits off the arm (before the cord end or past the tip).
-function _vw_clam_zip_off_arm() =
-    _clam_zip_on
-    && min([for (y = _clam_zip_y) min(y - _clam_zip_r,
-                                      _clam_length - y - _clam_zip_r)]) < 0;
-// Two zip stations overlap each other (mis-set Manual positions).
-function _vw_clam_zip_overlap() =
-    _clam_zip_on
-    && min([for (i = [0 : 1], j = [i + 1 : 2])
-                let (dx = _clam_zip_pts[i][0] - _clam_zip_pts[j][0],
-                     dy = _clam_zip_pts[i][1] - _clam_zip_pts[j][1])
-                sqrt(dx * dx + dy * dy)])
-       < clam_zip_hole_diameter + 0.6;
-// A zip station breaks into the velcro slot (Manual placements; Auto derives
-// the slot window between the mid and tip stations, so it cannot collide).
-function _vw_clam_zip_hits_slot() =
-    _clam_zip_on && _clam_slot_on
-    && min([for (p = _clam_zip_pts) _clam_slot_zip_clear(p)])
-       < _clam_zip_r + 0.5;
-// The plug body pushed the derived arm run past a printable plate length
-// (the arms always cover the full plug, so a very long plug on big-hand
-// finger lobes can outgrow common build plates).
-function _vw_clam_plug_too_long() =
-    _clam_length > 120;
-// The two thickness stations describe an implausibly steep taper — more
-// than ~20 degrees per side is almost certainly a mis-measurement.
-function _vw_clam_taper_steep() =
-    abs(_eff_plug_thickness_wall - _eff_plug_thickness_cable) / 2
-        > tan(20) * max(1, _eff_plug_length);
-// WC-10 — Step 3 turned the zip stations off on a clamshell build. Zip ties
-// are what cinch the two plates together, so without them nothing holds the
-// sandwich closed.
-function _vw_clam_no_zip_attachment() =
-    _is_clamshell && !_attach_zip;
-// WC-11 — the strap is wider than the slot window the arm can offer, so the
-// Step 3 strap won't thread through even after the strap-width floor.
-function _vw_clam_strap_too_wide() =
-    _clam_slot_on && _clam_slot_len < strap_width_eff + 1;
-
 module validation_warnings() {
     _messages = [
         for (entry = [
@@ -2805,6 +2480,9 @@ module validation_warnings() {
              "FINGER TOO BIG FOR HAND WIDTH - RECHECK BOTH"],
             [_vw_measured && _vw_plug_too_wide(),
              "PLUG TOO WIDE FOR THIS DESIGN (MAX 38MM)"],
+            // W-20 — a plug 24 mm or thicker belongs to the two-sided file
+            [_vw_plug_too_thick_for_one_sided(),
+             "PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE"],
             // W-4 fires only when the pocket was actually truncated at the
             // 120 mm body ceiling — the tool still works, but the pocket is
             // shorter than the plug. Preset lengths are trusted reference
@@ -2933,229 +2611,15 @@ module validation_warnings() {
     }
 }
 
-// Heavy-duty clamshell warnings, in the clamshell's own local frame. Same
-// red-coupon + console-mirror convention as validation_warnings().
-module clamshell_warnings() {
-    _messages = [
-        for (entry = [
-            [_vw_clam_cord_channel(),
-             "CORD TOO THICK FOR CABLE CHANNEL"],
-            [_vw_clam_arm_thin(),
-             "PLUG TOO THICK - ARMS BULGE PAST FINGER LOBES"],
-            [_vw_clam_no_bite(),
-             "NO GRIP BITE - PLUG WONT BE HELD"],
-            [_vw_clam_plate_thin(),
-             "PLATE THINNER THAN 2MM - TOO FLIMSY"],
-            [_vw_clam_zip_off_arm(),
-             "ZIP STATION OFF THE ARM"],
-            [_vw_clam_zip_overlap(),
-             "ZIP STATIONS OVERLAP EACH OTHER"],
-            [_vw_clam_zip_hits_slot(),
-             "ZIP STATION HITS VELCRO SLOT"],
-            [_vw_clam_plug_too_long(),
-             "PLUG TOO LONG - PLATE OVER 120MM, CHECK PLUG LENGTH"],
-            [_vw_clam_taper_steep(),
-             "PLUG THICKNESS TAPER LOOKS WRONG - RECHECK BOTH ENDS"],
-            [_vw_clam_no_zip_attachment(),
-             "STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER"],
-            [_vw_clam_strap_too_wide(),
-             "STRAP WIDER THAN ARM SLOT WINDOW - NARROW THE STRAP"],
-        ]) if (entry[0]) entry[1]
-    ];
-
-    for (m = _messages)
-        echo(str("WARNING: ", m));
-
-    if (len(_messages) > 0)
-        color("red")
-            translate([0, _clam_length + 8, 0]) {
-                linear_extrude(height = WARNING_TEXT_DEPTH)
-                    text("WARNING", size = WARNING_TEXT_SIZE,
-                         halign = "center", valign = "baseline", $fn = quality);
-                for (i = [0 : len(_messages) - 1])
-                    translate([0, (i + 1) * WARNING_LINE_GAP, 0])
-                        linear_extrude(height = WARNING_TEXT_DEPTH)
-                            text(_messages[i], size = WARNING_TEXT_SIZE,
-                                 halign = "center", valign = "baseline", $fn = quality);
-            }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// HEAVY-DUTY CLAMSHELL
-// ═══════════════════════════════════════════════════════════════════════════════
-// One flat plate; the "top" of the sandwich is the same plate flipped over.
-// Two plates zip-tied together grip a fat plug between their serrated inner
-// arms while the cord exits the narrow channel. All 2D work in the plate's
-// local frame (see CLAMSHELL DERIVED VALUES).
-
-// Right-half plate outline: a goggle lobe around the finger hole (tangent to
-// Y = 0) hulled with the rounded arm tip — a tapered arm like the ideal —
-// plus a straight channel wall beside the cable strip, minus the V gap
-// (everything inboard of the inner-edge profile). A small morphological
-// opening rounds the V-knee and cord-end corners.
-module clamshell_half_outline_2d() {
-    _r = 1.8;
-    offset(r = _r) offset(delta = -_r)
-        difference() {
-            union() {
-                hull() {
-                    translate([_clam_finger_x, _clam_finger_y])
-                        circle(r = _clam_lobe_r, $fn = quality);
-                    // Mid-arm bulge: concentric with the velcro slot's top
-                    // cap, guaranteeing the slot's outer wall
-                    // (_clam_slot_out_wall) all around it.
-                    if (_clam_slot_on)
-                        translate([_clam_mid_cx, _clam_mid_cy])
-                            circle(r = _clam_mid_r, $fn = quality);
-                    translate([_clam_tip_cx, _clam_tip_cy])
-                        circle(r = _clam_tip_r, $fn = quality);
-                }
-                // Channel wall: keeps the inner edge straight beside the
-                // strip down to Y = 0 (the lobe circle alone would arc away).
-                translate([_clam_cable_hw, 0])
-                    square([_clam_finger_x - _clam_cable_hw, _clam_finger_y]);
-            }
-            // The V gap: everything inboard of the inner-edge profile. The
-            // knots follow _clam_inner_x(): cable channel to the throat,
-            // the plug's back end, the serration-zone start (where the tip
-            // flare kicks in — emitted only when it sits above the back
-            // end), and the flared tip.
-            polygon(concat(
-                [
-                    [-1, -1],
-                    [_clam_cable_hw, -1],
-                    [_clam_cable_hw, _clam_throat_y0],
-                    [_clam_inner_x(_clam_y_back), _clam_y_back],
-                ],
-                (_clam_grip_y0 > _clam_y_back + 0.01)
-                    ? [[_clam_inner_x(_clam_grip_y0), _clam_grip_y0]]
-                    : [],
-                [
-                    [_clam_tip_hw, _clam_length],
-                    [_clam_tip_hw, _clam_length + 1],
-                    [-1, _clam_length + 1],
-                ]
-            ));
-        }
-}
-
-// Both arms (the full plate footprint).
-module clamshell_outline_2d() {
-    clamshell_half_outline_2d();
-    mirror([1, 0, 0]) clamshell_half_outline_2d();
-}
-
-// Gripper teeth cut into the inner edge over the serration zone, measured back
-// from the plug face (the tip). The span is _clam_grip_len_eff (auto = the
-// full plug body span); the teeth ride _clam_inner_x() so they follow the
-// plug's own taper. Empty when teeth are disabled.
-module clamshell_serrations_2d() {
-    if (_clam_teeth_on) {
-        _n = floor(_clam_grip_len_eff / clam_tooth_pitch);
-        for (i = [0 : _n]) {
-            _y = _clam_length - clam_grip_zone_start - i * clam_tooth_pitch;
-            // Tooth circle center sits INBOARD of the edge so the scallop
-            // bites exactly clam_tooth_depth into the arm (center at
-            // inner - r + depth ⇒ material removed from inner to inner+depth).
-            // Never below the plug's back end — the throat ramp stays smooth.
-            if (_y > _clam_y_back - eps)
-                translate([_clam_inner_x(_y) - clam_tooth_diameter / 2 + clam_tooth_depth, _y])
-                    circle(d = clam_tooth_diameter, $fn = quality);
-        }
-    }
-}
-
-// Rounded material-reduction / velcro slot footprint (a stadium: full
-// half-circle ends so the erode/dilate idiom can't collapse the width).
-// Sized by the derived _clam_slot_w / _clam_slot_len (zip-safe window).
-module clamshell_slot_2d() {
-    _r  = _clam_slot_w / 2;
-    _dy = max(0, _clam_slot_len / 2 - _r);
-    hull()
-        for (s = [-1, 1])
-            translate([0, s * _dy]) circle(r = _r, $fn = quality);
-}
-
-// One full plate (both arms + cable strip), holes and slots subtracted.
-// The tool is two copies of this same plate, one flipped over — print twice.
-module clamshell_plate_3d() {
-    _t  = clam_plate_thickness;
-    _rb = min(clam_edge_rounding, _t / 3);
-    _fr = min(1.2, _clam_finger_dia / 4, _t / 3);
-    $fn = quality;
-    difference() {
-        union() {
-            // Plate body. The outer-face (Z = 0) perimeter edge gets a ball
-            // roundover — same minkowski technique as the flat tool's body —
-            // while the plug-contact face (Z = _t) stays square.
-            intersection() {
-                linear_extrude(height = _t) clamshell_outline_2d();
-                if (_rb > 0)
-                    union() {
-                        translate([0, 0, _rb])
-                            linear_extrude(height = _t - _rb)
-                                clamshell_outline_2d();
-                        translate([0, 0, _rb])
-                            minkowski() {
-                                linear_extrude(height = max(eps, _t - _rb))
-                                    offset(delta = -_rb) clamshell_outline_2d();
-                                sphere(r = _rb, $fn = quality);
-                            }
-                    }
-            }
-            // Cable strip: thin bridge across the cord channel, flush with the
-            // OUTER face (z = 0), overlapping 1.5 mm into each arm.
-            if (clam_strip_thickness > 0)
-                translate([-_clam_cable_hw - 1.5, 0, 0])
-                    cube([_clam_cable_gap + 3, _clam_throat_y0,
-                          min(clam_strip_thickness, _t)]);
-        }
-        // Finger holes (one per arm), rim-filleted on the outer face only.
-        for (s = [-1, 1])
-            translate([s * _clam_finger_x, _clam_finger_y, 0]) {
-                translate([0, 0, -eps])
-                    cylinder(d = _clam_finger_dia, h = _t + 2 * eps);
-                if (_fr > 0)
-                    fillet_ring(_clam_finger_dia / 2, _fr);
-            }
-        // Zip stations (3 per arm), gated by Step 3's attachment choice.
-        if (_clam_zip_on)
-            for (s = [-1, 1])
-                for (p = _clam_zip_pts)
-                    translate([s * p[0], p[1], -eps])
-                        cylinder(d = clam_zip_hole_diameter, h = _t + 2 * eps);
-        // Velcro / material-reduction slots (one per arm).
-        if (_clam_slot_on)
-            for (s = [-1, 1])
-                translate([s * _clam_velcro_x, _clam_velcro_y, -eps])
-                    linear_extrude(height = _t + 2 * eps)
-                        clamshell_slot_2d();
-        // Gripper serrations (both arms), through-cut.
-        for (s = [-1, 1])
-            translate([0, 0, -eps])
-                linear_extrude(height = _t + 2 * eps)
-                    scale([s, 1]) clamshell_serrations_2d();
-    }
-}
-
 // ═══════════════════════════════════════════════════════════════════════════════
 // RENDER MODE DISPATCH
 // ═══════════════════════════════════════════════════════════════════════════════
 
 $fn = quality;
 
-if (render_mode == "Clamshell Plate") {
-    clamshell_plate_3d();
-    clamshell_warnings();
-}
-else if (render_mode == "Full") {
-    if (_is_clamshell) {
-        clamshell_plate_3d();
-        clamshell_warnings();
-    } else {
-        plug_puller_complete();
-        validation_warnings();
-    }
+if (render_mode == "Full") {
+    plug_puller_complete();
+    validation_warnings();
 }
 else if (render_mode == "Body Only") {
     body_with_cutouts();

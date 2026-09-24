@@ -6,9 +6,9 @@ can print a standard configuration without opening OpenSCAD:
 * Plug Puller (``src/Plug_Puller_Parametric.scad``) — each of the 3 plug
   presets x each of the 3 finger/hand sizes = 9 tools. Only ``plug_preset`` and
   ``size`` vary; the attachment (zip ties + velcro) and every other dial stay at
-  their defaults. ``tool_style`` is left on "Auto from plug", so the heavy-duty
-  round-cord preset resolves to a single heavy-duty clamshell plate (the tool is
-  two of these — print each file twice).
+  their defaults. The heavy-duty round-cord preset renders one plate of the
+  two-sided puller from ``src/Plug_Puller_Two_Sided.scad`` (the tool is two of
+  these — print each file twice).
 
 * Measuring Stencil (``Measuring_Stencil.scad``) — every individual card
   (P1/P2/P3 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing) rendered
@@ -53,14 +53,15 @@ from tests.openscad_runner import OpenSCADRunner  # noqa: E402
 logger = logging.getLogger(__name__)
 
 PLUG_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
+TWO_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
 STENCIL_SCAD = PROJECT_ROOT / "Measuring_Stencil.scad"
 DEFAULT_OUT = PROJECT_ROOT / "stl"
 
 SIZES = ["Small", "Medium", "Large"]
 
 # Plug presets exactly as they read in the Step 1 dropdown, paired with a
-# filesystem-safe descriptor and whether "Auto from plug" resolves them to the
-# heavy-duty clamshell (a single plate — the finished tool is two of them).
+# filesystem-safe descriptor and whether the two-sided puller file builds them
+# (a single plate — the finished tool is two of them).
 PLUG_PRESETS = [
     {
         "customizer": "Flat 2-prong lamp plug - NEMA 1-15",
@@ -110,13 +111,14 @@ def plug_jobs() -> List[Job]:
                 parts.append("Clamshell-Plate")
             parts.append(size)
             name = "_".join(parts) + ".stl"
+            scad, mode = (TWO_SIDED_SCAD, "One plate") if preset["clamshell"] else (PLUG_SCAD, "Full")
             jobs.append(
                 Job(
                     group="plug-puller",
-                    scad=PLUG_SCAD,
+                    scad=scad,
                     out_rel=Path("Plug-Puller") / name,
                     params={
-                        "render_mode": "Full",
+                        "render_mode": mode,
                         "plug_preset": preset["customizer"],
                         "size": size,
                     },
