@@ -273,6 +273,13 @@ class TestOneSidedCustomizer:
             f"got {plug_params[1:6]}."
         )
 
+    def test_section_titles_name_no_tool(self, scad_content: str) -> None:
+        """The file builds one tool, so no Customizer section title names a
+        tool (owner answer Q-24: drop "- Flat Tool")."""
+        sections = re.findall(r"/\*\s*\[([^\]]+)\]\s*\*/", scad_content)
+        named = [s for s in sections if "Flat Tool" in s or "Clamshell" in s]
+        assert not named, f"Section titles still name a tool: {named}"
+
 
 class TestTwoSidedCustomizer:
     """The two-sided file shows only the two-sided puller's controls."""
