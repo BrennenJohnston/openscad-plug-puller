@@ -11,7 +11,7 @@ Two things live here:
 1. **[Outline sheets](outline-sheets/)** — one printable page per
    quick-select combination. Each page shows that tool's exact
    silhouette at **1:1 scale** with CAD-style dimensions: cut it out,
-   hold it against your plug, and try the finger holes. All twelve
+   hold it against your plug, and try the finger holes. All nine
    sheets are also bundled into one printable PDF with a cover index:
    **[`docs/Plug_Puller_Outline_Sheets.pdf`](../Plug_Puller_Outline_Sheets.pdf)**.
 2. **[`Measuring-Stencil` STLs](../../stl/Measuring-Stencil)** — a
@@ -26,19 +26,28 @@ Two things live here:
 ## The outline sheets
 
 Every quick-select combination in the Customizer has a sheet — the
-three `plug_preset` plug families × the three hand sizes for the flat
-tool, plus the heavy-duty clamshell plate at the three hand sizes (the
-plate's finger holes follow the Size selection too):
+lamp and standard `plug_preset` plug families × the three hand sizes
+for the one-sided puller, plus one plate of the two-sided puller for
+the heavy-duty extension cord at the three hand sizes (the plate's
+finger holes follow the Size selection too):
 
 | Plug preset | Small | Medium | Large |
 | ----------- | ----- | ------ | ----- |
-| Flat 2-prong lamp plug (NEMA 1-15) | [sheet](outline-sheets/outline_flat-2-prong_small.svg) | [sheet](outline-sheets/outline_flat-2-prong_medium.svg) | [sheet](outline-sheets/outline_flat-2-prong_large.svg) |
-| Standard 3-prong plug (NEMA 5-15) | [sheet](outline-sheets/outline_standard-3-prong_small.svg) | [sheet](outline-sheets/outline_standard-3-prong_medium.svg) | [sheet](outline-sheets/outline_standard-3-prong_large.svg) |
-| Heavy-duty extension cord (NEMA 5-15), flat tool | [sheet](outline-sheets/outline_heavy-duty-round_small.svg) | [sheet](outline-sheets/outline_heavy-duty-round_medium.svg) | [sheet](outline-sheets/outline_heavy-duty-round_large.svg) |
-| Heavy-duty clamshell plate | [sheet](outline-sheets/outline_heavy-duty-clamshell_small.svg) | [sheet](outline-sheets/outline_heavy-duty-clamshell_medium.svg) | [sheet](outline-sheets/outline_heavy-duty-clamshell_large.svg) |
+| Flat 2-prong lamp plug (NEMA 1-15), one-sided puller | [sheet](outline-sheets/outline_flat-2-prong_small.svg) | [sheet](outline-sheets/outline_flat-2-prong_medium.svg) | [sheet](outline-sheets/outline_flat-2-prong_large.svg) |
+| Standard 3-prong plug (NEMA 5-15), one-sided puller | [sheet](outline-sheets/outline_standard-3-prong_small.svg) | [sheet](outline-sheets/outline_standard-3-prong_medium.svg) | [sheet](outline-sheets/outline_standard-3-prong_large.svg) |
+| Heavy-duty extension cord (NEMA 5-15), two-sided puller plate | [sheet](outline-sheets/outline_two-sided-plate_small.svg) | [sheet](outline-sheets/outline_two-sided-plate_medium.svg) | [sheet](outline-sheets/outline_two-sided-plate_large.svg) |
+
+Each sheet's title block lists the Customizer settings that reproduce
+it. Set them in the file for that tool: the lamp and standard sheets in
+the one-sided puller
+([`src/Plug_Puller_Parametric.scad`](../../src/Plug_Puller_Parametric.scad),
+or [`dist/Plug_Puller_SingleFile.scad`](../../dist/Plug_Puller_SingleFile.scad)
+in a web customizer), the plate sheets in the two-sided puller
+([`src/Plug_Puller_Two_Sided.scad`](../../src/Plug_Puller_Two_Sided.scad),
+or [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](../../dist/Plug_Puller_Two_Sided_SingleFile.scad)).
 
 Prefer one file? **[`docs/Plug_Puller_Outline_Sheets.pdf`](../Plug_Puller_Outline_Sheets.pdf)**
-bundles all twelve sheets behind a cover page with a page index — open
+bundles all nine sheets behind a cover page with a page index — open
 it, print just the page you need (at 100 %), done.
 
 Each sheet fits both **A4 and US Letter** paper and contains:
@@ -68,14 +77,14 @@ matters:
    two big finger circles (dashed).
 2. **Hold it against your plug** on the wall: the plug should fit
    inside the dashed pocket outline, and the notch at the top edge
-   should straddle the wall plate. On the clamshell sheets, the plug
-   body sits between the two serrated V-edges with the cord in the
-   bottom channel.
+   should straddle the wall plate. On the two-sided puller's plate
+   sheets, the plug body sits between the two serrated V-edges with the
+   cord in the bottom channel; the real tool is two of these plates.
 3. **Try the finger holes.** If they feel wrong, try the neighbouring
    size's sheet — or skip the scissors and print the
    [measuring stencil](#the-measuring-stencil) below.
-4. Found your combination? Open the Customizer, set the values from the
-   sheet's title block, and follow the
+4. Found your combination? Open that tool's file, set the values from
+   the sheet's title block in the Customizer, and follow the
    [Quick Start](quick-start-beginner.md) to export and print the real
    tool.
 
@@ -97,7 +106,7 @@ can read by touch:
 
 | ID | Card | Worksheet numbers it answers |
 | -- | ---- | ---------------------------- |
-| **P1 / P2 / P3** | Plug preset silhouettes (lamp / standard 3-prong / heavy-duty). Hold your plug in the **W** (width) and **T** (thickness) cutouts — if it fills them and the cord slips sideways into the open cord slot, that preset fits: pick it in Step 1 and skip measuring | all of 1–6, by preset match |
+| **P1 / P2 / P3** | Plug preset silhouettes (lamp / standard 3-prong / heavy-duty extension cord). Hold your plug in the **W** (width) and **T** (thickness) cutouts — if it fills them and the cord slips sideways into the open cord slot, that preset fits: pick it in Step 1 and skip measuring (P3's preset is in the two-sided puller) | all of 1–6, by preset match |
 | **R1** | Tactile mm ruler — raised ticks, edge notches every 10 mm | 1–5 |
 | **C1** | Cord gauge — open slots Ø 3–9 mm through the bottom edge; slides onto an installed cord from the side | 6 |
 | **F1 / F2** | The 18 finger-sizing circles (Ø 15–32 mm) from the [measuring template](measuring-template.svg) as real through-holes | 8 |
