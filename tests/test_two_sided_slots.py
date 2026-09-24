@@ -35,7 +35,7 @@ USB_C = {
     "measure_plug_width_prong_end": 13,
     "measure_plug_width_cord_end": 13,
     "measure_cord_thickness": 7,
-    "render_mode": "Clamshell Plate",
+    "render_mode": "One plate",
 }
 
 
@@ -80,7 +80,7 @@ def test_plug_narrower_than_cord_channel_warns(openscad_runner, tmp_path) -> Non
         "measure_plug_width_prong_end": 4,
         "measure_plug_width_cord_end": 4,
         "measure_cord_thickness": 4,
-        "render_mode": "Clamshell Plate",
+        "render_mode": "One plate",
     }
     _plate, console = _render(openscad_runner, tmp_path, "narrow_plug", params)
     assert any(WC12 in line for line in _warnings(console)), (
@@ -93,7 +93,7 @@ def test_plug_narrower_than_cord_channel_warns(openscad_runner, tmp_path) -> Non
 def test_long_plug_keeps_both_strap_slots(openscad_runner, tmp_path) -> None:
     plate, console = _render(
         openscad_runner, tmp_path, "long_plug",
-        {"measure_plug_length": 45, "render_mode": "Clamshell Plate"},
+        {"measure_plug_length": 45, "render_mode": "One plate"},
     )
     inventory = _classify(plate)
     assert len(inventory["velcro"]) == 2, f"Expected 2 strap slots, got {len(inventory['velcro'])}."
@@ -108,7 +108,7 @@ def test_manual_placement_still_reports_the_slot(openscad_runner, tmp_path) -> N
         "plug_preset": "Heavy-duty extension cord - NEMA 5-15",
         "plate_zip_placement": "Manual",
         "plate_zip_pos_2": 45,
-        "render_mode": "Clamshell Plate",
+        "render_mode": "One plate",
     }
     _plate, console = _render(openscad_runner, tmp_path, "manual_squeezed_window", params)
     assert any("STRAP WIDER THAN ARM SLOT WINDOW" in line for line in _warnings(console)), (

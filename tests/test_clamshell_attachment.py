@@ -109,7 +109,7 @@ def attachment_renders(
             parameters={
                 "plug_preset": HD_PRESET,
                 "attachment": choice,
-                "render_mode": "Clamshell Plate",
+                "render_mode": "One plate",
                 "quality": 64,
             },
         )

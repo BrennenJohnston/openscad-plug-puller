@@ -117,7 +117,7 @@ plate_velcro_slot_length = 28; // [5:1:60]
 quality = 64; // [24:8:128]
 
 /* [Hidden] */
-render_mode = "Full"; // [Full, Clamshell Plate]
+render_mode = "Full"; // [Full, One plate]
 
 // Epsilon — tiny overlap added wherever two solid faces would otherwise be
 // perfectly coincident (coplanar). Without it, the OpenSCAD CGAL kernel can
@@ -378,6 +378,12 @@ _clam_slot_left_out = _attach_velcro && plate_velcro_slot_width > 0
 _clam_mid_r  = _clam_slot_w / 2 + _clam_slot_out_wall;
 _clam_mid_cx = _clam_velcro_x;
 _clam_mid_cy = _clam_slot_top_y - _clam_slot_w / 2;
+
+// Widest point of the plate from the mirror line: the finger lobes, unless a
+// very wide plug pushes the arm tips (or the slot bulge) further out. The
+// pair layout spaces the two plates by this so they can never touch.
+_clam_half_width = max(_clam_outer_x, _clam_tip_cx + _clam_tip_r,
+                       _clam_slot_on ? _clam_mid_cx + _clam_mid_r : 0);
 
 // Outer-edge X at a given Y: piecewise chord lobe -> bulge -> tip. The true
 // hull boundary lies slightly outboard of these chords, so this is a safe
@@ -727,9 +733,25 @@ module clamshell_plate_3d() {
 // RENDER MODE DISPATCH
 // ═══════════════════════════════════════════════════════════════════════════════
 
+// Both identical plates side by side, outer face down, 8 mm apart, so one
+// file prints the whole tool; one plate is flipped over when assembling.
+module two_sided_pair() {
+    for (s = [-1, 1])
+        translate([s * (_clam_half_width + 4), 0, 0])
+            clamshell_plate_3d();
+}
+
 $fn = quality;
 
-if (render_mode == "Clamshell Plate" || render_mode == "Full") {
+if (render_mode == "One plate") {
     clamshell_plate_3d();
+    clamshell_warnings();
+} else if (render_mode == "Full") {
+    if (print_layout == "Both plates") {
+        echo("PRINT LAYOUT: both plates side by side - flip one after printing");
+        two_sided_pair();
+    } else {
+        clamshell_plate_3d();
+    }
     clamshell_warnings();
 }
