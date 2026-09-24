@@ -58,6 +58,8 @@ ONE_SIDED_ONLY_PARAMETERS = [
     "measure_plug_width_cable",
     "measure_plug_thickness_wall",
     "measure_plug_thickness_cable",
+    "measure_plug_thickness_prong_end",
+    "measure_plug_thickness_cord_end",
     "measure_wall_plate_style",
     "measure_hand_width",
     "tool_style",
@@ -232,31 +234,22 @@ class TestOneSidedCustomizer:
         )
 
     def test_plug_measurements_lead_the_customizer(self, scad_content: str) -> None:
-        """v7 leads with Step 0 (tool style), then Step 1 (the plug inputs):
-        `tool_style` is the very first Customizer parameter, and the plug
-        quick-select (`plug_preset`) is the first parameter of the plug
-        section, immediately followed by `measure_plug_width`."""
+        """The one-sided file leads with Step 1 (the plug inputs): the plug
+        quick-select (`plug_preset`) is the very first Customizer parameter,
+        followed by the plug measurements in reading order. The two-sided
+        puller has its own file, so there is no tool-style step."""
         sections = re.findall(r"/\*\s*\[([^\]]+)\]\s*\*/", scad_content)
-        assert sections, "No Customizer sections found in the v7 SCAD."
-        assert "Tool Style" in sections[0], (
-            f"The tool-style Step 0 section must come first in the Customizer, "
-            f"but the first section is '[{sections[0]}]'."
+        assert sections, "No Customizer sections found in the one-sided SCAD."
+        assert sections[0] == "Step 1 - Your Plug", (
+            f"The first Customizer section must be 'Step 1 - Your Plug', "
+            f"but it is '[{sections[0]}]'."
         )
-        assert "Your Plug" in sections[1], (
-            f"The plug-input section (Step 1) must follow Step 0, but the "
-            f"second section is '[{sections[1]}]'."
-        )
-        first_param = re.search(
-            r"^(\w+)\s*=\s*[^;]+;",
-            scad_content[scad_content.find(sections[0]):],
-            re.MULTILINE,
-        )
-        assert first_param and first_param.group(1) == "tool_style", (
-            "The first Customizer parameter must be `tool_style` (Step 0), "
-            f"got `{first_param.group(1) if first_param else None}`."
+        assert not re.search(r"^tool_style\s*=", scad_content, re.MULTILINE), (
+            "The one-sided file must not declare `tool_style`: the two-sided "
+            "puller is its own file."
         )
         plug_params = re.findall(
-            r"^(\w+)\s*=\s*[^;]+;", scad_content[scad_content.find(sections[1]):],
+            r"^(\w+)\s*=\s*[^;]+;", scad_content[scad_content.find(sections[0]):],
             re.MULTILINE,
         )
         assert plug_params and plug_params[0] == "plug_preset", (
@@ -269,13 +262,14 @@ class TestOneSidedCustomizer:
         )
         assert plug_params[1:6] == [
             "measure_plug_length",
-            "measure_plug_width_wall",
-            "measure_plug_width_cable",
-            "measure_plug_thickness_wall",
-            "measure_plug_thickness_cable",
+            "measure_plug_width_prong_end",
+            "measure_plug_width_cord_end",
+            "measure_plug_thickness_prong_end",
+            "measure_plug_thickness_cord_end",
         ], (
             "The two-station plug measurements must appear in reading order "
-            "(length, then width wall/cable, then thickness wall/cable); "
+            "(length, then width prong end/cord end, then thickness prong "
+            "end/cord end); "
             f"got {plug_params[1:6]}."
         )
 

@@ -118,10 +118,10 @@ FIT_SIZE_TABLE = {
 DEFAULT_MEASUREMENTS: Dict[str, Any] = {
     "size": "Medium",
     "measure_plug_length": 25.5,
-    "measure_plug_width_wall": 25.0,
-    "measure_plug_width_cable": 25.0,
-    "measure_plug_thickness_wall": 20.0,
-    "measure_plug_thickness_cable": 20.0,
+    "measure_plug_width_prong_end": 25.0,
+    "measure_plug_width_cord_end": 25.0,
+    "measure_plug_thickness_prong_end": 20.0,
+    "measure_plug_thickness_cord_end": 20.0,
     "measure_cord_thickness": 4.0,
     "measure_wall_plate_style": "Standard flat plate",
     "measure_finger_width": 20.0,
@@ -194,7 +194,7 @@ def derive(measurements: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
     # D-12 … D-14 — plug wall notch (from the WALL-station width — the end
     # of the plug that meets the wall is the end the notch must straddle)
     notch_w = _clamp(
-        m["measure_plug_width_wall"] + 2 * FIT_SLIDE_CLEARANCE, 5, 40
+        m["measure_plug_width_prong_end"] + 2 * FIT_SLIDE_CLEARANCE, 5, 40
     )
     notch_h = FIT_WALL_PLATE_DEPTHS.get(
         m["measure_wall_plate_style"], FIT_WALL_PLATE_DEPTHS["Standard flat plate"]
@@ -204,7 +204,7 @@ def derive(measurements: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
     # D-15 … D-18 — dome pocket
     seat_d = _clamp(notch_w + FIT_SEAT_BEYOND_NOTCH, 10, 45)
     pocket_w = _clamp(
-        m["measure_plug_width_wall"] + FIT_POCKET_WIDTH_CLEARANCE, 10, 45
+        m["measure_plug_width_prong_end"] + FIT_POCKET_WIDTH_CLEARANCE, 10, 45
     )
     dome_drop = min(FIT_DOME_DROP, 0.25 * m["measure_plug_length"])
     # D-43 — plug side taper (= the plug side rail angle), DERIVED from the
@@ -213,7 +213,7 @@ def derive(measurements: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
     # the main SCAD.
     side_angle = math.degrees(
         math.atan(
-            ((m["measure_plug_width_wall"] - m["measure_plug_width_cable"]) / 2)
+            ((m["measure_plug_width_prong_end"] - m["measure_plug_width_cord_end"]) / 2)
             / max(1.0, m["measure_plug_length"])
         )
     )
@@ -247,7 +247,7 @@ def derive(measurements: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
     # D-22 / D-23 — pocket floor heights (overall plug thickness = the
     # fatter of the two stations; mirrors _eff_plug_thickness)
     plug_thickness = max(
-        m["measure_plug_thickness_wall"], m["measure_plug_thickness_cable"]
+        m["measure_plug_thickness_prong_end"], m["measure_plug_thickness_cord_end"]
     )
     seat_floor = thickness - _clamp(
         FIT_RECESS_RATIO_SEAT * plug_thickness,
