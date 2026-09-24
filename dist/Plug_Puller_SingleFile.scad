@@ -2,9 +2,10 @@
 // Plug_Puller_SingleFile.scad — GENERATED FILE, DO NOT EDIT
 // =============================================================================
 //
-// Flattened single-file build of the Plug Puller 0.9 parametric model, with
-// fit_sizes.scad, fit_measured.scad and presets.scad inlined. Generated from
-// the canonical sources in src/ — edit those files, not this one.
+// Plug Puller — one-sided puller: the flattened single-file build of
+// src/Plug_Puller_Parametric.scad, with fit_sizes.scad, fit_measured.scad and
+// presets.scad inlined. Generated from the canonical sources in src/ — edit
+// those files, not this one.
 //
 // Purpose: web customizers (MakerWorld Parametric Model Maker,
 // openscad-playground `?src=` loading) accept only a single .scad file with
