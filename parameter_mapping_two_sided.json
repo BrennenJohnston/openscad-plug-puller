@@ -1,0 +1,475 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Plug Puller — two-sided puller parameter mapping",
+  "description": "Machine-readable schema for every user-facing Customizer parameter declared in src/Plug_Puller_Two_Sided.scad. Checked against the SCAD by tests/validate_parameter_schema.py in the quick test lane and the CI lint job. Written by hand in R1 phase B1; change it together with the SCAD.",
+  "version": "1.0.0",
+  "last_updated": "2026-09-23",
+  "documentation": "The two-sided puller file shows only its own controls: Steps 1 to 4, the Advanced - Two-Sided Puller dials and the render quality. This file checks default values, types, slider ranges and dropdown option lists against the SCAD.",
+  "parameters": [
+    {
+      "openscad_name": "plug_preset",
+      "type": "enum",
+      "default": "Measure my plug",
+      "values": [
+        "Measure my plug",
+        "Heavy-duty extension cord - NEMA 5-15"
+      ],
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
+      "openscad_name": "measure_plug_length",
+      "type": "float",
+      "default": 25.5,
+      "range": [
+        12.0,
+        85.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
+      "openscad_name": "measure_plug_width_prong_end",
+      "type": "float",
+      "default": 20,
+      "range": [
+        5.0,
+        40.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
+      "openscad_name": "measure_plug_width_cord_end",
+      "type": "float",
+      "default": 20,
+      "range": [
+        5.0,
+        40.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
+      "openscad_name": "measure_cord_thickness",
+      "type": "float",
+      "default": 4,
+      "range": [
+        1.5,
+        12.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
+      "openscad_name": "plug_sides",
+      "type": "enum",
+      "default": "Rounded sides",
+      "values": [
+        "Rounded sides",
+        "Flat sides"
+      ],
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
+      "openscad_name": "show_plug_preview",
+      "type": "boolean",
+      "default": true,
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
+      "openscad_name": "size",
+      "type": "enum",
+      "default": "Medium",
+      "values": [
+        "Small",
+        "Medium",
+        "Large",
+        "Measure my hand"
+      ],
+      "section": "Step 2 - Size",
+      "description": ""
+    },
+    {
+      "openscad_name": "measure_finger_width",
+      "type": "float",
+      "default": 20,
+      "range": [
+        14.0,
+        32.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Step 2 - Size",
+      "description": ""
+    },
+    {
+      "openscad_name": "attachment",
+      "type": "enum",
+      "default": "Zip ties + Velcro strap",
+      "values": [
+        "Zip ties + Velcro strap",
+        "Zip ties"
+      ],
+      "section": "Step 3 - Attachment",
+      "description": ""
+    },
+    {
+      "openscad_name": "strap_width",
+      "type": "integer",
+      "default": 15,
+      "range": [
+        10,
+        25
+      ],
+      "step": 1,
+      "unit": "mm",
+      "section": "Step 3 - Attachment",
+      "description": ""
+    },
+    {
+      "openscad_name": "print_layout",
+      "type": "enum",
+      "default": "Both plates",
+      "values": [
+        "Both plates",
+        "One plate"
+      ],
+      "section": "Step 4 - Print Layout",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_wall_boost",
+      "type": "float",
+      "default": 0,
+      "range": [
+        0.0,
+        5.0
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_thickness",
+      "type": "float",
+      "default": 4,
+      "range": [
+        2.0,
+        8.0
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_grip_bite",
+      "type": "float",
+      "default": -1,
+      "range": [
+        -2.0,
+        2.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_cable_clearance",
+      "type": "float",
+      "default": 0.8,
+      "range": [
+        0.0,
+        5.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_finger_fit",
+      "type": "float",
+      "default": 1,
+      "range": [
+        0.0,
+        8.0
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_finger_wall",
+      "type": "float",
+      "default": 5.0,
+      "range": [
+        3.0,
+        12.0
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_finger_inner_wall",
+      "type": "float",
+      "default": 3.0,
+      "range": [
+        1.0,
+        8.0
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_tooth_diameter",
+      "type": "float",
+      "default": 2,
+      "range": [
+        0.0,
+        4.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_tooth_pitch",
+      "type": "float",
+      "default": 2.8,
+      "range": [
+        0.5,
+        5.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_tooth_depth",
+      "type": "float",
+      "default": 1,
+      "range": [
+        0.0,
+        1.5
+      ],
+      "step": 0.05,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_grip_zone_start",
+      "type": "float",
+      "default": 4,
+      "range": [
+        0.0,
+        25.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_grip_zone_length",
+      "type": "integer",
+      "default": 0,
+      "range": [
+        0,
+        60
+      ],
+      "step": 1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_tip_flare",
+      "type": "float",
+      "default": 0.7,
+      "range": [
+        0.0,
+        4.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_arm_tip_width",
+      "type": "float",
+      "default": 11,
+      "range": [
+        5.0,
+        16.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_edge_rounding",
+      "type": "float",
+      "default": 1.2,
+      "range": [
+        0.0,
+        2.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_strip_thickness",
+      "type": "float",
+      "default": 1,
+      "range": [
+        0.0,
+        4.0
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_zip_hole_diameter",
+      "type": "float",
+      "default": 4,
+      "range": [
+        0.0,
+        8.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_zip_placement",
+      "type": "enum",
+      "default": "Auto",
+      "values": [
+        "Auto",
+        "Manual"
+      ],
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_zip_pos_1",
+      "type": "float",
+      "default": 4,
+      "range": [
+        0.0,
+        80.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_zip_pos_2",
+      "type": "float",
+      "default": 32,
+      "range": [
+        0.0,
+        80.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_zip_pos_3",
+      "type": "float",
+      "default": 63,
+      "range": [
+        0.0,
+        80.0
+      ],
+      "step": 0.5,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_slot_inner_wall",
+      "type": "float",
+      "default": 2.2,
+      "range": [
+        1.0,
+        8.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_velcro_slot_width",
+      "type": "float",
+      "default": 9.3,
+      "range": [
+        0.0,
+        20.0
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_velcro_slot_length",
+      "type": "integer",
+      "default": 28,
+      "range": [
+        5,
+        60
+      ],
+      "step": 1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "quality",
+      "type": "integer",
+      "default": 64,
+      "range": [
+        24,
+        128
+      ],
+      "step": 8,
+      "unit": "segments",
+      "section": "Advanced - Render Quality",
+      "description": ""
+    }
+  ]
+}
