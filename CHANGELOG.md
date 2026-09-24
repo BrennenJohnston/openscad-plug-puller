@@ -11,19 +11,65 @@ public milestone**.
 
 ## [Unreleased]
 
+The two tools move into two files. The **one-sided puller** (the old
+flat tool) stays in `src/Plug_Puller_Parametric.scad`; the **two-sided
+puller** (the old heavy-duty clamshell) gets its own file,
+`src/Plug_Puller_Two_Sided.scad`, with its own Customizer, a cradle for
+rounded plugs, and both plates in one download.
+
 ### Added
 
+- **`src/Plug_Puller_Two_Sided.scad`**: the two-sided puller in its own
+  file, lifted out of the one-sided file without a geometry change
+  (proven against the golden fixture). Its Customizer has four steps in
+  plain words — Your Plug, Size, Attachment, Print Layout — and an
+  `Advanced - Two-Sided Puller` section of 26 `plate_*` dials. Step 1
+  takes the plug length (12–85 mm), its width at the prong end and at
+  the cord end (`measure_plug_width_prong_end` / `_cord_end`, 5–40 mm:
+  the size the two plates close across) and the cord (1.5–12 mm). The
+  finger holes follow the shared size table: Ø 17.5 / 21 / 24 mm at
+  Small / Medium / Large. Ships with `parameter_mapping_two_sided.json`
+  (39 parameters) and `presets/Plug_Puller_Two_Sided.json` (the round
+  extension cord and a measured USB-C laptop plug).
+- **`dist/Plug_Puller_Two_Sided_SingleFile.scad`**: the two-sided
+  puller as one file for web customizers; `scripts/build_flattened.py`
+  builds both single files and `--check` verifies both.
+- **`src/fit_sizes.scad`**: the Small / Medium / Large size table and
+  finger clearance, shared by both files.
+- **Both plates in one file**: `print_layout` (Step 4 of the two-sided
+  file) is `Both plates` by default, two identical plates side by side,
+  or `One plate`. The console says "PRINT LAYOUT: both plates side by
+  side - flip one after printing".
+- **Rounded or flat sides** (`plug_sides`, two-sided): `Rounded sides`
+  (the default) gives each plate a sloped cradle, 2.5 mm per side
+  (`plate_cradle_depth`), with 0.5 mm of room where the plates meet
+  (`plate_grip_clearance`), so a round plug, a USB-C or charger tip
+  centers itself; the teeth follow the slope and the arm tips step in
+  to carry it. `Flat sides` keeps the straight toothed edge for a boxy
+  plug.
+- **See-through plug in the preview** (`show_plug_preview`, both files,
+  on by default): a translucent plug built from your numbers sits in
+  the pocket or on the plate so you can check the fit; it is never
+  exported.
+- **New in-model checks**: two-sided WC-12
+  `PLUG NARROWER THAN THE CORD CHANNEL - ARMS CANNOT TOUCH IT` and
+  WC-13 `CRADLE SHALLOWER THAN ASKED - PLUG NARROW`; one-sided W-20
+  `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE`. The
+  two-sided file also echoes its derived values (plate length, grip
+  gaps, cradle depth, cord channel, finger hole, strap slot, zip
+  stations) to the console.
 - **`export_card` selector on the measuring stencil** (`Measuring_Stencil.scad`,
   new `[Export]` Customizer tab): `All cards` keeps the normal packed-sheet
   layout, while picking a card ID (P1/P2/P3/R1/C1/F1/F2) renders just that one
   stencil at the origin so it can be uploaded as a standalone model. This is
   what lets the release build ship every card as its own file.
 - **`scripts/build_release_stls.py`**: one command renders the entire
-  committed ready-to-print library under `stl/` — 9 plug tools (the 3
-  `plug_preset` families × Small/Medium/Large) and 16 measuring-stencil
-  cards (Visual/Tactile full sets plus every individual card) — each
-  watertight-checked. `--only plug-puller` / `--only stencil` rebuild one
-  group.
+  committed ready-to-print library under `stl/` — 9 plug tools (6
+  one-sided pullers for the lamp and standard plugs and 3 two-sided
+  pullers for the round extension cord, each × Small/Medium/Large) and
+  16 measuring-stencil cards (Visual/Tactile full sets plus every
+  individual card) — each watertight-checked. `--only plug-puller` /
+  `--only stencil` rebuild one group.
 - **`stl/README.md`**: an index of the library that maps every file to the
   plug family, hand size, and stencil card it prints.
 
@@ -40,6 +86,59 @@ public milestone**.
   `build_release_stls.py`'s job catalog: every shipped STL is checked
   watertight (quick lane) and re-rendered mesh-equivalent to its source
   (render lane), so the downloads can never silently drift from the model.
+- **The round extension cord ships as the two-sided puller**:
+  `stl/Plug-Puller/Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_{Small,Medium,Large}.stl`,
+  each file holding both plates (each plate the same as before). Flip
+  one after printing, then zip-tie the pair face to face around the
+  plug.
+- **One-sided Step 1 names**: `measure_plug_width_prong_end` /
+  `_cord_end` and `measure_plug_thickness_prong_end` / `_cord_end`
+  replace the `…_wall` / `…_cable` names, and the help texts name the
+  prong end and the cord end. Saved parameter sets that use the old
+  names need the new ones. Slider ranges: width 8–38 mm, thickness
+  4–40 mm, cord 1.5–9 mm, length 12–85 mm.
+- **One-sided Customizer**: Step 1 comes first (Step 0 is gone), and
+  the sections read `Step 4 - Cord Hook`, `Advanced - Zip Tie
+  Placement` and `Advanced - Velcro Placement` (no "- Flat Tool"); the
+  Step 3 and Step 4 help texts describe the one tool.
+- **Two-sided strap slot**: with Auto placement a plug too short for a
+  velcro slot now gets none, with an orange preview note
+  `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE`, instead of a red tag;
+  WC-7 and WC-11 fire only with Manual placement.
+- **Two-sided tags name the width**: WC-2
+  `PLUG TOO WIDE - ARMS BULGE PAST FINGER LOBES` and WC-9
+  `PLUG WIDTH TAPER LOOKS WRONG - RECHECK BOTH ENDS`.
+- **`plate_grip_bite`** (was `clam_grip_bite`) applies to `Flat sides`
+  and the plug preset only, and WC-3 fires only there.
+- **Two-sided finger holes use the true size table**: Large is Ø 24 mm
+  (the old file's auto-fit clamp shrank it to 22.66 mm at its default
+  plug).
+- **Outline sheets**: the sheets say "One-sided puller" and "Two-sided
+  puller plate", and the plate sheets are
+  `outline_two-sided-plate_{small,medium,large}.svg`: 9 sheets and a
+  10-page PDF.
+- **README, starter guide, beginner quick start** (and the starter
+  guide PDF) describe the two tools, which file to open for each, and
+  the two-sided steps.
+
+### Removed
+
+- **Step 0 `tool_style` and the clamshell in the one-sided file**
+  (`src/Plug_Puller_Parametric.scad`): its Advanced clamshell section,
+  the clamshell checks and the `Clamshell Plate` render mode. The
+  two-sided puller lives in `src/Plug_Puller_Two_Sided.scad`.
+- **Two-sided attachment choices `Velcro strap` and `None`**: without
+  zip ties the two plates cannot be held together.
+- **`Plug-Puller_Heavy-Duty-Cord-NEMA-5-15_Clamshell-Plate_{Small,Medium,Large}.stl`**,
+  replaced by the two-sided files above.
+- **The one-sided saved set "Heavy-duty round cord (NEMA 5-15)"**; the
+  two-sided presets file has the round extension cord.
+- **The `clamshell_plate` golden fixture**; the `two_sided_plate`
+  fixture covers the plate.
+- **The three one-sided outline sheets for the extension-cord plug**:
+  that plug's sheets are the three two-sided plate sheets.
+- **`dist/Plug_Puller_SingleFile.json`**: a stray file of Customizer
+  sets saved in 0.8.0 that named settings which no longer exist.
 
 ## [0.11.0] - 2026-07-23
 
