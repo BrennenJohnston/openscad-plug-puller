@@ -120,6 +120,13 @@
       "description": ""
     },
     {
+      "openscad_name": "show_plug_preview",
+      "type": "boolean",
+      "default": true,
+      "section": "Step 1 - Your Plug",
+      "description": ""
+    },
+    {
       "openscad_name": "size",
       "type": "enum",
       "default": "Medium",

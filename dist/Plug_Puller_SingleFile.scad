@@ -103,6 +103,8 @@ measure_plug_thickness_cord_end = 20; // [4:0.5:40]
 measure_cord_thickness = 4; // [1.5:0.5:9]
 // Look at your outlet's cover plate: "Standard flat plate" = two small oval openings, "Rocker / Decora" = one big rectangle per outlet. This sets how deep the tool's end notch is so it can sit flat against the wall.
 measure_wall_plate_style = "Standard flat plate"; // [Standard flat plate, Rocker / Decora, Oversized / Jumbo, No plate / flush]
+// Show a see-through plug built from these numbers in the pocket in the preview so you can check the fit. It is never part of the exported file. MakerWorld shows the finished tool only.
+show_plug_preview = true;
 
 /* [Step 2 - Size] */
 // Pick the hand size. Medium = the original Plug Puller and fits most adults. Small / Large cover smaller and bigger hands. "Measure my hand" builds the grip from the two numbers below. "Custom" is for experts: it ignores ALL measurements and unlocks every "(Custom size only)" slider further down.
@@ -2228,6 +2230,33 @@ module plug_puller_complete() {
     }
 }
 
+// The plug body as measured in Step 1, where it lies in the tool: the
+// prong-end width at the plug end (Y = puller_length), the cord-end width
+// one plug length back, standing on the pocket floor as tall as the plug is
+// thick. Built from the plug's numbers, not the pocket's, so it shows the
+// fit rather than repeating the pocket.
+module plug_body_1s_3d() {
+    module slice(y, w) {
+        _r = 0.15 * min(w, _eff_plug_thickness);
+        translate([0, y, pocket_floor + _eff_plug_thickness / 2])
+            rotate([90, 0, 0])
+                linear_extrude(height = 0.01, center = true)
+                    offset(r = _r) offset(delta = -_r)
+                        square([w, _eff_plug_thickness], center = true);
+    }
+    hull() {
+        slice(puller_length, _eff_plug_width_wall);
+        slice(puller_length - _eff_plug_length, _eff_plug_width_cable);
+    }
+}
+
+// See-through plug for the preview only: the % background modifier keeps it
+// out of every render and export.
+module plug_preview_1s() {
+    if (show_plug_preview)
+        %color("SkyBlue", 0.35) plug_body_1s_3d();
+}
+
 // Body with all cutouts (identical to the full device; kept as a named
 // entry point for the "Body Only" render mode).
 module body_with_cutouts() {
@@ -2619,6 +2648,7 @@ $fn = quality;
 
 if (render_mode == "Full") {
     plug_puller_complete();
+    plug_preview_1s();
     validation_warnings();
 }
 else if (render_mode == "Body Only") {
