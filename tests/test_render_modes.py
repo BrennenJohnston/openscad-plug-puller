@@ -1,13 +1,15 @@
 """End-to-end render + mesh-property tests.
 
-Each test in this module renders the v5 SCAD with a known parameter set and
+Each test in this module renders a SCAD file with a known parameter set and
 compares the resulting mesh against the committed golden fixture
 (``tests/fixtures/<name>/reference.stl``) via :class:`MeshComparator`.
 
 Fixtures live in ``tests/fixtures/<name>/``:
 
 * ``params.json``    — exact ``{key: value}`` parameter overrides passed to
-                       OpenSCAD with ``-D``.
+                       OpenSCAD with ``-D``, plus an optional top-level
+                       ``"scad"`` key naming the file to render (relative
+                       to the repo root; default: the one-sided file).
 * ``reference.stl``  — committed golden mesh produced by the same SCAD on the
                        pinned OpenSCAD version.
 * ``metadata.json``  — provenance: OpenSCAD version, generation date,
@@ -61,6 +63,7 @@ FIXTURE_NAMES = _discover_fixtures(
 def test_render_matches_golden_fixture(
     fixture_name: str,
     scad_file: Path,
+    project_root: Path,
     fixtures_dir: Path,
     openscad_runner: OpenSCADRunner,
     mesh_comparator: MeshComparator,
@@ -88,17 +91,19 @@ def test_render_matches_golden_fixture(
     with open(params_path, "r", encoding="utf-8") as fh:
         payload = json.load(fh)
     parameters = payload.get("parameters", payload)
+    scad_rel = payload.get("scad")
+    fixture_scad = project_root / scad_rel if scad_rel else scad_file
 
     output_stl = tmp_path / f"{fixture_name}.stl"
     result = openscad_runner.generate_stl(
-        scad_file=scad_file,
+        scad_file=fixture_scad,
         output_stl=output_stl,
         parameters=parameters,
     )
 
     assert result.success, (
-        f"OpenSCAD render failed for fixture '{fixture_name}' "
-        f"(returncode={result.returncode}):\n{result.stderr}"
+        f"OpenSCAD render of {fixture_scad.name} failed for fixture "
+        f"'{fixture_name}' (returncode={result.returncode}):\n{result.stderr}"
     )
     assert output_stl.exists(), f"Output STL not produced: {output_stl}"
 

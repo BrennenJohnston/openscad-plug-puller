@@ -3,7 +3,9 @@
 This module wires the four core resources every STL test needs:
 
 * :data:`PROJECT_ROOT` — repo root (so tests can be invoked from any cwd).
-* The ``scad_file`` fixture pointing at ``src/Plug_Puller_Parametric.scad``.
+* The ``scad_file`` fixture pointing at ``src/Plug_Puller_Parametric.scad``
+  (the one-sided puller) and ``two_sided_scad_file`` pointing at
+  ``src/Plug_Puller_Two_Sided.scad`` (the two-sided puller).
 * An :class:`OpenSCADRunner` session fixture that auto-discovers the binary,
   optionally enforces the CI-pinned version, and is skipped (rather than
   errored) when OpenSCAD is missing so lint-only test runs still pass.
@@ -76,6 +78,15 @@ def fixtures_dir(tests_dir: Path) -> Path:
 def scad_file(project_root: Path) -> Path:
     """Path to the canonical SCAD file."""
     path = project_root / "src" / "Plug_Puller_Parametric.scad"
+    if not path.exists():
+        pytest.skip(f"SCAD file missing: {path}")
+    return path
+
+
+@pytest.fixture(scope="session")
+def two_sided_scad_file(project_root: Path) -> Path:
+    """Path to the two-sided puller SCAD file."""
+    path = project_root / "src" / "Plug_Puller_Two_Sided.scad"
     if not path.exists():
         pytest.skip(f"SCAD file missing: {path}")
     return path

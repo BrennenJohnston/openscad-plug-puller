@@ -18,8 +18,8 @@
 //     (`v6.0/CAD/v6.0.stl` = "Plug Puller 3.1 - B", measured by
 //     scripts/extract_reference_dims.py + scripts/analyze_v6*.py). The
 //     reference is inch-native: 1/4" slab, 1" finger bores, 3/16" cord stem.
-//   - The size table (Small / Medium / Large hand pairs, ANSUR-II grounded)
-//     and the "Measure my hand" passthrough.
+//   - The "Measure my hand" passthrough; the size table itself (Small /
+//     Medium / Large hand pairs, ANSUR-II grounded) lives in fit_sizes.scad.
 //   - Derivations mapping the always-active plug measurements plus the hand
 //     pair to every geometry parameter — including the v6 additions:
 //     J-hook cord catch (D-37..D-40), wing velcro (D-41..D-42), zip
@@ -47,10 +47,6 @@
 // ---------------------------------------------------------------------------
 // Clearance and design constants (v6-calibrated)
 // ---------------------------------------------------------------------------
-
-// Finger-hole bore = knuckle width + this. Reference: 1" bore (25.4) for the
-// designer's 20 mm finger -> +5.4. Also absorbs FDM hole undersizing.
-FIT_GRIP_CLEARANCE = 5.4;
 
 // Bridge of material between the two finger holes: spacing 33 - bore 25.4.
 FIT_FINGER_WEB = 7.6;
@@ -175,12 +171,8 @@ FIT_ZIP_COUNTERSINK = 0.9;  // Ø5.1 -> ~Ø6.9 flare at the top face
 // unchanged at default measurements.
 FIT_ZIP_FINGER_WEB = 2.5;
 
-// Size table: hand pair per size (ANSUR II 2012 hand breadth + Rogers 2008
-// PIP-joint breadth). Small ~5th %ile female, Medium = calibration anchor
-// (~combined 50th %ile), Large ~95th %ile male.
-FIT_SIZE_FINGER_S = 16.5;  FIT_SIZE_HAND_S = 72;
-FIT_SIZE_FINGER_M = 20;    FIT_SIZE_HAND_M = 85;
-FIT_SIZE_FINGER_L = 23;    FIT_SIZE_HAND_L = 96;
+// The size table and FIT_GRIP_CLEARANCE live in fit_sizes.scad, which the
+// main file includes first.
 
 function _fit_clamp(v, lo, hi) = max(lo, min(v, hi));
 function _fit_round05(v) = floor(v * 20 + 0.5) / 20;

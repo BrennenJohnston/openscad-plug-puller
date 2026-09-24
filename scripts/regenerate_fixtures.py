@@ -2,8 +2,9 @@
 
 For each fixture directory containing a ``params.json``, this script:
 
-1. Renders ``src/Plug_Puller_Parametric.scad`` with the fixture
-   parameters via ``tests.openscad_runner.OpenSCADRunner``.
+1. Renders ``src/Plug_Puller_Parametric.scad`` (or the file named by the
+   fixture's optional top-level ``"scad"`` key, relative to the repo root)
+   with the fixture parameters via ``tests.openscad_runner.OpenSCADRunner``.
 2. Writes the resulting STL to ``<fixture>/reference.stl``.
 3. Updates ``<fixture>/metadata.json`` with provenance: OpenSCAD version,
    Manifold backend flag, current ISO date, and the trimesh-measured volume,
@@ -73,10 +74,16 @@ def regenerate(only: List[str] | None = None, verbose: bool = False) -> int:
         with open(params_path, "r", encoding="utf-8") as fh:
             payload = json.load(fh)
         parameters = payload.get("parameters", payload)
+        scad_rel = payload.get("scad")
+        fixture_scad = PROJECT_ROOT / scad_rel if scad_rel else scad
+        if not fixture_scad.exists():
+            failures.append(fixture.name)
+            logger.error("  SCAD not found for '%s': %s", fixture.name, fixture_scad)
+            continue
 
         output = fixture / "reference.stl"
-        logger.info("Rendering fixture '%s' -> %s", fixture.name, output)
-        result = runner.generate_stl(scad, output, parameters)
+        logger.info("Rendering fixture '%s' from %s -> %s", fixture.name, fixture_scad.name, output)
+        result = runner.generate_stl(fixture_scad, output, parameters)
         if not result.success:
             failures.append(fixture.name)
             logger.error(
@@ -114,6 +121,8 @@ def regenerate(only: List[str] | None = None, verbose: bool = False) -> int:
             },
             "parameters": parameters,
         }
+        if scad_rel:
+            metadata["scad"] = scad_rel
         with open(fixture / "metadata.json", "w", encoding="utf-8") as fh:
             json.dump(metadata, fh, indent=2)
         logger.info(
