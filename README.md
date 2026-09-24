@@ -281,7 +281,7 @@ maintainer signs off on that.
 
 | Feature | Description |
 | ------- | ----------- |
-| Plug side rail | The flat-tool pocket walls, zip stations, and velcro slot follow one rail down the plug's side; the rail's taper angle is derived from the two Step 1 width stations over the plug length, so one taper moves everything coherently |
+| Plug side rail | The pocket walls, zip stations, and velcro slot follow one rail down the plug's side; the rail's taper angle is derived from the two Step 1 width stations over the plug length, so one taper moves everything coherently |
 | Organic body | A rounded organic silhouette reproduced by a fitted octagon + side rounding; crisp plug end, blob-rounded cord end, wider shoulder ears |
 | Dome plug pocket | A two-level pocket: a plug-shaped recess plus a deeper circular seat centered on the top edge; the two floor heights are directly settable in Custom |
 | Finger holes | Mirrored pair, Ø 25.4 mm at Medium, quarter-round rim fillets on both faces |
