@@ -233,8 +233,9 @@ of the actual printed result.
 
 5. **The two plates apart.** Both plates side by side, as they come off the
    printer, showing the serrated grip zone and the zip-tie stations.
-   **Alt text:** Two identical printed plates side by side, each with a curved
-   serrated inner edge, a finger lobe, and three zip-tie slots.
+   **Alt text:** Two identical printed plates side by side, each with two large
+   finger holes, two arms with serrated inner edges, and small round zip-tie
+   holes.
 
 6. **The three hand sizes, printed.** Small, Medium, and Large one-sided pullers
    together with a ruler.

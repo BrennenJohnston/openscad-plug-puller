@@ -123,8 +123,8 @@ female to the 95th percentile male, so one of the three fits most people.
 
 If none does, set `size` to `Measure my hand` and two sliders appear:
 
-- `measure_finger_width` (default 20 mm) — the width of your index finger across
-  the knuckle. This sets the finger holes.
+- `measure_finger_width` (default 20 mm) — the width of your middle finger across
+  its widest knuckle. This sets the finger holes.
 - `measure_hand_width` (default 85 mm) — the width of your hand across the
   knuckles, thumb excluded. This sets the overall body width. One-sided puller
   only: the two-sided puller asks for the finger width alone.
