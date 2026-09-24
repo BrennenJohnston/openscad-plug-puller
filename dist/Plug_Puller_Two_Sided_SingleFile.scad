@@ -232,17 +232,20 @@ _clam_slot_in_wall    = plate_slot_inner_wall + plate_wall_boost
 _clam_slot_out_wall   = 2.2 + plate_wall_boost;
 
 // Inner-edge gaps. The cord channel hugs the cord; the plug zone hugs the
-// plug's OWN two-station thickness profile with a (usually negative) bite so
+// plug's OWN two-station width profile with a (usually negative) bite so
 // the arms squeeze it: half-gap at the head (arm tips = the prong end of the
 // plug) comes from the prong-end width, half-gap at the plug's back end from
 // the cord-end width, interpolated linearly in between. Each station is floored
 // 1 mm outside the cable channel so the V can never pinch shut on the cord.
 _clam_cable_gap = max(2, _eff_cord_thickness + plate_cable_clearance);      // ~9.0
 _clam_cable_hw  = _clam_cable_gap / 2;
+// Grip per side against the plug's width. One name for it, so the half-gaps
+// below and the WC-12 check can never disagree.
+_grip_term      = plate_grip_bite;
 _clam_hw_wall   = max(_clam_cable_hw + 1,
-                      _eff_plug_width_prong_end / 2 + plate_grip_bite);      // ~12.5 (HD)
+                      _eff_plug_width_prong_end / 2 + _grip_term);           // ~12.5 (HD)
 _clam_hw_cable  = max(_clam_cable_hw + 1,
-                      _eff_plug_width_cord_end / 2 + plate_grip_bite);
+                      _eff_plug_width_cord_end / 2 + _grip_term);
 
 // Finger ("goggle") lobe at the cord end. The lobe radius is the finger bore
 // radius + wall, and the lobe center sits exactly one lobe radius above Y = 0,
@@ -350,15 +353,23 @@ _clam_slot_top_y  = _clam_velcro_y + _clam_slot_len / 2;
 // Width capped so the slot plus its inner (tooth-root) and outer walls fits
 // inside the plate's half-width at the goggle lobe (the bulge below never
 // widens the envelope).
-_clam_slot_w      = min(plate_velcro_slot_width,
+_clam_slot_w      = min(plate_velcro_slot_width, _clam_slot_len,
                         _clam_outer_x - _clam_inner_x(_clam_slot_top_y)
                             - _clam_slot_in_wall - _clam_slot_out_wall);
 _clam_velcro_x    = _clam_inner_x(_clam_slot_top_y) + _clam_slot_in_wall
                         + _clam_slot_w / 2;
 // Step 3's `attachment` gates the slot; `plate_velcro_slot_width` stays the
-// sizing dial (0 still disables it, and the arm slims automatically).
+// sizing dial (0 still disables it, and the arm slims automatically). In Auto
+// placement a window too short for the strap leaves the slot out (a preview
+// note says so) instead of cutting a slot that runs into the zip stations;
+// Manual placement keeps the slot where the stations put it, and WC-7 / WC-11
+// flag any collision.
+_clam_slot_fits   = plate_zip_placement == "Manual"
+                    || _clam_slot_window >= max(6, strap_width_eff + 1.5);
 _clam_slot_on     = _attach_velcro && plate_velcro_slot_width > 0
-                        && _clam_slot_w >= 3;
+                        && _clam_slot_w >= 3 && _clam_slot_fits;
+_clam_slot_left_out = _attach_velcro && plate_velcro_slot_width > 0
+                        && !_clam_slot_fits;
 
 // Mid-arm bulge: a hull control circle wrapped _clam_slot_out_wall outside
 // the slot's top cap, so the tapered arm always carries the slot with a
@@ -402,6 +413,17 @@ function _clam_slot_zip_clear(p) =
          dy  = max(abs(p[1] - _clam_velcro_y) - seg, 0))
     sqrt(dx * dx + dy * dy) - _clam_slot_w / 2;
 
+echo("=== Two-sided puller derived values (mm) ===");
+echo(str("  plate length = ", _clam_length));
+echo(str("  grip gap at the prong end = ", 2 * _clam_hw_wall));
+echo(str("  grip gap at the cord end = ", 2 * _clam_hw_cable));
+echo(str("  cord channel = ", _clam_cable_gap));
+echo(str("  finger hole = ", _clam_finger_dia));
+echo(_clam_slot_on ? str("  strap slot = ", _clam_slot_len, " long, ", _clam_slot_w, " wide")
+   : _clam_slot_left_out ? "  strap slot = left out, the plug is too short for one"
+   : "  strap slot = none");
+echo(str("  zip stations from the cord end = ", _clam_zip_y));
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // WARNINGS
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -438,7 +460,7 @@ function _vw_clam_zip_overlap() =
 // A zip station breaks into the velcro slot (Manual placements; Auto derives
 // the slot window between the mid and tip stations, so it cannot collide).
 function _vw_clam_zip_hits_slot() =
-    _clam_zip_on && _clam_slot_on
+    plate_zip_placement == "Manual" && _clam_zip_on && _clam_slot_on
     && min([for (p = _clam_zip_pts) _clam_slot_zip_clear(p)])
        < _clam_zip_r + 0.5;
 // The plug body pushed the derived arm run past a printable plate length
@@ -459,7 +481,16 @@ function _vw_clam_no_zip_attachment() =
 // WC-11 — the strap is wider than the slot window the arm can offer, so the
 // Step 3 strap won't thread through even after the strap-width floor.
 function _vw_clam_strap_too_wide() =
-    _clam_slot_on && _clam_slot_len < strap_width_eff + 1;
+    plate_zip_placement == "Manual"
+    && _clam_slot_on && _clam_slot_len < strap_width_eff + 1;
+// WC-12 — the cord-channel floor, not the plug, set a station's gap, and the
+// plug is narrower than that gap, so the arms cannot touch it there.
+function _vw_clam_plug_narrow() =
+    let (floor_hw = _clam_cable_hw + 1)
+    (_eff_plug_width_prong_end / 2 + _grip_term < floor_hw
+         && _eff_plug_width_prong_end < 2 * floor_hw)
+    || (_eff_plug_width_cord_end / 2 + _grip_term < floor_hw
+         && _eff_plug_width_cord_end < 2 * floor_hw);
 
 // Heavy-duty clamshell warnings, in the clamshell's own local frame. Same
 // red-coupon + console-mirror convention as validation_warnings().
@@ -488,6 +519,8 @@ module clamshell_warnings() {
              "STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER"],
             [_vw_clam_strap_too_wide(),
              "STRAP WIDER THAN ARM SLOT WINDOW - NARROW THE STRAP"],
+            [_vw_clam_plug_narrow(),
+             "PLUG NARROWER THAN THE CORD CHANNEL - ARMS CANNOT TOUCH IT"],
         ]) if (entry[0]) entry[1]
     ];
 
@@ -506,6 +539,18 @@ module clamshell_warnings() {
                             text(_messages[i], size = WARNING_TEXT_SIZE,
                                  halign = "center", valign = "baseline", $fn = quality);
             }
+
+    _notes = _clam_slot_left_out
+        ? ["STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE"] : [];
+    if ($preview && len(_notes) > 0)
+        color("orange")
+            translate([0, _clam_length + 8
+                          + (len(_messages) > 0 ? (len(_messages) + 1) * WARNING_LINE_GAP : 0), 0])
+                for (i = [0 : len(_notes) - 1])
+                    translate([0, i * WARNING_LINE_GAP, 0])
+                        linear_extrude(height = WARNING_TEXT_DEPTH)
+                            text(_notes[i], size = WARNING_TEXT_SIZE,
+                                 halign = "center", valign = "baseline", $fn = quality);
 }
 
 // Quarter-torus fillet for rounding a through-hole rim.
