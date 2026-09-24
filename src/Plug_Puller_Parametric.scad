@@ -66,18 +66,18 @@
 /* [Step 1 - Your Plug] */
 // The fastest start: pick your plug from this list and every measurement below fills in automatically. Pick "Measure my plug" to type your own numbers instead - docs/guides/measuring-guide.md walks you through each one in about 5 minutes.
 plug_preset = "Measure my plug"; // [Measure my plug, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15]
-// With the plug in the outlet: measure from the wall plate to the plug's back face - how far the whole plug sticks out of the wall. The tool's pocket (or the clamshell arms) run this full length. Skip if you picked a plug preset. (mm)
+// How far the plug body sticks out, from the surface it plugs into to the plug's back end where the cord starts. On a wall outlet, measure from the wall plate; on a laptop or charger, from the device's edge. The tool's pocket runs this full length. Skip if you picked a plug preset. (mm)
 measure_plug_length = 25.5; // [12:0.5:85]
-// Width of the plug body NEAR THE WALL - measure straight across the plastic body just behind the prong face (not the metal prongs), holding the ruler parallel to the wall. Skip if you picked a plug preset. (mm)
-measure_plug_width_wall = 25; // [12:0.5:45]
-// Width of the plug body NEAR THE CORD - same direction as the wall-end width, but measured at the far end of the molded body, just before the cord (skip any soft rubber cord boot). Together the two widths tell the tool which end of the plug is wider. Skip if you picked a plug preset. (mm)
-measure_plug_width_cable = 25; // [12:0.5:45]
-// Thickness of the plug body NEAR THE WALL - across the plug's THIN direction (usually top-to-bottom on a flat plug), just behind the prong face. The clamshell grips across this direction, and the bigger of the two thicknesses decides which tool "Auto from plug" builds - so measure carefully. Skip if you picked a plug preset. (mm)
-measure_plug_thickness_wall = 20; // [8:0.5:40]
-// Thickness of the plug body NEAR THE CORD - same thin direction, measured at the far end of the molded body just before the cord (skip any soft rubber boot). Skip if you picked a plug preset. (mm)
-measure_plug_thickness_cable = 20; // [8:0.5:40]
+// Plug width at the PRONG END: straight across the plastic body just behind the prongs (not the metal prongs), the WIDE way, holding the ruler parallel to the wall. On a USB-C or charger tip, just behind the metal tip. Skip if you picked a plug preset. (mm)
+measure_plug_width_prong_end = 25; // [8:0.5:38]
+// Plug width at the CORD END: the same wide direction, measured where the cord leaves the plug body. Skip the soft rubber strain relief. Together the two widths tell the tool which end of the plug is wider. Skip if you picked a plug preset. (mm)
+measure_plug_width_cord_end = 25; // [8:0.5:38]
+// Plug thickness at the PRONG END: across the plug's THIN direction (usually top to bottom on a flat plug), just behind the prongs. The thicker end sets how deep the pocket is; a plug 24 mm or thicker needs the two-sided puller file. Skip if you picked a plug preset. (mm)
+measure_plug_thickness_prong_end = 20; // [4:0.5:40]
+// Plug thickness at the CORD END: the same thin direction, measured where the cord leaves the plug body. Skip the soft rubber strain relief. Skip if you picked a plug preset. (mm)
+measure_plug_thickness_cord_end = 20; // [4:0.5:40]
 // Measure the cord just behind the plug, across its THIN side (flat lamp cord: the narrow way; round cord: the diameter). Skip if you picked a plug preset. (mm)
-measure_cord_thickness = 4; // [2:0.5:9]
+measure_cord_thickness = 4; // [1.5:0.5:9]
 // Look at your outlet's cover plate: "Standard flat plate" = two small oval openings, "Rocker / Decora" = one big rectangle per outlet. This sets how deep the tool's end notch is so it can sit flat against the wall.
 measure_wall_plate_style = "Standard flat plate"; // [Standard flat plate, Rocker / Decora, Oversized / Jumbo, No plate / flush]
 
@@ -311,22 +311,22 @@ _eff_plug_width_wall =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 25.0 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 26.6 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 25.8 :
-    measure_plug_width_wall;
+    measure_plug_width_prong_end;
 _eff_plug_width_cable =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.2 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.4 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 21.9 :
-    measure_plug_width_cable;
+    measure_plug_width_cord_end;
 _eff_plug_thickness_wall =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 18.6 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 18.9 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
-    measure_plug_thickness_wall;
+    measure_plug_thickness_prong_end;
 _eff_plug_thickness_cable =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 8.6 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 15.0 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
-    measure_plug_thickness_cable;
+    measure_plug_thickness_cord_end;
 _eff_cord_thickness =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 3.6 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 7.0 :
@@ -1818,14 +1818,14 @@ module validation_warnings() {
             [_vw_measured && !_pp_active && _vw_measure_bad(measure_plug_length, 12, 85),
              "CHECK PLUG LENGTH MEASUREMENT (MM?)"],
             [_vw_measured && !_pp_active
-                && (_vw_measure_bad(measure_plug_width_wall, 12, 45)
-                    || _vw_measure_bad(measure_plug_width_cable, 12, 45)),
+                && (_vw_measure_bad(measure_plug_width_prong_end, 8, 38)
+                    || _vw_measure_bad(measure_plug_width_cord_end, 8, 38)),
              "CHECK PLUG WIDTH MEASUREMENTS (MM?)"],
             [_vw_measured && !_pp_active
-                && (_vw_measure_bad(measure_plug_thickness_wall, 8, 40)
-                    || _vw_measure_bad(measure_plug_thickness_cable, 8, 40)),
+                && (_vw_measure_bad(measure_plug_thickness_prong_end, 4, 40)
+                    || _vw_measure_bad(measure_plug_thickness_cord_end, 4, 40)),
              "CHECK PLUG THICKNESS MEASUREMENTS (MM?)"],
-            [_vw_measured && !_pp_active && _vw_measure_bad(measure_cord_thickness, 2, 9),
+            [_vw_measured && !_pp_active && _vw_measure_bad(measure_cord_thickness, 1.5, 9),
              "CHECK CORD THICKNESS MEASUREMENT (MM?)"],
             [_vw_measured && size == "Measure my hand"
                 && _vw_measure_bad(measure_finger_width, 14, 32),

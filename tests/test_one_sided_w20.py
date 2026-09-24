@@ -20,8 +20,8 @@ ONE_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
 W20 = "PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE"
 CASES = {
     # name: (parameters, whether W-20 must fire)
-    "typed_27mm": ({"measure_plug_thickness_wall": 27, "measure_plug_thickness_cable": 27}, True),
-    "typed_20mm": ({"measure_plug_thickness_wall": 20, "measure_plug_thickness_cable": 20}, False),
+    "typed_27mm": ({"measure_plug_thickness_prong_end": 27, "measure_plug_thickness_cord_end": 27}, True),
+    "typed_20mm": ({"measure_plug_thickness_prong_end": 20, "measure_plug_thickness_cord_end": 20}, False),
     "heavy_duty_preset": ({"plug_preset": "Heavy-duty extension cord - NEMA 5-15"}, True),
 }
 

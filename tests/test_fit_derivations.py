@@ -43,11 +43,11 @@ MAPPING_FILE = PROJECT_ROOT / "parameter_mapping.json"
 # lint). These double as the W-1 plausibility windows.
 MEASURE_RANGES: Dict[str, tuple[float, float]] = {
     "measure_plug_length": (12, 85),
-    "measure_plug_width_wall": (12, 45),
-    "measure_plug_width_cable": (12, 45),
-    "measure_plug_thickness_wall": (8, 40),
-    "measure_plug_thickness_cable": (8, 40),
-    "measure_cord_thickness": (2, 9),
+    "measure_plug_width_prong_end": (8, 38),
+    "measure_plug_width_cord_end": (8, 38),
+    "measure_plug_thickness_prong_end": (4, 40),
+    "measure_plug_thickness_cord_end": (4, 40),
+    "measure_cord_thickness": (1.5, 9),
     "measure_finger_width": (14, 32),
     "measure_hand_width": (60, 110),
 }
@@ -84,10 +84,10 @@ RANGE_EXCEPTIONS: Dict[str, tuple[float, float]] = {
 VACUUM_PLUG_VECTOR: Dict[str, Any] = {
     "size": "Measure my hand",
     "measure_plug_length": 38,
-    "measure_plug_width_wall": 34,
-    "measure_plug_width_cable": 34,
-    "measure_plug_thickness_wall": 16,
-    "measure_plug_thickness_cable": 16,
+    "measure_plug_width_prong_end": 34,
+    "measure_plug_width_cord_end": 34,
+    "measure_plug_thickness_prong_end": 16,
+    "measure_plug_thickness_cord_end": 16,
     "measure_cord_thickness": 5,
     "measure_wall_plate_style": "Rocker / Decora",
     "measure_finger_width": 22,
@@ -195,18 +195,18 @@ class TestClampEdges:
             ("all_max", ALL_MAX_VECTOR),
             ("vacuum_plug", VACUUM_PLUG_VECTOR),
             ("small_extremes", {"size": "Small",
-                                "measure_plug_width_wall": 45,
-                                "measure_plug_width_cable": 45,
+                                "measure_plug_width_prong_end": 38,
+                                "measure_plug_width_cord_end": 38,
                                 "measure_plug_length": 85}),
             ("large_extremes", {"size": "Large",
-                                "measure_plug_width_wall": 12,
-                                "measure_plug_width_cable": 12,
+                                "measure_plug_width_prong_end": 8,
+                                "measure_plug_width_cord_end": 8,
                                 "measure_plug_length": 12}),
             ("fat_at_cable", {"size": "Medium",
-                              "measure_plug_width_wall": 20,
-                              "measure_plug_width_cable": 34,
-                              "measure_plug_thickness_wall": 18,
-                              "measure_plug_thickness_cable": 30,
+                              "measure_plug_width_prong_end": 20,
+                              "measure_plug_width_cord_end": 34,
+                              "measure_plug_thickness_prong_end": 18,
+                              "measure_plug_thickness_cord_end": 30,
                               "measure_plug_length": 62}),
         ],
     )
@@ -308,10 +308,10 @@ class TestMonotonicity:
             )
 
     def test_plug_width_widens_notch(self) -> None:
-        self._assert_monotonic("measure_plug_width_wall", "plug_wall_notch_width")
+        self._assert_monotonic("measure_plug_width_prong_end", "plug_wall_notch_width")
 
     def test_plug_width_widens_pocket(self) -> None:
-        self._assert_monotonic("measure_plug_width_wall", "pocket_width")
+        self._assert_monotonic("measure_plug_width_prong_end", "pocket_width")
 
     def test_finger_width_widens_hole(self) -> None:
         self._assert_monotonic("measure_finger_width", "finger_hole_diameter")
@@ -328,20 +328,20 @@ class TestMonotonicity:
 PLUG_PRESET_VECTORS: Dict[str, Dict[str, Any]] = {
     "lamp_1_15": {
         "measure_plug_length": 37.0,
-        "measure_plug_width_wall": 25.0, "measure_plug_width_cable": 11.2,
-        "measure_plug_thickness_wall": 18.6, "measure_plug_thickness_cable": 8.6,
+        "measure_plug_width_prong_end": 25.0, "measure_plug_width_cord_end": 11.2,
+        "measure_plug_thickness_prong_end": 18.6, "measure_plug_thickness_cord_end": 8.6,
         "measure_cord_thickness": 3.6,
     },
     "standard_5_15": {
         "measure_plug_length": 46.2,
-        "measure_plug_width_wall": 26.6, "measure_plug_width_cable": 13.4,
-        "measure_plug_thickness_wall": 18.9, "measure_plug_thickness_cable": 15.0,
+        "measure_plug_width_prong_end": 26.6, "measure_plug_width_cord_end": 13.4,
+        "measure_plug_thickness_prong_end": 18.9, "measure_plug_thickness_cord_end": 15.0,
         "measure_cord_thickness": 7,
     },
     "heavy_duty_5_15": {
         "measure_plug_length": 43.8,
-        "measure_plug_width_wall": 25.8, "measure_plug_width_cable": 21.9,
-        "measure_plug_thickness_wall": 27.0, "measure_plug_thickness_cable": 27.0,
+        "measure_plug_width_prong_end": 25.8, "measure_plug_width_cord_end": 21.9,
+        "measure_plug_thickness_prong_end": 27.0, "measure_plug_thickness_cord_end": 27.0,
         "measure_cord_thickness": 8.2,
     },
 }

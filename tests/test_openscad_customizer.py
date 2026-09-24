@@ -58,6 +58,8 @@ ONE_SIDED_ONLY_PARAMETERS = [
     "measure_plug_width_cable",
     "measure_plug_thickness_wall",
     "measure_plug_thickness_cable",
+    "measure_plug_thickness_prong_end",
+    "measure_plug_thickness_cord_end",
     "measure_wall_plate_style",
     "measure_hand_width",
     "tool_style",
@@ -260,13 +262,14 @@ class TestOneSidedCustomizer:
         )
         assert plug_params[1:6] == [
             "measure_plug_length",
-            "measure_plug_width_wall",
-            "measure_plug_width_cable",
-            "measure_plug_thickness_wall",
-            "measure_plug_thickness_cable",
+            "measure_plug_width_prong_end",
+            "measure_plug_width_cord_end",
+            "measure_plug_thickness_prong_end",
+            "measure_plug_thickness_cord_end",
         ], (
             "The two-station plug measurements must appear in reading order "
-            "(length, then width wall/cable, then thickness wall/cable); "
+            "(length, then width prong end/cord end, then thickness prong "
+            "end/cord end); "
             f"got {plug_params[1:6]}."
         )
 
