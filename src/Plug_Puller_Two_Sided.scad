@@ -404,7 +404,7 @@ WARNING_LINE_GAP   = WARNING_TEXT_SIZE + 2;
 // Cord doesn't fit the cable channel with clearance to spare.
 function _vw_clam_cord_channel() =
     _clam_cable_gap - _eff_cord_thickness < 0.5;
-// Plug so thick the tapered arm inverts (tip circle outboard of the lobes).
+// Plug so wide the tapered arm inverts (tip circle outboard of the lobes).
 function _vw_clam_arm_thin() =
     _clam_tip_cx + _clam_tip_r > _clam_outer_x - 1;
 // No interference bite — a non-negative bite means the plug isn't squeezed.
@@ -474,7 +474,7 @@ module clamshell_warnings() {
             [_vw_clam_cord_channel(),
              "CORD TOO THICK FOR CABLE CHANNEL"],
             [_vw_clam_arm_thin(),
-             "PLUG TOO THICK - ARMS BULGE PAST FINGER LOBES"],
+             "PLUG TOO WIDE - ARMS BULGE PAST FINGER LOBES"],
             [_vw_clam_no_bite(),
              "NO GRIP BITE - PLUG WONT BE HELD"],
             [_vw_clam_plate_thin(),
@@ -488,7 +488,7 @@ module clamshell_warnings() {
             [_vw_clam_plug_too_long(),
              "PLUG TOO LONG - PLATE OVER 120MM, CHECK PLUG LENGTH"],
             [_vw_clam_taper_steep(),
-             "PLUG THICKNESS TAPER LOOKS WRONG - RECHECK BOTH ENDS"],
+             "PLUG WIDTH TAPER LOOKS WRONG - RECHECK BOTH ENDS"],
             [_vw_clam_no_zip_attachment(),
              "STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER"],
             [_vw_clam_strap_too_wide(),
