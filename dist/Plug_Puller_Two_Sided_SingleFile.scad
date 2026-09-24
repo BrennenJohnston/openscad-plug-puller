@@ -733,6 +733,31 @@ module clamshell_plate_3d() {
 // RENDER MODE DISPATCH
 // ═══════════════════════════════════════════════════════════════════════════════
 
+// See-through plug for the preview only: the % background modifier keeps it
+// out of every render and export. Its width follows the two Step 1 widths and
+// it sits on the mating face (Z = plate_thickness), where the plug's middle
+// lies once the two plates meet. Its height is 0.55 x its width, a stand-in
+// for the plug's other side, which the two-sided puller never needs.
+module plug_preview_2s() {
+    _ratio = 0.55;
+    module slice(y, w) {
+        translate([0, y, plate_thickness])
+            rotate([90, 0, 0])
+                linear_extrude(height = 0.01, center = true)
+                    if (_sides_eff == "Rounded sides")
+                        scale([w / 2, _ratio * w / 2]) circle(r = 1, $fn = quality);
+                    else
+                        offset(r = 0.15 * _ratio * w) offset(delta = -0.15 * _ratio * w)
+                            square([w, _ratio * w], center = true);
+    }
+    if (show_plug_preview)
+        %color("SkyBlue", 0.35)
+            hull() {
+                slice(_clam_y_back, _eff_plug_width_cord_end);
+                slice(_clam_length + 2, _eff_plug_width_prong_end);
+            }
+}
+
 // Both identical plates side by side, outer face down, 8 mm apart, so one
 // file prints the whole tool; one plate is flipped over when assembling.
 module two_sided_pair() {
@@ -745,13 +770,16 @@ $fn = quality;
 
 if (render_mode == "One plate") {
     clamshell_plate_3d();
+    plug_preview_2s();
     clamshell_warnings();
 } else if (render_mode == "Full") {
     if (print_layout == "Both plates") {
         echo("PRINT LAYOUT: both plates side by side - flip one after printing");
         two_sided_pair();
+        translate([-(_clam_half_width + 4), 0, 0]) plug_preview_2s();
     } else {
         clamshell_plate_3d();
+        plug_preview_2s();
     }
     clamshell_warnings();
 }
