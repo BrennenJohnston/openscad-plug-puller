@@ -188,6 +188,32 @@
       "description": ""
     },
     {
+      "openscad_name": "plate_cradle_depth",
+      "type": "float",
+      "default": 2.5,
+      "range": [
+        0.0,
+        3.5
+      ],
+      "step": 0.25,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
+      "openscad_name": "plate_grip_clearance",
+      "type": "float",
+      "default": 0.5,
+      "range": [
+        0.0,
+        2.0
+      ],
+      "step": 0.1,
+      "unit": "mm",
+      "section": "Advanced - Two-Sided Puller",
+      "description": ""
+    },
+    {
       "openscad_name": "plate_cable_clearance",
       "type": "float",
       "default": 0.8,

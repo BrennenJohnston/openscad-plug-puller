@@ -67,8 +67,12 @@ print_layout = "Both plates"; // [Both plates, One plate]
 plate_wall_boost = 0; // [0:0.25:5]
 // Thickness of each plate. The two identical plates meet face to face around the plug, so the finished sandwich is twice this. (mm)
 plate_thickness = 4; // [2:0.25:8]
-// Grip clearance per side against the plug width. NEGATIVE squeezes the plug so the teeth bite (recommended); 0 = exact fit; positive = loose. The gap between the arms follows the plug's width at the prong end and at the cord end, plus 2x this. (mm)
+// Flat sides and plug presets only. Grip clearance per side against the plug width. NEGATIVE squeezes the plug so the teeth bite (recommended); 0 = exact fit; positive = loose. The gap between the arms follows the plug's width at the prong end and at the cord end, plus 2x this. (mm)
 plate_grip_bite = -1; // [-2:0.1:2]
+// Rounded sides only. How much narrower the gap is on each side at the outer face of each plate than where the plates meet; deeper = a steeper cradle. 0 = straight edge. (mm)
+plate_cradle_depth = 2.5; // [0:0.25:3.5]
+// Rounded sides only. Extra room added to the plug width where the plates meet. A small positive value lets a hard plug drop in flat; the cradle does the holding. (mm)
+plate_grip_clearance = 0.5; // [0:0.1:2]
 // Extra width added to the cord channel beyond the measured cord thickness, so the cord slides in freely. (mm)
 plate_cable_clearance = 0.8; // [0:0.1:5]
 // Finger-hole fit: bore = your finger width + this. Kept tighter than on the one-sided puller so the pull is secure. (mm)
@@ -239,13 +243,25 @@ _clam_slot_out_wall   = 2.2 + plate_wall_boost;
 // 1 mm outside the cable channel so the V can never pinch shut on the cord.
 _clam_cable_gap = max(2, _eff_cord_thickness + plate_cable_clearance);      // ~9.0
 _clam_cable_hw  = _clam_cable_gap / 2;
-// Grip per side against the plug's width. One name for it, so the half-gaps
-// below and the WC-12 check can never disagree.
-_grip_term      = plate_grip_bite;
+// Grip per side against the plug's width at the face where the plates meet.
+// Rounded sides get a small clearance and the cradle below does the holding;
+// Flat sides and presets squeeze the plug with the bite. One name for it, so
+// the half-gaps below and the WC-12 check can never disagree.
+_grip_term      = (_sides_eff == "Rounded sides") ? plate_grip_clearance / 2
+                                                  : plate_grip_bite;
 _clam_hw_wall   = max(_clam_cable_hw + 1,
                       _eff_plug_width_prong_end / 2 + _grip_term);           // ~12.5 (HD)
 _clam_hw_cable  = max(_clam_cable_hw + 1,
                       _eff_plug_width_cord_end / 2 + _grip_term);
+// Cradle (Rounded sides): the gap narrows by this much per side from the
+// mating face down to the outer face, so two plates form a diamond channel.
+// Guard: the outer-face gap may come down to the cord channel's width but
+// never below it, and the step-in never exceeds the plate. 0 = today's
+// straight edge.
+_cradle_eff     = (_sides_eff == "Rounded sides")
+    ? max(0, min(plate_cradle_depth, plate_thickness,
+                 min(_clam_hw_wall, _clam_hw_cable) - _clam_cable_hw))
+    : 0;
 
 // Finger ("goggle") lobe at the cord end. The lobe radius is the finger bore
 // radius + wall, and the lobe center sits exactly one lobe radius above Y = 0,
@@ -301,11 +317,12 @@ function _clam_inner_x(y) =
                      / max(eps, _clam_length - _clam_grip_y0)
                : 0);
 
-// Arm tip: a rounded tip hugging the flared inner edge. The arm is the 2D
-// hull of the goggle lobe, the mid-arm bulge circle (below), and this tip
-// circle, so it tapers like the ideal.
+// Arm tip: a rounded tip hugging the flared inner edge at the outer face
+// (stepped in by the cradle, so the arm carries the slope to its tip). The
+// arm is the 2D hull of the goggle lobe, the mid-arm bulge circle (below),
+// and this tip circle, so it tapers like the ideal.
 _clam_tip_r  = plate_arm_tip_width / 2;                                     // ~5.5
-_clam_tip_cx = _clam_tip_hw + _clam_tip_r;                                 // ~18.4
+_clam_tip_cx = _clam_tip_hw - _cradle_eff + _clam_tip_r;                   // ~18.4
 _clam_tip_cy = _clam_length - _clam_tip_r;                                 // ~68.3
 
 // Zip stations along the arm (Y from the cord end). Auto: rear beside the
@@ -423,6 +440,7 @@ echo("=== Two-sided puller derived values (mm) ===");
 echo(str("  plate length = ", _clam_length));
 echo(str("  grip gap at the prong end = ", 2 * _clam_hw_wall));
 echo(str("  grip gap at the cord end = ", 2 * _clam_hw_cable));
+echo(str("  cradle depth per side = ", _cradle_eff));
 echo(str("  cord channel = ", _clam_cable_gap));
 echo(str("  finger hole = ", _clam_finger_dia));
 echo(_clam_slot_on ? str("  strap slot = ", _clam_slot_len, " long, ", _clam_slot_w, " wide")
@@ -445,8 +463,9 @@ function _vw_clam_cord_channel() =
 function _vw_clam_arm_thin() =
     _clam_tip_cx + _clam_tip_r > _clam_outer_x - 1;
 // No interference bite — a non-negative bite means the plug isn't squeezed.
+// Rounded sides ignore the bite (the cradle holds the plug).
 function _vw_clam_no_bite() =
-    plate_grip_bite >= 0;
+    _sides_eff == "Flat sides" && plate_grip_bite >= 0;
 // Plate too thin to be stiff / printable as a grip.
 function _vw_clam_plate_thin() =
     plate_thickness < 2;
@@ -497,6 +516,10 @@ function _vw_clam_plug_narrow() =
          && _eff_plug_width_prong_end < 2 * floor_hw)
     || (_eff_plug_width_cord_end / 2 + _grip_term < floor_hw
          && _eff_plug_width_cord_end < 2 * floor_hw);
+// WC-13 — the depth guard made the cradle shallower than plate_cradle_depth
+// asks for, because the plug is narrow next to its cord channel.
+function _vw_clam_cradle_clamped() =
+    _sides_eff == "Rounded sides" && _cradle_eff < plate_cradle_depth - 0.01;
 
 // Heavy-duty clamshell warnings, in the clamshell's own local frame. Same
 // red-coupon + console-mirror convention as validation_warnings().
@@ -527,6 +550,8 @@ module clamshell_warnings() {
              "STRAP WIDER THAN ARM SLOT WINDOW - NARROW THE STRAP"],
             [_vw_clam_plug_narrow(),
              "PLUG NARROWER THAN THE CORD CHANNEL - ARMS CANNOT TOUCH IT"],
+            [_vw_clam_cradle_clamped(),
+             "CRADLE SHALLOWER THAN ASKED - PLUG NARROW"],
         ]) if (entry[0]) entry[1]
     ];
 
@@ -579,11 +604,35 @@ module fillet_ring(hole_r, fillet_r) {
 // arms while the cord exits the narrow channel. All 2D work in the plate's
 // local frame (see CLAMSHELL DERIVED VALUES).
 
+// Right-half V gap: everything inboard of the inner-edge profile. The knots
+// follow _clam_inner_x(): cable channel to the throat, the plug's back end,
+// the serration-zone start (where the tip flare kicks in — emitted only when
+// it sits above the back end), and the flared tip. From the throat on, the
+// edge steps in by c: the cradle at one height (0 = the mating face).
+module clamshell_v_gap_2d(c = 0) {
+    polygon(concat(
+        [
+            [-1, -1],
+            [_clam_cable_hw, -1],
+            [_clam_cable_hw, _clam_throat_y0],
+            [_clam_inner_x(_clam_y_back) - c, _clam_y_back],
+        ],
+        (_clam_grip_y0 > _clam_y_back + 0.01)
+            ? [[_clam_inner_x(_clam_grip_y0) - c, _clam_grip_y0]]
+            : [],
+        [
+            [_clam_tip_hw - c, _clam_length],
+            [_clam_tip_hw - c, _clam_length + 1],
+            [-1, _clam_length + 1],
+        ]
+    ));
+}
+
 // Right-half plate outline: a goggle lobe around the finger hole (tangent to
 // Y = 0) hulled with the rounded arm tip — a tapered arm like the ideal —
-// plus a straight channel wall beside the cable strip, minus the V gap
-// (everything inboard of the inner-edge profile). A small morphological
-// opening rounds the V-knee and cord-end corners.
+// plus a straight channel wall beside the cable strip, minus the V gap at
+// the outer face (narrowed by the cradle). A small morphological opening
+// rounds the V-knee and cord-end corners.
 module clamshell_half_outline_2d() {
     _r = 1.8;
     offset(r = _r) offset(delta = -_r)
@@ -606,27 +655,7 @@ module clamshell_half_outline_2d() {
                 translate([_clam_cable_hw, 0])
                     square([_clam_finger_x - _clam_cable_hw, _clam_finger_y]);
             }
-            // The V gap: everything inboard of the inner-edge profile. The
-            // knots follow _clam_inner_x(): cable channel to the throat,
-            // the plug's back end, the serration-zone start (where the tip
-            // flare kicks in — emitted only when it sits above the back
-            // end), and the flared tip.
-            polygon(concat(
-                [
-                    [-1, -1],
-                    [_clam_cable_hw, -1],
-                    [_clam_cable_hw, _clam_throat_y0],
-                    [_clam_inner_x(_clam_y_back), _clam_y_back],
-                ],
-                (_clam_grip_y0 > _clam_y_back + 0.01)
-                    ? [[_clam_inner_x(_clam_grip_y0), _clam_grip_y0]]
-                    : [],
-                [
-                    [_clam_tip_hw, _clam_length],
-                    [_clam_tip_hw, _clam_length + 1],
-                    [-1, _clam_length + 1],
-                ]
-            ));
+            clamshell_v_gap_2d(_cradle_eff);
         }
 }
 
@@ -639,8 +668,9 @@ module clamshell_outline_2d() {
 // Gripper teeth cut into the inner edge over the serration zone, measured back
 // from the plug face (the tip). The span is _clam_grip_len_eff (auto = the
 // full plug body span); the teeth ride _clam_inner_x() so they follow the
-// plug's own taper. Empty when teeth are disabled.
-module clamshell_serrations_2d() {
+// plug's own taper, stepped in by c with the cradle. Empty when teeth are
+// disabled.
+module clamshell_serrations_2d(c = 0) {
     if (_clam_teeth_on) {
         _n = floor(_clam_grip_len_eff / plate_tooth_pitch);
         for (i = [0 : _n]) {
@@ -650,7 +680,7 @@ module clamshell_serrations_2d() {
             // inner - r + depth ⇒ material removed from inner to inner+depth).
             // Never below the plug's back end — the throat ramp stays smooth.
             if (_y > _clam_y_back - eps)
-                translate([_clam_inner_x(_y) - plate_tooth_diameter / 2 + plate_tooth_depth, _y])
+                translate([_clam_inner_x(_y) - c - plate_tooth_diameter / 2 + plate_tooth_depth, _y])
                     circle(d = plate_tooth_diameter, $fn = quality);
         }
     }
@@ -665,6 +695,32 @@ module clamshell_slot_2d() {
     hull()
         for (s = [-1, 1])
             translate([0, s * _dy]) circle(r = _r, $fn = quality);
+}
+
+// The cradle: the plug zone's gap and teeth cut in thin slices, each stepped
+// in by the cradle at its mid-height, so the gap is widest at the mating face
+// (Z = plate_thickness) and narrowest at the outer face, and the teeth ride
+// the slope. The cable channel and strip below the throat are left alone.
+module two_sided_gap_cutter_3d() {
+    _t = plate_thickness;
+    _n = max(6, floor(quality / 6));
+    for (i = [0 : _n - 1]) {
+        _z0 = _t * i / _n;
+        _z1 = _t * (i + 1) / _n;
+        _c  = _cradle_eff * (1 - ((_z0 + _z1) / 2) / _t);
+        translate([0, 0, _z0 - eps])
+            linear_extrude(height = (_z1 - _z0) + 2 * eps)
+                for (s = [-1, 1])
+                    scale([s, 1]) {
+                        intersection() {
+                            clamshell_v_gap_2d(_c);
+                            translate([-1, _clam_throat_y0 + eps])
+                                square([_clam_hw_wall + _clam_hw_cable + plate_tip_flare + 2,
+                                        _clam_length + 2]);
+                        }
+                        clamshell_serrations_2d(_c);
+                    }
+    }
 }
 
 // One full plate (both arms + cable strip), holes and slots subtracted.
@@ -721,11 +777,15 @@ module clamshell_plate_3d() {
                 translate([s * _clam_velcro_x, _clam_velcro_y, -eps])
                     linear_extrude(height = _t + 2 * eps)
                         clamshell_slot_2d();
-        // Gripper serrations (both arms), through-cut.
-        for (s = [-1, 1])
-            translate([0, 0, -eps])
-                linear_extrude(height = _t + 2 * eps)
-                    scale([s, 1]) clamshell_serrations_2d();
+        // Gripper serrations (both arms): the cradle cutter with Rounded
+        // sides, otherwise straight through-cuts.
+        if (_cradle_eff > 0)
+            two_sided_gap_cutter_3d();
+        else
+            for (s = [-1, 1])
+                translate([0, 0, -eps])
+                    linear_extrude(height = _t + 2 * eps)
+                        scale([s, 1]) clamshell_serrations_2d();
     }
 }
 
