@@ -211,7 +211,7 @@
         "Right",
         "Left"
       ],
-      "section": "Step 4 - Cord Hook - Flat Tool",
+      "section": "Step 4 - Cord Hook",
       "description": ""
     },
     {
@@ -222,7 +222,7 @@
         "Auto",
         "Manual"
       ],
-      "section": "Advanced - Zip Tie Placement - Flat Tool",
+      "section": "Advanced - Zip Tie Placement",
       "description": ""
     },
     {
@@ -234,7 +234,7 @@
         3
       ],
       "step": 1,
-      "section": "Advanced - Zip Tie Placement - Flat Tool",
+      "section": "Advanced - Zip Tie Placement",
       "description": ""
     },
     {
@@ -247,7 +247,7 @@
       ],
       "step": 0.5,
       "unit": "mm",
-      "section": "Advanced - Zip Tie Placement - Flat Tool",
+      "section": "Advanced - Zip Tie Placement",
       "description": ""
     },
     {
@@ -260,7 +260,7 @@
       ],
       "step": 0.5,
       "unit": "mm",
-      "section": "Advanced - Zip Tie Placement - Flat Tool",
+      "section": "Advanced - Zip Tie Placement",
       "description": ""
     },
     {
@@ -273,7 +273,7 @@
       ],
       "step": 0.5,
       "unit": "mm",
-      "section": "Advanced - Zip Tie Placement - Flat Tool",
+      "section": "Advanced - Zip Tie Placement",
       "description": ""
     },
     {
@@ -286,7 +286,7 @@
       ],
       "step": 0.25,
       "unit": "mm",
-      "section": "Advanced - Zip Tie Placement - Flat Tool",
+      "section": "Advanced - Zip Tie Placement",
       "description": ""
     },
     {
@@ -297,7 +297,7 @@
         "Auto",
         "Manual"
       ],
-      "section": "Advanced - Velcro Placement - Flat Tool",
+      "section": "Advanced - Velcro Placement",
       "description": ""
     },
     {
@@ -310,7 +310,7 @@
       ],
       "step": 0.5,
       "unit": "mm",
-      "section": "Advanced - Velcro Placement - Flat Tool",
+      "section": "Advanced - Velcro Placement",
       "description": ""
     },
     {

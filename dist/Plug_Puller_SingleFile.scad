@@ -122,11 +122,11 @@ velcro_style = "Wing"; // [Wing, Classic slot]
 // Width of the hook-and-loop strap you'll thread through the openings - check the strap's packaging (ONE-WRAP comes in 10/13/16/20/25 mm). Sizes the wing opening so the strap clears it. (mm)
 strap_width = 15; // [10:1:25]
 
-/* [Step 4 - Cord Hook - Flat Tool] */
+/* [Step 4 - Cord Hook] */
 // Which way the tool's cord catch faces. Right = the original device. Pick whichever lets you hook the cord with your preferred hand - the hook is mirrored, nothing else changes.
 hook_hand = "Right"; // [Right, Left]
 
-/* [Advanced - Zip Tie Placement - Flat Tool] */
+/* [Advanced - Zip Tie Placement] */
 // POWER USERS from here down - beginners can stop after Step 4. Where the flat tool's zip-tie holes sit. Auto (recommended) spaces them along the plug's side rail just outside the pocket wall and keeps them clear of every other feature. Manual places each pair with the position dials below.
 zip_placement = "Auto"; // [Auto, Manual]
 // How many pairs of zip-tie holes (one hole per side of the plug pocket).
@@ -140,7 +140,7 @@ zip_pos_3 = 30; // [0:0.5:55]
 // How far outward from the pocket wall each zip-hole center sits. Raise it to pull the holes away from the pocket; the tie then threads beside the plug seat. (mm)
 zip_edge_offset = 4; // [2.5:0.25:12]
 
-/* [Advanced - Velcro Placement - Flat Tool] */
+/* [Advanced - Velcro Placement] */
 // Where the flat tool's velcro strap openings sit. Auto (recommended) derives the wing region / classic-slot placement from the body. Manual slides a pair of classic slots along the plug side rail with the dial below (the Wing style always uses Auto).
 velcro_placement = "Auto"; // [Auto, Manual]
 // Manual placement only: slot distance along the plug side rail, measured from the plug face toward the cord. (mm)
