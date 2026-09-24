@@ -26,32 +26,34 @@ card to the worksheet numbers below.
 
 Write your numbers into the worksheet at the bottom as you go.
 
-> **Shortcut:** the model's defaults reproduce the reference Plug Puller,
-> which fits a typical 25 mm two-prong plug on a standard flat wall
-> plate. If that describes your plug, you only need to pick a size and
-> can skip the measuring entirely.
+> **Shortcut:** the one-sided puller's defaults reproduce the reference
+> Plug Puller, which fits a typical 25 mm two-prong plug on a standard
+> flat wall plate. If that describes your plug, you only need to pick a
+> size and can skip the measuring entirely.
 >
 > **Even faster:** Step 1 starts with a **`plug_preset`** dropdown.
-> Pick `Flat 2-prong lamp plug`, `Standard 3-prong plug`, or
-> `Heavy-duty extension cord` and it fills in the plug numbers for
-> you. Leave it on `Measure my plug` to type your own numbers below.
+> Pick `Flat 2-prong lamp plug` or `Standard 3-prong plug` in the
+> one-sided puller, or `Heavy-duty extension cord` in the two-sided
+> puller, and it fills in the plug numbers for you. Leave it on
+> `Measure my plug` to type your own numbers below.
 >
-> **Two tools:** Step 0 `tool_style` is `Auto from plug` by default — it
-> builds the flat tool for slim plugs and the **heavy-duty clamshell**
-> (two serrated plates that zip-tie around the plug) for fat ones (plug
-> thickness ≥ 24 mm). So measuring **plug thickness** accurately matters:
-> it decides which tool you get. Force either tool with `tool_style` if
-> you prefer.
+> **Two tools, two files:** the **one-sided puller**
+> (`src/Plug_Puller_Parametric.scad`) and the **two-sided puller**
+> (`src/Plug_Puller_Two_Sided.scad`: two serrated plates that zip-tie
+> around the plug). A plug 24 mm thick or more gets a red tag in the
+> one-sided file that sends you to the two-sided file, so measuring
+> **plug thickness** accurately matters. The two-sided puller needs
+> fewer numbers: see
+> [The two-sided puller's numbers](#the-two-sided-pullers-numbers).
 
-This is the heavy-duty clamshell on the kind of fat round plug it is
-measured for — the two thickness numbers below are what routes you to
-it:
+This is the two-sided puller on the kind of fat round plug it is made
+for — a thickness of 24 mm or more sends you to it:
 
-![The assembled heavy-duty clamshell zip-tied around a thick round extension-cord plug](../images/clamshell-assembled-on-plug.jpg)
+![The assembled two-sided puller zip-tied around a thick round extension-cord plug](../images/clamshell-assembled-on-plug.jpg)
 
 <!-- TODO(photos): still wanted — one close-up photo per measurement
      below: ruler from wall plate to the plug's back face, caliper
-     across the plug body at the wall end and at the cord end, caliper
+     across the plug body at the prong end and at the cord end, caliper
      on the cord, the four wall-plate styles side by side, caliper on a
      middle-finger knuckle, ruler across four knuckles. These need
      manual capture; the text descriptions stand alone until they land. -->
@@ -65,57 +67,59 @@ it:
 > your own only when the preset is `Measure my plug`.
 
 Most plugs are not the same size at both ends, so the width and the
-thickness are each measured **twice**: once **near the wall** (just
-behind the prong face) and once **near the cord** (at the far end of
-the molded body, skipping any soft rubber cord boot). The two stations
+thickness are each measured **twice**: once at the **prong end** (just
+behind the prongs) and once at the **cord end** (where the cord leaves
+the plug body, skipping any soft rubber strain relief). The two ends
 tell the tool which end of your plug is fatter, and it shapes the
-pocket — or the clamshell's gripping arms — to follow that taper in
-the right direction.
+pocket — or the two-sided puller's gripping arms — to follow that
+taper in the right direction.
 
 ### 1. Plug length
 
 **With the plug in the outlet: ruler from the wall plate face to the
 plug's back face** — how far the whole plug sticks out of the wall.
-The tool's pocket (or the clamshell's arms) runs this full length.
+On a laptop or charger plug, measure from the device's edge. The
+one-sided puller's pocket (or the two-sided puller's arms) runs this
+full length.
 
 - Typical range: 20–50 mm
 - Example: ≈ 38 mm
 
-### 2. Plug width near the wall
+### 2. Plug width at the prong end
 
-**Caliper straight across the plastic body just behind the prong
-face, parallel to the wall.** Measure the body, not the metal prongs.
+**Caliper straight across the plastic body just behind the prongs,
+the wide way, parallel to the wall.** Measure the body, not the metal
+prongs.
 If the head flares (many plugs have a wider face plate), measure the
 widest part of that first stretch.
 
 - Typical range: 20–40 mm
 - Example: a chunky vacuum plug ≈ 34 mm
 
-### 3. Plug width near the cord
+### 3. Plug width at the cord end
 
-**Same direction, but at the far end of the molded body, just before
-the cord.** Skip any soft rubber strain-relief boot — measure the last
-part of the hard plug body you'd actually grip.
+**Same wide direction, but where the cord leaves the plug body.** Skip
+any soft rubber strain relief — measure the last part of the hard plug
+body you'd actually grip.
 
 - Typical range: 10–35 mm (most plugs narrow toward the cord)
 - Example: ≈ 13 mm on a typical lamp plug
 
-### 4. Plug thickness near the wall
+### 4. Plug thickness at the prong end
 
 **Caliper across the plug body's THIN direction** — usually
-top-to-bottom on a flat plug — **just behind the prong face**. The
-clamshell grips across this direction, and the bigger of the two
-thicknesses decides which tool `Auto from plug` builds, so measure
-carefully.
+top-to-bottom on a flat plug — **just behind the prongs**. The thicker
+end sets how deep the pocket is, and a plug 24 mm thick or more gets a
+red tag that sends you to the two-sided puller, so measure carefully.
 
 - Typical range: 12–30 mm
 - Example: a flat two-prong plug ≈ 16 mm
 
-### 5. Plug thickness near the cord
+### 5. Plug thickness at the cord end
 
-**Same thin direction, at the cord end of the molded body** (again,
-skip a soft boot). On round extension-cord plugs this can be as fat as
-the wall end — that is exactly what these two numbers capture.
+**Same thin direction, where the cord leaves the plug body** (again,
+skip the soft strain relief). On round extension-cord plugs this can be as fat as
+the prong end — that is exactly what these two numbers capture.
 
 - Typical range: 8–30 mm
 - Example: ≈ 9 mm on a lamp plug, 27 mm on a heavy-duty round plug
@@ -146,13 +150,43 @@ Look at the outlet cover plate and pick the closest match:
 | **No plate / flush** | No cover plate, or the outlet sits **flush** with the wall surface |
 
 This sets how deep the tool's end notch is, so the tool can straddle
-the plate and sit flat against the wall.
+the plate and sit flat against the wall. (The two-sided puller has no
+end notch and does not ask for it.)
 
 > **Where did the side-taper angle go?** Earlier versions asked for a
 > `measure_plug_side_angle` in degrees. That angle is now **computed
 > for you** from the two width measurements and the plug length — no
 > protractor required, and the tool automatically knows whether your
 > plug gets wider or narrower toward the cord.
+
+### The two-sided puller's numbers
+
+The two-sided puller (`src/Plug_Puller_Two_Sided.scad`) takes fewer
+numbers. Its Step 1 asks for:
+
+- **1. Plug length** — as above.
+- **Plug width at the prong end** — the size the two plates will close
+  across, measured across the plug body just behind the prongs (on a
+  USB-C or charger tip, just behind the metal tip). On a round plug it
+  is simply the diameter.
+- **Plug width at the cord end** — the same direction, measured where
+  the cord leaves the plug body. Skip the soft rubber strain relief.
+- **6. Cord thickness** — as above.
+- **Plug sides** — look at the plug body where the plates will grip it:
+  - `Rounded sides` — a round cord plug, a USB-C or charger tip. The
+    plates get a sloped cradle that centers the plug and forgives a
+    small measuring error.
+  - `Flat sides` — a boxy plug. The plates stay straight so the teeth
+    bite along the whole side.
+
+In Step 2 it uses only **8. Finger knuckle width** (with
+`Measure my hand`). The thickness pair (4–5), the wall plate style (7)
+and the hand width (9) belong to the one-sided puller only.
+
+Example: the USB-C laptop plug saved in
+[`presets/Plug_Puller_Two_Sided.json`](../../presets/Plug_Puller_Two_Sided.json)
+is 23 mm long and 13 mm wide at both ends, with a 7 mm cord and
+`Rounded sides`.
 
 ---
 
@@ -167,7 +201,9 @@ The **Size** dropdown covers most hands with built-in values:
 | Large | 23 mm | 96 mm | larger hands, gloved use (≈ 95th %ile male) |
 
 (The Small / Large values come from ANSUR II 2012 hand-breadth
-anthropometry, so the built-in sizes span most adult hands.)
+anthropometry, so the built-in sizes span most adult hands. The
+two-sided puller uses the finger width only: its finger holes are the
+finger width plus 1 mm.)
 
 Pick **Measure my hand** instead if you want the grip built from your
 own two numbers:
@@ -210,41 +246,44 @@ across the knuckles at the widest point.
 
 ## Step 3 — pick an attachment (no measuring needed)
 
-How the tool attaches to the plug so it stays put between uses. This
-step shapes **both tools** — each choice does something on whichever
-tool Step 0 resolves to:
+How the tool attaches to the plug so it stays put between uses. Each
+file has its own choices:
 
-| Pick this | Flat tool gets | Clamshell gets |
-| --------- | -------------- | -------------- |
+| Pick this | One-sided puller gets | Two-sided puller gets |
+| --------- | --------------------- | --------------------- |
 | **Zip ties** | The four small holes — thread two zip ties around the plug body | 3 zip-tie stations per arm — the ties cinch the two plates together |
-| **Velcro strap** | Angled wing slots for a hook-and-loop strap | A strap slot through each arm |
-| **Zip ties + Velcro** (default) | Both sets of openings (the v6 device is hybrid) | Both zip stations and arm slots |
-| **None** | A clean body (hold the tool on the plug by hand) | Solid arms — **not recommended**: zip ties are what hold the two clamshell plates together, so the model warns you |
+| **Velcro strap** | Angled wing slots for a hook-and-loop strap | *not offered: the plates need zip ties* |
+| **Zip ties + Velcro** (one-sided) / **Zip ties + Velcro strap** (two-sided) — the default in both | Both sets of openings (the v6 device is hybrid) | The zip stations and a strap slot through each arm (left out on a plug too short for one) |
+| **None** | A clean body (hold the tool on the plug by hand) | *not offered: the plates need zip ties* |
 
 Two extra choices sit under Step 3:
 
-- **`velcro_style`** — flat tool only: `Wing` (default: the v6 curved
-  openings, bigger slot, less plastic) or `Classic slot` (the older
-  rectangular slot). The clamshell's strap slot is always a plain
-  rounded slot.
+- **`velcro_style`** — one-sided puller only: `Wing` (default: the v6
+  curved openings, bigger slot, less plastic) or `Classic slot` (the
+  older rectangular slot). The two-sided puller's strap slot is always
+  a plain rounded slot.
 - **`strap_width`** — the width of the hook-and-loop strap you'll thread
-  through (10–25 mm; ONE-WRAP comes in 10/13/16/20/25). Sizes the flat
-  tool's wing opening AND the length of the clamshell's arm slot.
+  through (10–25 mm; ONE-WRAP comes in 10/13/16/20/25). Sizes the
+  one-sided puller's wing opening and the length of the two-sided
+  puller's arm slot.
 
-## Step 4 — cord hook (flat tool only)
+## Step 4 — cord hook (one-sided puller)
 
 | Setting | What it does |
 | ------- | ------------ |
-| `hook_hand` = **Right / Left** | Which way the flat tool's J-hook cord catch faces (Right = the reference). The clamshell has no cord hook, so it ignores this step |
+| `hook_hand` = **Right / Left** | Which way the one-sided puller's J-hook cord catch faces (Right = the reference) |
+
+The two-sided puller's Step 4 is **Print Layout**: keep `Both plates`,
+and one file prints the whole tool.
 
 > **Round / smooth plugs:** smooth-sided round cord ends (thick
 > extension-cord plugs) can slip in the pocket. Thread a zip tie down
 > one of the tool's zip-tie holes, around the plug barrel, and back up
 > the opposite hole, then cinch it — the 2×2 hole grid doubles as a
-> clamp anchor. (For the clamshell, the zip ties go plate-to-plate the
-> same way:)
+> clamp anchor. (On the two-sided puller, the zip ties go plate to
+> plate the same way:)
 >
-> ![Zip ties threaded through both clamshell plates around the plug barrel](../images/clamshell-assembly-zip-ties.jpg)
+> ![Zip ties threaded through both plates of the two-sided puller around the plug barrel](../images/clamshell-assembly-zip-ties.jpg)
 
 > **Safety:** the tool touches only the plug's **sides and back** —
 > never between the plug face and the wall. For extra grip on a slick
@@ -262,10 +301,10 @@ exact names you will see in the form, in the same order.
 | - | ---------- | -------------------- |
 | — | Plug preset | Measure my plug / Flat 2-prong / Standard 3-prong / Heavy-duty |
 | 1 | Plug length (mm) | ________ |
-| 2 | Plug width near the wall (mm) | ________ |
-| 3 | Plug width near the cord (mm) | ________ |
-| 4 | Plug thickness near the wall (mm) | ________ |
-| 5 | Plug thickness near the cord (mm) | ________ |
+| 2 | Plug width at the prong end (mm) | ________ |
+| 3 | Plug width at the cord end (mm) | ________ |
+| 4 | Plug thickness at the prong end (mm) | ________ |
+| 5 | Plug thickness at the cord end (mm) | ________ |
 | 6 | Cord thickness (mm) | ________ |
 | 7 | Wall plate style | ________ |
 | — | Size | Small / Medium / Large / Measure my hand |
@@ -275,9 +314,24 @@ exact names you will see in the form, in the same order.
 | — | Velcro style / strap width | Wing / Classic slot · ____ mm |
 | — | Cord hook hand | Right / Left |
 
+Using the two-sided puller? Its form asks for:
+
+| # | Form field | Your number / choice |
+| - | ---------- | -------------------- |
+| — | Plug preset | Measure my plug / Heavy-duty extension cord |
+| 1 | Plug length (mm) | ________ |
+| — | Plug width at the prong end (mm), across the plates | ________ |
+| — | Plug width at the cord end (mm), across the plates | ________ |
+| 6 | Cord thickness (mm) | ________ |
+| — | Plug sides | Rounded sides / Flat sides |
+| — | Size | Small / Medium / Large / Measure my hand |
+| 8 | Finger knuckle width (mm, only for Measure my hand) | ________ |
+| — | Attachment | Zip ties + Velcro strap / Zip ties |
+| — | Print layout | Both plates / One plate |
+
 **Sanity check before you continue:** each plug width should be a
-two-digit number (roughly 12–45), and the wall-end width is usually the
-bigger one. Finger width should be roughly 14–32. If a number looks
+two-digit number (roughly 12–45), and the prong-end width is usually
+the bigger one. Finger width should be roughly 14–32. If a number looks
 like `1.3`, it's probably inches — re-measure with the mm side.
 
 Next step: the **[Quick Start](quick-start-beginner.md)**, Step B.
@@ -286,17 +340,20 @@ Next step: the **[Quick Start](quick-start-beginner.md)**, Step B.
 
 Example measured devices ship as saved Customizer parameter sets in
 [`presets/Plug_Puller_Parametric.json`](../../presets/Plug_Puller_Parametric.json)
-(in OpenSCAD: Customizer panel → the preset-set dropdown above the
-sections → pick a set):
+for the one-sided puller and
+[`presets/Plug_Puller_Two_Sided.json`](../../presets/Plug_Puller_Two_Sided.json)
+for the two-sided puller (in OpenSCAD: Customizer panel → the
+preset-set dropdown above the sections → pick a set):
 
 | Set name | The values |
 | -------- | ---------- |
 | `Medium (v6 reference)` | all defaults — the v6 device, zip ties + wing velcro |
 | `Flat 2-prong lamp plug (NEMA 1-15)` | the lamp preset (37 mm long, widths 25 → 11.2, thickness 18.6 → 8.6, cord 3.6) |
 | `Standard 3-prong plug (NEMA 5-15)` | the standard preset (46.2 mm long, widths 26.6 → 13.4, thickness 18.9 → 15, cord 7) |
-| `Heavy-duty round cord (NEMA 5-15)` | the heavy-duty preset (43.8 mm long, 27 mm thick at both ends → clamshell, cord 8.2) |
-| `Measure my plug + hand (US vacuum plug)` | straight-sided plug 34 wide / 16 thick at both stations, 38 mm long, cord 5 mm, Rocker / Decora, finger 22 mm, hand 88 mm |
+| `Measure my plug + hand (US vacuum plug)` | straight-sided plug 34 wide / 16 thick at both ends, 38 mm long, cord 5 mm, Rocker / Decora, finger 22 mm, hand 88 mm |
 | `Left-handed + classic velcro slots` | `hook_hand = Left`, `velcro_style = Classic slot` |
+| `Round extension cord - NEMA 5-15` (two-sided) | the heavy-duty extension-cord preset, Medium, zip ties + velcro strap |
+| `USB-C laptop plug - measured` (two-sided) | 23 mm long, 13 mm wide at both ends, cord 7 mm, `Rounded sides`, zip ties only |
 
 Load one to see what a completed form looks like, then overwrite the
 values with your own numbers.

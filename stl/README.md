@@ -24,12 +24,12 @@ female hand, Large ≈ 95th-percentile male hand.
 
 | Plug family | File pattern | Tool type |
 | ----------- | ------------ | --------- |
-| Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | flat tool (one part) |
-| Standard 3-prong — NEMA 5-15 | `Plug-Puller_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | flat tool (one part) |
-| Heavy-duty round cord — NEMA 5-15 | `Plug-Puller_Heavy-Duty-Cord-NEMA-5-15_Clamshell-Plate_{Small,Medium,Large}.stl` | clamshell **plate** |
+| Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
+| Standard 3-prong — NEMA 5-15 | `Plug-Puller_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
+| Heavy-duty extension cord — NEMA 5-15 | `Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
 
-> **Clamshell tools take two plates.** Each heavy-duty file is a single plate.
-> Print it **twice**, flip one over, and zip-tie the two together around the plug.
+> **Each two-sided file holds both plates; flip one after printing.** Then
+> zip-tie the pair face to face around the plug.
 
 Not sure which plug you have, or which size fits? Print a
 [1:1 paper outline sheet](../docs/guides/print-preview-outlines.md) or the

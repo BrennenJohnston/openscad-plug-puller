@@ -80,7 +80,8 @@ in the console and placed alone on its own sheet.
    that preset is your plug:
    - P1 → Step 1 `plug_preset` = `Flat 2-prong lamp plug - NEMA 1-15`
    - P2 → Step 1 `plug_preset` = `Standard 3-prong plug - NEMA 5-15`
-   - P3 → Step 1 `plug_preset` = `Heavy-duty extension cord - NEMA 5-15`
+   - P3 → the two-sided puller's Step 1 `plug_preset` =
+     `Heavy-duty extension cord - NEMA 5-15`
 4. Skip to [Fill in the steps](#fill-in-the-customizer-steps) below.
 
 No card fits? Your plug is between presets — take Path B; the measured
@@ -95,8 +96,8 @@ worksheet's own numbering. Which card answers which number:
 | Worksheet # | What | Stencil card |
 | ----------- | ---- | ------------ |
 | 1 | Plug length | **R1** — wall plate to the plug's back face |
-| 2–3 | Plug width near the wall / near the cord | **R1** — hold the notched edge against the plug body |
-| 4–5 | Plug thickness near the wall / near the cord | **R1** — same, across the thin direction |
+| 2–3 | Plug width at the prong end / at the cord end | **R1** — hold the notched edge against the plug body |
+| 4–5 | Plug thickness at the prong end / at the cord end | **R1** — same, across the thin direction |
 | 6 | Cord thickness | **C1** — slide it onto the cord from the side; smallest slot that slips over |
 | 7 | Wall plate style | your eyes — it's a picture quiz, see the [Measuring Guide](measuring-guide.md#7-wall-plate-style-a-picture-quiz-not-a-measurement) |
 | 8 | Finger knuckle width | **F1 / F2** — smallest comfortable hole, **minus 5** |
@@ -109,42 +110,69 @@ the built-in Small / Medium / Large cover most hands.)
 
 ## Fill in the Customizer steps
 
-Open [`src/Plug_Puller_Parametric.scad`](../../src/Plug_Puller_Parametric.scad)
-in OpenSCAD and show the Customizer panel (`View ▸ Hide Customizer`
-unchecked). Every click is spelled out in the
+The Plug Puller comes as two tools, each in its own file:
+
+- the **one-sided puller**,
+  [`src/Plug_Puller_Parametric.scad`](../../src/Plug_Puller_Parametric.scad):
+  lamp plugs (P1), standard 3-prong plugs (P2), and other plugs
+  thinner than 24 mm;
+- the **two-sided puller**,
+  [`src/Plug_Puller_Two_Sided.scad`](../../src/Plug_Puller_Two_Sided.scad):
+  two plates that close on the plug from both sides, for thick round
+  plugs like P3, USB-C tips and charger plugs.
+
+A plug 24 mm thick or more gets a red tag in the one-sided file that
+sends you to the two-sided file.
+
+Open your tool's file in OpenSCAD and show the Customizer panel
+(`View ▸ Hide Customizer` unchecked). Every click is spelled out in the
 [Quick Start](quick-start-beginner.md); the short version:
 
-- **Step 0 — Tool Style:** leave on `Auto from plug`. Thick round
-  plugs (like P3) get the **heavy-duty clamshell**, everything else
-  the **flat tool**.
+### One-sided puller
+
 - **Step 1 — Your Plug:** the preset from Path A, or your Path B
   numbers with `plug_preset` = `Measure my plug`.
 - **Step 2 — Size:** `Medium` fits most adults; or `Measure my hand`
   with worksheet numbers 8–9.
 - **Step 3 — Attachment:** how the tool attaches to the plug. Keep the
   default `Zip ties + Velcro` unless you know you want less.
-- **Step 4 — Cord Hook:** `Right` or `Left` (flat tool only).
+- **Step 4 — Cord Hook:** `Right` or `Left`.
 
-Press **F6** to render and `File ▸ Export ▸ STL` to save. The
-clamshell is one plate — print it **twice**, flip one copy, zip-tie
-the pair face to face around the plug.
+### Two-sided puller
+
+- **Step 1 — Your Plug:** `Heavy-duty extension cord - NEMA 5-15` for
+  a P3 plug, or `Measure my plug` and four numbers: the plug length
+  (worksheet number 1), its width at the prong end and at the cord
+  end — the size the two plates close across — and the cord
+  (worksheet number 6). Then pick the plug's sides:
+  - `Rounded sides` — a round cord plug, a USB-C or charger tip. The
+    plates get a sloped cradle that centers the plug and forgives a
+    small measuring error. Example: a USB-C laptop plug 23 mm long and
+    13 mm wide, with a 7 mm cord.
+  - `Flat sides` — a boxy plug. The plates stay straight so the teeth
+    bite along the whole side.
+- **Step 2 — Size:** `Medium` fits most adults; or `Measure my hand`
+  with worksheet number 8.
+- **Step 3 — Attachment:** `Zip ties + Velcro strap` (default) or
+  `Zip ties`. The **zip ties are what hold the two plates together**,
+  so both choices keep them.
+- **Step 4 — Print Layout:** keep `Both plates`: one file prints the
+  whole tool.
+
+Press **F6** to render and `File ▸ Export ▸ STL` to save. For the
+two-sided puller: print both plates, flip one over, zip-tie the pair
+face to face around the plug.
 
 ### Which steps shape which tool
 
-Each Customizer step says which tool it shapes; settings for the other
-tool are simply ignored (the console tells you which ones). The map:
+Both files follow the same four steps. What each step shapes:
 
-| Step | Flat tool | Heavy-duty clamshell |
-| ---- | --------- | -------------------- |
-| 0 — Tool style | picks it | picks it |
-| 1 — Your plug | pocket, notch, hook slot | arm gap, arm length, cord channel |
-| 2 — Size | finger holes, body size | finger bores |
+| Step | One-sided puller | Two-sided puller |
+| ---- | ---------------- | ---------------- |
+| 1 — Your plug | pocket, notch, hook slot | arm gap, arm length, cord channel, cradle |
+| 2 — Size | finger holes, body size | finger holes |
 | 3 — Attachment | zip-hole grid, velcro wings | zip stations, arm strap slots |
-| 4 — Cord hook | J-hook direction | *ignored — no cord hook* |
-
-On the clamshell, the Step 3 **zip ties are what hold the two plates
-together** — leave them on unless you have another plan (the model
-warns you if you turn them off).
+| 4 | Cord hook: J-hook direction | Print layout: both plates or one |
 
 ---
 

@@ -20,9 +20,19 @@ type numbers, export** — so keep the
 
 ## Step 1 — Open the model in the Playground
 
-**Click this link** (it loads the whole model in one go):
+The Plug Puller is two tools in two files. **Click the link for your
+tool** (each loads the whole model in one go):
 
-> **[Open the Plug Puller in the OpenSCAD Playground](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_SingleFile.scad)**
+> **[Open the one-sided puller in the OpenSCAD Playground](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_SingleFile.scad)**
+> — lamp plugs, standard 3-prong plugs and other plugs thinner than
+> 24 mm.
+>
+> **[Open the two-sided puller in the OpenSCAD Playground](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_Two_Sided_SingleFile.scad)**
+> — thick round plugs, USB-C tips and charger plugs: two plates that
+> zip-tie around the plug.
+
+Not sure? Start with the one-sided puller: if your plug is 24 mm thick
+or more, it shows a red tag that sends you to the two-sided puller.
 
 Give it a moment — the first visit downloads the OpenSCAD engine
 (~10–20 MB) and then fetches the model. When it finishes you'll see
@@ -31,10 +41,12 @@ code on the left (ignore it) and a 3D preview on the right.
 **If the link doesn't load the model** (some browsers or an outage can
 interfere), load it manually — it's two steps:
 
-1. Download the single-file model:
+1. Download the single-file model of your tool:
    [`dist/Plug_Puller_SingleFile.scad`](../../dist/Plug_Puller_SingleFile.scad)
-   (on the GitHub page press the download button, or right-click **Raw**
-   → *Save link as…*).
+   (one-sided) or
+   [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](../../dist/Plug_Puller_Two_Sided_SingleFile.scad)
+   (two-sided) — on the GitHub page press the download button, or
+   right-click **Raw** → *Save link as…*.
 2. Open <https://ochafik.com/openscad2/> and **drag the downloaded file
    into the page** (or use the file menu in the top bar to open it).
 
@@ -45,30 +57,47 @@ OpenSCAD does:
 
 - Look for the **Customize** panel (on a wide screen it's a panel or
   tab beside the editor; on a phone it's a tab at the bottom).
-- You'll see the same numbered sections as the desktop Customizer:
-  **Step 0 - Tool Style**, **Step 1 - Your Plug**, **Step 2 - Size**,
+- You'll see the same numbered sections as the desktop Customizer.
+  One-sided puller: **Step 1 - Your Plug**, **Step 2 - Size**,
   **Step 3 - Attachment**, **Step 4 - Cord Hook** — then the optional
   `Advanced -` and `(Custom size only)` sections you can ignore.
+  Two-sided puller: **Step 1 - Your Plug**, **Step 2 - Size**,
+  **Step 3 - Attachment**, **Step 4 - Print Layout** — then the
+  optional `Advanced -` sections.
 
 ## Step 3 — Type your numbers
 
 Work top to bottom, exactly as in the
 [Measuring Guide](measuring-guide.md) worksheet:
 
-1. **Step 0** — leave `tool_style` on **Auto from plug**.
-2. **Step 1** — pick a `plug_preset` (the three most common US plugs
-   are built in) or leave it on **Measure my plug** and type your six
-   plug numbers.
-3. **Step 2** — pick **Small / Medium / Large**, or **Measure my hand**
-   and type your two hand numbers.
-4. **Step 3** — pick the attachment (**Zip ties + Velcro** is the
-   default).
-5. **Step 4** — `hook_hand` = **Right** or **Left**.
+In the one-sided puller:
 
-The preview re-renders as you change values. A green tag next to the
-model means your numbers were applied; **red text** names a measurement
-that looks wrong (usually inches instead of millimetres) — fix it
-before printing. The
+1. **Step 1** — pick a `plug_preset` (common US plugs are built in) or
+   leave it on **Measure my plug** and type your six plug numbers.
+2. **Step 2** — pick **Small / Medium / Large**, or **Measure my hand**
+   and type your two hand numbers.
+3. **Step 3** — pick the attachment (**Zip ties + Velcro** is the
+   default).
+4. **Step 4** — `hook_hand` = **Right** or **Left**.
+
+In the two-sided puller:
+
+1. **Step 1** — pick the `plug_preset` or leave it on
+   **Measure my plug** and type four numbers (the plug length, its
+   width at the prong end and at the cord end, the cord), then pick
+   **Rounded sides** or **Flat sides**.
+2. **Step 2** — pick **Small / Medium / Large**, or **Measure my hand**
+   and type your finger width.
+3. **Step 3** — **Zip ties + Velcro strap** (default) or **Zip ties**.
+4. **Step 4** — keep **Both plates**: the download holds both plates.
+
+The preview re-renders as you change values. Unlike desktop OpenSCAD,
+the Playground's preview does not show the see-through plug, so check
+the fit on paper (an [outline sheet](print-preview-outlines.md)) or in
+the desktop app if you want to see it. In the one-sided puller a green
+tag next to the model means your numbers were applied; in either file **red text**
+names a measurement that looks wrong (usually inches instead of
+millimetres) — fix it before printing. The
 **[Fit Troubleshooting Guide](fit-troubleshooting.md)** decodes every
 message.
 
@@ -81,7 +110,9 @@ message.
    save the file.
 3. Print it with the settings in the
    [README's 3D printing tips](../../README.md#3d-printing-tips)
-   (flat face down, no supports, PETG recommended).
+   (flat face down, no supports, PETG recommended). A two-sided puller
+   download holds both plates: print both, flip one over, zip-tie the
+   pair face to face around the plug.
 
 ## Using a phone or tablet
 

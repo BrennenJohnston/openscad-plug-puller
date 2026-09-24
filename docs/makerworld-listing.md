@@ -3,7 +3,10 @@
 Status: **draft — do not upload.** The licensing decision gate below is
 unresolved. Everything else in this document is finished and ready to paste.
 
-Upload file: [`dist/Plug_Puller_SingleFile.scad`](../dist/Plug_Puller_SingleFile.scad).
+Upload files: [`dist/Plug_Puller_SingleFile.scad`](../dist/Plug_Puller_SingleFile.scad)
+(the one-sided puller) and
+[`dist/Plug_Puller_Two_Sided_SingleFile.scad`](../dist/Plug_Puller_Two_Sided_SingleFile.scad)
+(the two-sided puller).
 
 Written to the shared
 [Accessible MakerWorld Documentation Standard](https://github.com/BrennenJohnston/accessible-makerworld-doc-standard/blob/main/ACCESSIBLE_MAKERWORLD_DOC_STANDARD.md).
@@ -42,7 +45,7 @@ Until Option A is explicitly chosen, **do not upload**.
 | Designer | Brennen Johnston |
 | Category | Health & Personal Care → Assistive Devices (or Tools → Hand Tools if unavailable) |
 | License | Blocked on the gate above. Recommended pick if Option A: **CC BY-NC-SA 4.0**. |
-| Upload file | `dist/Plug_Puller_SingleFile.scad` — this one file only. It is generated; see the pre-publish checklist. |
+| Upload files | `dist/Plug_Puller_SingleFile.scad` (the one-sided puller) and `dist/Plug_Puller_Two_Sided_SingleFile.scad` (the two-sided puller), each as its own customizable file. Both are generated; see the pre-publish checklist. |
 | Tags | `assistive technology`, `accessibility`, `arthritis`, `grip aid`, `plug puller`, `outlet`, `parametric`, `openscad`, `customizer`, `adaptive equipment`, `occupational therapy` |
 | External link | <https://github.com/BrennenJohnston/openscad-plug-puller> (source repository) |
 
@@ -52,8 +55,9 @@ A handheld assistive tool that helps people with limited grip strength,
 arthritis, or small hands remove electrical plugs from wall outlets safely — by
 pulling the plug, never the cord. Fully parametric: type a few ruler measurements
 into the customizer and get a tool shaped to your exact plug, outlet plate, and
-hand. Two tools in one model: a flat puller for typical plugs and a heavy-duty
-clamshell for fat extension-cord plugs.
+hand. Two tools, two customizable files: a one-sided puller for typical plugs and
+a two-sided puller — two plates that zip-tie around the plug — for fat
+extension-cord plugs, USB-C tips, and charger plugs.
 
 ## Description
 
@@ -61,39 +65,36 @@ clamshell for fat extension-cord plugs.
 
 **What it is**
 
-The Plug Puller wraps around a plugged-in plug and gives you two large finger
-holes and a cord hook, so removing the plug uses your whole hand instead of a
-fingertip pinch. It touches only the plug's sides and back — never between the
-plug face and the wall.
+The Plug Puller grips a plugged-in plug and gives you two large finger holes, so
+removing the plug uses your whole hand instead of a fingertip pinch. It touches
+only the plug's sides and back — never between the plug face and the wall.
 
-Two tool shapes come out of the same model, and Step 0 chooses between them for
-you:
+Two tools, each in its own customizable file:
 
-The **flat tool** is a single slab with a pocket shaped to your plug, two finger
-holes, a J-hook for the cord, and slots for zip ties or a velcro strap. Slide it
-over the plug and pull with your whole hand. Print one.
+The **one-sided puller** is a single slab with a pocket shaped to your plug, two
+finger holes, a J-hook for the cord, and slots for zip ties or a velcro strap.
+Slide it over the plug and pull with your whole hand. Print one.
 
-The **heavy-duty clamshell** is for fat round extension-cord plugs — anything 24
-millimetres or more thick, which Step 0 detects automatically. Two serrated
-plates grip the plug's sides and zip ties cinch them together. Print the same
-plate **twice**, flip one, and zip-tie the pair face to face.
+The **two-sided puller** is for fat round extension-cord plugs, USB-C tips, and
+charger plugs. Two identical serrated plates grip the plug's sides and zip ties
+cinch them together. The download holds **both plates**: print it, flip one
+plate over, and zip-tie the pair face to face. If your plug is 24 millimetres or
+more thick, the one-sided file shows a red tag sending you here.
 
 **Customize it to your plug and hand — this is the whole point**
 
-Open the **Customize** panel and work top to bottom. The sections are numbered
-and every measurement is in millimetres.
+Open the **Customize** panel on the file for your tool and work top to bottom.
+The sections are numbered and every measurement is in millimetres.
 
-*Step 0 — Tool style.* Leave `tool_style` on `Auto from plug`. Slim plugs get the
-flat tool; plugs 24 millimetres or thicker get the clamshell. Override it only if
-you want to force a style.
+In the one-sided puller:
 
 *Step 1 — Your plug.* Either pick a preset in `plug_preset` — flat 2-prong lamp
-plug (NEMA 1-15), standard 3-prong (NEMA 5-15), or heavy-duty round extension cord
-— or set it to `Measure my plug` and type six numbers: plug length, width near the
-wall, width near the cord, thickness near the wall, thickness near the cord, and
-cord thickness. Then choose your wall-plate style in `measure_wall_plate_style`
-(standard flat plate, Decora rocker, oversized jumbo, or no plate) so the tool
-straddles the plate and sits flat against the wall.
+plug (NEMA 1-15) or standard 3-prong (NEMA 5-15) — or set it to
+`Measure my plug` and type six numbers: plug length, width at the prong end,
+width at the cord end, thickness at the prong end, thickness at the cord end,
+and cord thickness. Then choose your wall-plate style in
+`measure_wall_plate_style` (standard flat plate, Decora rocker, oversized jumbo,
+or no plate) so the tool straddles the plate and sits flat against the wall.
 
 *Step 2 — Size.* `size` offers Small, Medium (default), and Large grips, built
 from ANSUR II 2012 hand anthropometry spanning roughly the 5th percentile female
@@ -105,25 +106,44 @@ both (the default), or none.
 
 *Step 4 — Cord hook.* `hook_hand` is `Right` or `Left`.
 
+In the two-sided puller:
+
+*Step 1 — Your plug.* Pick the heavy-duty extension cord preset, or set
+`plug_preset` to `Measure my plug` and type four numbers: plug length, the
+plug's width at the prong end and at the cord end (the size the two plates close
+across), and cord thickness. Then pick `plug_sides`: `Rounded sides` for a round
+plug, a USB-C or charger tip (the plates get a sloped cradle that centers it), or
+`Flat sides` for a boxy plug.
+
+*Step 2 — Size.* Small, Medium (default), Large, or `Measure my hand` with your
+finger knuckle width.
+
+*Step 3 — Attachment.* Zip ties plus a velcro strap slot in each arm (the
+default), or zip ties only. The zip ties hold the two plates together.
+
+*Step 4 — Print layout.* Keep `Both plates`: one download prints the whole tool.
+
 Everything below Step 4 is optional power-user tuning.
 
 **Bad numbers cannot fail silently.** If a measurement is out of range or the
 geometry cannot work, the model renders a **red warning tag** naming the
-measurement to fix — as actual 3D text you can see in the preview, not a console
-message. A green tag confirms which numbers were applied. Fix the warning before
-you export: the red tag is part of the exported model and would otherwise print
-as an extra object on your bed.
+measurement to fix — as actual 3D text in the rendered model, not a console
+message. Fix the warning before you export: the red tag is part of the exported
+model and would otherwise print as an extra object on your bed. (In the desktop
+app's preview, a green tag also confirms which numbers were applied; MakerWorld
+renders the finished model only, so it does not show there.)
 
 **Print settings**
 
-- Orientation: flat face down, pocket up. No supports.
+- Orientation: flat face down, pocket up; the two-sided puller's plates flat, as
+  they lie in the file. No supports.
 - Layer height: 0.2 millimetres, or 0.16 for crisper rim fillets.
 - Walls: 3 to 4. Infill: 25 to 35 percent, cubic or gyroid.
 - Material: **PETG recommended** — it handles repeated flexing and the warmth near
   an outlet better than PLA. PLA, ABS, and ASA all work. **Do not use flexible
   filament**; the tool has to stay rigid to transmit force to the plug.
-- Clamshell: print the plate **twice**, flip one copy, and zip-tie the pair face
-  to face around the plug.
+- Two-sided puller: the file holds **both plates**; flip one after printing and
+  zip-tie the pair face to face around the plug.
 - The `quality` slider defaults to 64 circle segments, which is print-ready. Drop
   it to 32 for fast test renders and put it back before you export.
 
@@ -184,8 +204,8 @@ depend on.
 | `quality` | 64 for export, 32 for test renders |
 
 If a print profile is added later, the sensible candidate is the default Medium
-flat tool with the standard 3-prong preset, and it needs its own photograph of the
-actual printed result.
+one-sided puller with the standard 3-prong preset, and it needs its own photograph
+of the actual printed result.
 
 ## Gallery plan
 
@@ -194,7 +214,7 @@ actual printed result.
    **Alt text:** A printed plug puller seated over a plug in a wall outlet, with a
    hand's fingers through its two large finger holes, ready to pull.
 
-2. **The flat tool alone, pocket up.** Three-quarter view showing the plug pocket,
+2. **The one-sided puller alone, pocket up.** Three-quarter view showing the plug pocket,
    finger holes, J-hook, and attachment slots.
    **Alt text:** A flat printed tool about 80 millimetres long with a shaped
    pocket at one end, two round finger holes, a J-shaped hook, and slots for zip
@@ -206,18 +226,19 @@ actual printed result.
    cover plate and gripping only the sides and back of the plug — nothing between
    the plug and the outlet.
 
-4. **Clamshell pair on an extension cord.** Two plates zip-tied face to face
-   around a fat round plug.
+4. **The two-sided puller on an extension cord.** Two plates zip-tied face to
+   face around a fat round plug.
    **Alt text:** Two printed plates zip-tied face to face around a thick round
    extension-cord plug, their serrated inner arms gripping the plug body.
 
-5. **Clamshell plates apart.** Both plates side by side, showing the serrated
-   grip zone and the zip-tie stations.
-   **Alt text:** Two identical printed plates side by side, each with a curved
-   serrated inner edge, a finger lobe, and three zip-tie slots.
+5. **The two plates apart.** Both plates side by side, as they come off the
+   printer, showing the serrated grip zone and the zip-tie stations.
+   **Alt text:** Two identical printed plates side by side, each with two large
+   finger holes, two arms with serrated inner edges, and small round zip-tie
+   holes.
 
-6. **The three hand sizes, printed.** Small, Medium, and Large flat tools together
-   with a ruler.
+6. **The three hand sizes, printed.** Small, Medium, and Large one-sided pullers
+   together with a ruler.
    **Alt text:** Three printed plug pullers in small, medium and large sizes beside
    a ruler, the largest about 78 millimetres wide across the finger holes.
 
@@ -242,10 +263,14 @@ profile.
 - [ ] **Maintainer has signed off on the licensing decision above.** This is the
       hard blocker; nothing else matters until it is resolved.
 - [ ] **Repo is public** — the listing links back to GitHub.
-- [ ] **`dist/Plug_Puller_SingleFile.scad` is fresh.** It is generated, not
-      hand-edited. Run `python scripts/build_flattened.py --check`; if it fails,
-      run `python scripts/build_flattened.py` and commit the result. Uploading a
-      stale flattened file ships different geometry than `src/`.
+- [ ] **Both single files are fresh** — `dist/Plug_Puller_SingleFile.scad` and
+      `dist/Plug_Puller_Two_Sided_SingleFile.scad`. They are generated, not
+      hand-edited. Run `python scripts/build_flattened.py --check` (it checks
+      both); if it fails, run `python scripts/build_flattened.py` and commit the
+      result. Uploading a stale flattened file ships different geometry than
+      `src/`.
+- [ ] **Both files uploaded,** each as its own customizable file on the one
+      design page.
 - [ ] **Single-file requirement verified.** The build script asserts the output
       contains no remaining `include`/`use` statements, and
       `tests/test_flattened_build.py` verifies render parity against the golden
@@ -257,14 +282,19 @@ profile.
       customizer silently revert the user's selection. The same module checks for
       `value:Label` syntax, defaults missing from their own option list, and that
       `render_mode` stays in the Hidden section.
-- [ ] **Creator Portal smoke test.** Upload via Creator Portal → Open SCAD File
-      and click through Steps 0–4 in MakerWorld's parameter form.
-- [ ] **Cloud render verified for both tool shapes.** Render the default Medium
-      flat tool, then switch `plug_preset` to the heavy-duty extension cord and
-      confirm the clamshell dispatch works in the hosted renderer and finishes
-      inside its timeout.
+- [ ] **Creator Portal smoke test.** Upload each file via Creator Portal → Open
+      SCAD File and click through Steps 1–4 in MakerWorld's parameter form.
+- [ ] **Cloud render verified for both tools.** Render the default Medium
+      one-sided puller, then the two-sided file at its defaults and with the
+      heavy-duty extension cord preset, and confirm each finishes inside the
+      hosted renderer's timeout.
+- [ ] **Pair download verified.** The two-sided file's download holds both
+      plates side by side (two separate parts in one STL).
+- [ ] **Plug preset label confirmed.** The maintainer has decided whether
+      `Heavy-duty extension cord - NEMA 5-15` keeps its name (it names the plug,
+      not the tool).
 - [ ] **Warning tags confirmed visible on MakerWorld.** Set
-      `measure_plug_width_wall` to an out-of-range value and confirm the red 3D
+      `measure_plug_width_prong_end` to an out-of-range value and confirm the red 3D
       warning text renders in the hosted preview. This model's warnings are real
       geometry rather than console output, which is exactly why it works on a
       platform with no console — verify it, because it is the model's main

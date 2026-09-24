@@ -3,12 +3,13 @@
 Every default preset the two models ship gets its own named STL so downloaders
 can print a standard configuration without opening OpenSCAD:
 
-* Plug Puller (``src/Plug_Puller_Parametric.scad``) — each of the 3 plug
-  presets x each of the 3 finger/hand sizes = 9 tools. Only ``plug_preset`` and
-  ``size`` vary; the attachment (zip ties + velcro) and every other dial stay at
-  their defaults. The heavy-duty round-cord preset renders one plate of the
-  two-sided puller from ``src/Plug_Puller_Two_Sided.scad`` (the tool is two of
-  these — print each file twice).
+* Plug Puller — each of the 3 plug presets x each of the 3 finger/hand sizes
+  = 9 plug tools: 6 one-sided + 3 two-sided pairs. Only ``plug_preset`` and
+  ``size`` vary; every other dial stays at its default. The lamp and standard
+  presets build the one-sided puller (``src/Plug_Puller_Parametric.scad``);
+  the round extension-cord preset builds the two-sided puller
+  (``src/Plug_Puller_Two_Sided.scad``) with both plates side by side in one
+  file (flip one after printing).
 
 * Measuring Stencil (``Measuring_Stencil.scad``) — every individual card
   (P1/P2/P3 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing) rendered
@@ -22,6 +23,7 @@ Files land under ``stl/`` in a folder tree that mirrors the upload layout
     stl/
       Plug-Puller/
         Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_Small.stl
+        Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_Small.stl
         ...
       Measuring-Stencil/
         Visual/   Measuring-Stencil_Visual_P1_Lamp-Plug-Gauge.stl  ...
@@ -61,22 +63,22 @@ SIZES = ["Small", "Medium", "Large"]
 
 # Plug presets exactly as they read in the Step 1 dropdown, paired with a
 # filesystem-safe descriptor and whether the two-sided puller file builds them
-# (a single plate — the finished tool is two of them).
+# (both plates in one file).
 PLUG_PRESETS = [
     {
         "customizer": "Flat 2-prong lamp plug - NEMA 1-15",
         "desc": "Flat-2-Prong-Lamp-NEMA-1-15",
-        "clamshell": False,
+        "two_sided": False,
     },
     {
         "customizer": "Standard 3-prong plug - NEMA 5-15",
         "desc": "Standard-3-Prong-NEMA-5-15",
-        "clamshell": False,
+        "two_sided": False,
     },
     {
         "customizer": "Heavy-duty extension cord - NEMA 5-15",
-        "desc": "Heavy-Duty-Cord-NEMA-5-15",
-        "clamshell": True,
+        "desc": "Round-Extension-Cord-NEMA-5-15",
+        "two_sided": True,
     },
 ]
 
@@ -106,22 +108,24 @@ def plug_jobs() -> List[Job]:
     jobs: List[Job] = []
     for preset in PLUG_PRESETS:
         for size in SIZES:
-            parts = ["Plug-Puller", preset["desc"]]
-            if preset["clamshell"]:
-                parts.append("Clamshell-Plate")
-            parts.append(size)
-            name = "_".join(parts) + ".stl"
-            scad, mode = (TWO_SIDED_SCAD, "One plate") if preset["clamshell"] else (PLUG_SCAD, "Full")
+            params = {
+                "render_mode": "Full",
+                "plug_preset": preset["customizer"],
+                "size": size,
+            }
+            if preset["two_sided"]:
+                name = f"Plug-Puller_Two-Sided_{preset['desc']}_{size}.stl"
+                scad = TWO_SIDED_SCAD
+                params["print_layout"] = "Both plates"
+            else:
+                name = f"Plug-Puller_{preset['desc']}_{size}.stl"
+                scad = PLUG_SCAD
             jobs.append(
                 Job(
                     group="plug-puller",
                     scad=scad,
                     out_rel=Path("Plug-Puller") / name,
-                    params={
-                        "render_mode": mode,
-                        "plug_preset": preset["customizer"],
-                        "size": size,
-                    },
+                    params=params,
                 )
             )
     return jobs

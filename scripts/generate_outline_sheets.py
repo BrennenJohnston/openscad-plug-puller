@@ -1,9 +1,9 @@
 """Generate the 1:1 dimensioned outline sheets for the public repo.
 
-For every quick-select combination (3 ``plug_preset`` families x 3 sizes for
-the flat tool, plus the heavy-duty clamshell plate at all 3 sizes — the plate
-geometry follows the Size selection, so it gets its own 3 sheets), this
-script:
+For every quick-select combination (the lamp and standard ``plug_preset``
+families x 3 sizes for the one-sided puller, plus one plate of the two-sided
+puller for the round extension cord at all 3 sizes — the plate geometry
+follows the Size selection, so it gets its own 3 sheets), this script:
 
 1. Renders the v7 SCAD via the OpenSCAD CLI (``render_mode="Body Only"`` /
    ``"One plate"`` from ``src/Plug_Puller_Two_Sided.scad`` for the plate
@@ -695,12 +695,11 @@ def build_flat_sheet(
         title=f"{plug['label']} · {size}",
         combo_lines=[
             f"{plug['short']}",
-            f"Flat tool · {size} hand size",
+            f"One-sided puller · {size} hand size",
             f"Printed footprint ≈ {fmt(W)} × {fmt(L)} mm",
         ],
         settings_lines=[
             "Customizer settings for this exact tool:",
-            "  tool_style = Flat tool",
             "  plug_preset =",
             f"      {plug['customizer']}",
             f"  size = {size}",
@@ -856,16 +855,15 @@ def build_clamshell_sheet(stl: Path, size: str, out: Path) -> List[Check]:
     sh = Sheet()
     info = SheetInfo(
         filename=out.name,
-        title=f"Heavy-duty clamshell plate · {size}",
+        title=f"Two-sided puller plate · {size}",
         combo_lines=[
-            "Heavy-duty clamshell plate",
+            "Two-sided puller plate",
             f"{plug['short']}",
             f"{size} hand size · the tool is TWO plates",
             f"Printed footprint ≈ {fmt(W)} × {fmt(L)} mm (one plate)",
         ],
         settings_lines=[
             "Customizer settings for this exact plate:",
-            "  tool_style = Heavy-duty clamshell",
             "  plug_preset =",
             f"      {plug['customizer']}",
             f"  size = {size}",
@@ -951,9 +949,16 @@ class Job:
         return f"outline_{self.slug}.svg"
 
 
+# The round extension cord is a two-sided puller plug (the one-sided file
+# sends it there with W-20), so its sheets are the plate sheets only.
+TWO_SIDED_PLUG_KEY = "heavy-duty-round"
+
+
 def all_jobs() -> List[Job]:
     jobs: List[Job] = []
     for key, plug in PLUG_PRESETS.items():
+        if key == TWO_SIDED_PLUG_KEY:
+            continue
         for size in SIZES:
             jobs.append(
                 Job(
@@ -971,7 +976,7 @@ def all_jobs() -> List[Job]:
     for size in SIZES:
         jobs.append(
             Job(
-                slug=f"heavy-duty-clamshell_{size.lower()}",
+                slug=f"two-sided-plate_{size.lower()}",
                 kind="clamshell",
                 preset_key="heavy-duty-round",
                 size=size,

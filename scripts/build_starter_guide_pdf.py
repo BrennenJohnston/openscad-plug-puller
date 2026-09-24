@@ -66,24 +66,24 @@ def page_one() -> str:
     <tr><th>P2</th><td>plug silhouette: <b>standard 3-prong plug</b> (NEMA 5-15)</td></tr>
     <tr><th>P3</th><td>plug silhouette: <b>heavy-duty extension cord</b> (NEMA 5-15)</td></tr>
     <tr><th>R1</th><td><b>ruler</b> — raised mm ticks, numerals every 10 mm, tactile edge notches</td></tr>
-    <tr><th>C1</th><td><b>cord gauge</b> — through-holes Ø 3–9 mm</td></tr>
+    <tr><th>C1</th><td><b>cord gauge</b> — open slots Ø 3–9 mm; slide it onto the cord from the side</td></tr>
     <tr><th>F1 / F2</th><td><b>finger sizing</b> — 18 labeled holes (Ø 15–25 on F1, Ø 26–32 on F2)</td></tr>
   </table>
   <p>Each P card has three openings: <b>W</b> (the plug's width outline),
-  <b>T</b> (its thickness outline), and a round cord hole. It is a “does my
+  <b>T</b> (its thickness outline), and an open cord slot. It is a “does my
   plug match this preset?” test — no numbers involved.</p>
 
   <h2>Path A — match a preset (fastest, no numbers)</h2>
   <ol>
     <li>Take the <b>P1</b>, <b>P2</b>, and <b>P3</b> cards to your plug.</li>
     <li>Hold each card's <b>W</b> cutout over the plug (wide side), then the
-        <b>T</b> cutout (thin side). Try the cord in the round hole.</li>
+        <b>T</b> cutout (thin side); slide the cord slot onto the cord.</li>
     <li>If the plug fills one card's openings — snug, no big gaps — that
         preset is your plug. Pick it in Step 1:
       <ul>
         <li>P1 → <span class="mono">Flat 2-prong lamp plug - NEMA 1-15</span></li>
         <li>P2 → <span class="mono">Standard 3-prong plug - NEMA 5-15</span></li>
-        <li>P3 → <span class="mono">Heavy-duty extension cord - NEMA 5-15</span></li>
+        <li>P3 → <span class="mono">Heavy-duty extension cord - NEMA 5-15</span> in the two-sided puller</li>
       </ul></li>
     <li>Skip ahead to “Fill in the Customizer steps” on the next page.</li>
   </ol>
@@ -95,9 +95,9 @@ def page_one() -> str:
   the numbers below are the worksheet's own numbering.</p>
   <table class="index">
     <tr><th>1</th><td>Plug length — <b>R1</b>, wall plate to the plug's back face</td></tr>
-    <tr><th>2–3</th><td>Plug width near wall / near cord — <b>R1</b> notched edge against the plug body</td></tr>
-    <tr><th>4–5</th><td>Plug thickness near wall / near cord — <b>R1</b>, across the thin direction</td></tr>
-    <tr><th>6</th><td>Cord thickness — <b>C1</b>, smallest hole the cord slides through</td></tr>
+    <tr><th>2–3</th><td>Plug width at the prong end / at the cord end — <b>R1</b> notched edge against the plug body</td></tr>
+    <tr><th>4–5</th><td>Plug thickness at the prong end / at the cord end — <b>R1</b>, across the thin direction</td></tr>
+    <tr><th>6</th><td>Cord thickness — <b>C1</b>, slide it onto the cord from the side; the smallest slot that slips over</td></tr>
     <tr><th>7</th><td>Wall plate style — a picture quiz, see the measuring guide</td></tr>
     <tr><th>8</th><td>Finger knuckle width — <b>F1 / F2</b>, smallest comfortable hole, <b>minus 5</b></td></tr>
     <tr><th>9</th><td>Hand width — <b>R1</b>, across the four knuckles, flat hand</td></tr>
@@ -113,41 +113,55 @@ def page_two() -> str:
     return """
 <section class="page guide">
   <h2>Fill in the Customizer steps</h2>
-  <p>Open <span class="mono">src/Plug_Puller_Parametric.scad</span> in OpenSCAD
-  and show the Customizer panel (uncheck <i>View ▸ Hide Customizer</i>). Every
-  click is spelled out in <span class="mono">docs/guides/quick-start-beginner.md</span>;
-  the short version:</p>
-  <table class="index">
-    <tr><th>Step 0 — Tool Style</th><td>leave on <span class="mono">Auto from plug</span>.
-        Thick round plugs (like P3) get the heavy-duty clamshell, everything
-        else the flat tool.</td></tr>
-    <tr><th>Step 1 — Your Plug</th><td>the preset from Path A, or your Path B numbers
-        with <span class="mono">plug_preset = Measure my plug</span>.</td></tr>
-    <tr><th>Step 2 — Size</th><td><span class="mono">Medium</span> fits most adults; or
-        <span class="mono">Measure my hand</span> with worksheet numbers 8–9.</td></tr>
-    <tr><th>Step 3 — Attachment</th><td>how the tool attaches to the plug. Keep the default
-        <span class="mono">Zip ties + Velcro</span> unless you know you want less.</td></tr>
-    <tr><th>Step 4 — Cord Hook</th><td><span class="mono">Right</span> or
-        <span class="mono">Left</span> (flat tool only).</td></tr>
+  <p>The Plug Puller comes as two tools, each in its own file. The
+  <b>one-sided puller</b> (<span class="mono">src/Plug_Puller_Parametric.scad</span>)
+  fits lamp plugs (P1), standard 3-prong plugs (P2) and other plugs thinner
+  than 24 mm. The <b>two-sided puller</b>
+  (<span class="mono">src/Plug_Puller_Two_Sided.scad</span>) closes two plates
+  on the plug from both sides: thick round plugs like P3, USB-C tips and
+  charger plugs. A plug 24 mm thick or more gets a red tag in the one-sided
+  file that sends you to the two-sided file.</p>
+  <p>Open your tool's file in OpenSCAD and show the Customizer panel (uncheck
+  <i>View ▸ Hide Customizer</i>). Every click is spelled out in
+  <span class="mono">docs/guides/quick-start-beginner.md</span>; the short
+  version:</p>
+  <table class="index three">
+    <tr class="head"><th>Step</th><td><b>One-sided puller</b></td><td><b>Two-sided puller</b></td></tr>
+    <tr><th>1 — Your Plug</th><td>the preset from Path A, or your Path B numbers
+        with <span class="mono">plug_preset = Measure my plug</span></td>
+        <td><span class="mono">Heavy-duty extension cord - NEMA 5-15</span> for a
+        P3 plug, or <span class="mono">Measure my plug</span> and four numbers:
+        length, width at the prong end and at the cord end (the size the two
+        plates close across), cord. Then <span class="mono">Rounded sides</span>
+        (a round plug, a USB-C or charger tip: a sloped cradle centers it) or
+        <span class="mono">Flat sides</span> (a boxy plug: the teeth bite along
+        the whole side)</td></tr>
+    <tr><th>2 — Size</th><td><span class="mono">Medium</span> fits most adults; or
+        <span class="mono">Measure my hand</span> with worksheet numbers 8–9</td>
+        <td>the same; <span class="mono">Measure my hand</span> asks for
+        number 8 only</td></tr>
+    <tr><th>3 — Attachment</th><td>keep the default
+        <span class="mono">Zip ties + Velcro</span> unless you know you want
+        less</td><td><span class="mono">Zip ties + Velcro strap</span> (default)
+        or <span class="mono">Zip ties</span>: the <b>zip ties hold the two
+        plates together</b></td></tr>
+    <tr><th>4</th><td>Cord Hook: <span class="mono">Right</span> or
+        <span class="mono">Left</span></td><td>Print Layout: keep
+        <span class="mono">Both plates</span>, one file prints the whole
+        tool</td></tr>
   </table>
-  <p>Press <b>F6</b> to render, then <i>File ▸ Export ▸ STL</i>. The clamshell
-  is one plate — print it <b>twice</b>, flip one copy, zip-tie the pair face
+  <p>Press <b>F6</b> to render, then <i>File ▸ Export ▸ STL</i>. For the
+  two-sided puller: print both plates, flip one over, zip-tie the pair face
   to face around the plug.</p>
 
   <h2>Which steps shape which tool</h2>
-  <p>Each step says which tool it shapes; settings for the other tool are
-  simply ignored (the console tells you which ones).</p>
   <table class="index three">
-    <tr class="head"><th>Step</th><td><b>Flat tool</b></td><td><b>Heavy-duty clamshell</b></td></tr>
-    <tr><th>0 — Tool style</th><td>picks it</td><td>picks it</td></tr>
-    <tr><th>1 — Your plug</th><td>pocket, notch, hook slot</td><td>arm gap, arm length, cord channel</td></tr>
-    <tr><th>2 — Size</th><td>finger holes, body size</td><td>finger bores</td></tr>
+    <tr class="head"><th>Step</th><td><b>One-sided puller</b></td><td><b>Two-sided puller</b></td></tr>
+    <tr><th>1 — Your plug</th><td>pocket, notch, hook slot</td><td>arm gap, arm length, cord channel, cradle</td></tr>
+    <tr><th>2 — Size</th><td>finger holes, body size</td><td>finger holes</td></tr>
     <tr><th>3 — Attachment</th><td>zip-hole grid, velcro wings</td><td>zip stations, arm strap slots</td></tr>
-    <tr><th>4 — Cord hook</th><td>J-hook direction</td><td><i>ignored — no cord hook</i></td></tr>
+    <tr><th>4</th><td>Cord hook: J-hook direction</td><td>Print layout: both plates or one</td></tr>
   </table>
-  <p>On the clamshell, the Step 3 <b>zip ties are what hold the two plates
-  together</b> — leave them on unless you have another plan (the model warns
-  you if you turn them off).</p>
 
   <h2>Printing the 3D stencil on a small bed</h2>
   <p>The cards pack onto print sheets automatically. Open
@@ -208,7 +222,7 @@ def build_html() -> str:
     border-collapse: collapse; width: 100%; margin: 1.5mm 0;
   }}
   .guide table.index th, .guide table.index td {{
-    border: 0.2mm solid #888; padding: 1.2mm 2.2mm; text-align: left;
+    border: 0.2mm solid #888; padding: 0.9mm 2.2mm; text-align: left;
     vertical-align: top; font-weight: normal;
   }}
   .guide table.index th {{ font-weight: bold; white-space: nowrap; }}
