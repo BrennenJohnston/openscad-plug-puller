@@ -1,34 +1,35 @@
 """OpenSCAD Customizer hygiene tests.
 
-These tests are *static* — they parse ``src/Plug_Puller_Parametric.scad``
-with regular expressions and never invoke OpenSCAD itself, so they run in
-under a second on CI's quick lane.
+These tests are *static* — they parse the two tool files
+(``src/Plug_Puller_Parametric.scad``, the one-sided puller, and
+``src/Plug_Puller_Two_Sided.scad``, the two-sided puller) with regular
+expressions and never invoke OpenSCAD itself, so they run in under a second
+on CI's quick lane.
 
-Why each check exists:
+Why each check exists (``TestCustomizerHygiene`` runs on both files):
 
-* :meth:`TestOpenSCADCustomizer.test_no_value_colon_label_format` —
+* :meth:`TestCustomizerHygiene.test_no_value_colon_label_format` —
   OpenSCAD's Customizer can render the legacy ``// [value:Label]`` dropdown
   syntax as duplicate entries in newer builds. The braille generator ate this
   bug in mid-2025; we keep the guard rail in this project too.
-* :meth:`TestOpenSCADCustomizer.test_dropdown_default_matches_option` —
+* :meth:`TestCustomizerHygiene.test_dropdown_default_matches_option` —
   When a dropdown's declared default doesn't match any option literal, the
   Customizer silently injects the default as an extra entry. Detected by
   parsing every ``param = "default"; // [opt1, opt2]`` line.
-* :meth:`TestOpenSCADCustomizer.test_no_duplicate_dropdown_options` —
+* :meth:`TestCustomizerHygiene.test_no_duplicate_dropdown_options` —
   Defensive deduplication check (catches copy-paste typos in the option list).
-* :meth:`TestOpenSCADCustomizer.test_size_dropdown_options` —
-  Hardcodes the v5.1 contract: the ``size`` dropdown must offer
-  Small / Medium / Large / Measure my hand / Custom. Breaks loudly if a
-  future refactor renames one of them without updating the routing / README.
-* :meth:`TestOpenSCADCustomizer.test_attachment_dropdown_options` —
-  Same for the ``attachment`` dropdown (zip ties / velcro quick options).
-* :meth:`TestOpenSCADCustomizer.test_plug_measurements_lead_the_customizer` —
-  The plug measurements are the primary input and must stay the FIRST
-  Customizer section (file order = UI order in OpenSCAD).
-* :meth:`TestOpenSCADCustomizer.test_render_mode_hidden_section` —
+* :meth:`TestCustomizerHygiene.test_no_parentheses_in_dropdown_options` —
+  The Customizer (and MakerWorld's PMM) silently reverts selections whose
+  label contains parentheses.
+* :meth:`TestCustomizerHygiene.test_render_mode_hidden_section` —
   ``render_mode`` is a hidden-section parameter (programmatic switch), not a
-  user-facing dropdown. Enforce that it stays under ``/* [Hidden] */`` so the
-  Customizer UI is not cluttered with 13 render variants.
+  user-facing dropdown. Enforce that it stays under ``/* [Hidden] */``.
+* :class:`TestOneSidedCustomizer` — the one-sided file's size and attachment
+  option contracts and its Step order (the routing, README and guides
+  document them).
+* :class:`TestTwoSidedCustomizer` — the two-sided file leads with Step 1, its
+  size and attachment options are exactly the owner's choices (Q-12), and
+  none of the one-sided puller's controls appear in it.
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -42,23 +43,55 @@ import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SCAD_FILE = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
+TWO_SIDED_SCAD_FILE = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
+SCAD_FILES = {"one_sided": SCAD_FILE, "two_sided": TWO_SIDED_SCAD_FILE}
 
 EXPECTED_SIZE_OPTIONS = ["Small", "Medium", "Large", "Measure my hand", "Custom"]
 EXPECTED_ATTACHMENT_OPTIONS = [
     "Zip ties", "Velcro strap", "Zip ties + Velcro", "None",
 ]
 
+TWO_SIDED_SIZE_OPTIONS = ["Small", "Medium", "Large", "Measure my hand"]
+TWO_SIDED_ATTACHMENT_OPTIONS = ["Zip ties + Velcro strap", "Zip ties"]
+ONE_SIDED_ONLY_PARAMETERS = [
+    "measure_plug_width_wall",
+    "measure_plug_width_cable",
+    "measure_plug_thickness_wall",
+    "measure_plug_thickness_cable",
+    "measure_wall_plate_style",
+    "measure_hand_width",
+    "tool_style",
+    "velcro_style",
+    "hook_hand",
+]
 
-class TestOpenSCADCustomizer:
-    """Static structural checks on the v5 Customizer block."""
 
-    @pytest.fixture
-    def scad_content(self) -> str:
-        assert SCAD_FILE.exists(), f"v5 SCAD missing: {SCAD_FILE}"
-        return SCAD_FILE.read_text(encoding="utf-8")
+def _read(path: Path) -> str:
+    assert path.exists(), f"SCAD file missing: {path}"
+    return path.read_text(encoding="utf-8")
 
-    def test_scad_file_exists(self) -> None:
-        assert SCAD_FILE.exists(), f"v5 SCAD missing: {SCAD_FILE}"
+
+def _dropdown(scad_content: str, name: str):
+    match = re.search(
+        rf'^{name}\s*=\s*"([^"]+)"\s*;\s*//\s*\[([^\]]+)\]',
+        scad_content,
+        re.MULTILINE,
+    )
+    assert match, f"Could not find the `{name}` dropdown declaration."
+    return match.group(1), [opt.strip() for opt in match.group(2).split(",")]
+
+
+@pytest.fixture(params=sorted(SCAD_FILES), ids=sorted(SCAD_FILES))
+def scad_content(request) -> str:
+    return _read(SCAD_FILES[request.param])
+
+
+class TestCustomizerHygiene:
+    """Static structural checks on both files' Customizer blocks."""
+
+    @pytest.mark.parametrize("which", sorted(SCAD_FILES))
+    def test_scad_file_exists(self, which: str) -> None:
+        assert SCAD_FILES[which].exists(), f"SCAD missing: {SCAD_FILES[which]}"
 
     def test_no_value_colon_label_format(self, scad_content: str) -> None:
         """Reject ``// [value:Label]`` style dropdowns (causes duplicates)."""
@@ -144,15 +177,33 @@ class TestOpenSCADCustomizer:
                 + "\n".join(f"  - {v}: '{o}'" for v, o in offenders)
             )
 
-    def test_size_dropdown_options(self, scad_content: str) -> None:
-        match = re.search(
-            r'^size\s*=\s*"([^"]+)"\s*;\s*//\s*\[([^\]]+)\]',
-            scad_content,
-            re.MULTILINE,
+    def test_render_mode_hidden_section(self, scad_content: str) -> None:
+        """``render_mode`` must live under ``/* [Hidden] */`` (programmatic switch)."""
+        idx = scad_content.find("render_mode")
+        assert idx != -1, "render_mode declaration not found."
+        preceding = scad_content[:idx]
+        last_section_match = list(re.finditer(r"/\*\s*\[([^\]]+)\]\s*\*/", preceding))
+        assert last_section_match, (
+            "Could not find any Customizer section header before `render_mode`. "
+            "Expected it to follow `/* [Hidden] */`."
         )
-        assert match, "Could not find the `size` dropdown declaration in v5 SCAD."
-        default = match.group(1)
-        options = [opt.strip() for opt in match.group(2).split(",")]
+        last_section = last_section_match[-1].group(1).strip().lower()
+        assert last_section == "hidden", (
+            f"`render_mode` must live under `/* [Hidden] */` so the Customizer UI "
+            f"is not cluttered with render variants, but it currently appears "
+            f"under section `[{last_section}]`."
+        )
+
+
+class TestOneSidedCustomizer:
+    """The one-sided file's option contracts and Step order."""
+
+    @pytest.fixture
+    def scad_content(self) -> str:
+        return _read(SCAD_FILE)
+
+    def test_size_dropdown_options(self, scad_content: str) -> None:
+        default, options = _dropdown(scad_content, "size")
         missing = [name for name in EXPECTED_SIZE_OPTIONS if name not in options]
         assert not missing, (
             f"Size dropdown is missing required options {missing}. "
@@ -166,16 +217,7 @@ class TestOpenSCADCustomizer:
         )
 
     def test_attachment_dropdown_options(self, scad_content: str) -> None:
-        match = re.search(
-            r'^attachment\s*=\s*"([^"]+)"\s*;\s*//\s*\[([^\]]+)\]',
-            scad_content,
-            re.MULTILINE,
-        )
-        assert match, (
-            "Could not find the `attachment` dropdown declaration in v5 SCAD."
-        )
-        default = match.group(1)
-        options = [opt.strip() for opt in match.group(2).split(",")]
+        default, options = _dropdown(scad_content, "attachment")
         missing = [
             name for name in EXPECTED_ATTACHMENT_OPTIONS if name not in options
         ]
@@ -237,21 +279,56 @@ class TestOpenSCADCustomizer:
             f"got {plug_params[1:6]}."
         )
 
-    def test_render_mode_hidden_section(self, scad_content: str) -> None:
-        """``render_mode`` must live under ``/* [Hidden] */`` (programmatic switch)."""
-        idx = scad_content.find("render_mode")
-        assert idx != -1, "render_mode declaration not found in v5 SCAD."
-        preceding = scad_content[:idx]
-        last_section_match = list(re.finditer(r"/\*\s*\[([^\]]+)\]\s*\*/", preceding))
-        assert last_section_match, (
-            "Could not find any Customizer section header before `render_mode`. "
-            "Expected it to follow `/* [Hidden] */`."
+
+class TestTwoSidedCustomizer:
+    """The two-sided file shows only the two-sided puller's controls."""
+
+    @pytest.fixture
+    def scad_content(self) -> str:
+        return _read(TWO_SIDED_SCAD_FILE)
+
+    def test_step1_leads_with_plug_preset(self, scad_content: str) -> None:
+        sections = re.findall(r"/\*\s*\[([^\]]+)\]\s*\*/", scad_content)
+        assert sections and sections[0] == "Step 1 - Your Plug", (
+            f"The first Customizer section must be 'Step 1 - Your Plug', got "
+            f"{sections[:1]}."
         )
-        last_section = last_section_match[-1].group(1).strip().lower()
-        assert last_section == "hidden", (
-            f"`render_mode` must live under `/* [Hidden] */` so the Customizer UI "
-            f"is not cluttered with 13 render variants, but it currently appears "
-            f"under section `[{last_section}]`."
+        first_param = re.search(
+            r"^(\w+)\s*=\s*[^;]+;",
+            scad_content[scad_content.find(sections[0]):],
+            re.MULTILINE,
+        )
+        assert first_param and first_param.group(1) == "plug_preset", (
+            "The first Customizer parameter must be `plug_preset`, got "
+            f"`{first_param.group(1) if first_param else None}`."
+        )
+
+    def test_size_options(self, scad_content: str) -> None:
+        default, options = _dropdown(scad_content, "size")
+        assert options == TWO_SIDED_SIZE_OPTIONS, (
+            f"Two-sided size options must be exactly {TWO_SIDED_SIZE_OPTIONS} "
+            f"(no Custom: the plate has no custom geometry), got {options}."
+        )
+        assert default == "Medium", f"Size default must be 'Medium', got '{default}'."
+
+    def test_attachment_options(self, scad_content: str) -> None:
+        default, options = _dropdown(scad_content, "attachment")
+        assert options == TWO_SIDED_ATTACHMENT_OPTIONS, (
+            f"Two-sided attachment options must be exactly "
+            f"{TWO_SIDED_ATTACHMENT_OPTIONS} (owner answer to Q-12: both other "
+            f"options build a plate nothing holds together), got {options}."
+        )
+        assert default == "Zip ties + Velcro strap", (
+            f"Attachment default must be 'Zip ties + Velcro strap' (the preset "
+            f"plate has the strap slot), got '{default}'."
+        )
+
+    def test_no_one_sided_parameters(self, scad_content: str) -> None:
+        declared = set(re.findall(r"^(\w+)\s*=", scad_content, re.MULTILINE))
+        present = [name for name in ONE_SIDED_ONLY_PARAMETERS if name in declared]
+        assert not present, (
+            f"The two-sided file must not declare one-sided or renamed "
+            f"parameters, but declares {present}."
         )
 
 

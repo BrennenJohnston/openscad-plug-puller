@@ -115,7 +115,7 @@ def rendered_dims(two_sided_scad_file: Path, openscad_runner, tmp_path_factory) 
         output_stl=out,
         parameters={
             "plug_preset": HD_PRESET,
-            "render_mode": "Clamshell Plate",
+            "render_mode": "One plate",
             "quality": 64,
         },
     )

@@ -82,7 +82,9 @@ jobs:
         run: ruff check tests/ scripts/
 
       - name: Validate parameter schema vs SCAD source
-        run: python tests/validate_parameter_schema.py
+        run: |
+          python tests/validate_parameter_schema.py
+          python tests/validate_parameter_schema.py --scad-file src/Plug_Puller_Two_Sided.scad --mapping-file parameter_mapping_two_sided.json
 
       - name: Verify flattened single-file build is fresh (dist/)
         # dist/Plug_Puller_SingleFile.scad is a committed generated

@@ -6,7 +6,8 @@ geometry follows the Size selection, so it gets its own 3 sheets), this
 script:
 
 1. Renders the v7 SCAD via the OpenSCAD CLI (``render_mode="Body Only"`` /
-   ``"Clamshell Plate"`` with the preset + size ``-D`` overrides) — the same
+   ``"One plate"`` from ``src/Plug_Puller_Two_Sided.scad`` for the plate
+   sheets, with the preset + size ``-D`` overrides) — the same
    pattern as ``regenerate_fixtures.py``. No model changes needed.
 2. Extracts the 2D geometry with trimesh + shapely:
    - flat tool: the true silhouette + through-hole bores from the projected
@@ -58,6 +59,7 @@ from tests.openscad_runner import OpenSCADRunner  # noqa: E402
 logger = logging.getLogger(__name__)
 
 SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
+TWO_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
 STL_DIR = PROJECT_ROOT / "tmp_renders" / "outline_sheets"
 DEFAULT_OUT = PROJECT_ROOT / "docs" / "guides" / "outline-sheets"
 
@@ -939,6 +941,7 @@ class Job:
     preset_key: str
     size: str
     params: Dict = field(default_factory=dict)
+    scad: Path = SCAD
 
     @property
     def stl(self) -> Path:
@@ -972,8 +975,9 @@ def all_jobs() -> List[Job]:
                 kind="clamshell",
                 preset_key="heavy-duty-round",
                 size=size,
+                scad=TWO_SIDED_SCAD,
                 params={
-                    "render_mode": "Clamshell Plate",
+                    "render_mode": "One plate",
                     "plug_preset": PLUG_PRESETS["heavy-duty-round"]["customizer"],
                     "size": size,
                 },
@@ -1010,7 +1014,7 @@ def main() -> int:
         runner = OpenSCADRunner()
         logger.info("OpenSCAD: %s", runner.version_string)
         for job in jobs:
-            res = runner.generate_stl(SCAD, job.stl, job.params)
+            res = runner.generate_stl(job.scad, job.stl, job.params)
             if not res.success:
                 logger.error("Render failed for %s: %s", job.slug, res.stderr[-400:])
                 return 1

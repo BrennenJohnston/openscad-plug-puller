@@ -1,20 +1,19 @@
-"""Step 3 attachment wiring on the heavy-duty clamshell.
+"""Step 3 attachment wiring on the two-sided puller.
 
-Workstream: the Step 3 ``attachment`` dropdown must gate the clamshell's
-zip-tie stations and velcro arm slot (previously it only drove the flat
-tool). This suite renders the clamshell plate at the heavy-duty preset with
-three Step 3 choices and asserts:
+The Step 3 ``attachment`` dropdown gates the plate's velcro arm slot; the zip
+stations are always cut, because zip ties are what hold the two plates
+together (the owner dropped the "None" and "Velcro strap" options, Q-12).
+This suite renders the plate at the heavy-duty preset with both Step 3
+choices and asserts:
 
 * every render is watertight;
-* material ordering holds — "None" (no zip holes, no slot) is the densest
-  plate, "Zip ties" (holes but no slot) is denser than the default
-  "Zip ties + Velcro" (holes and slot);
+* material ordering holds — "Zip ties" (holes but no slot) is denser than
+  the default "Zip ties + Velcro strap" (holes and slot);
 * the default render still matches the idealized parity reference (Step 3's
   defaults are geometry-preserving) with the full feature inventory.
 
-Renders with ``attachment="None"`` carry the WC-10 red warning coupon (a
-separate text body next to the plate), so volume comparisons use the largest
-connected component — the plate itself.
+Warning coupons would export as separate text bodies, so volume comparisons
+use the largest connected component — the plate itself.
 
 Skips (rather than fails) when OpenSCAD is unavailable.
 
@@ -39,9 +38,8 @@ IDEAL_PLATE = (
 HD_PRESET = "Heavy-duty extension cord - NEMA 5-15"
 
 ATTACHMENT_CHOICES = {
-    "default": "Zip ties + Velcro",
+    "default": "Zip ties + Velcro strap",
     "zip_only": "Zip ties",
-    "none": "None",
 }
 
 
@@ -111,7 +109,7 @@ def attachment_renders(
             parameters={
                 "plug_preset": HD_PRESET,
                 "attachment": choice,
-                "render_mode": "Clamshell Plate",
+                "render_mode": "One plate",
                 "quality": 64,
             },
         )
@@ -126,7 +124,7 @@ def attachment_renders(
 @pytest.mark.requires_openscad
 @pytest.mark.slow
 class TestClamshellAttachment:
-    """Step 3 gates the clamshell zip stations and velcro slot."""
+    """Step 3 gates the velcro slot; the zip stations are always cut."""
 
     def test_all_watertight(self, attachment_renders) -> None:
         for label, stats in attachment_renders.items():
@@ -146,22 +144,12 @@ class TestClamshellAttachment:
             f"{got['n_velcro']}"
         )
 
-    def test_none_drops_everything(self, attachment_renders) -> None:
-        got = attachment_renders["none"]
-        assert got["n_zip"] == 0, (
-            f"attachment='None' must remove the zip stations, got {got['n_zip']}"
-        )
-        assert got["n_velcro"] == 0, (
-            f"attachment='None' must remove the arm slots, got {got['n_velcro']}"
-        )
-
     def test_volume_ordering(self, attachment_renders) -> None:
-        v_none = attachment_renders["none"]["volume"]
         v_zip = attachment_renders["zip_only"]["volume"]
         v_default = attachment_renders["default"]["volume"]
-        assert v_none > v_zip > v_default, (
-            f"Expected volume(None) > volume(Zip ties) > volume(default); got "
-            f"{v_none:.0f} / {v_zip:.0f} / {v_default:.0f} mm^3"
+        assert v_zip > v_default, (
+            f"Expected volume(Zip ties) > volume(default); got "
+            f"{v_zip:.0f} / {v_default:.0f} mm^3"
         )
 
     def test_default_matches_parity_reference(self, attachment_renders) -> None:

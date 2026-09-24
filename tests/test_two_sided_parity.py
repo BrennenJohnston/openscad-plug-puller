@@ -31,7 +31,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TWO_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
 FIXTURE_STL = PROJECT_ROOT / "tests" / "fixtures" / "two_sided_plate" / "reference.stl"
 HD_PRESET = "Heavy-duty extension cord - NEMA 5-15"
-PRESET_PARAMS = {"plug_preset": HD_PRESET, "render_mode": "Clamshell Plate", "quality": 64}
+# Each file names its single-plate mode differently until the clamshell leaves
+# the unified file (phase C1).
+PRESET_PARAMS = {"plug_preset": HD_PRESET, "render_mode": "One plate", "quality": 64}
+UNIFIED_PARAMS = {"plug_preset": HD_PRESET, "render_mode": "Clamshell Plate", "quality": 64}
 SIZES = ["Small", "Medium", "Large"]
 
 
@@ -75,7 +78,7 @@ def test_preset_plate_matches_fixture(openscad_runner, mesh_comparator, tmp_path
 def test_preset_plate_matches_unified_file(scad_file, openscad_runner, tmp_path) -> None:
     scad = _require_two_sided_scad()
     new = _render(openscad_runner, scad, tmp_path / "two_sided.stl", PRESET_PARAMS)
-    old = _render(openscad_runner, scad_file, tmp_path / "unified.stl", PRESET_PARAMS)
+    old = _render(openscad_runner, scad_file, tmp_path / "unified.stl", UNIFIED_PARAMS)
     _assert_same_geometry(new, old, "two-sided vs unified file")
 
 
@@ -85,8 +88,8 @@ def test_finger_bore_table(scad_file, openscad_runner, tmp_path) -> None:
     scad = _require_two_sided_scad()
     bores: Dict[tuple, float] = {}
     for size in SIZES:
-        params = {**PRESET_PARAMS, "size": size}
-        for label, path in (("unified", scad_file), ("two-sided", scad)):
+        for label, path, base in (("unified", scad_file, UNIFIED_PARAMS), ("two-sided", scad, PRESET_PARAMS)):
+            params = {**base, "size": size}
             mesh = _render(openscad_runner, path, tmp_path / f"{label}_{size}.stl", params)
             fingers = _classify(mesh)["finger"]
             assert len(fingers) == 2, f"{label} {size}: expected 2 finger bores, got {len(fingers)}"
