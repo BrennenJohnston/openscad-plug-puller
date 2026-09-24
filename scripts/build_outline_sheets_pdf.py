@@ -41,12 +41,12 @@ MM_TO_PT = 72.0 / 25.4
 
 logger = logging.getLogger(__name__)
 
-# Sheet order for the PDF: flat tool by plug family (S/M/L), clamshell last.
+# Sheet order for the PDF: the one-sided puller by plug family (S/M/L), the
+# two-sided puller's plate last.
 SHEET_ORDER = [
-    ("flat-2-prong", "Flat 2-prong lamp plug (NEMA 1-15) — flat tool"),
-    ("standard-3-prong", "Standard 3-prong plug (NEMA 5-15) — flat tool"),
-    ("heavy-duty-round", "Heavy-duty extension cord (NEMA 5-15) — flat tool"),
-    ("heavy-duty-clamshell", "Heavy-duty clamshell plate"),
+    ("flat-2-prong", "Flat 2-prong lamp plug (NEMA 1-15) — one-sided puller"),
+    ("standard-3-prong", "Standard 3-prong plug (NEMA 5-15) — one-sided puller"),
+    ("two-sided-plate", "Heavy-duty extension cord (NEMA 5-15) — two-sided puller plate"),
 ]
 SIZES = ["small", "medium", "large"]
 
