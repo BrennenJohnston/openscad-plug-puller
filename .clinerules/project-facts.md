@@ -1,6 +1,6 @@
 # Project Facts — openscad-plug-puller (always active)
 
-Parametric handheld Plug Puller assistive device (current line, v0.11.0).
+Parametric handheld Plug Puller assistive device (current line, v0.12.0).
 Working branch: main. The older plug-puller-openscad repo is ARCHIVED — never
 copy patterns from it without asking me.
 
