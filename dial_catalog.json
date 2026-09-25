@@ -1,0 +1,2604 @@
+[
+  {
+    "file": "one-sided",
+    "name": "plug_preset",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug preset",
+    "changes": "Fills in all six plug numbers from a measured reference plug, so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Measure my plug",
+      "after": "Standard 3-prong plug - NEMA 5-15",
+      "context": {},
+      "plug": "Standard 3-prong plug - NEMA 5-15",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_plug_length",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug length",
+    "changes": "Runs the pocket farther toward the finger holes and stretches the whole body to keep the finger holes and zip-tie rows clear of it.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 25.5,
+      "after": 40,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_plug_width_prong_end",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug width at the prong end",
+    "changes": "Widens or narrows the pocket, its seat and the wall notch at the plug end, and moves the zip-tie holes and wing openings with them.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 25,
+      "after": 32,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_plug_width_cord_end",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug width at the cord end",
+    "changes": "Tilts the pocket's side walls to match the plug's taper, and the zip-tie holes and wing openings lean in with them.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 25,
+      "after": 15,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_plug_thickness_prong_end",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug thickness at the prong end",
+    "changes": "Deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers.",
+    "diagram": {
+      "view": "section-x",
+      "style": "fill",
+      "before": 20,
+      "after": 23.5,
+      "context": {},
+      "plug": "default",
+      "crop": null,
+      "at": 0
+    },
+    "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller."
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_plug_thickness_cord_end",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug thickness at the cord end",
+    "changes": "Deepens or shallows the two pocket floors, the round seat and the plug recess, when this end is the fatter end of the plug.",
+    "diagram": {
+      "view": "section-x",
+      "style": "fill",
+      "before": 20,
+      "after": 23.5,
+      "context": {},
+      "plug": "default",
+      "crop": null,
+      "at": 0
+    },
+    "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller."
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_cord_thickness",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Cord thickness",
+    "changes": "Widens the cord hook's slot and crossbar to fit the cord, and moves the finger holes and the whole body up to make room.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4,
+      "after": 8,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_wall_plate_style",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Outlet cover plate style",
+    "changes": "Cuts the wall notch at the plug end deeper or shallower to suit the cover plate, and the zip-tie rows shift down with it.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Standard flat plate",
+      "after": "Oversized / Jumbo",
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -22,
+        48,
+        22,
+        68
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "show_plug_preview",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Show the see-through plug",
+    "changes": "Shows or hides the see-through plug in the preview and changes nothing in the printed tool.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": true,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: the see-through plug is a preview aid and is never exported."
+  },
+  {
+    "file": "one-sided",
+    "name": "size",
+    "section": "Step 2 - Size",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Hand size",
+    "changes": "Scales the whole body, both finger holes, the wing openings and the zip-tie grid to the chosen hand size.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": "Medium",
+      "after": "Large",
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_finger_width",
+    "section": "Step 2 - Size",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Finger width",
+    "changes": "Widens both finger holes, spaces them farther apart and pushes them and the body up to keep the walls printable.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 20,
+      "after": 26,
+      "context": {
+        "size": "Measure my hand"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Measure my hand."
+  },
+  {
+    "file": "one-sided",
+    "name": "measure_hand_width",
+    "section": "Step 2 - Size",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Hand width",
+    "changes": "Widens the whole body outline and thickens the slab in step with the hand.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 85,
+      "after": 100,
+      "context": {
+        "size": "Measure my hand"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Measure my hand."
+  },
+  {
+    "file": "one-sided",
+    "name": "attachment",
+    "section": "Step 3 - Attachment",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Attachment",
+    "changes": "Adds or removes the zip-tie holes and the wing or slot openings for the strap.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Zip ties + Velcro",
+      "after": "Zip ties",
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "velcro_style",
+    "section": "Step 3 - Attachment",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Strap opening style",
+    "changes": "Swaps the curved wing openings for a pair of plain rectangular slots that lean along the body's sides.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Wing",
+      "after": "Classic slot",
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "strap_width",
+    "section": "Step 3 - Attachment",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Strap width",
+    "changes": "Sets the strap width the wing opening is checked against and changes no shape.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": 15,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: it only sets the width the W-14 check compares the wing opening against."
+  },
+  {
+    "file": "one-sided",
+    "name": "hook_hand",
+    "section": "Step 4 - Cord Hook",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Hook side",
+    "changes": "Mirrors the cord hook at the cord end so its catch faces the other side, and nothing else moves.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Right",
+      "after": "Left",
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "zip_placement",
+    "section": "Advanced - Zip Tie Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie hole placement",
+    "changes": "Switches the zip-tie pairs from the automatic rows to the three position dials, which slide each pair along the plug's side.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Auto",
+      "after": "Manual",
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "zip_row_count",
+    "section": "Advanced - Zip Tie Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Number of zip-tie rows",
+    "changes": "Adds or removes a pair of zip-tie holes, and the rows squeeze together when the body has no room for another.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 2,
+      "after": 3,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "zip_pos_1",
+    "section": "Advanced - Zip Tie Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie pair 1 position",
+    "changes": "Slides the first pair of zip-tie holes along the plug's side, measured from the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 6,
+      "after": 10,
+      "context": {
+        "zip_placement": "Manual"
+      },
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": "Only acts when zip_placement is Manual."
+  },
+  {
+    "file": "one-sided",
+    "name": "zip_pos_2",
+    "section": "Advanced - Zip Tie Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie pair 2 position",
+    "changes": "Slides the second pair of zip-tie holes along the plug's side, measured from the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 18,
+      "after": 26,
+      "context": {
+        "zip_placement": "Manual"
+      },
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": "Only acts when zip_placement is Manual."
+  },
+  {
+    "file": "one-sided",
+    "name": "zip_pos_3",
+    "section": "Advanced - Zip Tie Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie pair 3 position",
+    "changes": "Slides the third pair of zip-tie holes along the plug's side, measured from the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 30,
+      "after": 26,
+      "context": {
+        "zip_placement": "Manual",
+        "zip_row_count": 3
+      },
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": "Only acts when zip_placement is Manual and zip_row_count is 3."
+  },
+  {
+    "file": "one-sided",
+    "name": "zip_edge_offset",
+    "section": "Advanced - Zip Tie Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie hole distance from the pocket wall",
+    "changes": "Moves every zip-tie hole farther from or closer to the pocket wall, and the wing openings reshape around them.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4,
+      "after": 8,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "velcro_placement",
+    "section": "Advanced - Velcro Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Strap slot placement",
+    "changes": "Switches the strap openings to a pair of plain slots that the position dial slides along the plug's side, whatever the opening style.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Auto",
+      "after": "Manual",
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "one-sided",
+    "name": "velcro_pos",
+    "section": "Advanced - Velcro Placement",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Strap slot position",
+    "changes": "Slides the pair of strap slots along the plug's side, measured from the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 12,
+      "after": 25,
+      "context": {
+        "velcro_style": "Classic slot",
+        "velcro_placement": "Manual"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when velcro_placement is Manual."
+  },
+  {
+    "file": "one-sided",
+    "name": "quality",
+    "section": "Advanced - Render Quality",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Render quality",
+    "changes": "Sets how many flat segments draw each curve and changes no dimension.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": 64,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: it only sets the number of segments in every circle and arc."
+  },
+  {
+    "file": "one-sided",
+    "name": "reset_custom_to_medium",
+    "section": "Custom Mode",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Reset Custom to the Medium reference",
+    "changes": "Swaps every Custom slider for the Medium reference values for one render, so the whole tool snaps back to the Medium shape.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": false,
+      "after": true,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_enable_auto_fit",
+    "section": "Custom Mode",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Auto-fit",
+    "changes": "Lets the tool clamp any Custom slider that would push a feature past the body or into a neighbor, and changes nothing while every slider is inside its safe range.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": true,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape at the Custom defaults: it only clamps sliders that leave their safe range, and every clamp is reported in the console."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_puller_length",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Body length",
+    "changes": "Stretches the whole body from the cord end to the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 63.5,
+      "after": 73.5,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_puller_bottom_width",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Body width at the widest point",
+    "changes": "Widens the body at its widest point, just above the cord end, before the side rounding is applied.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 77.6,
+      "after": 87.6,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_puller_bottom_corners",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Cord-end corner width",
+    "changes": "Widens the flat at the cord end where the two lower corners of the body outline sit.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 3,
+      "after": 13,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_puller_top_width",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Body width at the plug end",
+    "changes": "Widens the plug end of the body, where the wall notch and the pocket seat sit.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 31.75,
+      "after": 41.75,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_puller_middle_width",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Body width at the middle",
+    "changes": "Widens the body at the middle control point, bulging or straightening the side edges between the widest point and the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 57.35,
+      "after": 67.35,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_puller_side_corner",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Side corner position",
+    "changes": "Moves the two widest corners of the body outline up toward the plug end or down toward the cord end.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 4.65,
+      "after": 14.65,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_body_thickness",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Body thickness",
+    "changes": "Thickens the whole slab, so every hole and the pocket get deeper walls.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 6.35,
+      "after": 9,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 35
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_body_round_bottom_only",
+    "section": "Body Shape (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Round the cord half only",
+    "changes": "Rounds the whole outline instead of only the cord half, so the plug end loses its crisp corners.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": true,
+      "after": false,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_pocket_seat_diameter",
+    "section": "Plug Pocket (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Pocket seat diameter",
+    "changes": "Widens the round seat cut into the plug end of the pocket.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 31.75,
+      "after": 36,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -25,
+        36,
+        25,
+        68
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_pocket_width",
+    "section": "Plug Pocket (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Pocket width",
+    "changes": "Widens the plug recess, and the zip-tie holes and wing openings move outward with its wall.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 28.85,
+      "after": 34,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_pocket_depth",
+    "section": "Plug Pocket (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Pocket depth",
+    "changes": "Runs the plug recess farther from the plug end toward the finger holes.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 24.5,
+      "after": 34,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_pocket_dome_drop",
+    "section": "Plug Pocket (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Pocket reference drop",
+    "changes": "Changes no shape of the pocket, because the recess outline is built from the plug width at the plug end and the side taper, and this reference point cancels out of it.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": 2.15,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: the recess is a rounded-nose shape whose width at the plug end is the pocket width and whose walls follow the side taper, so this reference point cancels out; measured with straight and with tapered walls."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_pocket_seat_floor",
+    "section": "Plug Pocket (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Pocket seat floor thickness",
+    "changes": "Thins or thickens the floor left under the round seat, so the seat is cut deeper or shallower.",
+    "diagram": {
+      "view": "section-x",
+      "style": "fill",
+      "before": 3.175,
+      "after": 1.5,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 0
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_pocket_floor",
+    "section": "Plug Pocket (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Plug recess floor thickness",
+    "changes": "Thins or thickens the floor left under the plug recess, so the recess is cut deeper or shallower.",
+    "diagram": {
+      "view": "section-x",
+      "style": "fill",
+      "before": 3.81,
+      "after": 2,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 0
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_pocket_side_angle",
+    "section": "Plug Pocket (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Pocket side taper",
+    "changes": "Tilts the pocket's side walls inward toward the cord end, and the zip-tie holes and strap slots lean in along the same line.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 0,
+      "after": 10,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_enable_finger_holes",
+    "section": "Finger Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Finger holes on or off",
+    "changes": "Cuts or leaves out both finger holes.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": true,
+      "after": false,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_finger_hole_diameter",
+    "section": "Finger Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Finger hole diameter",
+    "changes": "Widens both finger holes.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 25.4,
+      "after": 30,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_finger_hole_spacing",
+    "section": "Finger Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Finger hole spacing",
+    "changes": "Moves the two finger holes farther apart or closer together.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 33,
+      "after": 40,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_finger_hole_y_position",
+    "section": "Finger Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Finger hole position",
+    "changes": "Slides both finger holes up toward the pocket or down toward the cord hook.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 19.8,
+      "after": 26,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_enable_t_hook",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Cord hook on or off",
+    "changes": "Cuts or leaves out the cord hook at the cord end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": true,
+      "after": false,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_base_gap",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook slot width",
+    "changes": "Widens the slot the cord slides into at the cord end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4.7625,
+      "after": 7,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_length",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook length",
+    "changes": "Runs the cord hook farther into the body from the cord end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 10.16,
+      "after": 15,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_holder_width",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook crossbar width",
+    "changes": "Widens the crossbar the cord hooks under at the top of the slot.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 11.1125,
+      "after": 16,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_holder_length",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook crossbar height",
+    "changes": "Makes the crossbar opening taller or shorter along the body.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 5.08,
+      "after": 8,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_gap_offset",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook slot inset",
+    "changes": "Changes no shape of the printed tool, because the J-hook cord catch does not read this dial.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": 0,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_leg_offset",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook stem side offset",
+    "changes": "Moves nothing on the hook itself, and only pushes the finger holes up when the auto-fit keep-out around the hook grows with it.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 0,
+      "after": 3,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom; the J-hook cord catch is drawn without this dial, and only the auto-fit clamp on the finger holes reads it."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_stem_offset",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook stem offset",
+    "changes": "Shifts the cord slot sideways along the crossbar, making the J of the hook deeper or shallower.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4.5,
+      "after": 7,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_catch_reach",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook catch reach",
+    "changes": "Extends the crossbar past the slot on the catch side, lengthening the lip the cord hooks under.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4.55,
+      "after": 8,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_tip_drop",
+    "section": "T Hook (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook tip drop",
+    "changes": "Sags the slot's mouth farther below the cord end so a hooked cord cannot back out.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 1.98,
+      "after": 4,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_enable_plug_wall_notch",
+    "section": "Plug Wall Notch (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Wall notch on or off",
+    "changes": "Cuts or leaves out the notch at the plug end that straddles the outlet's cover plate.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": true,
+      "after": false,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -22,
+        48,
+        22,
+        68
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_plug_wall_notch_width",
+    "section": "Plug Wall Notch (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Wall notch width",
+    "changes": "Widens or narrows the notch at the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 26.67,
+      "after": 20,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -22,
+        48,
+        22,
+        68
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_plug_wall_notch_height",
+    "section": "Plug Wall Notch (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Wall notch depth",
+    "changes": "Cuts the notch deeper or shallower into the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 3.81,
+      "after": 7,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -22,
+        48,
+        22,
+        68
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_plug_wall_notch_rounding",
+    "section": "Plug Wall Notch (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Wall notch corner rounding",
+    "changes": "Rounds or squares the notch's two inner corners.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 2.54,
+      "after": 0,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -22,
+        48,
+        22,
+        68
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_zip_tie_hole_diameter",
+    "section": "Zip Tie Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Zip-tie hole diameter",
+    "changes": "Widens every zip-tie hole.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 5.08,
+      "after": 7,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_zip_tie_height_spacing",
+    "section": "Zip Tie Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Zip-tie row spacing",
+    "changes": "Moves the second row of zip-tie holes closer to or farther from the first.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 17.78,
+      "after": 12,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_zip_tie_width_spacing",
+    "section": "Zip Tie Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Zip-tie column spacing",
+    "changes": "Moves no zip-tie hole, because the two columns follow the pocket wall, and only feeds the auto-fit keep-out that can trim the row spacing by a hair.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": 17.7,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape of its own: the zip-tie columns sit zip_edge_offset inside the pocket wall; this dial only feeds the auto-fit finger keep-out, which trimmed the row spacing by 0.05 mm at the Custom defaults."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_zip_tie_distance_from_notch",
+    "section": "Zip Tie Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Zip-tie distance from the notch",
+    "changes": "Moves the first row of zip-tie holes farther from the wall notch, and the second row follows.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 5.1,
+      "after": 9,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_zip_tie_countersink",
+    "section": "Zip Tie Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Zip-tie countersink",
+    "changes": "Flares the top of the zip-tie holes wider so the tie head sits flush.",
+    "diagram": {
+      "view": "section-x",
+      "style": "fill",
+      "before": 0.9,
+      "after": 2.5,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -26,
+        24,
+        26,
+        66
+      ],
+      "at": 10.4
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_velcro_hole_length",
+    "section": "Velcro / Wing Strap Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Strap slot length",
+    "changes": "Lengthens each plain strap slot along its lean.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 12,
+      "after": 18,
+      "context": {
+        "size": "Custom",
+        "velcro_style": "Classic slot"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_velcro_hole_width",
+    "section": "Velcro / Wing Strap Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Strap slot width",
+    "changes": "Widens each plain strap slot.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 7,
+      "after": 11,
+      "context": {
+        "size": "Custom",
+        "velcro_style": "Classic slot"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_velcro_hole_x_center",
+    "section": "Velcro / Wing Strap Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Strap slot distance from the centerline",
+    "changes": "Moves the two plain strap slots closer to or farther from the centerline.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 19.4,
+      "after": 14,
+      "context": {
+        "size": "Custom",
+        "velcro_style": "Classic slot"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_velcro_hole_y_center",
+    "section": "Velcro / Wing Strap Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Strap slot position along the body",
+    "changes": "Slides the two plain strap slots toward the cord end or the plug end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 46,
+      "after": 38,
+      "context": {
+        "size": "Custom",
+        "velcro_style": "Classic slot"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_velcro_hole_rotation",
+    "section": "Velcro / Wing Strap Holes (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Strap slot lean",
+    "changes": "Leans the two plain strap slots more or less steeply, mirrored on the two sides.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 23.5,
+      "after": 60,
+      "context": {
+        "size": "Custom",
+        "velcro_style": "Classic slot"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_body_side_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Body side rounding",
+    "changes": "Rounds the body outline's corners more or less, down to the plain octagon at 0.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 15.85,
+      "after": 5,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_body_top_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Top edge rounding",
+    "changes": "Rounds or squares the edge where the body's top face meets its sides.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 2.54,
+      "after": 0,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 35
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_body_bottom_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Bottom edge rounding",
+    "changes": "Rounds or squares the edge where the body's bottom face meets its sides.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 0,
+      "after": 2,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 35
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_velcro_side_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Strap slot corner rounding",
+    "changes": "Rounds the four corners of each plain strap slot.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 0,
+      "after": 2.5,
+      "context": {
+        "size": "Custom",
+        "velcro_style": "Classic slot"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_velcro_top_bottom_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Strap opening edge rounding",
+    "changes": "Flares the top and bottom edges of the strap openings so the strap does not chafe.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 0,
+      "after": 1.5,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 46
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_finger_hole_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Finger hole rim rounding",
+    "changes": "Rounds or squares the rims of both finger holes on both faces.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 2.5,
+      "after": 0,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 19.8
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_holder_side_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook crossbar corner rounding",
+    "changes": "Rounds or squares the top corners of the hook's crossbar.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 1.27,
+      "after": 0,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": [
+        -14,
+        -3,
+        14,
+        18
+      ]
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_gap_side_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook slot corner rounding",
+    "changes": "Changes no shape of the printed tool, because the J-hook cord catch draws its own corners.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": 0,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
+  },
+  {
+    "file": "one-sided",
+    "name": "custom_t_hook_top_bottom_rounding",
+    "section": "Edge Rounding (Custom size only)",
+    "tier": "custom",
+    "quick_start": false,
+    "title": "Hook edge rounding",
+    "changes": "Flares the top and bottom edges of the cord hook's slot and crossbar.",
+    "diagram": {
+      "view": "section-x",
+      "style": "fill",
+      "before": 0,
+      "after": 2,
+      "context": {
+        "size": "Custom"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 4.5
+    },
+    "note": "Only acts when size is Custom."
+  },
+  {
+    "file": "two-sided",
+    "name": "plug_preset",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug preset",
+    "changes": "Fills in the plug's length, both widths and the cord from the measured heavy-duty cord plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Measure my plug",
+      "after": "Heavy-duty extension cord - NEMA 5-15",
+      "context": {},
+      "plug": "Heavy-duty extension cord - NEMA 5-15",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "measure_plug_length",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug length",
+    "changes": "Lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 25.5,
+      "after": 40,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "measure_plug_width_prong_end",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug width at the prong end",
+    "changes": "Opens or closes the gap between the arms at their tips, where the plug's prong end sits.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 20,
+      "after": 28,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "measure_plug_width_cord_end",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug width at the cord end",
+    "changes": "Opens or closes the gap between the arms at the plug's back end, so the arms taper to match the plug.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 20,
+      "after": 12,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "measure_cord_thickness",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Cord thickness",
+    "changes": "Widens the cord channel between the finger holes, and the finger lobes move outward with it.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4,
+      "after": 9,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plug_sides",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug sides",
+    "changes": "Removes the sloped cradle from the arms' gripping edges so the teeth bite straight along a flat-sided plug.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": "Rounded sides",
+      "after": "Flat sides",
+      "context": {},
+      "plug": "default",
+      "crop": null,
+      "at": 45
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "show_plug_preview",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Show the see-through plug",
+    "changes": "Shows or hides the see-through plug in the preview and changes nothing in the printed plates.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": true,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: the see-through plug is a preview aid and is never exported."
+  },
+  {
+    "file": "two-sided",
+    "name": "size",
+    "section": "Step 2 - Size",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Hand size",
+    "changes": "Widens both finger holes and their lobes, so the whole plate grows around them.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": "Medium",
+      "after": "Large",
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "measure_finger_width",
+    "section": "Step 2 - Size",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Finger width",
+    "changes": "Widens both finger holes and their lobes.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 20,
+      "after": 26,
+      "context": {
+        "size": "Measure my hand"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when size is Measure my hand."
+  },
+  {
+    "file": "two-sided",
+    "name": "attachment",
+    "section": "Step 3 - Attachment",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Attachment",
+    "changes": "Removes the strap slot from each arm, while the zip-tie stations stay because they hold the plates together.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Zip ties + Velcro strap",
+      "after": "Zip ties",
+      "context": {
+        "measure_plug_length": 40
+      },
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+  },
+  {
+    "file": "two-sided",
+    "name": "strap_width",
+    "section": "Step 3 - Attachment",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Strap width",
+    "changes": "Sets the strap the arm slot must clear, and when the slot's window between the zip-tie stations is shorter than the strap plus 1.5 mm the slot is left out.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 15,
+      "after": 25,
+      "context": {
+        "measure_plug_length": 40
+      },
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+  },
+  {
+    "file": "two-sided",
+    "name": "print_layout",
+    "section": "Step 4 - Print Layout",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Print layout",
+    "changes": "Puts both identical plates side by side in one file, or just one plate.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": "Both plates",
+      "after": "One plate",
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_wall_boost",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Extra wall on the plate",
+    "changes": "Thickens every wall around the finger holes, the cord channel, the zip-tie holes and the strap slot at once, so the plate outline grows and the openings shift to keep their walls.",
+    "diagram": {
+      "view": "top",
+      "style": "trace",
+      "before": 0,
+      "after": 2,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_thickness",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Plate thickness",
+    "changes": "Thickens each plate, so the finished pair is twice as thick.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 4,
+      "after": 6,
+      "context": {},
+      "plug": "default",
+      "crop": null,
+      "at": 3
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_grip_bite",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Grip bite",
+    "changes": "Squeezes the plug harder or softer, because the arms close in by this much per side against the plug's width.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": -1,
+      "after": -2,
+      "context": {
+        "plug_sides": "Flat sides"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 45
+    },
+    "note": "Only acts when plug_sides is Flat sides or a plug preset is chosen."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_cradle_depth",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Cradle depth",
+    "changes": "Slopes each arm's gripping edge from the mating face down to the outer face, so two plates form a cradle that centers a round plug.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 2.5,
+      "after": 0,
+      "context": {
+        "plug_sides": "Rounded sides"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 45
+    },
+    "note": "Only acts when plug_sides is Rounded sides."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_grip_clearance",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Grip clearance",
+    "changes": "Opens the gap between the arms where the plates meet, so a hard round plug can drop in flat before the cradle holds it.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 0.5,
+      "after": 2,
+      "context": {
+        "plug_sides": "Rounded sides"
+      },
+      "plug": "default",
+      "crop": null,
+      "at": 45
+    },
+    "note": "Only acts when plug_sides is Rounded sides."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_cable_clearance",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Cord channel clearance",
+    "changes": "Widens the cord channel between the finger holes beyond the cord's thickness.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 0.8,
+      "after": 3,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -16,
+        -2,
+        16,
+        32
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_finger_fit",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Finger hole fit",
+    "changes": "Widens both finger holes beyond your finger width.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 1,
+      "after": 4,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_finger_wall",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Finger lobe wall",
+    "changes": "Thickens the wall around each finger hole, so the rounded lobes grow.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 5.0,
+      "after": 9,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_finger_inner_wall",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Wall beside the cord channel",
+    "changes": "Thickens the wall between the cord channel and each finger hole, pushing the finger holes outward.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 3.0,
+      "after": 6,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_tooth_diameter",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Tooth size",
+    "changes": "Cuts bigger or smaller scallops into the arms' gripping edges.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 2,
+      "after": 4,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_tooth_pitch",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Tooth spacing",
+    "changes": "Spaces the teeth farther apart or closer together along the gripping edges.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 2.8,
+      "after": 4.5,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_tooth_depth",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Tooth depth",
+    "changes": "Cuts each tooth deeper or shallower into the gripping edge.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 1,
+      "after": 0.3,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_grip_zone_start",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Toothed zone start",
+    "changes": "Moves where the teeth begin, measured back from the arm tips, and the arms lengthen when the zone needs the room.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4,
+      "after": 15,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_grip_zone_length",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Toothed zone length",
+    "changes": "Sets how far the teeth run along each arm instead of covering the whole plug body.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 0,
+      "after": 12,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_tip_flare",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Tip flare",
+    "changes": "Opens the gap wider right at the arm tips so the plug head can enter before the teeth bite.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 0.7,
+      "after": 3,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -26,
+        40,
+        26,
+        62
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_arm_tip_width",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Arm tip width",
+    "changes": "Widens the rounded tip of each arm, so the arms taper less.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 11,
+      "after": 16,
+      "context": {},
+      "plug": "default",
+      "crop": [
+        -26,
+        40,
+        26,
+        62
+      ]
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_edge_rounding",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Outer edge rounding",
+    "changes": "Rounds or squares the outer face's edge all around the plate, while the plug-contact face stays square.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 1.2,
+      "after": 0,
+      "context": {},
+      "plug": "default",
+      "crop": null,
+      "at": 3
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_strip_thickness",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Cable strip thickness",
+    "changes": "Thickens or removes the thin strip that bridges the cord channel on the outer face and ties the two arms together.",
+    "diagram": {
+      "view": "section-y",
+      "style": "fill",
+      "before": 1,
+      "after": 0,
+      "context": {},
+      "plug": "default",
+      "crop": null,
+      "at": 3
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_zip_hole_diameter",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie hole diameter",
+    "changes": "Widens the three zip-tie holes in each arm, and the stations shift to keep their walls.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4,
+      "after": 6,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": null
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_zip_placement",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie station placement",
+    "changes": "Switches the three zip-tie stations in each arm from the automatic positions to the three position dials.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": "Auto",
+      "after": "Manual",
+      "context": {
+        "measure_plug_length": 40
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Drawn on a 40 mm plug so the default manual positions sit on the arm."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_zip_pos_1",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie station 1 position",
+    "changes": "Slides the rear zip-tie station along each arm, measured from the cord end.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 4,
+      "after": 27,
+      "context": {
+        "measure_plug_length": 40,
+        "plate_zip_placement": "Manual"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_zip_pos_2",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie station 2 position",
+    "changes": "Slides the middle zip-tie station along each arm, and the strap slot's window moves with it.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 32,
+      "after": 36,
+      "context": {
+        "measure_plug_length": 40,
+        "plate_zip_placement": "Manual"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_zip_pos_3",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Zip-tie station 3 position",
+    "changes": "Slides the tip zip-tie station along each arm, and the strap slot's window moves with it.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 63,
+      "after": 58,
+      "context": {
+        "measure_plug_length": 40,
+        "plate_zip_placement": "Manual"
+      },
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_slot_inner_wall",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Wall between the teeth and the slot",
+    "changes": "Thickens the wall between the toothed edge and the strap slot, moving the slot outward.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 2.2,
+      "after": 5,
+      "context": {
+        "measure_plug_length": 40
+      },
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_velcro_slot_width",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Strap slot width",
+    "changes": "Widens the strap slot in each arm, and the arm bulges outward to keep its wall.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 9.3,
+      "after": 14,
+      "context": {
+        "measure_plug_length": 40
+      },
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+  },
+  {
+    "file": "two-sided",
+    "name": "plate_velcro_slot_length",
+    "section": "Advanced - Two-Sided Puller",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Strap slot length",
+    "changes": "Lengthens or shortens the strap slot along each arm, within the window between the zip-tie stations.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 28,
+      "after": 15,
+      "context": {
+        "measure_plug_length": 40
+      },
+      "plug": "default",
+      "crop": [
+        4,
+        24,
+        34,
+        64
+      ]
+    },
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+  },
+  {
+    "file": "two-sided",
+    "name": "quality",
+    "section": "Advanced - Render Quality",
+    "tier": "advanced",
+    "quick_start": false,
+    "title": "Render quality",
+    "changes": "Sets how many flat segments draw each curve and changes no dimension.",
+    "diagram": {
+      "view": "none",
+      "style": "fill",
+      "before": 64,
+      "after": null,
+      "context": {},
+      "plug": "default",
+      "crop": null
+    },
+    "note": "Changes no shape: it only sets the number of segments in every circle and arc."
+  }
+]
