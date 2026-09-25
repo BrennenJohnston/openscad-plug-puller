@@ -21,7 +21,7 @@
 //   permitted. Contact the maintainer for commercial use.
 // =============================================================================
 
-// Plug Puller 0.9 — Parametric Generator for the one-sided puller
+// Plug Puller 0.12.0 — Parametric Generator for the one-sided puller
 // The one-sided puller is the reworked v6 flat puller: a slab with a
 // two-level plug pocket whose side walls follow a parametric "plug side
 // rail", plus rail-placed zip-tie holes and velcro slots, finger bores, and a
@@ -127,7 +127,7 @@ strap_width = 15; // [10:1:25]
 hook_hand = "Right"; // [Right, Left]
 
 /* [Advanced - Zip Tie Placement] */
-// POWER USERS from here down - beginners can stop after Step 4. Where the flat tool's zip-tie holes sit. Auto (recommended) spaces them along the plug's side rail just outside the pocket wall and keeps them clear of every other feature. Manual places each pair with the position dials below.
+// POWER USERS from here down - beginners can stop after Step 4. Where the tool's zip-tie holes sit. Auto (recommended) spaces them along the plug's side rail just outside the pocket wall and keeps them clear of every other feature. Manual places each pair with the position dials below.
 zip_placement = "Auto"; // [Auto, Manual]
 // How many pairs of zip-tie holes (one hole per side of the plug pocket).
 zip_row_count = 2; // [1:1:3]
@@ -141,7 +141,7 @@ zip_pos_3 = 30; // [0:0.5:55]
 zip_edge_offset = 4; // [2.5:0.25:12]
 
 /* [Advanced - Velcro Placement] */
-// Where the flat tool's velcro strap openings sit. Auto (recommended) derives the wing region / classic-slot placement from the body. Manual slides a pair of classic slots along the plug side rail with the dial below (the Wing style always uses Auto).
+// Where the tool's velcro strap openings sit. Auto (recommended) derives the wing region / classic-slot placement from the body. Manual slides a pair of classic slots along the plug side rail with the dial below (the Wing style always uses Auto).
 velcro_placement = "Auto"; // [Auto, Manual]
 // Manual placement only: slot distance along the plug side rail, measured from the plug face toward the cord. (mm)
 velcro_pos = 12; // [0:0.5:55]

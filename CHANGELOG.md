@@ -100,7 +100,8 @@ rounded plugs, and both plates in one download.
 - **One-sided Customizer**: Step 1 comes first (Step 0 is gone), and
   the sections read `Step 4 - Cord Hook`, `Advanced - Zip Tie
   Placement` and `Advanced - Velcro Placement` (no "- Flat Tool"); the
-  Step 3 and Step 4 help texts describe the one tool.
+  Step 3, Step 4 and Advanced placement help texts describe the one
+  tool.
 - **Two-sided strap slot**: with Auto placement a plug too short for a
   velcro slot now gets none, with an orange preview note
   `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE`, instead of a red tag;
