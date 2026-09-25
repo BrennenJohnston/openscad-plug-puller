@@ -399,7 +399,6 @@ openscad-plug-puller/
     Measuring-Stencil/             # sizing cards, in Visual/ and Tactile/ label modes
   docs/
     Plug_Puller_Reference.md       # exhaustive engineering reference
-    Plug_Puller_Complete_Guide.pdf # printable complete guide
     Plug_Puller_Measuring_Template.pdf  # printable 1:1 measuring template
     Plug_Puller_Outline_Sheets.pdf # all nine 1:1 outline sheets as one printable PDF
     guides/                        # beginner guides: quick start, web customizer, measuring, fit troubleshooting
@@ -468,7 +467,6 @@ Organized by audience — start in the row that matches you.
 | [`docs/guides/print-preview-outlines.md`](docs/guides/print-preview-outlines.md) | Try before you print: 1:1 outline sheets for every quick-select combination + the measuring stencil |
 | [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf) | All nine 1:1 outline sheets in one printable PDF with a cover index |
 | [`docs/guides/fit-troubleshooting.md`](docs/guides/fit-troubleshooting.md) | Symptom → which measurement to nudge → by how much; warning-tag decoder |
-| [`docs/Plug_Puller_Complete_Guide.pdf`](docs/Plug_Puller_Complete_Guide.pdf) | The complete guide as a single printable PDF |
 
 ### For power users (the Advanced and Custom tiers)
 
