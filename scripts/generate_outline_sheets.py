@@ -63,7 +63,7 @@ TWO_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
 STL_DIR = PROJECT_ROOT / "tmp_renders" / "outline_sheets"
 DEFAULT_OUT = PROJECT_ROOT / "docs" / "guides" / "outline-sheets"
 
-MODEL_VERSION = "0.9"
+MODEL_VERSION = "0.12.0"
 
 # ---------------------------------------------------------------------------
 # The quick-select matrix

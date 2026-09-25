@@ -9,7 +9,7 @@ Versions below 1.0.0 are public preview releases: the model is complete
 and print-tested, but small refinements are expected before the **v1.0
 public milestone**.
 
-## [Unreleased]
+## [0.12.0] - 2026-09-24
 
 The two tools move into two files. The **one-sided puller** (the old
 flat tool) stays in `src/Plug_Puller_Parametric.scad`; the **two-sided
@@ -355,6 +355,7 @@ First public release.
   (`docs/Plug_Puller_Reference.md`).
 - Ready-to-print Small / Medium / Large sample STLs in `stl/`.
 
+[0.12.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.12.0
 [0.11.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.11.0
 [0.10.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.10.0
 [0.9.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.9.0

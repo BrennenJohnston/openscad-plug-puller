@@ -2,7 +2,7 @@
 
 [![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20NC%201.0.0-blue.svg)](LICENSE)
 [![OpenSCAD](https://img.shields.io/badge/OpenSCAD-2021.01%2B-orange.svg)](https://openscad.org/downloads.html)
-[![Version](https://img.shields.io/badge/version-0.10.0-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.12.0-brightgreen.svg)](CHANGELOG.md)
 [![CI: STL Validation](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml/badge.svg)](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml)
 
 Parametric OpenSCAD model of the **Plug Puller** — a handheld assistive
@@ -52,7 +52,7 @@ two-sided puller's serrated plates.
 
 ![The printed two-sided puller in use at a wall outlet — fingers through both holes, pulling the plug straight out](docs/images/clamshell-in-use-outlet.jpg)
 
-> **Version 0.10** — one step from the **v1.0** public milestone. The
+> **Version 0.12** — one step from the **v1.0** public milestone. The
 > geometry and guides are complete and print-tested, the shipped STLs
 > are CI-validated against golden fixtures, and the model is
 > customizable in the browser with nothing to install.
