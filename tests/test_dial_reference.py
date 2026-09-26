@@ -16,6 +16,7 @@ from scripts.build_dial_reference import (
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 MARKDOWN = PROJECT_ROOT / "docs" / "guides" / "dial-reference.md"
+QUICK_MARKDOWN = PROJECT_ROOT / "docs" / "guides" / "dial-quick-start.md"
 
 SAMPLE_ROWS = [
     {
@@ -98,3 +99,22 @@ def test_reference_markdown_matches_catalog() -> None:
     assert names == [r["name"] for r in rows]
     for row in rows:
         assert f"![{row['changes']}](../dials/{row['file']}/{row['name']}.svg)" in text, row["name"]
+
+
+def test_quick_start_has_exactly_the_quick_rows() -> None:
+    """The quick-start twin names exactly the catalog rows flagged
+    quick_start, in Customizer order, and no other dial; the builder's
+    quick mode keeps only those rows of the sample."""
+    md = build_markdown(SAMPLE_ROWS, SAMPLE_MAPPINGS, SAMPLE_INDEX, quick=True)
+    assert "#### `measure_plug_length`" in md
+    assert "plate_thickness" not in md
+    text = QUICK_MARKDOWN.read_text(encoding="utf-8")
+    names = re.findall(r"^#### `([a-z_0-9]+)`", text, re.M)
+    rows = load_catalog()
+    assert names == [r["name"] for r in rows if r["quick_start"]]
+    assert len(names) == 28
+    all_names = {r["name"] for r in rows}
+    quick_names = set(names)
+    for name in re.findall(r"`([a-z_0-9]+)`", text):
+        if name in all_names:
+            assert name in quick_names, f"{name} is not a quick-start dial"

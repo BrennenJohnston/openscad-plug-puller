@@ -74,10 +74,35 @@ NO_SHAPE = "This dial changes no shape."
 MOVES_LABEL = "Moves"
 TRIPS_LABEL = "Can trip"
 
+# The quick-start cut: the Steps 1-4 dials only, with an opener page.
+QUICK_TITLE = "Plug Puller Dial Quick Start"
+QUICK_DESCRIPTION = (
+    "The dials of the four Customizer steps of both pullers, one per page: which file to open, "
+    "then what each step's dial moves."
+)
+QUICK_OUT_PDF = PROJECT_ROOT / "docs" / "Plug_Puller_Dial_Quick_Start.pdf"
+QUICK_OUT_MD = PROJECT_ROOT / "docs" / "guides" / "dial-quick-start.md"
+OPENER_HEADING = "Which file to open"
+OPENER = (
+    "Measure your plug's thickness. Up to 24 mm: open the one-sided puller, "
+    "src/Plug_Puller_Parametric.scad. Thicker than 24 mm, or a plug you want held from both "
+    "sides such as a USB-C tip or a round extension-cord plug: open the two-sided puller, "
+    "src/Plug_Puller_Two_Sided.scad.",
+    "Each file has four steps at the top of its Customizer: your plug, your size, the "
+    "attachment, and one last choice (the hook hand in the one-sided file; the print layout "
+    "in the two-sided file). The dials on the next pages are those steps and nothing else.",
+)
+RED_TEXT = (
+    "If red text appears beside the part in the preview, read it: it names the measurement "
+    "to fix, and the part will not fit until it is gone."
+)
+
 # The title page and the contents pages. Measured on the first print of the
 # 118-row catalog (the contents flow over two pages in two columns); the verify
-# step asserts the total.
+# step asserts the total. The quick-start cut: the opener page (its title page)
+# and one contents page for 28 dials.
 FRONT_MATTER_PAGES = 3
+QUICK_FRONT_MATTER_PAGES = 2
 FIGURE_W_MM = 170.0
 FIGURE_MAX_H_MM = 140.0
 FIGURE_MAX_SCALE = 2.0  # a cropped detail is drawn at most twice its 1:1 size
@@ -225,17 +250,36 @@ def values_text(row: Dict[str, Any], code: bool = True) -> str:
 # ---------------------------------------------------------------------------
 
 
+def quick_rows(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return [r for r in rows if r.get("quick_start")]
+
+
 def build_markdown(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dict[str, Any]]],
-                   index: Sequence[Dict[str, Any]]) -> str:
+                   index: Sequence[Dict[str, Any]], quick: bool = False) -> str:
     idx = {(e["file"], e["name"]): e for e in index}
-    lines = [
-        f"# {TITLE}", "",
-        DESCRIPTION, "",
-        f"Model version {MODEL_VERSION}. The printable twin is `docs/Plug_Puller_Dial_Reference.pdf` "
-        "(one dial per page, with bookmarks and a linked contents page). The dial names are written "
-        "exactly as the Customizer shows them.", "",
-        f"In every picture: {LEGEND}.", "",
-    ]
+    if quick:
+        rows = quick_rows(rows)
+        lines = [
+            f"# {QUICK_TITLE}", "",
+            QUICK_DESCRIPTION, "",
+            f"Model version {MODEL_VERSION}. The printable twin is `docs/Plug_Puller_Dial_Quick_Start.pdf`; "
+            "every dial of both files is in `docs/guides/dial-reference.md`. The dial names are written "
+            "exactly as the Customizer shows them.", "",
+            f"## {OPENER_HEADING}", "",
+            OPENER[0], "",
+            OPENER[1], "",
+            RED_TEXT, "",
+            f"In every picture: {LEGEND}.", "",
+        ]
+    else:
+        lines = [
+            f"# {TITLE}", "",
+            DESCRIPTION, "",
+            f"Model version {MODEL_VERSION}. The printable twin is `docs/Plug_Puller_Dial_Reference.pdf` "
+            "(one dial per page, with bookmarks and a linked contents page). The dial names are written "
+            "exactly as the Customizer shows them.", "",
+            f"In every picture: {LEGEND}.", "",
+        ]
     for file_key, groups in grouped(rows, mappings):
         lines += [f"## {FILE_LABELS[file_key]}", ""]
         for section, in_section in groups:
@@ -303,7 +347,21 @@ def dial_id(row: Dict[str, Any]) -> str:
     return f"{row['file']}-{row['name']}"
 
 
-def title_page_html() -> str:
+def title_page_html(quick: bool = False) -> str:
+    if quick:
+        return f"""
+<section class="page front opener">
+  <h1>{_esc(QUICK_TITLE)}</h1>
+  <p class="subtitle">{_esc(QUICK_DESCRIPTION)}</p>
+  <p class="version">Model version {_esc(MODEL_VERSION)}</p>
+  <p class="opener-heading">{_esc(OPENER_HEADING)}</p>
+  <p class="opener">{_esc(OPENER[0])}</p>
+  <p class="opener">{_esc(OPENER[1])}</p>
+  <p class="opener red">{_esc(RED_TEXT)}</p>
+  <p class="legend">In every picture: {_esc(LEGEND)}.</p>
+  <p class="hint">The dial names are written exactly as the Customizer shows them. Every dial of both files is in the full dial reference.</p>
+</section>
+"""
     return f"""
 <section class="page front">
   <h1>{_esc(TITLE)}</h1>
@@ -359,9 +417,12 @@ def dial_page_html(row: Dict[str, Any], mrow: Optional[Dict[str, Any]], entry: D
 
 
 def build_html(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dict[str, Any]]],
-               index: Sequence[Dict[str, Any]], svgs: Dict[Tuple[str, str], str]) -> str:
+               index: Sequence[Dict[str, Any]], svgs: Dict[Tuple[str, str], str],
+               quick: bool = False) -> str:
     idx = {(e["file"], e["name"]): e for e in index}
-    pages = [title_page_html(), contents_html(rows, mappings)]
+    if quick:
+        rows = quick_rows(rows)
+    pages = [title_page_html(quick), contents_html(rows, mappings)]
     for file_key, groups in grouped(rows, mappings):
         first = True
         for _section, in_section in groups:
@@ -372,7 +433,7 @@ def build_html(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dic
                 first = False
     body = "\n".join(pages)
     return f"""<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>{_esc(TITLE)}</title>
+<html lang="en"><head><meta charset="utf-8"><title>{_esc(QUICK_TITLE if quick else TITLE)}</title>
 <style>
   @page {{ size: {PAGE_W_MM:g}mm {PAGE_H_MM:g}mm; margin: 0; }}
   html, body {{ margin: 0; padding: 0; font-family: Helvetica, Arial, sans-serif; color: black; }}
@@ -388,6 +449,11 @@ def build_html(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dic
   .front .version {{ font-size: 3.2mm; text-align: center; margin: 0 0 12mm; color: #444; }}
   .front .legend {{ font-size: 3.2mm; text-align: center; margin: 0 8mm 4mm; }}
   .front .hint {{ font-size: 3mm; text-align: center; color: #444; margin: 0 8mm; }}
+  .opener h1 {{ margin: 14mm 0 5mm; }}
+  .opener .version {{ margin-bottom: 8mm; }}
+  .opener .opener-heading {{ font-size: 4.2mm; font-weight: bold; margin: 0 0 3mm; }}
+  .opener .opener {{ font-size: 3.4mm; text-align: left; margin: 0 0 3.5mm; line-height: 1.4; }}
+  .opener .red {{ border: 0.5mm solid black; padding: 3mm 4mm; margin: 4mm 0 8mm; }}
   .contents .columns {{ column-count: 2; column-gap: 8mm; font-size: 2.7mm; }}
   .contents .file {{ font-weight: bold; font-size: 3.4mm; margin: 2mm 0 1mm; break-after: avoid; }}
   .contents .section {{ font-weight: bold; margin: 2mm 0 0.8mm; break-after: avoid; }}
@@ -412,8 +478,8 @@ def build_html(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dic
 """
 
 
-def expected_pages(rows: Sequence[Dict[str, Any]]) -> int:
-    return len(rows) + FRONT_MATTER_PAGES
+def expected_pages(rows: Sequence[Dict[str, Any]], front_matter: int = FRONT_MATTER_PAGES) -> int:
+    return len(rows) + front_matter
 
 
 # ---------------------------------------------------------------------------
@@ -447,8 +513,9 @@ def link_count(pdf: Path) -> int:
     return len(re.findall(rb"/Subtype\s*/Link", pdf.read_bytes()))
 
 
-def verify_reference_pdf(pdf: Path, rows: Sequence[Dict[str, Any]]) -> None:
-    verify_pdf(pdf, expected_pages(rows))
+def verify_reference_pdf(pdf: Path, rows: Sequence[Dict[str, Any]],
+                         front_matter: int = FRONT_MATTER_PAGES) -> None:
+    verify_pdf(pdf, expected_pages(rows, front_matter))
     titles = outline_titles(pdf)
     want = 2 + len(FILE_ORDER) + len(rows)  # the title, Contents, one per file, one per dial
     if len(titles) != want:
@@ -470,32 +537,38 @@ def verify_reference_pdf(pdf: Path, rows: Sequence[Dict[str, Any]]) -> None:
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--out", type=Path, default=OUT_PDF, help="the PDF path")
-    parser.add_argument("--markdown", type=Path, default=OUT_MD, help="the Markdown twin's path")
+    parser.add_argument("--quick", action="store_true", help="the quick-start cut: the Steps 1-4 dials only, with the opener page")
+    parser.add_argument("--out", type=Path, default=None, help="the PDF path (default: docs/Plug_Puller_Dial_Reference.pdf, or the quick-start PDF with --quick)")
+    parser.add_argument("--markdown", type=Path, default=None, help="the Markdown twin's path (default: docs/guides/dial-reference.md, or the quick-start twin with --quick)")
     parser.add_argument("--markdown-only", action="store_true", help="write the Markdown twin only (no browser)")
     parser.add_argument("--keep-html", action="store_true", help="keep the HTML under tmp_renders/dial_reference/")
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO, format="%(message)s")
 
+    quick = args.quick
+    out_pdf = args.out or (QUICK_OUT_PDF if quick else OUT_PDF)
+    out_md = args.markdown or (QUICK_OUT_MD if quick else OUT_MD)
+    front_matter = QUICK_FRONT_MATTER_PAGES if quick else FRONT_MATTER_PAGES
     rows = load_catalog()
     mappings = load_mappings()
     index = load_index()
-    args.markdown.parent.mkdir(parents=True, exist_ok=True)
-    args.markdown.write_text(build_markdown(rows, mappings, index), encoding="utf-8")
-    logger.info("Wrote %s (%d dials)", args.markdown, len(rows))
+    built = quick_rows(rows) if quick else rows
+    out_md.parent.mkdir(parents=True, exist_ok=True)
+    out_md.write_text(build_markdown(rows, mappings, index, quick=quick), encoding="utf-8")
+    logger.info("Wrote %s (%d dials)", out_md, len(built))
     if args.markdown_only:
         return 0
 
-    svgs = load_svgs(rows)
+    svgs = load_svgs(built)
     SCRATCH.mkdir(parents=True, exist_ok=True)
-    html_path = SCRATCH / "dial_reference.html"
-    html_path.write_text(build_html(rows, mappings, index, svgs), encoding="utf-8")
-    print_to_pdf(html_path, args.out, outline=True, user_data_dir=EDGE_PROFILE)
+    html_path = SCRATCH / ("dial_quick_start.html" if quick else "dial_reference.html")
+    html_path.write_text(build_html(rows, mappings, index, svgs, quick=quick), encoding="utf-8")
+    print_to_pdf(html_path, out_pdf, outline=True, user_data_dir=EDGE_PROFILE)
     if not args.keep_html:
         html_path.unlink()
-    verify_reference_pdf(args.out, rows)
-    logger.info("Wrote %s (%.1f KB)", args.out, args.out.stat().st_size / 1024)
+    verify_reference_pdf(out_pdf, built, front_matter)
+    logger.info("Wrote %s (%.1f KB)", out_pdf, out_pdf.stat().st_size / 1024)
     return 0
 
 
