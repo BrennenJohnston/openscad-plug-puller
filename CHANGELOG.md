@@ -68,9 +68,14 @@ public milestone**.
 - **Six images renamed** for the two-tool vocabulary (`clamshell-*` to
   `two-sided-*`, `flat-tool-medium-render.png` to
   `one-sided-medium-render.png`); every link updated.
-- **`strap_width` help text** (one-sided file): it now says the wing
-  opening does not change with the number, which is only compared against
-  the strap (the W-14 tag). No geometry changed.
+- **Seven Custom help texts** (one-sided file) now say what the dial
+  really does: `strap_width` is only compared against the strap (the W-14
+  tag) and does not size the wing opening; `custom_t_hook_gap_offset`,
+  `custom_t_hook_gap_side_rounding`, `custom_pocket_dome_drop` and
+  `custom_t_hook_tip_drop` change no shape of the printed tool;
+  `custom_zip_tie_width_spacing` moves no hole and only feeds the auto-fit
+  keep-out; `custom_t_hook_leg_offset` moves nothing on the hook and only
+  pushes the finger holes through the auto-fit clamp. No geometry changed.
 - **Wording:** the green preview tag is written as the file prints it
   (`Medium: ...`); US spellings throughout; the MakerWorld quick start's
   preset table lists every preset of both files; the reference no longer
