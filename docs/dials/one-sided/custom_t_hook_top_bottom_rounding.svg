@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="65.34mm" height="62.10mm" viewBox="0 0 65.34 62.10" role="img">
+<title>Hook edge rounding</title>
+<desc>Flares the top and bottom edges of the cord hook's slot and crossbar. Before: 0. After: 2.</desc>
+<rect width="65.34" height="62.10" fill="white"/>
+<text x="32.67" y="5.32" font-family="Helvetica, Arial, sans-serif" font-size="3.32" font-weight="bold" text-anchor="middle" fill="#000">custom_t_hook_top_bottom_rounding</text>
+<text x="32.67" y="9.55" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">0 → 2</text>
+<text x="32.67" y="13.80" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(size: Custom, section-x: 4.5)</text>
+<path d="M 6.00 20.65 L 31.50 20.65 L 31.50 40.65 L 6.00 40.65 L 6.00 20.65 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 21.19 41.28 L 21.39 41.01 L 22.04 40.65 L 29.77 40.65 L 30.23 40.45 L 30.70 40.09 L 30.89 39.40 L 30.94 38.11 L 40.50 38.11 L 41.61 38.22 L 42.89 38.53 L 44.42 39.22 L 45.27 39.88 L 45.55 40.36 L 45.59 40.61 L 45.55 42.20 L 45.44 42.45 L 45.02 42.91 L 44.42 43.35 L 43.69 43.73 L 42.48 44.16 L 41.21 44.41 L 9.81 44.42 L 9.85 41.29 L 21.19 41.28 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 58.43 38.14 L 59.34 38.16 L 59.29 44.46 L 58.19 44.41 L 57.35 44.27 L 55.70 43.73 L 54.98 43.35 L 54.38 42.91 L 53.96 42.45 L 53.82 41.96 L 53.85 40.37 L 53.96 40.12 L 54.38 39.66 L 55.32 39.02 L 56.51 38.53 L 57.35 38.30 L 58.43 38.14 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 57.33 44.26 L 58.20 44.26 L 58.21 44.06 L 58.53 44.06 L 58.54 43.86 L 58.76 43.85 L 58.77 43.66 L 58.93 43.65 L 58.94 43.46 L 59.07 43.45 L 59.07 43.26 L 59.17 43.25 L 59.34 42.46 L 59.34 44.46 L 58.19 44.41 L 57.33 44.26 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 57.32 38.31 L 58.19 38.16 L 59.34 38.11 L 59.34 40.11 L 59.17 39.32 L 59.07 39.31 L 59.07 39.11 L 58.94 39.11 L 58.93 38.91 L 58.77 38.91 L 58.76 38.71 L 58.54 38.71 L 58.53 38.51 L 58.21 38.51 L 58.20 38.31 L 57.32 38.31 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="32.67" y="54.06" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="32.67" y="57.44" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="32.67" y="60.82" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>

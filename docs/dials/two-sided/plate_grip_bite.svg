@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64.00mm" height="41.57mm" viewBox="0 0 64.00 41.57" role="img">
+<title>Grip bite</title>
+<desc>Squeezes the plug harder or softer, because the arms close in by this much per side against the plug's width. Before: -1. After: -2.</desc>
+<rect width="64.00" height="41.57" fill="white"/>
+<text x="32.00" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">plate_grip_bite</text>
+<text x="32.00" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">-1 → -2</text>
+<text x="32.00" y="13.25" font-family="Helvetica, Arial, sans-serif" font-size="2.75" text-anchor="middle" fill="#000">(plug_sides: Flat sides, section-y: 45)</text>
+<path d="M 22.00 19.93 L 42.00 19.93 L 42.00 23.93 L 22.00 23.93 L 22.00 19.93 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 9.67 22.74 L 9.71 19.94 L 22.35 19.97 L 22.35 23.65 L 21.88 23.90 L 10.75 23.92 L 10.29 23.76 L 10.00 23.54 L 9.75 23.14 L 9.67 22.74 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 41.65 19.99 L 41.70 19.93 L 54.29 19.94 L 54.29 23.02 L 54.15 23.35 L 53.91 23.63 L 53.49 23.86 L 53.13 23.93 L 42.12 23.90 L 41.65 23.65 L 41.65 19.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 10.45 19.93 L 10.49 23.03 L 10.71 23.45 L 10.97 23.70 L 11.30 23.86 L 11.67 23.93 L 10.87 23.93 L 10.39 23.82 L 10.00 23.54 L 9.71 23.03 L 9.67 19.93 L 10.45 19.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 21.65 23.93 L 22.35 23.66 L 22.35 19.93 L 23.35 19.93 L 23.35 23.67 L 22.77 23.92 L 21.65 23.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 41.65 19.93 L 41.65 23.66 L 42.00 23.86 L 42.35 23.93 L 41.23 23.92 L 40.65 23.67 L 40.65 19.93 L 41.65 19.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 52.33 23.93 L 52.81 23.82 L 53.12 23.62 L 53.36 23.35 L 53.51 23.03 L 53.55 19.93 L 54.33 19.93 L 54.33 22.79 L 54.21 23.25 L 53.91 23.62 L 53.49 23.86 L 52.33 23.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="32.00" y="33.53" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="32.00" y="36.91" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="32.00" y="40.29" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>

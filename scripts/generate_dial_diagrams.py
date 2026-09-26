@@ -6,8 +6,9 @@ its Customizer defaults (plus the row's ``context``) and with the row's dial
 moved to its ``after`` value. The top view of each render is extracted with
 the outline-sheet helpers (the shadow silhouette with its through-holes plus
 the pocket recess for the one-sided puller; the contact-face section for a
-two-sided plate), and the symmetric difference of the two views is the red
-dashed trace of "what this dial moves". Each diagram is an SVG at
+two-sided plate; the Z-only dials get a vertical section instead, drawn
+with Z up the page), and the symmetric difference of the two views is the
+red dashed trace of "what this dial moves". Each diagram is an SVG at
 1 unit = 1 mm under ``docs/dials/<file>/<name>.svg``: the black default
 outline, the teal plug, the red trace, the legend line, and a ``<title>`` /
 ``<desc>`` pair carrying the row's words. Rows whose ``view`` is ``none``
@@ -40,6 +41,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
+import numpy as np
 import shapely
 import trimesh
 from shapely.geometry import LineString, Polygon
@@ -92,9 +94,9 @@ NO_SHAPE_SENTENCE = "This dial changes no shape."
 # The print_layout row keeps the file's own layout logic so its two states
 # differ.
 RENDER_MODE = {ONE_SIDED: ("render_mode", "Body Only"), TWO_SIDED: ("render_mode", "One plate")}
-VIEWS_BUILT = ("top", "none")  # C2 adds section-x / section-y
-VIEW_CHOICES = ("top", "none", "section", "all")
 SECTION_VIEWS = ("section-x", "section-y")
+VIEWS_BUILT = ("top", "none") + SECTION_VIEWS
+VIEW_CHOICES = ("top", "none", "section", "all")
 
 MEASURE_KEYS = (
     "measure_plug_length",
@@ -252,6 +254,29 @@ def largest_body(mesh: trimesh.Trimesh) -> trimesh.Trimesh:
     return max(parts, key=lambda p: abs(p.volume))
 
 
+COUPON_FRACTION = 0.01  # a body under 1 % of the largest is a warning coupon's letter
+
+
+def main_bodies(mesh: trimesh.Trimesh) -> trimesh.Trimesh:
+    """The tool without its warning coupons: every body at least 1 % of the
+    largest one (a two-sided plate with no cable strip is two equal halves,
+    and both belong in the picture)."""
+    parts = mesh.split(only_watertight=False)
+    if len(parts) <= 1:
+        return mesh
+    biggest = max(abs(p.volume) for p in parts)
+    keep = [p for p in parts if abs(p.volume) >= COUPON_FRACTION * biggest]
+    return trimesh.util.concatenate(keep) if len(keep) > 1 else keep[0]
+
+
+def _union(polys: Sequence[Polygon]):
+    """The union of polygons that may each be slightly invalid (a section
+    ring can self-touch at a rounded edge): every input is fixed first, so
+    GEOS does not raise a topology exception on the union."""
+    fixed = [_fix(p) for p in polys if not p.is_empty]
+    return _fix(shapely.union_all(fixed)) if fixed else Polygon()
+
+
 @dataclass
 class Outline:
     """A top view: solid polygons (through-holes as interiors) and the
@@ -262,10 +287,10 @@ class Outline:
 
     @property
     def filled(self):
-        solid = _fix(shapely.union_all(self.solids)) if self.solids else Polygon()
+        solid = _union(self.solids)
         if not self.recess:
             return solid
-        return _fix(solid.difference(_fix(shapely.union_all(self.recess))))
+        return _fix(solid.difference(_union(self.recess)))
 
     @property
     def bounds(self) -> Tuple[float, float, float, float]:
@@ -315,10 +340,93 @@ def outline_two_sided(mesh: trimesh.Trimesh) -> Outline:
 
 
 def top_view(file_key: str, stl: Path, params: Dict[str, Any]) -> Outline:
-    mesh = largest_body(trimesh.load(stl, force="mesh"))
+    mesh = main_bodies(trimesh.load(stl, force="mesh"))
     if file_key == ONE_SIDED:
         return outline_one_sided(mesh, params)
     return outline_two_sided(mesh)
+
+
+# ---------------------------------------------------------------------------
+# Section views (the Z-only dials)
+# ---------------------------------------------------------------------------
+#
+# A vertical cut through the body, drawn with Z up the page. ``axis`` "x" is
+# the plane x = at: the page's horizontal axis is the model's Y, mirrored so
+# the plate end (largest Y) points LEFT; "y" is the plane y = at: the page's
+# horizontal axis is the model's X. The rings come straight from the 3-D
+# section (the cut plane is axis-aligned, so dropping the constant
+# coordinate is the projection; no reprojection frame involved).
+
+
+def section_polygons(mesh: trimesh.Trimesh, axis: str, at: float) -> List[Polygon]:
+    if axis == "x":
+        origin, normal, cols, sign = [at, 0.0, 0.0], [1.0, 0.0, 0.0], (1, 2), -1.0
+    elif axis == "y":
+        origin, normal, cols, sign = [0.0, at, 0.0], [0.0, 1.0, 0.0], (0, 2), 1.0
+    else:
+        raise ValueError(f"axis must be 'x' or 'y', not {axis!r}")
+    sec = mesh.section(plane_origin=origin, plane_normal=normal)
+    if sec is None:
+        return []
+    rings = []
+    for d in sec.discrete:
+        r = np.asarray(d)[:, cols].copy()
+        r[:, 0] *= sign
+        rings.append(r)
+    return rings_to_polygons(rings)
+
+
+def section_view(stl: Path, view: str, at: float) -> Tuple[Outline, Tuple[float, float, float]]:
+    """The section polygons of the largest body as an Outline, plus the
+    body's (ymin, ymax, zmax) for placing the plug."""
+    mesh = main_bodies(trimesh.load(stl, force="mesh"))
+    axis = "x" if view == "section-x" else "y"
+    polys = section_polygons(mesh, axis, at)
+    if not polys:
+        raise RuntimeError(f"the plane {axis} = {at} misses the body ({stl.name})")
+    (_x0, y0, _z0), (_x1, y1, z1) = mesh.bounds
+    return Outline(solids=polys, recess=[]), (float(y0), float(y1), float(z1))
+
+
+def pocket_floor_z(params: Dict[str, Any]) -> float:
+    if params.get("size") == "Custom":
+        return float(params["custom_pocket_floor"])
+    meas = {k: v for k, v in params.items() if k in fit_formulas.DEFAULT_MEASUREMENTS}
+    meas.update(effective_measurements(ONE_SIDED, params))
+    return float(fit_formulas.derive(meas)["pocket_floor"])
+
+
+def section_plug_polygon(file_key: str, params: Dict[str, Any], view: str, at: float,
+                         body: Tuple[float, float, float]) -> Optional[Polygon]:
+    """The plug in the cut, or None when the plane does not pass through it.
+
+    One-sided, section-x: length (page X, plate end left) by thickness
+    (page Y), standing on the pocket floor, thickness at the prong end at
+    the plate end. Two-sided, section-y: the plug's width at that station
+    by the plate thickness, centred on the channel and on the plate's
+    mid-height.
+    """
+    m = effective_measurements(file_key, params)
+    _y0, y1, z1 = body
+    length = m["measure_plug_length"]
+    if file_key == ONE_SIDED:
+        if view != "section-x" or abs(at) > m["measure_plug_width_prong_end"] / 2:
+            return None
+        floor = pocket_floor_z(params)
+        u_plate, u_cord = -y1, -(y1 - length)
+        t_prong = m["measure_plug_thickness_prong_end"]
+        t_cord = m["measure_plug_thickness_cord_end"]
+        return Polygon([(u_plate, floor), (u_cord, floor),
+                        (u_cord, floor + t_cord), (u_plate, floor + t_prong)])
+    if view != "section-y":
+        return None
+    y_back = y1 - length
+    if not (y_back <= at <= y1 + 2.0):
+        return None
+    f = min(1.0, max(0.0, (at - y_back) / max(1e-6, length)))
+    w = m["measure_plug_width_cord_end"] + f * (m["measure_plug_width_prong_end"] - m["measure_plug_width_cord_end"])
+    mid = z1 / 2
+    return Polygon([(-w / 2, mid - z1 / 2), (w / 2, mid - z1 / 2), (w / 2, mid + z1 / 2), (-w / 2, mid + z1 / 2)])
 
 
 # ---------------------------------------------------------------------------
@@ -332,7 +440,19 @@ def _regions_of(diff) -> Tuple[List[Polygon], float]:
     planning prototype's counts), then every part that is thinner than
     0.04 mm everywhere (render noise: an opening would delete it) or under
     0.4 mm² is dropped."""
-    closed = _fix(diff).buffer(OPEN_CLOSE).buffer(-OPEN_CLOSE)
+    # Zero-area parts (degenerate polygons a symmetric difference leaves
+    # along shared edges) are dropped first, and the erosion runs part by
+    # part: GEOS 3.13 erodes a multipolygon that still carries them to
+    # nothing (an 11.4 mm² band vanished once in three renders of the
+    # plug-thickness rows before this).
+    parts = [p for p in as_polygons(_fix(diff)) if p.area > 1e-6]
+    if not parts:
+        return [], 0.0
+    # The dilated parts are snapped to a 1e-6 mm grid before the union:
+    # GEOS raised a non-noded intersection on the countersink row's
+    # near-coincident sliver edges without it.
+    dilated = _union([shapely.set_precision(p.buffer(OPEN_CLOSE), 1e-6) for p in parts])
+    closed = _union([q.buffer(-OPEN_CLOSE) for q in as_polygons(dilated)])
     regions = [
         p for p in as_polygons(closed)
         if p.area >= MIN_REGION_AREA and not p.buffer(-OPEN_CLOSE).is_empty
@@ -350,9 +470,6 @@ def outline_regions(before: Outline, after: Outline) -> Tuple[List[Polygon], flo
     """The changed regions of two top views: the solids' difference (the
     outer edge and every through-hole, even one that sits inside the
     recess) united with the recess rings' difference."""
-    def _union(polys: Sequence[Polygon]):
-        return _fix(shapely.union_all(list(polys))) if polys else Polygon()
-
     solids = _fix(_union(after.solids).symmetric_difference(_union(before.solids)))
     recess = _fix(_union(after.recess).symmetric_difference(_union(before.recess)))
     return _regions_of(solids.union(recess))
@@ -523,7 +640,7 @@ def compose_svg(
     if crop:
         x0, y0, x1, y1 = (float(v) for v in crop)
     else:
-        bx0, by0, bx1, by1 = shapely.union_all([before, after]).bounds
+        bx0, by0, bx1, by1 = shapely.union_all([before, after] + ([plug] if plug is not None else [])).bounds
         x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
     if x1 - x0 < MIN_WIDTH:
         pad = (MIN_WIDTH - (x1 - x0)) / 2
@@ -646,31 +763,43 @@ def build_none(row: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
     return index_row(row, 0, 0.0, [])
 
 
-def build_top(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
+def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
+    """A top-view or section diagram: two renders, two views, the diff."""
     file_key = row["file"]
     d = row["diagram"]
+    view = d["view"]
+    at = float(d.get("at") or 0.0)
     base, after_params = parameter_sets(row, defaults)
     tags: List[str] = []
     outlines = []
+    body = None
     for params in (base, after_params):
         defines = defines_for(file_key, row["name"], params, defaults)
         stl, log, _hit = renderer.render(file_key, defines)
         tags.extend(t for t in warning_tags(log) if t not in tags)
-        outlines.append(top_view(file_key, stl, params))
+        if view == "top":
+            outlines.append(top_view(file_key, stl, params))
+        else:
+            outline, body = section_view(stl, view, at)
+            outlines.append(outline)
     b_out, a_out = outlines
-    plug = plug_polygon(file_key, after_params, a_out)
-    before_filled, after_filled = b_out.filled, a_out.filled
+    context = dict(d.get("context") or {})
+    if view == "top":
+        plug = plug_polygon(file_key, after_params, a_out)
+    else:
+        plug = section_plug_polygon(file_key, after_params, view, at, body)
+        context[view] = at  # the cut plane, shown with the context
     regions, area = outline_regions(b_out, a_out)
     svg = compose_svg(
-        before=before_filled,
-        after=after_filled,
+        before=b_out.filled,
+        after=a_out.filled,
         plug=plug,
         title=row["title"],
         changes=row["changes"],
         name=row["name"],
         before_value=d["before"],
         after_value=d["after"],
-        context=d.get("context") or {},
+        context=context,
         style=d["style"],
         crop=d.get("crop"),
         before_outline=b_out,
@@ -691,7 +820,7 @@ def run_rows(
     renderer: Optional[Renderer] = None,
 ) -> List[Dict[str, Any]]:
     """Build the diagrams of ``rows`` under ``out_dir``; return their index
-    rows (rows whose view is not built yet are skipped with a log line)."""
+    rows (rows with a view this script does not build are skipped with a log line)."""
     out_dir = Path(out_dir)
     renderer = renderer or Renderer(cache_dir=Path(cache_dir), force=force)
     defaults = {key: mapping_defaults(load_mapping(key)) for key in SCADS}
@@ -701,9 +830,9 @@ def run_rows(
         t0 = time.time()
         if view == "none":
             entry = build_none(row, out_dir)
-        elif view == "top":
+        elif view == "top" or view in SECTION_VIEWS:
             r0, h0 = renderer.renders, renderer.hits
-            entry = build_top(row, renderer, defaults[row["file"]], out_dir)
+            entry = build_diff(row, renderer, defaults[row["file"]], out_dir)
             logger.info(
                 "%s %s: %d region(s), %.1f mm2, %d render(s), %d cache hit(s), %.1f s%s",
                 row["file"], row["name"], entry["regions"], entry["changed_area_mm2"],
@@ -711,7 +840,7 @@ def run_rows(
                 f", tags {entry['tags']}" if entry["tags"] else "",
             )
         else:
-            logger.warning("%s %s: view %s is not built yet (C2); skipped", row["file"], row["name"], view)
+            logger.warning("%s %s: view %s is not one this script builds; skipped", row["file"], row["name"], view)
             continue
         produced.append(entry)
     return produced
@@ -772,7 +901,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     renderer = Renderer(cache_dir=args.cache, force=args.force)
     produced = run_rows(rows, out_dir=args.out, cache_dir=args.cache, force=args.force, renderer=renderer)
     index_path = write_index(args.out, produced, catalog)
-    empty = [f"{e['file']}/{e['name']}" for e in produced if e["view"] == "top" and e["regions"] == 0]
+    empty = [f"{e['file']}/{e['name']}" for e in produced if e["view"] != "none" and e["regions"] == 0]
     missing = [f"{r['file']}/{r['name']}" for r in rows
                if (r["file"], r["name"]) not in {(e["file"], e["name"]) for e in produced}]
     if empty:

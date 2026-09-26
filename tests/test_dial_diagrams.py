@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 
 import pytest
+import trimesh
 from shapely.geometry import Polygon
 
 from scripts.generate_dial_diagrams import (
@@ -23,6 +24,7 @@ from scripts.generate_dial_diagrams import (
     compose_svg,
     load_catalog,
     run_rows,
+    section_polygons,
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -66,6 +68,16 @@ def test_svg_text_equivalent() -> None:
         assert piece in svg
     assert svg.count('stroke="#d81b1b"') == 1
     assert "href=" not in svg and "url(http" not in svg
+
+
+def test_section_polygons_box() -> None:
+    """A vertical section of a 40 x 30 x 6 mm box: at x = 0 one polygon of
+    30 x 6 mm, at y = 0 one polygon of 40 x 6 mm."""
+    box = trimesh.creation.box(extents=(40, 30, 6))
+    px = section_polygons(box, axis="x", at=0)
+    assert len(px) == 1 and abs(px[0].area - 180.0) < 0.5
+    py = section_polygons(box, axis="y", at=0)
+    assert len(py) == 1 and abs(py[0].area - 240.0) < 0.5
 
 
 def test_none_svg() -> None:
