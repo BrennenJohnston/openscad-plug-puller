@@ -65,7 +65,7 @@
 
 /* [Step 1 - Your Plug] */
 // The fastest start: pick your plug from this list and every measurement below fills in automatically. Pick "Measure my plug" to type your own numbers instead - docs/guides/measuring-guide.md walks you through each one in about 5 minutes.
-plug_preset = "Measure my plug"; // [Measure my plug, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15]
+plug_preset = "Measure my plug"; // [Measure my plug, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15, Wide 2-prong appliance plug - NEMA 1-15]
 // How far the plug body sticks out, from the surface it plugs into to the plug's back end where the cord starts. On a wall outlet, measure from the wall plate; on a laptop or charger, from the device's edge. The tool's pocket runs this full length. Skip if you picked a plug preset. (mm)
 measure_plug_length = 25.5; // [12:0.5:85]
 // Plug width at the PRONG END: straight across the plastic body just behind the prongs (not the metal prongs), the WIDE way, holding the ruler parallel to the wall. On a USB-C or charger tip, just behind the metal tip. Skip if you picked a plug preset. (mm)
@@ -299,6 +299,9 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 //   lamp       = 37.0 / 25.0-11.2 / 18.6-8.6  / 3.6
 //   standard   = 46.2 / 26.6-13.4 / 18.9-15.0 / 7.0
 //   heavy-duty = 43.8 / 25.8-21.9 / 27.0-27.0 / 8.2
+// The wide 2-prong appliance plug (the owner's US vacuum plug, measured with
+// a ruler; R2 Gate A) is straight-sided:
+//   wide 2-prong appliance = 38.0 / 34.0-34.0 / 16.0-16.0 / 5.0
 // The heavy-duty plug is 27.0 mm thick, past W-20's 24 mm limit: it belongs
 // to the two-sided puller file.
 
@@ -308,31 +311,37 @@ _eff_plug_length =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 37.0 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 46.2 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 43.8 :
+    plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 38.0 :
     measure_plug_length;
 _eff_plug_width_wall =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 25.0 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 26.6 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 25.8 :
+    plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 34.0 :
     measure_plug_width_prong_end;
 _eff_plug_width_cable =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.2 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.4 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 21.9 :
+    plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 34.0 :
     measure_plug_width_cord_end;
 _eff_plug_thickness_wall =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 18.6 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 18.9 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
+    plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 16.0 :
     measure_plug_thickness_prong_end;
 _eff_plug_thickness_cable =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 8.6 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 15.0 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
+    plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 16.0 :
     measure_plug_thickness_cord_end;
 _eff_cord_thickness =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 3.6 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 7.0 :
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 8.2 :
+    plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 5.0 :
     measure_cord_thickness;
 // Plug side taper (degrees), DERIVED from the two width stations over the
 // plug length — the sign automatically encodes which end of the plug is

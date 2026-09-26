@@ -19,7 +19,7 @@
 #   summary depends on all four.
 #
 # Pinned tooling:
-# - OpenSCAD 2026.01.03 nightly (Manifold backend) for byte-reproducible STLs
+# - OpenSCAD 2026.01.03 nightly (Manifold backend) for geometry-reproducible STLs
 # - Python 3.11
 # - Golden fixtures (tests/fixtures/**/reference.stl) are committed as plain
 #   binary STLs — no Git LFS required for a clone or CI run.
@@ -37,6 +37,8 @@ on:
       - "dist/**"
       - "presets/**"
       - "parameter_mapping.json"
+      - "parameter_mapping_two_sided.json"
+      - "dial_catalog.json"
       - "requirements-dev.txt"
       - "pytest.ini"
       - "ruff.toml"

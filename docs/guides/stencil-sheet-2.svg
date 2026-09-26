@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="279mm" viewBox="0 0 210 279">
+<rect x="0" y="0" width="210" height="279" fill="white"/>
+<text x="105.000" y="14.000" font-family="Helvetica, Arial, sans-serif" font-size="5.5" font-weight="bold" text-anchor="middle" fill="black">Plug Puller — Measuring Stencil Sheet</text>
+<text x="105.000" y="19.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="middle" fill="black">Print at 100% scale / “Actual size” — never “fit to page”. Check the calibration square before trusting anything on this sheet.</text>
+<rect x="14" y="26" width="50" height="50" fill="none" stroke="black" stroke-width="0.4"/>
+<text x="39.000" y="49.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">CALIBRATION</text>
+<text x="39.000" y="54.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="normal" text-anchor="middle" fill="black">50 × 50 mm</text>
+<text x="72.000" y="32.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">1. Measure this square with a ruler.</text>
+<text x="72.000" y="36.500" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">It must be exactly 50 × 50 mm — if not, your</text>
+<text x="72.000" y="41.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">print was scaled: re-print at 100%.</text>
+<text x="72.000" y="47.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="#444444">Card legend: docs/guides/starter-guide.md</text>
+<text x="72.000" y="52.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="#444444">Works on A4 and US Letter paper.</text>
+<text x="14.000" y="86.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">2. Plug silhouettes (1:1), continued — hold your plug against W (wide side) and T (thin side); if it matches, pick that preset in Step 1.</text>
+<polygon points="9.000,137.000 43.000,137.000 43.000,99.000 9.000,99.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<polygon points="46.000,137.000 62.000,137.000 62.000,99.000 46.000,99.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<circle cx="67.500" cy="134.500" r="2.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="26.000" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
+<text x="54.000" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
+<text x="67.500" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
+<text x="9.000" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P4</text>
+<text x="17.500" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Wide 2-prong NEMA 1-15</text>
+<text x="105.000" y="274.500" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#444444">openscad-plug-puller · measuring stencil sheet · scale 1:1 · prefer plastic? print stl/Measuring-Stencil/ · page 2 of 2</text>
+</svg>

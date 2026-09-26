@@ -10,10 +10,10 @@ model change (the shipped files are guarded by `tests/test_shipped_stls.py`).
 
 ```
 stl/
-  Plug-Puller/                 # 9 tools: 3 plug families x 3 hand sizes
+  Plug-Puller/                 # 21 tools: 5 plug families x 3 hand sizes, in every file that offers them
   Measuring-Stencil/
-    Visual/                    # debossed printed labels (8 files)
-    Tactile/                   # raised ADA characters + braille (8 files)
+    Visual/                    # debossed printed labels (9 files)
+    Tactile/                   # raised ADA characters + braille (9 files)
 ```
 
 ## Plug-Puller/
@@ -26,7 +26,11 @@ female hand, Large ≈ 95th-percentile male hand.
 | ----------- | ------------ | --------- |
 | Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
 | Standard 3-prong — NEMA 5-15 | `Plug-Puller_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
+| Wide 2-prong appliance plug — NEMA 1-15 | `Plug-Puller_Wide-2-Prong-Appliance_{Small,Medium,Large}.stl` | one-sided puller (one part) |
 | Heavy-duty extension cord — NEMA 5-15 | `Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
+| USB-C laptop tip | `Plug-Puller_Two-Sided_USB-C-Laptop-Tip_{Small,Medium,Large}.stl` | two-sided puller (**both plates**, Rounded sides) |
+| Flat 2-prong lamp — NEMA 1-15, two-sided | `Plug-Puller_Two-Sided_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
+| Standard 3-prong — NEMA 5-15, two-sided | `Plug-Puller_Two-Sided_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
 
 > **Each two-sided file holds both plates; flip one after printing.** Then
 > zip-tie the pair face to face around the plug.
@@ -49,6 +53,7 @@ raised ADA-size characters plus a fold-flat Grade 2 braille flap on every card
 | `P1_Lamp-Plug-Gauge` | flat 2-prong lamp plug silhouette (NEMA 1-15) |
 | `P2_Standard-3-Prong-Gauge` | standard 3-prong plug silhouette (NEMA 5-15) |
 | `P3_Heavy-Duty-Cord-Gauge` | heavy-duty round cord silhouette (NEMA 5-15) |
+| `P4_Wide-2-Prong-Appliance-Gauge` | wide 2-prong appliance plug silhouette (NEMA 1-15) |
 | `R1_Ruler-100mm` | a tactile 100 mm ruler |
 | `C1_Cord-Gauge` | open-slot cord gauge that slides onto an installed cord |
 | `F1_Finger-Sizing-15-25mm` | finger-sizing holes Ø 15–25 mm |

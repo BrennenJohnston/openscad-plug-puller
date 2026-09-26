@@ -40,6 +40,7 @@ import argparse
 import datetime as _dt
 import logging
 import math
+import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -72,12 +73,17 @@ MODEL_VERSION = "0.12.0"
 SIZES = ["Small", "Medium", "Large"]
 
 # Station measurements each plug_preset prefills (mirrors the `_eff_plug_*`
-# quick-select table in the v7 SCAD — keep in sync).
+# quick-select tables in both SCAD files — keep in sync), and the tool files
+# that offer the preset: "one-sided" gets a flat sheet per size, "two-sided"
+# a plate sheet per size. The two-sided file uses the width numbers only.
+ONE_SIDED = "one-sided"
+TWO_SIDED = "two-sided"
 PLUG_PRESETS: Dict[str, Dict] = {
     "flat-2-prong": {
         "customizer": "Flat 2-prong lamp plug - NEMA 1-15",
         "label": "Flat 2-prong lamp plug (NEMA 1-15)",
         "short": "Flat 2-prong lamp plug",
+        "files": (ONE_SIDED, TWO_SIDED),
         "measurements": {
             "measure_plug_length": 37.0,
             "measure_plug_width_prong_end": 25.0,
@@ -91,6 +97,7 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "customizer": "Standard 3-prong plug - NEMA 5-15",
         "label": "Standard 3-prong plug (NEMA 5-15)",
         "short": "Standard 3-prong plug",
+        "files": (ONE_SIDED, TWO_SIDED),
         "measurements": {
             "measure_plug_length": 46.2,
             "measure_plug_width_prong_end": 26.6,
@@ -104,6 +111,7 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "customizer": "Heavy-duty extension cord - NEMA 5-15",
         "label": "Heavy-duty extension cord (NEMA 5-15)",
         "short": "Heavy-duty extension cord",
+        "files": (TWO_SIDED,),
         "measurements": {
             "measure_plug_length": 43.8,
             "measure_plug_width_prong_end": 25.8,
@@ -113,7 +121,74 @@ PLUG_PRESETS: Dict[str, Dict] = {
             "measure_cord_thickness": 8.2,
         },
     },
+    # The USB-C tip is a two-sided-only plug: the four numbers the two-sided
+    # file carries. Its thin dimension is not measured yet, so no thickness
+    # keys (the plate sheet needs the length and the cord only).
+    "usb-c-laptop-tip": {
+        "customizer": "USB-C laptop tip",
+        "label": "USB-C laptop tip",
+        "short": "USB-C laptop tip",
+        "files": (TWO_SIDED,),
+        "sides": "Rounded sides",
+        "measurements": {
+            "measure_plug_length": 23.0,
+            "measure_plug_width_prong_end": 13.0,
+            "measure_plug_width_cord_end": 13.0,
+            "measure_cord_thickness": 7.0,
+        },
+    },
+    "wide-2-prong-appliance": {
+        "customizer": "Wide 2-prong appliance plug - NEMA 1-15",
+        "label": "Wide 2-prong appliance plug (NEMA 1-15)",
+        "short": "Wide 2-prong appliance plug",
+        "files": (ONE_SIDED,),
+        "measurements": {
+            "measure_plug_length": 38.0,
+            "measure_plug_width_prong_end": 34.0,
+            "measure_plug_width_cord_end": 34.0,
+            "measure_plug_thickness_prong_end": 16.0,
+            "measure_plug_thickness_cord_end": 16.0,
+            "measure_cord_thickness": 5.0,
+        },
+    },
 }
+
+
+def body_half_width_at_y(d: Dict, y: float) -> float:
+    """Mirror of the SCAD's body_half_width_at_y(): the raw octagon's
+    half-width at height y, interpolated between its control points."""
+    length = d["puller_length"]
+    side_corner = d["puller_side_corner"]
+    middle_y = (side_corner + length) / 2
+    bot, wide, mid, top = (
+        d["puller_bottom_corners"] / 2,
+        d["puller_bottom_width"] / 2,
+        d["puller_middle_width"] / 2,
+        d["puller_top_width"] / 2,
+    )
+    if y <= side_corner:
+        return bot + (wide - bot) * y / side_corner
+    if y <= middle_y:
+        return wide + (mid - wide) * (y - side_corner) / (middle_y - side_corner)
+    return mid + (top - mid) * (y - middle_y) / (length - middle_y)
+
+
+def console_pocket_width(log: Path) -> Optional[float]:
+    """The adapted pocket width from a render's console (the line
+    ``pocket_width = <mm>`` of the Final Adapted Dimensions block)."""
+    if not log.exists():
+        return None
+    m = re.search(r'"  pocket_width = ([-\d.]+)', log.read_text(encoding="utf-8", errors="replace"))
+    return float(m.group(1)) if m else None
+
+
+def pocket_width_effective(d: Dict) -> float:
+    """The pocket width the tool builds: the derived width, capped by the
+    one-sided auto-fit clamp (the body outline 3 mm inside the recess's
+    widest station). Every other auto-fit clamp is idle at the shipped
+    presets; this one bites for the wide appliance plug."""
+    y = min(d["puller_length"] - d["pocket_dome_drop"], d["puller_length"])
+    return max(8.0, min(d["pocket_width"], 2 * body_half_width_at_y(d, y) - 3))
 
 # Clamshell defaults mirrored from the v7 Customizer block (used for the
 # pure-Python clamshell dimension mirror below).
@@ -126,6 +201,7 @@ CLAM_ZIP_HOLE_DIAMETER = 4.0
 CLAM_VELCRO_SLOT = (9.3, 28.0)  # width x length
 CLAM_GRIP_ZONE_START = 4.0
 CLAM_GRIP_BITE = -1.0
+CLAM_CRADLE_DEPTH = 2.5
 
 
 def clamshell_mirror(size: str, plug: Dict) -> Dict[str, float]:
@@ -270,6 +346,44 @@ def classify_circle(ring: np.ndarray) -> Optional[Circle]:
     if r.std() / r.mean() < 0.04:
         return Circle(float(c[0]), float(c[1]), float(2 * r.mean()))
     return None
+
+
+# Dashed-line noise: the shadow and section rings carry render artefacts
+# (zero-area loops, hairline slivers, out-and-back stubs on a loop's corner).
+# Only the DRAWING is cleaned; every parity check reads the raw rings.
+NOISE_MIN_AREA = 0.5      # mm²: smaller loops are not features
+NOISE_MIN_SIDE = 0.15     # mm: a loop thinner than this is a sliver
+NOISE_SPIKE = 0.05        # mm: half the width of the thinnest stub kept
+
+
+def clean_loop(coords) -> Optional[List[Tuple[float, float]]]:
+    """Return the loop's coordinates with render noise removed, or None
+    when the loop is noise itself."""
+    poly = Polygon(coords)
+    if not poly.is_valid:
+        poly = _fix(poly)
+    if poly.is_empty or poly.area < NOISE_MIN_AREA:
+        return None
+    x0, y0, x1, y1 = poly.bounds
+    if min(x1 - x0, y1 - y0) < NOISE_MIN_SIDE:
+        return None
+    # Morphological opening then closing: drops spikes and notches thinner
+    # than 2 x NOISE_SPIKE, leaves the loop's shape otherwise unchanged.
+    cleaned = poly.buffer(-NOISE_SPIKE).buffer(2 * NOISE_SPIKE).buffer(-NOISE_SPIKE)
+    pieces = [g for g in as_polygons(cleaned) if g.area >= NOISE_MIN_AREA]
+    if not pieces:
+        return None
+    biggest = max(pieces, key=lambda g: g.area)
+    return list(shapely.simplify(biggest, 0.01, preserve_topology=True).exterior.coords)
+
+
+def clean_polygon(poly: Polygon) -> Optional[Polygon]:
+    """clean_loop() applied to a polygon's exterior and each of its holes."""
+    ext = clean_loop(poly.exterior.coords)
+    if ext is None:
+        return None
+    holes = [h for h in (clean_loop(i.coords) for i in poly.interiors) if h]
+    return Polygon(ext, holes)
 
 
 # ---------------------------------------------------------------------------
@@ -674,6 +788,7 @@ def build_flat_sheet(
         )
         for c in zips:
             checks.append(Check("zip bore Ø", d["zip_tie_hole_diameter"], c.d, 0.2))
+    pocket_w = pocket_width_effective(d)
     if pockets:
         pk_min_y = min(p.bounds[1] for p in pockets)
         checks.append(
@@ -684,6 +799,14 @@ def build_flat_sheet(
                 0.6,
             )
         )
+    # The tool prints its adapted pocket width in its console; the render log
+    # sits beside the STL. The mirror must agree with it (auto-fit clamps the
+    # width on narrow bodies, e.g. the Small sizes and the wide plug).
+    console_w = console_pocket_width(stl.with_suffix(".log"))
+    if console_w is not None:
+        checks.append(Check("pocket width vs model console", pocket_w, console_w, 0.01))
+    else:
+        logger.warning("%s: no render log beside the STL; the pocket width mirror is unchecked", stl.name)
 
     # ---- compose ----------------------------------------------------------
     L = ymax - ymin
@@ -699,6 +822,7 @@ def build_flat_sheet(
             f"Printed footprint ≈ {fmt(W)} × {fmt(L)} mm",
         ],
         settings_lines=[
+            "Open: src/Plug_Puller_Parametric.scad",
             "Customizer settings for this exact tool:",
             "  plug_preset =",
             f"      {plug['customizer']}",
@@ -709,7 +833,7 @@ def build_flat_sheet(
             f"Body thickness: {fmt(d['body_thickness'])} mm (this sheet is 2D)",
             f"Finger holes: Ø{fmt(d['finger_hole_diameter'])}, "
             f"{fmt(d['finger_hole_spacing'])} apart",
-            f"Pocket: {fmt(d['pocket_width'])} wide × {fmt(d['pocket_depth'])} deep",
+            f"Pocket: {fmt(pocket_w)} wide × {fmt(d['pocket_depth'])} deep",
             f"Wall notch: {fmt(d['plug_wall_notch_width'])} wide × "
             f"{fmt(d['plug_wall_notch_height'])} deep",
             f"Zip holes: 4 × Ø{fmt(d['zip_tie_hole_diameter'])}, rows "
@@ -729,12 +853,16 @@ def build_flat_sheet(
     top_margin = 16.0  # room for the notch + pocket-width dims above the tool
     drawing_frame(sh, L, top_margin)
 
-    # Outline: exterior solid, everything interior dashed.
+    # Outline: exterior solid, everything interior dashed (noise dropped).
     sh.ring_path(list(body.exterior.coords), 0.5)
     for interior in body.interiors:
-        sh.ring_path(list(interior.coords), 0.35, DASH_HOLE)
+        loop = clean_loop(interior.coords)
+        if loop:
+            sh.ring_path(loop, 0.35, DASH_HOLE)
     for p in pockets:
-        sh.polygon_outline(p, 0.35, DASH_POCKET, color="#333333")
+        cp = clean_polygon(p)
+        if cp is not None:
+            sh.polygon_outline(cp, 0.35, DASH_POCKET, color="#333333")
     for c in fingers + zips:
         sh.cross(c.cx, c.cy)
 
@@ -749,11 +877,11 @@ def build_flat_sheet(
         f"notch {fmt(d['plug_wall_notch_width'])}",
     )
     sh.dim_h(
-        -d["pocket_width"] / 2,
-        d["pocket_width"] / 2,
+        -pocket_w / 2,
+        pocket_w / 2,
         L + 12.5,
         L,
-        f"pocket {fmt(d['pocket_width'])}",
+        f"pocket {fmt(pocket_w)}",
     )
     sh.dim_v(
         L - d["pocket_depth"],
@@ -818,8 +946,8 @@ def build_flat_sheet(
 # ---------------------------------------------------------------------------
 
 
-def build_clamshell_sheet(stl: Path, size: str, out: Path) -> List[Check]:
-    plug = PLUG_PRESETS["heavy-duty-round"]
+def build_clamshell_sheet(stl: Path, preset_key: str, size: str, out: Path) -> List[Check]:
+    plug = PLUG_PRESETS[preset_key]
     cm = clamshell_mirror(size, plug)
     mesh = trimesh.load(stl, force="mesh")
     (xmin, ymin, zmin), (xmax, ymax, zmax) = mesh.bounds
@@ -839,6 +967,25 @@ def build_clamshell_sheet(stl: Path, size: str, out: Path) -> List[Check]:
         [c for c in circles if abs(c.d - cm["finger_dia"]) < 3.0], key=lambda c: c.cx
     )
     zips = [c for c in circles if abs(c.d - CLAM_ZIP_HOLE_DIAMETER) < 1.5]
+    # Strap slots: the stadium-shaped through-cuts (every non-circle hole
+    # bigger than a zip bore). A short plug has no slot; the file leaves it
+    # out, so the sheet says so instead of quoting the slot dials.
+    slots = [
+        Polygon(np.asarray(interior.coords))
+        for poly in polys for interior in poly.interiors
+        if classify_circle(np.asarray(interior.coords)) is None
+        and Polygon(np.asarray(interior.coords)).area > 20.0
+    ]
+    if slots:
+        sx0, sy0, sx1, sy1 = slots[0].bounds
+        slot_line = f"Velcro slots: {fmt(sx1 - sx0)} × {fmt(sy1 - sy0)} (2×)"
+    else:
+        slot_line = "Velcro slots: none (plug too short for one)"
+    sides_line = (
+        f"Rounded sides: cradle, {fmt(CLAM_CRADLE_DEPTH)} mm per side"
+        if plug.get("sides") == "Rounded sides"
+        else "Flat sides: straight, serrated V-edges grip the plug"
+    )
 
     checks = [
         Check("plate width vs mirror", cm["width"], xmax - xmin, 0.2),
@@ -855,7 +1002,7 @@ def build_clamshell_sheet(stl: Path, size: str, out: Path) -> List[Check]:
     sh = Sheet()
     info = SheetInfo(
         filename=out.name,
-        title=f"Two-sided puller plate · {size}",
+        title=f"{plug['label']} · {size} · two-sided plate",
         combo_lines=[
             "Two-sided puller plate",
             f"{plug['short']}",
@@ -863,6 +1010,7 @@ def build_clamshell_sheet(stl: Path, size: str, out: Path) -> List[Check]:
             f"Printed footprint ≈ {fmt(W)} × {fmt(L)} mm (one plate)",
         ],
         settings_lines=[
+            "Open: src/Plug_Puller_Two_Sided.scad",
             "Customizer settings for this exact plate:",
             "  plug_preset =",
             f"      {plug['customizer']}",
@@ -874,8 +1022,8 @@ def build_clamshell_sheet(stl: Path, size: str, out: Path) -> List[Check]:
             f"Finger holes: 2 × Ø{fmt(cm['finger_dia'])}",
             f"Cord channel: {fmt(cm['cable_gap'])} mm wide",
             f"Zip holes: 6 × Ø{fmt(CLAM_ZIP_HOLE_DIAMETER)}",
-            f"Velcro slots: {fmt(CLAM_VELCRO_SLOT[0])} × {fmt(CLAM_VELCRO_SLOT[1])}",
-            "Serrated V-edges grip the plug",
+            slot_line,
+            sides_line,
         ],
         howto_lines=[
             "1. Print at 100% and measure the calibration square — it must be exactly 50 × 50 mm.",
@@ -892,7 +1040,9 @@ def build_clamshell_sheet(stl: Path, size: str, out: Path) -> List[Check]:
     for p in polys:
         sh.ring_path(list(p.exterior.coords), 0.5)
         for interior in p.interiors:
-            sh.ring_path(list(interior.coords), 0.35, DASH_HOLE)
+            loop = clean_loop(interior.coords)
+            if loop:
+                sh.ring_path(loop, 0.35, DASH_HOLE)
     for c in circles:
         sh.cross(c.cx, c.cy)
     # Cable strip (outer face) as a light dashed rectangle.
@@ -949,45 +1099,50 @@ class Job:
         return f"outline_{self.slug}.svg"
 
 
-# The round extension cord is a two-sided puller plug (the one-sided file
-# sends it there with W-20), so its sheets are the plate sheets only.
-TWO_SIDED_PLUG_KEY = "heavy-duty-round"
+# Plate sheet slugs: the round extension cord keeps its original name
+# (outline_two-sided-plate_<size>.svg); every other two-sided preset carries
+# its key in the name.
+def plate_slug(key: str, size: str) -> str:
+    if key == "heavy-duty-round":
+        return f"two-sided-plate_{size.lower()}"
+    return f"two-sided-plate_{key}_{size.lower()}"
 
 
 def all_jobs() -> List[Job]:
     jobs: List[Job] = []
     for key, plug in PLUG_PRESETS.items():
-        if key == TWO_SIDED_PLUG_KEY:
-            continue
-        for size in SIZES:
-            jobs.append(
-                Job(
-                    slug=f"{key}_{size.lower()}",
-                    kind="flat",
-                    preset_key=key,
-                    size=size,
-                    params={
-                        "render_mode": "Body Only",
-                        "plug_preset": plug["customizer"],
-                        "size": size,
-                    },
+        if ONE_SIDED in plug["files"]:
+            for size in SIZES:
+                jobs.append(
+                    Job(
+                        slug=f"{key}_{size.lower()}",
+                        kind="flat",
+                        preset_key=key,
+                        size=size,
+                        params={
+                            "render_mode": "Body Only",
+                            "plug_preset": plug["customizer"],
+                            "size": size,
+                        },
+                    )
                 )
-            )
-    for size in SIZES:
-        jobs.append(
-            Job(
-                slug=f"two-sided-plate_{size.lower()}",
-                kind="clamshell",
-                preset_key="heavy-duty-round",
-                size=size,
-                scad=TWO_SIDED_SCAD,
-                params={
-                    "render_mode": "One plate",
-                    "plug_preset": PLUG_PRESETS["heavy-duty-round"]["customizer"],
-                    "size": size,
-                },
-            )
-        )
+    for key, plug in PLUG_PRESETS.items():
+        if TWO_SIDED in plug["files"]:
+            for size in SIZES:
+                jobs.append(
+                    Job(
+                        slug=plate_slug(key, size),
+                        kind="clamshell",
+                        preset_key=key,
+                        size=size,
+                        scad=TWO_SIDED_SCAD,
+                        params={
+                            "render_mode": "One plate",
+                            "plug_preset": plug["customizer"],
+                            "size": size,
+                        },
+                    )
+                )
     return jobs
 
 
@@ -1023,6 +1178,8 @@ def main() -> int:
             if not res.success:
                 logger.error("Render failed for %s: %s", job.slug, res.stderr[-400:])
                 return 1
+            job.stl.with_suffix(".log").write_text(
+                (res.stdout or "") + (res.stderr or ""), encoding="utf-8")
 
     failures: List[str] = []
     for job in jobs:
@@ -1030,7 +1187,7 @@ def main() -> int:
         if job.kind == "flat":
             checks = build_flat_sheet(job.stl, job.preset_key, job.size, out)
         else:
-            checks = build_clamshell_sheet(job.stl, job.size, out)
+            checks = build_clamshell_sheet(job.stl, job.preset_key, job.size, out)
         bad = [c for c in checks if not c.ok]
         status = "OK " if not bad else "FAIL"
         logger.info("%s %s -> %s (%d checks)", status, job.slug, out.name, len(checks))

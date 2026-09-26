@@ -7,13 +7,14 @@
 // a caliper. Each card carries a raised 2-character ID you can read by touch;
 // the legend lives in docs/guides/starter-guide.md:
 //
-//   P1 / P2 / P3  plug preset cards — hold your plug in the cutouts; if it
+//   P1 … P4      plug preset cards — hold your plug in the cutouts; if it
 //                 fills the W (width) and T (thickness) openings and the cord
 //                 slips sideways into the open cord slot, that preset fits —
 //                 pick it in Step 1 and skip measuring entirely.
 //                   P1 = flat 2-prong lamp plug (NEMA 1-15)
 //                   P2 = standard 3-prong plug (NEMA 5-15)
 //                   P3 = heavy-duty extension cord (NEMA 5-15)
+//                   P4 = wide 2-prong appliance plug (NEMA 1-15)
 //   R1            ruler card — raised tactile ticks (1 mm short, 5 mm medium,
 //                 10 mm tall), debossed numerals, and touch-countable edge
 //                 notches every 10 mm (worksheet measurements 1-5).
@@ -70,6 +71,8 @@ p1_id = "P1";
 p2_id = "P2";
 // ID embossed on the heavy-duty plug card - max 2 characters
 p3_id = "P3";
+// ID embossed on the wide 2-prong appliance plug card - max 2 characters
+p4_id = "P4";
 // ID embossed on the ruler card - max 2 characters
 r1_id = "R1";
 // ID embossed on the cord gauge card - max 2 characters
@@ -88,8 +91,8 @@ bed_depth = 200; // [80:5:400]
 part_index = 0; // [0:1:9]
 
 /* [Export] */
-// Upload helper. "All cards" lays every card onto print sheets (the normal layout, honouring the Print Bed sizes and part_index above). Pick a single card by its ID to render just that one stencil on its own at the origin - the way each card is uploaded as its own standalone model. A single card ignores the Print Bed / part_index settings. The list follows the fixed card order (P1/P2/P3 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing), so it still selects the right card even if you rename an ID above.
-export_card = "All cards"; // [All cards, P1, P2, P3, R1, C1, F1, F2]
+// Upload helper. "All cards" lays every card onto print sheets (the normal layout, honouring the Print Bed sizes and part_index above). Pick a single card by its ID to render just that one stencil on its own at the origin - the way each card is uploaded as its own standalone model. A single card ignores the Print Bed / part_index settings. The list follows the fixed card order (P1-P4 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing), so it still selects the right card even if you rename an ID above.
+export_card = "All cards"; // [All cards, P1, P2, P3, P4, R1, C1, F1, F2]
 
 /* [Hidden] */
 eps = 0.01;
@@ -99,19 +102,29 @@ IS_TACTILE = (label_mode == "Tactile");
 // ── Preset plug dimensions ──────────────────────────────────────────────────
 // [id, length, width wall, width cable, thickness wall, thickness cable, cord]
 // Copied from the `_eff_*` preset ternaries in src/Plug_Puller_Parametric.scad
-// (lamp, standard 3-prong, heavy-duty — the Step 1 dropdown order).
+// (lamp, standard 3-prong, heavy-duty, wide 2-prong appliance — the Step 1
+// dropdown order).
 // tests/test_stencil_data.py asserts these numbers match the main SCAD and
 // scripts/generate_stencil_sheet.py — keep all three in lock-step.
 PLUG_PRESET_DIMS = [
     ["P1", 37.0, 25.0, 11.2, 18.6, 8.6, 3.6],
     ["P2", 46.2, 26.6, 13.4, 18.9, 15.0, 7.0],
     ["P3", 43.8, 25.8, 21.9, 27.0, 27.0, 8.2],
+    ["P4", 38.0, 34.0, 34.0, 16.0, 16.0, 5.0],
 ];
 PLUG_PRESET_NAMES = [
     "LAMP 2-PRONG NEMA 1-15",
     "STANDARD 3-PRONG NEMA 5-15",
     "HEAVY-DUTY CORD NEMA 5-15",
+    "WIDE 2-PRONG NEMA 1-15",
 ];
+// Fixed card list indices: the P cards first, then the ruler, the cord gauge
+// and the two finger cards. Every index-bound spot below reads these.
+N_PLUG = len(PLUG_PRESET_DIMS);
+I_R1 = N_PLUG;
+I_C1 = N_PLUG + 1;
+I_F1 = N_PLUG + 2;
+I_F2 = N_PLUG + 3;
 
 // The 18 finger gauge holes, grouped into rows exactly like the paper
 // template (docs/guides/measuring-template.svg).
@@ -138,6 +151,7 @@ ADA_RAISE       = 0.8;  // ADA 703.2.1: >= 0.8 mm proud
 // P1: "lamp", "2 prong"
 // P2: "standard", "3 prong"
 // P3: "heavy duty", "cord"
+// P4: "wide plug", "2 prong"
 // R1: "ruler 100 mm", "notches 10 mm"
 // C1: "cord gauge mm"
 // F1: "finger sizing 1 of 2", "width: hole minus 5"
@@ -146,6 +160,7 @@ BRAILLE_LABELS = [
     ["⠇⠁⠍⠏", "⠼⠃⠀⠏⠗⠰⠛"],
     ["⠌⠯⠜⠙", "⠼⠉⠀⠏⠗⠰⠛"],
     ["⠓⠂⠧⠽⠀⠙⠥⠞⠽", "⠉⠕⠗⠙"],
+    ["⠺⠊⠙⠑⠀⠏⠇⠥⠛", "⠼⠃⠀⠏⠗⠰⠛"],
     ["⠗⠥⠇⠻⠀⠼⠁⠚⠚⠀⠍⠍", "⠝⠕⠞⠡⠑⠎⠀⠼⠁⠚⠀⠍⠍"],
     ["⠉⠕⠗⠙⠀⠛⠁⠥⠛⠑⠀⠍⠍"],
     ["⠋⠬⠻⠀⠎⠊⠵⠬⠀⠼⠁⠀⠷⠀⠼⠃", "⠺⠊⠙⠹⠒⠀⠓⠕⠇⠑⠀⠍⠔⠥⠎⠀⠼⠑"],
@@ -257,13 +272,13 @@ function _f_card_h(rows) =
     _f_row_center_y(rows, n) + rows[n][len(rows[n]) - 1] / 2 + F_EDGE;
 
 // Fixed card list: index -> [user-facing id, width, height].
-CARD_IDS = [p1_id, p2_id, p3_id, r1_id, c1_id, f1_id, f2_id];
+CARD_IDS = [p1_id, p2_id, p3_id, p4_id, r1_id, c1_id, f1_id, f2_id];
 function _card_body_size(i) =
-    i <= 2 ? [_p_card_w(i), _p_card_h(i)] :
-    i == 3 ? [RULER_LEN, _RULER_H] :
-    i == 4 ? [_c1_card_w(), _c1_card_h()] :
-    i == 5 ? [_f_card_w(F1_ROWS), _f_card_h(F1_ROWS)] :
-             [_f_card_w(F2_ROWS), _f_card_h(F2_ROWS)];
+    i < N_PLUG ? [_p_card_w(i), _p_card_h(i)] :
+    i == I_R1  ? [RULER_LEN, _RULER_H] :
+    i == I_C1  ? [_c1_card_w(), _c1_card_h()] :
+    i == I_F1  ? [_f_card_w(F1_ROWS), _f_card_h(F1_ROWS)] :
+                 [_f_card_w(F2_ROWS), _f_card_h(F2_ROWS)];
 // Full printed footprint: in Tactile mode the braille flap (hinge + leaning
 // slab + fins + brim) extends past the card's top edge.
 function card_size(i) =
@@ -496,9 +511,9 @@ module braille_flap(i, w, h) {
     }
 }
 
-// ── P1 / P2 / P3: plug preset silhouette cards ───────────────────────────────
+// ── P1 … P4: plug preset silhouette cards ────────────────────────────────────
 // Two through-cutouts side by side — the width view (W) and the thickness
-// view (T) — plus an open cord slot. Hold the plug in/behind a cutout: if
+// view (T) — plus an open cord slot. One card per PLUG_PRESET_DIMS row. Hold the plug in/behind a cutout: if
 // it fills the opening, this preset fits (no ruler needed). The cord slot
 // opens through the bottom edge so the card slips sideways over an
 // installed cord instead of needing a free cord end.
@@ -583,7 +598,7 @@ module ruler_card() {
                         square([w, h]);
             }
             translate([2, h - 3 - _ID_SIZE]) raised_id(r1_id);
-            if (IS_TACTILE) braille_flap(3, w, h);
+            if (IS_TACTILE) braille_flap(I_R1, w, h);
         }
         // Touch-countable notches every 10 mm along the bottom edge.
         for (x = [10 : 10 : RULER_LEN - 10])
@@ -625,7 +640,7 @@ module cord_card() {
             translate([CARD_MARGIN, h - 3 - _ID_SIZE]) raised_id(c1_id);
             if (IS_TACTILE) {
                 cord_card_labels();
-                braille_flap(4, w, h);
+                braille_flap(I_C1, w, h);
             }
         }
         for (k = [0 : len(CORD_GAUGE_DIAS) - 1]) {
@@ -705,11 +720,11 @@ module finger_card(rows, idx, id_str, title_str) {
 
 // One card by fixed-list index.
 module card(i) {
-    if (i <= 2)      plug_card(i);
-    else if (i == 3) ruler_card();
-    else if (i == 4) cord_card();
-    else if (i == 5) finger_card(F1_ROWS, 5, f1_id, "FINGER SIZING 1/2");
-    else             finger_card(F2_ROWS, 6, f2_id, "FINGER SIZING 2/2");
+    if (i < N_PLUG)     plug_card(i);
+    else if (i == I_R1) ruler_card();
+    else if (i == I_C1) cord_card();
+    else if (i == I_F1) finger_card(F1_ROWS, I_F1, f1_id, "FINGER SIZING 1/2");
+    else                finger_card(F2_ROWS, I_F2, f2_id, "FINGER SIZING 2/2");
 }
 
 // ── Sheet packing ────────────────────────────────────────────────────────────
@@ -781,10 +796,11 @@ _EXPORT_CARD_INDEX =
     export_card == "P1" ? 0 :
     export_card == "P2" ? 1 :
     export_card == "P3" ? 2 :
-    export_card == "R1" ? 3 :
-    export_card == "C1" ? 4 :
-    export_card == "F1" ? 5 :
-    export_card == "F2" ? 6 : -1;
+    export_card == "P4" ? 3 :
+    export_card == "R1" ? I_R1 :
+    export_card == "C1" ? I_C1 :
+    export_card == "F1" ? I_F1 :
+    export_card == "F2" ? I_F2 : -1;
 
 if (_EXPORT_CARD_INDEX >= 0)
     card(_EXPORT_CARD_INDEX);
