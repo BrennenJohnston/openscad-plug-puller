@@ -99,6 +99,7 @@ jobs:
           python -c "import json; json.load(open('presets/Plug_Puller_Parametric.json'))"
           python -c "import json; json.load(open('parameter_mapping.json'))"
           python -c "import json; json.load(open('tests/compare_config.json'))"
+          python -c "import json; json.load(open('dial_catalog.json'))"
 
   # ==========================================================================
   # Job 2: Quick tests (no OpenSCAD required)
