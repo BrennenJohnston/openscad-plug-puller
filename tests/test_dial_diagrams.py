@@ -10,6 +10,7 @@ the committed index.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -29,6 +30,7 @@ from scripts.generate_dial_diagrams import (
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 INDEX = PROJECT_ROOT / "docs" / "dials" / "dial_diagrams_index.json"
+README = PROJECT_ROOT / "docs" / "dials" / "README.md"
 
 BEFORE = Polygon([(0, 0), (40, 0), (40, 30), (0, 30)])
 AFTER = Polygon([(0, 0), (43, 0), (43, 30), (0, 30)])
@@ -85,6 +87,40 @@ def test_none_svg() -> None:
     assert NO_SHAPE_SENTENCE in svg
     assert "changes no shape" in svg
     assert "<title>A dial</title>" in svg
+
+
+def test_index_covers_catalog() -> None:
+    """Every catalog row has an index entry naming the features its trace
+    touches (a no-shape row's list is ["none"])."""
+    index = {(r["file"], r["name"]): r for r in json.loads(INDEX.read_text(encoding="utf-8"))}
+    for row in load_catalog():
+        entry = index.get((row["file"], row["name"]))
+        assert entry is not None, f"{row['file']}/{row['name']} has no index row"
+        features = entry.get("features")
+        assert isinstance(features, list) and features, f"{row['name']}: no features"
+        if row["diagram"]["view"] == "none":
+            assert features == ["none"], row["name"]
+        else:
+            assert "none" not in features, row["name"]
+
+
+def test_readme_lists_every_dial() -> None:
+    """docs/dials/README.md: one H1, no skipped heading levels, and for every
+    catalog row a backticked name and an image whose alt text is the row's
+    changes sentence."""
+    text = README.read_text(encoding="utf-8")
+    levels = [len(m.group(1)) for m in re.finditer(r"^(#{1,6}) ", text, re.M)]
+    assert levels.count(1) == 1, f"{levels.count(1)} H1 headings"
+    for prev, cur in zip(levels, levels[1:]):
+        assert cur <= prev + 1, f"heading level jumps from {prev} to {cur}"
+    images = {m.group(2): m.group(1) for m in re.finditer(r"!\[([^\]]*)\]\(([^)]+)\)", text)}
+    for alt in images.values():
+        assert alt.strip(), "an image has empty alt text"
+    for row in load_catalog():
+        assert f"`{row['name']}`" in text, f"{row['name']} is not listed"
+        path = f"{row['file']}/{row['name']}.svg"
+        assert path in images, f"{row['name']}: no image line"
+        assert images[path] == row["changes"], f"{row['name']}: alt text is not the changes sentence"
 
 
 @pytest.mark.requires_openscad

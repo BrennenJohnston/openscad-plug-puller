@@ -11,7 +11,15 @@
     "regions": 1,
     "changed_area_mm2": 3116.9,
     "tags": [],
-    "svg": "one-sided/plug_preset.svg"
+    "svg": "one-sided/plug_preset.svg",
+    "features": [
+      "body edge",
+      "pocket",
+      "seat",
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -25,7 +33,14 @@
     "regions": 5,
     "changed_area_mm2": 1182.9,
     "tags": [],
-    "svg": "one-sided/measure_plug_length.svg"
+    "svg": "one-sided/measure_plug_length.svg",
+    "features": [
+      "body edge",
+      "seat",
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -39,7 +54,13 @@
     "regions": 8,
     "changed_area_mm2": 195.4,
     "tags": [],
-    "svg": "one-sided/measure_plug_width_prong_end.svg"
+    "svg": "one-sided/measure_plug_width_prong_end.svg",
+    "features": [
+      "seat",
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -53,7 +74,11 @@
     "regions": 2,
     "changed_area_mm2": 332.4,
     "tags": [],
-    "svg": "one-sided/measure_plug_width_cord_end.svg"
+    "svg": "one-sided/measure_plug_width_cord_end.svg",
+    "features": [
+      "pocket",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -67,7 +92,11 @@
     "regions": 1,
     "changed_area_mm2": 11.4,
     "tags": [],
-    "svg": "one-sided/measure_plug_thickness_prong_end.svg"
+    "svg": "one-sided/measure_plug_thickness_prong_end.svg",
+    "features": [
+      "pocket",
+      "seat"
+    ]
   },
   {
     "file": "one-sided",
@@ -81,7 +110,11 @@
     "regions": 1,
     "changed_area_mm2": 11.4,
     "tags": [],
-    "svg": "one-sided/measure_plug_thickness_cord_end.svg"
+    "svg": "one-sided/measure_plug_thickness_cord_end.svg",
+    "features": [
+      "pocket",
+      "seat"
+    ]
   },
   {
     "file": "one-sided",
@@ -95,7 +128,15 @@
     "regions": 1,
     "changed_area_mm2": 2361.8,
     "tags": [],
-    "svg": "one-sided/measure_cord_thickness.svg"
+    "svg": "one-sided/measure_cord_thickness.svg",
+    "features": [
+      "body edge",
+      "finger holes",
+      "pocket",
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -109,7 +150,14 @@
     "regions": 7,
     "changed_area_mm2": 177.0,
     "tags": [],
-    "svg": "one-sided/measure_wall_plate_style.svg"
+    "svg": "one-sided/measure_wall_plate_style.svg",
+    "features": [
+      "body edge",
+      "pocket",
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -123,7 +171,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/show_plug_preview.svg"
+    "svg": "one-sided/show_plug_preview.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -137,7 +188,14 @@
     "regions": 10,
     "changed_area_mm2": 1101.6,
     "tags": [],
-    "svg": "one-sided/size.svg"
+    "svg": "one-sided/size.svg",
+    "features": [
+      "body edge",
+      "finger holes",
+      "pocket",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -153,7 +211,13 @@
     "regions": 6,
     "changed_area_mm2": 1017.2,
     "tags": [],
-    "svg": "one-sided/measure_finger_width.svg"
+    "svg": "one-sided/measure_finger_width.svg",
+    "features": [
+      "finger holes",
+      "pocket",
+      "wall notch",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -169,7 +233,10 @@
     "regions": 2,
     "changed_area_mm2": 757.6,
     "tags": [],
-    "svg": "one-sided/measure_hand_width.svg"
+    "svg": "one-sided/measure_hand_width.svg",
+    "features": [
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -183,7 +250,10 @@
     "regions": 2,
     "changed_area_mm2": 124.8,
     "tags": [],
-    "svg": "one-sided/attachment.svg"
+    "svg": "one-sided/attachment.svg",
+    "features": [
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -197,7 +267,10 @@
     "regions": 2,
     "changed_area_mm2": 80.3,
     "tags": [],
-    "svg": "one-sided/velcro_style.svg"
+    "svg": "one-sided/velcro_style.svg",
+    "features": [
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -211,7 +284,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/strap_width.svg"
+    "svg": "one-sided/strap_width.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -225,7 +301,10 @@
     "regions": 2,
     "changed_area_mm2": 68.1,
     "tags": [],
-    "svg": "one-sided/hook_hand.svg"
+    "svg": "one-sided/hook_hand.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "one-sided",
@@ -239,7 +318,13 @@
     "regions": 8,
     "changed_area_mm2": 190.2,
     "tags": [],
-    "svg": "one-sided/zip_placement.svg"
+    "svg": "one-sided/zip_placement.svg",
+    "features": [
+      "seat",
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -253,7 +338,11 @@
     "regions": 4,
     "changed_area_mm2": 76.7,
     "tags": [],
-    "svg": "one-sided/zip_row_count.svg"
+    "svg": "one-sided/zip_row_count.svg",
+    "features": [
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -269,7 +358,12 @@
     "regions": 2,
     "changed_area_mm2": 71.3,
     "tags": [],
-    "svg": "one-sided/zip_pos_1.svg"
+    "svg": "one-sided/zip_pos_1.svg",
+    "features": [
+      "seat",
+      "wall notch",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -285,7 +379,11 @@
     "regions": 6,
     "changed_area_mm2": 134.5,
     "tags": [],
-    "svg": "one-sided/zip_pos_2.svg"
+    "svg": "one-sided/zip_pos_2.svg",
+    "features": [
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -302,7 +400,11 @@
     "regions": 4,
     "changed_area_mm2": 83.2,
     "tags": [],
-    "svg": "one-sided/zip_pos_3.svg"
+    "svg": "one-sided/zip_pos_3.svg",
+    "features": [
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -316,7 +418,11 @@
     "regions": 6,
     "changed_area_mm2": 180.1,
     "tags": [],
-    "svg": "one-sided/zip_edge_offset.svg"
+    "svg": "one-sided/zip_edge_offset.svg",
+    "features": [
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -330,7 +436,10 @@
     "regions": 2,
     "changed_area_mm2": 252.3,
     "tags": [],
-    "svg": "one-sided/velcro_placement.svg"
+    "svg": "one-sided/velcro_placement.svg",
+    "features": [
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -347,7 +456,10 @@
     "regions": 2,
     "changed_area_mm2": 331.9,
     "tags": [],
-    "svg": "one-sided/velcro_pos.svg"
+    "svg": "one-sided/velcro_pos.svg",
+    "features": [
+      "classic slots"
+    ]
   },
   {
     "file": "one-sided",
@@ -361,7 +473,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/quality.svg"
+    "svg": "one-sided/quality.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -377,7 +492,13 @@
     "regions": 9,
     "changed_area_mm2": 836.2,
     "tags": [],
-    "svg": "one-sided/reset_custom_to_medium.svg"
+    "svg": "one-sided/reset_custom_to_medium.svg",
+    "features": [
+      "finger holes",
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -391,7 +512,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/custom_enable_auto_fit.svg"
+    "svg": "one-sided/custom_enable_auto_fit.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -407,7 +531,14 @@
     "regions": 1,
     "changed_area_mm2": 1083.5,
     "tags": [],
-    "svg": "one-sided/custom_puller_length.svg"
+    "svg": "one-sided/custom_puller_length.svg",
+    "features": [
+      "body edge",
+      "pocket",
+      "seat",
+      "wall notch",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -423,7 +554,10 @@
     "regions": 2,
     "changed_area_mm2": 99.6,
     "tags": [],
-    "svg": "one-sided/custom_puller_bottom_width.svg"
+    "svg": "one-sided/custom_puller_bottom_width.svg",
+    "features": [
+      "body edge"
+    ]
   },
   {
     "file": "one-sided",
@@ -439,7 +573,10 @@
     "regions": 1,
     "changed_area_mm2": 15.0,
     "tags": [],
-    "svg": "one-sided/custom_puller_bottom_corners.svg"
+    "svg": "one-sided/custom_puller_bottom_corners.svg",
+    "features": [
+      "body edge"
+    ]
   },
   {
     "file": "one-sided",
@@ -455,7 +592,11 @@
     "regions": 4,
     "changed_area_mm2": 216.0,
     "tags": [],
-    "svg": "one-sided/custom_puller_top_width.svg"
+    "svg": "one-sided/custom_puller_top_width.svg",
+    "features": [
+      "body edge",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -471,7 +612,11 @@
     "regions": 4,
     "changed_area_mm2": 446.0,
     "tags": [],
-    "svg": "one-sided/custom_puller_middle_width.svg"
+    "svg": "one-sided/custom_puller_middle_width.svg",
+    "features": [
+      "body edge",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -487,7 +632,11 @@
     "regions": 4,
     "changed_area_mm2": 399.7,
     "tags": [],
-    "svg": "one-sided/custom_puller_side_corner.svg"
+    "svg": "one-sided/custom_puller_side_corner.svg",
+    "features": [
+      "body edge",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -503,7 +652,10 @@
     "regions": 3,
     "changed_area_mm2": 131.0,
     "tags": [],
-    "svg": "one-sided/custom_body_thickness.svg"
+    "svg": "one-sided/custom_body_thickness.svg",
+    "features": [
+      "body edge"
+    ]
   },
   {
     "file": "one-sided",
@@ -519,7 +671,13 @@
     "regions": 4,
     "changed_area_mm2": 31.2,
     "tags": [],
-    "svg": "one-sided/custom_body_round_bottom_only.svg"
+    "svg": "one-sided/custom_body_round_bottom_only.svg",
+    "features": [
+      "body edge",
+      "hook",
+      "seat",
+      "wall notch"
+    ]
   },
   {
     "file": "one-sided",
@@ -535,7 +693,10 @@
     "regions": 2,
     "changed_area_mm2": 10.1,
     "tags": [],
-    "svg": "one-sided/custom_pocket_seat_diameter.svg"
+    "svg": "one-sided/custom_pocket_seat_diameter.svg",
+    "features": [
+      "seat"
+    ]
   },
   {
     "file": "one-sided",
@@ -551,7 +712,13 @@
     "regions": 8,
     "changed_area_mm2": 76.3,
     "tags": [],
-    "svg": "one-sided/custom_pocket_width.svg"
+    "svg": "one-sided/custom_pocket_width.svg",
+    "features": [
+      "pocket",
+      "seat",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -567,7 +734,11 @@
     "regions": 3,
     "changed_area_mm2": 36.4,
     "tags": [],
-    "svg": "one-sided/custom_pocket_depth.svg"
+    "svg": "one-sided/custom_pocket_depth.svg",
+    "features": [
+      "pocket",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -581,7 +752,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/custom_pocket_dome_drop.svg"
+    "svg": "one-sided/custom_pocket_dome_drop.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -597,7 +771,10 @@
     "regions": 1,
     "changed_area_mm2": 20.7,
     "tags": [],
-    "svg": "one-sided/custom_pocket_seat_floor.svg"
+    "svg": "one-sided/custom_pocket_seat_floor.svg",
+    "features": [
+      "seat"
+    ]
   },
   {
     "file": "one-sided",
@@ -613,7 +790,11 @@
     "regions": 1,
     "changed_area_mm2": 31.5,
     "tags": [],
-    "svg": "one-sided/custom_pocket_floor.svg"
+    "svg": "one-sided/custom_pocket_floor.svg",
+    "features": [
+      "pocket",
+      "seat"
+    ]
   },
   {
     "file": "one-sided",
@@ -629,7 +810,11 @@
     "regions": 2,
     "changed_area_mm2": 284.3,
     "tags": [],
-    "svg": "one-sided/custom_pocket_side_angle.svg"
+    "svg": "one-sided/custom_pocket_side_angle.svg",
+    "features": [
+      "pocket",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -645,7 +830,11 @@
     "regions": 2,
     "changed_area_mm2": 1011.8,
     "tags": [],
-    "svg": "one-sided/custom_enable_finger_holes.svg"
+    "svg": "one-sided/custom_enable_finger_holes.svg",
+    "features": [
+      "body edge",
+      "finger holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -661,7 +850,11 @@
     "regions": 4,
     "changed_area_mm2": 274.8,
     "tags": [],
-    "svg": "one-sided/custom_finger_hole_diameter.svg"
+    "svg": "one-sided/custom_finger_hole_diameter.svg",
+    "features": [
+      "finger holes",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -677,7 +870,11 @@
     "regions": 4,
     "changed_area_mm2": 356.9,
     "tags": [],
-    "svg": "one-sided/custom_finger_hole_spacing.svg"
+    "svg": "one-sided/custom_finger_hole_spacing.svg",
+    "features": [
+      "finger holes",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -693,7 +890,11 @@
     "regions": 3,
     "changed_area_mm2": 891.9,
     "tags": [],
-    "svg": "one-sided/custom_finger_hole_y_position.svg"
+    "svg": "one-sided/custom_finger_hole_y_position.svg",
+    "features": [
+      "finger holes",
+      "pocket"
+    ]
   },
   {
     "file": "one-sided",
@@ -709,7 +910,10 @@
     "regions": 1,
     "changed_area_mm2": 79.0,
     "tags": [],
-    "svg": "one-sided/custom_enable_t_hook.svg"
+    "svg": "one-sided/custom_enable_t_hook.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "one-sided",
@@ -725,7 +929,10 @@
     "regions": 2,
     "changed_area_mm2": 10.7,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_base_gap.svg"
+    "svg": "one-sided/custom_t_hook_base_gap.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "one-sided",
@@ -741,7 +948,14 @@
     "regions": 7,
     "changed_area_mm2": 482.5,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_length.svg"
+    "svg": "one-sided/custom_t_hook_length.svg",
+    "features": [
+      "finger holes",
+      "hook",
+      "pocket",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -757,7 +971,13 @@
     "regions": 6,
     "changed_area_mm2": 75.6,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_holder_width.svg"
+    "svg": "one-sided/custom_t_hook_holder_width.svg",
+    "features": [
+      "finger holes",
+      "hook",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -773,7 +993,10 @@
     "regions": 2,
     "changed_area_mm2": 20.4,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_holder_length.svg"
+    "svg": "one-sided/custom_t_hook_holder_length.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "one-sided",
@@ -787,7 +1010,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_gap_offset.svg"
+    "svg": "one-sided/custom_t_hook_gap_offset.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -803,7 +1029,12 @@
     "regions": 6,
     "changed_area_mm2": 117.1,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_leg_offset.svg"
+    "svg": "one-sided/custom_t_hook_leg_offset.svg",
+    "features": [
+      "finger holes",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -819,7 +1050,10 @@
     "regions": 2,
     "changed_area_mm2": 19.3,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_stem_offset.svg"
+    "svg": "one-sided/custom_t_hook_stem_offset.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "one-sided",
@@ -835,7 +1069,10 @@
     "regions": 1,
     "changed_area_mm2": 42.1,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_catch_reach.svg"
+    "svg": "one-sided/custom_t_hook_catch_reach.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "one-sided",
@@ -851,7 +1088,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_tip_drop.svg"
+    "svg": "one-sided/custom_t_hook_tip_drop.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -867,7 +1107,10 @@
     "regions": 1,
     "changed_area_mm2": 99.5,
     "tags": [],
-    "svg": "one-sided/custom_enable_plug_wall_notch.svg"
+    "svg": "one-sided/custom_enable_plug_wall_notch.svg",
+    "features": [
+      "wall notch"
+    ]
   },
   {
     "file": "one-sided",
@@ -883,7 +1126,10 @@
     "regions": 2,
     "changed_area_mm2": 25.4,
     "tags": [],
-    "svg": "one-sided/custom_plug_wall_notch_width.svg"
+    "svg": "one-sided/custom_plug_wall_notch_width.svg",
+    "features": [
+      "wall notch"
+    ]
   },
   {
     "file": "one-sided",
@@ -899,7 +1145,12 @@
     "regions": 5,
     "changed_area_mm2": 149.6,
     "tags": [],
-    "svg": "one-sided/custom_plug_wall_notch_height.svg"
+    "svg": "one-sided/custom_plug_wall_notch_height.svg",
+    "features": [
+      "wall notch",
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -915,7 +1166,10 @@
     "regions": 2,
     "changed_area_mm2": 3.5,
     "tags": [],
-    "svg": "one-sided/custom_plug_wall_notch_rounding.svg"
+    "svg": "one-sided/custom_plug_wall_notch_rounding.svg",
+    "features": [
+      "wall notch"
+    ]
   },
   {
     "file": "one-sided",
@@ -931,7 +1185,11 @@
     "regions": 6,
     "changed_area_mm2": 91.9,
     "tags": [],
-    "svg": "one-sided/custom_zip_tie_hole_diameter.svg"
+    "svg": "one-sided/custom_zip_tie_hole_diameter.svg",
+    "features": [
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -947,7 +1205,11 @@
     "regions": 6,
     "changed_area_mm2": 126.8,
     "tags": [],
-    "svg": "one-sided/custom_zip_tie_height_spacing.svg"
+    "svg": "one-sided/custom_zip_tie_height_spacing.svg",
+    "features": [
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -961,7 +1223,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/custom_zip_tie_width_spacing.svg"
+    "svg": "one-sided/custom_zip_tie_width_spacing.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -977,7 +1242,11 @@
     "regions": 7,
     "changed_area_mm2": 81.0,
     "tags": [],
-    "svg": "one-sided/custom_zip_tie_distance_from_notch.svg"
+    "svg": "one-sided/custom_zip_tie_distance_from_notch.svg",
+    "features": [
+      "wing openings",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -993,7 +1262,11 @@
     "regions": 2,
     "changed_area_mm2": 5.1,
     "tags": [],
-    "svg": "one-sided/custom_zip_tie_countersink.svg"
+    "svg": "one-sided/custom_zip_tie_countersink.svg",
+    "features": [
+      "pocket",
+      "zip-tie holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -1010,7 +1283,10 @@
     "regions": 2,
     "changed_area_mm2": 126.2,
     "tags": [],
-    "svg": "one-sided/custom_velcro_hole_length.svg"
+    "svg": "one-sided/custom_velcro_hole_length.svg",
+    "features": [
+      "classic slots"
+    ]
   },
   {
     "file": "one-sided",
@@ -1027,7 +1303,10 @@
     "regions": 2,
     "changed_area_mm2": 116.5,
     "tags": [],
-    "svg": "one-sided/custom_velcro_hole_width.svg"
+    "svg": "one-sided/custom_velcro_hole_width.svg",
+    "features": [
+      "classic slots"
+    ]
   },
   {
     "file": "one-sided",
@@ -1044,7 +1323,10 @@
     "regions": 2,
     "changed_area_mm2": 147.0,
     "tags": [],
-    "svg": "one-sided/custom_velcro_hole_x_center.svg"
+    "svg": "one-sided/custom_velcro_hole_x_center.svg",
+    "features": [
+      "classic slots"
+    ]
   },
   {
     "file": "one-sided",
@@ -1061,7 +1343,10 @@
     "regions": 2,
     "changed_area_mm2": 137.4,
     "tags": [],
-    "svg": "one-sided/custom_velcro_hole_y_center.svg"
+    "svg": "one-sided/custom_velcro_hole_y_center.svg",
+    "features": [
+      "classic slots"
+    ]
   },
   {
     "file": "one-sided",
@@ -1078,7 +1363,10 @@
     "regions": 2,
     "changed_area_mm2": 91.2,
     "tags": [],
-    "svg": "one-sided/custom_velcro_hole_rotation.svg"
+    "svg": "one-sided/custom_velcro_hole_rotation.svg",
+    "features": [
+      "classic slots"
+    ]
   },
   {
     "file": "one-sided",
@@ -1094,7 +1382,10 @@
     "regions": 2,
     "changed_area_mm2": 155.0,
     "tags": [],
-    "svg": "one-sided/custom_body_side_rounding.svg"
+    "svg": "one-sided/custom_body_side_rounding.svg",
+    "features": [
+      "body edge"
+    ]
   },
   {
     "file": "one-sided",
@@ -1110,7 +1401,10 @@
     "regions": 2,
     "changed_area_mm2": 3.1,
     "tags": [],
-    "svg": "one-sided/custom_body_top_rounding.svg"
+    "svg": "one-sided/custom_body_top_rounding.svg",
+    "features": [
+      "body edge"
+    ]
   },
   {
     "file": "one-sided",
@@ -1126,7 +1420,10 @@
     "regions": 2,
     "changed_area_mm2": 2.0,
     "tags": [],
-    "svg": "one-sided/custom_body_bottom_rounding.svg"
+    "svg": "one-sided/custom_body_bottom_rounding.svg",
+    "features": [
+      "body edge"
+    ]
   },
   {
     "file": "one-sided",
@@ -1143,7 +1440,10 @@
     "regions": 7,
     "changed_area_mm2": 10.8,
     "tags": [],
-    "svg": "one-sided/custom_velcro_side_rounding.svg"
+    "svg": "one-sided/custom_velcro_side_rounding.svg",
+    "features": [
+      "classic slots"
+    ]
   },
   {
     "file": "one-sided",
@@ -1159,7 +1459,11 @@
     "regions": 8,
     "changed_area_mm2": 5.4,
     "tags": [],
-    "svg": "one-sided/custom_velcro_top_bottom_rounding.svg"
+    "svg": "one-sided/custom_velcro_top_bottom_rounding.svg",
+    "features": [
+      "pocket",
+      "wing openings"
+    ]
   },
   {
     "file": "one-sided",
@@ -1175,7 +1479,10 @@
     "regions": 8,
     "changed_area_mm2": 10.7,
     "tags": [],
-    "svg": "one-sided/custom_finger_hole_rounding.svg"
+    "svg": "one-sided/custom_finger_hole_rounding.svg",
+    "features": [
+      "finger holes"
+    ]
   },
   {
     "file": "one-sided",
@@ -1191,7 +1498,10 @@
     "regions": 1,
     "changed_area_mm2": 0.7,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_holder_side_rounding.svg"
+    "svg": "one-sided/custom_t_hook_holder_side_rounding.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "one-sided",
@@ -1205,7 +1515,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_gap_side_rounding.svg"
+    "svg": "one-sided/custom_t_hook_gap_side_rounding.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "one-sided",
@@ -1221,7 +1534,10 @@
     "regions": 2,
     "changed_area_mm2": 2.0,
     "tags": [],
-    "svg": "one-sided/custom_t_hook_top_bottom_rounding.svg"
+    "svg": "one-sided/custom_t_hook_top_bottom_rounding.svg",
+    "features": [
+      "hook"
+    ]
   },
   {
     "file": "two-sided",
@@ -1235,7 +1551,13 @@
     "regions": 6,
     "changed_area_mm2": 1342.5,
     "tags": [],
-    "svg": "two-sided/plug_preset.svg"
+    "svg": "two-sided/plug_preset.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "plate edge",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1249,7 +1571,10 @@
     "regions": 2,
     "changed_area_mm2": 662.1,
     "tags": [],
-    "svg": "two-sided/measure_plug_length.svg"
+    "svg": "two-sided/measure_plug_length.svg",
+    "features": [
+      "arms"
+    ]
   },
   {
     "file": "two-sided",
@@ -1263,7 +1588,13 @@
     "regions": 6,
     "changed_area_mm2": 310.0,
     "tags": [],
-    "svg": "two-sided/measure_plug_width_prong_end.svg"
+    "svg": "two-sided/measure_plug_width_prong_end.svg",
+    "features": [
+      "arms",
+      "cord channel",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1277,7 +1608,12 @@
     "regions": 4,
     "changed_area_mm2": 152.0,
     "tags": [],
-    "svg": "two-sided/measure_plug_width_cord_end.svg"
+    "svg": "two-sided/measure_plug_width_cord_end.svg",
+    "features": [
+      "arms",
+      "teeth",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1291,7 +1627,13 @@
     "regions": 10,
     "changed_area_mm2": 575.8,
     "tags": [],
-    "svg": "two-sided/measure_cord_thickness.svg"
+    "svg": "two-sided/measure_cord_thickness.svg",
+    "features": [
+      "arms",
+      "cord channel",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1305,7 +1647,11 @@
     "regions": 4,
     "changed_area_mm2": 12.9,
     "tags": [],
-    "svg": "two-sided/plug_sides.svg"
+    "svg": "two-sided/plug_sides.svg",
+    "features": [
+      "arms",
+      "teeth"
+    ]
   },
   {
     "file": "two-sided",
@@ -1319,7 +1665,10 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "two-sided/show_plug_preview.svg"
+    "svg": "two-sided/show_plug_preview.svg",
+    "features": [
+      "none"
+    ]
   },
   {
     "file": "two-sided",
@@ -1333,7 +1682,12 @@
     "regions": 8,
     "changed_area_mm2": 705.2,
     "tags": [],
-    "svg": "two-sided/size.svg"
+    "svg": "two-sided/size.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1349,7 +1703,13 @@
     "regions": 6,
     "changed_area_mm2": 1304.9,
     "tags": [],
-    "svg": "two-sided/measure_finger_width.svg"
+    "svg": "two-sided/measure_finger_width.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "plate edge",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1365,7 +1725,12 @@
     "regions": 4,
     "changed_area_mm2": 509.7,
     "tags": [],
-    "svg": "two-sided/attachment.svg"
+    "svg": "two-sided/attachment.svg",
+    "features": [
+      "arms",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1381,7 +1746,12 @@
     "regions": 4,
     "changed_area_mm2": 509.7,
     "tags": [],
-    "svg": "two-sided/strap_width.svg"
+    "svg": "two-sided/strap_width.svg",
+    "features": [
+      "arms",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1395,7 +1765,13 @@
     "regions": 10,
     "changed_area_mm2": 2445.8,
     "tags": [],
-    "svg": "two-sided/print_layout.svg"
+    "svg": "two-sided/print_layout.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "plate edge",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1409,7 +1785,12 @@
     "regions": 10,
     "changed_area_mm2": 774.6,
     "tags": [],
-    "svg": "two-sided/plate_wall_boost.svg"
+    "svg": "two-sided/plate_wall_boost.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1423,7 +1804,12 @@
     "regions": 4,
     "changed_area_mm2": 75.1,
     "tags": [],
-    "svg": "two-sided/plate_thickness.svg"
+    "svg": "two-sided/plate_thickness.svg",
+    "features": [
+      "cord channel",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1439,7 +1825,11 @@
     "regions": 4,
     "changed_area_mm2": 14.3,
     "tags": [],
-    "svg": "two-sided/plate_grip_bite.svg"
+    "svg": "two-sided/plate_grip_bite.svg",
+    "features": [
+      "arms",
+      "teeth"
+    ]
   },
   {
     "file": "two-sided",
@@ -1455,7 +1845,11 @@
     "regions": 4,
     "changed_area_mm2": 25.7,
     "tags": [],
-    "svg": "two-sided/plate_cradle_depth.svg"
+    "svg": "two-sided/plate_cradle_depth.svg",
+    "features": [
+      "arms",
+      "teeth"
+    ]
   },
   {
     "file": "two-sided",
@@ -1471,7 +1865,11 @@
     "regions": 4,
     "changed_area_mm2": 10.6,
     "tags": [],
-    "svg": "two-sided/plate_grip_clearance.svg"
+    "svg": "two-sided/plate_grip_clearance.svg",
+    "features": [
+      "arms",
+      "teeth"
+    ]
   },
   {
     "file": "two-sided",
@@ -1485,7 +1883,13 @@
     "regions": 7,
     "changed_area_mm2": 213.0,
     "tags": [],
-    "svg": "two-sided/plate_cable_clearance.svg"
+    "svg": "two-sided/plate_cable_clearance.svg",
+    "features": [
+      "arms",
+      "cord channel",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1499,7 +1903,12 @@
     "regions": 8,
     "changed_area_mm2": 705.2,
     "tags": [],
-    "svg": "two-sided/plate_finger_fit.svg"
+    "svg": "two-sided/plate_finger_fit.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1513,7 +1922,12 @@
     "regions": 8,
     "changed_area_mm2": 977.3,
     "tags": [],
-    "svg": "two-sided/plate_finger_wall.svg"
+    "svg": "two-sided/plate_finger_wall.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1527,7 +1941,12 @@
     "regions": 8,
     "changed_area_mm2": 518.8,
     "tags": [],
-    "svg": "two-sided/plate_finger_inner_wall.svg"
+    "svg": "two-sided/plate_finger_inner_wall.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1541,7 +1960,10 @@
     "regions": 18,
     "changed_area_mm2": 12.0,
     "tags": [],
-    "svg": "two-sided/plate_tooth_diameter.svg"
+    "svg": "two-sided/plate_tooth_diameter.svg",
+    "features": [
+      "teeth"
+    ]
   },
   {
     "file": "two-sided",
@@ -1555,7 +1977,10 @@
     "regions": 10,
     "changed_area_mm2": 21.3,
     "tags": [],
-    "svg": "two-sided/plate_tooth_pitch.svg"
+    "svg": "two-sided/plate_tooth_pitch.svg",
+    "features": [
+      "teeth"
+    ]
   },
   {
     "file": "two-sided",
@@ -1569,7 +1994,10 @@
     "regions": 16,
     "changed_area_mm2": 20.4,
     "tags": [],
-    "svg": "two-sided/plate_tooth_depth.svg"
+    "svg": "two-sided/plate_tooth_depth.svg",
+    "features": [
+      "teeth"
+    ]
   },
   {
     "file": "two-sided",
@@ -1583,7 +2011,12 @@
     "regions": 6,
     "changed_area_mm2": 128.9,
     "tags": [],
-    "svg": "two-sided/plate_grip_zone_start.svg"
+    "svg": "two-sided/plate_grip_zone_start.svg",
+    "features": [
+      "arms",
+      "teeth",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1597,7 +2030,11 @@
     "regions": 6,
     "changed_area_mm2": 187.5,
     "tags": [],
-    "svg": "two-sided/plate_grip_zone_length.svg"
+    "svg": "two-sided/plate_grip_zone_length.svg",
+    "features": [
+      "arms",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1611,7 +2048,13 @@
     "regions": 7,
     "changed_area_mm2": 90.7,
     "tags": [],
-    "svg": "two-sided/plate_tip_flare.svg"
+    "svg": "two-sided/plate_tip_flare.svg",
+    "features": [
+      "arms",
+      "cord channel",
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1625,7 +2068,11 @@
     "regions": 4,
     "changed_area_mm2": 220.9,
     "tags": [],
-    "svg": "two-sided/plate_arm_tip_width.svg"
+    "svg": "two-sided/plate_arm_tip_width.svg",
+    "features": [
+      "arms",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1639,7 +2086,10 @@
     "regions": 2,
     "changed_area_mm2": 1.1,
     "tags": [],
-    "svg": "two-sided/plate_edge_rounding.svg"
+    "svg": "two-sided/plate_edge_rounding.svg",
+    "features": [
+      "finger lobes"
+    ]
   },
   {
     "file": "two-sided",
@@ -1653,7 +2103,10 @@
     "regions": 1,
     "changed_area_mm2": 5.4,
     "tags": [],
-    "svg": "two-sided/plate_strip_thickness.svg"
+    "svg": "two-sided/plate_strip_thickness.svg",
+    "features": [
+      "cord channel"
+    ]
   },
   {
     "file": "two-sided",
@@ -1667,7 +2120,13 @@
     "regions": 6,
     "changed_area_mm2": 103.2,
     "tags": [],
-    "svg": "two-sided/plate_zip_hole_diameter.svg"
+    "svg": "two-sided/plate_zip_hole_diameter.svg",
+    "features": [
+      "arms",
+      "finger lobes",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1683,7 +2142,12 @@
     "regions": 10,
     "changed_area_mm2": 79.4,
     "tags": [],
-    "svg": "two-sided/plate_zip_placement.svg"
+    "svg": "two-sided/plate_zip_placement.svg",
+    "features": [
+      "arms",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1700,7 +2164,11 @@
     "regions": 4,
     "changed_area_mm2": 50.2,
     "tags": [],
-    "svg": "two-sided/plate_zip_pos_1.svg"
+    "svg": "two-sided/plate_zip_pos_1.svg",
+    "features": [
+      "finger lobes",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1717,7 +2185,11 @@
     "regions": 2,
     "changed_area_mm2": 117.8,
     "tags": [],
-    "svg": "two-sided/plate_zip_pos_2.svg"
+    "svg": "two-sided/plate_zip_pos_2.svg",
+    "features": [
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1734,7 +2206,12 @@
     "regions": 6,
     "changed_area_mm2": 185.2,
     "tags": [],
-    "svg": "two-sided/plate_zip_pos_3.svg"
+    "svg": "two-sided/plate_zip_pos_3.svg",
+    "features": [
+      "arms",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1750,7 +2227,12 @@
     "regions": 4,
     "changed_area_mm2": 383.5,
     "tags": [],
-    "svg": "two-sided/plate_slot_inner_wall.svg"
+    "svg": "two-sided/plate_slot_inner_wall.svg",
+    "features": [
+      "arms",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1766,7 +2248,12 @@
     "regions": 4,
     "changed_area_mm2": 351.0,
     "tags": [],
-    "svg": "two-sided/plate_velcro_slot_width.svg"
+    "svg": "two-sided/plate_velcro_slot_width.svg",
+    "features": [
+      "arms",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1782,7 +2269,12 @@
     "regions": 6,
     "changed_area_mm2": 127.3,
     "tags": [],
-    "svg": "two-sided/plate_velcro_slot_length.svg"
+    "svg": "two-sided/plate_velcro_slot_length.svg",
+    "features": [
+      "arms",
+      "strap slot",
+      "zip stations"
+    ]
   },
   {
     "file": "two-sided",
@@ -1796,6 +2288,9 @@
     "regions": 0,
     "changed_area_mm2": 0.0,
     "tags": [],
-    "svg": "two-sided/quality.svg"
+    "svg": "two-sided/quality.svg",
+    "features": [
+      "none"
+    ]
   }
 ]

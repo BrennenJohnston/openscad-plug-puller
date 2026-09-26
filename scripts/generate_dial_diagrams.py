@@ -44,12 +44,13 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 import numpy as np
 import shapely
 import trimesh
-from shapely.geometry import LineString, Polygon
+from shapely.geometry import LineString, Point, Polygon
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.generate_outline_sheets import (  # noqa: E402
+    CLAM_FINGER_WALL,
     DASH_HOLE,
     DASH_POCKET,
     FONT,
@@ -60,6 +61,8 @@ from scripts.generate_outline_sheets import (  # noqa: E402
     TWO_SIDED_SCAD,
     _fix,
     as_polygons,
+    clamshell_mirror,
+    classify_circle,
     clean_polygon,
     filled_union,
     rings_to_polygons,
@@ -495,6 +498,218 @@ def plug_polygon(file_key: str, params: Dict[str, Any], outline: Outline) -> Pol
 
 
 # ---------------------------------------------------------------------------
+# Feature names: which part of the tool a changed region sits on
+# ---------------------------------------------------------------------------
+#
+# Footprints are built in the top view's coordinates from the numbers the
+# outline-sheet script uses (the fit formulas, the clamshell mirror, the
+# circle classifier) and from the BEFORE outline's own holes. Each changed
+# region is named after the first footprint, in the order below (the most
+# specific first), that covers at least a quarter of it; failing that, the
+# footprint that covers most of it; failing that, the body's or plate's
+# edge.
+
+FEATURE_FALLBACK = {ONE_SIDED: "body edge", TWO_SIDED: "plate edge"}
+FOOTPRINT_PAD = 1.5  # mm: a moved edge's region lies just outside its old footprint
+HOLE_PAD = 1.5  # mm: the holes of both states are in the footprint, so a small pad does
+SPECIFIC_SHARE = 0.5  # a hole, slot or tooth band owns a region it covers this much of
+BROAD_SHARE = 0.15  # a pocket, notch, lobe, channel or arm owns a region it covers this much of
+FALLBACK_SHARE = 0.10  # below this the region is the body's or plate's edge
+COVERED_SHARE = 0.5  # a region that covers this much of a footprint's own area names it
+WHOLE_BODY_SHARE = 0.25  # a region this big against the body is the edge's too
+TEETH_DEPTH = 3.0  # mm: the band along the arms' inner edges that the teeth occupy
+PROBE_HALF = 0.5  # mm: half the thickness of a section row's probe box
+
+
+@dataclass
+class Footprints:
+    """Named regions of the top view. ``specific`` are the holes, slots and
+    teeth (padded generously, so a moved hole's region still lands on it);
+    ``broad`` are the pocket, notch, seat, hook, lobes, channel and arms,
+    each minus the specific cores and the broad ones listed before it."""
+
+    specific: List[Tuple[str, Any]] = field(default_factory=list)
+    broad: List[Tuple[str, Any]] = field(default_factory=list)
+
+
+def _circles(polys: Sequence[Polygon]):
+    out = []
+    for poly in polys:
+        for ring in poly.interiors:
+            c = classify_circle(np.asarray(ring.coords))
+            if c:
+                out.append(c)
+    return out
+
+
+def _disc(c, pad: float = 0.0) -> Polygon:
+    return Point(c.cx, c.cy).buffer(c.d / 2 + pad)
+
+
+def _hole_slots(polys: Sequence[Polygon], min_area: float) -> List[Polygon]:
+    out = []
+    for poly in polys:
+        for ring in poly.interiors:
+            coords = np.asarray(ring.coords)
+            if classify_circle(coords) is None:
+                p = Polygon(coords)
+                if p.area > min_area:
+                    out.append(p)
+    return out
+
+
+def _assemble(specific_cores: List[Tuple[str, Any, float]], broad: List[Tuple[str, Any]]) -> Footprints:
+    """Pad the specific cores by their own pad; pad the broad footprints by
+    FOOTPRINT_PAD and make them exclusive of the cores and of each other."""
+    fp = Footprints()
+    taken = _union([geom for _n, geom, _pad in specific_cores if not geom.is_empty])
+    for name, geom, pad in specific_cores:
+        if not geom.is_empty:
+            fp.specific.append((name, geom.buffer(pad)))
+    for name, geom in broad:
+        if geom.is_empty:
+            continue
+        own = _fix(geom.buffer(FOOTPRINT_PAD).difference(taken))
+        if not own.is_empty:
+            fp.broad.append((name, own))
+        taken = _fix(taken.union(geom.buffer(FOOTPRINT_PAD)))
+    return fp
+
+
+def _one_sided_numbers(params: Dict[str, Any]) -> Dict[str, Any]:
+    meas = {k: v for k, v in params.items() if k in fit_formulas.DEFAULT_MEASUREMENTS}
+    meas.update(effective_measurements(ONE_SIDED, params))
+    d = dict(fit_formulas.derive(meas))
+    if params.get("size") == "Custom":
+        for key in ("pocket_seat_diameter", "plug_wall_notch_width", "plug_wall_notch_height",
+                    "t_hook_length", "t_hook_holder_width", "t_hook_catch_reach",
+                    "t_hook_tip_drop", "finger_hole_diameter", "zip_tie_hole_diameter"):
+            if f"custom_{key}" in params:
+                d[key] = float(params[f"custom_{key}"])
+    return d
+
+
+def _hook_box(d: Dict[str, Any], params: Dict[str, Any]) -> Polygon:
+    hand = -1.0 if params.get("hook_hand") == "Left" else 1.0
+    cl = -d["t_hook_catch_reach"]
+    cr = cl + d["t_hook_holder_width"]
+    return shapely.box(min(hand * cl, hand * cr), -d["t_hook_tip_drop"] - 1.0,
+                       max(hand * cl, hand * cr), d["t_hook_length"])
+
+
+def footprints_one_sided(params: Dict[str, Any], outline: Outline,
+                         after: Optional[Outline] = None,
+                         after_params: Optional[Dict[str, Any]] = None) -> Footprints:
+    d = _one_sided_numbers(params)
+    d2 = _one_sided_numbers(after_params) if after_params else d
+    body = max(outline.solids, key=lambda p: p.area)
+    top = body.bounds[3]
+    solids = list(outline.solids) + (list(after.solids) if after else [])
+    circles = _circles(solids)
+    fingers = [c for c in circles if abs(c.d - d["finger_hole_diameter"]) < 3.0]
+    zips = [c for c in circles if abs(c.d - d["zip_tie_hole_diameter"]) < 2.0]
+    wings = _hole_slots(solids, 5.0)
+    wing_name = "classic slots" if params.get("velcro_style") == "Classic slot" else "wing openings"
+    notch = _union([shapely.box(-x["plug_wall_notch_width"] / 2, top - x["plug_wall_notch_height"],
+                                x["plug_wall_notch_width"] / 2, top + 1.0) for x in (d, d2)])
+    seat = Point(0.0, top).buffer(max(d["pocket_seat_diameter"], d2["pocket_seat_diameter"]) / 2)
+    hook = _union([_hook_box(d, params), _hook_box(d2, after_params or params)])
+    recess = _union(list(outline.recess) + (list(after.recess) if after else []))
+    specific = [
+        ("zip-tie holes", _union([_disc(c) for c in zips]), HOLE_PAD),
+        ("finger holes", _union([_disc(c) for c in fingers]), HOLE_PAD),
+        (wing_name, _union(wings), FOOTPRINT_PAD),
+    ]
+    broad = [("wall notch", notch), ("seat", seat), ("hook", hook), ("pocket", recess)]
+    return _assemble(specific, broad)
+
+
+def footprints_two_sided(params: Dict[str, Any], outline: Outline,
+                         after: Optional[Outline] = None,
+                         after_params: Optional[Dict[str, Any]] = None) -> Footprints:
+    m = effective_measurements(TWO_SIDED, params)
+    size = params.get("size", "Medium")
+    mirror_size = size if size in fit_formulas.FIT_SIZE_TABLE else "Medium"
+    cm = clamshell_mirror(mirror_size, {"measurements": m})
+    solids = list(outline.solids) + (list(after.solids) if after else [])
+    x0, y0, x1, y1 = shapely.union_all(solids).bounds
+    circles = _circles(solids)
+    zip_d = float(params.get("plate_zip_hole_diameter", 4.0))
+    fingers = [c for c in circles if abs(c.d - cm["finger_dia"]) < 3.0]
+    zips = [c for c in circles if abs(c.d - zip_d) < 1.5]
+    slots = _hole_slots(solids, 20.0)
+    lobes = _union([_disc(c, CLAM_FINGER_WALL) for c in fingers])
+    plug = plug_polygon(TWO_SIDED, params, outline)
+    teeth = plug.buffer(TEETH_DEPTH).difference(plug).intersection(
+        shapely.box(x0 - 1.0, y1 - m["measure_plug_length"], x1 + 1.0, y1 + 3.0))
+    channel = shapely.box(-cm["cable_gap"] / 2 - 2.0, y0 - 1.0, cm["cable_gap"] / 2 + 2.0, cm["throat_y0"] + 2.0)
+    arms = shapely.box(x0 - 1.0, cm["throat_y0"], x1 + 1.0, y1 + 1.0)
+    specific = [
+        ("zip stations", _union([_disc(c) for c in zips]), HOLE_PAD),
+        ("strap slot", _union(slots), FOOTPRINT_PAD),
+        ("teeth", teeth, FOOTPRINT_PAD),
+    ]
+    broad = [("finger lobes", lobes), ("cord channel", channel), ("arms", arms)]
+    return _assemble(specific, broad)
+
+
+def footprints(file_key: str, params: Dict[str, Any], outline: Outline,
+               after: Optional[Outline] = None,
+               after_params: Optional[Dict[str, Any]] = None) -> Footprints:
+    """The named footprints from the BEFORE outline's numbers; the holes and
+    slots of the AFTER outline join them so a hole that appears or moves is
+    covered too."""
+    if file_key == ONE_SIDED:
+        return footprints_one_sided(params, outline, after, after_params)
+    return footprints_two_sided(params, outline, after, after_params)
+
+
+def _section_probe(region: Polygon, view: str, at: float) -> Polygon:
+    """A section region mapped back onto the top view: a thin box along the
+    cut plane over the region's span."""
+    u0, _v0, u1, _v1 = region.bounds
+    if view == "section-x":
+        return shapely.box(at - PROBE_HALF, -u1, at + PROBE_HALF, -u0)
+    return shapely.box(u0, at - PROBE_HALF, u1, at + PROBE_HALF)
+
+
+def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
+                     view: str = "top", at: float = 0.0,
+                     body_area: float = 0.0) -> List[str]:
+    """Name every changed region: the specific footprints (holes, slots,
+    teeth) covering at least half of it, the broad ones (pocket, notch,
+    seat, hook, lobes, channel, arms) covering at least a sixth of it,
+    and any footprint the region itself covers at least half of (a region
+    that swallows a whole feature); a region that swallows a quarter of the
+    body is also the edge's; a region nothing claims takes the footprint
+    covering most of it, if a tenth, else the edge."""
+    names = set()
+    edge = FEATURE_FALLBACK[file_key]
+    for region in regions:
+        probe = region if view == "top" else _section_probe(region, view, at)
+        area = max(probe.area, 1e-9)
+        hits = set()
+        shares: Dict[str, float] = {}
+        for tier, threshold in ((fp.specific, SPECIFIC_SHARE), (fp.broad, BROAD_SHARE)):
+            for name, geom in tier:
+                inter = probe.intersection(geom).area
+                shares[name] = inter / area
+                if inter / area >= threshold or inter / max(geom.area, 1e-9) >= COVERED_SHARE:
+                    hits.add(name)
+        if view == "top" and body_area and region.area >= WHOLE_BODY_SHARE * body_area:
+            hits.add(edge)
+        if not hits and shares and view == "top":
+            # A section probe is a thin box across the whole cut: a feature it
+            # merely grazes must not name it, so the tenth-share fallback is
+            # for top views only.
+            best = max(shares, key=shares.get)
+            if shares[best] >= FALLBACK_SHARE:
+                hits.add(best)
+        names.update(hits or {edge})
+    return sorted(names)
+
+
+# ---------------------------------------------------------------------------
 # SVG composition
 # ---------------------------------------------------------------------------
 
@@ -737,7 +952,8 @@ def svg_relpath(row: Dict[str, Any]) -> str:
     return f"{row['file']}/{row['name']}.svg"
 
 
-def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str]) -> Dict[str, Any]:
+def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str],
+              features: Sequence[str]) -> Dict[str, Any]:
     d = row["diagram"]
     return {
         "file": row["file"],
@@ -752,6 +968,7 @@ def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str]) -
         "changed_area_mm2": round(area, 1),
         "tags": tags,
         "svg": svg_relpath(row),
+        "features": list(features),
     }
 
 
@@ -760,7 +977,7 @@ def build_none(row: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
     path = out_dir / svg_relpath(row)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return index_row(row, 0, 0.0, [])
+    return index_row(row, 0, 0.0, [], ["none"])
 
 
 def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
@@ -772,10 +989,12 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     base, after_params = parameter_sets(row, defaults)
     tags: List[str] = []
     outlines = []
+    stls: List[Path] = []
     body = None
     for params in (base, after_params):
         defines = defines_for(file_key, row["name"], params, defaults)
         stl, log, _hit = renderer.render(file_key, defines)
+        stls.append(stl)
         tags.extend(t for t in warning_tags(log) if t not in tags)
         if view == "top":
             outlines.append(top_view(file_key, stl, params))
@@ -790,6 +1009,13 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
         plug = section_plug_polygon(file_key, after_params, view, at, body)
         context[view] = at  # the cut plane, shown with the context
     regions, area = outline_regions(b_out, a_out)
+    if view == "top":
+        feats = footprints(file_key, base, b_out, a_out, after_params)
+    else:
+        feats = footprints(file_key, base, top_view(file_key, stls[0], base),
+                           top_view(file_key, stls[1], after_params), after_params)
+    body_area = sum(p.area for p in b_out.solids) if view == "top" else 0.0
+    features = classify_regions(file_key, regions, feats, view, at, body_area) if regions else []
     svg = compose_svg(
         before=b_out.filled,
         after=a_out.filled,
@@ -809,7 +1035,7 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     path = out_dir / svg_relpath(row)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return index_row(row, len(regions), area, tags)
+    return index_row(row, len(regions), area, tags, features)
 
 
 def run_rows(
@@ -867,6 +1093,71 @@ def write_index(out_dir: Path, produced: Sequence[Dict[str, Any]], catalog: Sequ
     return path
 
 
+# ---------------------------------------------------------------------------
+# docs/dials/README.md: every diagram inline with its words
+# ---------------------------------------------------------------------------
+
+README_NAME = "README.md"
+README_TITLE = "Dial diagrams"
+README_INTRO = (
+    "Every dial of the one-sided puller and the two-sided puller has a picture here: "
+    "the tool at its defaults in black, the plug in teal, and a red dashed trace on the "
+    "part that dial moves when it goes from its default to a second value.",
+    "The pictures are cut from the same OpenSCAD files you print from, at 1 unit = 1 mm; "
+    "the two values drawn are written under each picture.",
+)
+README_FILE_HEADINGS = {ONE_SIDED: "One-sided puller", TWO_SIDED: "Two-sided puller"}
+
+
+def _readme_entry(row: Dict[str, Any], entry: Dict[str, Any]) -> List[str]:
+    d = row["diagram"]
+    lines = [f"`{row['name']}`: {row['title']}", "", f"![{row['changes']}]({svg_relpath(row)})", ""]
+    if d["view"] == "none":
+        lines.append(f"{NO_SHAPE_SENTENCE} {row.get('note') or ''}".strip())
+    else:
+        parts = [f"Before: {_fmt_value(d['before'])}. After: {_fmt_value(d['after'])}."]
+        ctx = d.get("context") or {}
+        if ctx:
+            parts.append("Context: " + ", ".join(f"`{k}` = {_fmt_value(v)}" for k, v in ctx.items()) + ".")
+        if d["view"] in SECTION_VIEWS:
+            axis = "x" if d["view"] == "section-x" else "y"
+            parts.append(f"Section at {axis} = {_fmt_value(d.get('at') or 0)} mm.")
+        parts.append("Moves: " + ", ".join(entry.get("features") or []) + ".")
+        lines.append(" ".join(parts))
+    lines.append("")
+    return lines
+
+
+def write_readme(out_dir: Path, catalog: Sequence[Dict[str, Any]],
+                 index_rows: Sequence[Dict[str, Any]]) -> Path:
+    """The Markdown index: H1, the intro and the legend, H2 per file, H3 per
+    Customizer section in mapping order, one entry per dial."""
+    index = {(e["file"], e["name"]): e for e in index_rows}
+    lines = [f"# {README_TITLE}", "", README_INTRO[0], "", README_INTRO[1], "", LEGEND_LINE + ".", ""]
+    count = 0
+    for file_key in (ONE_SIDED, TWO_SIDED):
+        lines += [f"## {README_FILE_HEADINGS[file_key]}", ""]
+        sections: List[str] = []
+        for mrow in load_mapping(file_key).values():
+            if mrow["section"] not in sections:
+                sections.append(mrow["section"])
+        for section in sections:
+            rows = [r for r in catalog if r["file"] == file_key and r["section"] == section]
+            if not rows:
+                continue
+            lines += [f"### {section}", ""]
+            for row in rows:
+                entry = index.get((row["file"], row["name"]))
+                if entry is None:
+                    raise RuntimeError(f"{row['file']}/{row['name']} has no index row; build it first")
+                lines += _readme_entry(row, entry)
+                count += 1
+    path = out_dir / README_NAME
+    path.write_text("\n".join(lines).rstrip("\n") + "\n", encoding="utf-8")
+    logger.info("README: %d entries -> %s", count, path)
+    return path
+
+
 def select_rows(catalog: Sequence[Dict[str, Any]], files: Sequence[str], only: Sequence[str], views: str) -> List[Dict[str, Any]]:
     if views == "all":
         wanted = set(VIEWS_BUILT)
@@ -888,10 +1179,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--cache", type=Path, default=DEFAULT_CACHE, help="render cache (default: tmp_renders/dial_diagrams)")
     parser.add_argument("--force", action="store_true", help="re-render even when the cache has the STL")
     parser.add_argument("--views", choices=VIEW_CHOICES, default="all", help="which catalog views to build (default: every view this script supports)")
+    parser.add_argument("--readme", action="store_true", help="only rewrite docs/dials/README.md from the index on disk (no rows built)")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
     catalog = load_catalog()
+    if args.readme:
+        index_path = args.out / INDEX_NAME
+        if not index_path.exists():
+            logger.error("no index at %s; build the rows first", index_path)
+            return 1
+        write_readme(args.out, catalog, json.loads(index_path.read_text(encoding="utf-8")))
+        return 0
     files = [args.file] if args.file else [ONE_SIDED, TWO_SIDED]
     rows = select_rows(catalog, files, args.only, args.views)
     if not rows:
@@ -901,6 +1200,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     renderer = Renderer(cache_dir=args.cache, force=args.force)
     produced = run_rows(rows, out_dir=args.out, cache_dir=args.cache, force=args.force, renderer=renderer)
     index_path = write_index(args.out, produced, catalog)
+    index_rows = json.loads(index_path.read_text(encoding="utf-8"))
+    if len(index_rows) == len(catalog):
+        write_readme(args.out, catalog, index_rows)
+    else:
+        logger.warning("README not written: the index has %d of %d catalog rows", len(index_rows), len(catalog))
     empty = [f"{e['file']}/{e['name']}" for e in produced if e["view"] != "none" and e["regions"] == 0]
     missing = [f"{r['file']}/{r['name']}" for r in rows
                if (r["file"], r["name"]) not in {(e["file"], e["name"]) for e in produced}]
