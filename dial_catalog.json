@@ -9,7 +9,7 @@
     "changes": "Fills in all six plug numbers from a measured reference plug, so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": "Measure my plug",
       "after": "Standard 3-prong plug - NEMA 5-15",
       "context": {},
@@ -125,7 +125,7 @@
     "changes": "Widens the cord hook's slot and crossbar to fit the cord, and moves the finger holes and the whole body up to make room.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": 4,
       "after": 8,
       "context": {},
@@ -1764,7 +1764,7 @@
     "changes": "Fills in the plug's length, both widths and the cord from the measured heavy-duty cord plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": "Measure my plug",
       "after": "Heavy-duty extension cord - NEMA 5-15",
       "context": {},
@@ -1783,7 +1783,7 @@
     "changes": "Lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": 25.5,
       "after": 40,
       "context": {},
