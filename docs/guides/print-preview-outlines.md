@@ -47,7 +47,7 @@ in a web customizer), the plate sheets in the two-sided puller
 or [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](../../dist/Plug_Puller_Two_Sided_SingleFile.scad)).
 
 Prefer one file? **[`docs/Plug_Puller_Outline_Sheets.pdf`](../Plug_Puller_Outline_Sheets.pdf)**
-bundles all nine sheets behind a cover page with a page index — open
+bundles all 21 sheets behind a cover page with a page index — open
 it, print just the page you need (at 100 %), done.
 
 Each sheet fits both **A4 and US Letter** paper and contains:
@@ -106,7 +106,7 @@ can read by touch:
 
 | ID | Card | Worksheet numbers it answers |
 | -- | ---- | ---------------------------- |
-| **P1 / P2 / P3** | Plug preset silhouettes (lamp / standard 3-prong / heavy-duty extension cord). Hold your plug in the **W** (width) and **T** (thickness) cutouts — if it fills them and the cord slips sideways into the open cord slot, that preset fits: pick it in Step 1 and skip measuring (P3's preset is in the two-sided puller) | all of 1–6, by preset match |
+| **P1 / P2 / P3 / P4** | Plug silhouettes: lamp, standard 3-prong, heavy-duty extension cord, wide appliance plug. If your plug fills the **W** and **T** cutouts, it fits | all of 1–6, by preset match |
 | **R1** | Tactile mm ruler — raised ticks, edge notches every 10 mm | 1–5 |
 | **C1** | Cord gauge — open slots Ø 3–9 mm through the bottom edge; slides onto an installed cord from the side | 6 |
 | **F1 / F2** | The 18 finger-sizing circles (Ø 15–32 mm) from the [measuring template](measuring-template.svg) as real through-holes | 8 |

@@ -50,16 +50,18 @@ Set `plug_preset` in **Step 1 - Your Plug** to whichever matches:
 
 | `plug_preset` | What it is | File |
 |---------------|------------|------|
-| `Flat 2-prong lamp plug - NEMA 1-15` | The thin two-blade plug on lamps and small appliances | one-sided |
-| `Standard 3-prong plug - NEMA 5-15` | The common three-pin plug with a round ground pin | one-sided |
-| `Heavy-duty extension cord - NEMA 5-15` | Fat moulded plug on a thick orange or brown extension cord | two-sided |
+| `Flat 2-prong lamp plug - NEMA 1-15` | The thin two-blade plug on lamps and small appliances | one-sided, two-sided |
+| `Standard 3-prong plug - NEMA 5-15` | The common three-pin plug with a round ground pin | one-sided, two-sided |
+| `Wide 2-prong appliance plug - NEMA 1-15` | The wide flat plug on a vacuum or a kitchen appliance | one-sided |
+| `Heavy-duty extension cord - NEMA 5-15` | Fat molded plug on a thick orange or brown extension cord | two-sided |
+| `USB-C laptop tip` | The metal tip of a USB-C laptop charger cable, held from both sides | two-sided |
 
 That is the whole of Step 1 if a preset fits. Skip to section 3.
 
 ### Route B — measure your plug
 
 Set `plug_preset` to `Measure my plug` and type your numbers. All measurements
-are in millimetres. **Measure the plug body, not the prongs.**
+are in millimeters. **Measure the plug body, not the prongs.**
 
 In the one-sided file, six numbers:
 
@@ -86,7 +88,7 @@ In the two-sided file, four numbers and one choice:
 | Parameter | What to measure | Default |
 |-----------|-----------------|---------|
 | `measure_plug_length` | How far the plug body sticks out; on a laptop or charger, from the device's edge | 25.5 mm |
-| `measure_plug_width_prong_end` | The size the two plates close across, just behind the prongs (on a USB-C or charger tip, just behind the metal tip); on a round plug, the diameter | 20 mm |
+| `measure_plug_width_prong_end` | The size the two plates close across, just behind the prongs (or the metal tip); on a round plug, the diameter | 20 mm |
 | `measure_plug_width_cord_end` | The same direction, where the cord leaves the plug body | 20 mm |
 | `measure_cord_thickness` | Thickness of the cord itself | 4 mm |
 
@@ -224,7 +226,7 @@ finished STL only. You see them in desktop OpenSCAD and in the OpenSCAD
 Playground (section 8):
 
 - **A green tag** (one-sided file) confirms what was applied, in the form
-  `MEDIUM: 25x25.5 PLUG, 20MM FINGER`. Read it back against what you typed.
+  `Medium: 25x25.5 PLUG, 20MM FINGER`. Read it back against what you typed.
 - `CUSTOM SLIDERS IGNORED - SET SIZE = CUSTOM` (orange, one-sided) — you moved a
   `custom_*` slider while `size` is not `Custom`. Either set `size` to `Custom`
   or leave the advanced sliders alone.
@@ -249,7 +251,7 @@ The red warning strings are exact. Find yours in the list.
 (MM?)`
 
 The `(MM?)` is the hint: a number this far out is usually inches typed into a
-millimetre field. One inch is 25.4 mm. Re-measure in millimetres, or multiply.
+millimeter field. One inch is 25.4 mm. Re-measure in millimeters, or multiply.
 
 ### The measurements contradict each other
 
@@ -359,7 +361,7 @@ How it compares:
   into <https://ochafik.com/openscad2/> instead.
 - **On a phone,** you will be switching between the editor, the customizer, and
   the preview rather than seeing them at once.
-- **No braille translation and no presets**, because this model needs neither.
+- **No braille translation**, because this model needs none; the plug presets are in the file itself, so they work in the Playground too.
 
 The full Playground walkthrough is in
 [`docs/guides/web-customizer.md`](guides/web-customizer.md).

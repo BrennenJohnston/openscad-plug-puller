@@ -1,6 +1,6 @@
 # Measuring Guide — The Numbers That Make Your Plug Puller Fit
 
-Everything on this page is measured in **millimetres (mm)**.
+Everything on this page is measured in **millimeters (mm)**.
 If your ruler or caliper has two scales, **use the mm side** — a US
 plug is about **25 mm** wide; if you wrote down "1" you measured in
 inches.
@@ -19,7 +19,7 @@ with a mm ruler and finger-sizing circles — print it at 100 % scale
 before trusting it. Prefer not to cut paper? Print the
 **[measuring stencil](print-preview-outlines.md#the-measuring-stencil)**
 ([`stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl`](../../stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl))
-instead — plug-preset silhouette cards (P1/P2/P3), a tactile mm ruler
+instead — plug-preset silhouette cards (P1/P2/P3/P4), a tactile mm ruler
 (R1), a cord gauge (C1), and the 18 finger circles as real
 through-holes (F1/F2). The [Starter Guide](starter-guide.md) maps each
 card to the worksheet numbers below.
@@ -49,7 +49,7 @@ Write your numbers into the worksheet at the bottom as you go.
 This is the two-sided puller on the kind of fat round plug it is made
 for — a thickness of 24 mm or more sends you to it:
 
-![The assembled two-sided puller zip-tied around a thick round extension-cord plug](../images/clamshell-assembled-on-plug.jpg)
+![The two-sided puller zip-tied around an orange extension-cord plug on a table, two ties across the plug and one at the cord.](../images/two-sided-assembled-on-plug.jpg)
 
 <!-- TODO(photos): still wanted — one close-up photo per measurement
      below: ruler from wall plate to the plug's back face, caliper
@@ -129,7 +129,7 @@ the prong end — that is exactly what these two numbers capture.
 **Caliper across the cord right behind the plug, on its thin side.**
 Flat lamp cord: measure the narrow way. Round cord: the diameter.
 The cord must slide sideways into the tool's hook slot, so measure
-where the hook will actually grab — a few centimetres behind the plug.
+where the hook will actually grab — a few centimeters behind the plug.
 
 With the stencil: **C1**'s slots open through the card's bottom edge,
 so slide the card sideways onto the installed cord — no free cord end
@@ -283,7 +283,7 @@ and one file prints the whole tool.
 > clamp anchor. (On the two-sided puller, the zip ties go plate to
 > plate the same way:)
 >
-> ![Zip ties threaded through both plates of the two-sided puller around the plug barrel](../images/clamshell-assembly-zip-ties.jpg)
+> ![Two zip ties threaded through one plate of the two-sided puller and lying across the orange plug toward the second plate.](../images/two-sided-assembly-zip-ties.jpg)
 
 > **Safety:** the tool touches only the plug's **sides and back** —
 > never between the plug face and the wall. For extra grip on a slick
@@ -350,7 +350,7 @@ preset-set dropdown above the sections → pick a set):
 | `Medium (v6 reference)` | all defaults — the v6 device, zip ties + wing velcro |
 | `Flat 2-prong lamp plug (NEMA 1-15)` | the lamp preset (37 mm long, widths 25 → 11.2, thickness 18.6 → 8.6, cord 3.6) |
 | `Standard 3-prong plug (NEMA 5-15)` | the standard preset (46.2 mm long, widths 26.6 → 13.4, thickness 18.9 → 15, cord 7) |
-| `Measure my plug + hand (US vacuum plug)` | straight-sided plug 34 wide / 16 thick at both ends, 38 mm long, cord 5 mm, Rocker / Decora, finger 22 mm, hand 88 mm |
+| `Measure my plug + hand (US vacuum plug)` | straight-sided plug 34 wide, 16 thick, 38 long; cord 5 mm; Rocker / Decora; finger 22, hand 88 mm |
 | `Left-handed + classic velcro slots` | `hook_hand = Left`, `velcro_style = Classic slot` |
 | `Round extension cord - NEMA 5-15` (two-sided) | the heavy-duty extension-cord preset, Medium, zip ties + velcro strap |
 | `USB-C laptop plug - measured` (two-sided) | 23 mm long, 13 mm wide at both ends, cord 7 mm, `Rounded sides`, zip ties only |

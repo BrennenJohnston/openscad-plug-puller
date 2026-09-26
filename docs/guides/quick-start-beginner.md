@@ -46,7 +46,7 @@ keep reading — the next sentence tells you exactly what to press.
 
 Open the **[Measuring Guide](measuring-guide.md)** (it works well on a
 phone) and write down your numbers on the worksheet at the bottom of
-that guide. Everything is measured in **millimetres (mm)** — use the mm
+that guide. Everything is measured in **millimeters (mm)** — use the mm
 side of your ruler or caliper.
 
 You will end up with something like this:
@@ -162,9 +162,9 @@ things.
    holds the plate dials; the [Power User Guide](power-user-guide.md)
    explains them.
 
-   ![One plate of the two-sided puller in the preview — a flat plate with two finger holes and two serrated gripping arms](../images/clamshell-plate-render.png)
+   ![The two-sided puller's two plates side by side in the preview, the see-through plug between the left plate's arms, and the orange note that the plug is too short for a strap slot.](../images/two-sided-plate-render.png)
 
-   ![The two printed plates of the two-sided puller beside a heavy-duty extension-cord plug — two identical plates, one flipped over](../images/clamshell-plates-and-plug.jpg)
+   ![The two identical plates of the two-sided puller on a table, one flipped, with the orange extension-cord plug between them.](../images/two-sided-plates-and-plug.jpg)
 
 > **One advanced slider worth knowing:** if you're building the
 > two-sided puller and want a beefier print, `plate_wall_boost`
@@ -173,16 +173,16 @@ things.
 > else adjusts automatically.
 
 **How to know it worked:** in the one-sided file the preview shows a
-green tag reading `MEDIUM: …` (or your size) next to the model — that
+green tag reading `Medium: …` (or your size) next to the model — that
 is the model confirming your numbers were applied. In the two-sided
 file, look at the see-through plug on the left plate: it is the plug
 your numbers describe.
 
-![The one-sided puller in the preview with the green confirmation tag reading "Medium: 25x25.5 plug, 20mm finger" floating beside it](../images/flat-tool-medium-render.png)
+![The one-sided puller in the preview with the see-through plug in its pocket and the green tag reading Medium: 25x25.5 plug, 20mm finger.](../images/one-sided-medium-render.png)
 
 If you instead see **red text**,
 one of your numbers looks wrong (for example, inches instead of
-millimetres). The red text names which measurement to re-check — fix it
+millimeters). The red text names which measurement to re-check — fix it
 before printing. The **[Fit Troubleshooting Guide](fit-troubleshooting.md)**
 explains every message.
 
@@ -219,11 +219,11 @@ For the two-sided puller: flip one plate over, thread the zip ties
 through both plates' zip-tie holes, sandwich the plug between the
 serrated arms, and cinch —
 
-![The two plates of the two-sided puller being zip-tied face to face around a heavy-duty extension-cord plug](../images/clamshell-assembly-zip-ties.jpg)
+![Two zip ties threaded through one plate of the two-sided puller and lying across the orange plug toward the second plate.](../images/two-sided-assembly-zip-ties.jpg)
 
-![The assembled two-sided puller cinched around the plug, finger holes clear of the cord](../images/clamshell-assembled-on-plug.jpg)
+![The two-sided puller zip-tied around an orange extension-cord plug on a table, two ties across the plug and one at the cord.](../images/two-sided-assembled-on-plug.jpg)
 
-![The two-sided puller in use at a wall outlet — fingers through both holes, pulling the plug straight out](../images/clamshell-in-use-outlet.jpg)
+![A gloved hand pulling the two-sided puller and its orange extension-cord plug straight out of a wall outlet, two fingers through the holes.](../images/two-sided-in-use-outlet.jpg)
 
 If anything is snug, loose, or uncomfortable, open the
 **[Fit Troubleshooting Guide](fit-troubleshooting.md)**. Every fix is a
@@ -243,4 +243,4 @@ one reprint.
 | Red text appears in the preview | A measurement is implausible or conflicting. The text names it; see the [Fit Troubleshooting Guide](fit-troubleshooting.md). |
 | The red text says `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | Your plug is too thick for the one-sided puller. Open `src/Plug_Puller_Two_Sided.scad` and fill in its Step 1. |
 | The exported file is tiny / my slicer says it's empty | You exported after F5 (preview) instead of F6 (render). Press F6, wait, then export again. |
-| A red text tag printed next to my part | That is the warning tag, printed on purpose so a bad file can't fail silently. Read what it says, fix that measurement, re-export, reprint. |
+| A red text tag printed next to my part | That is the warning tag, printed on purpose so a bad file cannot fail silently. Read it, fix that measurement, re-export, reprint. |
