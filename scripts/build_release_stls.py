@@ -3,13 +3,14 @@
 Every default preset the two models ship gets its own named STL so downloaders
 can print a standard configuration without opening OpenSCAD:
 
-* Plug Puller — each of the 3 plug presets x each of the 3 finger/hand sizes
-  = 9 plug tools: 6 one-sided + 3 two-sided pairs. Only ``plug_preset`` and
-  ``size`` vary; every other dial stays at its default. The lamp and standard
-  presets build the one-sided puller (``src/Plug_Puller_Parametric.scad``);
-  the round extension-cord preset builds the two-sided puller
-  (``src/Plug_Puller_Two_Sided.scad``) with both plates side by side in one
-  file (flip one after printing).
+* Plug Puller — every plug preset x each of the 3 finger/hand sizes, in every
+  tool file that offers the preset = 21 plug tools: 9 one-sided (the lamp,
+  standard and wide appliance presets) + 12 two-sided pairs (the lamp,
+  standard, round extension-cord and USB-C presets). Only ``plug_preset``
+  and ``size`` vary; every other dial stays at its default. The one-sided
+  puller is ``src/Plug_Puller_Parametric.scad``; the two-sided puller
+  (``src/Plug_Puller_Two_Sided.scad``) renders both plates side by side in
+  one file (flip one after printing).
 
 * Measuring Stencil (``Measuring_Stencil.scad``) — every individual card
   (P1-P4 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing) rendered
@@ -62,23 +63,36 @@ DEFAULT_OUT = PROJECT_ROOT / "stl"
 SIZES = ["Small", "Medium", "Large"]
 
 # Plug presets exactly as they read in the Step 1 dropdown, paired with a
-# filesystem-safe descriptor and whether the two-sided puller file builds them
-# (both plates in one file).
+# filesystem-safe descriptor and the tool files that offer the preset: the
+# one-sided file renders one tool per size, the two-sided file renders both
+# plates in one file per size. A preset in both files ships both.
+ONE_SIDED = "one-sided"
+TWO_SIDED = "two-sided"
 PLUG_PRESETS = [
     {
         "customizer": "Flat 2-prong lamp plug - NEMA 1-15",
         "desc": "Flat-2-Prong-Lamp-NEMA-1-15",
-        "two_sided": False,
+        "files": (ONE_SIDED, TWO_SIDED),
     },
     {
         "customizer": "Standard 3-prong plug - NEMA 5-15",
         "desc": "Standard-3-Prong-NEMA-5-15",
-        "two_sided": False,
+        "files": (ONE_SIDED, TWO_SIDED),
     },
     {
         "customizer": "Heavy-duty extension cord - NEMA 5-15",
         "desc": "Round-Extension-Cord-NEMA-5-15",
-        "two_sided": True,
+        "files": (TWO_SIDED,),
+    },
+    {
+        "customizer": "USB-C laptop tip",
+        "desc": "USB-C-Laptop-Tip",
+        "files": (TWO_SIDED,),
+    },
+    {
+        "customizer": "Wide 2-prong appliance plug - NEMA 1-15",
+        "desc": "Wide-2-Prong-Appliance",
+        "files": (ONE_SIDED,),
     },
 ]
 
@@ -108,27 +122,28 @@ class Job:
 def plug_jobs() -> List[Job]:
     jobs: List[Job] = []
     for preset in PLUG_PRESETS:
-        for size in SIZES:
-            params = {
-                "render_mode": "Full",
-                "plug_preset": preset["customizer"],
-                "size": size,
-            }
-            if preset["two_sided"]:
-                name = f"Plug-Puller_Two-Sided_{preset['desc']}_{size}.stl"
-                scad = TWO_SIDED_SCAD
-                params["print_layout"] = "Both plates"
-            else:
-                name = f"Plug-Puller_{preset['desc']}_{size}.stl"
-                scad = PLUG_SCAD
-            jobs.append(
-                Job(
-                    group="plug-puller",
-                    scad=scad,
-                    out_rel=Path("Plug-Puller") / name,
-                    params=params,
+        for tool_file in preset["files"]:
+            for size in SIZES:
+                params = {
+                    "render_mode": "Full",
+                    "plug_preset": preset["customizer"],
+                    "size": size,
+                }
+                if tool_file == TWO_SIDED:
+                    name = f"Plug-Puller_Two-Sided_{preset['desc']}_{size}.stl"
+                    scad = TWO_SIDED_SCAD
+                    params["print_layout"] = "Both plates"
+                else:
+                    name = f"Plug-Puller_{preset['desc']}_{size}.stl"
+                    scad = PLUG_SCAD
+                jobs.append(
+                    Job(
+                        group="plug-puller",
+                        scad=scad,
+                        out_rel=Path("Plug-Puller") / name,
+                        params=params,
+                    )
                 )
-            )
     return jobs
 
 
@@ -173,7 +188,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
         "--out", type=Path, default=DEFAULT_OUT,
-        help="Output root for the release STL tree (default: release/).",
+        help="Output root for the release STL tree (default: stl/).",
     )
     parser.add_argument(
         "--only", choices=["plug-puller", "stencil"],

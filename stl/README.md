@@ -10,7 +10,7 @@ model change (the shipped files are guarded by `tests/test_shipped_stls.py`).
 
 ```
 stl/
-  Plug-Puller/                 # 9 tools: 3 plug families x 3 hand sizes
+  Plug-Puller/                 # 21 tools: 5 plug families x 3 hand sizes, in every file that offers them
   Measuring-Stencil/
     Visual/                    # debossed printed labels (9 files)
     Tactile/                   # raised ADA characters + braille (9 files)
@@ -26,7 +26,11 @@ female hand, Large ≈ 95th-percentile male hand.
 | ----------- | ------------ | --------- |
 | Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
 | Standard 3-prong — NEMA 5-15 | `Plug-Puller_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
+| Wide 2-prong appliance plug — NEMA 1-15 | `Plug-Puller_Wide-2-Prong-Appliance_{Small,Medium,Large}.stl` | one-sided puller (one part) |
 | Heavy-duty extension cord — NEMA 5-15 | `Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
+| USB-C laptop tip | `Plug-Puller_Two-Sided_USB-C-Laptop-Tip_{Small,Medium,Large}.stl` | two-sided puller (**both plates**, Rounded sides) |
+| Flat 2-prong lamp — NEMA 1-15, two-sided | `Plug-Puller_Two-Sided_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
+| Standard 3-prong — NEMA 5-15, two-sided | `Plug-Puller_Two-Sided_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
 
 > **Each two-sided file holds both plates; flip one after printing.** Then
 > zip-tie the pair face to face around the plug.
