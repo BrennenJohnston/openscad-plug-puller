@@ -108,15 +108,18 @@ class TestStencilData:
         for label, dims in main.items():
             assert len(dims) == len(EFF_VARS), f"{label!r}: {dims}"
 
-    @pytest.mark.xfail(strict=True, reason="B3 adds the stencil rows for the presets B2 added")
-    def test_copies_carry_a_row_per_preset(self) -> None:
-        """Both copies have exactly one row per dropdown preset."""
+    def test_stencil_scad_carries_a_row_per_preset(self) -> None:
+        """The stencil has exactly one card row per dropdown preset."""
         stencil = _stencil_scad_dims()
-        sheet = _sheet_script_dims()
         assert len(stencil) == len(PRESET_LABELS), (
             f"Measuring_Stencil.scad PLUG_PRESET_DIMS has {len(stencil)} rows for "
             f"{len(PRESET_LABELS)} dropdown presets {PRESET_LABELS}"
         )
+
+    @pytest.mark.xfail(strict=True, reason="B5 adds the sheet rows for the presets B2 added")
+    def test_sheet_script_carries_a_row_per_preset(self) -> None:
+        """The paper sheet has exactly one silhouette row per dropdown preset."""
+        sheet = _sheet_script_dims()
         assert len(sheet) == len(PRESET_LABELS), (
             f"generate_stencil_sheet.py PLUG_PRESET_DIMS has {len(sheet)} rows for "
             f"{len(PRESET_LABELS)} dropdown presets {PRESET_LABELS}"

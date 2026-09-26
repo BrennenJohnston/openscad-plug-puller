@@ -31,12 +31,16 @@ from typing import List
 
 import pytest
 
+from scripts.build_release_stls import STENCIL_CARDS
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 STENCIL_SCAD = PROJECT_ROOT / "Measuring_Stencil.scad"
 LABELS_JSON = PROJECT_ROOT / "scripts" / "braille_labels.json"
 
-# Card order of BRAILLE_LABELS rows (= the SCAD's fixed card list).
-CARD_ORDER = ["P1", "P2", "P3", "R1", "C1", "F1", "F2"]
+# Card order of BRAILLE_LABELS rows: the SCAD's fixed card list, which the
+# release script's STENCIL_CARDS mirrors (P cards first, then R1, C1, F1, F2).
+CARD_ORDER = [card_id for card_id, _desc in STENCIL_CARDS]
+N_PLUG_CARDS = sum(1 for card_id in CARD_ORDER if card_id.startswith("P"))
 
 # Layout constants duplicated from Measuring_Stencil.scad — keep in lock-step.
 CARD_MARGIN = 6
@@ -79,7 +83,9 @@ def _stencil_plug_dims() -> List[List[float]]:
     block_match = re.search(r"PLUG_PRESET_DIMS\s*=\s*\[(.*?)\];", text, flags=re.S)
     assert block_match, f"PLUG_PRESET_DIMS not found in {STENCIL_SCAD.name}"
     rows = re.findall(r'\[\s*"[^"]+"\s*,([^\]]+)\]', block_match.group(1))
-    assert len(rows) == 3
+    assert len(rows) == N_PLUG_CARDS, (
+        f"PLUG_PRESET_DIMS has {len(rows)} rows but STENCIL_CARDS lists {N_PLUG_CARDS} P cards"
+    )
     return [[float(v) for v in row.split(",")] for row in rows]
 
 

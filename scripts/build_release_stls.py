@@ -12,10 +12,10 @@ can print a standard configuration without opening OpenSCAD:
   file (flip one after printing).
 
 * Measuring Stencil (``Measuring_Stencil.scad``) — every individual card
-  (P1/P2/P3 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing) rendered
+  (P1-P4 plug gauges, R1 ruler, C1 cord gauge, F1/F2 finger sizing) rendered
   on its own via the ``export_card`` selector, in both label modes (Visual and
-  Tactile), plus the full packed set for each mode. 2 x (7 cards + 1 full set)
-  = 16 files.
+  Tactile), plus the full packed set for each mode. 2 x (8 cards + 1 full set)
+  = 18 files.
 
 Files land under ``stl/`` in a folder tree that mirrors the upload layout
 (this is the committed ready-to-print library the README links to):
@@ -88,6 +88,7 @@ STENCIL_CARDS = [
     ("P1", "P1_Lamp-Plug-Gauge"),
     ("P2", "P2_Standard-3-Prong-Gauge"),
     ("P3", "P3_Heavy-Duty-Cord-Gauge"),
+    ("P4", "P4_Wide-2-Prong-Appliance-Gauge"),
     ("R1", "R1_Ruler-100mm"),
     ("C1", "C1_Cord-Gauge"),
     ("F1", "F1_Finger-Sizing-15-25mm"),
