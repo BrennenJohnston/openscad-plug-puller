@@ -49,7 +49,7 @@ Write your numbers into the worksheet at the bottom as you go.
 This is the two-sided puller on the kind of fat round plug it is made
 for — a thickness of 24 mm or more sends you to it:
 
-![The assembled two-sided puller zip-tied around a thick round extension-cord plug](../images/clamshell-assembled-on-plug.jpg)
+![The two-sided puller zip-tied around an orange extension-cord plug on a table, two ties across the plug and one at the cord.](../images/two-sided-assembled-on-plug.jpg)
 
 <!-- TODO(photos): still wanted — one close-up photo per measurement
      below: ruler from wall plate to the plug's back face, caliper
@@ -283,7 +283,7 @@ and one file prints the whole tool.
 > clamp anchor. (On the two-sided puller, the zip ties go plate to
 > plate the same way:)
 >
-> ![Zip ties threaded through both plates of the two-sided puller around the plug barrel](../images/clamshell-assembly-zip-ties.jpg)
+> ![Two zip ties threaded through one plate of the two-sided puller and lying across the orange plug toward the second plate.](../images/two-sided-assembly-zip-ties.jpg)
 
 > **Safety:** the tool touches only the plug's **sides and back** —
 > never between the plug face and the wall. For extra grip on a slick

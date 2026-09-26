@@ -50,7 +50,7 @@ round plugs are held by its pocket walls plus a zip tie cinched through
 the existing zip-tie holes; fat round plugs are gripped between the
 two-sided puller's serrated plates.
 
-![The printed two-sided puller in use at a wall outlet — fingers through both holes, pulling the plug straight out](docs/images/clamshell-in-use-outlet.jpg)
+![A gloved hand pulling the two-sided puller and its orange extension-cord plug straight out of a wall outlet, two fingers through the holes.](docs/images/two-sided-in-use-outlet.jpg)
 
 > **Version 0.12** — one step from the **v1.0** public milestone. The
 > geometry and guides are complete and print-tested, the shipped STLs

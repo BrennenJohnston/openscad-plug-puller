@@ -162,9 +162,9 @@ things.
    holds the plate dials; the [Power User Guide](power-user-guide.md)
    explains them.
 
-   ![One plate of the two-sided puller in the preview — a flat plate with two finger holes and two serrated gripping arms](../images/clamshell-plate-render.png)
+   ![The two-sided puller's two plates side by side in the preview, the see-through plug between the left plate's arms, and the orange note that the plug is too short for a strap slot.](../images/two-sided-plate-render.png)
 
-   ![The two printed plates of the two-sided puller beside a heavy-duty extension-cord plug — two identical plates, one flipped over](../images/clamshell-plates-and-plug.jpg)
+   ![The two identical plates of the two-sided puller on a table, one flipped, with the orange extension-cord plug between them.](../images/two-sided-plates-and-plug.jpg)
 
 > **One advanced slider worth knowing:** if you're building the
 > two-sided puller and want a beefier print, `plate_wall_boost`
@@ -178,7 +178,7 @@ is the model confirming your numbers were applied. In the two-sided
 file, look at the see-through plug on the left plate: it is the plug
 your numbers describe.
 
-![The one-sided puller in the preview with the green confirmation tag reading "Medium: 25x25.5 plug, 20mm finger" floating beside it](../images/flat-tool-medium-render.png)
+![The one-sided puller in the preview with the see-through plug in its pocket and the green tag reading Medium: 25x25.5 plug, 20mm finger.](../images/one-sided-medium-render.png)
 
 If you instead see **red text**,
 one of your numbers looks wrong (for example, inches instead of
@@ -219,11 +219,11 @@ For the two-sided puller: flip one plate over, thread the zip ties
 through both plates' zip-tie holes, sandwich the plug between the
 serrated arms, and cinch —
 
-![The two plates of the two-sided puller being zip-tied face to face around a heavy-duty extension-cord plug](../images/clamshell-assembly-zip-ties.jpg)
+![Two zip ties threaded through one plate of the two-sided puller and lying across the orange plug toward the second plate.](../images/two-sided-assembly-zip-ties.jpg)
 
-![The assembled two-sided puller cinched around the plug, finger holes clear of the cord](../images/clamshell-assembled-on-plug.jpg)
+![The two-sided puller zip-tied around an orange extension-cord plug on a table, two ties across the plug and one at the cord.](../images/two-sided-assembled-on-plug.jpg)
 
-![The two-sided puller in use at a wall outlet — fingers through both holes, pulling the plug straight out](../images/clamshell-in-use-outlet.jpg)
+![A gloved hand pulling the two-sided puller and its orange extension-cord plug straight out of a wall outlet, two fingers through the holes.](../images/two-sided-in-use-outlet.jpg)
 
 If anything is snug, loose, or uncomfortable, open the
 **[Fit Troubleshooting Guide](fit-troubleshooting.md)**. Every fix is a

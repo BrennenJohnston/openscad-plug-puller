@@ -238,15 +238,13 @@ of the actual printed result.
    holes.
 
 6. **The three hand sizes, printed.** Small, Medium, and Large one-sided pullers
-   together with a ruler.
-   **Alt text:** Three printed plug pullers in small, medium and large sizes beside
-   a ruler, the largest about 78 millimetres wide across the finger holes.
+   on three plugs (`docs/images/one-sided-three-sizes.jpg`).
+   **Alt text:** Three one-sided pullers side by side on the printer bed, Large on an orange extension-cord plug, Medium on a black three-prong plug, Small on a black lamp plug.
 
-7. **A red warning tag in the preview.** Screenshot of the customizer showing the
-   red 3D warning text on a deliberately bad measurement.
-   **Alt text:** The customizer preview showing red three-dimensional text reading
-   "WARNING — CHECK PLUG WIDTH MEASUREMENTS (MM?)" above the model, which is how
-   the tool reports a measurement that is out of range.
+7. **A red warning tag in the preview.** The preview with the red 3D warning text
+   on a deliberately bad measurement (`docs/images/one-sided-warning-tag-preview.png`,
+   rendered by `scripts/render_doc_images.py` with a 27 mm thick plug).
+   **Alt text:** The one-sided puller in the preview with red text lying beside it reading WARNING: PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE, which is how the tool reports a plug it cannot hold.
 
 8. **The measuring stencil, tactile version.** Printed cards with raised
    characters and the braille flaps.
