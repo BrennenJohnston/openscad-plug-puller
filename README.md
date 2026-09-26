@@ -466,6 +466,10 @@ Organized by audience — start in the row that matches you.
 | [`docs/Plug_Puller_Measuring_Template.pdf`](docs/Plug_Puller_Measuring_Template.pdf) | The same measuring template as a printable PDF |
 | [`docs/guides/print-preview-outlines.md`](docs/guides/print-preview-outlines.md) | Try before you print: 1:1 outline sheets for every quick-select combination + the measuring stencil |
 | [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf) | All nine 1:1 outline sheets in one printable PDF with a cover index |
+| [`docs/guides/dial-quick-start.md`](docs/guides/dial-quick-start.md) | Which file to open, then the dials of the four Customizer steps of both pullers, each with a picture of what it moves |
+| [`docs/Plug_Puller_Dial_Quick_Start.pdf`](docs/Plug_Puller_Dial_Quick_Start.pdf) | The same quick start as a printable PDF with bookmarks, one dial per page |
+| [`docs/guides/dial-reference.md`](docs/guides/dial-reference.md) | Every dial of both pullers: a picture of what it moves, its sentence, and its default, range, step and unit |
+| [`docs/Plug_Puller_Dial_Reference.pdf`](docs/Plug_Puller_Dial_Reference.pdf) | The same dial reference as a printable PDF with bookmarks and a linked contents page, one dial per page |
 | [`docs/guides/fit-troubleshooting.md`](docs/guides/fit-troubleshooting.md) | Symptom → which measurement to nudge → by how much; warning-tag decoder |
 
 ### For power users (the Advanced and Custom tiers)

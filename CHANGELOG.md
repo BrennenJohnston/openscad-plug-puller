@@ -9,6 +9,27 @@ Versions below 1.0.0 are public preview releases: the model is complete
 and print-tested, but small refinements are expected before the **v1.0
 public milestone**.
 
+## [Unreleased]
+
+### Added
+
+- **The dial reference** (`docs/Plug_Puller_Dial_Reference.pdf` and its
+  Markdown twin `docs/guides/dial-reference.md`), generated from
+  `dial_catalog.json` by `scripts/build_dial_reference.py`: one page per
+  Customizer dial of both pullers with a diagram of what the dial moves,
+  its sentence, the default, range, step and unit, its caution note, the
+  features its trace touches and the warning tags it can trip; the PDF
+  has bookmarks and a linked contents page.
+- **A diagram for every dial** under `docs/dials/` (118 SVGs, an index
+  and a README), drawn by `scripts/generate_dial_diagrams.py` from the
+  catalog: the tool at its defaults in black, the plug in teal, a red
+  dashed trace on what the dial moves.
+
+### Removed
+
+- `docs/Plug_Puller_Complete_Guide.pdf` (described the retired single-file
+  model; replaced by the dial reference and the guides).
+
 ## [0.12.0] - 2026-09-24
 
 The two tools move into two files. The **one-sided puller** (the old

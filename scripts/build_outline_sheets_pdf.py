@@ -188,17 +188,36 @@ def build_html(sheets: List[Path]) -> str:
 """
 
 
-def print_to_pdf(html_path: Path, out_pdf: Path) -> None:
+def print_to_pdf(
+    html_path: Path,
+    out_pdf: Path,
+    *,
+    outline: bool = False,
+    user_data_dir: Path | None = None,
+) -> None:
+    """Print ``html_path`` to ``out_pdf`` with headless Edge/Chrome.
+
+    ``outline=True`` asks the browser for a PDF document outline (bookmarks)
+    built from the page's headings. ``user_data_dir`` gives the browser a
+    scratch profile: without one, a headless call attaches to a running
+    Edge and never returns. The sheets' own build keeps both defaults.
+    """
     browser = find_browser()
     out_pdf.parent.mkdir(parents=True, exist_ok=True)
     cmd = [
         str(browser),
         "--headless",
         "--disable-gpu",
+        "--no-first-run",
+        "--disable-extensions",
         "--no-pdf-header-footer",
-        f"--print-to-pdf={out_pdf}",
-        html_path.as_uri(),
     ]
+    if outline:
+        cmd.append("--generate-pdf-document-outline")
+    if user_data_dir is not None:
+        user_data_dir.mkdir(parents=True, exist_ok=True)
+        cmd.append(f"--user-data-dir={user_data_dir}")
+    cmd += [f"--print-to-pdf={out_pdf}", html_path.as_uri()]
     logger.info("Printing with %s", browser.name)
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if not out_pdf.exists():
