@@ -116,7 +116,6 @@ class TestStencilData:
             f"{len(PRESET_LABELS)} dropdown presets {PRESET_LABELS}"
         )
 
-    @pytest.mark.xfail(strict=True, reason="B5 adds the sheet rows for the presets B2 added")
     def test_sheet_script_carries_a_row_per_preset(self) -> None:
         """The paper sheet has exactly one silhouette row per dropdown preset."""
         sheet = _sheet_script_dims()
