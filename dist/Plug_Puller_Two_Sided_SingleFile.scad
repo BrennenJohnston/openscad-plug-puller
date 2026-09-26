@@ -31,8 +31,8 @@
 // License: PolyForm Noncommercial 1.0.0
 
 /* [Step 1 - Your Plug] */
-// Pick your plug if it is on this list and every number below fills in. Otherwise leave Measure my plug and type four numbers.
-plug_preset = "Measure my plug"; // [Measure my plug, Heavy-duty extension cord - NEMA 5-15]
+// Pick your plug if it is on this list and every number below fills in, including its sides. Otherwise leave Measure my plug and type four numbers.
+plug_preset = "Measure my plug"; // [Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15]
 // How far the plug body sticks out, from the surface it plugs into to the plug's back end where the cord starts. On a laptop or charger, measure from the device's edge. Skip if you picked a plug preset. (mm)
 measure_plug_length = 25.5; // [12:0.5:85]
 // Plug width at the PRONG END: the size the two plates will close across, measured across the plug body just behind the prongs. On a USB-C or charger tip, just behind the metal tip. (mm)
@@ -172,21 +172,37 @@ FIT_SIZE_FINGER_L = 23;    FIT_SIZE_HAND_L = 96;
 // ═══════════════════════════════════════════════════════════════════════════════
 // ROUTING
 // ═══════════════════════════════════════════════════════════════════════════════
-// Plug preset -> effective plug measurements. The heavy-duty preset carries
-// its measured values (the same numbers as the one-sided file's prefill);
-// "Measure my plug" keeps the Step 1 sliders authoritative.
+// Plug preset -> effective plug measurements. Each preset carries the
+// numbers measured on its reference plug: the heavy-duty cord (the same
+// numbers as the one-sided file's prefill), the USB-C laptop tip (the
+// owner's measured and printed set), and the lamp and standard plugs (their
+// one-sided preset numbers; the plates close across the plug's wider face,
+// so the two-sided widths are those plugs' widths). "Measure my plug" keeps
+// the Step 1 sliders authoritative.
 _pp_active = (plug_preset != "Measure my plug");
 _eff_plug_length =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 43.8 :
+    plug_preset == "USB-C laptop tip"                        ? 23.0 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 37.0 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 46.2 :
     measure_plug_length;
 _eff_plug_width_prong_end =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
+    plug_preset == "USB-C laptop tip"                        ? 13.0 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 25.0 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 26.6 :
     measure_plug_width_prong_end;
 _eff_plug_width_cord_end =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
+    plug_preset == "USB-C laptop tip"                        ? 13.0 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.2 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.4 :
     measure_plug_width_cord_end;
 _eff_cord_thickness =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 8.2 :
+    plug_preset == "USB-C laptop tip"                        ? 7.0 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 3.6 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 7.0 :
     measure_cord_thickness;
 
 // Zip ties are what hold the two plates together, so every choice keeps them.
@@ -194,8 +210,17 @@ _attach_zip    = true;
 _attach_velcro = (attachment == "Zip ties + Velcro strap");
 strap_width_eff = max(8, min(strap_width, 30));
 _is_clamshell = true;
-// Presets carry their own tested grip, so they always build the straight edge.
-_sides_eff = _pp_active ? "Flat sides" : plug_sides;
+// Each preset carries its own sides: the heavy-duty cord keeps the straight
+// edge and the bite (its plate is the golden fixture), the USB-C tip builds
+// the cradle the owner printed and tested, and the lamp and standard plugs
+// are boxy. "Measure my plug" follows the Step 1 dropdown.
+_preset_sides =
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? "Flat sides" :
+    plug_preset == "USB-C laptop tip"                        ? "Rounded sides" :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? "Flat sides" :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? "Flat sides" :
+    plug_sides;
+_sides_eff = _pp_active ? _preset_sides : plug_sides;
 
 // Size -> finger bore straight from the size table: bore = finger width +
 // FIT_GRIP_CLEARANCE, clamped 15-40 mm like the one-sided D-9.

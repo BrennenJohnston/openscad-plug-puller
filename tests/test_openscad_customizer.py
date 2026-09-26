@@ -53,6 +53,15 @@ EXPECTED_ATTACHMENT_OPTIONS = [
 
 TWO_SIDED_SIZE_OPTIONS = ["Small", "Medium", "Large", "Measure my hand"]
 TWO_SIDED_ATTACHMENT_OPTIONS = ["Zip ties + Velcro strap", "Zip ties"]
+# The two-sided plug presets in Customizer order (R2 Gate A: Q-38 chose the
+# plugs and their file, Q-39 the labels; the USB charger cube joins once measured).
+TWO_SIDED_PLUG_PRESET_OPTIONS = [
+    "Measure my plug",
+    "Heavy-duty extension cord - NEMA 5-15",
+    "USB-C laptop tip",
+    "Flat 2-prong lamp plug - NEMA 1-15",
+    "Standard 3-prong plug - NEMA 5-15",
+]
 ONE_SIDED_ONLY_PARAMETERS = [
     "measure_plug_width_wall",
     "measure_plug_width_cable",
@@ -323,6 +332,20 @@ class TestTwoSidedCustomizer:
             f"Attachment default must be 'Zip ties + Velcro strap' (the preset "
             f"plate has the strap slot), got '{default}'."
         )
+
+    def test_plug_preset_options(self, scad_content: str) -> None:
+        """The two-sided dropdown offers exactly the plugs chosen at R2's
+        Gate A, in that order, with labels the Customizer can carry."""
+        default, options = _dropdown(scad_content, "plug_preset")
+        assert options == TWO_SIDED_PLUG_PRESET_OPTIONS, (
+            f"Two-sided plug_preset options must be exactly "
+            f"{TWO_SIDED_PLUG_PRESET_OPTIONS} (Gate A, Q-38 and Q-39), got {options}."
+        )
+        assert default == "Measure my plug", (
+            f"plug_preset default must be 'Measure my plug', got '{default}'."
+        )
+        offenders = [opt for opt in options if "(" in opt or ")" in opt]
+        assert not offenders, f"plug_preset labels with parentheses: {offenders}"
 
     def test_no_one_sided_parameters(self, scad_content: str) -> None:
         declared = set(re.findall(r"^(\w+)\s*=", scad_content, re.MULTILINE))
