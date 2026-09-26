@@ -51,6 +51,15 @@ EXPECTED_ATTACHMENT_OPTIONS = [
     "Zip ties", "Velcro strap", "Zip ties + Velcro", "None",
 ]
 
+# The one-sided plug presets in Customizer order (R2 Gate A: Q-38 and Q-39).
+# The heavy-duty cord stays as the signpost to the two-sided file (W-20).
+ONE_SIDED_PLUG_PRESET_OPTIONS = [
+    "Measure my plug",
+    "Flat 2-prong lamp plug - NEMA 1-15",
+    "Standard 3-prong plug - NEMA 5-15",
+    "Heavy-duty extension cord - NEMA 5-15",
+    "Wide 2-prong appliance plug - NEMA 1-15",
+]
 TWO_SIDED_SIZE_OPTIONS = ["Small", "Medium", "Large", "Measure my hand"]
 TWO_SIDED_ATTACHMENT_OPTIONS = ["Zip ties + Velcro strap", "Zip ties"]
 # The two-sided plug presets in Customizer order (R2 Gate A: Q-38 chose the
@@ -281,6 +290,20 @@ class TestOneSidedCustomizer:
             "end/cord end); "
             f"got {plug_params[1:6]}."
         )
+
+    def test_plug_preset_options(self, scad_content: str) -> None:
+        """The one-sided dropdown offers exactly the plugs chosen at R2's
+        Gate A, in that order, with labels the Customizer can carry."""
+        default, options = _dropdown(scad_content, "plug_preset")
+        assert options == ONE_SIDED_PLUG_PRESET_OPTIONS, (
+            f"One-sided plug_preset options must be exactly "
+            f"{ONE_SIDED_PLUG_PRESET_OPTIONS} (Gate A, Q-38 and Q-39), got {options}."
+        )
+        assert default == "Measure my plug", (
+            f"plug_preset default must be 'Measure my plug', got '{default}'."
+        )
+        offenders = [opt for opt in options if "(" in opt or ")" in opt]
+        assert not offenders, f"plug_preset labels with parentheses: {offenders}"
 
     def test_section_titles_name_no_tool(self, scad_content: str) -> None:
         """The file builds one tool, so no Customizer section title names a

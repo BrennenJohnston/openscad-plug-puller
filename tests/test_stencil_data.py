@@ -1,17 +1,19 @@
 """Static drift guard for the plug preset dimensions (no OpenSCAD needed).
 
-The preset plug numbers (length, width wall/cable, thickness wall/cable,
-cord) live in three places:
+The preset plug numbers (length, width at the prong end and at the cord end,
+thickness at both ends, cord) live in three places:
 
 1. the ``_eff_*`` preset ternaries in ``src/Plug_Puller_Parametric.scad``
    (the authority — the model builds from these);
-2. ``PLUG_PRESET_DIMS`` in ``Measuring_Stencil.scad`` (the printable P1/P2/P3
-   silhouette cards);
+2. ``PLUG_PRESET_DIMS`` in ``Measuring_Stencil.scad`` (the printable P-card
+   silhouettes);
 3. ``PLUG_PRESET_DIMS`` in ``scripts/generate_stencil_sheet.py`` (the 1:1
    paper stencil sheet).
 
-This suite regex-extracts all three and asserts they are identical, so the
-copies cannot drift apart.
+The preset list itself is read from the one-sided file's ``plug_preset``
+dropdown (every label but "Measure my plug"), so adding a preset to the
+dropdown is enough to put it under this guard: the two copies must then
+carry a row for it, in the dropdown's order, with the same six numbers.
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -29,12 +31,6 @@ MAIN_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
 STENCIL_SCAD = PROJECT_ROOT / "Measuring_Stencil.scad"
 SHEET_SCRIPT = PROJECT_ROOT / "scripts" / "generate_stencil_sheet.py"
 
-# Step 1 dropdown order (P1, P2, P3).
-PRESET_LABELS = [
-    "Flat 2-prong lamp plug - NEMA 1-15",
-    "Standard 3-prong plug - NEMA 5-15",
-    "Heavy-duty extension cord - NEMA 5-15",
-]
 # _eff_* variable per dimension, in PLUG_PRESET_DIMS column order.
 EFF_VARS = [
     "_eff_plug_length",
@@ -46,6 +42,19 @@ EFF_VARS = [
 ]
 
 Dims = Tuple[float, float, float, float, float, float]
+
+
+def _preset_labels() -> List[str]:
+    """The one-sided dropdown's presets in Customizer order (P1, P2, ...)."""
+    text = MAIN_SCAD.read_text(encoding="utf-8")
+    match = re.search(r'^plug_preset\s*=\s*"[^"]+"\s*;\s*//\s*\[([^\]]+)\]', text, re.M)
+    assert match, f"Could not find the `plug_preset` dropdown in {MAIN_SCAD.name}"
+    labels = [opt.strip() for opt in match.group(1).split(",")]
+    assert labels and labels[0] == "Measure my plug", f"unexpected dropdown: {labels}"
+    return labels[1:]
+
+
+PRESET_LABELS = _preset_labels()
 
 
 def _main_scad_dims() -> Dict[str, Dims]:
@@ -76,7 +85,7 @@ def _stencil_scad_dims() -> List[Dims]:
     block_match = re.search(r"PLUG_PRESET_DIMS\s*=\s*\[(.*?)\];", text, flags=re.S)
     assert block_match, f"PLUG_PRESET_DIMS not found in {STENCIL_SCAD.name}"
     rows = re.findall(r'\[\s*"[^"]+"\s*,([^\]]+)\]', block_match.group(1))
-    assert len(rows) == 3, f"Expected 3 PLUG_PRESET_DIMS rows, got {len(rows)}"
+    assert rows, f"No PLUG_PRESET_DIMS rows in {STENCIL_SCAD.name}"
     return [tuple(float(v) for v in row.split(",")) for row in rows]
 
 
@@ -86,12 +95,32 @@ def _sheet_script_dims() -> List[Dims]:
     block_match = re.search(r"PLUG_PRESET_DIMS\s*=\s*\[(.*?)\]\n", text, flags=re.S)
     assert block_match, f"PLUG_PRESET_DIMS not found in {SHEET_SCRIPT.name}"
     rows = re.findall(r'\(\s*"[^"]+"\s*,\s*"[^"]+"\s*,([^)]+)\)', block_match.group(1))
-    assert len(rows) == 3, f"Expected 3 PLUG_PRESET_DIMS rows, got {len(rows)}"
+    assert rows, f"No PLUG_PRESET_DIMS rows in {SHEET_SCRIPT.name}"
     return [tuple(float(v) for v in row.split(",") if v.strip()) for row in rows]
 
 
 class TestStencilData:
     """The three copies of the preset plug numbers must be identical."""
+
+    def test_main_scad_has_every_preset(self) -> None:
+        main = _main_scad_dims()
+        assert list(main) == PRESET_LABELS
+        for label, dims in main.items():
+            assert len(dims) == len(EFF_VARS), f"{label!r}: {dims}"
+
+    @pytest.mark.xfail(strict=True, reason="B3 adds the stencil rows for the presets B2 added")
+    def test_copies_carry_a_row_per_preset(self) -> None:
+        """Both copies have exactly one row per dropdown preset."""
+        stencil = _stencil_scad_dims()
+        sheet = _sheet_script_dims()
+        assert len(stencil) == len(PRESET_LABELS), (
+            f"Measuring_Stencil.scad PLUG_PRESET_DIMS has {len(stencil)} rows for "
+            f"{len(PRESET_LABELS)} dropdown presets {PRESET_LABELS}"
+        )
+        assert len(sheet) == len(PRESET_LABELS), (
+            f"generate_stencil_sheet.py PLUG_PRESET_DIMS has {len(sheet)} rows for "
+            f"{len(PRESET_LABELS)} dropdown presets {PRESET_LABELS}"
+        )
 
     def test_stencil_scad_matches_main_scad(self) -> None:
         main = _main_scad_dims()
@@ -118,9 +147,10 @@ class TestStencilData:
     def test_dims_are_plausible(self) -> None:
         """Cheap sanity net: every dimension physically plausible for a US
         plug. (Presets can sit below the Customizer slider floors — e.g.
-        P1's cable-side width is 11.2 mm against a 12 mm slider minimum —
-        so these are looser physical bounds, not the slider ranges.)"""
-        for dims in _stencil_scad_dims():
+        P1's cord-end width is 11.2 mm against a 12 mm slider minimum of the
+        old range — so these are looser physical bounds, not the slider
+        ranges.)"""
+        for dims in list(_main_scad_dims().values()) + _stencil_scad_dims():
             length, ww, wc, tw, tc, cord = dims
             assert 12 <= length <= 85
             assert 8 <= ww <= 45 and 8 <= wc <= 45
