@@ -751,7 +751,7 @@
       "view": "top",
       "style": "fill",
       "before": 31.75,
-      "after": 36,
+      "after": 28,
       "context": {
         "size": "Custom"
       },
@@ -924,7 +924,7 @@
       "view": "top",
       "style": "fill",
       "before": 25.4,
-      "after": 30,
+      "after": 22,
       "context": {
         "size": "Custom"
       },
@@ -1206,22 +1206,17 @@
     "title": "Hook tip drop",
     "changes": "Sags the slot's mouth farther below the cord end so a hooked cord cannot back out.",
     "diagram": {
-      "view": "top",
+      "view": "none",
       "style": "fill",
       "before": 1.98,
-      "after": 4,
+      "after": null,
       "context": {
         "size": "Custom"
       },
       "plug": "default",
-      "crop": [
-        -14,
-        -3,
-        14,
-        18
-      ]
+      "crop": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0."
   },
   {
     "file": "one-sided",
