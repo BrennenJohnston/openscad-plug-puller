@@ -2,9 +2,9 @@
 
 Produces ``docs/Plug_Puller_Starter_Guide.pdf``: the starter guide
 (``docs/guides/starter-guide.md``) condensed onto two typeset pages, followed
-by the 1:1 measuring stencil sheet (``docs/guides/stencil-sheet.svg``) as the
-final page — so someone without a 3D printer can print one document and have
-both the instructions and the paper stencil at exact scale.
+by the 1:1 measuring stencil sheet pages (``docs/guides/stencil-sheet.svg``
+and its continuation pages) — so someone without a 3D printer can print one
+document and have both the instructions and the paper stencil at exact scale.
 
 Reuses the outline-sheets pipeline (headless Edge/Chrome printing a fixed
 210 x 279 mm @page, then MediaBox verification) so the stencil page keeps its
@@ -34,6 +34,7 @@ from build_outline_sheets_pdf import (
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SHEET_SVG = PROJECT_ROOT / "docs" / "guides" / "stencil-sheet.svg"
+GUIDE_PAGES = 2  # the typeset pages before the stencil sheets
 DEFAULT_OUT = PROJECT_ROOT / "docs" / "Plug_Puller_Starter_Guide.pdf"
 
 logger = logging.getLogger(__name__)
@@ -47,9 +48,9 @@ def page_one() -> str:
   your plug (match it or measure it), fill in the Customizer steps, print.</p>
 
   <div class="warn">
-    <p><b>The last page of this PDF is a 1:1 measuring stencil sheet.</b>
+    <p><b>The last two pages of this PDF are 1:1 measuring stencil sheets.</b>
     Print this document at 100% scale / “Actual size” — never “fit to page” —
-    and check the 50 × 50 mm calibration square on that page before
+    and check the 50 × 50 mm calibration square on each of those pages before
     trusting it.</p>
   </div>
 
@@ -65,6 +66,7 @@ def page_one() -> str:
     <tr><th>P1</th><td>plug silhouette: <b>flat 2-prong lamp plug</b> (NEMA 1-15)</td></tr>
     <tr><th>P2</th><td>plug silhouette: <b>standard 3-prong plug</b> (NEMA 5-15)</td></tr>
     <tr><th>P3</th><td>plug silhouette: <b>heavy-duty extension cord</b> (NEMA 5-15)</td></tr>
+    <tr><th>P4</th><td>plug silhouette: <b>wide 2-prong appliance plug</b> (NEMA 1-15)</td></tr>
     <tr><th>R1</th><td><b>ruler</b> — raised mm ticks, numerals every 10 mm, tactile edge notches</td></tr>
     <tr><th>C1</th><td><b>cord gauge</b> — open slots Ø 3–9 mm; slide it onto the cord from the side</td></tr>
     <tr><th>F1 / F2</th><td><b>finger sizing</b> — 18 labeled holes (Ø 15–25 on F1, Ø 26–32 on F2)</td></tr>
@@ -75,7 +77,7 @@ def page_one() -> str:
 
   <h2>Path A — match a preset (fastest, no numbers)</h2>
   <ol>
-    <li>Take the <b>P1</b>, <b>P2</b>, and <b>P3</b> cards to your plug.</li>
+    <li>Take the <b>P1</b>, <b>P2</b>, <b>P3</b> and <b>P4</b> cards to your plug.</li>
     <li>Hold each card's <b>W</b> cutout over the plug (wide side), then the
         <b>T</b> cutout (thin side); slide the cord slot onto the cord.</li>
     <li>If the plug fills one card's openings — snug, no big gaps — that
@@ -84,6 +86,7 @@ def page_one() -> str:
         <li>P1 → <span class="mono">Flat 2-prong lamp plug - NEMA 1-15</span></li>
         <li>P2 → <span class="mono">Standard 3-prong plug - NEMA 5-15</span></li>
         <li>P3 → <span class="mono">Heavy-duty extension cord - NEMA 5-15</span> in the two-sided puller</li>
+        <li>P4 → <span class="mono">Wide 2-prong appliance plug - NEMA 1-15</span></li>
       </ul></li>
     <li>Skip ahead to “Fill in the Customizer steps” on the next page.</li>
   </ol>
@@ -104,7 +107,7 @@ def page_one() -> str:
   </table>
   <p class="hint">8 and 9 are only needed if you pick “Measure my hand” in
   Step 2 — the built-in Small / Medium / Large cover most hands.</p>
-  <p class="footer">openscad-plug-puller · starter guide · page 1 of 3</p>
+  <p class="footer">openscad-plug-puller · starter guide · page 1 of 4</p>
 </section>
 """
 
@@ -115,11 +118,12 @@ def page_two() -> str:
   <h2>Fill in the Customizer steps</h2>
   <p>The Plug Puller comes as two tools, each in its own file. The
   <b>one-sided puller</b> (<span class="mono">src/Plug_Puller_Parametric.scad</span>)
-  fits lamp plugs (P1), standard 3-prong plugs (P2) and other plugs thinner
-  than 24 mm. The <b>two-sided puller</b>
-  (<span class="mono">src/Plug_Puller_Two_Sided.scad</span>) closes two plates
-  on the plug from both sides: thick round plugs like P3, USB-C tips and
-  charger plugs. A plug 24 mm thick or more gets a red tag in the one-sided
+  fits lamp plugs (P1), standard 3-prong plugs (P2), the wide 2-prong
+  appliance plug (P4) and other plugs thinner than 24 mm. The <b>two-sided
+  puller</b> (<span class="mono">src/Plug_Puller_Two_Sided.scad</span>) closes
+  two plates on the plug from both sides: thick round plugs like P3, the USB-C
+  laptop tip, charger plugs, and the lamp and standard plugs too (both files
+  offer those two as presets). A plug 24 mm thick or more gets a red tag in the one-sided
   file that sends you to the two-sided file.</p>
   <p>Open your tool's file in OpenSCAD and show the Customizer panel (uncheck
   <i>View ▸ Hide Customizer</i>). Every click is spelled out in
@@ -129,8 +133,9 @@ def page_two() -> str:
     <tr class="head"><th>Step</th><td><b>One-sided puller</b></td><td><b>Two-sided puller</b></td></tr>
     <tr><th>1 — Your Plug</th><td>the preset from Path A, or your Path B numbers
         with <span class="mono">plug_preset = Measure my plug</span></td>
-        <td><span class="mono">Heavy-duty extension cord - NEMA 5-15</span> for a
-        P3 plug, or <span class="mono">Measure my plug</span> and four numbers:
+        <td>a preset: <span class="mono">Heavy-duty extension cord - NEMA 5-15</span>
+        for a P3 plug, <span class="mono">USB-C laptop tip</span>, or the lamp or
+        standard plug; or <span class="mono">Measure my plug</span> and four numbers:
         length, width at the prong end and at the cord end (the size the two
         plates close across), cord. Then <span class="mono">Rounded sides</span>
         (a round plug, a USB-C or charger tip: a sloped cradle centers it) or
@@ -181,19 +186,31 @@ def page_two() -> str:
   (<span class="mono">docs/guides/print-preview-outlines.md</span>).</p>
 
   <div class="warn">
-    <p><b>Next page: the 1:1 measuring stencil sheet.</b> Cut along the dashed
-    lines. Measure the calibration square before trusting anything — it must
-    be exactly 50 × 50 mm.</p>
+    <p><b>Next pages: the 1:1 measuring stencil sheets</b> (the wide 2-prong
+    appliance plug, P4, is on the second one). Cut along the dashed lines.
+    Measure the calibration square on each page before trusting anything — it
+    must be exactly 50 × 50 mm.</p>
   </div>
-  <p class="footer">openscad-plug-puller · starter guide · page 2 of 3</p>
+  <p class="footer">openscad-plug-puller · starter guide · page 2 of 4</p>
 </section>
 """
 
 
+def sheet_svgs() -> list:
+    """The stencil sheet and its continuation pages, in order."""
+    paths = [SHEET_SVG]
+    k = 2
+    while (nxt := SHEET_SVG.with_name(f"{SHEET_SVG.stem}-{k}{SHEET_SVG.suffix}")).exists():
+        paths.append(nxt)
+        k += 1
+    return paths
+
+
 def build_html() -> str:
-    sheet = SHEET_SVG.read_text(encoding="utf-8")
+    sheets = [p.read_text(encoding="utf-8") for p in sheet_svgs()]
     body = "\n".join(
-        [page_one(), page_two(), f'<section class="page">{sheet}</section>']
+        [page_one(), page_two()]
+        + [f'<section class="page">{sheet}</section>' for sheet in sheets]
     )
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8">
@@ -207,13 +224,13 @@ def build_html() -> str:
   .page:last-child {{ page-break-after: auto; }}
   .page svg {{ display: block; }}
   .guide {{
-    box-sizing: border-box; padding: 16mm 18mm; position: relative;
+    box-sizing: border-box; padding: 12mm 18mm 14mm; position: relative;
     font-family: Helvetica, Arial, sans-serif; color: black;
-    font-size: 3.1mm; line-height: 1.45;
+    font-size: 3.1mm; line-height: 1.38;
   }}
   .guide h1 {{ font-size: 6.4mm; text-align: center; margin: 0 0 2.5mm; }}
   .guide .subtitle {{ font-size: 3.3mm; text-align: center; margin: 0 0 5mm; }}
-  .guide h2 {{ font-size: 4mm; margin: 4.5mm 0 1.8mm; }}
+  .guide h2 {{ font-size: 4mm; margin: 3.6mm 0 1.5mm; }}
   .guide p {{ margin: 1.5mm 0; }}
   .guide .warn {{
     border: 0.5mm solid black; padding: 2mm 4mm; margin: 3mm 0;
@@ -267,7 +284,7 @@ def main() -> int:
             keep.write_text(html, encoding="utf-8")
             logger.info("Kept HTML: %s", keep)
 
-    verify_pdf(args.out, expected_pages=3)
+    verify_pdf(args.out, expected_pages=GUIDE_PAGES + len(sheet_svgs()))
     logger.info("Wrote %s (%.1f KB)", args.out, args.out.stat().st_size / 1024)
     return 0
 

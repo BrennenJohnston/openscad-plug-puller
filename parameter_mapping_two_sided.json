@@ -12,7 +12,10 @@
       "default": "Measure my plug",
       "values": [
         "Measure my plug",
-        "Heavy-duty extension cord - NEMA 5-15"
+        "Heavy-duty extension cord - NEMA 5-15",
+        "USB-C laptop tip",
+        "Flat 2-prong lamp plug - NEMA 1-15",
+        "Standard 3-prong plug - NEMA 5-15"
       ],
       "section": "Step 1 - Your Plug",
       "description": ""

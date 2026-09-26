@@ -17,6 +17,21 @@
             "size": "Medium",
             "attachment": "Zip ties",
             "quality": "64"
+        },
+        "USB-C laptop tip": {
+            "plug_preset": "USB-C laptop tip",
+            "size": "Medium",
+            "quality": "64"
+        },
+        "Flat 2-prong lamp plug - NEMA 1-15": {
+            "plug_preset": "Flat 2-prong lamp plug - NEMA 1-15",
+            "size": "Medium",
+            "quality": "64"
+        },
+        "Standard 3-prong plug - NEMA 5-15": {
+            "plug_preset": "Standard 3-prong plug - NEMA 5-15",
+            "size": "Medium",
+            "quality": "64"
         }
     }
 }

@@ -9,11 +9,13 @@ can open when this page points at it.
 either the printed **measuring stencil** or a ruler with mm markings.
 
 > **No 3D printer handy yet?** There is a **paper version of the
-> stencil**: print [`stencil-sheet.svg`](stencil-sheet.svg) at 100 %
-> scale ("actual size", never "fit to page") and check its 50 × 50 mm
-> calibration square. The same sheet ships inside the printable
+> stencil**: print [`stencil-sheet.svg`](stencil-sheet.svg) and
+> [`stencil-sheet-2.svg`](stencil-sheet-2.svg) (the wide 2-prong
+> appliance plug, P4) at 100 % scale ("actual size", never "fit to
+> page") and check the 50 × 50 mm calibration square on each. The same
+> sheets ship inside the printable
 > **[Starter Guide PDF](../Plug_Puller_Starter_Guide.pdf)** — this
-> whole page plus the 1:1 stencil sheet in one document.
+> whole page plus the 1:1 stencil sheets in one document.
 
 ---
 
@@ -27,6 +29,7 @@ raised two-letter ID you can find by touch:
 - **P1** — plug silhouette card: **flat 2-prong lamp plug** (NEMA 1-15)
 - **P2** — plug silhouette card: **standard 3-prong plug** (NEMA 5-15)
 - **P3** — plug silhouette card: **heavy-duty extension cord** (NEMA 5-15)
+- **P4** — plug silhouette card: **wide 2-prong appliance plug** (NEMA 1-15)
 - **R1** — **ruler**: raised mm ticks, numerals every 10 mm, and edge
   notches every 10 mm you can count by touch
 - **C1** — **cord gauge**: open slots Ø 3–9 mm through the bottom
@@ -72,7 +75,7 @@ in the console and placed alone on its own sheet.
 
 ## Path A — match a preset (fastest, no numbers)
 
-1. Take the **P1**, **P2**, and **P3** cards to your plug.
+1. Take the **P1**, **P2**, **P3** and **P4** cards to your plug.
 2. Hold each card's **W** cutout over the plug (looking at its wide
    side), then the **T** cutout (looking at its thin side). Slide the
    card's open cord slot sideways onto the cord.
@@ -82,6 +85,7 @@ in the console and placed alone on its own sheet.
    - P2 → Step 1 `plug_preset` = `Standard 3-prong plug - NEMA 5-15`
    - P3 → the two-sided puller's Step 1 `plug_preset` =
      `Heavy-duty extension cord - NEMA 5-15`
+   - P4 → Step 1 `plug_preset` = `Wide 2-prong appliance plug - NEMA 1-15`
 4. Skip to [Fill in the steps](#fill-in-the-customizer-steps) below.
 
 No card fits? Your plug is between presets — take Path B; the measured
@@ -114,12 +118,13 @@ The Plug Puller comes as two tools, each in its own file:
 
 - the **one-sided puller**,
   [`src/Plug_Puller_Parametric.scad`](../../src/Plug_Puller_Parametric.scad):
-  lamp plugs (P1), standard 3-prong plugs (P2), and other plugs
-  thinner than 24 mm;
+  lamp plugs (P1), standard 3-prong plugs (P2), the wide 2-prong
+  appliance plug (P4), and other plugs thinner than 24 mm;
 - the **two-sided puller**,
   [`src/Plug_Puller_Two_Sided.scad`](../../src/Plug_Puller_Two_Sided.scad):
   two plates that close on the plug from both sides, for thick round
-  plugs like P3, USB-C tips and charger plugs.
+  plugs like P3, the USB-C laptop tip, charger plugs, and the lamp and
+  standard plugs too (both files offer those two as presets).
 
 A plug 24 mm thick or more gets a red tag in the one-sided file that
 sends you to the two-sided file.
@@ -140,8 +145,9 @@ Open your tool's file in OpenSCAD and show the Customizer panel
 
 ### Two-sided puller
 
-- **Step 1 — Your Plug:** `Heavy-duty extension cord - NEMA 5-15` for
-  a P3 plug, or `Measure my plug` and four numbers: the plug length
+- **Step 1 — Your Plug:** a preset (`Heavy-duty extension cord - NEMA 5-15`
+  for a P3 plug, `USB-C laptop tip`, or the lamp or standard plug), or
+  `Measure my plug` and four numbers: the plug length
   (worksheet number 1), its width at the prong end and at the cord
   end — the size the two plates close across — and the cord
   (worksheet number 6). Then pick the plug's sides:
