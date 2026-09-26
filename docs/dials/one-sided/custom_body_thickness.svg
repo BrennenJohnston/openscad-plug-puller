@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="68.55mm" height="47.39mm" viewBox="0 0 68.55 47.39" role="img">
+<title>Body thickness</title>
+<desc>Thickens the whole slab, so every hole and the pocket get deeper walls. Before: 6.35. After: 9.</desc>
+<rect width="68.55" height="47.39" fill="white"/>
+<text x="34.27" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">custom_body_thickness</text>
+<text x="34.27" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">6.35 → 9</text>
+<text x="34.27" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(size: Custom, section-y: 35)</text>
+<path d="M 6.00 25.94 L 6.16 25.08 L 6.40 24.63 L 6.72 24.23 L 7.35 23.76 L 8.36 23.43 L 20.93 23.40 L 22.07 24.31 L 22.07 29.71 L 6.04 29.75 L 6.00 25.94 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 59.91 23.40 L 60.71 23.54 L 61.42 23.89 L 62.00 24.42 L 62.38 25.08 L 62.54 25.82 L 62.51 29.74 L 46.48 29.72 L 46.48 24.31 L 47.60 23.40 L 59.91 23.40 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 25.68 29.75 L 25.63 29.70 L 25.63 24.31 L 26.76 23.40 L 41.78 23.40 L 42.91 24.31 L 42.88 29.74 L 25.68 29.75 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 6.00 23.29 L 6.16 22.43 L 6.39 21.98 L 6.72 21.58 L 7.35 21.11 L 8.36 20.77 L 20.94 20.75 L 22.07 21.65 L 22.07 24.30 L 20.94 23.40 L 8.36 23.42 L 7.35 23.76 L 6.72 24.23 L 6.40 24.63 L 6.16 25.08 L 6.00 25.94 L 6.00 23.29 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 46.48 21.65 L 47.60 20.75 L 59.91 20.75 L 60.45 20.82 L 61.20 21.11 L 61.64 21.41 L 62.00 21.77 L 62.38 22.43 L 62.54 23.16 L 62.55 25.94 L 62.38 25.08 L 62.15 24.63 L 61.83 24.23 L 61.20 23.76 L 60.18 23.42 L 47.61 23.40 L 46.48 24.30 L 46.48 21.65 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 25.63 21.65 L 26.75 20.75 L 41.79 20.75 L 42.92 21.65 L 42.92 24.30 L 41.79 23.40 L 26.76 23.40 L 25.63 24.30 L 25.63 21.65 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="34.27" y="39.35" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="34.27" y="42.73" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="34.27" y="46.11" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>

@@ -9,7 +9,7 @@
     "changes": "Fills in all six plug numbers from a measured reference plug, so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": "Measure my plug",
       "after": "Standard 3-prong plug - NEMA 5-15",
       "context": {},
@@ -125,7 +125,7 @@
     "changes": "Widens the cord hook's slot and crossbar to fit the cord, and moves the finger holes and the whole body up to make room.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": 4,
       "after": 8,
       "context": {},
@@ -751,7 +751,7 @@
       "view": "top",
       "style": "fill",
       "before": 31.75,
-      "after": 36,
+      "after": 28,
       "context": {
         "size": "Custom"
       },
@@ -924,7 +924,7 @@
       "view": "top",
       "style": "fill",
       "before": 25.4,
-      "after": 30,
+      "after": 22,
       "context": {
         "size": "Custom"
       },
@@ -1206,22 +1206,17 @@
     "title": "Hook tip drop",
     "changes": "Sags the slot's mouth farther below the cord end so a hooked cord cannot back out.",
     "diagram": {
-      "view": "top",
+      "view": "none",
       "style": "fill",
       "before": 1.98,
-      "after": 4,
+      "after": null,
       "context": {
         "size": "Custom"
       },
       "plug": "default",
-      "crop": [
-        -14,
-        -3,
-        14,
-        18
-      ]
+      "crop": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0."
   },
   {
     "file": "one-sided",
@@ -1442,10 +1437,10 @@
       },
       "plug": "default",
       "crop": [
-        -26,
-        24,
-        26,
-        66
+        -66,
+        -3,
+        -30,
+        10
       ],
       "at": 10.4
     },
@@ -1769,7 +1764,7 @@
     "changes": "Fills in the plug's length, both widths and the cord from the measured heavy-duty cord plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": "Measure my plug",
       "after": "Heavy-duty extension cord - NEMA 5-15",
       "context": {},
@@ -1788,7 +1783,7 @@
     "changes": "Lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them.",
     "diagram": {
       "view": "top",
-      "style": "fill",
+      "style": "trace",
       "before": 25.5,
       "after": 40,
       "context": {},

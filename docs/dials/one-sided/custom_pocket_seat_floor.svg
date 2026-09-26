@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="75.50mm" height="62.20mm" viewBox="0 0 75.50 62.20" role="img">
+<title>Pocket seat floor thickness</title>
+<desc>Thins or thickens the floor left under the round seat, so the seat is cut deeper or shallower. Before: 3.175. After: 1.5.</desc>
+<rect width="75.50" height="62.20" fill="white"/>
+<text x="37.75" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">custom_pocket_seat_floor</text>
+<text x="37.75" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">3.175 → 1.5</text>
+<text x="37.75" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(size: Custom, section-x: 0)</text>
+<path d="M 6.00 20.75 L 31.50 20.75 L 31.50 40.75 L 6.00 40.75 L 6.00 20.75 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 64.42 38.26 L 64.47 38.21 L 67.08 38.21 L 67.57 38.29 L 68.27 38.57 L 69.00 39.23 L 69.35 39.89 L 69.50 40.62 L 69.48 44.55 L 64.43 44.54 L 64.42 38.26 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 9.86 44.56 L 9.81 44.51 L 9.85 41.39 L 21.85 41.38 L 22.04 41.11 L 22.67 40.75 L 30.49 40.75 L 30.94 40.55 L 31.38 40.19 L 31.56 39.50 L 31.61 38.21 L 59.34 38.26 L 59.29 44.56 L 9.86 44.56 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 9.81 43.06 L 9.81 41.39 L 21.87 41.38 L 22.03 41.11 L 22.68 40.75 L 22.03 42.06 L 21.87 43.06 L 9.81 43.06 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="37.75" y="54.16" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="37.75" y="57.54" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="37.75" y="60.92" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>

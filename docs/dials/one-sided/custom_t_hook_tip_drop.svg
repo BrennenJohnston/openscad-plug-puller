@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="40mm" viewBox="0 0 120 40" role="img">
+<title>Hook tip drop</title>
+<desc>This dial changes no shape. Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0.</desc>
+<rect width="120" height="40" fill="white"/>
+<rect x="0.5" y="0.5" width="119" height="39" fill="none" stroke="#999999" stroke-width="0.4" stroke-dasharray="1.6,1.1"/>
+<text x="60.00" y="8.00" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">custom_t_hook_tip_drop</text>
+<text x="60.00" y="14.00" font-family="Helvetica, Arial, sans-serif" font-size="3.20" text-anchor="middle" fill="#000">This dial changes no shape.</text>
+<text x="60.00" y="19.50" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">Only acts when size is Custom. Changes no shape: the hook slot's mouth</text>
+<text x="60.00" y="23.10" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">already opens through the cord end (the body ends at Y = 0), so sagging the</text>
+<text x="60.00" y="26.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">mouth farther below that edge cuts only air; measured at 1.98, 4 and 0.</text>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="68.55mm" height="44.74mm" viewBox="0 0 68.55 44.74" role="img">
+<title>Top edge rounding</title>
+<desc>Rounds or squares the edge where the body's top face meets its sides. Before: 2.54. After: 0.</desc>
+<rect width="68.55" height="44.74" fill="white"/>
+<text x="34.27" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">custom_body_top_rounding</text>
+<text x="34.27" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">2.54 → 0</text>
+<text x="34.27" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(size: Custom, section-y: 35)</text>
+<path d="M 6.00 23.30 L 6.16 22.43 L 6.40 21.98 L 6.72 21.59 L 7.35 21.11 L 8.36 20.78 L 20.93 20.75 L 22.07 21.67 L 22.07 27.06 L 6.04 27.10 L 6.00 23.30 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 59.91 20.75 L 60.71 20.90 L 61.42 21.25 L 62.00 21.77 L 62.38 22.43 L 62.54 23.17 L 62.51 27.10 L 46.48 27.07 L 46.48 21.67 L 47.60 20.76 L 59.91 20.75 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 25.68 27.10 L 25.63 27.05 L 25.63 21.67 L 26.76 20.76 L 41.78 20.75 L 42.91 21.66 L 42.88 27.10 L 25.68 27.10 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 6.00 20.75 L 20.94 20.75 L 20.95 20.76 L 8.36 20.78 L 7.35 21.11 L 6.72 21.58 L 6.40 21.98 L 6.16 22.43 L 6.00 23.29 L 6.00 20.75 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 47.61 20.75 L 62.55 20.75 L 62.55 23.29 L 62.38 22.43 L 62.15 21.98 L 61.83 21.58 L 61.20 21.11 L 60.18 20.78 L 47.61 20.75 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="34.27" y="36.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="34.27" y="40.08" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="34.27" y="43.46" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>

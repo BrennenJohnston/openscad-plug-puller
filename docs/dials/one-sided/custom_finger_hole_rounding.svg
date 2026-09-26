@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="78.41mm" height="44.74mm" viewBox="0 0 78.41 44.74" role="img">
+<title>Finger hole rim rounding</title>
+<desc>Rounds or squares the rims of both finger holes on both faces. Before: 2.5. After: 0.</desc>
+<rect width="78.41" height="44.74" fill="white"/>
+<text x="39.20" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">custom_finger_hole_rounding</text>
+<text x="39.20" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">2.5 → 0</text>
+<text x="39.20" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(size: Custom, section-y: 19.8)</text>
+<path d="M 37.90 27.10 L 37.17 26.99 L 36.51 26.67 L 35.97 26.18 L 35.59 25.55 L 35.41 24.84 L 35.41 23.01 L 35.51 22.52 L 35.82 21.86 L 36.14 21.48 L 36.72 21.04 L 37.65 20.76 L 40.74 20.76 L 41.23 20.86 L 41.89 21.17 L 42.27 21.48 L 42.70 22.07 L 42.99 23.00 L 42.99 24.85 L 42.81 25.55 L 42.58 25.99 L 41.89 26.68 L 40.99 27.05 L 37.90 27.10 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 6.00 23.31 L 6.08 22.67 L 6.36 21.98 L 6.66 21.58 L 7.24 21.11 L 8.03 20.81 L 8.68 21.04 L 9.09 21.32 L 9.71 22.07 L 9.99 23.01 L 9.95 25.08 L 9.71 25.77 L 9.43 26.19 L 8.89 26.68 L 8.22 26.99 L 7.50 27.10 L 6.02 27.09 L 6.00 23.31 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 68.45 25.09 L 68.45 22.76 L 68.59 22.29 L 68.97 21.66 L 69.52 21.17 L 70.37 20.81 L 70.94 20.99 L 71.38 21.25 L 72.04 21.98 L 72.38 22.91 L 72.40 27.08 L 70.65 27.08 L 69.73 26.80 L 68.97 26.18 L 68.69 25.77 L 68.45 25.09 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 7.99 27.05 L 8.68 26.80 L 9.43 26.18 L 9.81 25.55 L 10.00 24.60 L 10.00 27.10 L 7.50 27.10 L 7.99 27.05 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 35.45 25.08 L 35.70 25.78 L 36.31 26.53 L 36.95 26.91 L 37.90 27.10 L 35.40 27.10 L 35.40 24.60 L 35.45 25.08 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 40.99 27.05 L 41.68 26.80 L 42.43 26.18 L 42.81 25.55 L 43.00 24.60 L 43.00 27.10 L 40.50 27.10 L 40.99 27.05 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 68.45 25.08 L 68.70 25.78 L 69.31 26.53 L 69.95 26.91 L 70.90 27.10 L 68.40 27.10 L 68.40 24.60 L 68.45 25.08 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 8.03 20.80 L 10.00 20.75 L 10.00 23.25 L 9.89 22.52 L 9.58 21.86 L 8.89 21.17 L 8.03 20.80 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 35.40 20.75 L 37.84 20.75 L 36.94 20.94 L 36.13 21.48 L 35.59 22.29 L 35.40 23.25 L 35.40 20.75 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 43.00 20.75 L 43.00 23.25 L 43.00 23.25 L 42.81 22.29 L 42.27 21.48 L 41.46 20.94 L 40.56 20.75 L 43.00 20.75 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<path d="M 68.40 20.75 L 70.37 20.80 L 69.51 21.17 L 68.97 21.66 L 68.51 22.52 L 68.40 23.25 L 68.40 20.75 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="39.20" y="36.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="39.20" y="40.08" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="39.20" y="43.46" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>

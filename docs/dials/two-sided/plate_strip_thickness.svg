@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64.00mm" height="42.39mm" viewBox="0 0 64.00 42.39" role="img">
+<title>Cable strip thickness</title>
+<desc>Thickens or removes the thin strip that bridges the cord channel on the outer face and ties the two arms together. Before: 1. After: 0.</desc>
+<rect width="64.00" height="42.39" fill="white"/>
+<text x="32.00" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">plate_strip_thickness</text>
+<text x="32.00" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">1 → 0</text>
+<text x="32.00" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(section-y: 3)</text>
+<path d="M 37.04 24.74 L 26.96 24.74 L 26.93 20.80 L 29.59 20.77 L 29.64 23.75 L 34.38 23.75 L 34.41 20.77 L 37.01 20.75 L 37.04 24.74 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 6.97 23.56 L 7.01 20.75 L 23.06 20.79 L 23.03 24.75 L 8.84 24.74 L 7.98 24.58 L 7.49 24.36 L 7.09 23.96 L 6.97 23.56 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 40.99 24.75 L 40.93 24.70 L 40.97 20.75 L 57.03 20.79 L 57.01 23.73 L 56.84 24.06 L 56.63 24.27 L 56.21 24.51 L 55.82 24.63 L 54.94 24.75 L 40.99 24.75 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 28.10 24.75 L 28.69 24.71 L 29.11 24.51 L 29.43 24.17 L 29.58 23.75 L 34.42 23.75 L 34.57 24.17 L 34.89 24.51 L 35.31 24.71 L 35.90 24.75 L 28.10 24.75 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="32.00" y="34.35" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="32.00" y="37.73" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="32.00" y="41.11" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>

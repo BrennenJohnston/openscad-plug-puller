@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="77.50mm" height="65.26mm" viewBox="0 0 77.50 65.26" role="img">
+<title>Plug thickness at the cord end</title>
+<desc>Deepens or shallows the two pocket floors, the round seat and the plug recess, when this end is the fatter end of the plug. Before: 20. After: 23.5.</desc>
+<rect width="77.50" height="65.26" fill="white"/>
+<text x="38.75" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">measure_plug_thickness_cord_end</text>
+<text x="38.75" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">20 → 23.5</text>
+<text x="38.75" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(section-x: 0)</text>
+<path d="M 6.00 24.25 L 31.50 20.75 L 31.50 44.25 L 6.00 44.25 L 6.00 24.25 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 71.50 43.80 L 71.48 47.60 L 66.43 47.60 L 66.44 41.28 L 69.09 41.27 L 70.05 41.51 L 70.67 41.93 L 71.14 42.50 L 71.42 43.18 L 71.50 43.80 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 21.22 44.44 L 21.41 44.16 L 22.05 43.81 L 31.50 43.80 L 31.94 43.61 L 32.38 43.25 L 32.56 42.55 L 32.61 41.27 L 61.29 41.27 L 61.34 47.57 L 9.81 47.58 L 9.85 44.44 L 21.22 44.44 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 9.81 44.44 L 21.24 44.44 L 21.41 44.17 L 22.04 43.81 L 31.50 43.81 L 31.94 43.61 L 32.38 43.26 L 32.56 42.56 L 32.56 43.00 L 32.38 43.70 L 31.94 44.05 L 31.50 44.25 L 22.04 44.25 L 21.41 44.67 L 21.25 45.00 L 9.81 45.00 L 9.81 44.44 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
+<text x="38.75" y="57.22" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
+<text x="38.75" y="60.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
+<text x="38.75" y="63.98" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+</svg>
