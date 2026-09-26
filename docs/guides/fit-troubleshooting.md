@@ -15,7 +15,9 @@ touch anything below the three Step groups at the top of the form.
 These are the one-sided puller's symptoms. The two-sided puller's fit
 dials (`plate_grip_clearance`, `plate_cradle_depth`, `plate_grip_bite`,
 `plate_cable_clearance`, `plate_finger_fit`) are in the
-[Power User Guide](power-user-guide.md).
+[Power User Guide](power-user-guide.md). There are no two-sided fit
+reports from printed tools yet; when the owner's test prints of the
+USB-C, lamp and standard presets are reported, their fits go here.
 
 | # | Symptom | Change this | By how much |
 | - | ------- | ----------- | ----------- |
@@ -34,7 +36,7 @@ dials (`plate_grip_clearance`, `plate_cradle_depth`, `plate_grip_bite`,
 | 12 | Tool feels too small in the hand / fingers crowd the edges | **Size** up — or Measure my hand with **+5 mm** hand width |
 | 13 | Tool too wide for a cramped outlet corner (hits trim or another plug) | **Size** down one step (the body tracks the hand size) |
 | 14 | Strap keeps sliding off the plug | **Attachment** → `Zip ties + Velcro` and use both |
-| 15 | Smooth round plug still slips out of the zip-tie hold | Thread a zip tie down one zip-tie hole, around the plug barrel, and back up the opposite hole, then cinch it — the 2×2 hole grid doubles as a clamp anchor |
+| 15 | Smooth round plug still slips out of the zip-tie hold | Thread a zip tie down one zip-tie hole, around the plug barrel, up the opposite hole, and cinch it |
 | 16 | Hook is on the wrong side for your hand | **Step 4** → `hook_hand` = **Left** (or **Right**) |
 | 17 | Strap won't thread through the wing opening | **Step 3** → lower `strap_width`, or use a narrower strap (the wing is sized to it) |
 
@@ -49,11 +51,11 @@ Read the tag, fix that measurement, re-export.
 
 | Tag says | What it means | What to do |
 | -------- | ------------- | ---------- |
-| `CHECK PLUG LENGTH MEASUREMENT (MM?)` / `CHECK PLUG WIDTH MEASUREMENTS (MM?)` / `CHECK PLUG THICKNESS MEASUREMENTS (MM?)` / `CHECK CORD THICKNESS MEASUREMENT (MM?)` / `CHECK FINGER WIDTH MEASUREMENT (MM?)` / `CHECK HAND WIDTH MEASUREMENT (MM?)` | That number is outside any plausible mm value — classic inch entry (e.g. 1.25 instead of 32) | Re-measure with the **mm** side, re-type |
+| `CHECK PLUG LENGTH MEASUREMENT (MM?)`, and the same for `PLUG WIDTH`, `PLUG THICKNESS`, `CORD THICKNESS`, `FINGER WIDTH`, `HAND WIDTH` | That number is outside any plausible mm value: classic inch entry (1.25 instead of 32) | Re-measure with the **mm** side, re-type |
 | `FINGER TOO BIG FOR HAND WIDTH - RECHECK BOTH` | The finger holes can't physically fit inside a body sized for that hand width | Re-measure both finger knuckle width and hand width — one of them is off |
 | `PLUG TOO WIDE FOR THIS DESIGN (MAX 38MM)` | Your plug (at the prong end) is wider than the tool's end can open up | The design tops out near 38 mm plug width; if your plug is really that wide, this tool geometry can't grip it |
-| `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | Your plug is 24 mm thick or more at one end: too thick for this tool's pocket | Open the two-sided puller, `src/Plug_Puller_Two_Sided.scad` (or its single-file build), and fill in its Step 1; if the number is a mis-measurement, re-measure plug thickness at both ends |
-| `PLUG LONGER THAN POCKET LIMIT - POCKET SHORTENED` | The plug is longer than the pocket budget inside the tool's 120 mm body ceiling, so the pocket was truncated — the tool still works but won't swallow the whole plug | Double-check plug length; if it's real, print and try it |
+| `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | Your plug is 24 mm thick or more at one end: too thick for this tool's pocket | Open the two-sided puller, `src/Plug_Puller_Two_Sided.scad`, and fill in its Step 1; or re-measure the thickness at both ends |
+| `PLUG LONGER THAN POCKET LIMIT - POCKET SHORTENED` | The plug is longer than the pocket can be inside the 120 mm body, so the pocket stops short | Double-check plug length; if it's real, print and try it |
 | `PLUG WIDTH TAPER TOO STEEP - RECHECK BOTH WIDTHS` | The two width measurements describe a taper steeper than the pocket walls can follow | Re-measure plug width at the prong end and at the cord end — one of them is probably off |
 | `CORD TOO THICK FOR HOOK SLOT` | The hook slot can't open wide enough for that cord | Re-measure the cord's **thin** side; cords past ~9 mm don't fit the hook |
 | `FINGER HOLES HIT PLUG POCKET` | Your finger + plug combination makes the holes collide with the plug pocket | Reduce finger knuckle width slightly, or re-check plug length |
@@ -63,17 +65,19 @@ Read the tag, fix that measurement, re-export.
 | `PLUG SEAT OVERHANGS BODY - RECHECK PLUG WIDTH` / `PLUG POCKET OVERHANGS BODY - RECHECK PLUG WIDTH` | The plug pocket is wider than the tool body at that spot | Re-measure plug width, or go up a size so the body grows |
 | `WING OPENING SMALLER THAN STRAP WIDTH` | The wing velcro slot is too narrow to pass the strap you set | Lower `strap_width` (Step 3), or switch `velcro_style` to `Classic slot` |
 | `WING WEB COLLAPSED - NO ROOM FOR STRAP` | Features crowded the wing until no opening is left | Go up a size (bigger body) or lower `strap_width` |
-| `ZIP TIE HOLES HIT FINGER HOLES` | A zip row landed too close to a finger hole (with `Auto` placement the rows now derive around the finger holes, so this fires for `Manual` `zip_pos_*` dials or Custom mode with auto-fit off) | Move the offending `zip_pos_*` dial, re-enable auto-fit, or lengthen the body |
+| `ZIP TIE HOLES HIT FINGER HOLES` | A zip row landed too close to a finger hole. `Auto` placement avoids this; `Manual` `zip_pos_*` dials or auto-fit off trip it | Move the offending `zip_pos_*` dial, re-enable auto-fit, or lengthen the body |
 | `ZIP TIE ROWS OVERLAP EACH OTHER` | Two manual zip rows landed on top of each other | Spread the `zip_pos_*` dials at least one hole diameter apart |
 | `ZIP TIE HOLES HIT VELCRO SLOTS` | A zip row broke into a classic velcro slot | Move `zip_pos_*` or `velcro_pos` apart (Step 3) |
-| `SEAT HAS NO RECESS - PLUG WONT NEST` / `POCKET HAS NO RECESS - PLUG WONT NEST` / `SEAT FLOOR TOO THIN TO PRINT` / `POCKET FLOOR TOO THIN TO PRINT` / `ZIP TIE GRID BELOW CORD END` / `ZIP TIE GRID OUTSIDE BODY` / anything else | An internal geometry check — with measured inputs this shouldn't happen | Re-check all numbers against the [Measuring Guide](measuring-guide.md); if it persists, open an issue with your numbers |
-| `FINGER HOLES OUTSIDE BODY` / `POCKET SEAT WIDER THAN TOP EDGE` / `POCKET WIDER THAN BODY` / `WALL NOTCH WIDER THAN TOP EDGE` | `size = Custom` only: the Custom-mode wording of the finger-hole, seat, pocket and notch checks above | Adjust the custom sliders of that feature (finger holes, pocket seat, pocket or wall notch), or turn `custom_enable_auto_fit` back on |
+| `SEAT HAS NO RECESS - PLUG WONT NEST` or `POCKET HAS NO RECESS - PLUG WONT NEST` | An internal geometry check; with measured inputs this should not happen | Re-check all numbers against the [Measuring Guide](measuring-guide.md); if it persists, open an issue with your numbers |
+| `SEAT FLOOR TOO THIN TO PRINT` or `POCKET FLOOR TOO THIN TO PRINT` | The same internal check, on the pocket floors | As above |
+| `ZIP TIE GRID BELOW CORD END`, `ZIP TIE GRID OUTSIDE BODY`, anything else | The same internal check, on the zip-tie grid | As above |
+| `FINGER HOLES OUTSIDE BODY`, `POCKET SEAT WIDER THAN TOP EDGE`, `POCKET WIDER THAN BODY`, `WALL NOTCH WIDER THAN TOP EDGE` | `size = Custom` only: the Custom-mode wording of the finger-hole, seat, pocket and notch checks above | Adjust that feature's custom sliders, or turn `custom_enable_auto_fit` back on |
 
 Preview-only notes (never in the exported file):
 
 | Note says | What it means | What to do |
 | --------- | ------------- | ---------- |
-| A **green** `MEDIUM: …` / `MEASURED: …` tag | Not a warning! Positive confirmation that your size and numbers were applied | Nothing |
+| A **green** `Medium: …` / `MEASURED: …` tag | Not a warning! Positive confirmation that your size and numbers were applied | Nothing |
 | Orange `CUSTOM SLIDERS IGNORED - SET SIZE = CUSTOM` | A `custom_*` slider was moved while a non-Custom size is active; the console names each one | Set Step 2's `size = Custom` if you meant it, or leave the slider alone |
 | Orange `AUTO-FIT ADJUSTED <n> VALUES - SEE CONSOLE` | `size = Custom` with auto-fit on: <n> sliders were clamped to keep the part printable | Read the console's `(clamped from …)` lines |
 
@@ -92,11 +96,11 @@ These appear only in the two-sided puller, `src/Plug_Puller_Two_Sided.scad`:
 | `ZIP STATION HITS VELCRO SLOT` | `Manual` placement only: a zip position broke into the velcro slot | Move `plate_zip_pos_2/3` — in `Auto` placement the slot always keeps clear of the stations |
 | `PLUG TOO LONG - PLATE OVER 120MM, CHECK PLUG LENGTH` | The arms grow with the plug, and this plug length pushed the plate past 120 mm | Re-measure plug length (from the surface it plugs into to the plug's back end — not including the cord) |
 | `PLUG WIDTH TAPER LOOKS WRONG - RECHECK BOTH ENDS` | The two width measurements are more than ~20° of taper apart — almost certainly a mis-measurement | Re-measure plug width at the prong end and at the cord end |
-| `STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER` | The zip-tie stations are gone, but zip ties are what cinch the two plates together. Both Step 3 choices keep them, so you should not see this | Set Step 3 to `Zip ties` or `Zip ties + Velcro strap` |
+| `STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER` | The zip-tie stations are gone, but zip ties hold the two plates together; both Step 3 choices keep them | Set Step 3 to `Zip ties` or `Zip ties + Velcro strap` |
 | `STRAP WIDER THAN ARM SLOT WINDOW - NARROW THE STRAP` | `Manual` placement only: your `strap_width` is wider than the slot length the arm can offer between the zip stations | Use a narrower strap, or raise `plate_velcro_slot_length` / rearrange `plate_zip_pos_*` to widen the window |
 | `PLUG NARROWER THAN THE CORD CHANNEL - ARMS CANNOT TOUCH IT` | At one end the plug is narrower than the cord channel, so the arms cannot reach it there | Re-measure the plug widths and the cord — the cord itself, not its strain relief; a smaller `plate_cable_clearance` narrows the channel |
-| `CRADLE SHALLOWER THAN ASKED - PLUG NARROW` | `Rounded sides`: the plug is so narrow next to its cord channel that the full cradle would make the gap at the outer face narrower than the cord channel, so the cradle was built shallower | A smaller `plate_cradle_depth`, or measure the cord itself, not its strain relief |
-| Orange `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE` (preview only) | `Auto` placement: the plug is too short for a strap slot in the arms, so it was left out; the zip ties still hold the plates | Nothing to fix; pick `Zip ties` in Step 3 and the note goes away |
+| `CRADLE SHALLOWER THAN ASKED - PLUG NARROW` | `Rounded sides`: the plug is so narrow that the full cradle would close below the cord channel, so it was built shallower | A smaller `plate_cradle_depth`, or measure the cord itself, not its strain relief |
+| Orange `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE` (preview only) | `Auto` placement: the plug is too short for a strap slot, so the arms have none; the zip ties still hold | Nothing to fix; pick `Zip ties` in Step 3 and the note goes away |
 
 > **Two-sided puller feels too flimsy?** Raise `plate_wall_boost` (the
 > first slider in the **Advanced - Two-Sided Puller** section): it

@@ -15,7 +15,7 @@ Each Customizer is organized in tiers, top to bottom:
 | Tier | Sections | Who it's for |
 | ---- | -------- | ------------ |
 | **Guided steps** | `Step 1` … `Step 4` in both files | Everyone. Measurements + a few dropdowns; the model derives all geometry from these. |
-| **Advanced** | One-sided: `Advanced - Zip Tie Placement`, `Advanced - Velcro Placement`, `Advanced - Render Quality`. Two-sided: `Advanced - Two-Sided Puller`, `Advanced - Render Quality` | Power users. Placement overrides and tuning dials that work *with* the measured sizes — no mode switch needed. |
+| **Advanced** | One-sided: `Advanced - Zip Tie Placement`, `Advanced - Velcro Placement`. Two-sided: `Advanced - Two-Sided Puller`. Both: `Advanced - Render Quality` | Power users. Placement overrides and tuning dials that work *with* the measured sizes. |
 | **Custom** (one-sided only) | `Custom Mode` + every section marked `(Custom size only)` | Experts. Set Step 2's `size = Custom` and the measurements are ignored entirely; ~50 sliders control the raw geometry. |
 
 Everything in the Advanced tier applies immediately, in any size. The
@@ -185,7 +185,7 @@ zip-tie the pair face to face around the plug.
 
 | Goal | Dial(s) |
 | ---- | ------- |
-| **Denser, stronger plate all around** | `plate_wall_boost` — adds N mm to *every* wall around the inner openings at once (finger walls, cord-channel web, both velcro-slot walls, zip webs). The outline grows and the holes re-place themselves; Auto placement keeps every web intact at any boost. |
+| **Denser, stronger plate all around** | `plate_wall_boost` adds N mm to *every* wall around the inner openings at once; the outline grows and the holes re-place themselves. |
 | Stiffer sandwich | `plate_thickness` (each plate; the stack is 2×) |
 | Beef up only the tooth-to-slot boundary | `plate_slot_inner_wall` — measured from the **deepest tooth bite**, so bigger teeth never silently thin it |
 | Less plastic / lighter | `plate_velcro_slot_width/length` (the slots double as material reduction), `plate_strip_thickness = 0` |
@@ -248,7 +248,7 @@ and echoes the same message to the console. The
 one-sided tags `W-1…W-20`, two-sided tags `WC-1…WC-13`.
 
 Preview-only (never exported): the see-through plug in both files, the
-green `MEDIUM: …` / `MEASURED: …` confirmation tag and the orange HUD
+green `Medium: …` / `MEASURED: …` confirmation tag and the orange HUD
 notices for ignored custom sliders and auto-fit clamps in the one-sided
 file, and the orange `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE`
 note in the two-sided file.

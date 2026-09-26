@@ -46,7 +46,7 @@ keep reading — the next sentence tells you exactly what to press.
 
 Open the **[Measuring Guide](measuring-guide.md)** (it works well on a
 phone) and write down your numbers on the worksheet at the bottom of
-that guide. Everything is measured in **millimetres (mm)** — use the mm
+that guide. Everything is measured in **millimeters (mm)** — use the mm
 side of your ruler or caliper.
 
 You will end up with something like this:
@@ -173,7 +173,7 @@ things.
 > else adjusts automatically.
 
 **How to know it worked:** in the one-sided file the preview shows a
-green tag reading `MEDIUM: …` (or your size) next to the model — that
+green tag reading `Medium: …` (or your size) next to the model — that
 is the model confirming your numbers were applied. In the two-sided
 file, look at the see-through plug on the left plate: it is the plug
 your numbers describe.
@@ -182,7 +182,7 @@ your numbers describe.
 
 If you instead see **red text**,
 one of your numbers looks wrong (for example, inches instead of
-millimetres). The red text names which measurement to re-check — fix it
+millimeters). The red text names which measurement to re-check — fix it
 before printing. The **[Fit Troubleshooting Guide](fit-troubleshooting.md)**
 explains every message.
 
@@ -243,4 +243,4 @@ one reprint.
 | Red text appears in the preview | A measurement is implausible or conflicting. The text names it; see the [Fit Troubleshooting Guide](fit-troubleshooting.md). |
 | The red text says `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | Your plug is too thick for the one-sided puller. Open `src/Plug_Puller_Two_Sided.scad` and fill in its Step 1. |
 | The exported file is tiny / my slicer says it's empty | You exported after F5 (preview) instead of F6 (render). Press F6, wait, then export again. |
-| A red text tag printed next to my part | That is the warning tag, printed on purpose so a bad file can't fail silently. Read what it says, fix that measurement, re-export, reprint. |
+| A red text tag printed next to my part | That is the warning tag, printed on purpose so a bad file cannot fail silently. Read it, fix that measurement, re-export, reprint. |

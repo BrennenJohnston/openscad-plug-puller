@@ -78,13 +78,13 @@ Slide it over the plug and pull with your whole hand. Print one.
 The **two-sided puller** is for fat round extension-cord plugs, USB-C tips, and
 charger plugs. Two identical serrated plates grip the plug's sides and zip ties
 cinch them together. The download holds **both plates**: print it, flip one
-plate over, and zip-tie the pair face to face. If your plug is 24 millimetres or
+plate over, and zip-tie the pair face to face. If your plug is 24 millimeters or
 more thick, the one-sided file shows a red tag sending you here.
 
 **Customize it to your plug and hand — this is the whole point**
 
 Open the **Customize** panel on the file for your tool and work top to bottom.
-The sections are numbered and every measurement is in millimetres.
+The sections are numbered and every measurement is in millimeters.
 
 In the one-sided puller:
 
@@ -137,7 +137,7 @@ renders the finished model only, so it does not show there.)
 
 - Orientation: flat face down, pocket up; the two-sided puller's plates flat, as
   they lie in the file. No supports.
-- Layer height: 0.2 millimetres, or 0.16 for crisper rim fillets.
+- Layer height: 0.2 millimeters, or 0.16 for crisper rim fillets.
 - Walls: 3 to 4. Infill: 25 to 35 percent, cubic or gyroid.
 - Material: **PETG recommended** — it handles repeated flexing and the warmth near
   an outlet better than PLA. PLA, ABS, and ASA all work. **Do not use flexible
@@ -160,7 +160,7 @@ security.
 The source repository has printable 1:1 outline sheets so you can hold a paper
 version of the tool against your plug before committing filament, and a printable
 **measuring stencil** — a set of thin cards with plug silhouette gauges, a 100
-millimetre tactile ruler, a cord-thickness gauge, and eighteen finger-sizing holes.
+millimeter tactile ruler, a cord-thickness gauge, and eighteen finger-sizing holes.
 The stencil lets you find your numbers by matching shapes instead of reading a
 ruler, which matters if reading a ruler is the hard part.
 
@@ -216,7 +216,7 @@ of the actual printed result.
 
 2. **The one-sided puller alone, pocket up.** Three-quarter view showing the plug pocket,
    finger holes, J-hook, and attachment slots.
-   **Alt text:** A flat printed tool about 80 millimetres long with a shaped
+   **Alt text:** A flat printed tool about 80 millimeters long with a shaped
    pocket at one end, two round finger holes, a J-shaped hook, and slots for zip
    ties.
 

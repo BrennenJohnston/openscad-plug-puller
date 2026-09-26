@@ -76,11 +76,11 @@ purpose.
 ### 2.1 Plug presets (two-station, re-measured)
 
 `plug_preset` prefills the effective plug measurements (`_eff_*`) from
-two-station measurements of the three reference plugs
-(`scripts/measure_plug_references.py`: length = the molded body only, the
-prong-end station just behind the prongs, the cord-end station at the cord
-end of the gripped body — the heavy-duty plug's narrower strain-relief
-boot is skipped); the manual sliders are ignored unless
+two-station measurements of the three reference plugs (length = the molded
+body only, the prong-end station just behind the prongs, the cord-end
+station at the cord end of the gripped body; the heavy-duty plug's narrower
+strain-relief boot is skipped; the measuring script is no longer in the
+repository); the manual sliders are ignored unless
 `plug_preset = "Measure my plug"`. In the one-sided file:
 
 | Preset | length | width prong end/cord end | thickness prong end/cord end | cord |
@@ -275,7 +275,7 @@ every render and export.
 ## 6. Two-sided puller geometry
 
 Local frame per Section 3.2. Calibrated to the idealized plate
-(66.6 × 73.7 × 4.5 mm; see `scripts/measure_clamshell_ideal.py`); the
+(66.6 × 73.7 × 4.5 mm; the measuring script is no longer in the repository); the
 `plate_*` defaults carry the field-tested "New Heavy Duty Clam T3" grip
 profile (2 mm teeth on a 2.8 mm pitch biting 1 mm deep, bite −1, tip
 flare 0.7, 11 mm arm tips, 4 mm plate; the serration span is auto = the
@@ -365,12 +365,18 @@ centers itself. As built:
 
 | # | Feature | As built |
 |---|---------|----------|
-| 1 | Mating-face gap | half-gap = width/2 + `plate_grip_clearance`/2 per side (default clearance 0.5 mm in total); `Flat sides` and the preset use `+ plate_grip_bite` (−1) instead |
-| 2 | Ramped gap cutter | `two_sided_gap_cutter_3d()`: n = `max(6, floor(quality/6))` slices (10 at quality 64); slice i cuts `clamshell_v_gap_2d(c)` (limited to Y past the throat) and `clamshell_serrations_2d(c)` with c = `_cradle_eff × (1 − z_mid/t)`, so the teeth ride the slope; the cable channel and strip are left alone |
+| 1 | Mating-face gap | half-gap = width/2 + `plate_grip_clearance`/2 per side (0.5 mm in total by default); `Flat sides` and the preset use `+ plate_grip_bite` (−1) |
+| 2 | Ramped gap cutter | `two_sided_gap_cutter_3d()`: `max(6, floor(quality/6))` slices (10 at quality 64), each cutting gap and serrations at c = `_cradle_eff × (1 − z_mid/t)` |
 | 3 | Arm tips | `_clam_tip_cx` steps in by `_cradle_eff`, so the slope runs to the tips |
-| 4 | Depth guard | `_cradle_eff ≤ min(plate_cradle_depth, plate_thickness, min(hw_wall, hw_cable) − cable_hw)`: the outer-face gap may come down to the cord channel's width but never below it |
+| 4 | Depth guard | `_cradle_eff ≤ min(plate_cradle_depth, plate_thickness, min(hw_wall, hw_cable) − cable_hw)`: the outer-face gap never closes below the cord channel's width |
 | 5 | WC-13 | `CRADLE SHALLOWER THAN ASKED - PLUG NARROW` when `_cradle_eff < plate_cradle_depth − 0.01` |
-| 6 | See-through plug | `plug_preview_2s()`: a `%` hull of two slices on the mating face, the cord-end width at `_clam_y_back` and the prong-end width at `_clam_length + 2`; an ellipse (`Rounded sides`) or rounded rectangle (`Flat sides`) 0.55 × the width tall; drawn on the pair's left plate |
+| 6 | See-through plug | `plug_preview_2s()`: a `%` hull of two slices (cord-end width at `_clam_y_back`, prong-end width at `_clam_length + 2`), 0.55 × the width tall |
+
+Row 2 in full: slice i cuts `clamshell_v_gap_2d(c)` (limited to Y past the
+throat) and `clamshell_serrations_2d(c)`, so the teeth ride the slope; the
+cable channel and strip are left alone. Row 6 in full: the ellipse is for
+`Rounded sides`, the rounded rectangle for `Flat sides`; the plug is drawn on
+the pair's left plate.
 
 Defaults: `plate_cradle_depth` 2.5 mm per side [0:0.25:3.5] (the gap
 narrows by 5 mm from the mating face to the outer face; about 32° from
@@ -499,7 +505,7 @@ the part itself is never altered.
   6.1).
 
 Preview only (`$preview`-gated or `%`, never exported): the see-through
-plug in both files; in the one-sided file the green `MEDIUM: …` /
+plug in both files; in the one-sided file the green `Medium: …` /
 `MEASURED: …` confirmation tag and the orange `CUSTOM SLIDERS IGNORED -
 SET SIZE = CUSTOM` and `AUTO-FIT ADJUSTED <n> VALUES - SEE CONSOLE`
 notices; in the two-sided file the orange `STRAP SLOT LEFT OUT - PLUG TOO
@@ -544,10 +550,9 @@ block in `src/Plug_Puller_Two_Sided.scad`. For a stronger print, raise
 `plate_wall_boost` (thickens every wall around the inner openings at once)
 and/or `plate_thickness`; for the tooth-to-slot boundary specifically,
 raise `plate_slot_inner_wall`; for the cradle, `plate_cradle_depth` and
-`plate_grip_clearance`. Re-run `scripts/measure_clamshell_ideal.py`
-against the reference plate to re-check calibration, then
-`tests/test_two_sided_parity.py`, `tests/test_clamshell_parity.py` and
-`tests/test_two_sided_cradle.py`.
+`plate_grip_clearance`. Then re-run `tests/test_two_sided_parity.py`,
+`tests/test_clamshell_parity.py` and `tests/test_two_sided_cradle.py` to
+re-check the calibration against the golden plate.
 
 ### 12.3 Print orientation
 

@@ -119,7 +119,7 @@ measure_hand_width = 85; // [60:1:110]
 attachment = "Zip ties + Velcro"; // [Zip ties, Velcro strap, Zip ties + Velcro, None]
 // Shape of the velcro strap opening. Wing = the curved openings of the original (bigger opening, less plastic). Classic slot = a simple rectangular slot.
 velcro_style = "Wing"; // [Wing, Classic slot]
-// Width of the hook-and-loop strap you'll thread through the openings - check the strap's packaging (ONE-WRAP comes in 10/13/16/20/25 mm). Sizes the wing opening so the strap clears it. (mm)
+// Width of the hook-and-loop strap you'll thread through the openings - check the strap's packaging (ONE-WRAP comes in 10/13/16/20/25 mm). The wing opening does not change with this number; it is only compared against the strap, so a wing too narrow for it prints the W-14 tag. (mm)
 strap_width = 15; // [10:1:25]
 
 /* [Step 4 - Cord Hook] */
