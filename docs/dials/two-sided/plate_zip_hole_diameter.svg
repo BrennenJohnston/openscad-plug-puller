@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="193.58mm" height="69.50mm" viewBox="0 0 193.58 69.50" role="img">
 <title>Zip-tie hole diameter</title>
-<desc>Widens the three zip-tie holes in each arm, and the stations shift to keep their walls. Before: 4. After: 6.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: zip-tie hole diameter at 6 mm. Marked in red: 1, the zip stations and the arms. 2, the zip stations, the finger lobes and the arms. 3, the zip stations and the strap slot.</desc>
 <rect width="193.58" height="69.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 47.40 6.00 L 47.40 33.50 L 27.40 33.50 L 27.40 6.00 L 47.40 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

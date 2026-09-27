@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="161.95mm" height="26.65mm" viewBox="0 0 161.95 26.65" role="img">
 <title>Strap opening edge rounding</title>
-<desc>Flares the top and bottom edges of the strap openings so the strap does not chafe. Before: 0. After: 1.5.</desc>
+<desc>Two vertical slices of the one-sided puller at y = 46 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: strap opening edge rounding at 1.5 mm. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline.</desc>
 <rect width="161.95" height="26.65" fill="white"/>
 <g class="panel" id="before">
 <path d="M 6.00 8.54 L 6.08 7.92 L 6.39 7.23 L 6.72 6.83 L 7.35 6.36 L 8.37 6.02 L 10.67 6.01 L 10.68 12.33 L 6.02 12.34 L 6.00 8.54 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>

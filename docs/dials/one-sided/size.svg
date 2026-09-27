@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="224.76mm" height="79.65mm" viewBox="0 0 224.76 79.65" role="img">
 <title>Hand size</title>
-<desc>Scales the whole body, both finger holes, the wing openings and the zip-tie grid to the chosen hand size. Before: Medium. After: Large.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hand size set to Large. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the pocket: the plug recess on the centerline. 3, the wing openings: the two openings beside the pocket. 4, the finger holes: the two large holes in the lower half. 5, the body edge: the outer outline.</desc>
 <rect width="224.76" height="79.65" fill="white"/>
 <g class="panel" id="before">
 <path d="M 57.68 8.15 L 57.68 33.65 L 32.68 33.65 L 32.68 8.15 L 57.68 8.15 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

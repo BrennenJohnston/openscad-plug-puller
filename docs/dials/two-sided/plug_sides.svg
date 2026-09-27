@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="157.32mm" height="27.70mm" viewBox="0 0 157.32 27.70" role="img">
 <title>Plug sides</title>
-<desc>Removes the sloped cradle from the arms' gripping edges so the teeth bite straight along a flat-sided plug. Before: Rounded sides. After: Flat sides.</desc>
+<desc>Two vertical slices of the two-sided puller at y = 45 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug sides set to Flat sides. Marked in red: 1, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half. 2, the arms: the two toothed arms in the upper half.</desc>
 <rect width="157.32" height="27.70" fill="white"/>
 <g class="panel" id="before">
 <path d="M 18.33 6.00 L 38.33 6.00 L 38.33 10.00 L 18.33 10.00 L 18.33 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

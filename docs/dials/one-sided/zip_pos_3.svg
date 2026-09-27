@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="148.00mm" height="46.90mm" viewBox="0 0 148.00 46.90" role="img">
 <title>Zip-tie pair 3 position</title>
-<desc>Slides the third pair of zip-tie holes along the plug's side, measured from the plug end. Before: 30. After: 26.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with zip-tie hole placement set to Manual and number of zip-tie rows set to 3, a 25 mm wide plug in teal. Right: zip-tie pair 3 position at 26 mm. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the zip-tie holes and the wing openings: the four small holes beside the pocket; the two openings beside the pocket.</desc>
 <rect width="148.00" height="46.90" fill="white"/>
 <g class="panel" id="before">
 <path d="M 38.49 0.50 L 38.49 26.00 L 13.49 26.00 L 13.49 0.50 L 38.49 0.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

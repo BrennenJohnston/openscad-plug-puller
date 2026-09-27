@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="193.58mm" height="84.00mm" viewBox="0 0 193.58 84.00" role="img">
 <title>Zip-tie station 1 position</title>
-<desc>Slides the rear zip-tie station along each arm, measured from the cord end. Before: 4. After: 27.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 1 position at 27 mm. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. 2, the zip stations: the three small holes along each arm, removed.</desc>
 <rect width="193.58" height="84.00" fill="white"/>
 <g class="panel" id="before">
 <path d="M 47.40 6.00 L 47.40 48.00 L 27.40 48.00 L 27.40 6.00 L 47.40 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

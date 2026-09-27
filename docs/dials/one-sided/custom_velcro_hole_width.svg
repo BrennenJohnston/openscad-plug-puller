@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="201.26mm" height="75.50mm" viewBox="0 0 201.26 75.50" role="img">
 <title>Strap slot width</title>
-<desc>Widens each plain strap slot. Before: 7. After: 11.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom and strap opening style set to Classic slot, a 25 mm wide plug in teal. Right: strap slot width at 11 mm: widens each plain strap slot. Marked in red: 1, the classic slots: the two slots beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were.</desc>
 <rect width="201.26" height="75.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 51.82 6.00 L 51.82 31.50 L 26.82 31.50 L 26.82 6.00 L 51.82 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

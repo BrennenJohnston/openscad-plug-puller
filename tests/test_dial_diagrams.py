@@ -112,8 +112,8 @@ def test_index_covers_catalog() -> None:
 
 def test_readme_lists_every_dial() -> None:
     """docs/dials/README.md: one H1, no skipped heading levels, and for every
-    catalog row a backticked name and an image whose alt text is the row's
-    changes sentence."""
+    catalog row a backticked name, an image whose alt text is the index's
+    generated alt, and the long description right under the image."""
     text = README.read_text(encoding="utf-8")
     levels = [len(m.group(1)) for m in re.finditer(r"^(#{1,6}) ", text, re.M)]
     assert levels.count(1) == 1, f"{levels.count(1)} H1 headings"
@@ -122,11 +122,17 @@ def test_readme_lists_every_dial() -> None:
     images = {m.group(2): m.group(1) for m in re.finditer(r"!\[([^\]]*)\]\(([^)]+)\)", text)}
     for alt in images.values():
         assert alt.strip(), "an image has empty alt text"
+    index = {(r["file"], r["name"]): r for r in json.loads(INDEX.read_text(encoding="utf-8"))}
+    text_lines = text.splitlines()
     for row in load_catalog():
         assert f"`{row['name']}`" in text, f"{row['name']} is not listed"
         path = f"{row['file']}/{row['name']}.svg"
         assert path in images, f"{row['name']}: no image line"
-        assert images[path] == row["changes"], f"{row['name']}: alt text is not the changes sentence"
+        entry = index[(row["file"], row["name"])]
+        assert images[path] == entry["alt"], f"{row['name']}: alt text is not the index's alt"
+        at = next(i for i, line in enumerate(text_lines) if f"]({path})" in line)
+        following = " ".join(text_lines[at + 1:at + 3])
+        assert entry["long_description"] in following, f"{row['name']}: the long description does not follow its image"
 
 
 def test_pair_svg_two_panels() -> None:
@@ -189,6 +195,49 @@ def test_regions_named_in_index() -> None:
             assert isinstance(names, list) and names and all(isinstance(n, str) for n in names), entry["name"]
         distinct = sorted({n for _area, names in named for n in names})
         assert distinct == sorted(entry["features"]), (entry["name"], distinct, entry["features"])
+
+
+def test_descriptions_follow_rules() -> None:
+    """Every index row carries the two-part text alternative of FD-45: an
+    alt of at most 150 characters that never opens with "image of" and the
+    like, names the row's title and, unless it says "named below", every
+    feature red marks; a long description of at most 90 words that opens
+    with "Two " (a pair), "One " (a single panel) or "This dial changes no
+    shape" (a no-shape row), carries one numbered item per key entry, and
+    whose numbered list names only the features of its own tool (the quoted
+    changes sentence is the catalog's own words)."""
+    from scripts.generate_dial_diagrams import FEATURE_LOCATIONS, SINGLE_PANEL_ROWS
+
+    rows = {(r["file"], r["name"]): r for r in load_catalog()}
+    for entry in json.loads(INDEX.read_text(encoding="utf-8")):
+        key = (entry["file"], entry["name"])
+        row = rows[key]
+        alt, long = entry.get("alt"), entry.get("long_description")
+        assert isinstance(alt, str) and alt.strip(), f"{key}: no alt"
+        assert len(alt) <= 150, (key, len(alt))
+        assert not alt.lower().startswith(("image of", "photo of", "picture of", "diagram of")), key
+        assert row["title"] in alt, (key, alt)
+        if entry["view"] != "none" and key not in SINGLE_PANEL_ROWS and "named below" not in alt:
+            for name in entry["features"]:
+                assert name in alt, (key, name, alt)
+        assert isinstance(long, str) and long.strip(), f"{key}: no long_description"
+        assert len(long.split()) <= 90, (key, len(long.split()))
+        if entry["view"] == "none":
+            assert long.startswith("This dial changes no shape"), key
+        elif key in SINGLE_PANEL_ROWS:
+            assert long.startswith("One "), key
+        else:
+            assert long.startswith("Two "), key
+            for n, names, _removed in entry["callouts"]:
+                assert f"{n}, the {names[0]}" in long, (key, n, names, long)
+        own = FEATURE_LOCATIONS[entry["file"]]
+        marked = long[long.find("Marked in red:"):] if "Marked in red:" in long else ""
+        for other, table in FEATURE_LOCATIONS.items():
+            if other == entry["file"]:
+                continue
+            for name in table:
+                if name not in own:
+                    assert name not in marked, (key, name)
 
 
 def test_dimension_callout_endpoints() -> None:

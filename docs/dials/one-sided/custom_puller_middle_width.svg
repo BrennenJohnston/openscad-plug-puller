@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="212.73mm" height="80.40mm" viewBox="0 0 212.73 80.40" role="img">
 <title>Body width at the middle</title>
-<desc>Widens the body at the middle control point, bulging or straightening the side edges between the widest point and the plug end. Before: 57.35. After: 67.35.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body width at the middle at 67.35 mm: widens the body at the middle control point, bulging or straightening the side edges between the widest point and the plug end. Marked in red: 1, the body edge: the outer outline. 2, the wing openings: the two openings beside the pocket. Everything else follows the outline.</desc>
 <rect width="212.73" height="80.40" fill="white"/>
 <g class="panel" id="before">
 <path d="M 54.69 6.00 L 54.69 31.50 L 29.69 31.50 L 29.69 6.00 L 54.69 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

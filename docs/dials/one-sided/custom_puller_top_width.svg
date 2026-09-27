@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="201.26mm" height="80.40mm" viewBox="0 0 201.26 80.40" role="img">
 <title>Body width at the plug end</title>
-<desc>Widens the plug end of the body, where the wall notch and the pocket seat sit. Before: 31.75. After: 41.75.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body width at the plug end at 41.75 mm: widens the plug end of the body, where the wall notch and the pocket seat sit. Marked in red: 1, the body edge: the outer outline. 2, the wing openings: the two openings beside the pocket. Everything else follows the outline.</desc>
 <rect width="201.26" height="80.40" fill="white"/>
 <g class="panel" id="before">
 <path d="M 51.82 6.00 L 51.82 31.50 L 26.82 31.50 L 26.82 6.00 L 51.82 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

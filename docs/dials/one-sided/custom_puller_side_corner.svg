@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="203.35mm" height="80.40mm" viewBox="0 0 203.35 80.40" role="img">
 <title>Side corner position</title>
-<desc>Moves the two widest corners of the body outline up toward the plug end or down toward the cord end. Before: 4.65. After: 14.65.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: side corner position at 14.65 mm: moves the two widest corners of the body outline up toward the plug end or down toward the cord end. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the body edge: the outer outline. Everything else follows the outline.</desc>
 <rect width="203.35" height="80.40" fill="white"/>
 <g class="panel" id="before">
 <path d="M 52.34 6.00 L 52.34 31.50 L 27.34 31.50 L 27.34 6.00 L 52.34 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

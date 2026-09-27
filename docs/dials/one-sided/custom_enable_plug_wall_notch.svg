@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="132.00mm" height="24.90mm" viewBox="0 0 132.00 24.90" role="img">
 <title>Wall notch on or off</title>
-<desc>Cuts or leaves out the notch at the plug end that straddles the outlet's cover plate. Before: true. After: false.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: wall notch on or off set to false: cuts or leaves out the notch at the plug end that straddles the outlet's cover plate. Marked in red: 1, the wall notch: the notch in the top edge. The body edge, the pocket, the seat and the wing openings stay where they were.</desc>
 <rect width="132.00" height="24.90" fill="white"/>
 <g class="panel" id="before">
 <path d="M 34.50 4.50 L 34.50 20.00 L 9.50 20.00 L 9.50 4.50 L 34.50 4.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

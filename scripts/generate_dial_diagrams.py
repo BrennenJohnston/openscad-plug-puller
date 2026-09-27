@@ -92,10 +92,10 @@ DEFAULT_CACHE = PROJECT_ROOT / "tmp_renders" / "dial_diagrams"
 INDEX_NAME = "dial_diagrams_index.json"
 CANONICAL_OPENSCAD = Path(r"C:\Program Files\OpenSCAD (Nightly)\openscad.com")
 
-# The words on every diagram (strings pack S-247 and S-248).
+# The picture key (strings pack S-421; the pages print it once, never the picture).
 LEGEND_LINE = (
-    "black = the tool at its defaults; teal = the plug you measured; "
-    "red dashed = what this dial moves"
+    "black = the tool; teal = your plug; red dotted = the edges this dial moved; "
+    "the numbers match the key beside the picture"
 )
 NO_SHAPE_SENTENCE = "This dial changes no shape."
 
@@ -950,11 +950,11 @@ def compose_svg(
     return "\n".join(svg) + "\n"
 
 
-def compose_none_svg(note: str, title: str = "", name: str = "") -> str:
+def compose_none_svg(note: str, title: str = "", name: str = "", desc: Optional[str] = None) -> str:
     """A 120 x 40 mm card for a dial that changes no shape."""
     width, height = 120.0, 40.0
     body_lines = textwrap.wrap(note or "", width=76)
-    desc = f"{NO_SHAPE_SENTENCE} {note}".strip()
+    desc = desc or f"{NO_SHAPE_SENTENCE} {note}".strip()
     svg = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:.0f}mm" height="{height:.0f}mm" '
@@ -1586,6 +1586,159 @@ def compose_pair_svg(
     return "\n".join(s for s in svg if s) + "\n"
 
 
+
+# ---------------------------------------------------------------------------
+# The text alternatives (R3 B3, FD-45): a short alt text and a long description
+# ---------------------------------------------------------------------------
+#
+# The rules are docs/guides/describing-pictures.md (R1 to R10). The alt names
+# the picture, the two values and what red marks; the long description is the
+# overview, the two panels, the numbered list matching the key, and what stayed.
+
+ALT_MAX_CHARS = 150
+LONG_MAX_WORDS = 90
+TOOL_NAMES = {ONE_SIDED: "the one-sided puller", TWO_SIDED: "the two-sided puller"}
+# Where each feature sits, the plug end being the top of the picture (the plan's
+# section 4.2, shortened so a five-entry list fits the 90-word rule).
+FEATURE_LOCATIONS = {
+    ONE_SIDED: {
+        "body edge": "the outer outline",
+        "pocket": "the plug recess on the centerline",
+        "seat": "the round recess at the plug end",
+        "wall notch": "the notch in the top edge",
+        "wing openings": "the two openings beside the pocket",
+        "classic slots": "the two slots beside the pocket",
+        "zip-tie holes": "the four small holes beside the pocket",
+        "finger holes": "the two large holes in the lower half",
+        "hook": "the cord hook slot in the bottom edge",
+    },
+    TWO_SIDED: {
+        "plate edge": "the outer outline",
+        "arms": "the two toothed arms in the upper half",
+        "teeth": "the serrated inner edges of the arms",
+        "finger lobes": "the two rounded lobes in the lower half",
+        "cord channel": "the gap between the lobes at the bottom",
+        "zip stations": "the three small holes along each arm",
+        "strap slot": "the long slot in each arm",
+    },
+}
+
+
+def _join_names(names: Sequence[str]) -> str:
+    items = [f"the {n}" for n in names]
+    if len(items) <= 1:
+        return "".join(items)
+    return ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def _values_words(before: Any, after: Any, unit: Optional[str]) -> str:
+    text = f"{_fmt_value(before)} to {_fmt_value(after)}"
+    if unit and not isinstance(after, str):
+        text += f" {unit}"
+    return text
+
+
+def _lower_first(text: str) -> str:
+    return text[:1].lower() + text[1:] if text else text
+
+
+def describe_alt(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any]) -> str:
+    """The short alt text (at most ALT_MAX_CHARS): the title, the kind of
+    picture, the two values, and the parts red marks (or their count when
+    the names do not fit)."""
+    title = row["title"]
+    d = row["diagram"]
+    if d["view"] == "none":
+        return f"{title}: changes no shape."
+    values = _values_words(d["before"], d["after"], unit)
+    if (row["file"], row["name"]) in SINGLE_PANEL_ROWS:
+        return f"{title}: one view, {values}; the layout with both plates, nothing marked."
+    features = list(entry.get("features") or [])
+    alt = f"{title}: before and after, {values}; red marks {_join_names(features)}."
+    if len(alt) > ALT_MAX_CHARS:
+        alt = f"{title}: before and after, {values}; red marks {len(features)} parts, named below."
+    return alt
+
+
+def describe_long(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any],
+                  plug_width: Optional[float] = None, titles: Optional[Dict[str, str]] = None) -> str:
+    """The long description (at most LONG_MAX_WORDS): an overview sentence,
+    the left panel, the right panel, the numbered list that matches the key,
+    and what stayed. When the whole runs long, the closing sentence goes
+    first, then the changes sentence, then the locations of the entries
+    that carry several names, then every location."""
+    file_key = row["file"]
+    d = row["diagram"]
+    view = d["view"]
+    title = row["title"]
+    tool = TOOL_NAMES[file_key]
+    titles = titles or {}
+    if view == "none":
+        note = (row.get("note") or "").strip()
+        if note.lower().startswith("changes no shape:"):
+            return f"{NO_SHAPE_SENTENCE[:-1]}: {note.split(':', 1)[1].strip()}"
+        return f"{NO_SHAPE_SENTENCE} {note}".strip()
+    if (file_key, row["name"]) in SINGLE_PANEL_ROWS:
+        return (f"One top view of {tool} with both plates side by side, the plug end at the top: "
+                f"what the file prints at {_fmt_value(d['before'])}. At {_fmt_value(d['after'])} it prints "
+                f"one plate. Nothing is marked in red: this dial changes the layout, not the plate.")
+    if view == "top":
+        subject = "one plate of the two-sided puller" if file_key == TWO_SIDED else "the one-sided puller"
+        overview = f"Two top views of {subject}, before left and after right, the plug end at the top."
+    else:
+        axis = "x" if view == "section-x" else "y"
+        overview = (f"Two vertical slices of {tool} at {axis} = {_fmt_value(d.get('at') or 0)} mm, "
+                    "before left and after right, the top face up.")
+    ctx = d.get("context") or {}
+    ctx_words = (" with " + " and ".join(f"{_lower_first(titles.get(k, k))} set to {_fmt_value(v)}" for k, v in ctx.items())) if ctx else ""
+    if view == "top" and plug_width is not None:
+        left = f"Left: the defaults{ctx_words}, a {_fmt_value(plug_width)} mm wide plug in teal."
+    else:
+        left = f"Left: the defaults{ctx_words}, the plug in teal in the cut."
+    if isinstance(d["after"], (str, bool)):
+        after_words = f"set to {_fmt_value(d['after'])}"
+    else:
+        after_words = "at " + _fmt_value(d["after"]) + (f" {unit}" if unit else "")
+    right_short = f"Right: {_lower_first(title)} {after_words}."
+    right_full = f"Right: {_lower_first(title)} {after_words}: {_lower_first(row['changes'])}"
+    locations = FEATURE_LOCATIONS[file_key]
+    callouts = entry.get("callouts") or []
+
+    def marked(with_locations: str) -> str:
+        """``with_locations``: "all", "single" (entries with one name only) or "none"."""
+        if not callouts:
+            return "Nothing is marked in red."
+        items = []
+        for n, names, removed in callouts:
+            state = ", removed" if removed else ""
+            if with_locations == "all" or (with_locations == "single" and len(names) == 1):
+                where = "; ".join(locations.get(nm, nm) for nm in names)
+                items.append(f"{n}, {_join_names(names)}: {where}{state}.")
+            else:
+                items.append(f"{n}, {_join_names(names)}{state}.")
+        return "Marked in red: " + " ".join(items)
+
+    named = {nm for _n, names, _r in callouts for nm in names}
+    unnamed = [f for f in locations if f not in named][:4]
+    if FEATURE_FALLBACK[file_key] in named:
+        closing = "Everything else follows the outline."
+    elif unnamed:
+        stayed = _join_names(unnamed)
+        closing = f"{stayed[:1].upper()}{stayed[1:]} stay where they were."
+    else:
+        closing = ""
+    text = ""
+    for parts in ([overview, left, right_full, marked("all"), closing],
+                  [overview, left, right_full, marked("all")],
+                  [overview, left, right_short, marked("all")],
+                  [overview, left, right_short, marked("single")],
+                  [overview, left, right_short, marked("none")]):
+        text = " ".join(part for part in parts if part)
+        if len(text.split()) <= LONG_MAX_WORDS:
+            return text
+    return text
+
+
 # ---------------------------------------------------------------------------
 # Driver
 # ---------------------------------------------------------------------------
@@ -1622,16 +1775,21 @@ def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str],
     }
 
 
-def build_none(row: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
-    svg = compose_none_svg(note=row.get("note") or "", title=row["title"], name=row["name"])
+def build_none(row: Dict[str, Any], out_dir: Path, unit: Optional[str] = None) -> Dict[str, Any]:
+    entry = index_row(row, 0, 0.0, [], ["none"])
+    entry["alt"] = describe_alt(row, unit, entry)
+    entry["long_description"] = describe_long(row, unit, entry)
+    svg = compose_none_svg(note=row.get("note") or "", title=row["title"], name=row["name"],
+                           desc=entry["long_description"])
     path = out_dir / svg_relpath(row)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return index_row(row, 0, 0.0, [], ["none"])
+    return entry
 
 
 def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path,
-               layout: str = "pair", unit: Optional[str] = None) -> Dict[str, Any]:
+               layout: str = "pair", unit: Optional[str] = None,
+               titles: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
     """A top-view or section diagram: two renders, two views, the diff; the
     pair picture for the views in PAIR_VIEWS (``layout`` "pair"), else the
     single drawing."""
@@ -1682,11 +1840,16 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     named = classify_regions(file_key, regions, feats, view, at, body_area, edge_rings) if regions else []
     features = feature_names(named)
     callouts: List[List[Any]] = []
+    alt = long_description = None
     if layout == "pair" and view in PAIR_VIEWS:
         crop = d.get("crop")
         single = (file_key, row["name"]) in SINGLE_PANEL_ROWS
         plan = plan_callouts(b_out, a_out, named, shapely.box(*(float(v) for v in crop)) if crop else None)
         callouts = [] if single else plan.key_rows
+        draft = index_row(row, len(regions), area, tags, features, named, callouts)
+        plug_width = effective_measurements(file_key, base)["measure_plug_width_prong_end"] if view == "top" else None
+        alt = describe_alt(row, unit, draft)
+        long_description = describe_long(row, unit, draft, plug_width, titles)
         svg = compose_pair_svg(
             before_outline=b_out,
             after_outline=a_out,
@@ -1706,6 +1869,7 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
             plan=plan,
             single_panel=single,
             dimension=dimension,
+            desc=long_description,
         )
     else:
         svg = compose_svg(
@@ -1730,6 +1894,9 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     entry = index_row(row, len(regions), area, tags, features, named, callouts)
     entry["dimension"] = ({"kind": dimension["kind"], "at": d["dimension"]["at"], "label": dimension["label"]}
                           if dimension else None)
+    entry["alt"] = alt if alt is not None else describe_alt(row, unit, entry)
+    entry["long_description"] = (long_description if long_description is not None
+                                 else describe_long(row, unit, entry, None, titles))
     return entry
 
 
@@ -1747,16 +1914,18 @@ def run_rows(
     renderer = renderer or Renderer(cache_dir=Path(cache_dir), force=force)
     mappings = {key: load_mapping(key) for key in SCADS}
     defaults = {key: mapping_defaults(m) for key, m in mappings.items()}
+    titles = {key: {r["name"]: r["title"] for r in rows if r["file"] == key} for key in SCADS}
     produced: List[Dict[str, Any]] = []
     for row in rows:
         view = row["diagram"]["view"]
         t0 = time.time()
         if view == "none":
-            entry = build_none(row, out_dir)
+            entry = build_none(row, out_dir, (mappings[row["file"]].get(row["name"]) or {}).get("unit"))
         elif view == "top" or view in SECTION_VIEWS:
             r0, h0 = renderer.renders, renderer.hits
             unit = (mappings[row["file"]].get(row["name"]) or {}).get("unit")
-            entry = build_diff(row, renderer, defaults[row["file"]], out_dir, layout=layout, unit=unit)
+            entry = build_diff(row, renderer, defaults[row["file"]], out_dir, layout=layout, unit=unit,
+                               titles=titles[row["file"]])
             logger.info(
                 "%s %s: %d region(s), %.1f mm2, %d render(s), %d cache hit(s), %.1f s%s",
                 row["file"], row["name"], entry["regions"], entry["changed_area_mm2"],
@@ -1799,17 +1968,21 @@ README_NAME = "README.md"
 README_TITLE = "Dial diagrams"
 README_INTRO = (
     "Every dial of the one-sided puller and the two-sided puller has a picture here: "
-    "the tool at its defaults in black, the plug in teal, and a red dashed trace on the "
-    "part that dial moves when it goes from its default to a second value.",
-    "The pictures are cut from the same OpenSCAD files you print from, at 1 unit = 1 mm; "
-    "the two values drawn are written under each picture.",
+    "the tool at the dial's default on the left with the plug in teal, an arrow with the "
+    "two values, and the tool after the dial moved on the right, drawn once in black with "
+    "the edges that moved in red dots; the numbered dots on those edges match the key "
+    "beside the picture.",
+    "The pictures are cut from the same OpenSCAD files you print from, at 1 unit = 1 mm. "
+    "Under each picture: the long form of its text alternative, then the two values and "
+    "the parts that moved.",
 )
 README_FILE_HEADINGS = {ONE_SIDED: "One-sided puller", TWO_SIDED: "Two-sided puller"}
 
 
 def _readme_entry(row: Dict[str, Any], entry: Dict[str, Any]) -> List[str]:
     d = row["diagram"]
-    lines = [f"`{row['name']}`: {row['title']}", "", f"![{row['changes']}]({svg_relpath(row)})", ""]
+    lines = [f"`{row['name']}`: {row['title']}", "", f"![{entry['alt']}]({svg_relpath(row)})", "",
+             entry["long_description"], ""]
     if d["view"] == "none":
         lines.append(f"{NO_SHAPE_SENTENCE} {row.get('note') or ''}".strip())
     else:

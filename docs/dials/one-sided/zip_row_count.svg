@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="148.00mm" height="42.00mm" viewBox="0 0 148.00 42.00" role="img">
 <title>Number of zip-tie rows</title>
-<desc>Adds or removes a pair of zip-tie holes, and the rows squeeze together when the body has no room for another. Before: 2. After: 3.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: number of zip-tie rows at 3: adds or removes a pair of zip-tie holes, and the rows squeeze together when the body has no room for another. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the zip-tie holes: the four small holes beside the pocket.</desc>
 <rect width="148.00" height="42.00" fill="white"/>
 <g class="panel" id="before">
 <path d="M 38.49 0.50 L 38.49 26.00 L 13.49 26.00 L 13.49 0.50 L 38.49 0.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

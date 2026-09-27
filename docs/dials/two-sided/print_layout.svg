@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="145.59mm" height="77.80mm" viewBox="0 0 145.59 77.80" role="img">
 <title>Print layout</title>
-<desc>Puts both identical plates side by side in one file, or just one plate. Before: Both plates. After: One plate.</desc>
+<desc>One top view of the two-sided puller with both plates side by side, the plug end at the top: what the file prints at Both plates. At One plate it prints one plate. Nothing is marked in red: this dial changes the layout, not the plate.</desc>
 <rect width="145.59" height="77.80" fill="white"/>
 <g class="panel" id="single">
 <path d="M 82.80 6.00 L 82.80 33.50 L 62.80 33.50 L 62.80 6.00 L 82.80 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

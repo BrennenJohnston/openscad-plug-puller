@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="208.19mm" height="80.40mm" viewBox="0 0 208.19 80.40" role="img">
 <title>Body width at the widest point</title>
-<desc>Widens the body at its widest point, just above the cord end, before the side rounding is applied. Before: 77.6. After: 87.6.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body width at the widest point at 87.6 mm: widens the body at its widest point, just above the cord end, before the side rounding is applied. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.</desc>
 <rect width="208.19" height="80.40" fill="white"/>
 <g class="panel" id="before">
 <path d="M 53.55 6.00 L 53.55 31.50 L 28.55 31.50 L 28.55 6.00 L 53.55 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

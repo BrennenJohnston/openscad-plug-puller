@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="209.58mm" height="73.50mm" viewBox="0 0 209.58 73.50" role="img">
 <title>Finger lobe wall</title>
-<desc>Thickens the wall around each finger hole, so the rounded lobes grow. Before: 5. After: 9.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: finger lobe wall at 9 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes and the arms: the two rounded lobes in the lower half; the two toothed arms in the upper half. 3, the finger lobes: the two rounded lobes in the lower half.</desc>
 <rect width="209.58" height="73.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 51.40 10.00 L 51.40 37.50 L 31.40 37.50 L 31.40 10.00 L 51.40 10.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="157.32mm" height="24.30mm" viewBox="0 0 157.32 24.30" role="img">
 <title>Grip bite</title>
-<desc>Squeezes the plug harder or softer, because the arms close in by this much per side against the plug's width. Before: -1. After: -2.</desc>
+<desc>Two vertical slices of the two-sided puller at y = 45 mm, before left and after right, the top face up. Left: the defaults with plug sides set to Flat sides, the plug in teal in the cut. Right: grip bite at -2 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half.</desc>
 <rect width="157.32" height="24.30" fill="white"/>
 <g class="panel" id="before">
 <path d="M 18.33 6.00 L 38.33 6.00 L 38.33 10.00 L 18.33 10.00 L 18.33 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

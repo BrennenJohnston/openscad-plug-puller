@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="168.14mm" height="26.30mm" viewBox="0 0 168.14 26.30" role="img">
 <title>Plate thickness</title>
-<desc>Thickens each plate, so the finished pair is twice as thick. Before: 4. After: 6.</desc>
+<desc>Two vertical slices of the two-sided puller at y = 3 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plate thickness at 6 mm. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. 2, the zip stations, the finger lobes and the cord channel: the three small holes along each arm; the two rounded lobes in the lower half; the gap between the lobes at the bottom.</desc>
 <rect width="168.14" height="26.30" fill="white"/>
 <g class="panel" id="before">
 <path d="M 36.07 11.99 L 25.99 11.99 L 25.97 8.05 L 28.62 8.02 L 28.67 11.00 L 33.41 11.00 L 33.45 8.02 L 36.05 8.00 L 36.07 11.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>

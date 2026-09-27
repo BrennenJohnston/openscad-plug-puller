@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="100.00mm" height="25.90mm" viewBox="0 0 100.00 25.90" role="img">
 <title>Hook crossbar width</title>
-<desc>Widens the crossbar the cord hooks under at the top of the slot. Before: 11.1125. After: 16.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook crossbar width at 16 mm. Marked in red: 1, the finger holes and the hook: the two large holes in the lower half; the cord hook slot in the bottom edge. 2, the finger holes: the two large holes in the lower half.</desc>
 <rect width="100.00" height="25.90" fill="white"/>
 <g class="panel" id="before">
 <path d="M 28.00 16.51 L 20.92 17.41 L 20.88 13.25 L 20.56 12.90 L 20.56 8.99 L 20.41 8.51 L 20.19 8.21 L 19.78 7.94 L 19.29 7.84 L 10.60 7.85 L 10.12 7.99 L 9.83 8.21 L 9.60 8.51 L 9.48 8.86 L 9.45 11.65 L 9.60 12.25 L 10.01 12.71 L 10.60 12.91 L 14.80 12.93 L 16.12 14.26 L 16.09 17.99 L 11.50 17.97 L 0.00 16.51" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>

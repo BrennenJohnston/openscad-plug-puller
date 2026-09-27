@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="181.09mm" height="29.30mm" viewBox="0 0 181.09 29.30" role="img">
 <title>Body thickness</title>
-<desc>Thickens the whole slab, so every hole and the pocket get deeper walls. Before: 6.35. After: 9.</desc>
+<desc>Two vertical slices of the one-sided puller at y = 35 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: body thickness at 9 mm: thickens the whole slab, so every hole and the pocket get deeper walls. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.</desc>
 <rect width="181.09" height="29.30" fill="white"/>
 <g class="panel" id="before">
 <path d="M 59.91 8.65 L 60.71 8.79 L 61.42 9.14 L 62.00 9.67 L 62.38 10.33 L 62.54 11.07 L 62.51 14.99 L 46.48 14.97 L 46.48 9.56 L 47.60 8.65 L 59.91 8.65 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>

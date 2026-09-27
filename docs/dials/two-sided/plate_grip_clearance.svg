@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="155.74mm" height="24.30mm" viewBox="0 0 155.74 24.30" role="img">
 <title>Grip clearance</title>
-<desc>Opens the gap between the arms where the plates meet, so a hard round plug can drop in flat before the cradle holds it. Before: 0.5. After: 2.</desc>
+<desc>Two vertical slices of the two-sided puller at y = 45 mm, before left and after right, the top face up. Left: the defaults with plug sides set to Rounded sides, the plug in teal in the cut. Right: grip clearance at 2 mm. Marked in red: 1, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half. 2, the arms: the two toothed arms in the upper half.</desc>
 <rect width="155.74" height="24.30" fill="white"/>
 <g class="panel" id="before">
 <path d="M 17.93 6.00 L 37.93 6.00 L 37.93 10.00 L 17.93 10.00 L 17.93 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

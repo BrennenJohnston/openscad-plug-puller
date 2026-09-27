@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="211.03mm" height="81.75mm" viewBox="0 0 211.03 81.75" role="img">
 <title>Finger width</title>
-<desc>Widens both finger holes, spaces them farther apart and pushes them and the body up to keep the walls printable. Before: 20. After: 26.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the wall notch and the body edge.</desc>
 <rect width="211.03" height="81.75" fill="white"/>
 <g class="panel" id="before">
 <path d="M 54.26 10.25 L 54.26 35.75 L 29.26 35.75 L 29.26 10.25 L 54.26 10.25 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

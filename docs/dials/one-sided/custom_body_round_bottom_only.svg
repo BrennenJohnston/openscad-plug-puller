@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="201.26mm" height="75.50mm" viewBox="0 0 201.26 75.50" role="img">
 <title>Round the cord half only</title>
-<desc>Rounds the whole outline instead of only the cord half, so the plug end loses its crisp corners. Before: true. After: false.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: round the cord half only set to false: rounds the whole outline instead of only the cord half, so the plug end loses its crisp corners. Marked in red: 1, the wall notch and the seat: the notch in the top edge; the round recess at the plug end.</desc>
 <rect width="201.26" height="75.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 51.82 6.00 L 51.82 31.50 L 26.82 31.50 L 26.82 6.00 L 51.82 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

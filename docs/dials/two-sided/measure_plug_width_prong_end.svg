@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="193.58mm" height="71.50mm" viewBox="0 0 193.58 71.50" role="img">
 <title>Plug width at the prong end</title>
-<desc>Opens or closes the gap between the arms at their tips, where the plug's prong end sits. Before: 20. After: 28.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom.</desc>
 <rect width="193.58" height="71.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 47.40 8.00 L 47.40 35.50 L 27.40 35.50 L 27.40 8.00 L 47.40 8.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

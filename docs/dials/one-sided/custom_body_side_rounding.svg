@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="216.28mm" height="75.50mm" viewBox="0 0 216.28 75.50" role="img">
 <title>Body side rounding</title>
-<desc>Rounds the body outline's corners more or less, down to the plain octagon at 0. Before: 15.85. After: 5.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body side rounding at 5 mm: rounds the body outline's corners more or less, down to the plain octagon at 0. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.</desc>
 <rect width="216.28" height="75.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 55.57 6.00 L 55.57 31.50 L 30.57 31.50 L 30.57 6.00 L 55.57 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

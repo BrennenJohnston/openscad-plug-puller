@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="213.43mm" height="89.10mm" viewBox="0 0 213.43 89.10" role="img">
 <title>Cord thickness</title>
-<desc>Widens the cord hook's slot and crossbar to fit the cord, and moves the finger holes and the whole body up to make room. Before: 4. After: 8.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: cord thickness at 8 mm. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the pocket and the body edge.</desc>
 <rect width="213.43" height="89.10" fill="white"/>
 <g class="panel" id="before">
 <path d="M 54.85 17.60 L 54.85 43.10 L 29.85 43.10 L 29.85 17.60 L 54.85 17.60 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

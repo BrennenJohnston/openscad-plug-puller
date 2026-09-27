@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="104.00mm" height="44.90mm" viewBox="0 0 104.00 44.90" role="img">
 <title>Strap slot width</title>
-<desc>Widens the strap slot in each arm, and the arm bulges outward to keep its wall. Before: 9.3. After: 14.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40, a 20 mm wide plug in teal. Right: strap slot width at 14 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the strap slot and the arms: the long slot in each arm; the two toothed arms in the upper half.</desc>
 <rect width="104.00" height="44.90" fill="white"/>
 <g class="panel" id="before">
 <path d="M 6.00 34.00 L 0.00 34.00 L 0.00 0.00 L 6.00 0.00 L 6.00 34.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="200.82mm" height="26.65mm" viewBox="0 0 200.82 26.65" role="img">
 <title>Finger hole rim rounding</title>
-<desc>Rounds or squares the rims of both finger holes on both faces. Before: 2.5. After: 0.</desc>
+<desc>Two vertical slices of the one-sided puller at y = 19.8 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: finger hole rim rounding at 0 mm: rounds or squares the rims of both finger holes on both faces. Marked in red: 1, the finger holes: the two large holes in the lower half. The body edge, the pocket, the seat and the wall notch stay where they were.</desc>
 <rect width="200.82" height="26.65" fill="white"/>
 <g class="panel" id="before">
 <path d="M 37.90 12.35 L 37.17 12.24 L 36.51 11.92 L 35.97 11.43 L 35.59 10.80 L 35.41 10.09 L 35.41 8.26 L 35.51 7.77 L 35.82 7.11 L 36.14 6.73 L 36.72 6.29 L 37.65 6.01 L 40.74 6.01 L 41.23 6.11 L 41.89 6.42 L 42.27 6.73 L 42.70 7.32 L 42.99 8.25 L 42.99 10.10 L 42.81 10.80 L 42.58 11.24 L 41.89 11.93 L 40.99 12.30 L 37.90 12.35 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="181.09mm" height="26.65mm" viewBox="0 0 181.09 26.65" role="img">
 <title>Top edge rounding</title>
-<desc>Rounds or squares the edge where the body's top face meets its sides. Before: 2.54. After: 0.</desc>
+<desc>Two vertical slices of the one-sided puller at y = 35 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: top edge rounding at 0 mm: rounds or squares the edge where the body's top face meets its sides. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.</desc>
 <rect width="181.09" height="26.65" fill="white"/>
 <g class="panel" id="before">
 <path d="M 59.91 6.00 L 60.71 6.15 L 61.42 6.50 L 62.00 7.02 L 62.38 7.68 L 62.54 8.42 L 62.51 12.35 L 46.48 12.32 L 46.48 6.92 L 47.60 6.01 L 59.91 6.00 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>

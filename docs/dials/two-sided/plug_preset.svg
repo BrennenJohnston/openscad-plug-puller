@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="201.98mm" height="96.10mm" viewBox="0 0 201.98 96.10" role="img">
 <title>Plug preset</title>
-<desc>Fills in the plug's length, both widths and the cord from the measured heavy-duty cord plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once. Before: Measure my plug. After: Heavy-duty extension cord - NEMA 5-15.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the finger lobes, the arms and the plate edge. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm.</desc>
 <rect width="201.98" height="96.10" fill="white"/>
 <g class="panel" id="before">
 <path d="M 49.50 24.30 L 49.50 51.80 L 29.50 51.80 L 29.50 24.30 L 49.50 24.30 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

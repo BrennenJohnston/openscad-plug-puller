@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="203.58mm" height="69.50mm" viewBox="0 0 203.58 69.50" role="img">
 <title>Cord thickness</title>
-<desc>Widens the cord channel between the finger holes, and the finger lobes move outward with it. Before: 4. After: 9.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm.</desc>
 <rect width="203.58" height="69.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 49.90 6.00 L 49.90 33.50 L 29.90 33.50 L 29.90 6.00 L 49.90 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="201.73mm" height="75.50mm" viewBox="0 0 201.73 75.50" role="img">
 <title>Cord-end corner width</title>
-<desc>Widens the flat at the cord end where the two lower corners of the body outline sit. Before: 3. After: 13.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: cord-end corner width at 13 mm: widens the flat at the cord end where the two lower corners of the body outline sit. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.</desc>
 <rect width="201.73" height="75.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 51.94 6.00 L 51.94 31.50 L 26.94 31.50 L 26.94 6.00 L 51.94 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

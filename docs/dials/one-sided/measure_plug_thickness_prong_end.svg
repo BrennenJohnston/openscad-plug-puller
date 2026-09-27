@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="223.00mm" height="47.17mm" viewBox="0 0 223.00 47.17" role="img">
 <title>Plug thickness at the prong end</title>
-<desc>Deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers. Before: 20. After: 23.5.</desc>
+<desc>Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the prong end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline.</desc>
 <rect width="223.00" height="47.17" fill="white"/>
 <g class="panel" id="before">
 <path d="M 18.00 9.06 L 43.50 9.06 L 43.50 29.06 L 18.00 29.06 L 18.00 9.06 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

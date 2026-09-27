@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="204.77mm" height="90.40mm" viewBox="0 0 204.77 90.40" role="img">
 <title>Body length</title>
-<desc>Stretches the whole body from the cord end to the plug end. Before: 63.5. After: 73.5.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body length at 73.5 mm. Marked in red: 1, the zip-tie holes, the wall notch, the seat, the pocket and the body edge: the four small holes beside the pocket; the notch in the top edge; the round recess at the plug end; the plug recess on the centerline; the outer outline.</desc>
 <rect width="204.77" height="90.40" fill="white"/>
 <g class="panel" id="before">
 <path d="M 52.70 16.00 L 52.70 41.50 L 27.70 41.50 L 27.70 16.00 L 52.70 16.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="148.00mm" height="46.90mm" viewBox="0 0 148.00 46.90" role="img">
 <title>Zip-tie row spacing</title>
-<desc>Moves the second row of zip-tie holes closer to or farther from the first. Before: 17.78. After: 12.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: zip-tie row spacing at 12 mm: moves the second row of zip-tie holes closer to or farther from the first. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the zip-tie holes: the four small holes beside the pocket.</desc>
 <rect width="148.00" height="46.90" fill="white"/>
 <g class="panel" id="before">
 <path d="M 38.50 2.50 L 38.50 28.00 L 13.50 28.00 L 13.50 2.50 L 38.50 2.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="174.68mm" height="44.11mm" viewBox="0 0 174.68 44.11" role="img">
 <title>Hook edge rounding</title>
-<desc>Flares the top and bottom edges of the cord hook's slot and crossbar. Before: 0. After: 2.</desc>
+<desc>Two vertical slices of the one-sided puller at x = 4.5 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: hook edge rounding at 2 mm: flares the top and bottom edges of the cord hook's slot and crossbar. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were.</desc>
 <rect width="174.68" height="44.11" fill="white"/>
 <g class="panel" id="before">
 <path d="M 6.00 6.00 L 31.50 6.00 L 31.50 26.00 L 6.00 26.00 L 6.00 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

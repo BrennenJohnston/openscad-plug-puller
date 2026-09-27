@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="209.38mm" height="80.50mm" viewBox="0 0 209.38 80.50" role="img">
 <title>Plug width at the prong end</title>
-<desc>Widens or narrows the pocket, its seat and the wall notch at the plug end, and moves the zip-tie holes and wing openings with them. Before: 25. After: 32.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the prong end at 32 mm. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline.</desc>
 <rect width="209.38" height="80.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 53.85 9.00 L 53.85 34.50 L 28.85 34.50 L 28.85 9.00 L 53.85 9.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

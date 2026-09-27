@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="148.00mm" height="50.30mm" viewBox="0 0 148.00 50.30" role="img">
 <title>Zip-tie hole placement</title>
-<desc>Switches the zip-tie pairs from the automatic rows to the three position dials, which slide each pair along the plug's side. Before: Auto. After: Manual.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: zip-tie hole placement set to Manual. Marked in red: 1, the zip-tie holes, the wall notch and the seat: the four small holes beside the pocket; the notch in the top edge; the round recess at the plug end. 2, the wing openings: the two openings beside the pocket. 3, the zip-tie holes: the four small holes beside the pocket.</desc>
 <rect width="148.00" height="50.30" fill="white"/>
 <g class="panel" id="before">
 <path d="M 38.49 0.50 L 38.49 26.00 L 13.49 26.00 L 13.49 0.50 L 38.49 0.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

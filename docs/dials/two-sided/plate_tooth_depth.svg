@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="104.00mm" height="44.90mm" viewBox="0 0 104.00 44.90" role="img">
 <title>Tooth depth</title>
-<desc>Cuts each tooth deeper or shallower into the gripping edge. Before: 1. After: 0.3.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: tooth depth at 0.3 mm: cuts each tooth deeper or shallower into the gripping edge. Marked in red: 1, the teeth: the serrated inner edges of the arms. The plate edge, the arms, the finger lobes and the cord channel stay where they were.</desc>
 <rect width="104.00" height="44.90" fill="white"/>
 <g class="panel" id="before">
 <path d="M 6.00 6.50 L 6.00 34.00 L 0.00 34.00 L 0.00 6.50 L 6.00 6.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

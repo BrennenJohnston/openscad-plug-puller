@@ -503,6 +503,7 @@ For contributors and engineers:
 | [`docs/Plug_Puller_Reference.md`](docs/Plug_Puller_Reference.md) | Exhaustive reference: both tools, coordinate frames, the plug side rail, the plate geometry, CSG order, sizes, derivation layer, render modes, warnings |
 | [`docs/makerworld-listing.md`](docs/makerworld-listing.md) | The draft MakerWorld listing text |
 | [`docs/MAKERWORLD_QUICK_START.md`](docs/MAKERWORLD_QUICK_START.md) | The user guide that goes with the listing |
+| [`docs/guides/describing-pictures.md`](docs/guides/describing-pictures.md) | How every picture's alt text and long description are written, with the sources |
 | [`scripts/README.md`](scripts/README.md) | Every build and check script |
 | [`CHANGELOG.md`](CHANGELOG.md) | Keep-a-Changelog release history |
 | [`okh.yml`](okh.yml) | The Open Know-How manifest |

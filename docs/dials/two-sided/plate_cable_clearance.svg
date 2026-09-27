@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="108.00mm" height="38.90mm" viewBox="0 0 108.00 38.90" role="img">
 <title>Cord channel clearance</title>
-<desc>Widens the cord channel between the finger holes beyond the cord's thickness. Before: 0.8. After: 3.</desc>
+<desc>Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord channel clearance at 3 mm. Marked in red: 1, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm.</desc>
 <rect width="108.00" height="38.90" fill="white"/>
 <g class="panel" id="before">
 <path d="M 26.00 2.00 L 6.00 2.00 L 6.00 0.00 L 26.00 0.00 L 26.00 2.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="132.00mm" height="30.40mm" viewBox="0 0 132.00 30.40" role="img">
 <title>Outlet cover plate style</title>
-<desc>Cuts the wall notch at the plug end deeper or shallower to suit the cover plate, and the zip-tie rows shift down with it. Before: Standard flat plate. After: Oversized / Jumbo.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: outlet cover plate style set to Oversized / Jumbo. Marked in red: 1, the wall notch and the body edge: the notch in the top edge; the outer outline. 2, the zip-tie holes: the four small holes beside the pocket. 3, the pocket: the plug recess on the centerline. 4, the wing openings: the two openings beside the pocket.</desc>
 <rect width="132.00" height="30.40" fill="white"/>
 <g class="panel" id="before">
 <path d="M 34.49 2.50 L 34.49 20.00 L 9.49 20.00 L 9.49 2.50 L 34.49 2.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>

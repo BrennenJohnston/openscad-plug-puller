@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="40mm" viewBox="0 0 120 40" role="img">
 <title>Render quality</title>
-<desc>This dial changes no shape. Changes no shape: it only sets the number of segments in every circle and arc.</desc>
+<desc>This dial changes no shape: it only sets the number of segments in every circle and arc.</desc>
 <rect width="120" height="40" fill="white"/>
 <rect x="0.5" y="0.5" width="119" height="39" fill="none" stroke="#999999" stroke-width="0.4" stroke-dasharray="1.6,1.1"/>
 <text x="60.00" y="8.00" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">quality</text>

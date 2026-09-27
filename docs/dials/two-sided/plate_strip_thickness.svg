@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="168.14mm" height="24.30mm" viewBox="0 0 168.14 24.30" role="img">
 <title>Cable strip thickness</title>
-<desc>Thickens or removes the thin strip that bridges the cord channel on the outer face and ties the two arms together. Before: 1. After: 0.</desc>
+<desc>Two vertical slices of the two-sided puller at y = 3 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: cable strip thickness at 0 mm: thickens or removes the thin strip that bridges the cord channel on the outer face and ties the two arms together. Marked in red: 1, the cord channel: the gap between the lobes at the bottom. The plate edge, the arms, the teeth and the finger lobes stay where they were.</desc>
 <rect width="168.14" height="24.30" fill="white"/>
 <g class="panel" id="before">
 <path d="M 36.07 9.99 L 25.99 9.99 L 25.97 6.05 L 28.62 6.02 L 28.67 9.00 L 33.41 9.00 L 33.45 6.02 L 36.05 6.00 L 36.07 9.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
