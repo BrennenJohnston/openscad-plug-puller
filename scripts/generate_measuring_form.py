@@ -521,7 +521,7 @@ def build_twin(tool: str, table: List[Dict[str, Any]], anchors: Dict[int, str], 
         elif t["measure"] is not None and t["measure"]["anchor"] in QUIZ_ANCHORS:
             out.append(f"- Row {t['k']}, {t['title'].lower()}: no arrow; the boxes carry the choice.")
     out += ["", "Type them into the Customizer in this order.", "",
-            "How each number is measured, with its typical range and an example: [the measuring guide](../measuring-guide.md).", ""]
+            f"How each number is measured, with its typical range and an example: [the {words}'s measuring guide](measuring-guide.md).", ""]
     return "\n".join(out)
 
 

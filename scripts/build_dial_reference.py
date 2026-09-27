@@ -18,9 +18,17 @@ The date is never printed, so the PDF is reproducible. The SVGs are inlined
 into the HTML, which keeps each diagram's <title>/<desc> text equivalent in
 the page.
 
+The per-tool guide packets (R3): ``--tool one-sided`` or ``--tool two-sided``
+writes that tool's Markdown twins under ``docs/guides/<tool>/`` from the same
+data plus the storyboard index and the catalog's ``measure`` rows: the quick
+start (the opener, the storyboard, the four steps' dials), the dial guide
+(every dial of the file) and the measuring guide (one section per measured
+dial, in the measuring form's order). ``--part`` picks one of them.
+
 Usage:
     python scripts/build_dial_reference.py                 # both files
     python scripts/build_dial_reference.py --markdown-only # no browser needed
+    python scripts/build_dial_reference.py --tool one-sided --markdown-only
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -45,6 +53,7 @@ from scripts.build_outline_sheets_pdf import (  # noqa: E402
     print_to_pdf,
     verify_pdf,
 )
+from scripts.generate_dial_diagrams import LEGEND_LINE  # noqa: E402
 from scripts.generate_outline_sheets import MODEL_VERSION  # noqa: E402
 
 logger = logging.getLogger(__name__)
@@ -56,6 +65,7 @@ MAPPINGS = {
 }
 DIALS_DIR = PROJECT_ROOT / "docs" / "dials"
 INDEX = DIALS_DIR / "dial_diagrams_index.json"
+STORYBOARDS = DIALS_DIR / "storyboards_index.json"
 OUT_PDF = PROJECT_ROOT / "docs" / "Plug_Puller_Dial_Reference.pdf"
 OUT_MD = PROJECT_ROOT / "docs" / "guides" / "dial-reference.md"
 SCRATCH = PROJECT_ROOT / "tmp_renders" / "dial_reference"
@@ -95,6 +105,69 @@ OPENER = (
 RED_TEXT = (
     "If red text appears beside the part in the preview, read it: it names the measurement "
     "to fix, and the part will not fit until it is gone."
+)
+
+# The per-tool guide packets (R3, FD-44): one folder of Markdown twins per
+# tool, the prose blocks below as their own strings rows.
+TOOL_WORDS = {"one-sided": "one-sided puller", "two-sided": "two-sided puller"}
+PACKET_DIRS = {
+    "one-sided": PROJECT_ROOT / "docs" / "guides" / "one-sided",
+    "two-sided": PROJECT_ROOT / "docs" / "guides" / "two-sided",
+}
+PACKET_PARTS = ("quick-start", "dial-guide", "measuring-guide")
+PART_TITLES = {"quick-start": "Quick start", "dial-guide": "Dial guide", "measuring-guide": "Measuring guide"}
+PACKET_TITLES = {"one-sided": "Plug Puller: the one-sided puller", "two-sided": "Plug Puller: the two-sided puller"}
+PACKET_PDFS = {"one-sided": "docs/Plug_Puller_One_Sided_Guide.pdf", "two-sided": "docs/Plug_Puller_Two_Sided_Guide.pdf"}
+PACKET_OPENER_HEADING = "Which tool this is"
+PACKET_OPENERS = {
+    "one-sided": (
+        "This packet is for the one-sided puller, src/Plug_Puller_Parametric.scad: the tool for a wall plug up to "
+        "24 mm thick, a pocket around the plug's back and sides with two finger holes below it, pulled with one "
+        "hand. Measure your plug's thickness first. Thicker than 24 mm, or a plug you want held from both sides "
+        "such as a USB-C tip or a round extension-cord plug, is the two-sided puller's job, and that tool has its "
+        "own packet.",
+        "The Customizer's four steps are your plug, your size, the attachment and the hook's side. The quick "
+        "start below shows each step's dials, the dial guide every dial of the file, the measuring guide how to "
+        "take each number, and the measuring form is the sheet you fill in first.",
+    ),
+    "two-sided": (
+        "This packet is for the two-sided puller, src/Plug_Puller_Two_Sided.scad: two serrated plates that "
+        "zip-tie around the plug and close across it, for a plug 24 mm thick or more and for a plug held from "
+        "both sides, a USB-C tip or a round extension-cord plug. A thinner wall plug is the one-sided puller's "
+        "job, and that tool has its own packet.",
+        "The Customizer's four steps are your plug, your size, the attachment and the print layout. The quick "
+        "start below shows each step's dials, the dial guide every dial of the file, the measuring guide how to "
+        "take each number, and the measuring form is the sheet you fill in first.",
+    ),
+}
+STEP_CAPTIONS = {
+    "one-sided": ("Step 1: type your plug's numbers", "Step 2: pick your hand size",
+                  "Step 3: pick how it attaches", "Step 4: pick the hook's side"),
+    "two-sided": ("Step 1: type your plug's numbers and pick Rounded sides or Flat sides", "Step 2: pick your hand size",
+                  "Step 3: pick how it attaches; a plug this short gets no strap slot", "Step 4: both plates in one file"),
+}
+MEASURING_INTRO = (
+    "Everything here is in mm: a US plug is about 25 mm wide, so a 1 on your paper means you measured in inches. "
+    "You need a caliper or a ruler with mm marks, the plug in its outlet, and your own hand only if you pick "
+    "Measure my hand. Print the measuring form at 100 % and fill it in as you go: the sections below are the "
+    "form's rows, in the same order, and the card names (R1, C1, F1 / F2) are the cards of the printed "
+    "[measuring stencil](../print-preview-outlines.md)."
+)
+SANITY_CHECK = (
+    "Sanity check: each plug width is a two-digit number, roughly 12 to 45, and the prong-end width is usually "
+    "the bigger one; the finger width is roughly 14 to 32. A number like 1.3 is inches: measure again with the "
+    "mm side."
+)
+RING_TRICK = "No caliper? Take a ring that fits that finger snugly, measure the ring's inner diameter in mm and add 1.5 mm."
+FOR_SOMEONE_ELSE = (
+    "When you measure for someone else, a relative or a client, measure their hand for the finger and hand rows "
+    "and their outlet and plug for the plug rows. Doubtful between two values? Round up: a slightly roomy fit "
+    "works, a tight one does not."
+)
+TWO_SIDED_WIDTHS = (
+    "The two-sided puller's widths are the size the two plates close across, so measure across the plug the way "
+    "the plates will grip it. The thickness pair, the wall plate style and the hand width belong to the one-sided "
+    "puller only."
 )
 
 # The title page and the contents pages. Measured on the first print of the
@@ -153,6 +226,13 @@ def load_mappings() -> Dict[str, Dict[str, Dict[str, Any]]]:
 
 def load_index() -> List[Dict[str, Any]]:
     return json.loads(INDEX.read_text(encoding="utf-8"))
+
+
+def load_storyboards() -> Dict[str, Dict[str, Any]]:
+    """The storyboard index keyed by tool; empty when the file is missing."""
+    if not STORYBOARDS.exists():
+        return {}
+    return {e["file"]: e for e in json.loads(STORYBOARDS.read_text(encoding="utf-8"))}
 
 
 def load_svgs(rows: Sequence[Dict[str, Any]]) -> Dict[Tuple[str, str], str]:
@@ -254,8 +334,141 @@ def quick_rows(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return [r for r in rows if r.get("quick_start")]
 
 
+def numbers_line(mrow: Optional[Dict[str, Any]]) -> str:
+    """The mapping's numbers as one line of prose, never a table cell (and
+    never "Step 0.5": the docs gate reads "step 0" as the retired section
+    name)."""
+    default, rng, step, unit = mapping_cells(mrow)
+    if mrow and mrow.get("type") in ("enum", "boolean"):
+        return f"Default {default} · {rng}"
+    return f"Default {default} · Range {rng} · Step size {step} · Unit {unit}"
+
+
+def dial_card(row: Dict[str, Any], mrow: Optional[Dict[str, Any]], entry: Dict[str, Any],
+              rel: str = "../../dials") -> List[str]:
+    """One dial's card in Markdown: H3 name, the title, the picture with the
+    index's alt text and its long description right under it, the changes
+    sentence, the numbers line, the options, the values and context line,
+    the note, Moves and Can trip."""
+    alt = entry.get("alt") or row["changes"]
+    lines = [f"### `{row['name']}`", "", row["title"], "",
+             f"![{alt}]({rel}/{row['file']}/{row['name']}.svg)", ""]
+    long = entry.get("long_description") or ""
+    if long:
+        lines += [long, ""]
+    if row["changes"] not in long:
+        lines += [row["changes"], ""]
+    lines += [numbers_line(mrow), ""]
+    if options_text(mrow):
+        lines += [options_text(mrow), ""]
+    if row["diagram"]["view"] != "none":
+        lines += [values_text(row), ""]
+        if row.get("note"):
+            lines += [row["note"], ""]
+    elif not entry.get("long_description") and row.get("note"):
+        lines += [values_text(row), ""]
+    features = entry.get("features") or []
+    if features and features != ["none"]:
+        lines += [f"{MOVES_LABEL}: {', '.join(features)}.", ""]
+    tags = TAGS_BY_DIAL.get((row["file"], row["name"]))
+    if tags:
+        lines += [f"{TRIPS_LABEL}: " + "; ".join(f"`{t}`" for t in tags) + ".", ""]
+    return lines
+
+
+def _sections(rows_of_file: Sequence[Dict[str, Any]], mapping: Dict[str, Dict[str, Any]]):
+    for section in sections_in_order(rows_of_file, mapping):
+        in_section = [r for r in rows_of_file if r["section"] == section]
+        if in_section:
+            yield section, in_section
+
+
+def _packet_head(tool: str, part: str, blurb: str) -> List[str]:
+    return [f"# {PART_TITLES[part]}, {TOOL_WORDS[tool]}", "", blurb, "",
+            f"Model version {MODEL_VERSION}. The printable packet is `{PACKET_PDFS[tool]}`; its parts are "
+            "[the quick start](quick-start.md), [the dial guide](dial-guide.md), [the measuring guide](measuring-guide.md) "
+            "and [the measuring form](measuring-form.md). The dial names are written exactly as the Customizer shows them.", ""]
+
+
+def quick_start_markdown(rows, mappings, index, storyboards, tool: str) -> str:
+    idx = {(e["file"], e["name"]): e for e in index}
+    mapping = mappings.get(tool, {})
+    quick = [r for r in rows if r["file"] == tool and r.get("quick_start")]
+    lines = _packet_head(tool, "quick-start",
+                         f"The four Customizer steps of the {TOOL_WORDS[tool]}, dial by dial: what each dial moves, "
+                         "in a picture and a sentence, with the numbers the Customizer allows.")
+    lines += [f"## {PACKET_OPENER_HEADING}", "", PACKET_OPENERS[tool][0], "", PACKET_OPENERS[tool][1], "",
+              RED_TEXT, "", f"In every picture: {LEGEND_LINE}.", ""]
+    board = storyboards.get(tool)
+    if board:
+        lines += [f"![{board['alt']}](../../dials/{tool}/storyboard.svg)", "", board["long_description"], ""]
+        lines += [f"- {caption}" for caption in STEP_CAPTIONS[tool]] + [""]
+    for section, in_section in _sections(quick, mapping):
+        lines += [f"## {section}", ""]
+        for row in in_section:
+            lines += dial_card(row, mapping.get(row["name"]), idx.get((tool, row["name"]), {}))
+    return "\n".join(lines).rstrip("\n") + "\n"
+
+
+def dial_guide_markdown(rows, mappings, index, tool: str) -> str:
+    idx = {(e["file"], e["name"]): e for e in index}
+    mapping = mappings.get(tool, {})
+    of_file = [r for r in rows if r["file"] == tool]
+    lines = _packet_head(tool, "dial-guide",
+                         f"Every dial of the {TOOL_WORDS[tool]} in the Customizer's order: what it moves, in a picture "
+                         "and a sentence, with the numbers the Customizer allows.")
+    lines += [f"In every picture: {LEGEND_LINE}.", ""]
+    for section, in_section in _sections(of_file, mapping):
+        lines += [f"## {section}", ""]
+        for row in in_section:
+            lines += dial_card(row, mapping.get(row["name"]), idx.get((tool, row["name"]), {}))
+    return "\n".join(lines).rstrip("\n") + "\n"
+
+
+def measuring_guide_markdown(rows, mappings, tool: str) -> str:
+    mapping = mappings.get(tool, {})
+    step_names = [name for name, mrow in mapping.items() if mrow["section"].startswith("Step")]
+    measured = [r for r in rows if r["file"] == tool and r.get("measure")]
+    lines = _packet_head(tool, "measuring-guide",
+                         f"How to take each number the {TOOL_WORDS[tool]} asks for, in the measuring form's order, "
+                         "with the typical range and an example.")
+    lines += [MEASURING_INTRO, ""]
+    if tool == "two-sided":
+        lines += [TWO_SIDED_WIDTHS, ""]
+    for row in measured:
+        m = row["measure"]
+        k = step_names.index(row["name"]) + 1 if row["name"] in step_names else None
+        where = f"row {k} of the form" if k else "not on the form"
+        lines += [f"## {k}. {row['title']}" if k else f"## {row['title']}", "",
+                  f"Customizer name `{row['name']}`, {where}.", "", m["how"], ""]
+        if m["typical"] is None:
+            mrow = mapping.get(row["name"]) or {}
+            lines += ["The choices: " + ", ".join(mrow.get("values", [])) + ".", ""]
+        else:
+            lo, hi = m["typical"]
+            lines += [f"Typical: {lo:g} to {hi:g} mm. Example: {m['example']:g} mm.", ""]
+        if m.get("stencil"):
+            lines += [f"With the stencil: card {m['stencil']}.", ""]
+        if row["name"] == "measure_finger_width":
+            lines += [RING_TRICK, ""]
+    lines += [SANITY_CHECK, "", FOR_SOMEONE_ELSE, "",
+              "Print the form and fill it in as you measure: [the measuring form](measuring-form.md)."]
+    return "\n".join(lines) + "\n"
+
+
 def build_markdown(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dict[str, Any]]],
-                   index: Sequence[Dict[str, Any]], quick: bool = False) -> str:
+                   index: Sequence[Dict[str, Any]], quick: bool = False, tool: Optional[str] = None,
+                   part: Optional[str] = None, storyboards: Optional[Dict[str, Dict[str, Any]]] = None) -> str:
+    """The combined twins (no ``tool``: the dial reference, or the quick-start
+    cut with ``quick``), or one part of a tool's packet."""
+    if tool is not None:
+        if part == "quick-start":
+            return quick_start_markdown(rows, mappings, index, storyboards or {}, tool)
+        if part == "dial-guide":
+            return dial_guide_markdown(rows, mappings, index, tool)
+        if part == "measuring-guide":
+            return measuring_guide_markdown(rows, mappings, tool)
+        raise ValueError(f"unknown packet part {part!r}")
     idx = {(e["file"], e["name"]): e for e in index}
     if quick:
         rows = quick_rows(rows)
@@ -538,6 +751,8 @@ def verify_reference_pdf(pdf: Path, rows: Sequence[Dict[str, Any]],
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--quick", action="store_true", help="the quick-start cut: the Steps 1-4 dials only, with the opener page")
+    parser.add_argument("--tool", choices=sorted(PACKET_DIRS), help="one tool's guide packet: its Markdown twins under docs/guides/<tool>/")
+    parser.add_argument("--part", choices=PACKET_PARTS + ("all",), default="all", help="one part of the packet (default: all)")
     parser.add_argument("--out", type=Path, default=None, help="the PDF path (default: docs/Plug_Puller_Dial_Reference.pdf, or the quick-start PDF with --quick)")
     parser.add_argument("--markdown", type=Path, default=None, help="the Markdown twin's path (default: docs/guides/dial-reference.md, or the quick-start twin with --quick)")
     parser.add_argument("--markdown-only", action="store_true", help="write the Markdown twin only (no browser)")
@@ -545,6 +760,21 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO, format="%(message)s")
+
+    if args.tool:
+        if not args.markdown_only:
+            parser.error("--tool writes the Markdown twins only for now: pass --markdown-only")
+        rows = load_catalog()
+        mappings = load_mappings()
+        index = load_index()
+        storyboards = load_storyboards()
+        out_dir = PACKET_DIRS[args.tool]
+        out_dir.mkdir(parents=True, exist_ok=True)
+        for part in (PACKET_PARTS if args.part == "all" else (args.part,)):
+            text = build_markdown(rows, mappings, index, tool=args.tool, part=part, storyboards=storyboards)
+            (out_dir / f"{part}.md").write_text(text, encoding="utf-8", newline="\n")
+            logger.info("Wrote %s (%d lines)", out_dir / f"{part}.md", text.count("\n"))
+        return 0
 
     quick = args.quick
     out_pdf = args.out or (QUICK_OUT_PDF if quick else OUT_PDF)

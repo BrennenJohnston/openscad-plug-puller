@@ -39,4 +39,4 @@ The left column is the numbered list above, one row per dial in the Customizer's
 
 Type them into the Customizer in this order.
 
-How each number is measured, with its typical range and an example: [the measuring guide](../measuring-guide.md).
+How each number is measured, with its typical range and an example: [the two-sided puller's measuring guide](measuring-guide.md).
