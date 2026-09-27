@@ -1,0 +1,98 @@
+# Open Know-How (OKH) manifest for the Plug Puller
+# Follows the Open Know-How Specification (Internet of Production Alliance, 2022)
+# Spec: https://standards.internetofproduction.org/pub/okh
+# Field set copied from the Click Me access switch's manifest, with this model's own paths.
+
+okhv: OKH-LOSHv1.0
+
+name: "Plug Puller: parametric assistive plug remover"
+repo: https://github.com/BrennenJohnston/openscad-plug-puller
+version: 0.12.0
+license:
+  hardware: PolyForm-Noncommercial-1.0.0
+  documentation: PolyForm-Noncommercial-1.0.0
+  software: PolyForm-Noncommercial-1.0.0
+licensor:
+  name: Brennen Johnston
+documentation-language: en-US
+date-created: 2026-07-22
+date-updated: 2026-09-26
+function: |
+  A handheld 3D-printed tool for pulling an electrical plug out of a wall outlet with a whole
+  hand instead of a fingertip pinch, for anyone with arthritis, low grip strength, tremor,
+  a small hand or one hand. Two finger holes take the pull; the tool grips only the plug's
+  sides and back, never the outlet. It is parametric: type a few ruler measurements of your
+  plug and your hand into the OpenSCAD Customizer form, or pick a measured plug preset, and
+  the tool is shaped to them. A plug up to 24 mm thick gets the one-sided puller, a single
+  printed part with a plug pocket, two finger holes and a cord hook; a thicker plug, a USB-C
+  tip or a round cord plug gets the two-sided puller, two identical plates that zip-tie
+  face to face around the plug. A red tag printed beside the part reports a measurement
+  that cannot work. Ready-to-print STLs cover the common US plug families at three hand
+  sizes, and a printable measuring stencil finds the numbers by matching shapes.
+
+documentation-readiness-level: ODRL-3
+technology-readiness-level: OTRL-4
+
+documentation-home: https://github.com/BrennenJohnston/openscad-plug-puller#readme
+archive-download: https://github.com/BrennenJohnston/openscad-plug-puller/releases
+
+bom: ./docs/guides/bom.md
+making-instructions:
+  - path: ./docs/guides/maker-guide.md
+    title: Choose the file, measure or match, customize, print, assemble
+operation-instructions:
+  - path: ./docs/guides/user-guide.md
+    title: Using the one-sided and the two-sided puller, safety and care
+user-manual: ./docs/guides/user-guide.md
+manufacturing-instructions: ./docs/guides/maker-guide.md
+
+design-files:
+  - path: ./src/Plug_Puller_Parametric.scad
+    title: The one-sided puller (OpenSCAD, parametric)
+  - path: ./src/Plug_Puller_Two_Sided.scad
+    title: The two-sided puller (OpenSCAD, parametric)
+  - path: ./Measuring_Stencil.scad
+    title: The measuring stencil cards (OpenSCAD, parametric)
+
+manufacturing-files:
+  - path: ./stl/Plug-Puller/
+    title: Ready-to-print pullers for the common US plug families at three hand sizes
+  - path: ./stl/Measuring-Stencil/
+    title: Ready-to-print measuring stencil cards, Visual and Tactile label modes
+  - path: ./dist/
+    title: Single-file builds of both pullers for browser and MakerWorld customizers
+
+tool-list:
+  - A 3D printer (a bed of 200 by 200 mm or larger prints the stencil sheets whole)
+  - Zip ties
+  - A hook-and-loop strap (optional)
+
+software:
+  - name: OpenSCAD
+    version: "2026.01.03 nightly (2021.01 or later works)"
+    url: https://openscad.org/
+
+image: ./docs/images/two-sided-in-use-outlet.jpg
+
+keywords:
+  - assistive-technology
+  - plug-puller
+  - plug-remover
+  - grip-aid
+  - arthritis
+  - openscad
+  - parametric
+  - 3d-printable
+  - customizer
+  - openat
+
+attestation:
+  - Built and used by the designer; the presets were measured from real plugs and test-printed; no third-party certification has been performed.
+
+related:
+  - name: OpenAT-Template
+    url: https://github.com/makersmakingchange/OpenAT-Template
+    relation: documentation and repository structure follows this template
+  - name: Accessible MakerWorld Documentation Standard
+    url: https://github.com/BrennenJohnston/accessible-makerworld-doc-standard
+    relation: the documentation is written to this standard

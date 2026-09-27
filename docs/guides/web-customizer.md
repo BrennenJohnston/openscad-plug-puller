@@ -97,7 +97,7 @@ the fit on paper (an [outline sheet](print-preview-outlines.md)) or in
 the desktop app if you want to see it. In the one-sided puller a green
 tag next to the model means your numbers were applied; in either file **red text**
 names a measurement that looks wrong (usually inches instead of
-millimetres) — fix it before printing. The
+millimeters) — fix it before printing. The
 **[Fit Troubleshooting Guide](fit-troubleshooting.md)** decodes every
 message.
 

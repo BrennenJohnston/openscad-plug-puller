@@ -13,6 +13,22 @@ public milestone**.
 
 ### Added
 
+- **Plug presets from measured plugs.** The one-sided file gains
+  `Wide 2-prong appliance plug - NEMA 1-15`; the two-sided file gains
+  `USB-C laptop tip` (Rounded sides), `Flat 2-prong lamp plug - NEMA 1-15`
+  and `Standard 3-prong plug - NEMA 5-15` (Flat sides). Each has a saved
+  set under `presets/`.
+- **The P4 stencil card** (`P4_Wide-2-Prong-Appliance-Gauge`, Visual and
+  Tactile with its braille flap), a second paper stencil page
+  (`docs/guides/stencil-sheet-2.svg`) in the Starter Guide PDF, and the
+  card in the measuring guide's legend.
+- **The library and the sheets grow with the presets:** 21 plug tools
+  (five presets, from every file that offers each, at three sizes) and 18
+  stencil cards under `stl/`; 21 outline sheets and a 22-page
+  `docs/Plug_Puller_Outline_Sheets.pdf`.
+- **`dial_catalog.json`**: one row per Customizer dial of both files (118),
+  with a plain title, one sentence on what it changes and how to draw it;
+  `tests/test_dial_catalog.py` keeps it in step with the mappings.
 - **The dial reference** (`docs/Plug_Puller_Dial_Reference.pdf` and its
   Markdown twin `docs/guides/dial-reference.md`), generated from
   `dial_catalog.json` by `scripts/build_dial_reference.py`: one page per
@@ -24,6 +40,47 @@ public milestone**.
   and a README), drawn by `scripts/generate_dial_diagrams.py` from the
   catalog: the tool at its defaults in black, the plug in teal, a red
   dashed trace on what the dial moves.
+- **The dial quick start** (`docs/Plug_Puller_Dial_Quick_Start.pdf` and
+  `docs/guides/dial-quick-start.md`): the Steps 1-4 dials of both files,
+  with an opener page on which file to open.
+- **The maker's manual:** `docs/guides/maker-guide.md` (choose the file,
+  measure or match, customize, print, assemble), `docs/guides/user-guide.md`
+  (use, safety, care), `docs/guides/bom.md` (zip ties, the strap, filament
+  per tool) and `docs/guides/design-rationale.md` (why each default is what
+  it is), in the Makers Making Change OpenAT shape.
+- **Photos:** fifteen July 2026 photos under `docs/images/` (the one-sided
+  puller on lamp and 3-prong plugs at three sizes, the two-sided assembly
+  in six steps, the print bed), resized under 400 KB with no camera
+  metadata, each with alt text; `scripts/render_doc_images.py` renders the
+  three preview pictures, including the red warning tag.
+- **`okh.yml`**, an Open Know-How manifest at the repository root.
+- **The docs gate:** `scripts/check_docs.py` and `tests/test_docs_gate.py`
+  hold `README.md` and `docs/**/*.md` to the documentation standard's
+  mechanical rules (one H1, no skipped level, alt text on every image, no
+  banned or retired word, table cells of at most 22 words, every relative
+  link resolving, no compliance claim).
+
+### Changed
+
+- **`README.md`** reordered to the OpenAT template: Overview, How to obtain
+  the device, Build instructions, How to use it, How to improve this
+  device, Files, License, Attribution; the new guides are its first links.
+- **Six images renamed** for the two-tool vocabulary (`clamshell-*` to
+  `two-sided-*`, `flat-tool-medium-render.png` to
+  `one-sided-medium-render.png`); every link updated.
+- **Seven Custom help texts** (one-sided file) now say what the dial
+  really does: `strap_width` is only compared against the strap (the W-14
+  tag) and does not size the wing opening; `custom_t_hook_gap_offset`,
+  `custom_t_hook_gap_side_rounding`, `custom_pocket_dome_drop` and
+  `custom_t_hook_tip_drop` change no shape of the printed tool;
+  `custom_zip_tie_width_spacing` moves no hole and only feeds the auto-fit
+  keep-out; `custom_t_hook_leg_offset` moves nothing on the hook and only
+  pushes the finger holes through the auto-fit clamp. No geometry changed.
+- **Wording:** the green preview tag is written as the file prints it
+  (`Medium: ...`); US spellings throughout; the MakerWorld quick start's
+  preset table lists every preset of both files; the reference no longer
+  cites two measuring scripts that are not in the repository; long table
+  cells shortened to pass the docs gate.
 
 ### Removed
 
