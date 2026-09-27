@@ -17,7 +17,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -40,7 +41,17 @@
         "at": "pocket_length"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "With the plug in the outlet, ruler from the wall plate face to the plug's back face. On a laptop or charger plug, measure from the device's edge.",
+      "typical": [
+        20,
+        50
+      ],
+      "example": 38,
+      "stencil": "R1",
+      "anchor": "plug_length"
+    }
   },
   {
     "file": "one-sided",
@@ -63,7 +74,17 @@
         "at": "plug_width_prong_end"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "Caliper straight across the plastic body just behind the prongs, the wide way, parallel to the wall. Measure the body, not the metal prongs; if the head flares, take the widest part of that first stretch.",
+      "typical": [
+        20,
+        38
+      ],
+      "example": 34,
+      "stencil": "R1",
+      "anchor": "plug_width_prong_end"
+    }
   },
   {
     "file": "one-sided",
@@ -86,7 +107,17 @@
         "at": "plug_width_cord_end"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "The same wide direction, but where the cord leaves the plug body. Skip any soft rubber strain relief and measure the last part of the hard body you would grip.",
+      "typical": [
+        10,
+        35
+      ],
+      "example": 13,
+      "stencil": "R1",
+      "anchor": "plug_width_cord_end"
+    }
   },
   {
     "file": "one-sided",
@@ -110,7 +141,17 @@
         "at": "plug_thickness_prong_end"
       }
     },
-    "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller."
+    "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller.",
+    "measure": {
+      "how": "Caliper across the plug body's thin direction, usually top to bottom on a flat plug, just behind the prongs. A plug 24 mm thick or more needs the two-sided puller, so measure carefully.",
+      "typical": [
+        12,
+        30
+      ],
+      "example": 16,
+      "stencil": "R1",
+      "anchor": "plug_thickness_prong_end"
+    }
   },
   {
     "file": "one-sided",
@@ -134,7 +175,17 @@
         "at": "plug_thickness_cord_end"
       }
     },
-    "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller."
+    "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller.",
+    "measure": {
+      "how": "The same thin direction, where the cord leaves the plug body, skipping the soft strain relief. On a round extension-cord plug this can be as fat as the prong end.",
+      "typical": [
+        8,
+        30
+      ],
+      "example": 9,
+      "stencil": "R1",
+      "anchor": "plug_thickness_cord_end"
+    }
   },
   {
     "file": "one-sided",
@@ -157,7 +208,17 @@
         "at": "hook_slot"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "Caliper across the cord just behind the plug, on its thin side: flat cord the narrow way, round cord the diameter. With the stencil, the smallest C1 slot that slips over the cord is this number.",
+      "typical": [
+        3,
+        7
+      ],
+      "example": 5,
+      "stencil": "C1",
+      "anchor": "cord"
+    }
   },
   {
     "file": "one-sided",
@@ -182,7 +243,14 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "Look at the outlet cover plate: two small oval openings is Standard flat plate; one big rectangle per outlet is Rocker / Decora; a bigger, thicker plate is Oversized / Jumbo; no plate or a flush outlet is No plate / flush.",
+      "typical": null,
+      "example": null,
+      "stencil": null,
+      "anchor": "wall_plate"
+    }
   },
   {
     "file": "one-sided",
@@ -202,7 +270,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: the see-through plug is a preview aid and is never exported."
+    "note": "Changes no shape: the see-through plug is a preview aid and is never exported.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -222,7 +291,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -247,7 +317,17 @@
         "at": "finger_hole"
       }
     },
-    "note": "Only acts when size is Measure my hand."
+    "note": "Only acts when size is Measure my hand.",
+    "measure": {
+      "how": "Caliper across the widest knuckle of your middle finger, the finger that goes into the pull hole. With the stencil, find the smallest F1 or F2 hole your finger passes through comfortably and subtract 5 from its number.",
+      "typical": [
+        16,
+        24
+      ],
+      "example": 22,
+      "stencil": "F1 / F2",
+      "anchor": "finger_width"
+    }
   },
   {
     "file": "one-sided",
@@ -272,7 +352,17 @@
         "at": "body_width"
       }
     },
-    "note": "Only acts when size is Measure my hand."
+    "note": "Only acts when size is Measure my hand.",
+    "measure": {
+      "how": "Caliper or ruler straight across the four knuckles of your flat hand, fingers together, no thumb. Measure at the widest point.",
+      "typical": [
+        70,
+        100
+      ],
+      "example": 88,
+      "stencil": "R1",
+      "anchor": "hand_width"
+    }
   },
   {
     "file": "one-sided",
@@ -292,7 +382,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -312,7 +403,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -332,7 +424,17 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: it only sets the width the W-14 check compares the wing opening against."
+    "note": "Changes no shape: it only sets the width the W-14 check compares the wing opening against.",
+    "measure": {
+      "how": "Read the width on the strap's packaging. ONE-WRAP comes in 10, 13, 16, 20 and 25 mm.",
+      "typical": [
+        10,
+        25
+      ],
+      "example": 15,
+      "stencil": null,
+      "anchor": "strap_width"
+    }
   },
   {
     "file": "one-sided",
@@ -357,7 +459,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -382,7 +485,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -407,7 +511,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -434,7 +539,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when zip_placement is Manual."
+    "note": "Only acts when zip_placement is Manual.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -461,7 +567,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when zip_placement is Manual."
+    "note": "Only acts when zip_placement is Manual.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -489,7 +596,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when zip_placement is Manual and zip_row_count is 3."
+    "note": "Only acts when zip_placement is Manual and zip_row_count is 3.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -514,7 +622,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -534,7 +643,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -557,7 +667,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when velcro_placement is Manual."
+    "note": "Only acts when velcro_placement is Manual.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -577,7 +688,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: it only sets the number of segments in every circle and arc."
+    "note": "Changes no shape: it only sets the number of segments in every circle and arc.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -599,7 +711,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -619,7 +732,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape at the Custom defaults: it only clamps sliders that leave their safe range, and every clamp is reported in the console."
+    "note": "Changes no shape at the Custom defaults: it only clamps sliders that leave their safe range, and every clamp is reported in the console.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -641,7 +755,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -663,7 +778,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -685,7 +801,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -707,7 +824,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -729,7 +847,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -751,7 +870,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -774,7 +894,8 @@
       "at": 35,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -796,7 +917,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -823,7 +945,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -845,7 +968,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -867,7 +991,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -887,7 +1012,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: the recess is a rounded-nose shape whose width at the plug end is the pocket width and whose walls follow the side taper, so this reference point cancels out; measured with straight and with tapered walls."
+    "note": "Changes no shape: the recess is a rounded-nose shape whose width at the plug end is the pocket width and whose walls follow the side taper, so this reference point cancels out; measured with straight and with tapered walls.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -910,7 +1036,8 @@
       "at": 0,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -933,7 +1060,8 @@
       "at": 0,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -955,7 +1083,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -977,7 +1106,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -999,7 +1129,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1021,7 +1152,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1043,7 +1175,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1070,7 +1203,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1097,7 +1231,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1124,7 +1259,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1151,7 +1287,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1178,7 +1315,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1198,7 +1336,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
+    "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1220,7 +1359,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom; the J-hook cord catch is drawn without this dial, and only the auto-fit clamp on the finger holes reads it."
+    "note": "Only acts when size is Custom; the J-hook cord catch is drawn without this dial, and only the auto-fit clamp on the finger holes reads it.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1247,7 +1387,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1274,7 +1415,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1296,7 +1438,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0."
+    "note": "Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1323,7 +1466,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1350,7 +1494,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1377,7 +1522,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1404,7 +1550,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1431,7 +1578,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1458,7 +1606,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1478,7 +1627,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape of its own: the zip-tie columns sit zip_edge_offset inside the pocket wall; this dial only feeds the auto-fit finger keep-out, which trimmed the row spacing by 0.05 mm at the Custom defaults."
+    "note": "Changes no shape of its own: the zip-tie columns sit zip_edge_offset inside the pocket wall; this dial only feeds the auto-fit finger keep-out, which trimmed the row spacing by 0.05 mm at the Custom defaults.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1505,7 +1655,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1533,7 +1684,8 @@
       "at": 10.4,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1556,7 +1708,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1579,7 +1732,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1602,7 +1756,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1625,7 +1780,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1648,7 +1804,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1670,7 +1827,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1693,7 +1851,8 @@
       "at": 35,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1716,7 +1875,8 @@
       "at": 35,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1739,7 +1899,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot."
+    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1762,7 +1923,8 @@
       "at": 46,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1785,7 +1947,8 @@
       "at": 19.8,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1812,7 +1975,8 @@
       ],
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1832,7 +1996,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
+    "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay.",
+    "measure": null
   },
   {
     "file": "one-sided",
@@ -1855,7 +2020,8 @@
       "at": 4.5,
       "dimension": null
     },
-    "note": "Only acts when size is Custom."
+    "note": "Only acts when size is Custom.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -1875,7 +2041,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -1898,7 +2065,17 @@
         "at": "plug_length"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "With the plug in the outlet, ruler from the wall plate face to the plug's back face. On a laptop or charger plug, measure from the device's edge.",
+      "typical": [
+        20,
+        50
+      ],
+      "example": 23,
+      "stencil": "R1",
+      "anchor": "plug_length"
+    }
   },
   {
     "file": "two-sided",
@@ -1921,7 +2098,17 @@
         "at": "gap_tips"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "Caliper across the plug body just behind the prongs, the size the two plates close across. On a USB-C or charger tip, just behind the metal tip; on a round plug it is the diameter.",
+      "typical": [
+        12,
+        40
+      ],
+      "example": 13,
+      "stencil": "R1",
+      "anchor": "plug_width_prong_end"
+    }
   },
   {
     "file": "two-sided",
@@ -1944,7 +2131,17 @@
         "at": "gap_cord_end"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "The same direction across the plates, measured where the cord leaves the plug body. Skip the soft rubber strain relief.",
+      "typical": [
+        12,
+        40
+      ],
+      "example": 13,
+      "stencil": "R1",
+      "anchor": "plug_width_cord_end"
+    }
   },
   {
     "file": "two-sided",
@@ -1967,7 +2164,17 @@
         "at": "channel"
       }
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "Caliper across the cord just behind the plug, on its thin side: flat cord the narrow way, round cord the diameter. With the stencil, the smallest C1 slot that slips over the cord is this number.",
+      "typical": [
+        3,
+        9
+      ],
+      "example": 7,
+      "stencil": "C1",
+      "anchor": "cord"
+    }
   },
   {
     "file": "two-sided",
@@ -1988,7 +2195,14 @@
       "at": 45,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": {
+      "how": "Look at the plug body where the plates will grip it. Rounded sides for a round cord plug, a USB-C or charger tip; Flat sides for a boxy plug.",
+      "typical": null,
+      "example": null,
+      "stencil": null,
+      "anchor": "plug_sides"
+    }
   },
   {
     "file": "two-sided",
@@ -2008,7 +2222,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: the see-through plug is a preview aid and is never exported."
+    "note": "Changes no shape: the see-through plug is a preview aid and is never exported.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2028,7 +2243,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2053,7 +2269,17 @@
         "at": "finger_hole"
       }
     },
-    "note": "Only acts when size is Measure my hand."
+    "note": "Only acts when size is Measure my hand.",
+    "measure": {
+      "how": "Caliper across the widest knuckle of your middle finger, the finger that goes into the pull hole. With the stencil, find the smallest F1 or F2 hole your finger passes through comfortably and subtract 5 from its number.",
+      "typical": [
+        16,
+        24
+      ],
+      "example": 22,
+      "stencil": "F1 / F2",
+      "anchor": "finger_width"
+    }
   },
   {
     "file": "two-sided",
@@ -2080,7 +2306,8 @@
       ],
       "dimension": null
     },
-    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2107,7 +2334,17 @@
       ],
       "dimension": null
     },
-    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot. At 25 mm the slot leaves too, because the plug is too short for one, so the after picture has no slot and no dimension line."
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot. At 25 mm the slot leaves too, because the plug is too short for one, so the after picture has no slot and no dimension line.",
+    "measure": {
+      "how": "Read the width on the strap's packaging. ONE-WRAP comes in 10, 13, 16, 20 and 25 mm.",
+      "typical": [
+        10,
+        25
+      ],
+      "example": 15,
+      "stencil": null,
+      "anchor": "strap_width"
+    }
   },
   {
     "file": "two-sided",
@@ -2127,7 +2364,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2147,7 +2385,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2168,7 +2407,8 @@
       "at": 3,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2191,7 +2431,8 @@
       "at": 45,
       "dimension": null
     },
-    "note": "Only acts when plug_sides is Flat sides or a plug preset is chosen."
+    "note": "Only acts when plug_sides is Flat sides or a plug preset is chosen.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2214,7 +2455,8 @@
       "at": 45,
       "dimension": null
     },
-    "note": "Only acts when plug_sides is Rounded sides."
+    "note": "Only acts when plug_sides is Rounded sides.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2237,7 +2479,8 @@
       "at": 45,
       "dimension": null
     },
-    "note": "Only acts when plug_sides is Rounded sides."
+    "note": "Only acts when plug_sides is Rounded sides.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2262,7 +2505,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2282,7 +2526,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2302,7 +2547,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2322,7 +2568,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2347,7 +2594,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2372,7 +2620,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2397,7 +2646,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2422,7 +2672,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2447,7 +2698,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2472,7 +2724,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2497,7 +2750,8 @@
       ],
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2518,7 +2772,8 @@
       "at": 3,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2539,7 +2794,8 @@
       "at": 3,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2559,7 +2815,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": null
+    "note": null,
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2581,7 +2838,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Drawn on a 40 mm plug so the default manual positions sit on the arm."
+    "note": "Drawn on a 40 mm plug so the default manual positions sit on the arm.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2604,7 +2862,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
+    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2627,7 +2886,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
+    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2650,7 +2910,8 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
+    "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2677,7 +2938,8 @@
       ],
       "dimension": null
     },
-    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2704,7 +2966,8 @@
       ],
       "dimension": null
     },
-    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2731,7 +2994,8 @@
       ],
       "dimension": null
     },
-    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot.",
+    "measure": null
   },
   {
     "file": "two-sided",
@@ -2751,6 +3015,7 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Changes no shape: it only sets the number of segments in every circle and arc."
+    "note": "Changes no shape: it only sets the number of segments in every circle and arc.",
+    "measure": null
   }
 ]
