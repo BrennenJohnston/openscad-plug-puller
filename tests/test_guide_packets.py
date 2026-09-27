@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from scripts.build_dial_reference import build_markdown, load_catalog
+from scripts.build_dial_reference import build_html, build_markdown, load_catalog
 from tests.test_dial_catalog import _mapping_rows
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -204,3 +204,46 @@ def test_builder_tool_filter() -> None:
     assert "![Plate thickness: before and after, 4 to 6 mm; red marks the cord channel and the finger lobes.](../../dials/two-sided/plate_thickness.svg)" in md
     assert "Two vertical slices of one plate of the two-sided puller." in md
     assert "#### " not in md
+
+
+SAMPLE_SVGS = {
+    ("one-sided", "measure_plug_length"): '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80"><title>Plug length</title></svg>',
+    ("two-sided", "plate_thickness"): '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"><title>Plate thickness</title></svg>',
+}
+SAMPLE_STORYBOARDS = {
+    "one-sided": {"file": "one-sided", "name": "storyboard", "key": "one-sided-vacuum-plug", "svg": "one-sided/storyboard.svg",
+                  "title": "The four steps on a US vacuum plug", "stages": [0, 3, 8, 2, 1],
+                  "alt": "The one-sided puller, the four Customizer steps on a US vacuum plug, five stages left to right.",
+                  "long_description": "Five stages of the one-sided puller, left to right."},
+}
+SAMPLE_STORYBOARD_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 184.5 120.37"><title>The four steps</title></svg>'
+SAMPLE_FORM_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="279mm" viewBox="0 0 210 279"><rect width="210" height="279" fill="white"/></svg>'
+
+
+def test_packet_html() -> None:
+    """The packet's HTML, in order: a title section, a contents section, an
+    opener section with the storyboard figure, then one card per row for
+    the quick start and the dial guide (a figure holding the SVG with a
+    figcaption equal to the long description; the ids qs- and ref-), a
+    measuring-guide section with an h3 per measure row, and last the form
+    page with the form SVG at 210 mm; no figure scaled above 1:1."""
+    html = build_html(SAMPLE_ROWS, SAMPLE_MAPPINGS, SAMPLE_INDEX, SAMPLE_SVGS, tool="one-sided",
+                      storyboards=SAMPLE_STORYBOARDS, storyboard_svg=SAMPLE_STORYBOARD_SVG, form_svg=SAMPLE_FORM_SVG)
+    order = [html.index(s) for s in ('class="page front title"', 'class="page front contents"', 'class="page front opener"',
+                                     'id="qs-one-sided-measure_plug_length"', 'id="ref-one-sided-measure_plug_length"',
+                                     'class="flow measuring"', 'class="page form"')]
+    assert order == sorted(order), "the packet's sections are out of order"
+    assert html.count('<section class="card"') == 2
+    assert "plate_thickness" not in html
+    assert html.count("<figcaption>Two top views of the one-sided puller, before left and after right.</figcaption>") == 2
+    assert html.count("<title>Plug length</title>") == 2
+    assert 'class="page front opener"' in html and "<title>The four steps</title>" in html
+    assert "<figcaption>Five stages of the one-sided puller, left to right.</figcaption>" in html
+    measuring = html[html.index('class="flow measuring"'):html.index('class="page form"')]
+    assert measuring.count("<h3") == 1 and "measure_plug_length" in measuring
+    form = html[html.index('class="page form"'):]
+    assert 'width="210mm"' in form and 'height="279mm"' in form
+    figures = re.findall(r'<figure[^>]*>\s*<svg[^>]*viewBox="0 0 ([\d.]+) [\d.]+"[^>]*width="([\d.]+)mm"', html)
+    assert len(figures) == 3, "two card figures and the storyboard"
+    for vb_w, width in figures:
+        assert float(width) <= float(vb_w) + 1e-6, "a figure is scaled above 1:1"

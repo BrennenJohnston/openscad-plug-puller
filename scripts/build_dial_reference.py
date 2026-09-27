@@ -23,7 +23,14 @@ writes that tool's Markdown twins under ``docs/guides/<tool>/`` from the same
 data plus the storyboard index and the catalog's ``measure`` rows: the quick
 start (the opener, the storyboard, the four steps' dials), the dial guide
 (every dial of the file) and the measuring guide (one section per measured
-dial, in the measuring form's order). ``--part`` picks one of them.
+dial, in the measuring form's order). ``--part`` picks one of them. Without
+``--markdown-only`` the same data is typeset as the packet PDF
+(``docs/Plug_Puller_One_Sided_Guide.pdf`` / ``..._Two_Sided_Guide.pdf``): a
+title page, a linked contents page, the opener with the storyboard, then the
+quick start and the dial guide as cards that flow down the pages (never a
+picture above 1:1), the measuring guide, and the measuring form sheet at
+exactly 210 × 279 mm as the last page; the picture key line sits in every
+flowing page's bottom margin.
 
 Usage:
     python scripts/build_dial_reference.py                 # both files
@@ -39,8 +46,10 @@ import argparse
 import html
 import json
 import logging
+import math
 import re
 import sys
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
@@ -118,6 +127,13 @@ PACKET_PARTS = ("quick-start", "dial-guide", "measuring-guide")
 PART_TITLES = {"quick-start": "Quick start", "dial-guide": "Dial guide", "measuring-guide": "Measuring guide"}
 PACKET_TITLES = {"one-sided": "Plug Puller: the one-sided puller", "two-sided": "Plug Puller: the two-sided puller"}
 PACKET_PDFS = {"one-sided": "docs/Plug_Puller_One_Sided_Guide.pdf", "two-sided": "docs/Plug_Puller_Two_Sided_Guide.pdf"}
+PACKET_SUBTITLE = "Quick start, dial guide, measuring guide and measuring form."
+PACKET_PART_NAMES = ("Quick start", "Full dial guide", "Measuring guide", "Measuring form")
+FORM_PAGE_NOTE = ("The next page is the measuring form: print it at 100 % (actual size, never fit to page) and check the "
+                  "50 mm bar with a ruler before you trust it. Fill in the blanks top to bottom, then type the numbers "
+                  "into the Customizer in the same order. Its text twin is measuring-form.md beside this packet's twins.")
+PACKET_FIGURE_MAX_SCALE = 1.0  # a packet never draws a picture above 1:1 (D-022)
+PACKET_TALL_MM = 120.0  # a card whose figure is taller than this starts a new page
 PACKET_OPENER_HEADING = "Which tool this is"
 PACKET_OPENERS = {
     "one-sided": (
@@ -153,6 +169,7 @@ MEASURING_INTRO = (
     "form's rows, in the same order, and the card names (R1, C1, F1 / F2) are the cards of the printed "
     "[measuring stencil](../print-preview-outlines.md)."
 )
+MEASURING_INTRO_PLAIN = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", MEASURING_INTRO)
 SANITY_CHECK = (
     "Sanity check: each plug width is a two-digit number, roughly 12 to 45, and the prong-end width is usually "
     "the bigger one; the finger width is roughly 14 to 32. A number like 1.3 is inches: measure again with the "
@@ -536,10 +553,16 @@ def _esc(text: Any) -> str:
     return html.escape(str(text), quote=False)
 
 
-def figure_svg(svg_text: str) -> str:
+def figure_svg(svg_text: str, max_scale: float = FIGURE_MAX_SCALE) -> str:
     """The SVG element sized for the page: 170 mm wide, or less when its
-    height would pass 140 mm or the scale would pass 2:1; the XML
-    declaration dropped."""
+    height would pass 140 mm or the scale would pass ``max_scale`` (2:1 for
+    the combined reference, 1:1 for the packets); the XML declaration
+    dropped."""
+    return figure_svg_sized(svg_text, max_scale)[0]
+
+
+def figure_svg_sized(svg_text: str, max_scale: float = FIGURE_MAX_SCALE) -> Tuple[str, float, float]:
+    """``figure_svg`` plus the drawn width and height in mm."""
     text = re.sub(r"<\?xml[^>]*\?>\s*", "", svg_text)
     m = _SVG_ROOT.search(text)
     if not m:
@@ -549,11 +572,22 @@ def figure_svg(svg_text: str) -> str:
     if not vb:
         raise ValueError("the diagram has no viewBox")
     _x, _y, w, h = (float(v) for v in vb.group(1).split())
-    scale = min(FIGURE_W_MM / w, FIGURE_MAX_H_MM / h, FIGURE_MAX_SCALE)
+    scale = min(FIGURE_W_MM / w, FIGURE_MAX_H_MM / h, max_scale)
     width, height = w * scale, h * scale
     new_root = re.sub(r'\s(width|height)="[^"]*"', "", root)
     new_root = new_root[:-1] + f' width="{width:.2f}mm" height="{height:.2f}mm">'
-    return text[:m.start()] + new_root + text[m.end():]
+    return text[:m.start()] + new_root + text[m.end():], width, height
+
+
+def sheet_svg(svg_text: str) -> str:
+    """A full-page sheet (the measuring form) at exactly 210 × 279 mm."""
+    text = re.sub(r"<\?xml[^>]*\?>\s*", "", svg_text)
+    m = _SVG_ROOT.search(text)
+    if not m:
+        raise ValueError("no <svg> root in the sheet")
+    root = re.sub(r'\s(width|height)="[^"]*"', "", m.group(0))
+    root = root[:-1] + f' width="{PAGE_W_MM:g}mm" height="{PAGE_H_MM:g}mm">'
+    return text[:m.start()] + root + text[m.end():]
 
 
 def dial_id(row: Dict[str, Any]) -> str:
@@ -629,9 +663,207 @@ def dial_page_html(row: Dict[str, Any], mrow: Optional[Dict[str, Any]], entry: D
     return "\n".join(parts)
 
 
+def packet_card_html(row: Dict[str, Any], mrow: Optional[Dict[str, Any]], entry: Dict[str, Any],
+                     svg_text: str, prefix: str, level: int) -> str:
+    """One dial's card for the packet: the name as a heading (h4 under a
+    section's h3), the title, the figure with the long description as its
+    caption, then the same lines as the Markdown card."""
+    figure, _w, h = figure_svg_sized(svg_text, PACKET_FIGURE_MAX_SCALE)
+    long = entry.get("long_description") or ""
+    classes = "card tall" if h > PACKET_TALL_MM else "card"
+    parts = [f'<section class="{classes}" id="{prefix}-{dial_id(row)}">',
+             f'<h{level} class="name">{_esc(row["name"])}</h{level}>',
+             f'<p class="title">{_esc(row["title"])}</p>',
+             f'<figure>{figure}<figcaption>{_esc(long)}</figcaption></figure>']
+    if row["changes"] not in long:
+        parts.append(f'<p class="changes">{_esc(row["changes"])}</p>')
+    parts.append(f'<p class="numbers">{_esc(numbers_line(mrow))}</p>')
+    if options_text(mrow):
+        parts.append(f'<p class="options">{_esc(options_text(mrow))}</p>')
+    if row["diagram"]["view"] != "none":
+        parts.append(f'<p class="values">{_esc(values_text(row, code=False))}</p>')
+        if row.get("note"):
+            parts.append(f'<p class="note">{_esc(row["note"])}</p>')
+    features = entry.get("features") or []
+    if features and features != ["none"]:
+        parts.append(f'<p class="moves">{_esc(MOVES_LABEL)}: {_esc(", ".join(features))}.</p>')
+    tags = TAGS_BY_DIAL.get((row["file"], row["name"]))
+    if tags:
+        parts.append(f'<p class="trips">{_esc(TRIPS_LABEL)}: ' + "; ".join(f"<span class=\"tag\">{_esc(t)}</span>" for t in tags) + ".</p>")
+    parts.append("</section>")
+    return "\n".join(parts)
+
+
+def packet_html(rows, mappings, index, svgs, tool: str, storyboards, storyboard_svg: str, form_svg: str) -> str:
+    idx = {(e["file"], e["name"]): e for e in index}
+    mapping = mappings.get(tool, {})
+    of_file = [r for r in rows if r["file"] == tool]
+    quick = [r for r in of_file if r.get("quick_start")]
+    measured = [r for r in of_file if r.get("measure")]
+    step_names = [name for name, mrow in mapping.items() if mrow["section"].startswith("Step")]
+    key_line = f"In every picture: {LEGEND_LINE}."
+    # 1. The title page.
+    pages = [f"""
+<section class="page front title">
+  <h1>{_esc(PACKET_TITLES[tool])}</h1>
+  <p class="subtitle">{_esc(PACKET_SUBTITLE)}</p>
+  <p class="version">Model version {_esc(MODEL_VERSION)}</p>
+  <p class="legend">{_esc(key_line)}</p>
+  <p class="hint">The dial names are written exactly as the Customizer shows them. Use the bookmarks or the contents page to jump to a part or a dial.</p>
+</section>"""]
+    # 2. The contents page: the four parts, then the dials.
+    c = ['<section class="page front contents">', f"<h1>{_esc(CONTENTS_HEADING)}</h1>", '<ul class="parts">']
+    for name, anchor in zip(PACKET_PART_NAMES, ("part-quick-start", "part-dial-guide", "part-measuring-guide", "part-form")):
+        c.append(f'<li><a href="#{anchor}">{_esc(name)}</a></li>')
+    c += ["</ul>", '<div class="columns">', f'<p class="file">{_esc(PACKET_PART_NAMES[0])}</p>']
+    for section, in_section in _sections(quick, mapping):
+        c.append(f'<p class="section">{_esc(section)}</p><ul>')
+        for row in in_section:
+            c.append(f'<li><a href="#qs-{dial_id(row)}">{_esc(row["name"])}</a>: {_esc(row["title"])}</li>')
+        c.append("</ul>")
+    c.append(f'<p class="file">{_esc(PACKET_PART_NAMES[1])}</p>')
+    for section, in_section in _sections(of_file, mapping):
+        c.append(f'<p class="section">{_esc(section)}</p><ul>')
+        for row in in_section:
+            c.append(f'<li><a href="#ref-{dial_id(row)}">{_esc(row["name"])}</a>: {_esc(row["title"])}</li>')
+        c.append("</ul>")
+    c.append(f'<p class="file">{_esc(PACKET_PART_NAMES[2])}</p><ul>')
+    for row in measured:
+        c.append(f'<li><a href="#mg-{dial_id(row)}">{_esc(row["name"])}</a>: {_esc(row["title"])}</li>')
+    c += ["</ul>", f'<p class="file"><a href="#part-form">{_esc(PACKET_PART_NAMES[3])}</a></p>', "</div>", "</section>"]
+    pages.append("\n".join(c))
+    # 3. The opener page with the storyboard.
+    board = storyboards.get(tool) or {}
+    story_fig, _sw, _sh = figure_svg_sized(storyboard_svg, PACKET_FIGURE_MAX_SCALE)
+    o = ['<section class="page front opener">', f"<h2>{_esc(PACKET_OPENER_HEADING)}</h2>"]
+    o += [f'<p class="opener">{_esc(par)}</p>' for par in PACKET_OPENERS[tool]]
+    o += [f'<p class="opener red">{_esc(RED_TEXT)}</p>', f'<p class="legend">{_esc(key_line)}</p>',
+          f'<figure class="story">{story_fig}<figcaption>{_esc(board.get("long_description", ""))}</figcaption></figure>',
+          "<ul class=\"captions\">" + "".join(f"<li>{_esc(cap)}</li>" for cap in STEP_CAPTIONS[tool]) + "</ul>",
+          "</section>"]
+    pages.append("\n".join(o))
+    # 4. The quick start: cards under the Step sections.
+    q = ['<div class="flow">', f'<h2 id="part-quick-start">{_esc(PACKET_PART_NAMES[0])}</h2>']
+    for section, in_section in _sections(quick, mapping):
+        q.append(f"<h3>{_esc(section)}</h3>")
+        for row in in_section:
+            q.append(packet_card_html(row, mapping.get(row["name"]), idx.get((tool, row["name"]), {}),
+                                      svgs[(tool, row["name"])], "qs", 4))
+    q.append("</div>")
+    pages.append("\n".join(q))
+    # 5. The dial guide: every dial, cards under the sections.
+    g = ['<div class="flow">', f'<h2 id="part-dial-guide">{_esc(PACKET_PART_NAMES[1])}</h2>']
+    for section, in_section in _sections(of_file, mapping):
+        g.append(f"<h3>{_esc(section)}</h3>")
+        for row in in_section:
+            g.append(packet_card_html(row, mapping.get(row["name"]), idx.get((tool, row["name"]), {}),
+                                      svgs[(tool, row["name"])], "ref", 4))
+    g.append("</div>")
+    pages.append("\n".join(g))
+    # 6. The measuring guide.
+    m = ['<div class="flow measuring">', f'<h2 id="part-measuring-guide">{_esc(PACKET_PART_NAMES[2])}</h2>',
+         f'<p class="prose">{_esc(MEASURING_INTRO_PLAIN)}</p>']
+    if tool == "two-sided":
+        m.append(f'<p class="prose">{_esc(TWO_SIDED_WIDTHS)}</p>')
+    for row in measured:
+        mm = row["measure"]
+        k = step_names.index(row["name"]) + 1 if row["name"] in step_names else None
+        heading = f"{k}. {row['title']}" if k else row["title"]
+        m += [f'<section class="measure" id="mg-{dial_id(row)}">', f"<h3>{_esc(heading)}</h3>",
+              f'<p class="name">Customizer name <span class="mono">{_esc(row["name"])}</span>, ' + (f"row {k} of the form." if k else "not on the form.") + "</p>",
+              f'<p class="prose">{_esc(mm["how"])}</p>']
+        if mm["typical"] is None:
+            mrow = mapping.get(row["name"]) or {}
+            m.append(f'<p class="prose">The choices: {_esc(", ".join(mrow.get("values", [])))}.</p>')
+        else:
+            lo, hi = mm["typical"]
+            m.append(f'<p class="prose">Typical: {lo:g} to {hi:g} mm. Example: {mm["example"]:g} mm.</p>')
+        if mm.get("stencil"):
+            m.append(f'<p class="prose">With the stencil: card {_esc(mm["stencil"])}.</p>')
+        if row["name"] == "measure_finger_width":
+            m.append(f'<p class="prose">{_esc(RING_TRICK)}</p>')
+        m.append("</section>")
+    m += [f'<p class="prose">{_esc(SANITY_CHECK)}</p>', f'<p class="prose">{_esc(FOR_SOMEONE_ELSE)}</p>',
+          f'<h2 id="part-form">{_esc(PACKET_PART_NAMES[3])}</h2>', f'<p class="prose">{_esc(FORM_PAGE_NOTE)}</p>', "</div>"]
+    pages.append("\n".join(m))
+    # 7. The form sheet, the last page, at 1:1.
+    pages.append(f'<section class="page form">{sheet_svg(form_svg)}</section>')
+    body = "\n".join(pages)
+    return f"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>{_esc(PACKET_TITLES[tool])}</title>
+<style>
+  @page {{ size: {PAGE_W_MM:g}mm {PAGE_H_MM:g}mm; margin: 0; }}
+  @page flow {{
+    margin: 16mm 20mm 16mm;
+    @bottom-center {{ content: "{_esc(LEGEND_LINE)}"; font-family: Helvetica, Arial, sans-serif; font-size: 2.4mm; color: #444; }}
+  }}
+  html, body {{ margin: 0; padding: 0; font-family: Helvetica, Arial, sans-serif; color: black; }}
+  .page {{
+    width: {PAGE_W_MM:g}mm; height: {PAGE_H_MM:g}mm; box-sizing: border-box;
+    padding: 18mm 20mm 16mm; overflow: hidden; page-break-after: always; position: relative;
+  }}
+  .page.form {{ padding: 0; }}
+  .page.form svg {{ display: block; }}
+  .contents {{ height: auto; min-height: {PAGE_H_MM:g}mm; overflow: visible; }}
+  .front h1 {{ font-size: 7mm; text-align: center; margin: 30mm 0 6mm; }}
+  .contents h1 {{ margin: 0 0 5mm; }}
+  .front .subtitle {{ font-size: 3.6mm; text-align: center; margin: 0 10mm 6mm; }}
+  .front .version {{ font-size: 3.2mm; text-align: center; margin: 0 0 12mm; color: #444; }}
+  .front .legend {{ font-size: 3.2mm; text-align: center; margin: 0 8mm 4mm; }}
+  .front .hint {{ font-size: 3mm; text-align: center; color: #444; margin: 0 8mm; }}
+  .contents .parts {{ font-size: 3.4mm; margin: 0 0 5mm; padding-left: 5mm; }}
+  .contents .parts li {{ margin: 0 0 1mm; }}
+  .contents .columns {{ column-count: 2; column-gap: 8mm; font-size: 2.7mm; }}
+  .contents .file {{ font-weight: bold; font-size: 3.4mm; margin: 2mm 0 1mm; break-after: avoid; }}
+  .contents .section {{ font-weight: bold; margin: 2mm 0 0.8mm; break-after: avoid; }}
+  .contents ul {{ margin: 0 0 1mm; padding-left: 4mm; }}
+  .contents li {{ margin: 0 0 0.6mm; }}
+  .contents a, .opener a {{ color: #0b4f8a; text-decoration: none; }}
+  .contents .columns a {{ font-family: Consolas, monospace; }}
+  .opener h2 {{ font-size: 5mm; margin: 0 0 4mm; }}
+  .opener .opener {{ font-size: 3.4mm; text-align: left; margin: 0 0 3.5mm; line-height: 1.4; }}
+  .opener .red {{ border: 0.5mm solid black; padding: 3mm 4mm; margin: 4mm 0 4mm; }}
+  .opener .legend {{ font-size: 3mm; margin: 0 0 4mm; text-align: left; }}
+  .opener figure {{ margin: 0; text-align: center; }}
+  .opener figure svg {{ display: inline-block; }}
+  .opener figcaption {{ font-size: 2.6mm; color: #444; text-align: left; margin: 2mm 0 0; }}
+  .opener .captions {{ font-size: 3mm; margin: 3mm 0 0; padding-left: 5mm; }}
+  .flow {{ page: flow; height: auto; overflow: visible; }}
+  .flow h2 {{ font-size: 6mm; margin: 0 0 4mm; break-after: avoid; }}
+  .flow h3 {{ font-size: 4.2mm; margin: 6mm 0 2mm; break-after: avoid; }}
+  .card {{ break-inside: avoid; padding: 4mm 0; border-top: 0.2mm solid #ccc; }}
+  .card.tall {{ break-before: page; }}
+  .card h4 {{ font-size: 4.2mm; font-family: Consolas, monospace; margin: 0 0 1mm; word-break: break-all; }}
+  .card .title {{ font-size: 3.6mm; font-weight: bold; margin: 0 0 3mm; }}
+  .card figure {{ margin: 0 0 2mm; text-align: center; }}
+  .card figure svg {{ display: inline-block; }}
+  .card figcaption {{ font-size: 2.6mm; color: #444; text-align: left; margin: 1.5mm 0 0; }}
+  .card .changes {{ font-size: 3.2mm; margin: 0 0 2mm; }}
+  .card .numbers, .card .values, .card .note, .card .moves, .card .trips, .card .options {{ font-size: 2.8mm; margin: 0 0 1.5mm; }}
+  .card .note {{ color: #444; }}
+  .card .tag, .mono {{ font-family: Consolas, monospace; }}
+  .measuring .measure {{ break-inside: avoid; margin: 0 0 3mm; }}
+  .measuring h3 {{ margin: 5mm 0 1.5mm; }}
+  .measuring .name {{ font-size: 2.8mm; color: #444; margin: 0 0 1.5mm; }}
+  .measuring .prose {{ font-size: 3.2mm; margin: 0 0 2mm; line-height: 1.4; }}
+</style></head>
+<body>{body}</body></html>
+"""
+
+
 def build_html(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dict[str, Any]]],
                index: Sequence[Dict[str, Any]], svgs: Dict[Tuple[str, str], str],
-               quick: bool = False) -> str:
+               quick: bool = False, tool: Optional[str] = None, storyboards=None,
+               storyboard_svg: Optional[str] = None, form_svg: Optional[str] = None) -> str:
+    """The combined reference (no ``tool``) or one tool's packet."""
+    if tool is not None:
+        if storyboards is None:
+            storyboards = load_storyboards()
+        if storyboard_svg is None:
+            storyboard_svg = (DIALS_DIR / tool / "storyboard.svg").read_text(encoding="utf-8")
+        if form_svg is None:
+            form_svg = (PACKET_DIRS[tool] / "measuring-form.svg").read_text(encoding="utf-8")
+        return packet_html(rows, mappings, index, svgs, tool, storyboards, storyboard_svg, form_svg)
     idx = {(e["file"], e["name"]): e for e in index}
     if quick:
         rows = quick_rows(rows)
@@ -726,6 +958,39 @@ def link_count(pdf: Path) -> int:
     return len(re.findall(rb"/Subtype\s*/Link", pdf.read_bytes()))
 
 
+def pdf_page_count(pdf: Path) -> int:
+    data = pdf.read_bytes()
+    return data.count(b"/Type /Page") - data.count(b"/Type /Pages")
+
+
+def verify_packet_pdf(pdf: Path, rows: Sequence[Dict[str, Any]], tool: str, html_text: str) -> Dict[str, int]:
+    """The packet's PDF: every page 210 × 279 mm; one outline entry per
+    heading the HTML carries (h1 to h4); at least one link per card; the
+    page count between a third of the cards plus the fixed pages and every
+    card on its own page plus the measuring pages."""
+    n_pages = pdf_page_count(pdf)
+    verify_pdf(pdf, n_pages)
+    of_file = [r for r in rows if r["file"] == tool]
+    cards = len(of_file) + sum(1 for r in of_file if r.get("quick_start"))
+    fixed = 4  # the title, the contents (at least one page), the opener, the form
+    lo, hi = math.ceil(cards / 3) + fixed, cards + fixed + 8
+    if not lo <= n_pages <= hi:
+        raise AssertionError(f"{n_pages} pages, expected between {lo} and {hi}")
+    want = len(re.findall(r"<h[1-4][ >]", html_text))
+    titles = outline_titles(pdf)
+    if len(titles) != want:
+        raise AssertionError(f"Expected {want} outline entries (the HTML's h1 to h4), found {len(titles)}")
+    names = {r["name"] for r in of_file}
+    missing = names - set(titles)
+    if missing:
+        raise AssertionError(f"{len(missing)} dial names missing from the outline, e.g. {sorted(missing)[:3]}")
+    links = link_count(pdf)
+    if links < cards:
+        raise AssertionError(f"Expected at least {cards} link annotations, found {links}")
+    logger.info("Verified: %d pages, %d outline entries, %d link annotations.", n_pages, len(titles), links)
+    return {"pages": n_pages, "outline": len(titles), "links": links, "cards": cards}
+
+
 def verify_reference_pdf(pdf: Path, rows: Sequence[Dict[str, Any]],
                          front_matter: int = FRONT_MATTER_PAGES) -> None:
     verify_pdf(pdf, expected_pages(rows, front_matter))
@@ -762,8 +1027,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO, format="%(message)s")
 
     if args.tool:
-        if not args.markdown_only:
-            parser.error("--tool writes the Markdown twins only for now: pass --markdown-only")
         rows = load_catalog()
         mappings = load_mappings()
         index = load_index()
@@ -774,6 +1037,24 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             text = build_markdown(rows, mappings, index, tool=args.tool, part=part, storyboards=storyboards)
             (out_dir / f"{part}.md").write_text(text, encoding="utf-8", newline="\n")
             logger.info("Wrote %s (%d lines)", out_dir / f"{part}.md", text.count("\n"))
+        if args.markdown_only:
+            return 0
+        of_file = [r for r in rows if r["file"] == args.tool]
+        svgs = load_svgs(of_file)
+        html_text = build_html(rows, mappings, index, svgs, tool=args.tool, storyboards=storyboards)
+        SCRATCH.mkdir(parents=True, exist_ok=True)
+        html_path = SCRATCH / f"packet_{args.tool}.html"
+        html_path.write_text(html_text, encoding="utf-8")
+        out_pdf = args.out or (PROJECT_ROOT / PACKET_PDFS[args.tool])
+        started = time.perf_counter()
+        print_to_pdf(html_path.resolve(), out_pdf, outline=True, user_data_dir=EDGE_PROFILE)
+        seconds = time.perf_counter() - started
+        if not args.keep_html:
+            html_path.unlink()
+        counts = verify_packet_pdf(out_pdf, rows, args.tool, html_text)
+        logger.info("Wrote %s (%.1f KB, %d pages, %d outline entries, %d links, %d cards; printed in %.1f s)",
+                    out_pdf, out_pdf.stat().st_size / 1024, counts["pages"], counts["outline"], counts["links"],
+                    counts["cards"], seconds)
         return 0
 
     quick = args.quick
