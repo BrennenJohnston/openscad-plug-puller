@@ -19,7 +19,37 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        3116.9,
+        [
+          "zip-tie holes",
+          "wing openings",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wing openings",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Plug preset: before and after, Measure my plug to Standard 3-prong plug - NEMA 5-15; red marks 6 parts, named below.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug preset set to Standard 3-prong plug - NEMA 5-15. Marked in red: 1, the zip-tie holes, the wing openings, the wall notch, the seat, the pocket and the body edge."
   },
   {
     "file": "one-sided",
@@ -40,7 +70,76 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        1045.6,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ]
+      ],
+      [
+        37.8,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        30.8,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        37.8,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        30.8,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "v",
+      "at": "pocket_length",
+      "label": "40 mm"
+    },
+    "alt": "Plug length: before and after, 25.5 to 40 mm; red marks the body edge, the seat, the wall notch, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug length at 40 mm. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the zip-tie holes and the wing openings. 3, the wall notch, the seat and the body edge."
   },
   {
     "file": "one-sided",
@@ -56,11 +155,98 @@
     "tags": [],
     "svg": "one-sided/measure_plug_width_prong_end.svg",
     "features": [
+      "body edge",
       "seat",
       "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        14.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        51.1,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        12.3,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        14.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        51.1,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ]
+      ],
+      [
+        12.3,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "h",
+      "at": "plug_width_prong_end",
+      "label": "32 mm"
+    },
+    "alt": "Plug width at the prong end: before and after, 25 to 32 mm; red marks 5 parts, named below.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the prong end at 32 mm. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline."
   },
   {
     "file": "one-sided",
@@ -78,7 +264,40 @@
     "features": [
       "pocket",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        166.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        166.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings",
+          "pocket"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "h",
+      "at": "plug_width_cord_end",
+      "label": "15 mm"
+    },
+    "alt": "Plug width at the cord end: before and after, 25 to 15 mm; red marks the pocket and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the cord end at 15 mm: tilts the pocket's side walls to match the plug's taper, and the zip-tie holes and wing openings lean in with them. Marked in red: 1, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline."
   },
   {
     "file": "one-sided",
@@ -96,7 +315,33 @@
     "features": [
       "pocket",
       "seat"
-    ]
+    ],
+    "regions_named": [
+      [
+        11.4,
+        [
+          "seat",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat",
+          "pocket"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "v",
+      "at": "plug_thickness_prong_end",
+      "label": "23.5 mm"
+    },
+    "alt": "Plug thickness at the prong end: before and after, 20 to 23.5 mm; red marks the pocket and the seat.",
+    "long_description": "Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the prong end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline."
   },
   {
     "file": "one-sided",
@@ -114,7 +359,33 @@
     "features": [
       "pocket",
       "seat"
-    ]
+    ],
+    "regions_named": [
+      [
+        11.4,
+        [
+          "seat",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat",
+          "pocket"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "v",
+      "at": "plug_thickness_cord_end",
+      "label": "23.5 mm"
+    },
+    "alt": "Plug thickness at the cord end: before and after, 20 to 23.5 mm; red marks the pocket and the seat.",
+    "long_description": "Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the cord end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, when this end is the fatter end of the plug. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline."
   },
   {
     "file": "one-sided",
@@ -136,7 +407,41 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        2361.8,
+        [
+          "zip-tie holes",
+          "finger holes",
+          "wing openings",
+          "wall notch",
+          "pocket",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "finger holes",
+          "wing openings",
+          "wall notch",
+          "pocket",
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "h",
+      "at": "hook_slot",
+      "label": "8 mm"
+    },
+    "alt": "Cord thickness: before and after, 4 to 8 mm; red marks 6 parts, named below.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: cord thickness at 8 mm. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the pocket and the body edge."
   },
   {
     "file": "one-sided",
@@ -157,7 +462,86 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        0.6,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        80.5,
+        [
+          "wall notch",
+          "body edge"
+        ]
+      ],
+      [
+        13.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        48.1,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        10.1,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        13.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        10.1,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch",
+          "body edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Outlet cover plate style: before and after, Standard flat plate to Oversized / Jumbo; red marks 5 parts, named below.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: outlet cover plate style set to Oversized / Jumbo. Marked in red: 1, the wall notch and the body edge: the notch in the top edge; the outer outline. 2, the zip-tie holes: the four small holes beside the pocket. 3, the pocket: the plug recess on the centerline. 4, the wing openings: the two openings beside the pocket."
   },
   {
     "file": "one-sided",
@@ -174,7 +558,11 @@
     "svg": "one-sided/show_plug_preview.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Show the see-through plug: changes no shape.",
+    "long_description": "This dial changes no shape: the see-through plug is a preview aid and is never exported."
   },
   {
     "file": "one-sided",
@@ -195,7 +583,109 @@
       "pocket",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        96.9,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        569.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        93.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        69.6,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        21.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        96.9,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        92.9,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        21.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        5,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hand size: before and after, Medium to Large; red marks the body edge, the finger holes, the pocket, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hand size set to Large. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the pocket: the plug recess on the centerline. 3, the wing openings: the two openings beside the pocket. 4, the finger holes: the two large holes in the lower half. 5, the body edge: the outer outline."
   },
   {
     "file": "one-sided",
@@ -213,11 +703,89 @@
     "tags": [],
     "svg": "one-sided/measure_finger_width.svg",
     "features": [
+      "body edge",
       "finger holes",
       "pocket",
       "wall notch",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        185.7,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        328.7,
+        [
+          "wall notch",
+          "body edge"
+        ]
+      ],
+      [
+        56.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        203.5,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        185.7,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        56.8,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "wall notch",
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "dia",
+      "at": "finger_hole",
+      "label": "26 mm"
+    },
+    "alt": "Finger width: before and after, 20 to 26 mm; red marks the body edge, the finger holes, the pocket, the wall notch and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the wall notch and the body edge."
   },
   {
     "file": "one-sided",
@@ -235,8 +803,38 @@
     "tags": [],
     "svg": "one-sided/measure_hand_width.svg",
     "features": [
-      "wing openings"
-    ]
+      "body edge"
+    ],
+    "regions_named": [
+      [
+        379.0,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        378.6,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "h",
+      "at": "body_width",
+      "label": "100 mm"
+    },
+    "alt": "Hand width: before and after, 85 to 100 mm; red marks the body edge.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: hand width at 100 mm: widens the whole body outline and thickens the slab in step with the hand. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -253,7 +851,33 @@
     "svg": "one-sided/attachment.svg",
     "features": [
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        62.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        62.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        true
+      ]
+    ],
+    "dimension": null,
+    "alt": "Attachment: before and after, Zip ties + Velcro to Zip ties; red marks the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: attachment set to Zip ties: adds or removes the zip-tie holes and the wing or slot openings for the strap. Marked in red: 1, the wing openings: the two openings beside the pocket, removed. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -270,7 +894,33 @@
     "svg": "one-sided/velcro_style.svg",
     "features": [
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        40.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        40.1,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap opening style: before and after, Wing to Classic slot; red marks the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: strap opening style set to Classic slot: swaps the curved wing openings for a pair of plain rectangular slots that lean along the body's sides. Marked in red: 1, the wing openings: the two openings beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -287,7 +937,11 @@
     "svg": "one-sided/strap_width.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Strap width: changes no shape.",
+    "long_description": "This dial changes no shape: it only sets the width the W-14 check compares the wing opening against."
   },
   {
     "file": "one-sided",
@@ -299,12 +953,38 @@
     "context": {},
     "plug": "default",
     "regions": 2,
-    "changed_area_mm2": 68.1,
+    "changed_area_mm2": 68.2,
     "tags": [],
     "svg": "one-sided/hook_hand.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        34.1,
+        [
+          "hook"
+        ]
+      ],
+      [
+        34.1,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook side: before and after, Right to Left; red marks the hook.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hook side set to Left: mirrors the cord hook at the cord end so its catch faces the other side, and nothing else moves. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -324,7 +1004,89 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.6,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.6,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie hole placement: before and after, Auto to Manual; red marks the seat, the wall notch, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: zip-tie hole placement set to Manual. Marked in red: 1, the zip-tie holes, the wall notch and the seat: the four small holes beside the pocket; the notch in the top edge; the round recess at the plug end. 2, the wing openings: the two openings beside the pocket. 3, the zip-tie holes: the four small holes beside the pocket."
   },
   {
     "file": "one-sided",
@@ -342,7 +1104,52 @@
     "features": [
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        18.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Number of zip-tie rows: before and after, 2 to 3; red marks the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: number of zip-tie rows at 3: adds or removes a pair of zip-tie holes, and the rows squeeze together when the body has no room for another. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the zip-tie holes: the four small holes beside the pocket."
   },
   {
     "file": "one-sided",
@@ -363,7 +1170,39 @@
       "seat",
       "wall notch",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        35.7,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ],
+      [
+        35.7,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie pair 1 position: before and after, 6 to 10 mm; red marks the seat, the wall notch and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with zip-tie hole placement set to Manual, a 25 mm wide plug in teal. Right: zip-tie pair 1 position at 10 mm. Marked in red: 1, the zip-tie holes, the wall notch and the seat: the four small holes beside the pocket; the notch in the top edge; the round recess at the plug end."
   },
   {
     "file": "one-sided",
@@ -383,7 +1222,64 @@
     "features": [
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        26.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        26.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie pair 2 position: before and after, 18 to 26 mm; red marks the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with zip-tie hole placement set to Manual, a 25 mm wide plug in teal. Right: zip-tie pair 2 position at 26 mm: slides the second pair of zip-tie holes along the plug's side, measured from the plug end. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket."
   },
   {
     "file": "one-sided",
@@ -404,7 +1300,55 @@
     "features": [
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        34.1,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        7.5,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        34.1,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        7.5,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie pair 3 position: before and after, 30 to 26 mm; red marks the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with zip-tie hole placement set to Manual and number of zip-tie rows set to 3, a 25 mm wide plug in teal. Right: zip-tie pair 3 position at 26 mm. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the zip-tie holes and the wing openings: the four small holes beside the pocket; the two openings beside the pocket."
   },
   {
     "file": "one-sided",
@@ -422,7 +1366,64 @@
     "features": [
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie hole distance from the pocket wall: before and after, 4 to 8 mm; red marks the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: zip-tie hole distance from the pocket wall at 8 mm: moves every zip-tie hole farther from or closer to the pocket wall, and the wing openings reshape around them. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket."
   },
   {
     "file": "one-sided",
@@ -439,7 +1440,33 @@
     "svg": "one-sided/velcro_placement.svg",
     "features": [
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        126.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        126.2,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot placement: before and after, Auto to Manual; red marks the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: strap slot placement set to Manual: switches the strap openings to a pair of plain slots that the position dial slides along the plug's side, whatever the opening style. Marked in red: 1, the wing openings: the two openings beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -459,7 +1486,33 @@
     "svg": "one-sided/velcro_pos.svg",
     "features": [
       "classic slots"
-    ]
+    ],
+    "regions_named": [
+      [
+        166.0,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        166.0,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot position: before and after, 12 to 25 mm; red marks the classic slots.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with strap opening style set to Classic slot and strap slot placement set to Manual, a 25 mm wide plug in teal. Right: strap slot position at 25 mm: slides the pair of strap slots along the plug's side, measured from the plug end. Marked in red: 1, the classic slots: the two slots beside the pocket."
   },
   {
     "file": "one-sided",
@@ -476,7 +1529,11 @@
     "svg": "one-sided/quality.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Render quality: changes no shape.",
+    "long_description": "This dial changes no shape: it only sets the number of segments in every circle and arc."
   },
   {
     "file": "one-sided",
@@ -490,15 +1547,104 @@
     },
     "plug": "default",
     "regions": 9,
-    "changed_area_mm2": 836.2,
+    "changed_area_mm2": 836.3,
     "tags": [],
     "svg": "one-sided/reset_custom_to_medium.svg",
     "features": [
+      "body edge",
       "finger holes",
-      "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        101.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        417.5,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        24.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        59.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        23.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        101.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        24.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        59.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        23.9,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Reset Custom to the Medium reference: before and after, false to true; red marks 4 parts, named below.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: reset Custom to the Medium reference set to true. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the body edge: the outer outline."
   },
   {
     "file": "one-sided",
@@ -515,7 +1661,11 @@
     "svg": "one-sided/custom_enable_auto_fit.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Auto-fit: changes no shape.",
+    "long_description": "This dial changes no shape. Changes no shape at the Custom defaults: it only clamps sliders that leave their safe range, and every clamp is reported in the console."
   },
   {
     "file": "one-sided",
@@ -529,7 +1679,7 @@
     },
     "plug": "default",
     "regions": 1,
-    "changed_area_mm2": 1083.5,
+    "changed_area_mm2": 1083.6,
     "tags": [],
     "svg": "one-sided/custom_puller_length.svg",
     "features": [
@@ -538,7 +1688,35 @@
       "seat",
       "wall notch",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        1083.6,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Body length: before and after, 63.5 to 73.5 mm; red marks the body edge, the pocket, the seat, the wall notch and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body length at 73.5 mm. Marked in red: 1, the zip-tie holes, the wall notch, the seat, the pocket and the body edge: the four small holes beside the pocket; the notch in the top edge; the round recess at the plug end; the plug recess on the centerline; the outer outline."
   },
   {
     "file": "one-sided",
@@ -557,7 +1735,33 @@
     "svg": "one-sided/custom_puller_bottom_width.svg",
     "features": [
       "body edge"
-    ]
+    ],
+    "regions_named": [
+      [
+        49.9,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        49.7,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Body width at the widest point: before and after, 77.6 to 87.6 mm; red marks the body edge.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body width at the widest point at 87.6 mm: widens the body at its widest point, just above the cord end, before the side rounding is applied. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -576,7 +1780,27 @@
     "svg": "one-sided/custom_puller_bottom_corners.svg",
     "features": [
       "body edge"
-    ]
+    ],
+    "regions_named": [
+      [
+        15.0,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Cord-end corner width: before and after, 3 to 13 mm; red marks the body edge.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: cord-end corner width at 13 mm: widens the flat at the cord end where the two lower corners of the body outline sit. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -596,7 +1820,52 @@
     "features": [
       "body edge",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        73.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        34.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        73.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        34.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Body width at the plug end: before and after, 31.75 to 41.75 mm; red marks the body edge and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body width at the plug end at 41.75 mm: widens the plug end of the body, where the wall notch and the pocket seat sit. Marked in red: 1, the body edge: the outer outline. 2, the wing openings: the two openings beside the pocket. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -610,13 +1879,58 @@
     },
     "plug": "default",
     "regions": 4,
-    "changed_area_mm2": 446.0,
+    "changed_area_mm2": 446.1,
     "tags": [],
     "svg": "one-sided/custom_puller_middle_width.svg",
     "features": [
       "body edge",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        172.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        50.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        172.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        50.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Body width at the middle: before and after, 57.35 to 67.35 mm; red marks the body edge and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body width at the middle at 67.35 mm: widens the body at the middle control point, bulging or straightening the side edges between the widest point and the plug end. Marked in red: 1, the body edge: the outer outline. 2, the wing openings: the two openings beside the pocket. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -636,7 +1950,52 @@
     "features": [
       "body edge",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        178.9,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        24.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        172.0,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        24.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Side corner position: before and after, 4.65 to 14.65 mm; red marks the body edge and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: side corner position at 14.65 mm: moves the two widest corners of the body outline up toward the plug end or down toward the cord end. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -655,7 +2014,39 @@
     "svg": "one-sided/custom_body_thickness.svg",
     "features": [
       "body edge"
-    ]
+    ],
+    "regions_named": [
+      [
+        42.6,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        42.6,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        45.8,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Body thickness: before and after, 6.35 to 9 mm; red marks the body edge.",
+    "long_description": "Two vertical slices of the one-sided puller at y = 35 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: body thickness at 9 mm: thickens the whole slab, so every hole and the pocket get deeper walls. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -677,7 +2068,49 @@
       "hook",
       "seat",
       "wall notch"
-    ]
+    ],
+    "regions_named": [
+      [
+        2.4,
+        [
+          "hook",
+          "body edge"
+        ]
+      ],
+      [
+        13.4,
+        [
+          "wall notch",
+          "seat"
+        ]
+      ],
+      [
+        1.9,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        13.4,
+        [
+          "wall notch",
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch",
+          "seat"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Round the cord half only: before and after, true to false; red marks the body edge, the hook, the seat and the wall notch.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: round the cord half only set to false: rounds the whole outline instead of only the cord half, so the plug end loses its crisp corners. Marked in red: 1, the wall notch and the seat: the notch in the top edge; the round recess at the plug end."
   },
   {
     "file": "one-sided",
@@ -696,7 +2129,33 @@
     "svg": "one-sided/custom_pocket_seat_diameter.svg",
     "features": [
       "seat"
-    ]
+    ],
+    "regions_named": [
+      [
+        5.1,
+        [
+          "seat"
+        ]
+      ],
+      [
+        5.1,
+        [
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Pocket seat diameter: before and after, 31.75 to 28 mm; red marks the seat.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: pocket seat diameter at 28 mm: widens the round seat cut into the plug end of the pocket. Marked in red: 1, the seat: the round recess at the plug end. The body edge, the pocket, the wall notch and the wing openings stay where they were."
   },
   {
     "file": "one-sided",
@@ -718,7 +2177,86 @@
       "seat",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        8.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        8.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        11.9,
+        [
+          "seat",
+          "pocket"
+        ]
+      ],
+      [
+        11.9,
+        [
+          "seat",
+          "pocket"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat",
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Pocket width: before and after, 28.85 to 34 mm; red marks the pocket, the seat, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: pocket width at 34 mm. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline. 2, the zip-tie holes: the four small holes beside the pocket. 3, the wing openings: the two openings beside the pocket."
   },
   {
     "file": "one-sided",
@@ -732,13 +2270,52 @@
     },
     "plug": "default",
     "regions": 3,
-    "changed_area_mm2": 36.4,
+    "changed_area_mm2": 36.3,
     "tags": [],
     "svg": "one-sided/custom_pocket_depth.svg",
     "features": [
       "pocket",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        3.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        29.5,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        3.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Pocket depth: before and after, 24.5 to 34 mm; red marks the pocket and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: pocket depth at 34 mm: runs the plug recess farther from the plug end toward the finger holes. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the wing openings: the two openings beside the pocket."
   },
   {
     "file": "one-sided",
@@ -755,7 +2332,11 @@
     "svg": "one-sided/custom_pocket_dome_drop.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Pocket reference drop: changes no shape.",
+    "long_description": "This dial changes no shape: the recess is a rounded-nose shape whose width at the plug end is the pocket width and whose walls follow the side taper, so this reference point cancels out; measured with straight and with tapered walls."
   },
   {
     "file": "one-sided",
@@ -774,7 +2355,27 @@
     "svg": "one-sided/custom_pocket_seat_floor.svg",
     "features": [
       "seat"
-    ]
+    ],
+    "regions_named": [
+      [
+        20.7,
+        [
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Pocket seat floor thickness: before and after, 3.175 to 1.5 mm; red marks the seat.",
+    "long_description": "Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: pocket seat floor thickness at 1.5 mm: thins or thickens the floor left under the round seat, so the seat is cut deeper or shallower. Marked in red: 1, the seat: the round recess at the plug end."
   },
   {
     "file": "one-sided",
@@ -794,7 +2395,29 @@
     "features": [
       "pocket",
       "seat"
-    ]
+    ],
+    "regions_named": [
+      [
+        31.5,
+        [
+          "seat",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat",
+          "pocket"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Plug recess floor thickness: before and after, 3.81 to 2 mm; red marks the pocket and the seat.",
+    "long_description": "Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: plug recess floor thickness at 2 mm: thins or thickens the floor left under the plug recess, so the recess is cut deeper or shallower. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline."
   },
   {
     "file": "one-sided",
@@ -814,7 +2437,36 @@
     "features": [
       "pocket",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        142.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        142.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings",
+          "pocket"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Pocket side taper: before and after, 0 to 10 mm; red marks the pocket and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: pocket side taper at 10 mm: tilts the pocket's side walls inward toward the cord end, and the zip-tie holes and strap slots lean in along the same line. Marked in red: 1, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline."
   },
   {
     "file": "one-sided",
@@ -834,7 +2486,36 @@
     "features": [
       "body edge",
       "finger holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        505.9,
+        [
+          "finger holes",
+          "body edge"
+        ]
+      ],
+      [
+        505.9,
+        [
+          "finger holes",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger holes",
+          "body edge"
+        ],
+        true
+      ]
+    ],
+    "dimension": null,
+    "alt": "Finger holes on or off: before and after, true to false; red marks the body edge and the finger holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: finger holes on or off set to false: cuts or leaves out both finger holes. Marked in red: 1, the finger holes and the body edge: the two large holes in the lower half; the outer outline, removed. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -854,7 +2535,52 @@
     "features": [
       "finger holes",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        126.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        11.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        126.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        11.0,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Finger hole diameter: before and after, 25.4 to 22 mm; red marks the finger holes and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: finger hole diameter at 22 mm: widens both finger holes. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the finger holes: the two large holes in the lower half. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -874,7 +2600,52 @@
     "features": [
       "finger holes",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        177.1,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        177.1,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Finger hole spacing: before and after, 33 to 40 mm; red marks the finger holes and the wing openings.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: finger hole spacing at 40 mm: moves the two finger holes farther apart or closer together. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the finger holes: the two large holes in the lower half."
   },
   {
     "file": "one-sided",
@@ -894,7 +2665,46 @@
     "features": [
       "finger holes",
       "pocket"
-    ]
+    ],
+    "regions_named": [
+      [
+        357.6,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        357.6,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        176.7,
+        [
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Finger hole position: before and after, 19.8 to 26 mm; red marks the finger holes and the pocket.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: finger hole position at 26 mm: slides both finger holes up toward the pocket or down toward the cord hook. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the finger holes: the two large holes in the lower half."
   },
   {
     "file": "one-sided",
@@ -913,7 +2723,27 @@
     "svg": "one-sided/custom_enable_t_hook.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        79.0,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Cord hook on or off: before and after, true to false; red marks the hook.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: cord hook on or off set to false: cuts or leaves out the cord hook at the cord end. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -932,7 +2762,33 @@
     "svg": "one-sided/custom_t_hook_base_gap.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        6.7,
+        [
+          "hook"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook slot width: before and after, 4.7625 to 7 mm; red marks the hook.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook slot width at 7 mm: widens the slot the cord slides into at the cord end. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -946,7 +2802,7 @@
     },
     "plug": "default",
     "regions": 7,
-    "changed_area_mm2": 482.5,
+    "changed_area_mm2": 482.6,
     "tags": [],
     "svg": "one-sided/custom_t_hook_length.svg",
     "features": [
@@ -955,7 +2811,72 @@
       "pocket",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        130.8,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        22.0,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        24.7,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        211.9,
+        [
+          "finger holes",
+          "hook"
+        ]
+      ],
+      [
+        22.0,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        24.6,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        46.6,
+        [
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes",
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook length: before and after, 10.16 to 15 mm; red marks the finger holes, the hook, the pocket, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook length at 15 mm: runs the cord hook farther into the body from the cord end. Marked in red: 1, the finger holes: the two large holes in the lower half. 2, the finger holes and the hook: the two large holes in the lower half; the cord hook slot in the bottom edge."
   },
   {
     "file": "one-sided",
@@ -977,7 +2898,66 @@
       "hook",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        23.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        43.7,
+        [
+          "finger holes",
+          "hook"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger holes",
+          "hook"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook crossbar width: before and after, 11.1125 to 16 mm; red marks the finger holes, the hook, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook crossbar width at 16 mm. Marked in red: 1, the finger holes and the hook: the two large holes in the lower half; the cord hook slot in the bottom edge. 2, the finger holes: the two large holes in the lower half."
   },
   {
     "file": "one-sided",
@@ -996,7 +2976,33 @@
     "svg": "one-sided/custom_t_hook_holder_length.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        19.5,
+        [
+          "hook"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook crossbar height: before and after, 5.08 to 8 mm; red marks the hook.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook crossbar height at 8 mm: makes the crossbar opening taller or shorter along the body. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1013,7 +3019,11 @@
     "svg": "one-sided/custom_t_hook_gap_offset.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Hook slot inset: changes no shape.",
+    "long_description": "This dial changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
   },
   {
     "file": "one-sided",
@@ -1034,7 +3044,71 @@
       "finger holes",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        45.8,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        45.8,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        5.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        5.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        7.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        7.1,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook stem side offset: before and after, 0 to 3 mm; red marks the finger holes, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook stem side offset at 3 mm. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the zip-tie holes: the four small holes beside the pocket. 3, the finger holes: the two large holes in the lower half."
   },
   {
     "file": "one-sided",
@@ -1053,7 +3127,33 @@
     "svg": "one-sided/custom_t_hook_stem_offset.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        12.4,
+        [
+          "hook"
+        ]
+      ],
+      [
+        6.9,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook stem offset: before and after, 4.5 to 7 mm; red marks the hook.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook stem offset at 7 mm: shifts the cord slot sideways along the crossbar, making the J of the hook deeper or shallower. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1072,7 +3172,27 @@
     "svg": "one-sided/custom_t_hook_catch_reach.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        42.1,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook catch reach: before and after, 4.55 to 8 mm; red marks the hook.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook catch reach at 8 mm: extends the crossbar past the slot on the catch side, lengthening the lip the cord hooks under. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1091,7 +3211,11 @@
     "svg": "one-sided/custom_t_hook_tip_drop.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Hook tip drop: changes no shape.",
+    "long_description": "This dial changes no shape. Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0."
   },
   {
     "file": "one-sided",
@@ -1110,7 +3234,27 @@
     "svg": "one-sided/custom_enable_plug_wall_notch.svg",
     "features": [
       "wall notch"
-    ]
+    ],
+    "regions_named": [
+      [
+        99.5,
+        [
+          "wall notch"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Wall notch on or off: before and after, true to false; red marks the wall notch.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: wall notch on or off set to false: cuts or leaves out the notch at the plug end that straddles the outlet's cover plate. Marked in red: 1, the wall notch: the notch in the top edge. The body edge, the pocket, the seat and the wing openings stay where they were."
   },
   {
     "file": "one-sided",
@@ -1129,7 +3273,33 @@
     "svg": "one-sided/custom_plug_wall_notch_width.svg",
     "features": [
       "wall notch"
-    ]
+    ],
+    "regions_named": [
+      [
+        12.7,
+        [
+          "wall notch"
+        ]
+      ],
+      [
+        12.7,
+        [
+          "wall notch"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Wall notch width: before and after, 26.67 to 20 mm; red marks the wall notch.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: wall notch width at 20 mm: widens or narrows the notch at the plug end. Marked in red: 1, the wall notch: the notch in the top edge. The body edge, the pocket, the seat and the wing openings stay where they were."
   },
   {
     "file": "one-sided",
@@ -1150,7 +3320,53 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        140.0,
+        [
+          "zip-tie holes",
+          "wall notch"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Wall notch depth: before and after, 3.81 to 7 mm; red marks the wall notch, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: wall notch depth at 7 mm: cuts the notch deeper or shallower into the plug end. Marked in red: 1, the zip-tie holes and the wall notch: the four small holes beside the pocket; the notch in the top edge. The body edge, the pocket, the seat and the wing openings stay where they were."
   },
   {
     "file": "one-sided",
@@ -1169,7 +3385,33 @@
     "svg": "one-sided/custom_plug_wall_notch_rounding.svg",
     "features": [
       "wall notch"
-    ]
+    ],
+    "regions_named": [
+      [
+        1.7,
+        [
+          "wall notch"
+        ]
+      ],
+      [
+        1.8,
+        [
+          "wall notch"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Wall notch corner rounding: before and after, 2.54 to 0 mm; red marks the wall notch.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: wall notch corner rounding at 0 mm: rounds or squares the notch's two inner corners. Marked in red: 1, the wall notch: the notch in the top edge. The body edge, the pocket, the seat and the wing openings stay where they were."
   },
   {
     "file": "one-sided",
@@ -1189,7 +3431,64 @@
     "features": [
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        9.6,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        9.6,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie hole diameter: before and after, 5.08 to 7 mm; red marks the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: zip-tie hole diameter at 7 mm: widens every zip-tie hole. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1209,7 +3508,64 @@
     "features": [
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        22.9,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        22.9,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie row spacing: before and after, 17.78 to 12 mm; red marks the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: zip-tie row spacing at 12 mm: moves the second row of zip-tie holes closer to or farther from the first. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the zip-tie holes: the four small holes beside the pocket."
   },
   {
     "file": "one-sided",
@@ -1226,7 +3582,11 @@
     "svg": "one-sided/custom_zip_tie_width_spacing.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Zip-tie column spacing: changes no shape.",
+    "long_description": "This dial changes no shape. Changes no shape of its own: the zip-tie columns sit zip_edge_offset inside the pocket wall; this dial only feeds the auto-fit finger keep-out, which trimmed the row spacing by 0.05 mm at the Custom defaults."
   },
   {
     "file": "one-sided",
@@ -1240,13 +3600,76 @@
     },
     "plug": "default",
     "regions": 7,
-    "changed_area_mm2": 81.0,
+    "changed_area_mm2": 81.1,
     "tags": [],
     "svg": "one-sided/custom_zip_tie_distance_from_notch.svg",
     "features": [
       "wing openings",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        0.5,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.3,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie distance from the notch: before and after, 5.1 to 9 mm; red marks the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: zip-tie distance from the notch at 9 mm: moves the first row of zip-tie holes farther from the wall notch, and the second row follows. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket."
   },
   {
     "file": "one-sided",
@@ -1266,7 +3689,42 @@
     "features": [
       "pocket",
       "zip-tie holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        2.4,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        2.7,
+        [
+          "zip-tie holes",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes",
+          "pocket"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie countersink: before and after, 0.9 to 2.5 mm; red marks the pocket and the zip-tie holes.",
+    "long_description": "Two vertical slices of the one-sided puller at x = 10.4 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: zip-tie countersink at 2.5 mm. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the zip-tie holes and the pocket: the four small holes beside the pocket; the plug recess on the centerline."
   },
   {
     "file": "one-sided",
@@ -1286,7 +3744,33 @@
     "svg": "one-sided/custom_velcro_hole_length.svg",
     "features": [
       "classic slots"
-    ]
+    ],
+    "regions_named": [
+      [
+        63.1,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        63.1,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot length: before and after, 12 to 18 mm; red marks the classic slots.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom and strap opening style set to Classic slot, a 25 mm wide plug in teal. Right: strap slot length at 18 mm: lengthens each plain strap slot along its lean. Marked in red: 1, the classic slots: the two slots beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1306,7 +3790,33 @@
     "svg": "one-sided/custom_velcro_hole_width.svg",
     "features": [
       "classic slots"
-    ]
+    ],
+    "regions_named": [
+      [
+        58.2,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        58.2,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot width: before and after, 7 to 11 mm; red marks the classic slots.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom and strap opening style set to Classic slot, a 25 mm wide plug in teal. Right: strap slot width at 11 mm: widens each plain strap slot. Marked in red: 1, the classic slots: the two slots beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1326,7 +3836,33 @@
     "svg": "one-sided/custom_velcro_hole_x_center.svg",
     "features": [
       "classic slots"
-    ]
+    ],
+    "regions_named": [
+      [
+        73.5,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        73.5,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot distance from the centerline: before and after, 19.4 to 14 mm; red marks the classic slots.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom and strap opening style set to Classic slot, a 25 mm wide plug in teal. Right: strap slot distance from the centerline at 14 mm: moves the two plain strap slots closer to or farther from the centerline. Marked in red: 1, the classic slots: the two slots beside the pocket."
   },
   {
     "file": "one-sided",
@@ -1346,7 +3882,33 @@
     "svg": "one-sided/custom_velcro_hole_y_center.svg",
     "features": [
       "classic slots"
-    ]
+    ],
+    "regions_named": [
+      [
+        68.7,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        68.7,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot position along the body: before and after, 46 to 38 mm; red marks the classic slots.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom and strap opening style set to Classic slot, a 25 mm wide plug in teal. Right: strap slot position along the body at 38 mm: slides the two plain strap slots toward the cord end or the plug end. Marked in red: 1, the classic slots: the two slots beside the pocket."
   },
   {
     "file": "one-sided",
@@ -1366,7 +3928,33 @@
     "svg": "one-sided/custom_velcro_hole_rotation.svg",
     "features": [
       "classic slots"
-    ]
+    ],
+    "regions_named": [
+      [
+        45.6,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        45.6,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot lean: before and after, 23.5 to 60 deg; red marks the classic slots.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom and strap opening style set to Classic slot, a 25 mm wide plug in teal. Right: strap slot lean at 60 deg: leans the two plain strap slots more or less steeply, mirrored on the two sides. Marked in red: 1, the classic slots: the two slots beside the pocket."
   },
   {
     "file": "one-sided",
@@ -1385,7 +3973,33 @@
     "svg": "one-sided/custom_body_side_rounding.svg",
     "features": [
       "body edge"
-    ]
+    ],
+    "regions_named": [
+      [
+        77.5,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        77.5,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Body side rounding: before and after, 15.85 to 5 mm; red marks the body edge.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body side rounding at 5 mm: rounds the body outline's corners more or less, down to the plain octagon at 0. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -1404,7 +4018,33 @@
     "svg": "one-sided/custom_body_top_rounding.svg",
     "features": [
       "body edge"
-    ]
+    ],
+    "regions_named": [
+      [
+        1.6,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        1.6,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Top edge rounding: before and after, 2.54 to 0 mm; red marks the body edge.",
+    "long_description": "Two vertical slices of the one-sided puller at y = 35 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: top edge rounding at 0 mm: rounds or squares the edge where the body's top face meets its sides. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -1423,7 +4063,33 @@
     "svg": "one-sided/custom_body_bottom_rounding.svg",
     "features": [
       "body edge"
-    ]
+    ],
+    "regions_named": [
+      [
+        1.0,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Bottom edge rounding: before and after, 0 to 2 mm; red marks the body edge.",
+    "long_description": "Two vertical slices of the one-sided puller at y = 35 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: bottom edge rounding at 2 mm: rounds or squares the edge where the body's bottom face meets its sides. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline."
   },
   {
     "file": "one-sided",
@@ -1443,7 +4109,63 @@
     "svg": "one-sided/custom_velcro_side_rounding.svg",
     "features": [
       "classic slots"
-    ]
+    ],
+    "regions_named": [
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.4,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        2.7,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot corner rounding: before and after, 0 to 2.5 mm; red marks the classic slots.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom and strap opening style set to Classic slot, a 25 mm wide plug in teal. Right: strap slot corner rounding at 2.5 mm: rounds the four corners of each plain strap slot. Marked in red: 1, the classic slots: the two slots beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1463,7 +4185,81 @@
     "features": [
       "pocket",
       "wing openings"
-    ]
+    ],
+    "regions_named": [
+      [
+        0.7,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings",
+          "pocket"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap opening edge rounding: before and after, 0 to 1.5 mm; red marks the pocket and the wing openings.",
+    "long_description": "Two vertical slices of the one-sided puller at y = 46 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: strap opening edge rounding at 1.5 mm. Marked in red: 1, the wing openings: the two openings beside the pocket. 2, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline."
   },
   {
     "file": "one-sided",
@@ -1482,7 +4278,69 @@
     "svg": "one-sided/custom_finger_hole_rounding.svg",
     "features": [
       "finger holes"
-    ]
+    ],
+    "regions_named": [
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "finger holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger holes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Finger hole rim rounding: before and after, 2.5 to 0 mm; red marks the finger holes.",
+    "long_description": "Two vertical slices of the one-sided puller at y = 19.8 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: finger hole rim rounding at 0 mm: rounds or squares the rims of both finger holes on both faces. Marked in red: 1, the finger holes: the two large holes in the lower half. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1501,7 +4359,27 @@
     "svg": "one-sided/custom_t_hook_holder_side_rounding.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        0.7,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook crossbar corner rounding: before and after, 1.27 to 0 mm; red marks the hook.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook crossbar corner rounding at 0 mm: rounds or squares the top corners of the hook's crossbar. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "one-sided",
@@ -1518,7 +4396,11 @@
     "svg": "one-sided/custom_t_hook_gap_side_rounding.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Hook slot corner rounding: changes no shape.",
+    "long_description": "This dial changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
   },
   {
     "file": "one-sided",
@@ -1537,7 +4419,33 @@
     "svg": "one-sided/custom_t_hook_top_bottom_rounding.svg",
     "features": [
       "hook"
-    ]
+    ],
+    "regions_named": [
+      [
+        1.0,
+        [
+          "hook"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hook edge rounding: before and after, 0 to 2 mm; red marks the hook.",
+    "long_description": "Two vertical slices of the one-sided puller at x = 4.5 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: hook edge rounding at 2 mm: flares the top and bottom edges of the cord hook's slot and crossbar. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were."
   },
   {
     "file": "two-sided",
@@ -1557,7 +4465,77 @@
       "finger lobes",
       "plate edge",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        16.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        16.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        88.0,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        88.0,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        567.2,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        567.2,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip stations"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Plug preset: before and after, Measure my plug to Heavy-duty extension cord - NEMA 5-15; red marks 4 parts, named below.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the finger lobes, the arms and the plate edge. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm."
   },
   {
     "file": "two-sided",
@@ -1574,7 +4552,37 @@
     "svg": "two-sided/measure_plug_length.svg",
     "features": [
       "arms"
-    ]
+    ],
+    "regions_named": [
+      [
+        331.1,
+        [
+          "arms"
+        ]
+      ],
+      [
+        331.1,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "v",
+      "at": "plug_length",
+      "label": "40 mm"
+    },
+    "alt": "Plug length: before and after, 25.5 to 40 mm; red marks the arms.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug length at 40 mm: lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them. Marked in red: 1, the arms: the two toothed arms in the upper half. The plate edge, the teeth, the finger lobes and the cord channel stay where they were."
   },
   {
     "file": "two-sided",
@@ -1594,7 +4602,78 @@
       "cord channel",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        3.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        148.9,
+        [
+          "arms"
+        ]
+      ],
+      [
+        148.9,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes",
+          "cord channel"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "h",
+      "at": "gap_tips",
+      "label": "28 mm"
+    },
+    "alt": "Plug width at the prong end: before and after, 20 to 28 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom."
   },
   {
     "file": "two-sided",
@@ -1613,7 +4692,59 @@
       "arms",
       "teeth",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        71.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        71.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        5.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        5.1,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "h",
+      "at": "gap_cord_end",
+      "label": "12 mm"
+    },
+    "alt": "Plug width at the cord end: before and after, 20 to 12 mm; red marks the arms, the teeth and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the cord end at 12 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1633,7 +4764,112 @@
       "cord channel",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        72.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        104.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        91.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.8,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        72.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        104.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        91.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.8,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes",
+          "cord channel"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "zip stations"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "h",
+      "at": "channel",
+      "label": "9 mm"
+    },
+    "alt": "Cord thickness: before and after, 4 to 9 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm."
   },
   {
     "file": "two-sided",
@@ -1651,7 +4887,55 @@
     "features": [
       "arms",
       "teeth"
-    ]
+    ],
+    "regions_named": [
+      [
+        3.9,
+        [
+          "arms"
+        ]
+      ],
+      [
+        2.5,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        2.5,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        3.9,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Plug sides: before and after, Rounded sides to Flat sides; red marks the arms and the teeth.",
+    "long_description": "Two vertical slices of the two-sided puller at y = 45 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug sides set to Flat sides. Marked in red: 1, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half. 2, the arms: the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1668,7 +4952,11 @@
     "svg": "two-sided/show_plug_preview.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Show the see-through plug: changes no shape.",
+    "long_description": "This dial changes no shape: the see-through plug is a preview aid and is never exported."
   },
   {
     "file": "two-sided",
@@ -1687,7 +4975,86 @@
       "arms",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Hand size: before and after, Medium to Large; red marks the arms, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: hand size set to Large. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes and the arms: the two rounded lobes in the lower half; the two toothed arms in the upper half. 3, the finger lobes: the two rounded lobes in the lower half."
   },
   {
     "file": "two-sided",
@@ -1709,7 +5076,74 @@
       "finger lobes",
       "plate edge",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        627.3,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        627.3,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ],
+        false
+      ]
+    ],
+    "dimension": {
+      "kind": "dia",
+      "at": "finger_hole",
+      "label": "26 mm"
+    },
+    "alt": "Finger width: before and after, 20 to 26 mm; red marks the arms, the finger lobes, the plate edge and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 20 mm wide plug in teal. Right: finger width at 26 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes, the arms and the plate edge: the two rounded lobes in the lower half; the two toothed arms in the upper half; the outer outline."
   },
   {
     "file": "two-sided",
@@ -1730,7 +5164,55 @@
       "arms",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Attachment: before and after, Zip ties + Velcro strap to Zip ties; red marks the arms, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40, a 20 mm wide plug in teal. Right: attachment set to Zip ties. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the strap slot and the arms: the long slot in each arm; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1751,7 +5233,55 @@
       "arms",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap width: before and after, 15 to 25 mm; red marks the arms, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40, a 20 mm wide plug in teal. Right: strap width at 25 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the strap slot and the arms: the long slot in each arm; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1771,7 +5301,79 @@
       "finger lobes",
       "plate edge",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        150.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        150.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        686.6,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        360.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        360.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        686.6,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [],
+    "dimension": null,
+    "alt": "Print layout: one view, Both plates to One plate; the layout with both plates, nothing marked.",
+    "long_description": "One top view of the two-sided puller with both plates side by side, the plug end at the top: what the file prints at Both plates. At One plate it prints one plate. Nothing is marked in red: this dial changes the layout, not the plate."
   },
   {
     "file": "two-sided",
@@ -1790,7 +5392,98 @@
       "arms",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        15.3,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        15.3,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        118.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        118.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        217.5,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        217.5,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        20.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        20.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        15.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        15.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Extra wall on the plate: before and after, 0 to 2 mm; red marks the arms, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: extra wall on the plate at 2 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes and the arms: the two rounded lobes in the lower half; the two toothed arms in the upper half. 3, the finger lobes: the two rounded lobes in the lower half."
   },
   {
     "file": "two-sided",
@@ -1809,7 +5502,58 @@
       "cord channel",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        32.2,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        5.3,
+        [
+          "zip stations",
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        5.3,
+        [
+          "zip stations",
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        32.2,
+        [
+          "finger lobes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations",
+          "finger lobes",
+          "cord channel"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Plate thickness: before and after, 4 to 6 mm; red marks the cord channel, the finger lobes and the zip stations.",
+    "long_description": "Two vertical slices of the two-sided puller at y = 3 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plate thickness at 6 mm. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. 2, the zip stations, the finger lobes and the cord channel: the three small holes along each arm; the two rounded lobes in the lower half; the gap between the lobes at the bottom."
   },
   {
     "file": "two-sided",
@@ -1829,7 +5573,55 @@
     "features": [
       "arms",
       "teeth"
-    ]
+    ],
+    "regions_named": [
+      [
+        3.1,
+        [
+          "arms"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Grip bite: before and after, -1 to -2 mm; red marks the arms and the teeth.",
+    "long_description": "Two vertical slices of the two-sided puller at y = 45 mm, before left and after right, the top face up. Left: the defaults with plug sides set to Flat sides, the plug in teal in the cut. Right: grip bite at -2 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1849,7 +5641,55 @@
     "features": [
       "arms",
       "teeth"
-    ]
+    ],
+    "regions_named": [
+      [
+        7.9,
+        [
+          "arms"
+        ]
+      ],
+      [
+        5.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        5.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        7.9,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Cradle depth: before and after, 2.5 to 0 mm; red marks the arms and the teeth.",
+    "long_description": "Two vertical slices of the two-sided puller at y = 45 mm, before left and after right, the top face up. Left: the defaults with plug sides set to Rounded sides, the plug in teal in the cut. Right: cradle depth at 0 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1869,7 +5709,55 @@
     "features": [
       "arms",
       "teeth"
-    ]
+    ],
+    "regions_named": [
+      [
+        2.3,
+        [
+          "arms"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        2.3,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Grip clearance: before and after, 0.5 to 2 mm; red marks the arms and the teeth.",
+    "long_description": "Two vertical slices of the two-sided puller at y = 45 mm, before left and after right, the top face up. Left: the defaults with plug sides set to Rounded sides, the plug in teal in the cut. Right: grip clearance at 2 mm. Marked in red: 1, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half. 2, the arms: the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1889,7 +5777,81 @@
       "cord channel",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        8.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        8.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        31.4,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        31.4,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        46.1,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        46.1,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        40.4,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes",
+          "cord channel"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip stations"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Cord channel clearance: before and after, 0.8 to 3 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord channel clearance at 3 mm. Marked in red: 1, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm."
   },
   {
     "file": "two-sided",
@@ -1908,7 +5870,86 @@
       "arms",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Finger hole fit: before and after, 1 to 4 mm; red marks the arms, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: finger hole fit at 4 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes and the arms: the two rounded lobes in the lower half; the two toothed arms in the upper half. 3, the finger lobes: the two rounded lobes in the lower half."
   },
   {
     "file": "two-sided",
@@ -1927,7 +5968,86 @@
       "arms",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        166.8,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        166.8,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        271.6,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        271.6,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Finger lobe wall: before and after, 5 to 9 mm; red marks the arms, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: finger lobe wall at 9 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes and the arms: the two rounded lobes in the lower half; the two toothed arms in the upper half. 3, the finger lobes: the two rounded lobes in the lower half."
   },
   {
     "file": "two-sided",
@@ -1946,7 +6066,79 @@
       "arms",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        125.5,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        22.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        22.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        110.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        125.5,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        110.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Wall beside the cord channel: before and after, 3 to 6 mm; red marks the arms, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: wall beside the cord channel at 6 mm. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. 2, the finger lobes and the arms: the two rounded lobes in the lower half; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -1963,7 +6155,129 @@
     "svg": "two-sided/plate_tooth_diameter.svg",
     "features": [
       "teeth"
-    ]
+    ],
+    "regions_named": [
+      [
+        0.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.4,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.4,
+        [
+          "teeth"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Tooth size: before and after, 2 to 4 mm; red marks the teeth.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: tooth size at 4 mm: cuts bigger or smaller scallops into the arms' gripping edges. Marked in red: 1, the teeth: the serrated inner edges of the arms. The plate edge, the arms, the finger lobes and the cord channel stay where they were."
   },
   {
     "file": "two-sided",
@@ -1980,7 +6294,81 @@
     "svg": "two-sided/plate_tooth_pitch.svg",
     "features": [
       "teeth"
-    ]
+    ],
+    "regions_named": [
+      [
+        3.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        3.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.6,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.6,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        3.4,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        3.4,
+        [
+          "teeth"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Tooth spacing: before and after, 2.8 to 4.5 mm; red marks the teeth.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: tooth spacing at 4.5 mm: spaces the teeth farther apart or closer together along the gripping edges. Marked in red: 1, the teeth: the serrated inner edges of the arms. The plate edge, the arms, the finger lobes and the cord channel stay where they were."
   },
   {
     "file": "two-sided",
@@ -1997,7 +6385,117 @@
     "svg": "two-sided/plate_tooth_depth.svg",
     "features": [
       "teeth"
-    ]
+    ],
+    "regions_named": [
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Tooth depth: before and after, 1 to 0.3 mm; red marks the teeth.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: tooth depth at 0.3 mm: cuts each tooth deeper or shallower into the gripping edge. Marked in red: 1, the teeth: the serrated inner edges of the arms. The plate edge, the arms, the finger lobes and the cord channel stay where they were."
   },
   {
     "file": "two-sided",
@@ -2016,7 +6514,67 @@
       "arms",
       "teeth",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        41.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        41.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Toothed zone start: before and after, 4 to 15 mm; red marks the arms, the teeth and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: toothed zone start at 15 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -2034,7 +6592,64 @@
     "features": [
       "arms",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        56.6,
+        [
+          "arms"
+        ]
+      ],
+      [
+        56.6,
+        [
+          "arms"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Toothed zone length: before and after, 0 to 12 mm; red marks the arms and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: toothed zone length at 12 mm: sets how far the teeth run along each arm instead of covering the whole plug body. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the arms: the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -2054,7 +6669,71 @@
       "cord channel",
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        0.7,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        36.8,
+        [
+          "arms"
+        ]
+      ],
+      [
+        36.8,
+        [
+          "arms"
+        ]
+      ],
+      [
+        7.3,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        7.3,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Tip flare: before and after, 0.7 to 3 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: tip flare at 3 mm: opens the gap wider right at the arm tips so the plug head can enter before the teeth bite. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm."
   },
   {
     "file": "two-sided",
@@ -2072,7 +6751,52 @@
     "features": [
       "arms",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        87.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        87.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        23.4,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        23.4,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Arm tip width: before and after, 11 to 16 mm; red marks the arms and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: arm tip width at 16 mm: widens the rounded tip of each arm, so the arms taper less. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm."
   },
   {
     "file": "two-sided",
@@ -2089,7 +6813,33 @@
     "svg": "two-sided/plate_edge_rounding.svg",
     "features": [
       "finger lobes"
-    ]
+    ],
+    "regions_named": [
+      [
+        0.6,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        0.6,
+        [
+          "finger lobes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Outer edge rounding: before and after, 1.2 to 0 mm; red marks the finger lobes.",
+    "long_description": "Two vertical slices of the two-sided puller at y = 3 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: outer edge rounding at 0 mm: rounds or squares the outer face's edge all around the plate, while the plug-contact face stays square. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. The plate edge, the arms, the teeth and the cord channel stay where they were."
   },
   {
     "file": "two-sided",
@@ -2106,7 +6856,27 @@
     "svg": "two-sided/plate_strip_thickness.svg",
     "features": [
       "cord channel"
-    ]
+    ],
+    "regions_named": [
+      [
+        5.4,
+        [
+          "cord channel"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "cord channel"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Cable strip thickness: before and after, 1 to 0 mm; red marks the cord channel.",
+    "long_description": "Two vertical slices of the two-sided puller at y = 3 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: cable strip thickness at 0 mm: thickens or removes the thin strip that bridges the cord channel on the outer face and ties the two arms together. Marked in red: 1, the cord channel: the gap between the lobes at the bottom. The plate edge, the arms, the teeth and the finger lobes stay where they were."
   },
   {
     "file": "two-sided",
@@ -2126,7 +6896,83 @@
       "finger lobes",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        17.8,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ],
+      [
+        17.8,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ],
+      [
+        17.8,
+        [
+          "zip stations",
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        17.8,
+        [
+          "zip stations",
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        16.0,
+        [
+          "zip stations",
+          "arms"
+        ]
+      ],
+      [
+        16.0,
+        [
+          "zip stations",
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations",
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations",
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip stations",
+          "strap slot"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie hole diameter: before and after, 4 to 6 mm; red marks the arms, the finger lobes, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: zip-tie hole diameter at 6 mm. Marked in red: 1, the zip stations and the arms. 2, the zip stations, the finger lobes and the arms. 3, the zip stations and the strap slot."
   },
   {
     "file": "two-sided",
@@ -2147,7 +6993,95 @@
       "arms",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        7.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        7.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        15.1,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        15.1,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "strap slot"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie station placement: before and after, Auto to Manual; red marks the arms, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40, a 20 mm wide plug in teal. Right: zip-tie station placement set to Manual. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the strap slot: the long slot in each arm."
   },
   {
     "file": "two-sided",
@@ -2168,7 +7102,52 @@
     "features": [
       "finger lobes",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "finger lobes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        true
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie station 1 position: before and after, 4 to 27 mm; red marks the finger lobes and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 1 position at 27 mm. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. 2, the zip stations: the three small holes along each arm, removed."
   },
   {
     "file": "two-sided",
@@ -2189,7 +7168,36 @@
     "features": [
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        58.9,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ],
+      [
+        58.9,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations",
+          "strap slot"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie station 2 position: before and after, 32 to 36 mm; red marks the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 2 position at 36 mm. Marked in red: 1, the zip stations and the strap slot: the three small holes along each arm; the long slot in each arm."
   },
   {
     "file": "two-sided",
@@ -2211,7 +7219,71 @@
       "arms",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        34.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        34.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        46.0,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        46.0,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        true
+      ],
+      [
+        3,
+        [
+          "strap slot"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Zip-tie station 3 position: before and after, 63 to 58 mm; red marks the arms, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 3 position at 58 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm, removed. 3, the strap slot: the long slot in each arm."
   },
   {
     "file": "two-sided",
@@ -2232,7 +7304,55 @@
       "arms",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        189.2,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        189.2,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Wall between the teeth and the slot: before and after, 2.2 to 5 mm; red marks the arms, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40, a 20 mm wide plug in teal. Right: wall between the teeth and the slot at 5 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the strap slot and the arms: the long slot in each arm; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -2253,7 +7373,55 @@
       "arms",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        172.9,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        172.9,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot width: before and after, 9.3 to 14 mm; red marks the arms, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40, a 20 mm wide plug in teal. Right: strap slot width at 14 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the strap slot and the arms: the long slot in each arm; the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -2274,7 +7442,64 @@
       "arms",
       "strap slot",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        16.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        16.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        45.9,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        45.9,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "strap slot"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "arms"
+        ],
+        false
+      ]
+    ],
+    "dimension": null,
+    "alt": "Strap slot length: before and after, 28 to 15 mm; red marks the arms, the strap slot and the zip stations.",
+    "long_description": "Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40, a 20 mm wide plug in teal. Right: strap slot length at 15 mm: lengthens or shortens the strap slot along each arm, within the window between the zip-tie stations. Marked in red: 1, the strap slot: the long slot in each arm. 2, the arms: the two toothed arms in the upper half."
   },
   {
     "file": "two-sided",
@@ -2291,6 +7516,10 @@
     "svg": "two-sided/quality.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": [],
+    "alt": "Render quality: changes no shape.",
+    "long_description": "This dial changes no shape: it only sets the number of segments in every circle and arc."
   }
 ]

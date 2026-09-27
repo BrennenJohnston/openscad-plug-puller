@@ -1,0 +1,51 @@
+[
+  {
+    "file": "one-sided",
+    "key": "one-sided-vacuum-plug",
+    "title": "The four steps on a US vacuum plug",
+    "plug_label": "US vacuum plug",
+    "stages": [
+      {"step": "defaults", "set": {}},
+      {
+        "step": "Step 1 - Your Plug",
+        "set": {
+          "measure_plug_length": 38,
+          "measure_plug_width_prong_end": 34,
+          "measure_plug_width_cord_end": 34,
+          "measure_plug_thickness_prong_end": 16,
+          "measure_plug_thickness_cord_end": 16,
+          "measure_cord_thickness": 5,
+          "measure_wall_plate_style": "Rocker / Decora"
+        }
+      },
+      {
+        "step": "Step 2 - Size",
+        "set": {"size": "Measure my hand", "measure_finger_width": 22, "measure_hand_width": 88}
+      },
+      {"step": "Step 3 - Attachment", "set": {"attachment": "Zip ties"}},
+      {"step": "Step 4 - Cord Hook", "set": {"hook_hand": "Left"}}
+    ]
+  },
+  {
+    "file": "two-sided",
+    "key": "two-sided-usb-c",
+    "title": "The four steps on a USB-C laptop plug",
+    "plug_label": "USB-C laptop plug",
+    "stages": [
+      {"step": "defaults", "set": {}},
+      {
+        "step": "Step 1 - Your Plug",
+        "set": {
+          "measure_plug_length": 23,
+          "measure_plug_width_prong_end": 13,
+          "measure_plug_width_cord_end": 13,
+          "measure_cord_thickness": 7,
+          "plug_sides": "Rounded sides"
+        }
+      },
+      {"step": "Step 2 - Size", "set": {"size": "Large"}},
+      {"step": "Step 3 - Attachment", "set": {"attachment": "Zip ties"}},
+      {"step": "Step 4 - Print Layout", "set": {"print_layout": "Both plates"}}
+    ]
+  }
+]

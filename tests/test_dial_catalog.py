@@ -33,7 +33,28 @@ FILES = {
 
 ROW_KEYS = {"file", "name", "section", "tier", "quick_start", "title", "changes",
             "diagram", "note"}
-DIAGRAM_KEYS = {"view", "style", "before", "after", "context", "plug", "crop"}
+DIAGRAM_KEYS = {"view", "style", "before", "after", "context", "plug", "crop", "dimension"}
+DIMENSION_KINDS = {"h", "v", "dia"}
+# The anchors a dimension callout may sit on (the plan's Appendix C).
+DIMENSION_ANCHORS = {
+    "plug_length", "plug_width_prong_end", "plug_width_cord_end",
+    "plug_thickness_prong_end", "plug_thickness_cord_end", "cord", "finger_width",
+    "hand_width", "strap_width", "wall_plate", "plug_sides",
+    "pocket_length", "hook_slot", "finger_hole", "body_width", "gap_tips",
+    "gap_cord_end", "channel", "slot_length", "floor",
+}
+# The numeric Step dials that carry a dimension callout, and nothing else: 13
+# of the 14 (the two-sided strap_width's nudge leaves the plug without a
+# strap slot, so there is nothing to dimension on its after state).
+DIMENSION_ROWS = {
+    ("one-sided", "measure_plug_length"), ("one-sided", "measure_plug_width_prong_end"),
+    ("one-sided", "measure_plug_width_cord_end"), ("one-sided", "measure_plug_thickness_prong_end"),
+    ("one-sided", "measure_plug_thickness_cord_end"), ("one-sided", "measure_cord_thickness"),
+    ("one-sided", "measure_finger_width"), ("one-sided", "measure_hand_width"),
+    ("two-sided", "measure_plug_length"), ("two-sided", "measure_plug_width_prong_end"),
+    ("two-sided", "measure_plug_width_cord_end"), ("two-sided", "measure_cord_thickness"),
+    ("two-sided", "measure_finger_width"),
+}
 VIEWS = {"top", "side", "section-x", "section-y", "none"}
 STYLES = {"fill", "trace"}
 TIERS = {"step", "advanced", "custom"}
@@ -250,6 +271,26 @@ def test_title_and_changes_wording(catalog) -> None:
                     f"{name}: {label} uses the banned word {word!r}")
             for word in RETIRED_WORDS:
                 assert word not in lowered, f"{name}: {label} uses the retired word {word!r}"
+
+
+def test_dimension_key(catalog) -> None:
+    """Every row's diagram carries ``dimension``: null, or ``{"kind", "at"}``
+    with a kind of h, v or dia and an anchor from the list; exactly the
+    DIMENSION_ROWS carry one."""
+    with_dimension = set()
+    for row in catalog:
+        diagram = row["diagram"]
+        assert "dimension" in diagram, f"{row['name']}: no dimension key"
+        dim = diagram["dimension"]
+        if dim is None:
+            continue
+        assert isinstance(dim, dict) and set(dim.keys()) == {"kind", "at"}, (
+            f"{row['name']}: dimension is null or {{kind, at}}, not {dim!r}")
+        assert dim["kind"] in DIMENSION_KINDS, f"{row['name']}: kind {dim['kind']!r}"
+        assert dim["at"] in DIMENSION_ANCHORS, f"{row['name']}: anchor {dim['at']!r}"
+        with_dimension.add((row["file"], row["name"]))
+    assert with_dimension == DIMENSION_ROWS, (
+        f"rows with a dimension: {sorted(with_dimension ^ DIMENSION_ROWS)} differ from the list")
 
 
 def test_counts(catalog) -> None:

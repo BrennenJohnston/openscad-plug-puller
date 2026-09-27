@@ -8,20 +8,33 @@ the outline-sheet helpers (the shadow silhouette with its through-holes plus
 the pocket recess for the one-sided puller; the contact-face section for a
 two-sided plate; the Z-only dials get a vertical section instead, drawn
 with Z up the page), and the symmetric difference of the two views is the
-red dashed trace of "what this dial moves". Each diagram is an SVG at
-1 unit = 1 mm under ``docs/dials/<file>/<name>.svg``: the black default
-outline, the teal plug, the red trace, the legend line, and a ``<title>`` /
-``<desc>`` pair carrying the row's words. Rows whose ``view`` is ``none``
-get a small SVG saying the dial changes no shape.
+changed geometry of "what this dial moves". Each diagram is an SVG at
+1 unit = 1 mm under ``docs/dials/<file>/<name>.svg``. The pair layout (the
+default since R3, FD-48) draws three parts at one scale: the BEFORE panel
+(the tool at the dial's default, the plug in teal), an arrow with the two
+values, and the AFTER panel (the tool after the dial moved, drawn once in
+black, with the pieces of its outline that moved overdrawn in red dots),
+numbered dots on the moved edges and a key column beside the picture that
+names them; no dial name and no legend inside the picture. A feature that
+disappeared is drawn from its old outline in red dots and marked removed.
+``--layout single`` keeps the previous one-drawing picture for one release
+cycle. Rows whose ``view`` is ``none`` get a small SVG saying the dial
+changes no shape. Every SVG carries a ``<title>`` / ``<desc>`` pair.
 
 Renders are cached under ``tmp_renders/dial_diagrams/`` (gitignored), keyed
 by the parameter set and the SCAD sources, never by STL bytes (identical
 renders are not byte-identical).
 
+The two storyboards of ``dial_storyboards.json`` (the four Customizer steps
+applied one after another to a real plug, five panels in a 3 + 2 grid) are
+drawn by ``--storyboards`` into ``docs/dials/<file>/storyboard.svg`` with
+their own index, ``docs/dials/storyboards_index.json``.
+
 Usage:
     python scripts/generate_dial_diagrams.py                 # every row
     python scripts/generate_dial_diagrams.py --file one-sided --only size
     python scripts/generate_dial_diagrams.py --views top --force
+    python scripts/generate_dial_diagrams.py --storyboards   # the two storyboards and the README
 
 Exit status 0 only when every selected row produced an SVG.
 """
@@ -85,10 +98,10 @@ DEFAULT_CACHE = PROJECT_ROOT / "tmp_renders" / "dial_diagrams"
 INDEX_NAME = "dial_diagrams_index.json"
 CANONICAL_OPENSCAD = Path(r"C:\Program Files\OpenSCAD (Nightly)\openscad.com")
 
-# The words on every diagram (strings pack S-247 and S-248).
+# The picture key (strings pack S-421; the pages print it once, never the picture).
 LEGEND_LINE = (
-    "black = the tool at its defaults; teal = the plug you measured; "
-    "red dashed = what this dial moves"
+    "black = the tool; teal = your plug; red dotted = the edges this dial moved; "
+    "the numbers match the key beside the picture"
 )
 NO_SHAPE_SENTENCE = "This dial changes no shape."
 
@@ -517,6 +530,9 @@ BROAD_SHARE = 0.15  # a pocket, notch, lobe, channel or arm owns a region it cov
 FALLBACK_SHARE = 0.10  # below this the region is the body's or plate's edge
 COVERED_SHARE = 0.5  # a region that covers this much of a footprint's own area names it
 WHOLE_BODY_SHARE = 0.25  # a region this big against the body is the edge's too
+EDGE_BAND = 1.5  # mm: the strip inside the body's outer edge
+EDGE_SHARE = 0.5  # a region lying this much within the strip hugs the edge and is the edge's too
+EDGE_CONTACT_SHARE = 0.10  # a region touching this much of the outer edge's length (outside every footprint) is the edge's too
 TEETH_DEPTH = 3.0  # mm: the band along the arms' inner edges that the teeth occupy
 PROBE_HALF = 0.5  # mm: half the thickness of a section row's probe box
 
@@ -675,16 +691,30 @@ def _section_probe(region: Polygon, view: str, at: float) -> Polygon:
 
 def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
                      view: str = "top", at: float = 0.0,
-                     body_area: float = 0.0) -> List[str]:
-    """Name every changed region: the specific footprints (holes, slots,
-    teeth) covering at least half of it, the broad ones (pocket, notch,
-    seat, hook, lobes, channel, arms) covering at least a sixth of it,
-    and any footprint the region itself covers at least half of (a region
-    that swallows a whole feature); a region that swallows a quarter of the
-    body is also the edge's; a region nothing claims takes the footprint
-    covering most of it, if a tenth, else the edge."""
-    names = set()
+                     body_area: float = 0.0,
+                     edge_rings: Sequence[LineString] = ()) -> List[Tuple[Polygon, List[str]]]:
+    """Name every changed region, one name list per region in drawing order
+    (the most specific footprint first): the specific footprints (holes,
+    slots, teeth) covering at least half of it, the broad ones (pocket,
+    notch, seat, hook, lobes, channel, arms) covering at least a sixth of
+    it, and any footprint the region itself covers at least half of (a
+    region that swallows a whole feature); a region that swallows a quarter
+    of the body is also the edge's; a region nothing claims takes the
+    footprint covering most of it, if a tenth, else the edge. A region that
+    lies mostly within EDGE_BAND of one of ``edge_rings`` (the body's outer
+    edge before and after), outside every named footprint, is the edge's too."""
+    named: List[Tuple[Polygon, List[str]]] = []
     edge = FEATURE_FALLBACK[file_key]
+    order = [n for n, _g in fp.specific] + [n for n, _g in fp.broad] + [edge]
+    edge_strip = edge_lines = None
+    edge_length = 0.0
+    if edge_rings:
+        # the strip along the outer edge, minus every named footprint: a notch, a hook slot or a hole
+        # cut into the edge belongs to its own feature, not to the edge
+        claimed = _union([g for _n, g in list(fp.specific) + list(fp.broad)])
+        edge_strip = _fix(_union([r.buffer(EDGE_BAND) for r in edge_rings]).difference(claimed))
+        edge_lines = shapely.union_all(list(edge_rings)).difference(claimed)
+        edge_length = sum(r.length for r in edge_rings)
     for region in regions:
         probe = region if view == "top" else _section_probe(region, view, at)
         area = max(probe.area, 1e-9)
@@ -698,6 +728,11 @@ def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
                     hits.add(name)
         if view == "top" and body_area and region.area >= WHOLE_BODY_SHARE * body_area:
             hits.add(edge)
+        if view == "top" and edge_strip is not None and region.area > 0:
+            hugs = region.intersection(edge_strip).area / region.area >= EDGE_SHARE
+            contact = region.buffer(EDGE_BAND).intersection(edge_lines).length / max(edge_length, 1e-9)
+            if hugs or contact >= EDGE_CONTACT_SHARE:
+                hits.add(edge)
         if not hits and shares and view == "top":
             # A section probe is a thin box across the whole cut: a feature it
             # merely grazes must not name it, so the tenth-share fallback is
@@ -705,8 +740,14 @@ def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
             best = max(shares, key=shares.get)
             if shares[best] >= FALLBACK_SHARE:
                 hits.add(best)
-        names.update(hits or {edge})
-    return sorted(names)
+        names = sorted(hits or {edge}, key=lambda n: order.index(n) if n in order else len(order))
+        named.append((region, names))
+    return named
+
+
+def feature_names(named: Sequence[Tuple[Polygon, Sequence[str]]]) -> List[str]:
+    """The sorted, distinct feature names of a row (the index's ``features``)."""
+    return sorted({n for _region, names in named for n in names})
 
 
 # ---------------------------------------------------------------------------
@@ -915,11 +956,11 @@ def compose_svg(
     return "\n".join(svg) + "\n"
 
 
-def compose_none_svg(note: str, title: str = "", name: str = "") -> str:
+def compose_none_svg(note: str, title: str = "", name: str = "", desc: Optional[str] = None) -> str:
     """A 120 x 40 mm card for a dial that changes no shape."""
     width, height = 120.0, 40.0
     body_lines = textwrap.wrap(note or "", width=76)
-    desc = f"{NO_SHAPE_SENTENCE} {note}".strip()
+    desc = desc or f"{NO_SHAPE_SENTENCE} {note}".strip()
     svg = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:.0f}mm" height="{height:.0f}mm" '
@@ -943,6 +984,767 @@ def compose_none_svg(note: str, title: str = "", name: str = "") -> str:
     return "\n".join(svg) + "\n"
 
 
+
+# ---------------------------------------------------------------------------
+# The pair picture (R3, FD-48): before | arrow | after, the moved edges in red
+# ---------------------------------------------------------------------------
+
+PAIR_VIEWS = ("top",) + SECTION_VIEWS
+# Rows drawn as ONE panel of their default state with no marks: a layout switch
+# moves everything, so "what moved" says nothing (the two-sided print layout
+# puts both plates side by side; its picture is what you print).
+SINGLE_PANEL_ROWS = {(TWO_SIDED, "print_layout")}
+PAIR_GAP = 10.0  # mm between the panels; the arrow lives here
+KEY_W = 34.0  # mm, the key column beside the after panel
+KEY_PAD = 3.0
+KEY_LINE = 4.0  # mm between key entries
+KEY_SUBLINE = 3.1  # mm between the wrapped lines of one entry
+KEY_SIZE = 2.6
+KEY_WRAP_MM = KEY_W - KEY_PAD - 1.0
+ARROW_W = 0.6
+ARROW_HEAD = 2.5
+VALUES_SIZE = 2.8
+STRIP_LINE = 3.4  # mm per values line when the values go under the panels
+CALLOUT_D = 2.6  # mm, the numbered dot
+CALLOUT_STROKE = 0.35
+CALLOUT_TEXT = 2.2
+LEADER_W = 0.3
+LEADER_MIN_MM2 = 2.0  # a region smaller than this never carries the number's leader
+EDGE_TOL = 0.2  # mm: an after edge within this of a before edge did not move (render jitter is under 0.1)
+MIN_ARC = 0.6  # mm: shorter moved pieces are noise
+ARC_TOUCH = 0.5  # mm: an arc this close to a region bounds it
+REMOVED_MIN_MM2 = 5.0  # a region with no moved edge is a removed feature only from this size
+REMOVED_SUFFIX = " (removed)"
+DOTS_PER_NUMBER = 6  # a number shared by more regions than this shows its dot on the leadered region only
+DOT_W = 0.6  # the red dotted stroke; round caps make 0.6 mm dots at a 1.1 mm pitch
+DOT_DASH = "0.01,1.1"
+DIM_EXT_W = 0.25
+DIM_LINE_W = 0.3
+DIM_ARROW = 1.5
+DIM_TEXT = 2.6
+
+
+def _as_outline(geom) -> Outline:
+    return geom if isinstance(geom, Outline) else _outline_from_filled(geom)
+
+
+def _drawn_rings(outline: Outline) -> List[List[Tuple[float, float]]]:
+    """The rings _draw_outline() draws (cleaned), as coordinate lists."""
+    rings: List[List[Tuple[float, float]]] = []
+    for raw in list(outline.solids) + list(outline.recess):
+        poly = clean_polygon(raw)
+        if poly is None:
+            continue
+        rings.append(list(poly.exterior.coords))
+        rings.extend(list(i.coords) for i in poly.interiors)
+    return rings
+
+
+def moved_arcs(after_out: Outline, before_out: Outline) -> List[LineString]:
+    """The pieces of the after outline's rings farther than EDGE_TOL from every
+    ring of the before outline: the edges the dial moved."""
+    before = [LineString(r) for r in _drawn_rings(before_out)]
+    guard = shapely.union_all(before).buffer(EDGE_TOL) if before else None
+    arcs: List[LineString] = []
+    for coords in _drawn_rings(after_out):
+        line = LineString(coords)
+        moved = line.difference(guard) if guard is not None else line
+        for g in shapely.get_parts(moved):
+            if isinstance(g, LineString) and g.length >= MIN_ARC:
+                arcs.append(g)
+    return arcs
+
+
+def _arc_owner(arc: LineString, regions: Sequence[Polygon]) -> Optional[int]:
+    """The region the arc bounds: the one nearest to the arc's quarter points,
+    if all three lie within ARC_TOUCH of it."""
+    probes = [arc.interpolate(f, normalized=True) for f in (0.25, 0.5, 0.75)]
+    best, best_d = None, None
+    for i, region in enumerate(regions):
+        d = max(region.distance(pt) for pt in probes)
+        if d <= ARC_TOUCH and (best_d is None or d < best_d):
+            best, best_d = i, d
+    return best
+
+
+def wrap_key(line: str) -> List[str]:
+    words = line.split(" ")
+    out: List[str] = []
+    cur = ""
+    for w in words:
+        trial = (cur + " " + w).strip()
+        if cur and CHAR_W * KEY_SIZE * len(trial) > KEY_WRAP_MM:
+            out.append(cur)
+            cur = w
+        else:
+            cur = trial
+    if cur:
+        out.append(cur)
+    return out
+
+
+@dataclass
+class PairPlan:
+    """What the pair picture marks: the regions that get a dot (specks with no
+    moved edge dropped), their arcs, the numbering and the key."""
+
+    regions: List[Tuple[Polygon, List[str]]] = field(default_factory=list)
+    arcs: List[LineString] = field(default_factory=list)
+    region_arcs: List[List[LineString]] = field(default_factory=list)
+    removed: List[bool] = field(default_factory=list)
+    number_of: List[int] = field(default_factory=list)
+    key_lines: List[str] = field(default_factory=list)
+    dots: List[Point] = field(default_factory=list)
+
+    @property
+    def key_rows(self) -> List[List[Any]]:
+        """The key as index data: ``[number, names, removed]`` per entry."""
+        rows: Dict[int, List[Any]] = {}
+        for (region, names), n, rm in zip(self.regions, self.number_of, self.removed):
+            row = rows.setdefault(n, [n, list(names), True])
+            row[2] = row[2] and rm
+        return [rows[n] for n in sorted(rows)]
+
+
+def _dot_point(arcs: Sequence[LineString]) -> Point:
+    """The arc vertex nearest the key column: the greatest x, then the highest y."""
+    best = None
+    for a in arcs:
+        for x, y in a.coords:
+            if best is None or (x, y) > best:
+                best = (x, y)
+    return Point(best)
+
+
+def plan_callouts(before_out: Outline, after_out: Outline,
+                  regions_named: Sequence[Tuple[Polygon, Sequence[str]]],
+                  box: Optional[Polygon] = None) -> PairPlan:
+    """``box`` is the panel's drawing box in model mm (a crop): a region whose
+    marks all lie outside it is not numbered, so its leader cannot land on the
+    neighbouring panel."""
+    arcs = moved_arcs(after_out, before_out)
+    all_regions = [r for r, _n in regions_named]
+    owner = [_arc_owner(a, all_regions) for a in arcs]
+    arcs_of = {i: [a for a, o in zip(arcs, owner) if o == i] for i in range(len(all_regions))}
+    plan = PairPlan(arcs=arcs)
+    for i, (region, names) in enumerate(regions_named):
+        ra = arcs_of[i]
+        if not ra and region.area < REMOVED_MIN_MM2:
+            continue
+        dot = _dot_point(ra) if ra else region.representative_point()
+        if box is not None:
+            marks = shapely.union_all(ra) if ra else region.exterior
+            if not marks.intersects(box):
+                continue
+            if not box.contains(dot):
+                inside = marks.intersection(box)
+                dot = inside.representative_point() if not inside.is_empty else dot
+        plan.regions.append((region, list(names)))
+        plan.region_arcs.append(ra)
+        plan.removed.append(not ra)
+        plan.dots.append(dot)
+    groups: Dict[Tuple[str, ...], List[int]] = {}
+    for i, (_region, names) in enumerate(plan.regions):
+        groups.setdefault(tuple(names), []).append(i)
+    ordered = sorted(groups.items(), key=lambda kv: -max(plan.dots[i].y for i in kv[1]))
+    plan.number_of = [0] * len(plan.regions)
+    for n, (names, idxs) in enumerate(ordered, start=1):
+        for i in idxs:
+            plan.number_of[i] = n
+        suffix = REMOVED_SUFFIX if all(plan.removed[i] for i in idxs) else ""
+        plan.key_lines.append(f"{n} {' / '.join(names)}{suffix}")
+    return plan
+
+
+def _values_lines(before_value: Any, after_value: Any, unit: Optional[str],
+                  section: Optional[Tuple[str, float]]) -> List[str]:
+    if isinstance(before_value, str) or isinstance(after_value, str):
+        lines = [f"{_fmt_value(before_value)}", f"\u2192 {_fmt_value(after_value)}"]
+    else:
+        lines = [f"{_fmt_value(before_value)} \u2192 {_fmt_value(after_value)}" + (f" {unit}" if unit else "")]
+    if section:
+        axis = "x" if section[0] == "section-x" else "y"
+        lines.append(f"section at {axis} = {_fmt_value(section[1])} mm")
+    return lines
+
+
+def _svg_arrow_h(x0: float, x1: float, y: float) -> str:
+    hx = x1 - ARROW_HEAD
+    return (f'<line x1="{x0:.2f}" y1="{y:.2f}" x2="{hx:.2f}" y2="{y:.2f}" stroke="#000" stroke-width="{ARROW_W}"/>'
+            f'<polygon points="{x1:.2f},{y:.2f} {hx:.2f},{y - ARROW_HEAD * 0.45:.2f} {hx:.2f},{y + ARROW_HEAD * 0.45:.2f}" fill="#000"/>')
+
+
+def _pt(frame: _Frame, x: float, y: float) -> Tuple[float, float]:
+    return x - frame.x0, frame.top + (frame.y1 - y)
+
+
+def _dotted(frame: _Frame, line: LineString, color: str = COLOR_TRACE, width: float = DOT_W,
+            dash: str = DOT_DASH) -> str:
+    """A dotted line clipped to the drawing box (a crop), as the outlines are."""
+    pieces = [g for g in shapely.get_parts(line.intersection(frame.box)) if isinstance(g, LineString) and not g.is_empty]
+    return "".join(
+        f'<path d="M {frame._pts(g.coords)}" fill="none" stroke="{color}" stroke-width="{width}" '
+        f'stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="{dash}"/>'
+        for g in pieces
+    )
+
+
+def _dim_arrow(x: float, y: float, direction: float, color: str) -> str:
+    bx = x - direction * DIM_ARROW * 1.6
+    return f'<polygon points="{x:.2f},{y:.2f} {bx:.2f},{y - DIM_ARROW * 0.35:.2f} {bx:.2f},{y + DIM_ARROW * 0.35:.2f}" fill="{color}"/>'
+
+
+def _dim_arrow_v(x: float, y: float, direction: float, color: str) -> str:
+    """A filled arrow head at (x, y) pointing along +y (direction 1, down the page) or -y."""
+    by = y - direction * DIM_ARROW * 1.6
+    return f'<polygon points="{x:.2f},{y:.2f} {x - DIM_ARROW * 0.35:.2f},{by:.2f} {x + DIM_ARROW * 0.35:.2f},{by:.2f}" fill="{color}"/>'
+
+
+def _dim_label(x: float, y: float, label: str, anchor: str, color: str) -> List[str]:
+    """The label with a white halo drawn as a separate text under it (an SVG
+    rasterizer may ignore paint-order)."""
+    text = _esc(label)
+    return [
+        f'<text x="{x:.2f}" y="{y:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
+        f'text-anchor="{anchor}" fill="white" stroke="white" stroke-width="0.8" stroke-linejoin="round">{text}</text>',
+        f'<text x="{x:.2f}" y="{y:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
+        f'text-anchor="{anchor}" fill="{color}">{text}</text>',
+    ]
+
+
+def draw_dimension(frame: _Frame, dim: Dict[str, Any]) -> List[str]:
+    """A dimension callout in the after panel with the outline sheets'
+    conventions. Kind "h": extension lines from the object's edge ``y_obj``,
+    a line at ``y_dim`` between ``x0`` and ``x1`` with two arrow heads, the
+    label above it. Kind "v": the same turned upright (``x_obj``, ``x_dim``,
+    ``y0``, ``y1``), the label beside the line on the side with room. Kind
+    "dia": a line across the circle (``cx``, ``cy``, ``r``) with the arrow
+    heads at its edge, the label above."""
+    c = COLOR_TRACE
+    out = ['<g class="dimension">']
+    kind = dim["kind"]
+    if kind == "h":
+        (xa, ya), (xb, _yb) = _pt(frame, dim["x0"], dim["y_dim"]), _pt(frame, dim["x1"], dim["y_dim"])
+        (_xo, yo) = _pt(frame, dim["x0"], dim["y_obj"])
+        over = 1.0 if ya < yo else -1.0
+        for x in (xa, xb):
+            out.append(f'<line x1="{x:.2f}" y1="{yo:.2f}" x2="{x:.2f}" y2="{ya - over:.2f}" stroke="{c}" stroke-width="{DIM_EXT_W}"/>')
+        if (xb - xa) < 11.0:
+            out.append(f'<line x1="{xa - 5:.2f}" y1="{ya:.2f}" x2="{xb + 5:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow(xa, ya, -1.0, c))
+            out.append(_dim_arrow(xb, ya, 1.0, c))
+        else:
+            out.append(f'<line x1="{xa:.2f}" y1="{ya:.2f}" x2="{xb:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow(xa, ya, 1.0, c))
+            out.append(_dim_arrow(xb, ya, -1.0, c))
+        out.extend(_dim_label((xa + xb) / 2, ya - 1.0, dim["label"], "middle", c))
+    elif kind == "v":
+        (xd, ya) = _pt(frame, dim["x_dim"], max(dim["y0"], dim["y1"]))
+        (_x, yb) = _pt(frame, dim["x_dim"], min(dim["y0"], dim["y1"]))
+        (xo, _y) = _pt(frame, dim["x_obj"], dim["y0"])
+        over = 1.0 if xd < xo else -1.0
+        for y in (ya, yb):
+            out.append(f'<line x1="{xo:.2f}" y1="{y:.2f}" x2="{xd - over:.2f}" y2="{y:.2f}" stroke="{c}" stroke-width="{DIM_EXT_W}"/>')
+        if (yb - ya) < 11.0:
+            out.append(f'<line x1="{xd:.2f}" y1="{ya - 5:.2f}" x2="{xd:.2f}" y2="{yb + 5:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow_v(xd, ya, -1.0, c))
+            out.append(_dim_arrow_v(xd, yb, 1.0, c))
+        else:
+            out.append(f'<line x1="{xd:.2f}" y1="{ya:.2f}" x2="{xd:.2f}" y2="{yb:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow_v(xd, ya, 1.0, c))
+            out.append(_dim_arrow_v(xd, yb, -1.0, c))
+        room_right = (frame.box.bounds[2] - frame.x0) - xd
+        if room_right >= CHAR_W * DIM_TEXT * len(dim["label"]) + 2.0:
+            out.extend(_dim_label(xd + 1.4, (ya + yb) / 2 + 1.0, dim["label"], "start", c))
+        else:
+            out.extend(_dim_label(xd - 1.4, (ya + yb) / 2 + 1.0, dim["label"], "end", c))
+    else:
+        (cx, cy) = _pt(frame, dim["cx"], dim["cy"])
+        r = dim["r"]
+        out.append(f'<line x1="{cx - r:.2f}" y1="{cy:.2f}" x2="{cx + r:.2f}" y2="{cy:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+        out.append(_dim_arrow(cx - r, cy, -1.0, c))
+        out.append(_dim_arrow(cx + r, cy, 1.0, c))
+        out.extend(_dim_label(cx, cy - 1.0, dim["label"], "middle", c))
+    out.append("</g>")
+    return out
+
+
+
+# ---------------------------------------------------------------------------
+# The dimension callout: one red dimension line at the feature the dial sets
+# ---------------------------------------------------------------------------
+#
+# A catalog row's ``diagram.dimension`` names an anchor; the endpoints are
+# read from the AFTER state's outline, plug and numbers (never estimated by
+# eye). The label is the dial's value with its unit.
+
+DIM_OFFSET = 4.0  # mm from the object's edge to the dimension line
+DIM_LABEL_ROOM = 14.0  # mm of room a vertical dimension's label needs beside its line
+
+
+def _probe_gap(filled, y: float, near_x: float) -> Optional[Tuple[float, float]]:
+    """The gap in ``filled`` along the horizontal line at ``y`` that contains
+    or is nearest to ``near_x``: (left edge, right edge)."""
+    x0, _y0, x1, _y1 = filled.bounds
+    cut = LineString([(x0 - 1.0, y), (x1 + 1.0, y)]).intersection(filled)
+    spans = sorted((g.bounds[0], g.bounds[2]) for g in shapely.get_parts(cut) if not g.is_empty)
+    gaps = [(a[1], b[0]) for a, b in zip(spans, spans[1:]) if b[0] > a[1]]
+    if not gaps:
+        return None
+    return min(gaps, key=lambda g: 0.0 if g[0] <= near_x <= g[1] else min(abs(g[0] - near_x), abs(g[1] - near_x)))
+
+
+def _plug_edges(plug: Polygon) -> Tuple[float, float, float, float]:
+    x0, y0, x1, y1 = plug.bounds
+    return x0, y0, x1, y1
+
+
+def _label(value: Any, unit: Optional[str]) -> str:
+    return f"{_fmt_value(value)} {unit}" if unit else _fmt_value(value)
+
+
+def anchor_dimension(anchor: str, file_key: str, params: Dict[str, Any], outline: Outline,
+                     plug: Optional[Polygon], view: str, at: float, value: Any,
+                     unit: Optional[str]) -> Optional[Dict[str, Any]]:
+    """The dimension callout for ``anchor`` in model mm, or None when the
+    geometry cannot give it: kind "h" {x0, x1, y_obj, y_dim}, kind "v"
+    {y0, y1, x_obj, x_dim}, kind "dia" {cx, cy, r}; every kind has "label"."""
+    label = _label(value, unit)
+    filled = _union(outline.solids)
+    bx0, by0, bx1, by1 = filled.bounds
+    if anchor in ("plug_width_prong_end", "plug_width_cord_end"):
+        if plug is None:
+            return None
+        pts = list(plug.exterior.coords)[:-1]
+        edge_y = max(y for _x, y in pts) if anchor == "plug_width_prong_end" else min(y for _x, y in pts)
+        xs = sorted(x for x, y in pts if abs(y - edge_y) < 1e-6)
+        if len(xs) < 2:
+            return None
+        above = anchor == "plug_width_prong_end"
+        return {"kind": "h", "x0": xs[0], "x1": xs[-1], "y_obj": edge_y,
+                "y_dim": edge_y + (DIM_OFFSET if above else -DIM_OFFSET), "label": label}
+    if anchor == "pocket_length":
+        if not outline.recess:
+            return None
+        rx0, ry0, rx1, _ry1 = _union(outline.recess).bounds
+        return {"kind": "v", "y0": ry0, "y1": by1, "x_obj": rx1, "x_dim": rx1 + DIM_OFFSET + 1.0, "label": label}
+    if anchor in ("plug_thickness_prong_end", "plug_thickness_cord_end"):
+        if plug is None or view != "section-x":
+            return None
+        pts = list(plug.exterior.coords)[:-1]
+        floor = min(y for _x, y in pts)
+        u_plate, u_cord = min(x for x, _y in pts), max(x for x, _y in pts)
+        u_edge = u_plate if anchor == "plug_thickness_prong_end" else u_cord
+        top = max(y for x, y in pts if abs(x - u_edge) < 1e-6)
+        x_dim = u_edge - DIM_OFFSET if anchor == "plug_thickness_prong_end" else u_edge + DIM_OFFSET
+        return {"kind": "v", "y0": floor, "y1": top, "x_obj": u_edge, "x_dim": x_dim, "label": label}
+    if anchor == "hook_slot":
+        d = _one_sided_numbers(params)
+        hook_x = _hook_box(d, params).centroid.x
+        gap = _probe_gap(filled, by0 + 3.0, hook_x)  # 1.5 mm up the probe hits the hook's own foot
+        if gap is None:
+            return None
+        return {"kind": "h", "x0": gap[0], "x1": gap[1], "y_obj": by0, "y_dim": by0 - DIM_OFFSET, "label": label}
+    if anchor == "finger_hole":
+        circles = _circles(outline.solids)
+        if not circles:
+            return None
+        big = max(c.d for c in circles)
+        fingers = [c for c in circles if c.d >= big - 3.0]
+        c = max(fingers, key=lambda c: c.cx)
+        return {"kind": "dia", "cx": c.cx, "cy": c.cy, "r": c.d / 2, "label": label}
+    if anchor == "body_width":
+        best_y, best_w = by0, 0.0
+        y = by0 + 0.5
+        while y < by1:
+            cut = LineString([(bx0 - 1.0, y), (bx1 + 1.0, y)]).intersection(filled)
+            if not cut.is_empty:
+                w = cut.bounds[2] - cut.bounds[0]
+                if w > best_w:
+                    best_y, best_w = y, w
+            y += 1.0
+        return {"kind": "h", "x0": bx0, "x1": bx1, "y_obj": best_y, "y_dim": by0 - DIM_OFFSET, "label": label}
+    if anchor == "plug_length":
+        if plug is None:
+            return None
+        px0, py0, px1, py1 = _plug_edges(plug)
+        return {"kind": "v", "y0": py0, "y1": py1, "x_obj": px1, "x_dim": bx1 + DIM_OFFSET, "label": label}
+    if anchor in ("gap_tips", "gap_cord_end"):
+        m = effective_measurements(file_key, params)
+        y = by1 - 2.0 if anchor == "gap_tips" else by1 - m["measure_plug_length"]
+        gap = _probe_gap(filled, y, 0.0)
+        if gap is None:
+            return None
+        y_dim = by1 + DIM_OFFSET + 1.0 if anchor == "gap_tips" else y - DIM_OFFSET
+        return {"kind": "h", "x0": gap[0], "x1": gap[1], "y_obj": y, "y_dim": y_dim, "label": label}
+    if anchor == "channel":
+        gap = _probe_gap(filled, by0 + 3.0, 0.0)
+        if gap is None:
+            return None
+        return {"kind": "h", "x0": gap[0], "x1": gap[1], "y_obj": by0, "y_dim": by0 - DIM_OFFSET, "label": label}
+    if anchor == "slot_length":
+        slots = _hole_slots(outline.solids, 20.0)
+        if not slots:
+            return None
+        s = max(slots, key=lambda q: q.centroid.x)
+        sx0, sy0, sx1, sy1 = s.bounds
+        return {"kind": "v", "y0": sy0, "y1": sy1, "x_obj": sx1, "x_dim": sx1 + DIM_OFFSET, "label": label}
+    return None
+
+
+def _dimension_extent(dim: Dict[str, Any]) -> Tuple[float, float, float, float]:
+    """The model-space box the callout and its label need."""
+    if dim["kind"] == "h":
+        lo, hi = sorted((dim["y_obj"], dim["y_dim"]))
+        return dim["x0"] - 6.0, lo - 1.0, dim["x1"] + 6.0, hi + 5.0
+    if dim["kind"] == "v":
+        lo, hi = sorted((dim["x_obj"], dim["x_dim"]))
+        return lo - DIM_LABEL_ROOM, dim["y0"] - 6.0, hi + DIM_LABEL_ROOM, dim["y1"] + 6.0
+    return dim["cx"] - dim["r"] - 2.0, dim["cy"] - 2.0, dim["cx"] + dim["r"] + 2.0, dim["cy"] + 5.0
+
+
+def _compose_single_panel(outline: Outline, plug: Optional[Polygon], title: str, changes: str,
+                          before_value: Any, after_value: Any, unit: Optional[str],
+                          desc: Optional[str]) -> str:
+    """One panel of the row's default state in black with the plug, the two
+    values in a strip under it, no marks and no key (SINGLE_PANEL_ROWS)."""
+    geoms = outline.solids + outline.recess + ([plug] if plug is not None else [])
+    bx0, by0, bx1, by1 = shapely.union_all(geoms).bounds
+    x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
+    width, height = x1 - x0, y1 - y0
+    lines = _values_lines(before_value, after_value, unit, None)
+    strip_h = 1.5 + len(lines) * STRIP_LINE
+    row_h = height + strip_h
+    frame = _Frame(x0, y0, x1, y1, 0.0)
+    text = desc or f"{changes} Before: {_fmt_value(before_value)}. After: {_fmt_value(after_value)}."
+    svg: List[str] = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:.2f}mm" height="{row_h:.2f}mm" '
+        f'viewBox="0 0 {width:.2f} {row_h:.2f}" role="img">',
+        f'<title>{_esc(title)}</title>',
+        f'<desc>{_esc(text)}</desc>',
+        f'<rect width="{width:.2f}" height="{row_h:.2f}" fill="white"/>',
+        '<g class="panel" id="single">',
+    ]
+    if plug is not None:
+        svg.append(_filled_polygon(frame, plug, COLOR_PLUG, PLUG_OPACITY))
+    svg.extend(_draw_outline(frame, outline, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+    svg.append("</g>")
+    svg.append('<g class="arrow">')
+    ty = height + 1.5 + VALUES_SIZE
+    for line in lines:
+        svg.append(_text(width / 2, ty, line, VALUES_SIZE))
+        ty += STRIP_LINE
+    svg.append("</g>")
+    svg.append("</svg>")
+    return "\n".join(s for s in svg if s) + "\n"
+
+
+def compose_pair_svg(
+    before_outline,
+    after_outline,
+    before_plug: Optional[Polygon],
+    after_plug: Optional[Polygon],
+    title: str,
+    changes: str,
+    name: str,
+    before_value: Any,
+    after_value: Any,
+    unit: Optional[str],
+    context: Dict[str, Any],
+    style: str,
+    crop: Optional[Sequence[float]],
+    regions_named: Sequence[Tuple[Polygon, Sequence[str]]],
+    dimension: Optional[Dict[str, Any]] = None,
+    desc: Optional[str] = None,
+    section: Optional[Tuple[str, float]] = None,
+    plan: Optional[PairPlan] = None,
+    single_panel: bool = False,
+) -> str:
+    """The pair picture as SVG text (1 unit = 1 mm): the BEFORE panel (the
+    outline in black, the before plug in teal), a 10 mm gap with the arrow
+    and the two values, the AFTER panel (the after outline in black, the
+    after plug in teal, the moved edges in red dots, a removed feature from
+    its old outline, an optional dimension callout, the numbered dots), and
+    the key column with one leader per entry. ``style`` no longer changes
+    the drawing (FD-48); ``context`` is the card's text, not the picture's.
+    """
+    del style, context
+    b_out, a_out = _as_outline(before_outline), _as_outline(after_outline)
+    if single_panel:
+        return _compose_single_panel(b_out, before_plug, title, changes, before_value, after_value, unit, desc)
+    if crop:
+        x0, y0, x1, y1 = (float(v) for v in crop)
+    else:
+        geoms = b_out.solids + b_out.recess + a_out.solids + a_out.recess
+        geoms += [g for g in (before_plug, after_plug) if g is not None]
+        bx0, by0, bx1, by1 = shapely.union_all(geoms).bounds
+        x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
+    if dimension and not crop:
+        ex0, ey0, ex1, ey1 = _dimension_extent(dimension)
+        x0, y0, x1, y1 = min(x0, ex0), min(y0, ey0), max(x1, ex1), max(y1, ey1)
+    width, height = x1 - x0, y1 - y0
+    plan = plan or plan_callouts(b_out, a_out, regions_named, shapely.box(x0, y0, x1, y1) if crop else None)
+
+    key_entries = [wrap_key(line) for line in plan.key_lines]
+    key_h = 2.0 + sum(KEY_LINE + (len(e) - 1) * KEY_SUBLINE for e in key_entries) + 1.0
+    lines = _values_lines(before_value, after_value, unit, section)
+    widest = max(CHAR_W * VALUES_SIZE * len(t) for t in lines)
+    # a crop has no margin around the drawing, so only the gap itself may hold the values
+    under_arrow = widest <= PAIR_GAP - 1.0 + (0.0 if crop else 2 * MARGIN - 1.0)
+    strip_h = 0.0 if under_arrow else 1.5 + len(lines) * STRIP_LINE
+    row_w = 2 * width + PAIR_GAP + KEY_W
+    row_h = max(height, key_h) + strip_h
+
+    frame = _Frame(x0, y0, x1, y1, 0.0)
+    ax = width + PAIR_GAP
+    text = desc or f"{changes} Before: {_fmt_value(before_value)}. After: {_fmt_value(after_value)}."
+    svg: List[str] = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{row_w:.2f}mm" height="{row_h:.2f}mm" '
+        f'viewBox="0 0 {row_w:.2f} {row_h:.2f}" role="img">',
+        f'<title>{_esc(title)}</title>',
+        f'<desc>{_esc(text)}</desc>',
+        f'<rect width="{row_w:.2f}" height="{row_h:.2f}" fill="white"/>',
+        '<g class="panel" id="before">',
+    ]
+    if before_plug is not None:
+        svg.append(_filled_polygon(frame, before_plug, COLOR_PLUG, PLUG_OPACITY))
+    svg.extend(_draw_outline(frame, b_out, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+    svg.append("</g>")
+    svg.append('<g class="arrow">')
+    mid = height / 2
+    svg.append(_svg_arrow_h(width + 1.5, width + PAIR_GAP - 1.5, mid))
+    ty = mid + 3.0 + VALUES_SIZE if under_arrow else max(height, key_h) + 1.5 + VALUES_SIZE
+    for line in lines:
+        svg.append(_text(width + PAIR_GAP / 2, ty, line, VALUES_SIZE))
+        ty += STRIP_LINE
+    svg.append("</g>")
+    svg.append(f'<g class="panel" id="after" transform="translate({ax:.2f} 0)">')
+    if after_plug is not None:
+        svg.append(_filled_polygon(frame, after_plug, COLOR_PLUG, PLUG_OPACITY))
+    svg.extend(_draw_outline(frame, a_out, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+    for arc in plan.arcs:
+        svg.append(_dotted(frame, arc))
+    for (region, _names), removed in zip(plan.regions, plan.removed):
+        if removed:
+            svg.append(_dotted(frame, LineString(region.exterior.coords)))
+    if dimension:
+        svg.extend(draw_dimension(frame, dimension))
+    dots_row: List[Tuple[int, float, float]] = []
+    for dot, n in zip(plan.dots, plan.number_of):
+        px, py = _pt(frame, dot.x, dot.y)
+        dots_row.append((n, px + ax, py))
+    dot_svg: Dict[int, str] = {}
+    for i, (n, rx, ry) in enumerate(dots_row):
+        px, py = rx - ax, ry
+        dot_svg[i] = (f'<circle cx="{px:.2f}" cy="{py:.2f}" r="{CALLOUT_D / 2}" fill="white" stroke="{COLOR_TRACE}" stroke-width="{CALLOUT_STROKE}"/>'
+                      + _text(px, py + CALLOUT_TEXT * 0.36, str(n), CALLOUT_TEXT, fill=COLOR_TRACE))
+    crowded = {n for n in set(plan.number_of) if plan.number_of.count(n) > DOTS_PER_NUMBER}
+    after_close = len(svg)  # the dots are inserted here, before the after panel closes
+    svg.append("</g>")
+    key_x = 2 * width + PAIR_GAP + KEY_PAD
+    svg.append('<g class="key">')
+    key_y: List[float] = []
+    y = 2.0 + KEY_SIZE
+    for entry in key_entries:
+        key_y.append(y)
+        for j, line in enumerate(entry):
+            svg.append(_text(key_x + (3.0 if j else 0.0), y, line, KEY_SIZE, anchor="start"))
+            y += KEY_SUBLINE
+        y += KEY_LINE - KEY_SUBLINE
+    svg.append("</g>")
+    # One leader per key entry, from the dot whose straight leader crosses the fewest drawn lines
+    # (then the fewest plug edges, then the dot nearest the key); a speck never carries it.
+    rings_row = [LineString([(x - x0 + ax, (y1 - y)) for x, y in r]) for r in _drawn_rings(a_out)]
+    plug_row = (Polygon([(x - x0 + ax, (y1 - y)) for x, y in after_plug.exterior.coords])
+                if after_plug is not None else None)
+    leaders: List[str] = []
+    shown: set = set()
+    for n in range(1, len(plan.key_lines) + 1):
+        idxs = [i for i, m in enumerate(plan.number_of) if m == n]
+        biggest = max(plan.regions[i][0].area for i in idxs)
+        big = [i for i in idxs if plan.regions[i][0].area >= max(LEADER_MIN_MM2, 0.1 * biggest)] or idxs
+        ex, ey = key_x - 1.0, key_y[n - 1] - KEY_SIZE * 0.35
+        best = None
+        for i in big:
+            _m, cx, cy = dots_row[i]
+            dx, dy = ex - cx, ey - cy
+            dist = (dx * dx + dy * dy) ** 0.5 or 1.0
+            sx, sy = cx + dx / dist * (CALLOUT_D / 2), cy + dy / dist * (CALLOUT_D / 2)
+            leader = LineString([(sx, sy), (ex, ey)])
+            crossings = sum(len([g for g in shapely.get_parts(leader.intersection(r)) if not g.is_empty]) for r in rings_row)
+            plug_x = (len([g for g in shapely.get_parts(leader.intersection(plug_row.exterior)) if not g.is_empty])
+                      if plug_row is not None else 0)
+            score = (crossings, plug_x, -cx)
+            if best is None or score < best[0]:
+                best = (score, sx, sy, i)
+        _score, sx, sy, i_best = best
+        leaders.append(f'<line x1="{sx:.2f}" y1="{sy:.2f}" x2="{ex:.2f}" y2="{ey:.2f}" stroke="{COLOR_TRACE}" stroke-width="{LEADER_W}"/>')
+        shown.add(i_best)
+        if n not in crowded:
+            shown.update(idxs)
+    svg[after_close:after_close] = [dot_svg[i] for i in sorted(shown)]
+    svg.append('<g class="leaders">')
+    svg.extend(leaders)
+    svg.append("</g>")
+    svg.append("</svg>")
+    return "\n".join(s for s in svg if s) + "\n"
+
+
+
+# ---------------------------------------------------------------------------
+# The text alternatives (R3 B3, FD-45): a short alt text and a long description
+# ---------------------------------------------------------------------------
+#
+# The rules are docs/guides/describing-pictures.md (R1 to R10). The alt names
+# the picture, the two values and what red marks; the long description is the
+# overview, the two panels, the numbered list matching the key, and what stayed.
+
+ALT_MAX_CHARS = 150
+LONG_MAX_WORDS = 90
+TOOL_NAMES = {ONE_SIDED: "the one-sided puller", TWO_SIDED: "the two-sided puller"}
+# Where each feature sits, the plug end being the top of the picture (the plan's
+# section 4.2, shortened so a five-entry list fits the 90-word rule).
+FEATURE_LOCATIONS = {
+    ONE_SIDED: {
+        "body edge": "the outer outline",
+        "pocket": "the plug recess on the centerline",
+        "seat": "the round recess at the plug end",
+        "wall notch": "the notch in the top edge",
+        "wing openings": "the two openings beside the pocket",
+        "classic slots": "the two slots beside the pocket",
+        "zip-tie holes": "the four small holes beside the pocket",
+        "finger holes": "the two large holes in the lower half",
+        "hook": "the cord hook slot in the bottom edge",
+    },
+    TWO_SIDED: {
+        "plate edge": "the outer outline",
+        "arms": "the two toothed arms in the upper half",
+        "teeth": "the serrated inner edges of the arms",
+        "finger lobes": "the two rounded lobes in the lower half",
+        "cord channel": "the gap between the lobes at the bottom",
+        "zip stations": "the three small holes along each arm",
+        "strap slot": "the long slot in each arm",
+    },
+}
+
+
+def _join_names(names: Sequence[str]) -> str:
+    items = [f"the {n}" for n in names]
+    if len(items) <= 1:
+        return "".join(items)
+    return ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def _values_words(before: Any, after: Any, unit: Optional[str]) -> str:
+    text = f"{_fmt_value(before)} to {_fmt_value(after)}"
+    if unit and not isinstance(after, str):
+        text += f" {unit}"
+    return text
+
+
+def _lower_first(text: str) -> str:
+    return text[:1].lower() + text[1:] if text else text
+
+
+def describe_alt(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any]) -> str:
+    """The short alt text (at most ALT_MAX_CHARS): the title, the kind of
+    picture, the two values, and the parts red marks (or their count when
+    the names do not fit)."""
+    title = row["title"]
+    d = row["diagram"]
+    if d["view"] == "none":
+        return f"{title}: changes no shape."
+    values = _values_words(d["before"], d["after"], unit)
+    if (row["file"], row["name"]) in SINGLE_PANEL_ROWS:
+        return f"{title}: one view, {values}; the layout with both plates, nothing marked."
+    features = list(entry.get("features") or [])
+    alt = f"{title}: before and after, {values}; red marks {_join_names(features)}."
+    if len(alt) > ALT_MAX_CHARS:
+        alt = f"{title}: before and after, {values}; red marks {len(features)} parts, named below."
+    return alt
+
+
+def describe_long(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any],
+                  plug_width: Optional[float] = None, titles: Optional[Dict[str, str]] = None) -> str:
+    """The long description (at most LONG_MAX_WORDS): an overview sentence,
+    the left panel, the right panel, the numbered list that matches the key,
+    and what stayed. When the whole runs long, the closing sentence goes
+    first, then the changes sentence, then the locations of the entries
+    that carry several names, then every location."""
+    file_key = row["file"]
+    d = row["diagram"]
+    view = d["view"]
+    title = row["title"]
+    tool = TOOL_NAMES[file_key]
+    titles = titles or {}
+    if view == "none":
+        note = (row.get("note") or "").strip()
+        if note.lower().startswith("changes no shape:"):
+            return f"{NO_SHAPE_SENTENCE[:-1]}: {note.split(':', 1)[1].strip()}"
+        return f"{NO_SHAPE_SENTENCE} {note}".strip()
+    if (file_key, row["name"]) in SINGLE_PANEL_ROWS:
+        return (f"One top view of {tool} with both plates side by side, the plug end at the top: "
+                f"what the file prints at {_fmt_value(d['before'])}. At {_fmt_value(d['after'])} it prints "
+                f"one plate. Nothing is marked in red: this dial changes the layout, not the plate.")
+    if view == "top":
+        subject = "one plate of the two-sided puller" if file_key == TWO_SIDED else "the one-sided puller"
+        overview = f"Two top views of {subject}, before left and after right, the plug end at the top."
+    else:
+        axis = "x" if view == "section-x" else "y"
+        overview = (f"Two vertical slices of {tool} at {axis} = {_fmt_value(d.get('at') or 0)} mm, "
+                    "before left and after right, the top face up.")
+    ctx = d.get("context") or {}
+    ctx_words = (" with " + " and ".join(f"{_lower_first(titles.get(k, k))} set to {_fmt_value(v)}" for k, v in ctx.items())) if ctx else ""
+    if view == "top" and plug_width is not None:
+        left = f"Left: the defaults{ctx_words}, a {_fmt_value(plug_width)} mm wide plug in teal."
+    else:
+        left = f"Left: the defaults{ctx_words}, the plug in teal in the cut."
+    if isinstance(d["after"], (str, bool)):
+        after_words = f"set to {_fmt_value(d['after'])}"
+    else:
+        after_words = "at " + _fmt_value(d["after"]) + (f" {unit}" if unit else "")
+    right_short = f"Right: {_lower_first(title)} {after_words}."
+    right_full = f"Right: {_lower_first(title)} {after_words}: {_lower_first(row['changes'])}"
+    locations = FEATURE_LOCATIONS[file_key]
+    callouts = entry.get("callouts") or []
+
+    def marked(with_locations: str) -> str:
+        """``with_locations``: "all", "single" (entries with one name only) or "none"."""
+        if not callouts:
+            return "Nothing is marked in red."
+        items = []
+        for n, names, removed in callouts:
+            state = ", removed" if removed else ""
+            if with_locations == "all" or (with_locations == "single" and len(names) == 1):
+                where = "; ".join(locations.get(nm, nm) for nm in names)
+                items.append(f"{n}, {_join_names(names)}: {where}{state}.")
+            else:
+                items.append(f"{n}, {_join_names(names)}{state}.")
+        return "Marked in red: " + " ".join(items)
+
+    named = {nm for _n, names, _r in callouts for nm in names}
+    unnamed = [f for f in locations if f not in named][:4]
+    if FEATURE_FALLBACK[file_key] in named:
+        closing = "Everything else follows the outline."
+    elif unnamed:
+        stayed = _join_names(unnamed)
+        closing = f"{stayed[:1].upper()}{stayed[1:]} stay where they were."
+    else:
+        closing = ""
+    text = ""
+    for parts in ([overview, left, right_full, marked("all"), closing],
+                  [overview, left, right_full, marked("all")],
+                  [overview, left, right_short, marked("all")],
+                  [overview, left, right_short, marked("single")],
+                  [overview, left, right_short, marked("none")]):
+        text = " ".join(part for part in parts if part)
+        if len(text.split()) <= LONG_MAX_WORDS:
+            return text
+    return text
+
+
 # ---------------------------------------------------------------------------
 # Driver
 # ---------------------------------------------------------------------------
@@ -953,7 +1755,12 @@ def svg_relpath(row: Dict[str, Any]) -> str:
 
 
 def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str],
-              features: Sequence[str]) -> Dict[str, Any]:
+              features: Sequence[str],
+              regions_named: Sequence[Tuple[Polygon, Sequence[str]]] = (),
+              callouts: Sequence[Sequence[Any]] = ()) -> Dict[str, Any]:
+    """One index entry: ``regions_named`` is ``[area_mm2, [names]]`` per
+    changed region in drawing order; ``callouts`` is the key of the pair
+    picture, ``[number, [names], removed]`` per entry."""
     d = row["diagram"]
     return {
         "file": row["file"],
@@ -969,19 +1776,29 @@ def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str],
         "tags": tags,
         "svg": svg_relpath(row),
         "features": list(features),
+        "regions_named": [[round(region.area, 1), list(names)] for region, names in regions_named],
+        "callouts": [list(c) for c in callouts],
     }
 
 
-def build_none(row: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
-    svg = compose_none_svg(note=row.get("note") or "", title=row["title"], name=row["name"])
+def build_none(row: Dict[str, Any], out_dir: Path, unit: Optional[str] = None) -> Dict[str, Any]:
+    entry = index_row(row, 0, 0.0, [], ["none"])
+    entry["alt"] = describe_alt(row, unit, entry)
+    entry["long_description"] = describe_long(row, unit, entry)
+    svg = compose_none_svg(note=row.get("note") or "", title=row["title"], name=row["name"],
+                           desc=entry["long_description"])
     path = out_dir / svg_relpath(row)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return index_row(row, 0, 0.0, [], ["none"])
+    return entry
 
 
-def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
-    """A top-view or section diagram: two renders, two views, the diff."""
+def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path,
+               layout: str = "pair", unit: Optional[str] = None,
+               titles: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+    """A top-view or section diagram: two renders, two views, the diff; the
+    pair picture for the views in PAIR_VIEWS (``layout`` "pair"), else the
+    single drawing."""
     file_key = row["file"]
     d = row["diagram"]
     view = d["view"]
@@ -990,7 +1807,7 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     tags: List[str] = []
     outlines = []
     stls: List[Path] = []
-    body = None
+    bodies = []
     for params in (base, after_params):
         defines = defines_for(file_key, row["name"], params, defaults)
         stl, log, _hit = renderer.render(file_key, defines)
@@ -1001,13 +1818,22 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
         else:
             outline, body = section_view(stl, view, at)
             outlines.append(outline)
+            bodies.append(body)
     b_out, a_out = outlines
     context = dict(d.get("context") or {})
     if view == "top":
         plug = plug_polygon(file_key, after_params, a_out)
+        before_plug = plug_polygon(file_key, base, b_out)
     else:
-        plug = section_plug_polygon(file_key, after_params, view, at, body)
+        plug = section_plug_polygon(file_key, after_params, view, at, bodies[1])
+        before_plug = section_plug_polygon(file_key, base, view, at, bodies[0])
         context[view] = at  # the cut plane, shown with the context
+    dimension = None
+    if d.get("dimension"):
+        dimension = anchor_dimension(d["dimension"]["at"], file_key, after_params, a_out, plug, view, at,
+                                     d["after"], unit)
+        if dimension is None:
+            logger.warning("%s %s: the anchor %s gave no dimension callout", file_key, row["name"], d["dimension"]["at"])
     regions, area = outline_regions(b_out, a_out)
     if view == "top":
         feats = footprints(file_key, base, b_out, a_out, after_params)
@@ -1015,27 +1841,69 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
         feats = footprints(file_key, base, top_view(file_key, stls[0], base),
                            top_view(file_key, stls[1], after_params), after_params)
     body_area = sum(p.area for p in b_out.solids) if view == "top" else 0.0
-    features = classify_regions(file_key, regions, feats, view, at, body_area) if regions else []
-    svg = compose_svg(
-        before=b_out.filled,
-        after=a_out.filled,
-        plug=plug,
-        title=row["title"],
-        changes=row["changes"],
-        name=row["name"],
-        before_value=d["before"],
-        after_value=d["after"],
-        context=context,
-        style=d["style"],
-        crop=d.get("crop"),
-        before_outline=b_out,
-        after_outline=a_out,
-        regions=regions,
-    )
+    edge_rings = ([LineString(max(o.solids, key=lambda q: q.area).exterior.coords) for o in (b_out, a_out) if o.solids]
+                  if view == "top" else [])
+    named = classify_regions(file_key, regions, feats, view, at, body_area, edge_rings) if regions else []
+    features = feature_names(named)
+    callouts: List[List[Any]] = []
+    alt = long_description = None
+    if layout == "pair" and view in PAIR_VIEWS:
+        crop = d.get("crop")
+        single = (file_key, row["name"]) in SINGLE_PANEL_ROWS
+        plan = plan_callouts(b_out, a_out, named, shapely.box(*(float(v) for v in crop)) if crop else None)
+        callouts = [] if single else plan.key_rows
+        draft = index_row(row, len(regions), area, tags, features, named, callouts)
+        plug_width = effective_measurements(file_key, base)["measure_plug_width_prong_end"] if view == "top" else None
+        alt = describe_alt(row, unit, draft)
+        long_description = describe_long(row, unit, draft, plug_width, titles)
+        svg = compose_pair_svg(
+            before_outline=b_out,
+            after_outline=a_out,
+            before_plug=before_plug,
+            after_plug=plug,
+            title=row["title"],
+            changes=row["changes"],
+            name=row["name"],
+            before_value=d["before"],
+            after_value=d["after"],
+            unit=unit,
+            context=context,
+            style=d["style"],
+            crop=d.get("crop"),
+            regions_named=named,
+            section=(view, at) if view in SECTION_VIEWS else None,
+            plan=plan,
+            single_panel=single,
+            dimension=dimension,
+            desc=long_description,
+        )
+    else:
+        svg = compose_svg(
+            before=b_out.filled,
+            after=a_out.filled,
+            plug=plug,
+            title=row["title"],
+            changes=row["changes"],
+            name=row["name"],
+            before_value=d["before"],
+            after_value=d["after"],
+            context=context,
+            style=d["style"],
+            crop=d.get("crop"),
+            before_outline=b_out,
+            after_outline=a_out,
+            regions=regions,
+        )
     path = out_dir / svg_relpath(row)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return index_row(row, len(regions), area, tags, features)
+    entry = index_row(row, len(regions), area, tags, features, named, callouts)
+    entry["dimension"] = ({"kind": dimension["kind"], "at": d["dimension"]["at"], "label": dimension["label"]}
+                          if dimension else None)
+    entry["alt"] = alt if alt is not None else describe_alt(row, unit, entry)
+    entry["long_description"] = (long_description if long_description is not None
+                                 else describe_long(row, unit, entry, None, titles))
+    return entry
 
 
 def run_rows(
@@ -1044,21 +1912,26 @@ def run_rows(
     cache_dir: Path,
     force: bool = False,
     renderer: Optional[Renderer] = None,
+    layout: str = "pair",
 ) -> List[Dict[str, Any]]:
     """Build the diagrams of ``rows`` under ``out_dir``; return their index
     rows (rows with a view this script does not build are skipped with a log line)."""
     out_dir = Path(out_dir)
     renderer = renderer or Renderer(cache_dir=Path(cache_dir), force=force)
-    defaults = {key: mapping_defaults(load_mapping(key)) for key in SCADS}
+    mappings = {key: load_mapping(key) for key in SCADS}
+    defaults = {key: mapping_defaults(m) for key, m in mappings.items()}
+    titles = {key: {r["name"]: r["title"] for r in rows if r["file"] == key} for key in SCADS}
     produced: List[Dict[str, Any]] = []
     for row in rows:
         view = row["diagram"]["view"]
         t0 = time.time()
         if view == "none":
-            entry = build_none(row, out_dir)
+            entry = build_none(row, out_dir, (mappings[row["file"]].get(row["name"]) or {}).get("unit"))
         elif view == "top" or view in SECTION_VIEWS:
             r0, h0 = renderer.renders, renderer.hits
-            entry = build_diff(row, renderer, defaults[row["file"]], out_dir)
+            unit = (mappings[row["file"]].get(row["name"]) or {}).get("unit")
+            entry = build_diff(row, renderer, defaults[row["file"]], out_dir, layout=layout, unit=unit,
+                               titles=titles[row["file"]])
             logger.info(
                 "%s %s: %d region(s), %.1f mm2, %d render(s), %d cache hit(s), %.1f s%s",
                 row["file"], row["name"], entry["regions"], entry["changed_area_mm2"],
@@ -1093,6 +1966,234 @@ def write_index(out_dir: Path, produced: Sequence[Dict[str, Any]], catalog: Sequ
     return path
 
 
+
+# ---------------------------------------------------------------------------
+# The storyboards (R3 B4): the four Customizer steps on one plug, five panels
+# ---------------------------------------------------------------------------
+
+STORYBOARDS = PROJECT_ROOT / "dial_storyboards.json"
+STORYBOARD_INDEX_NAME = "storyboards_index.json"
+SB_PANEL_W = 48.0  # mm, the widest ordinary panel; the others share its scale
+SB_GAP = 13.0  # mm between panels, the numbered arrow lives here
+SB_STUB = 6.0  # mm, the wrap arrow's stubs at the end of row 1 and the start of row 2
+SB_CIRCLE = 3.2  # mm, the step number's circle
+SB_CAPTION = 2.4  # mm, the step names under the rows
+SB_LONG_MAX_WORDS = 150
+LAYOUT_STEP = "Step 4 - Print Layout"  # the two-sided file's last step: both plates in Full mode, nothing marked
+
+
+def load_storyboards() -> List[Dict[str, Any]]:
+    return json.loads(STORYBOARDS.read_text(encoding="utf-8"))
+
+
+def storyboard_stages(board: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Render the five cumulative states through the cache and diff each
+    against the previous one; the layout step (both plates) is drawn as it
+    prints, with no marks."""
+    file_key = board["file"]
+    params = dict(defaults)
+    prev: Optional[Dict[str, Any]] = None
+    stages: List[Dict[str, Any]] = []
+    for stage in board["stages"]:
+        params = dict(params)
+        params.update(stage["set"])
+        layout = stage["step"] == LAYOUT_STEP
+        if layout:
+            defines = {k: v for k, v in params.items() if not _same_value(v, defaults.get(k))}
+            defines["render_mode"] = "Full"
+        else:
+            defines = defines_for(file_key, "storyboard", params, defaults)
+        stl, log, _hit = renderer.render(file_key, defines)
+        outline = top_view(file_key, stl, params)
+        plug = None if layout else plug_polygon(file_key, params, outline)
+        named: List[Tuple[Polygon, List[str]]] = []
+        area = 0.0
+        plan = PairPlan()
+        if prev is not None and not layout:
+            regions, area = outline_regions(prev["outline"], outline)
+            if regions:
+                fp = footprints(file_key, prev["params"], prev["outline"], outline, params)
+                body_area = sum(q.area for q in prev["outline"].solids)
+                edge_rings = [LineString(max(o.solids, key=lambda q: q.area).exterior.coords)
+                              for o in (prev["outline"], outline) if o.solids]
+                named = classify_regions(file_key, regions, fp, "top", 0.0, body_area, edge_rings)
+            plan = plan_callouts(prev["outline"], outline, named)
+        stages.append({"step": stage["step"], "set": stage["set"], "params": params, "outline": outline,
+                       "plug": plug, "named": named, "area": area, "plan": plan,
+                       "tags": warning_tags(log), "layout": layout})
+        prev = stages[-1]
+    return stages
+
+
+def compose_storyboard_svg(board: Dict[str, Any], stages: Sequence[Dict[str, Any]], desc: str) -> str:
+    """The 3 + 2 grid: five panels at one scale (the layout panel may be
+    wider), each drawn like an after panel against the previous stage, the
+    numbered arrows between them, the step names under the rows, the wrap
+    from panel 3 to panel 4 as two stubs in one arrow group."""
+    panels = []
+    for k, st in enumerate(stages):
+        geoms = list(st["outline"].solids) + list(st["outline"].recess) + ([st["plug"]] if st["plug"] is not None else [])
+        if k > 0 and not st["layout"]:
+            pv = stages[k - 1]
+            geoms += list(pv["outline"].solids) + list(pv["outline"].recess) + ([pv["plug"]] if pv["plug"] is not None else [])
+        bx0, by0, bx1, by1 = shapely.union_all(geoms).bounds
+        x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
+        panels.append({"frame": _Frame(x0, y0, x1, y1, 0.0), "W": x1 - x0, "H": y1 - y0})
+    s = SB_PANEL_W / max(pn["W"] for pn, st in zip(panels, stages) if not st["layout"])
+    for pn in panels:
+        pn["s"], pn["w_page"], pn["h_page"] = s, pn["W"] * s, pn["H"] * s
+    row_h1 = max(pn["h_page"] for pn in panels[:3])
+    row_h2 = max(pn["h_page"] for pn in panels[3:])
+    cap_h = 1.5 + SB_CAPTION + 1.0
+    cells = [SB_PANEL_W] * 3
+    total_w = SB_STUB + 1.0 + sum(cells) + 2 * SB_GAP + 0.5 + SB_STUB + 1.0
+    total_h = 2.0 + row_h1 + cap_h + 4.0 + row_h2 + cap_h + 1.0
+    origins: Dict[int, Tuple[float, float]] = {}
+    y_row1 = 2.0
+    y_row2 = 2.0 + row_h1 + cap_h + 4.0
+    for k in range(3):
+        origins[k] = (SB_STUB + 1.0 + k * (SB_PANEL_W + SB_GAP), y_row1 + (row_h1 - panels[k]["h_page"]) / 2)
+    for k in (3, 4):
+        origins[k] = (SB_STUB + 1.0 + (k - 3) * (SB_PANEL_W + SB_GAP), y_row2 + (row_h2 - panels[k]["h_page"]) / 2)
+    svg: List[str] = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{total_w:.2f}mm" height="{total_h:.2f}mm" '
+        f'viewBox="0 0 {total_w:.2f} {total_h:.2f}" role="img">',
+        f'<title>{_esc(board["title"])}</title>',
+        f'<desc>{_esc(desc)}</desc>',
+        f'<rect width="{total_w:.2f}" height="{total_h:.2f}" fill="white"/>',
+    ]
+    for k, (st, pn) in enumerate(zip(stages, panels)):
+        ox, oy = origins[k]
+        if not st["layout"]:
+            ox += (SB_PANEL_W - pn["w_page"]) / 2
+        fr = pn["frame"]
+        svg.append(f'<g class="panel" id="stage{k}" transform="translate({ox:.2f} {oy:.2f}) scale({pn["s"]:.4f})">')
+        if st["plug"] is not None:
+            svg.append(_filled_polygon(fr, st["plug"], COLOR_PLUG, PLUG_OPACITY))
+        svg.extend(_draw_outline(fr, st["outline"], COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+        plan = st["plan"]
+        for arc in plan.arcs:
+            svg.append(_dotted(fr, arc))
+        for (region, _names), removed in zip(plan.regions, plan.removed):
+            if removed:
+                svg.append(_dotted(fr, LineString(region.exterior.coords)))
+        svg.append("</g>")
+
+    def arrow(xa: float, xb: float, y: float, step: int, caption_y: float, caption: Optional[str],
+              anchor: str = "middle") -> List[str]:
+        cx = (xa + xb) / 2
+        out = [_svg_arrow_h(xa, xb, y),
+               f'<circle cx="{cx:.2f}" cy="{y - 4.2:.2f}" r="{SB_CIRCLE / 2}" fill="white" stroke="#000" stroke-width="0.35"/>',
+               _text(cx, y - 4.2 + 1.0, str(step), 2.6, bold=True)]
+        if caption:
+            tx = cx if anchor == "middle" else xa
+            out.append(_text(tx, caption_y, caption, SB_CAPTION, anchor=anchor, fill="#333333"))
+        return out
+
+    steps = [st["step"] for st in stages[1:]]
+    mid1, mid2 = y_row1 + row_h1 / 2, y_row2 + row_h2 / 2
+    cap1, cap2 = y_row1 + row_h1 + 1.5 + SB_CAPTION, y_row2 + row_h2 + 1.5 + SB_CAPTION
+    for k in (0, 1):
+        xa = origins[k][0] + SB_PANEL_W + 1.0
+        svg.append('<g class="arrow">')
+        svg.extend(arrow(xa, xa + SB_GAP - 2.0, mid1, k + 1, cap1, steps[k]))
+        svg.append("</g>")
+    svg.append('<g class="arrow">')
+    xa = origins[2][0] + SB_PANEL_W + 0.5
+    svg.extend(arrow(xa, xa + SB_STUB, mid1, 3, cap1, None))
+    svg.extend(arrow(0.5, 0.5 + SB_STUB, mid2, 3, cap2, steps[2], anchor="start"))
+    svg.append("</g>")
+    xa = origins[3][0] + SB_PANEL_W + 1.0
+    svg.append('<g class="arrow">')
+    svg.extend(arrow(xa, xa + SB_GAP - 2.0, mid2, 4, cap2, steps[3]))
+    svg.append("</g>")
+    svg.append("</svg>")
+    return "\n".join(x for x in svg if x) + "\n"
+
+
+def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]], titles: Dict[str, str],
+                        units: Dict[str, Optional[str]], defaults: Dict[str, Any]) -> Tuple[str, str]:
+    """The storyboard's alt text and long description (an overview, then one
+    numbered line per stage, at most SB_LONG_MAX_WORDS)."""
+    file_key = board["file"]
+    tool = TOOL_NAMES[file_key]
+    alt = f"{tool[0].upper()}{tool[1:]}, the four Customizer steps on a {board['plug_label']}, five stages left to right."
+    plug_w = _fmt_value(effective_measurements(file_key, defaults)["measure_plug_width_prong_end"])
+    overview = (f"Five stages of {tool}, left to right, the top row first, the plug end at the top; "
+                "red dots mark the edges each step moved.")
+
+    def stage_line(k: int, st: Dict[str, Any], level: int) -> str:
+        """level 0: the dials with their values; 1: the dials' names; 2: at most three names and a count."""
+        if k == 0:
+            return f"1, the defaults: the tool as the file opens, with a {plug_w} mm wide plug in teal."
+        if st["layout"]:
+            return f"{k + 1}, {st['step']}: both plates side by side in one file, what you print; nothing marked."
+        parts = []
+        for dial, value in st["set"].items():
+            name = _lower_first(titles.get(dial, dial))
+            if level == 0:
+                unit = units.get(dial)
+                shown = f"{_fmt_value(value)} {unit}" if unit and not isinstance(value, (str, bool)) else _fmt_value(value)
+                parts.append(f"{name} {shown}")
+            else:
+                parts.append(name)
+        if level >= 2 and len(parts) > 3:
+            parts = parts[:3] + [f"and {len(parts) - 3} more"]
+        plan = st["plan"]
+        gone = feature_names([rn for rn, rm in zip(plan.regions, plan.removed) if rm])
+        feats = [f for f in feature_names(st["named"]) if f not in gone]
+        if feats or gone:
+            red = f"; red on {_join_names(feats)}" if feats else ""
+            if gone:
+                red += f"; {_join_names(gone)} removed, drawn in red from the old outline"
+        elif file_key == TWO_SIDED and st["step"].startswith("Step 3"):
+            red = "; no strap slot on a plug this short, so nothing moved"
+        else:
+            red = "; nothing moved"
+        return f"{k + 1}, {st['step']}: {', '.join(parts)}{red}."
+
+    for level in (0, 1, 2):
+        lines = [stage_line(k, st, level) for k, st in enumerate(stages)]
+        text = overview + " " + " ".join(lines)
+        if len(text.split()) <= SB_LONG_MAX_WORDS:
+            return alt, text
+    return alt, text
+
+
+def build_storyboards(out_dir: Path, renderer: Renderer, catalog: Sequence[Dict[str, Any]]) -> Path:
+    """Draw both storyboards under ``out_dir`` and write their index."""
+    mappings = {key: load_mapping(key) for key in SCADS}
+    defaults = {key: mapping_defaults(m) for key, m in mappings.items()}
+    entries = []
+    for board in load_storyboards():
+        file_key = board["file"]
+        t0 = time.time()
+        stages = storyboard_stages(board, renderer, defaults[file_key])
+        titles = {r["name"]: r["title"] for r in catalog if r["file"] == file_key}
+        units = {name: row.get("unit") for name, row in mappings[file_key].items()}
+        alt, long_description = describe_storyboard(board, stages, titles, units, defaults[file_key])
+        svg = compose_storyboard_svg(board, stages, long_description)
+        rel = f"{file_key}/storyboard.svg"
+        path = out_dir / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(svg, encoding="utf-8")
+        tags = sorted({tag for st in stages for tag in st["tags"]})
+        entries.append({"file": file_key, "name": "storyboard", "key": board["key"], "title": board["title"],
+                        "svg": rel, "stages": [len(st["plan"].regions) for st in stages], "tags": tags,
+                        "alt": alt, "long_description": long_description})
+        logger.info("storyboard %s: stages %s, %.1f s%s", board["key"], entries[-1]["stages"], time.time() - t0,
+                    f", tags {tags}" if tags else "")
+    index_path = out_dir / STORYBOARD_INDEX_NAME
+    index_path.write_text(json.dumps(entries, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return index_path
+
+
+def load_storyboard_index(out_dir: Path) -> List[Dict[str, Any]]:
+    path = out_dir / STORYBOARD_INDEX_NAME
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+
+
 # ---------------------------------------------------------------------------
 # docs/dials/README.md: every diagram inline with its words
 # ---------------------------------------------------------------------------
@@ -1101,17 +2202,21 @@ README_NAME = "README.md"
 README_TITLE = "Dial diagrams"
 README_INTRO = (
     "Every dial of the one-sided puller and the two-sided puller has a picture here: "
-    "the tool at its defaults in black, the plug in teal, and a red dashed trace on the "
-    "part that dial moves when it goes from its default to a second value.",
-    "The pictures are cut from the same OpenSCAD files you print from, at 1 unit = 1 mm; "
-    "the two values drawn are written under each picture.",
+    "the tool at the dial's default on the left with the plug in teal, an arrow with the "
+    "two values, and the tool after the dial moved on the right, drawn once in black with "
+    "the edges that moved in red dots; the numbered dots on those edges match the key "
+    "beside the picture.",
+    "The pictures are cut from the same OpenSCAD files you print from, at 1 unit = 1 mm. "
+    "Under each picture: the long form of its text alternative, then the two values and "
+    "the parts that moved.",
 )
 README_FILE_HEADINGS = {ONE_SIDED: "One-sided puller", TWO_SIDED: "Two-sided puller"}
 
 
 def _readme_entry(row: Dict[str, Any], entry: Dict[str, Any]) -> List[str]:
     d = row["diagram"]
-    lines = [f"`{row['name']}`: {row['title']}", "", f"![{row['changes']}]({svg_relpath(row)})", ""]
+    lines = [f"`{row['name']}`: {row['title']}", "", f"![{entry['alt']}]({svg_relpath(row)})", "",
+             entry["long_description"], ""]
     if d["view"] == "none":
         lines.append(f"{NO_SHAPE_SENTENCE} {row.get('note') or ''}".strip())
     else:
@@ -1129,14 +2234,20 @@ def _readme_entry(row: Dict[str, Any], entry: Dict[str, Any]) -> List[str]:
 
 
 def write_readme(out_dir: Path, catalog: Sequence[Dict[str, Any]],
-                 index_rows: Sequence[Dict[str, Any]]) -> Path:
-    """The Markdown index: H1, the intro and the legend, H2 per file, H3 per
-    Customizer section in mapping order, one entry per dial."""
+                 index_rows: Sequence[Dict[str, Any]],
+                 storyboards: Sequence[Dict[str, Any]] = ()) -> Path:
+    """The Markdown index: H1, the intro and the legend, H2 per file, the
+    storyboard section when one exists, H3 per Customizer section in mapping
+    order, one entry per dial."""
     index = {(e["file"], e["name"]): e for e in index_rows}
+    boards = {e["file"]: e for e in storyboards}
     lines = [f"# {README_TITLE}", "", README_INTRO[0], "", README_INTRO[1], "", LEGEND_LINE + ".", ""]
     count = 0
     for file_key in (ONE_SIDED, TWO_SIDED):
         lines += [f"## {README_FILE_HEADINGS[file_key]}", ""]
+        board = boards.get(file_key)
+        if board:
+            lines += ["### The four steps", "", f"![{board['alt']}]({board['svg']})", "", board["long_description"], ""]
         sections: List[str] = []
         for mrow in load_mapping(file_key).values():
             if mrow["section"] not in sections:
@@ -1180,16 +2291,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--force", action="store_true", help="re-render even when the cache has the STL")
     parser.add_argument("--views", choices=VIEW_CHOICES, default="all", help="which catalog views to build (default: every view this script supports)")
     parser.add_argument("--readme", action="store_true", help="only rewrite docs/dials/README.md from the index on disk (no rows built)")
+    parser.add_argument("--layout", choices=("pair", "single"), default="pair", help="the pair picture (default) or the previous one-drawing picture")
+    parser.add_argument("--storyboards", action="store_true", help="draw the two storyboards of dial_storyboards.json and rewrite the README (no catalog rows built)")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
     catalog = load_catalog()
-    if args.readme:
+    if args.readme or args.storyboards:
         index_path = args.out / INDEX_NAME
         if not index_path.exists():
             logger.error("no index at %s; build the rows first", index_path)
             return 1
-        write_readme(args.out, catalog, json.loads(index_path.read_text(encoding="utf-8")))
+        if args.storyboards:
+            renderer = Renderer(cache_dir=args.cache, force=args.force)
+            build_storyboards(args.out, renderer, catalog)
+            logger.info("storyboards: %d renders (%.1f s in OpenSCAD), %d cache hits", renderer.renders, renderer.seconds, renderer.hits)
+        write_readme(args.out, catalog, json.loads(index_path.read_text(encoding="utf-8")), load_storyboard_index(args.out))
         return 0
     files = [args.file] if args.file else [ONE_SIDED, TWO_SIDED]
     rows = select_rows(catalog, files, args.only, args.views)
@@ -1198,11 +2315,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 1
     t0 = time.time()
     renderer = Renderer(cache_dir=args.cache, force=args.force)
-    produced = run_rows(rows, out_dir=args.out, cache_dir=args.cache, force=args.force, renderer=renderer)
+    produced = run_rows(rows, out_dir=args.out, cache_dir=args.cache, force=args.force, renderer=renderer, layout=args.layout)
     index_path = write_index(args.out, produced, catalog)
     index_rows = json.loads(index_path.read_text(encoding="utf-8"))
     if len(index_rows) == len(catalog):
-        write_readme(args.out, catalog, index_rows)
+        write_readme(args.out, catalog, index_rows, load_storyboard_index(args.out))
     else:
         logger.warning("README not written: the index has %d of %d catalog rows", len(index_rows), len(catalog))
     empty = [f"{e['file']}/{e['name']}" for e in produced if e["view"] != "none" and e["regions"] == 0]

@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="64.00mm" height="43.14mm" viewBox="0 0 64.00 43.14" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="100.00mm" height="29.30mm" viewBox="0 0 100.00 29.30" role="img">
 <title>Hook side</title>
-<desc>Mirrors the cord hook at the cord end so its catch faces the other side, and nothing else moves. Before: Right. After: Left.</desc>
-<rect width="64.00" height="43.14" fill="white"/>
-<text x="32.00" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">hook_hand</text>
-<text x="32.00" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">Right → Left</text>
-<path d="M 64.00 19.15 L 63.93 19.25 L 62.86 20.54 L 61.67 21.72 L 60.37 22.77 L 58.97 23.69 L 57.48 24.47 L 55.94 25.10 L 54.33 25.57 L 52.69 25.89 L 38.92 27.83 L 38.88 23.75 L 38.56 23.40 L 38.56 19.49 L 38.41 19.01 L 38.10 18.63 L 37.78 18.44 L 37.29 18.34 L 28.72 18.34 L 28.12 18.49 L 27.66 18.90 L 27.46 19.49 L 27.46 22.27 L 27.60 22.75 L 27.82 23.05 L 28.12 23.27 L 28.60 23.41 L 32.78 23.42 L 34.12 24.76 L 34.10 28.49 L 30.06 28.50 L 10.06 25.66 L 8.45 25.23 L 6.88 24.63 L 5.38 23.89 L 3.96 23.00 L 2.63 21.98 L 1.41 20.83 L 0.32 19.58 L 0.00 19.13" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 27.61 10.50 L 27.23 11.56 L 26.70 12.68 L 26.06 13.75 L 25.32 14.75 L 24.48 15.68 L 23.56 16.51 L 22.56 17.26 L 21.49 17.90 L 20.36 18.43 L 19.19 18.85 L 17.98 19.16 L 16.75 19.34 L 15.50 19.40 L 14.26 19.34 L 13.03 19.16 L 11.82 18.85 L 10.64 18.43 L 9.52 17.90 L 8.45 17.26 L 7.45 16.52 L 6.52 15.68 L 5.69 14.76 L 4.94 13.76 L 4.30 12.69 L 3.77 11.56 L 3.39 10.50" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
-<path d="M 60.61 10.50 L 60.23 11.56 L 59.70 12.68 L 59.06 13.75 L 58.32 14.75 L 57.48 15.68 L 56.56 16.51 L 55.56 17.26 L 54.49 17.90 L 53.36 18.43 L 52.19 18.85 L 50.98 19.16 L 49.75 19.34 L 48.50 19.40 L 47.26 19.34 L 46.03 19.16 L 44.82 18.85 L 43.64 18.43 L 42.52 17.90 L 41.45 17.26 L 40.45 16.52 L 39.52 15.68 L 38.69 14.76 L 37.94 13.76 L 37.30 12.69 L 36.77 11.56 L 36.39 10.50" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
-<path d="M 35.41 23.41 L 35.77 23.32 L 36.18 23.05 L 36.50 22.52 L 36.54 19.49 L 36.40 19.01 L 36.18 18.71 L 35.88 18.49 L 35.28 18.34 L 37.54 18.36 L 37.89 18.49 L 38.27 18.80 L 38.56 19.49 L 38.56 23.41 L 38.88 23.74 L 38.89 27.83 L 47.98 26.55 L 34.69 28.43 L 34.12 28.50 L 34.12 24.75 L 32.79 23.42 L 32.00 23.42 L 35.41 23.41 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<path d="M 25.10 27.84 L 25.12 23.74 L 25.44 23.41 L 25.49 19.24 L 25.90 18.63 L 26.46 18.36 L 28.72 18.34 L 28.35 18.39 L 28.01 18.55 L 27.66 18.90 L 27.50 19.24 L 27.46 22.27 L 27.66 22.85 L 28.02 23.21 L 28.60 23.41 L 32.00 23.42 L 31.21 23.42 L 29.88 24.75 L 29.88 28.48 L 29.31 28.43 L 16.02 26.55 L 25.10 27.84 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<text x="32.00" y="35.10" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
-<text x="32.00" y="38.48" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
-<text x="32.00" y="41.86" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hook side set to Left: mirrors the cord hook at the cord end so its catch faces the other side, and nothing else moves. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were.</desc>
+<rect width="100.00" height="29.30" fill="white"/>
+<g class="panel" id="before">
+<path d="M 28.00 16.33 L 20.92 17.33 L 20.88 13.25 L 20.56 12.90 L 20.56 8.99 L 20.41 8.51 L 20.10 8.13 L 19.77 7.94 L 19.29 7.84 L 10.72 7.84 L 10.12 7.99 L 9.66 8.40 L 9.46 8.99 L 9.46 11.77 L 9.55 12.14 L 9.82 12.55 L 10.12 12.77 L 10.60 12.91 L 14.78 12.92 L 16.12 14.26 L 16.10 17.99 L 12.05 18.00 L 0.00 16.29" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 9.61 0.00 L 9.23 1.06 L 8.70 2.18 L 8.06 3.25 L 7.32 4.25 L 6.48 5.18 L 5.56 6.01 L 4.56 6.76 L 3.49 7.40 L 2.36 7.93 L 1.19 8.35 L 0.00 8.65" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
+<path d="M 28.00 8.65 L 26.82 8.35 L 25.64 7.93 L 24.52 7.40 L 23.45 6.76 L 22.45 6.02 L 21.52 5.18 L 20.69 4.26 L 19.94 3.26 L 19.30 2.19 L 18.77 1.06 L 18.39 0.00" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
+</g>
+<g class="arrow">
+<line x1="29.50" y1="10.50" x2="34.00" y2="10.50" stroke="#000" stroke-width="0.6"/><polygon points="36.50,10.50 34.00,9.38 34.00,11.62" fill="#000"/>
+<text x="33.00" y="25.30" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">Right</text>
+<text x="33.00" y="28.70" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">→ Left</text>
+</g>
+<g class="panel" id="after" transform="translate(38.00 0)">
+<path d="M 28.00 16.33 L 16.13 18.00 L 12.05 18.00 L 11.88 17.94 L 11.88 14.26 L 13.20 12.93 L 17.40 12.91 L 17.88 12.77 L 18.34 12.36 L 18.54 11.77 L 18.54 8.99 L 18.40 8.51 L 18.09 8.13 L 17.77 7.94 L 17.28 7.84 L 8.71 7.84 L 8.22 7.94 L 7.90 8.13 L 7.59 8.51 L 7.44 8.99 L 7.44 12.90 L 7.12 13.25 L 7.08 17.33 L 0.00 16.33" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 9.61 0.00 L 9.23 1.06 L 8.70 2.18 L 8.06 3.25 L 7.32 4.25 L 6.48 5.18 L 5.56 6.01 L 4.56 6.76 L 3.49 7.40 L 2.36 7.93 L 1.19 8.35 L 0.00 8.65" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
+<path d="M 28.00 8.65 L 26.82 8.35 L 25.64 7.93 L 24.52 7.40 L 23.45 6.76 L 22.45 6.02 L 21.52 5.18 L 20.69 4.26 L 19.94 3.26 L 19.30 2.19 L 18.77 1.06 L 18.39 0.00" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
+<path d="M 20.70 17.37 L 16.69 17.93 L 16.32 17.98" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 11.88 17.78 L 11.88 14.26 L 13.02 13.12" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 15.06 12.92 L 17.40 12.91 L 17.65 12.87 L 17.88 12.77 L 17.99 12.70 L 18.18 12.55 L 18.34 12.36 L 18.45 12.13 L 18.50 12.02 L 18.54 11.77 L 18.54 8.99 L 18.50 8.74 L 18.40 8.51 L 18.26 8.30 L 18.09 8.13 L 17.95 8.04" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 9.98 7.84 L 8.71 7.84 L 8.46 7.86 L 8.22 7.94 L 8.11 7.99 L 7.90 8.13 L 7.73 8.30 L 7.59 8.51 L 7.49 8.74 L 7.44 8.99 L 7.44 12.90 L 7.43 12.93 L 7.13 13.22 L 7.12 13.25 L 7.12 17.14" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<circle cx="20.70" cy="17.37" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="20.70" y="18.16" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+<circle cx="13.02" cy="13.12" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="13.02" y="13.91" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+</g>
+<g class="key">
+<text x="69.00" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 hook</text>
+</g>
+<g class="leaders">
+<line x1="59.43" y1="16.29" x2="68.00" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>
+</g>
 </svg>

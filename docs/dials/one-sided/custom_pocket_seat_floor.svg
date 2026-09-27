@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="75.50mm" height="62.20mm" viewBox="0 0 75.50 62.20" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="195.00mm" height="44.11mm" viewBox="0 0 195.00 44.11" role="img">
 <title>Pocket seat floor thickness</title>
-<desc>Thins or thickens the floor left under the round seat, so the seat is cut deeper or shallower. Before: 3.175. After: 1.5.</desc>
-<rect width="75.50" height="62.20" fill="white"/>
-<text x="37.75" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">custom_pocket_seat_floor</text>
-<text x="37.75" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">3.175 → 1.5</text>
-<text x="37.75" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(size: Custom, section-x: 0)</text>
-<path d="M 6.00 20.75 L 31.50 20.75 L 31.50 40.75 L 6.00 40.75 L 6.00 20.75 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
-<path d="M 64.42 38.26 L 64.47 38.21 L 67.08 38.21 L 67.57 38.29 L 68.27 38.57 L 69.00 39.23 L 69.35 39.89 L 69.50 40.62 L 69.48 44.55 L 64.43 44.54 L 64.42 38.26 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 9.86 44.56 L 9.81 44.51 L 9.85 41.39 L 21.85 41.38 L 22.04 41.11 L 22.67 40.75 L 30.49 40.75 L 30.94 40.55 L 31.38 40.19 L 31.56 39.50 L 31.61 38.21 L 59.34 38.26 L 59.29 44.56 L 9.86 44.56 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 9.81 43.06 L 9.81 41.39 L 21.87 41.38 L 22.03 41.11 L 22.68 40.75 L 22.03 42.06 L 21.87 43.06 L 9.81 43.06 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<text x="37.75" y="54.16" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
-<text x="37.75" y="57.54" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
-<text x="37.75" y="60.92" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+<desc>Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: pocket seat floor thickness at 1.5 mm: thins or thickens the floor left under the round seat, so the seat is cut deeper or shallower. Marked in red: 1, the seat: the round recess at the plug end.</desc>
+<rect width="195.00" height="44.11" fill="white"/>
+<g class="panel" id="before">
+<path d="M 6.00 6.00 L 31.50 6.00 L 31.50 26.00 L 6.00 26.00 L 6.00 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 69.50 25.99 L 69.48 29.80 L 64.43 29.79 L 64.44 23.47 L 67.09 23.46 L 68.05 23.71 L 68.66 24.12 L 69.14 24.69 L 69.42 25.38 L 69.50 25.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 9.86 29.81 L 9.81 29.76 L 9.85 26.64 L 21.85 26.63 L 22.04 26.36 L 22.67 26.00 L 30.49 26.00 L 30.94 25.80 L 31.38 25.44 L 31.56 24.75 L 31.61 23.46 L 59.34 23.51 L 59.29 29.81 L 9.86 29.81 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g class="arrow">
+<line x1="77.00" y1="17.91" x2="81.50" y2="17.91" stroke="#000" stroke-width="0.6"/><polygon points="84.00,17.91 81.50,16.78 81.50,19.03" fill="#000"/>
+<text x="80.50" y="40.11" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">3.175 → 1.5 mm</text>
+<text x="80.50" y="43.51" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">section at x = 0 mm</text>
+</g>
+<g class="panel" id="after" transform="translate(85.50 0)">
+<path d="M 6.00 6.00 L 31.50 6.00 L 31.50 26.00 L 6.00 26.00 L 6.00 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 69.50 25.99 L 69.48 29.80 L 64.43 29.79 L 64.44 23.47 L 67.09 23.46 L 68.05 23.71 L 68.67 24.12 L 69.14 24.69 L 69.42 25.38 L 69.50 25.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 9.86 29.81 L 9.81 29.76 L 9.85 28.31 L 21.84 28.31 L 22.03 27.31 L 22.69 26.00 L 30.50 26.00 L 30.94 25.80 L 31.38 25.44 L 31.56 24.75 L 31.61 23.46 L 59.34 23.51 L 59.29 29.81 L 9.86 29.81 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 10.01 28.31 L 21.84 28.31 L 21.88 28.27 L 21.97 27.78 L 21.98 27.66 L 22.03 27.31 L 22.52 26.31" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<circle cx="22.52" cy="26.31" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="22.52" y="27.11" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+</g>
+<g class="key">
+<text x="164.00" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 seat</text>
+</g>
+<g class="leaders">
+<line x1="109.22" y1="25.82" x2="163.00" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>
+</g>
 </svg>
