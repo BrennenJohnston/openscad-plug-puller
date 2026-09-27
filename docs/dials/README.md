@@ -8,6 +8,12 @@ black = the tool; teal = your plug; red dotted = the edges this dial moved; the 
 
 ## One-sided puller
 
+### The four steps
+
+![The one-sided puller, the four Customizer steps on a US vacuum plug, five stages left to right.](one-sided/storyboard.svg)
+
+Five stages of the one-sided puller, left to right, the top row first, the plug end at the top; red dots mark the edges each step moved. 1, the defaults: the tool as the file opens, with a 25 mm wide plug in teal. 2, Step 1 - Your Plug: plug length, plug width at the prong end, plug width at the cord end, and 4 more; red on the body edge, the finger holes, the seat, the wall notch and the wing openings. 3, Step 2 - Size: hand size, finger width, hand width; red on the body edge, the finger holes, the pocket, the wall notch, the wing openings and the zip-tie holes. 4, Step 3 - Attachment: attachment; the wing openings removed, drawn in red from the old outline. 5, Step 4 - Cord Hook: hook side; red on the hook.
+
 ### Step 1 - Your Plug
 
 `plug_preset`: Plug preset
@@ -673,6 +679,12 @@ Two vertical slices of the one-sided puller at x = 4.5 mm, before left and after
 Before: 0. After: 2. Context: `size` = Custom. Section at x = 4.5 mm. Moves: hook.
 
 ## Two-sided puller
+
+### The four steps
+
+![The two-sided puller, the four Customizer steps on a USB-C laptop plug, five stages left to right.](two-sided/storyboard.svg)
+
+Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; red dots mark the edges each step moved. 1, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. 2, Step 1 - Your Plug: plug length 23 mm, plug width at the prong end 13 mm, plug width at the cord end 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. 3, Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. 4, Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. 5, Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
 
 ### Step 1 - Your Plug
 

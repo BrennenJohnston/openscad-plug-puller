@@ -281,6 +281,54 @@ def test_dimension_callout_endpoints() -> None:
     assert any(abs(s - 20) < 0.05 for s in spans), spans
 
 
+def test_storyboards() -> None:
+    """dial_storyboards.json: two storyboards, each five cumulative stages in
+    Customizer Step order whose dials and values the file's mapping allows;
+    each tool's storyboard.svg has five panels and four arrow groups; the
+    storyboard index carries an alt and a long description with five
+    numbered lines per storyboard."""
+    from scripts.generate_dial_diagrams import STORYBOARDS, STORYBOARD_INDEX_NAME
+    from tests.test_dial_catalog import _mapping_rows, _value_allowed
+
+    assert STORYBOARDS.exists(), f"{STORYBOARDS} is missing"
+    boards = json.loads(STORYBOARDS.read_text(encoding="utf-8"))
+    assert isinstance(boards, list) and len(boards) == 2
+    index_path = PROJECT_ROOT / "docs" / "dials" / STORYBOARD_INDEX_NAME
+    assert index_path.exists(), f"{index_path} is missing"
+    by_key = {e["key"]: e for e in json.loads(index_path.read_text(encoding="utf-8"))}
+    for board in boards:
+        assert set(board) == {"file", "key", "title", "plug_label", "stages"}, board.get("key")
+        rows = {r["openscad_name"]: r for r in _mapping_rows(board["file"])}
+        sections: list = []
+        for r in rows.values():
+            if r["section"] not in sections:
+                sections.append(r["section"])
+        steps = [s["step"] for s in board["stages"]]
+        assert len(steps) == 5 and steps[0] == "defaults", steps
+        assert all(s.startswith("Step") for s in steps[1:]), steps
+        order = [sections.index(s) for s in steps[1:]]
+        assert order == sorted(order) and len(set(order)) == 4, steps
+        for stage in board["stages"]:
+            assert set(stage) == {"step", "set"}
+            for dial, value in stage["set"].items():
+                assert dial in rows, (board["key"], dial)
+                assert _value_allowed(rows[dial], value), (board["key"], dial, value)
+                assert rows[dial]["section"] == stage["step"], (board["key"], dial, stage["step"])
+        svg_path = PROJECT_ROOT / "docs" / "dials" / board["file"] / "storyboard.svg"
+        assert svg_path.exists(), svg_path
+        svg = svg_path.read_text(encoding="utf-8")
+        assert svg.count('<g class="panel"') == 5, board["key"]
+        assert svg.count('<g class="arrow"') == 4, board["key"]
+        assert f"<title>{board['title']}</title>" in svg
+        entry = by_key[board["key"]]
+        assert entry["file"] == board["file"] and entry["svg"] == f"{board['file']}/storyboard.svg"
+        assert entry["alt"] and len(entry["alt"]) <= 150 and not entry["alt"].lower().startswith(("image of", "picture of"))
+        long = entry["long_description"]
+        assert len(long.split()) <= 150, len(long.split())
+        assert all(f" {n}, " in f" {long}" for n in (1, 2, 3, 4, 5)), long
+        assert len(entry["stages"]) == 5
+
+
 @pytest.mark.requires_openscad
 @pytest.mark.slow
 def test_two_rows_regenerate_within_one_region(tmp_path: Path) -> None:

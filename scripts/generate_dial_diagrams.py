@@ -25,10 +25,16 @@ Renders are cached under ``tmp_renders/dial_diagrams/`` (gitignored), keyed
 by the parameter set and the SCAD sources, never by STL bytes (identical
 renders are not byte-identical).
 
+The two storyboards of ``dial_storyboards.json`` (the four Customizer steps
+applied one after another to a real plug, five panels in a 3 + 2 grid) are
+drawn by ``--storyboards`` into ``docs/dials/<file>/storyboard.svg`` with
+their own index, ``docs/dials/storyboards_index.json``.
+
 Usage:
     python scripts/generate_dial_diagrams.py                 # every row
     python scripts/generate_dial_diagrams.py --file one-sided --only size
     python scripts/generate_dial_diagrams.py --views top --force
+    python scripts/generate_dial_diagrams.py --storyboards   # the two storyboards and the README
 
 Exit status 0 only when every selected row produced an SVG.
 """
@@ -1960,6 +1966,234 @@ def write_index(out_dir: Path, produced: Sequence[Dict[str, Any]], catalog: Sequ
     return path
 
 
+
+# ---------------------------------------------------------------------------
+# The storyboards (R3 B4): the four Customizer steps on one plug, five panels
+# ---------------------------------------------------------------------------
+
+STORYBOARDS = PROJECT_ROOT / "dial_storyboards.json"
+STORYBOARD_INDEX_NAME = "storyboards_index.json"
+SB_PANEL_W = 48.0  # mm, the widest ordinary panel; the others share its scale
+SB_GAP = 13.0  # mm between panels, the numbered arrow lives here
+SB_STUB = 6.0  # mm, the wrap arrow's stubs at the end of row 1 and the start of row 2
+SB_CIRCLE = 3.2  # mm, the step number's circle
+SB_CAPTION = 2.4  # mm, the step names under the rows
+SB_LONG_MAX_WORDS = 150
+LAYOUT_STEP = "Step 4 - Print Layout"  # the two-sided file's last step: both plates in Full mode, nothing marked
+
+
+def load_storyboards() -> List[Dict[str, Any]]:
+    return json.loads(STORYBOARDS.read_text(encoding="utf-8"))
+
+
+def storyboard_stages(board: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Render the five cumulative states through the cache and diff each
+    against the previous one; the layout step (both plates) is drawn as it
+    prints, with no marks."""
+    file_key = board["file"]
+    params = dict(defaults)
+    prev: Optional[Dict[str, Any]] = None
+    stages: List[Dict[str, Any]] = []
+    for stage in board["stages"]:
+        params = dict(params)
+        params.update(stage["set"])
+        layout = stage["step"] == LAYOUT_STEP
+        if layout:
+            defines = {k: v for k, v in params.items() if not _same_value(v, defaults.get(k))}
+            defines["render_mode"] = "Full"
+        else:
+            defines = defines_for(file_key, "storyboard", params, defaults)
+        stl, log, _hit = renderer.render(file_key, defines)
+        outline = top_view(file_key, stl, params)
+        plug = None if layout else plug_polygon(file_key, params, outline)
+        named: List[Tuple[Polygon, List[str]]] = []
+        area = 0.0
+        plan = PairPlan()
+        if prev is not None and not layout:
+            regions, area = outline_regions(prev["outline"], outline)
+            if regions:
+                fp = footprints(file_key, prev["params"], prev["outline"], outline, params)
+                body_area = sum(q.area for q in prev["outline"].solids)
+                edge_rings = [LineString(max(o.solids, key=lambda q: q.area).exterior.coords)
+                              for o in (prev["outline"], outline) if o.solids]
+                named = classify_regions(file_key, regions, fp, "top", 0.0, body_area, edge_rings)
+            plan = plan_callouts(prev["outline"], outline, named)
+        stages.append({"step": stage["step"], "set": stage["set"], "params": params, "outline": outline,
+                       "plug": plug, "named": named, "area": area, "plan": plan,
+                       "tags": warning_tags(log), "layout": layout})
+        prev = stages[-1]
+    return stages
+
+
+def compose_storyboard_svg(board: Dict[str, Any], stages: Sequence[Dict[str, Any]], desc: str) -> str:
+    """The 3 + 2 grid: five panels at one scale (the layout panel may be
+    wider), each drawn like an after panel against the previous stage, the
+    numbered arrows between them, the step names under the rows, the wrap
+    from panel 3 to panel 4 as two stubs in one arrow group."""
+    panels = []
+    for k, st in enumerate(stages):
+        geoms = list(st["outline"].solids) + list(st["outline"].recess) + ([st["plug"]] if st["plug"] is not None else [])
+        if k > 0 and not st["layout"]:
+            pv = stages[k - 1]
+            geoms += list(pv["outline"].solids) + list(pv["outline"].recess) + ([pv["plug"]] if pv["plug"] is not None else [])
+        bx0, by0, bx1, by1 = shapely.union_all(geoms).bounds
+        x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
+        panels.append({"frame": _Frame(x0, y0, x1, y1, 0.0), "W": x1 - x0, "H": y1 - y0})
+    s = SB_PANEL_W / max(pn["W"] for pn, st in zip(panels, stages) if not st["layout"])
+    for pn in panels:
+        pn["s"], pn["w_page"], pn["h_page"] = s, pn["W"] * s, pn["H"] * s
+    row_h1 = max(pn["h_page"] for pn in panels[:3])
+    row_h2 = max(pn["h_page"] for pn in panels[3:])
+    cap_h = 1.5 + SB_CAPTION + 1.0
+    cells = [SB_PANEL_W] * 3
+    total_w = SB_STUB + 1.0 + sum(cells) + 2 * SB_GAP + 0.5 + SB_STUB + 1.0
+    total_h = 2.0 + row_h1 + cap_h + 4.0 + row_h2 + cap_h + 1.0
+    origins: Dict[int, Tuple[float, float]] = {}
+    y_row1 = 2.0
+    y_row2 = 2.0 + row_h1 + cap_h + 4.0
+    for k in range(3):
+        origins[k] = (SB_STUB + 1.0 + k * (SB_PANEL_W + SB_GAP), y_row1 + (row_h1 - panels[k]["h_page"]) / 2)
+    for k in (3, 4):
+        origins[k] = (SB_STUB + 1.0 + (k - 3) * (SB_PANEL_W + SB_GAP), y_row2 + (row_h2 - panels[k]["h_page"]) / 2)
+    svg: List[str] = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{total_w:.2f}mm" height="{total_h:.2f}mm" '
+        f'viewBox="0 0 {total_w:.2f} {total_h:.2f}" role="img">',
+        f'<title>{_esc(board["title"])}</title>',
+        f'<desc>{_esc(desc)}</desc>',
+        f'<rect width="{total_w:.2f}" height="{total_h:.2f}" fill="white"/>',
+    ]
+    for k, (st, pn) in enumerate(zip(stages, panels)):
+        ox, oy = origins[k]
+        if not st["layout"]:
+            ox += (SB_PANEL_W - pn["w_page"]) / 2
+        fr = pn["frame"]
+        svg.append(f'<g class="panel" id="stage{k}" transform="translate({ox:.2f} {oy:.2f}) scale({pn["s"]:.4f})">')
+        if st["plug"] is not None:
+            svg.append(_filled_polygon(fr, st["plug"], COLOR_PLUG, PLUG_OPACITY))
+        svg.extend(_draw_outline(fr, st["outline"], COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+        plan = st["plan"]
+        for arc in plan.arcs:
+            svg.append(_dotted(fr, arc))
+        for (region, _names), removed in zip(plan.regions, plan.removed):
+            if removed:
+                svg.append(_dotted(fr, LineString(region.exterior.coords)))
+        svg.append("</g>")
+
+    def arrow(xa: float, xb: float, y: float, step: int, caption_y: float, caption: Optional[str],
+              anchor: str = "middle") -> List[str]:
+        cx = (xa + xb) / 2
+        out = [_svg_arrow_h(xa, xb, y),
+               f'<circle cx="{cx:.2f}" cy="{y - 4.2:.2f}" r="{SB_CIRCLE / 2}" fill="white" stroke="#000" stroke-width="0.35"/>',
+               _text(cx, y - 4.2 + 1.0, str(step), 2.6, bold=True)]
+        if caption:
+            tx = cx if anchor == "middle" else xa
+            out.append(_text(tx, caption_y, caption, SB_CAPTION, anchor=anchor, fill="#333333"))
+        return out
+
+    steps = [st["step"] for st in stages[1:]]
+    mid1, mid2 = y_row1 + row_h1 / 2, y_row2 + row_h2 / 2
+    cap1, cap2 = y_row1 + row_h1 + 1.5 + SB_CAPTION, y_row2 + row_h2 + 1.5 + SB_CAPTION
+    for k in (0, 1):
+        xa = origins[k][0] + SB_PANEL_W + 1.0
+        svg.append('<g class="arrow">')
+        svg.extend(arrow(xa, xa + SB_GAP - 2.0, mid1, k + 1, cap1, steps[k]))
+        svg.append("</g>")
+    svg.append('<g class="arrow">')
+    xa = origins[2][0] + SB_PANEL_W + 0.5
+    svg.extend(arrow(xa, xa + SB_STUB, mid1, 3, cap1, None))
+    svg.extend(arrow(0.5, 0.5 + SB_STUB, mid2, 3, cap2, steps[2], anchor="start"))
+    svg.append("</g>")
+    xa = origins[3][0] + SB_PANEL_W + 1.0
+    svg.append('<g class="arrow">')
+    svg.extend(arrow(xa, xa + SB_GAP - 2.0, mid2, 4, cap2, steps[3]))
+    svg.append("</g>")
+    svg.append("</svg>")
+    return "\n".join(x for x in svg if x) + "\n"
+
+
+def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]], titles: Dict[str, str],
+                        units: Dict[str, Optional[str]], defaults: Dict[str, Any]) -> Tuple[str, str]:
+    """The storyboard's alt text and long description (an overview, then one
+    numbered line per stage, at most SB_LONG_MAX_WORDS)."""
+    file_key = board["file"]
+    tool = TOOL_NAMES[file_key]
+    alt = f"{tool[0].upper()}{tool[1:]}, the four Customizer steps on a {board['plug_label']}, five stages left to right."
+    plug_w = _fmt_value(effective_measurements(file_key, defaults)["measure_plug_width_prong_end"])
+    overview = (f"Five stages of {tool}, left to right, the top row first, the plug end at the top; "
+                "red dots mark the edges each step moved.")
+
+    def stage_line(k: int, st: Dict[str, Any], level: int) -> str:
+        """level 0: the dials with their values; 1: the dials' names; 2: at most three names and a count."""
+        if k == 0:
+            return f"1, the defaults: the tool as the file opens, with a {plug_w} mm wide plug in teal."
+        if st["layout"]:
+            return f"{k + 1}, {st['step']}: both plates side by side in one file, what you print; nothing marked."
+        parts = []
+        for dial, value in st["set"].items():
+            name = _lower_first(titles.get(dial, dial))
+            if level == 0:
+                unit = units.get(dial)
+                shown = f"{_fmt_value(value)} {unit}" if unit and not isinstance(value, (str, bool)) else _fmt_value(value)
+                parts.append(f"{name} {shown}")
+            else:
+                parts.append(name)
+        if level >= 2 and len(parts) > 3:
+            parts = parts[:3] + [f"and {len(parts) - 3} more"]
+        plan = st["plan"]
+        gone = feature_names([rn for rn, rm in zip(plan.regions, plan.removed) if rm])
+        feats = [f for f in feature_names(st["named"]) if f not in gone]
+        if feats or gone:
+            red = f"; red on {_join_names(feats)}" if feats else ""
+            if gone:
+                red += f"; {_join_names(gone)} removed, drawn in red from the old outline"
+        elif file_key == TWO_SIDED and st["step"].startswith("Step 3"):
+            red = "; no strap slot on a plug this short, so nothing moved"
+        else:
+            red = "; nothing moved"
+        return f"{k + 1}, {st['step']}: {', '.join(parts)}{red}."
+
+    for level in (0, 1, 2):
+        lines = [stage_line(k, st, level) for k, st in enumerate(stages)]
+        text = overview + " " + " ".join(lines)
+        if len(text.split()) <= SB_LONG_MAX_WORDS:
+            return alt, text
+    return alt, text
+
+
+def build_storyboards(out_dir: Path, renderer: Renderer, catalog: Sequence[Dict[str, Any]]) -> Path:
+    """Draw both storyboards under ``out_dir`` and write their index."""
+    mappings = {key: load_mapping(key) for key in SCADS}
+    defaults = {key: mapping_defaults(m) for key, m in mappings.items()}
+    entries = []
+    for board in load_storyboards():
+        file_key = board["file"]
+        t0 = time.time()
+        stages = storyboard_stages(board, renderer, defaults[file_key])
+        titles = {r["name"]: r["title"] for r in catalog if r["file"] == file_key}
+        units = {name: row.get("unit") for name, row in mappings[file_key].items()}
+        alt, long_description = describe_storyboard(board, stages, titles, units, defaults[file_key])
+        svg = compose_storyboard_svg(board, stages, long_description)
+        rel = f"{file_key}/storyboard.svg"
+        path = out_dir / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(svg, encoding="utf-8")
+        tags = sorted({tag for st in stages for tag in st["tags"]})
+        entries.append({"file": file_key, "name": "storyboard", "key": board["key"], "title": board["title"],
+                        "svg": rel, "stages": [len(st["plan"].regions) for st in stages], "tags": tags,
+                        "alt": alt, "long_description": long_description})
+        logger.info("storyboard %s: stages %s, %.1f s%s", board["key"], entries[-1]["stages"], time.time() - t0,
+                    f", tags {tags}" if tags else "")
+    index_path = out_dir / STORYBOARD_INDEX_NAME
+    index_path.write_text(json.dumps(entries, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return index_path
+
+
+def load_storyboard_index(out_dir: Path) -> List[Dict[str, Any]]:
+    path = out_dir / STORYBOARD_INDEX_NAME
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+
+
 # ---------------------------------------------------------------------------
 # docs/dials/README.md: every diagram inline with its words
 # ---------------------------------------------------------------------------
@@ -2000,14 +2234,20 @@ def _readme_entry(row: Dict[str, Any], entry: Dict[str, Any]) -> List[str]:
 
 
 def write_readme(out_dir: Path, catalog: Sequence[Dict[str, Any]],
-                 index_rows: Sequence[Dict[str, Any]]) -> Path:
-    """The Markdown index: H1, the intro and the legend, H2 per file, H3 per
-    Customizer section in mapping order, one entry per dial."""
+                 index_rows: Sequence[Dict[str, Any]],
+                 storyboards: Sequence[Dict[str, Any]] = ()) -> Path:
+    """The Markdown index: H1, the intro and the legend, H2 per file, the
+    storyboard section when one exists, H3 per Customizer section in mapping
+    order, one entry per dial."""
     index = {(e["file"], e["name"]): e for e in index_rows}
+    boards = {e["file"]: e for e in storyboards}
     lines = [f"# {README_TITLE}", "", README_INTRO[0], "", README_INTRO[1], "", LEGEND_LINE + ".", ""]
     count = 0
     for file_key in (ONE_SIDED, TWO_SIDED):
         lines += [f"## {README_FILE_HEADINGS[file_key]}", ""]
+        board = boards.get(file_key)
+        if board:
+            lines += ["### The four steps", "", f"![{board['alt']}]({board['svg']})", "", board["long_description"], ""]
         sections: List[str] = []
         for mrow in load_mapping(file_key).values():
             if mrow["section"] not in sections:
@@ -2052,16 +2292,21 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--views", choices=VIEW_CHOICES, default="all", help="which catalog views to build (default: every view this script supports)")
     parser.add_argument("--readme", action="store_true", help="only rewrite docs/dials/README.md from the index on disk (no rows built)")
     parser.add_argument("--layout", choices=("pair", "single"), default="pair", help="the pair picture (default) or the previous one-drawing picture")
+    parser.add_argument("--storyboards", action="store_true", help="draw the two storyboards of dial_storyboards.json and rewrite the README (no catalog rows built)")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
     catalog = load_catalog()
-    if args.readme:
+    if args.readme or args.storyboards:
         index_path = args.out / INDEX_NAME
         if not index_path.exists():
             logger.error("no index at %s; build the rows first", index_path)
             return 1
-        write_readme(args.out, catalog, json.loads(index_path.read_text(encoding="utf-8")))
+        if args.storyboards:
+            renderer = Renderer(cache_dir=args.cache, force=args.force)
+            build_storyboards(args.out, renderer, catalog)
+            logger.info("storyboards: %d renders (%.1f s in OpenSCAD), %d cache hits", renderer.renders, renderer.seconds, renderer.hits)
+        write_readme(args.out, catalog, json.loads(index_path.read_text(encoding="utf-8")), load_storyboard_index(args.out))
         return 0
     files = [args.file] if args.file else [ONE_SIDED, TWO_SIDED]
     rows = select_rows(catalog, files, args.only, args.views)
@@ -2074,7 +2319,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     index_path = write_index(args.out, produced, catalog)
     index_rows = json.loads(index_path.read_text(encoding="utf-8"))
     if len(index_rows) == len(catalog):
-        write_readme(args.out, catalog, index_rows)
+        write_readme(args.out, catalog, index_rows, load_storyboard_index(args.out))
     else:
         logger.warning("README not written: the index has %d of %d catalog rows", len(index_rows), len(catalog))
     empty = [f"{e['file']}/{e['name']}" for e in produced if e["view"] != "none" and e["regions"] == 0]

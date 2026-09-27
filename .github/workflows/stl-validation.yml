@@ -39,6 +39,7 @@ on:
       - "parameter_mapping.json"
       - "parameter_mapping_two_sided.json"
       - "dial_catalog.json"
+      - "dial_storyboards.json"
       - "requirements-dev.txt"
       - "pytest.ini"
       - "ruff.toml"
@@ -102,6 +103,7 @@ jobs:
           python -c "import json; json.load(open('parameter_mapping.json'))"
           python -c "import json; json.load(open('tests/compare_config.json'))"
           python -c "import json; json.load(open('dial_catalog.json'))"
+          python -c "import json; json.load(open('dial_storyboards.json'))"
 
   # ==========================================================================
   # Job 2: Quick tests (no OpenSCAD required)
