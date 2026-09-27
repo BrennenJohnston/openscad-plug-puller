@@ -1,24 +1,9 @@
 #!/usr/bin/env python3
-"""Build the dial reference: one page per Customizer dial of both pullers.
+"""Build one tool's guide packet: the Markdown twins and the PDF.
 
-Reads ``dial_catalog.json``, the two parameter mappings and the diagram
-index (``docs/dials/dial_diagrams_index.json``) and writes, from the same
-data:
-
-* ``docs/guides/dial-reference.md``: the Markdown twin (H1, H2 per file,
-  H3 per Customizer section, H4 per dial with its diagram, its sentence,
-  the mapping's default / range / step / unit, its caution note, the
-  features its trace moves and the warning tags it can trip);
-* ``docs/Plug_Puller_Dial_Reference.pdf``: a title page, a contents page
-  with a link per dial, then one page per dial, printed with headless
-  Edge/Chrome through the outline-sheets pipeline (210 x 279 mm pages,
-  the browser's document outline as bookmarks).
-
-The date is never printed, so the PDF is reproducible. The SVGs are inlined
-into the HTML, which keeps each diagram's <title>/<desc> text equivalent in
-the page.
-
-The per-tool guide packets (R3): ``--tool one-sided`` or ``--tool two-sided``
+``--tool one-sided`` or ``--tool two-sided`` reads ``dial_catalog.json``
+(its ``measure`` rows too), the two parameter mappings, the diagram index
+(``docs/dials/dial_diagrams_index.json``) and the storyboard index, and
 writes that tool's Markdown twins under ``docs/guides/<tool>/`` from the same
 data plus the storyboard index and the catalog's ``measure`` rows: the quick
 start (the opener, the storyboard, the four steps' dials), the dial guide
@@ -32,10 +17,13 @@ picture above 1:1), the measuring guide, and the measuring form sheet at
 exactly 210 × 279 mm as the last page; the picture key line sits in every
 flowing page's bottom margin.
 
+The date is never printed, so the PDF is reproducible. The SVGs are inlined
+into the HTML, which keeps each diagram's <title>/<desc> text equivalent in
+the page.
+
 Usage:
-    python scripts/build_dial_reference.py                 # both files
-    python scripts/build_dial_reference.py --markdown-only # no browser needed
-    python scripts/build_dial_reference.py --tool one-sided --markdown-only
+    python scripts/build_dial_reference.py --tool one-sided                  # the twins and the PDF
+    python scripts/build_dial_reference.py --tool two-sided --markdown-only  # no browser needed
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -75,42 +63,16 @@ MAPPINGS = {
 DIALS_DIR = PROJECT_ROOT / "docs" / "dials"
 INDEX = DIALS_DIR / "dial_diagrams_index.json"
 STORYBOARDS = DIALS_DIR / "storyboards_index.json"
-OUT_PDF = PROJECT_ROOT / "docs" / "Plug_Puller_Dial_Reference.pdf"
-OUT_MD = PROJECT_ROOT / "docs" / "guides" / "dial-reference.md"
 SCRATCH = PROJECT_ROOT / "tmp_renders" / "dial_reference"
 EDGE_PROFILE = PROJECT_ROOT / "tmp_renders" / "edge_profile"
 
 FILE_LABELS = {"one-sided": "One-sided puller", "two-sided": "Two-sided puller"}
 FILE_ORDER = ("one-sided", "two-sided")
-TITLE = "Plug Puller Dial Reference"
-DESCRIPTION = (
-    "Every dial of the one-sided puller and the two-sided puller on its own page: "
-    "what it moves, in a picture and a sentence, with the numbers the Customizer allows."
-)
 CONTENTS_HEADING = "Contents"
-LEGEND = "black = the tool at its defaults; teal = the plug you measured; red dashed = what this dial moves"
 NO_SHAPE = "This dial changes no shape."
 MOVES_LABEL = "Moves"
 TRIPS_LABEL = "Can trip"
 
-# The quick-start cut: the Steps 1-4 dials only, with an opener page.
-QUICK_TITLE = "Plug Puller Dial Quick Start"
-QUICK_DESCRIPTION = (
-    "The dials of the four Customizer steps of both pullers, one per page: which file to open, "
-    "then what each step's dial moves."
-)
-QUICK_OUT_PDF = PROJECT_ROOT / "docs" / "Plug_Puller_Dial_Quick_Start.pdf"
-QUICK_OUT_MD = PROJECT_ROOT / "docs" / "guides" / "dial-quick-start.md"
-OPENER_HEADING = "Which file to open"
-OPENER = (
-    "Measure your plug's thickness. Up to 24 mm: open the one-sided puller, "
-    "src/Plug_Puller_Parametric.scad. Thicker than 24 mm, or a plug you want held from both "
-    "sides such as a USB-C tip or a round extension-cord plug: open the two-sided puller, "
-    "src/Plug_Puller_Two_Sided.scad.",
-    "Each file has four steps at the top of its Customizer: your plug, your size, the "
-    "attachment, and one last choice (the hook hand in the one-sided file; the print layout "
-    "in the two-sided file). The dials on the next pages are those steps and nothing else.",
-)
 RED_TEXT = (
     "If red text appears beside the part in the preview, read it: it names the measurement "
     "to fix, and the part will not fit until it is gone."
@@ -187,12 +149,6 @@ TWO_SIDED_WIDTHS = (
     "puller only."
 )
 
-# The title page and the contents pages. Measured on the first print of the
-# 118-row catalog (the contents flow over two pages in two columns); the verify
-# step asserts the total. The quick-start cut: the opener page (its title page)
-# and one contents page for 28 dials.
-FRONT_MATTER_PAGES = 3
-QUICK_FRONT_MATTER_PAGES = 2
 FIGURE_W_MM = 170.0
 FIGURE_MAX_H_MM = 140.0
 FIGURE_MAX_SCALE = 2.0  # a cropped detail is drawn at most twice its 1:1 size
@@ -347,10 +303,6 @@ def values_text(row: Dict[str, Any], code: bool = True) -> str:
 # ---------------------------------------------------------------------------
 
 
-def quick_rows(rows: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    return [r for r in rows if r.get("quick_start")]
-
-
 def numbers_line(mrow: Optional[Dict[str, Any]]) -> str:
     """The mapping's numbers as one line of prose, never a table cell (and
     never "Step 0.5": the docs gate reads "step 0" as the retired section
@@ -474,72 +426,16 @@ def measuring_guide_markdown(rows, mappings, tool: str) -> str:
 
 
 def build_markdown(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dict[str, Any]]],
-                   index: Sequence[Dict[str, Any]], quick: bool = False, tool: Optional[str] = None,
-                   part: Optional[str] = None, storyboards: Optional[Dict[str, Dict[str, Any]]] = None) -> str:
-    """The combined twins (no ``tool``: the dial reference, or the quick-start
-    cut with ``quick``), or one part of a tool's packet."""
-    if tool is not None:
-        if part == "quick-start":
-            return quick_start_markdown(rows, mappings, index, storyboards or {}, tool)
-        if part == "dial-guide":
-            return dial_guide_markdown(rows, mappings, index, tool)
-        if part == "measuring-guide":
-            return measuring_guide_markdown(rows, mappings, tool)
-        raise ValueError(f"unknown packet part {part!r}")
-    idx = {(e["file"], e["name"]): e for e in index}
-    if quick:
-        rows = quick_rows(rows)
-        lines = [
-            f"# {QUICK_TITLE}", "",
-            QUICK_DESCRIPTION, "",
-            f"Model version {MODEL_VERSION}. The printable twin is `docs/Plug_Puller_Dial_Quick_Start.pdf`; "
-            "every dial of both files is in `docs/guides/dial-reference.md`. The dial names are written "
-            "exactly as the Customizer shows them.", "",
-            f"## {OPENER_HEADING}", "",
-            OPENER[0], "",
-            OPENER[1], "",
-            RED_TEXT, "",
-            f"In every picture: {LEGEND}.", "",
-        ]
-    else:
-        lines = [
-            f"# {TITLE}", "",
-            DESCRIPTION, "",
-            f"Model version {MODEL_VERSION}. The printable twin is `docs/Plug_Puller_Dial_Reference.pdf` "
-            "(one dial per page, with bookmarks and a linked contents page). The dial names are written "
-            "exactly as the Customizer shows them.", "",
-            f"In every picture: {LEGEND}.", "",
-        ]
-    for file_key, groups in grouped(rows, mappings):
-        lines += [f"## {FILE_LABELS[file_key]}", ""]
-        for section, in_section in groups:
-            lines += [f"### {section}", ""]
-            for row in in_section:
-                entry = idx.get((row["file"], row["name"]), {})
-                mrow = mappings.get(file_key, {}).get(row["name"])
-                default, rng, step, unit = mapping_cells(mrow)
-                lines += [
-                    f"#### `{row['name']}`", "",
-                    row["title"], "",
-                    f"![{row['changes']}](../dials/{row['file']}/{row['name']}.svg)", "",
-                    row["changes"], "",
-                    "| Default | Range | Step | Unit |",
-                    "|---|---|---|---|",
-                    f"| {default} | {rng} | {step} | {unit} |", "",
-                ]
-                if options_text(mrow):
-                    lines += [options_text(mrow), ""]
-                lines += [values_text(row), ""]
-                if row["diagram"]["view"] != "none" and row.get("note"):
-                    lines += [row["note"], ""]
-                features = entry.get("features") or []
-                if features and features != ["none"]:
-                    lines += [f"{MOVES_LABEL}: {', '.join(features)}.", ""]
-                tags = TAGS_BY_DIAL.get((row["file"], row["name"]))
-                if tags:
-                    lines += [f"{TRIPS_LABEL}: " + "; ".join(f"`{t}`" for t in tags) + ".", ""]
-    return "\n".join(lines).rstrip("\n") + "\n"
-
+                   index: Sequence[Dict[str, Any]], tool: str, part: str,
+                   storyboards: Optional[Dict[str, Dict[str, Any]]] = None) -> str:
+    """One part of a tool's packet as Markdown."""
+    if part == "quick-start":
+        return quick_start_markdown(rows, mappings, index, storyboards or {}, tool)
+    if part == "dial-guide":
+        return dial_guide_markdown(rows, mappings, index, tool)
+    if part == "measuring-guide":
+        return measuring_guide_markdown(rows, mappings, tool)
+    raise ValueError(f"unknown packet part {part!r}")
 
 # ---------------------------------------------------------------------------
 # HTML for the PDF
@@ -592,75 +488,6 @@ def sheet_svg(svg_text: str) -> str:
 
 def dial_id(row: Dict[str, Any]) -> str:
     return f"{row['file']}-{row['name']}"
-
-
-def title_page_html(quick: bool = False) -> str:
-    if quick:
-        return f"""
-<section class="page front opener">
-  <h1>{_esc(QUICK_TITLE)}</h1>
-  <p class="subtitle">{_esc(QUICK_DESCRIPTION)}</p>
-  <p class="version">Model version {_esc(MODEL_VERSION)}</p>
-  <p class="opener-heading">{_esc(OPENER_HEADING)}</p>
-  <p class="opener">{_esc(OPENER[0])}</p>
-  <p class="opener">{_esc(OPENER[1])}</p>
-  <p class="opener red">{_esc(RED_TEXT)}</p>
-  <p class="legend">In every picture: {_esc(LEGEND)}.</p>
-  <p class="hint">The dial names are written exactly as the Customizer shows them. Every dial of both files is in the full dial reference.</p>
-</section>
-"""
-    return f"""
-<section class="page front">
-  <h1>{_esc(TITLE)}</h1>
-  <p class="subtitle">{_esc(DESCRIPTION)}</p>
-  <p class="version">Model version {_esc(MODEL_VERSION)}</p>
-  <p class="legend">In every picture: {_esc(LEGEND)}.</p>
-  <p class="hint">The dial names are written exactly as the Customizer shows them. Use the bookmarks or the contents page to jump to a dial.</p>
-</section>
-"""
-
-
-def contents_html(rows: Sequence[Dict[str, Any]], mappings) -> str:
-    parts = ['<section class="page front contents">', f"<h1>{_esc(CONTENTS_HEADING)}</h1>", '<div class="columns">']
-    for file_key, groups in grouped(rows, mappings):
-        parts.append(f'<p class="file">{_esc(FILE_LABELS[file_key])}</p>')
-        for section, in_section in groups:
-            parts.append(f'<p class="section">{_esc(section)}</p><ul>')
-            for row in in_section:
-                parts.append(f'<li><a href="#{dial_id(row)}">{_esc(row["name"])}</a>: {_esc(row["title"])}</li>')
-            parts.append("</ul>")
-    parts += ["</div>", "</section>"]
-    return "\n".join(parts)
-
-
-def dial_page_html(row: Dict[str, Any], mrow: Optional[Dict[str, Any]], entry: Dict[str, Any],
-                   svg_text: str, first_of_file: bool) -> str:
-    default, rng, step, unit = mapping_cells(mrow)
-    parts = ['<section class="page dial">']
-    if first_of_file:
-        parts.append(f"<h2>{_esc(FILE_LABELS[row['file']])}</h2>")
-    parts += [
-        f'<h3 id="{dial_id(row)}">{_esc(row["name"])}</h3>',
-        f'<p class="where">{_esc(FILE_LABELS[row["file"]])} · {_esc(row["section"])}</p>',
-        f'<p class="title">{_esc(row["title"])}</p>',
-        f'<div class="figure">{figure_svg(svg_text)}</div>',
-        f'<p class="changes">{_esc(row["changes"])}</p>',
-        "<table><tr><th>Default</th><th>Range</th><th>Step</th><th>Unit</th></tr>"
-        f"<tr><td>{_esc(default)}</td><td>{_esc(rng)}</td><td>{_esc(step)}</td><td>{_esc(unit)}</td></tr></table>",
-    ]
-    if options_text(mrow):
-        parts.append(f'<p class="options">{_esc(options_text(mrow))}</p>')
-    parts.append(f'<p class="values">{_esc(values_text(row, code=False))}</p>')
-    if row["diagram"]["view"] != "none" and row.get("note"):
-        parts.append(f'<p class="note">{_esc(row["note"])}</p>')
-    features = entry.get("features") or []
-    if features and features != ["none"]:
-        parts.append(f'<p class="moves">{_esc(MOVES_LABEL)}: {_esc(", ".join(features))}.</p>')
-    tags = TAGS_BY_DIAL.get((row["file"], row["name"]))
-    if tags:
-        parts.append(f'<p class="trips">{_esc(TRIPS_LABEL)}: ' + "; ".join(f"<span class=\"tag\">{_esc(t)}</span>" for t in tags) + ".</p>")
-    parts.append("</section>")
-    return "\n".join(parts)
 
 
 def packet_card_html(row: Dict[str, Any], mrow: Optional[Dict[str, Any]], entry: Dict[str, Any],
@@ -852,80 +679,17 @@ def packet_html(rows, mappings, index, svgs, tool: str, storyboards, storyboard_
 
 
 def build_html(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dict[str, Any]]],
-               index: Sequence[Dict[str, Any]], svgs: Dict[Tuple[str, str], str],
-               quick: bool = False, tool: Optional[str] = None, storyboards=None,
-               storyboard_svg: Optional[str] = None, form_svg: Optional[str] = None) -> str:
-    """The combined reference (no ``tool``) or one tool's packet."""
-    if tool is not None:
-        if storyboards is None:
-            storyboards = load_storyboards()
-        if storyboard_svg is None:
-            storyboard_svg = (DIALS_DIR / tool / "storyboard.svg").read_text(encoding="utf-8")
-        if form_svg is None:
-            form_svg = (PACKET_DIRS[tool] / "measuring-form.svg").read_text(encoding="utf-8")
-        return packet_html(rows, mappings, index, svgs, tool, storyboards, storyboard_svg, form_svg)
-    idx = {(e["file"], e["name"]): e for e in index}
-    if quick:
-        rows = quick_rows(rows)
-    pages = [title_page_html(quick), contents_html(rows, mappings)]
-    for file_key, groups in grouped(rows, mappings):
-        first = True
-        for _section, in_section in groups:
-            for row in in_section:
-                pages.append(dial_page_html(
-                    row, mappings.get(file_key, {}).get(row["name"]), idx.get((row["file"], row["name"]), {}),
-                    svgs[(row["file"], row["name"])], first))
-                first = False
-    body = "\n".join(pages)
-    return f"""<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>{_esc(QUICK_TITLE if quick else TITLE)}</title>
-<style>
-  @page {{ size: {PAGE_W_MM:g}mm {PAGE_H_MM:g}mm; margin: 0; }}
-  html, body {{ margin: 0; padding: 0; font-family: Helvetica, Arial, sans-serif; color: black; }}
-  .page {{
-    width: {PAGE_W_MM:g}mm; height: {PAGE_H_MM:g}mm; box-sizing: border-box;
-    padding: 18mm 20mm 16mm; overflow: hidden; page-break-after: always; position: relative;
-  }}
-  .page:last-child {{ page-break-after: auto; }}
-  .front h1 {{ font-size: 7mm; text-align: center; margin: 30mm 0 6mm; }}
-  .contents {{ height: auto; min-height: {PAGE_H_MM:g}mm; overflow: visible; }}
-  .contents h1 {{ margin: 0 0 5mm; }}
-  .front .subtitle {{ font-size: 3.6mm; text-align: center; margin: 0 10mm 6mm; }}
-  .front .version {{ font-size: 3.2mm; text-align: center; margin: 0 0 12mm; color: #444; }}
-  .front .legend {{ font-size: 3.2mm; text-align: center; margin: 0 8mm 4mm; }}
-  .front .hint {{ font-size: 3mm; text-align: center; color: #444; margin: 0 8mm; }}
-  .opener h1 {{ margin: 14mm 0 5mm; }}
-  .opener .version {{ margin-bottom: 8mm; }}
-  .opener .opener-heading {{ font-size: 4.2mm; font-weight: bold; margin: 0 0 3mm; }}
-  .opener .opener {{ font-size: 3.4mm; text-align: left; margin: 0 0 3.5mm; line-height: 1.4; }}
-  .opener .red {{ border: 0.5mm solid black; padding: 3mm 4mm; margin: 4mm 0 8mm; }}
-  .contents .columns {{ column-count: 2; column-gap: 8mm; font-size: 2.7mm; }}
-  .contents .file {{ font-weight: bold; font-size: 3.4mm; margin: 2mm 0 1mm; break-after: avoid; }}
-  .contents .section {{ font-weight: bold; margin: 2mm 0 0.8mm; break-after: avoid; }}
-  .contents ul {{ margin: 0 0 1mm; padding-left: 4mm; }}
-  .contents li {{ margin: 0 0 0.6mm; }}
-  .contents a {{ color: #0b4f8a; text-decoration: none; font-family: Consolas, monospace; }}
-  .dial h2 {{ font-size: 3.2mm; color: #444; margin: 0 0 2mm; font-weight: normal; }}
-  .dial h3 {{ font-size: 6mm; font-family: Consolas, monospace; margin: 0 0 1.5mm; word-break: break-all; }}
-  .dial .where {{ font-size: 3mm; color: #444; margin: 0 0 1mm; }}
-  .dial .title {{ font-size: 4.2mm; font-weight: bold; margin: 0 0 4mm; }}
-  .dial .figure {{ text-align: center; margin: 0 0 4mm; }}
-  .dial .figure svg {{ display: inline-block; }}
-  .dial .changes {{ font-size: 3.4mm; margin: 0 0 3mm; }}
-  .dial table {{ border-collapse: collapse; font-size: 3mm; margin: 0 0 3mm; }}
-  .dial th, .dial td {{ border: 0.2mm solid #888; padding: 1.2mm 2.5mm; text-align: left; font-weight: normal; }}
-  .dial th {{ font-weight: bold; }}
-  .dial .values, .dial .note, .dial .moves, .dial .trips, .dial .options {{ font-size: 3mm; margin: 0 0 2mm; }}
-  .dial .note {{ color: #444; }}
-  .dial .tag {{ font-family: Consolas, monospace; }}
-</style></head>
-<body>{body}</body></html>
-"""
-
-
-def expected_pages(rows: Sequence[Dict[str, Any]], front_matter: int = FRONT_MATTER_PAGES) -> int:
-    return len(rows) + front_matter
-
+               index: Sequence[Dict[str, Any]], svgs: Dict[Tuple[str, str], str], tool: str,
+               storyboards=None, storyboard_svg: Optional[str] = None, form_svg: Optional[str] = None) -> str:
+    """One tool's packet as HTML for the print (the storyboard SVG and the
+    form SVG are read from the tree unless given)."""
+    if storyboards is None:
+        storyboards = load_storyboards()
+    if storyboard_svg is None:
+        storyboard_svg = (DIALS_DIR / tool / "storyboard.svg").read_text(encoding="utf-8")
+    if form_svg is None:
+        form_svg = (PACKET_DIRS[tool] / "measuring-form.svg").read_text(encoding="utf-8")
+    return packet_html(rows, mappings, index, svgs, tool, storyboards, storyboard_svg, form_svg)
 
 # ---------------------------------------------------------------------------
 # PDF checks beyond the sheets' (standard library only)
@@ -991,23 +755,6 @@ def verify_packet_pdf(pdf: Path, rows: Sequence[Dict[str, Any]], tool: str, html
     return {"pages": n_pages, "outline": len(titles), "links": links, "cards": cards}
 
 
-def verify_reference_pdf(pdf: Path, rows: Sequence[Dict[str, Any]],
-                         front_matter: int = FRONT_MATTER_PAGES) -> None:
-    verify_pdf(pdf, expected_pages(rows, front_matter))
-    titles = outline_titles(pdf)
-    want = 2 + len(FILE_ORDER) + len(rows)  # the title, Contents, one per file, one per dial
-    if len(titles) != want:
-        raise AssertionError(f"Expected {want} outline entries, found {len(titles)}")
-    names = {r["name"] for r in rows}
-    missing = names - set(titles)
-    if missing:
-        raise AssertionError(f"{len(missing)} dial names missing from the outline, e.g. {sorted(missing)[:3]}")
-    links = link_count(pdf)
-    if links < len(rows):
-        raise AssertionError(f"Expected at least {len(rows)} link annotations, found {links}")
-    logger.info("Verified: %d outline entries, %d link annotations.", len(titles), links)
-
-
 # ---------------------------------------------------------------------------
 # Driver
 # ---------------------------------------------------------------------------
@@ -1015,71 +762,44 @@ def verify_reference_pdf(pdf: Path, rows: Sequence[Dict[str, Any]],
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--quick", action="store_true", help="the quick-start cut: the Steps 1-4 dials only, with the opener page")
-    parser.add_argument("--tool", choices=sorted(PACKET_DIRS), help="one tool's guide packet: its Markdown twins under docs/guides/<tool>/")
+    parser.add_argument("--tool", choices=sorted(PACKET_DIRS), required=True,
+                        help="the tool whose guide packet to build: its Markdown twins under docs/guides/<tool>/ and its PDF")
     parser.add_argument("--part", choices=PACKET_PARTS + ("all",), default="all", help="one part of the packet (default: all)")
-    parser.add_argument("--out", type=Path, default=None, help="the PDF path (default: docs/Plug_Puller_Dial_Reference.pdf, or the quick-start PDF with --quick)")
-    parser.add_argument("--markdown", type=Path, default=None, help="the Markdown twin's path (default: docs/guides/dial-reference.md, or the quick-start twin with --quick)")
-    parser.add_argument("--markdown-only", action="store_true", help="write the Markdown twin only (no browser)")
+    parser.add_argument("--out", type=Path, default=None, help="the PDF path (default: the tool's packet under docs/)")
+    parser.add_argument("--markdown-only", action="store_true", help="write the Markdown twins only (no browser)")
     parser.add_argument("--keep-html", action="store_true", help="keep the HTML under tmp_renders/dial_reference/")
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO, format="%(message)s")
 
-    if args.tool:
-        rows = load_catalog()
-        mappings = load_mappings()
-        index = load_index()
-        storyboards = load_storyboards()
-        out_dir = PACKET_DIRS[args.tool]
-        out_dir.mkdir(parents=True, exist_ok=True)
-        for part in (PACKET_PARTS if args.part == "all" else (args.part,)):
-            text = build_markdown(rows, mappings, index, tool=args.tool, part=part, storyboards=storyboards)
-            (out_dir / f"{part}.md").write_text(text, encoding="utf-8", newline="\n")
-            logger.info("Wrote %s (%d lines)", out_dir / f"{part}.md", text.count("\n"))
-        if args.markdown_only:
-            return 0
-        of_file = [r for r in rows if r["file"] == args.tool]
-        svgs = load_svgs(of_file)
-        html_text = build_html(rows, mappings, index, svgs, tool=args.tool, storyboards=storyboards)
-        SCRATCH.mkdir(parents=True, exist_ok=True)
-        html_path = SCRATCH / f"packet_{args.tool}.html"
-        html_path.write_text(html_text, encoding="utf-8")
-        out_pdf = args.out or (PROJECT_ROOT / PACKET_PDFS[args.tool])
-        started = time.perf_counter()
-        print_to_pdf(html_path.resolve(), out_pdf, outline=True, user_data_dir=EDGE_PROFILE)
-        seconds = time.perf_counter() - started
-        if not args.keep_html:
-            html_path.unlink()
-        counts = verify_packet_pdf(out_pdf, rows, args.tool, html_text)
-        logger.info("Wrote %s (%.1f KB, %d pages, %d outline entries, %d links, %d cards; printed in %.1f s)",
-                    out_pdf, out_pdf.stat().st_size / 1024, counts["pages"], counts["outline"], counts["links"],
-                    counts["cards"], seconds)
-        return 0
-
-    quick = args.quick
-    out_pdf = args.out or (QUICK_OUT_PDF if quick else OUT_PDF)
-    out_md = args.markdown or (QUICK_OUT_MD if quick else OUT_MD)
-    front_matter = QUICK_FRONT_MATTER_PAGES if quick else FRONT_MATTER_PAGES
     rows = load_catalog()
     mappings = load_mappings()
     index = load_index()
-    built = quick_rows(rows) if quick else rows
-    out_md.parent.mkdir(parents=True, exist_ok=True)
-    out_md.write_text(build_markdown(rows, mappings, index, quick=quick), encoding="utf-8")
-    logger.info("Wrote %s (%d dials)", out_md, len(built))
+    storyboards = load_storyboards()
+    out_dir = PACKET_DIRS[args.tool]
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for part in (PACKET_PARTS if args.part == "all" else (args.part,)):
+        text = build_markdown(rows, mappings, index, tool=args.tool, part=part, storyboards=storyboards)
+        (out_dir / f"{part}.md").write_text(text, encoding="utf-8", newline="\n")
+        logger.info("Wrote %s (%d lines)", out_dir / f"{part}.md", text.count("\n"))
     if args.markdown_only:
         return 0
-
-    svgs = load_svgs(built)
+    of_file = [r for r in rows if r["file"] == args.tool]
+    svgs = load_svgs(of_file)
+    html_text = build_html(rows, mappings, index, svgs, tool=args.tool, storyboards=storyboards)
     SCRATCH.mkdir(parents=True, exist_ok=True)
-    html_path = SCRATCH / ("dial_quick_start.html" if quick else "dial_reference.html")
-    html_path.write_text(build_html(rows, mappings, index, svgs, quick=quick), encoding="utf-8")
-    print_to_pdf(html_path, out_pdf, outline=True, user_data_dir=EDGE_PROFILE)
+    html_path = SCRATCH / f"packet_{args.tool}.html"
+    html_path.write_text(html_text, encoding="utf-8")
+    out_pdf = args.out or (PROJECT_ROOT / PACKET_PDFS[args.tool])
+    started = time.perf_counter()
+    print_to_pdf(html_path.resolve(), out_pdf, outline=True, user_data_dir=EDGE_PROFILE)
+    seconds = time.perf_counter() - started
     if not args.keep_html:
         html_path.unlink()
-    verify_reference_pdf(out_pdf, built, front_matter)
-    logger.info("Wrote %s (%.1f KB)", out_pdf, out_pdf.stat().st_size / 1024)
+    counts = verify_packet_pdf(out_pdf, rows, args.tool, html_text)
+    logger.info("Wrote %s (%.1f KB, %d pages, %d outline entries, %d links, %d cards; printed in %.1f s)",
+                out_pdf, out_pdf.stat().st_size / 1024, counts["pages"], counts["outline"], counts["links"],
+                counts["cards"], seconds)
     return 0
 
 

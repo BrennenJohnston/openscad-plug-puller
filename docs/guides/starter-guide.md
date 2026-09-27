@@ -103,7 +103,7 @@ worksheet's own numbering. Which card answers which number:
 | 2–3 | Plug width at the prong end / at the cord end | **R1** — hold the notched edge against the plug body |
 | 4–5 | Plug thickness at the prong end / at the cord end | **R1** — same, across the thin direction |
 | 6 | Cord thickness | **C1** — slide it onto the cord from the side; smallest slot that slips over |
-| 7 | Wall plate style | your eyes — it's a picture quiz, see the [Measuring Guide](measuring-guide.md#7-wall-plate-style-a-picture-quiz-not-a-measurement) |
+| 7 | Wall plate style | your eyes — it's a picture quiz, see the [one-sided measuring guide](one-sided/measuring-guide.md#8-outlet-cover-plate-style) |
 | 8 | Finger knuckle width | **F1 / F2** — smallest comfortable hole, **minus 5** |
 | 9 | Hand width | **R1** — across the four knuckles, flat hand |
 

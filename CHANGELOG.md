@@ -29,20 +29,38 @@ public milestone**.
 - **`dial_catalog.json`**: one row per Customizer dial of both files (118),
   with a plain title, one sentence on what it changes and how to draw it;
   `tests/test_dial_catalog.py` keeps it in step with the mappings.
-- **The dial reference** (`docs/Plug_Puller_Dial_Reference.pdf` and its
-  Markdown twin `docs/guides/dial-reference.md`), generated from
-  `dial_catalog.json` by `scripts/build_dial_reference.py`: one page per
-  Customizer dial of both pullers with a diagram of what the dial moves,
-  its sentence, the default, range, step and unit, its caution note, the
-  features its trace touches and the warning tags it can trip; the PDF
-  has bookmarks and a linked contents page.
-- **A diagram for every dial** under `docs/dials/` (118 SVGs, an index
-  and a README), drawn by `scripts/generate_dial_diagrams.py` from the
-  catalog: the tool at its defaults in black, the plug in teal, a red
-  dashed trace on what the dial moves.
-- **The dial quick start** (`docs/Plug_Puller_Dial_Quick_Start.pdf` and
-  `docs/guides/dial-quick-start.md`): the Steps 1-4 dials of both files,
-  with an opener page on which file to open.
+- **A guide packet per tool** (`docs/Plug_Puller_One_Sided_Guide.pdf`,
+  `docs/Plug_Puller_Two_Sided_Guide.pdf` and their Markdown twins under
+  `docs/guides/one-sided/` and `docs/guides/two-sided/`), generated from
+  `dial_catalog.json` by `scripts/build_dial_reference.py --tool <t>`:
+  the opener with the storyboard, the quick start (the four steps' dials),
+  the full dial guide (every dial of the file as a card with its
+  before-and-after picture, its sentence, the default, range, step and
+  unit, its caution note, the features it moves and the warning tags it
+  can trip), the measuring guide and the blank measuring form; the PDF
+  has bookmarks, a linked contents page and the picture key on every
+  card page.
+- **A before-and-after picture for every dial** under `docs/dials/` (118
+  SVGs, an index and a README), drawn by `scripts/generate_dial_diagrams.py`
+  from the catalog: the tool at the dial's default on the left with the
+  plug in teal, an arrow with the two values, and the tool after the dial
+  moved on the right, drawn once in black with the edges that moved in
+  red dots, numbered dots and a key naming the parts; the measuring dials
+  carry a red dimension line with the dial's value (`diagram.dimension`
+  in the catalog). Every picture has an alt text and a long description
+  written by the rules in `docs/guides/describing-pictures.md`.
+- **Two storyboards** (`dial_storyboards.json`,
+  `docs/dials/<tool>/storyboard.svg`, `docs/dials/storyboards_index.json`):
+  the four Customizer steps applied one after another to a US vacuum plug
+  and to a USB-C laptop plug.
+- **The measuring forms** (`docs/guides/<tool>/measuring-form.svg` and
+  `.md`, drawn by `scripts/generate_measuring_form.py`): one row per Step
+  dial in Customizer order with a blank or tick boxes, and a numbered
+  leader from every measured row to a schematic plug; the catalog's
+  `measure` rows (how to take each number, the typical range, the
+  example, the stencil card, the form anchor) feed the form and the
+  measuring guide. New tests: `test_measuring_form.py`,
+  `test_guide_packets.py`, and the catalog, diagram and description rules.
 - **The maker's manual:** `docs/guides/maker-guide.md` (choose the file,
   measure or match, customize, print, assemble), `docs/guides/user-guide.md`
   (use, safety, care), `docs/guides/bom.md` (zip ties, the strap, filament
@@ -64,7 +82,13 @@ public milestone**.
 
 - **`README.md`** reordered to the OpenAT template: Overview, How to obtain
   the device, Build instructions, How to use it, How to improve this
-  device, Files, License, Attribution; the new guides are its first links.
+  device, Files, License, Attribution; the new guides are its first links;
+  its documentation index and layout list the two packets and their twins.
+- **The diagram README** (`docs/dials/README.md`) shows the pair pictures
+  with their alt text and long description and the storyboards;
+  **the measuring guide** (`docs/guides/measuring-guide.md`) is a
+  one-screen router to each tool's measuring guide and form;
+  `okh.yml`'s making-instructions list the two packets.
 - **Six images renamed** for the two-tool vocabulary (`clamshell-*` to
   `two-sided-*`, `flat-tool-medium-render.png` to
   `one-sided-medium-render.png`); every link updated.
@@ -85,7 +109,12 @@ public milestone**.
 ### Removed
 
 - `docs/Plug_Puller_Complete_Guide.pdf` (described the retired single-file
-  model; replaced by the dial reference and the guides).
+  model; replaced by the guide packets and the guides).
+- The combined dial quick start and dial reference
+  (`docs/guides/dial-quick-start.md`, `docs/guides/dial-reference.md`,
+  `docs/Plug_Puller_Dial_Quick_Start.pdf`, `docs/Plug_Puller_Dial_Reference.pdf`,
+  built earlier in this cycle) and `tests/test_dial_reference.py`:
+  replaced by the per-tool packets before any release carried them.
 
 ## [0.12.0] - 2026-09-24
 
