@@ -19,6 +19,33 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        3116.9,
+        [
+          "zip-tie holes",
+          "wing openings",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wing openings",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -40,6 +67,68 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        1045.6,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ]
+      ],
+      [
+        37.8,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        30.8,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        37.8,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        30.8,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -56,10 +145,90 @@
     "tags": [],
     "svg": "one-sided/measure_plug_width_prong_end.svg",
     "features": [
+      "body edge",
       "seat",
       "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        14.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        51.1,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        12.3,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        14.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        51.1,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ]
+      ],
+      [
+        12.3,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -78,6 +247,32 @@
     "features": [
       "pocket",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        166.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        166.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings",
+          "pocket"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -136,6 +331,33 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        2361.8,
+        [
+          "zip-tie holes",
+          "finger holes",
+          "wing openings",
+          "wall notch",
+          "pocket",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "finger holes",
+          "wing openings",
+          "wall notch",
+          "pocket",
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -157,6 +379,82 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        0.6,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        80.5,
+        [
+          "wall notch",
+          "body edge"
+        ]
+      ],
+      [
+        13.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        48.1,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        10.1,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        13.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        10.1,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch",
+          "body edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -174,7 +472,9 @@
     "svg": "one-sided/show_plug_preview.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -195,6 +495,105 @@
       "pocket",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        96.9,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        569.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        93.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        69.6,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        21.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        96.9,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        20.1,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        92.9,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        21.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        5,
+        [
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -213,10 +612,81 @@
     "tags": [],
     "svg": "one-sided/measure_finger_width.svg",
     "features": [
+      "body edge",
       "finger holes",
       "pocket",
       "wall notch",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        185.7,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        328.7,
+        [
+          "wall notch",
+          "body edge"
+        ]
+      ],
+      [
+        56.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        203.5,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        185.7,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        56.8,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "wall notch",
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -235,7 +705,30 @@
     "tags": [],
     "svg": "one-sided/measure_hand_width.svg",
     "features": [
-      "wing openings"
+      "body edge"
+    ],
+    "regions_named": [
+      [
+        379.0,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        378.6,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -253,6 +746,29 @@
     "svg": "one-sided/attachment.svg",
     "features": [
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        62.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        62.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        true
+      ]
     ]
   },
   {
@@ -270,6 +786,29 @@
     "svg": "one-sided/velcro_style.svg",
     "features": [
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        40.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        40.1,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -287,7 +826,9 @@
     "svg": "one-sided/strap_width.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -299,11 +840,34 @@
     "context": {},
     "plug": "default",
     "regions": 2,
-    "changed_area_mm2": 68.1,
+    "changed_area_mm2": 68.2,
     "tags": [],
     "svg": "one-sided/hook_hand.svg",
     "features": [
       "hook"
+    ],
+    "regions_named": [
+      [
+        34.1,
+        [
+          "hook"
+        ]
+      ],
+      [
+        34.1,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -324,6 +888,85 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.6,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        27.6,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -342,6 +985,48 @@
     "features": [
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        18.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -363,6 +1048,35 @@
       "seat",
       "wall notch",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        35.7,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ],
+      [
+        35.7,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -383,6 +1097,60 @@
     "features": [
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        26.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        26.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -404,6 +1172,51 @@
     "features": [
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        34.1,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        7.5,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        34.1,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ]
+      ],
+      [
+        7.5,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes",
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -422,6 +1235,60 @@
     "features": [
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.9,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -439,6 +1306,29 @@
     "svg": "one-sided/velcro_placement.svg",
     "features": [
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        126.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        126.2,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -459,6 +1349,29 @@
     "svg": "one-sided/velcro_pos.svg",
     "features": [
       "classic slots"
+    ],
+    "regions_named": [
+      [
+        166.0,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        166.0,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -476,7 +1389,9 @@
     "svg": "one-sided/quality.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -490,14 +1405,100 @@
     },
     "plug": "default",
     "regions": 9,
-    "changed_area_mm2": 836.2,
+    "changed_area_mm2": 836.3,
     "tags": [],
     "svg": "one-sided/reset_custom_to_medium.svg",
     "features": [
+      "body edge",
       "finger holes",
-      "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        101.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        417.5,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        24.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        59.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        23.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        101.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        24.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        59.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        23.9,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -515,7 +1516,9 @@
     "svg": "one-sided/custom_enable_auto_fit.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -529,7 +1532,7 @@
     },
     "plug": "default",
     "regions": 1,
-    "changed_area_mm2": 1083.5,
+    "changed_area_mm2": 1083.6,
     "tags": [],
     "svg": "one-sided/custom_puller_length.svg",
     "features": [
@@ -538,6 +1541,31 @@
       "seat",
       "wall notch",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        1083.6,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch",
+          "seat",
+          "pocket",
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -557,6 +1585,29 @@
     "svg": "one-sided/custom_puller_bottom_width.svg",
     "features": [
       "body edge"
+    ],
+    "regions_named": [
+      [
+        49.9,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        49.7,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -576,6 +1627,23 @@
     "svg": "one-sided/custom_puller_bottom_corners.svg",
     "features": [
       "body edge"
+    ],
+    "regions_named": [
+      [
+        15.0,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -596,6 +1664,48 @@
     "features": [
       "body edge",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        73.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        34.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        73.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        34.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -610,12 +1720,54 @@
     },
     "plug": "default",
     "regions": 4,
-    "changed_area_mm2": 446.0,
+    "changed_area_mm2": 446.1,
     "tags": [],
     "svg": "one-sided/custom_puller_middle_width.svg",
     "features": [
       "body edge",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        172.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        50.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        172.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        50.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -636,6 +1788,48 @@
     "features": [
       "body edge",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        178.9,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        24.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        172.0,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        24.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -677,6 +1871,45 @@
       "hook",
       "seat",
       "wall notch"
+    ],
+    "regions_named": [
+      [
+        2.4,
+        [
+          "hook",
+          "body edge"
+        ]
+      ],
+      [
+        13.4,
+        [
+          "wall notch",
+          "seat"
+        ]
+      ],
+      [
+        1.9,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        13.4,
+        [
+          "wall notch",
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch",
+          "seat"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -696,6 +1929,29 @@
     "svg": "one-sided/custom_pocket_seat_diameter.svg",
     "features": [
       "seat"
+    ],
+    "regions_named": [
+      [
+        5.1,
+        [
+          "seat"
+        ]
+      ],
+      [
+        5.1,
+        [
+          "seat"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -718,6 +1974,82 @@
       "seat",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        8.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        8.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        11.9,
+        [
+          "seat",
+          "pocket"
+        ]
+      ],
+      [
+        11.9,
+        [
+          "seat",
+          "pocket"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "seat",
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -732,12 +2064,48 @@
     },
     "plug": "default",
     "regions": 3,
-    "changed_area_mm2": 36.4,
+    "changed_area_mm2": 36.3,
     "tags": [],
     "svg": "one-sided/custom_pocket_depth.svg",
     "features": [
       "pocket",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        3.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        29.5,
+        [
+          "pocket"
+        ]
+      ],
+      [
+        3.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -755,7 +2123,9 @@
     "svg": "one-sided/custom_pocket_dome_drop.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -814,6 +2184,32 @@
     "features": [
       "pocket",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        142.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ],
+      [
+        142.2,
+        [
+          "wing openings",
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings",
+          "pocket"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -834,6 +2230,32 @@
     "features": [
       "body edge",
       "finger holes"
+    ],
+    "regions_named": [
+      [
+        505.9,
+        [
+          "finger holes",
+          "body edge"
+        ]
+      ],
+      [
+        505.9,
+        [
+          "finger holes",
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger holes",
+          "body edge"
+        ],
+        true
+      ]
     ]
   },
   {
@@ -854,6 +2276,48 @@
     "features": [
       "finger holes",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        126.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        11.0,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        126.4,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        11.0,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -874,6 +2338,48 @@
     "features": [
       "finger holes",
       "wing openings"
+    ],
+    "regions_named": [
+      [
+        177.1,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        177.1,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        1.4,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -894,6 +2400,42 @@
     "features": [
       "finger holes",
       "pocket"
+    ],
+    "regions_named": [
+      [
+        357.6,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        357.6,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        176.7,
+        [
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "pocket"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -913,6 +2455,23 @@
     "svg": "one-sided/custom_enable_t_hook.svg",
     "features": [
       "hook"
+    ],
+    "regions_named": [
+      [
+        79.0,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -932,6 +2491,29 @@
     "svg": "one-sided/custom_t_hook_base_gap.svg",
     "features": [
       "hook"
+    ],
+    "regions_named": [
+      [
+        6.7,
+        [
+          "hook"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -946,7 +2528,7 @@
     },
     "plug": "default",
     "regions": 7,
-    "changed_area_mm2": 482.5,
+    "changed_area_mm2": 482.6,
     "tags": [],
     "svg": "one-sided/custom_t_hook_length.svg",
     "features": [
@@ -955,6 +2537,68 @@
       "pocket",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        130.8,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        22.0,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        24.7,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        211.9,
+        [
+          "finger holes",
+          "hook"
+        ]
+      ],
+      [
+        22.0,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        24.6,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        46.6,
+        [
+          "pocket"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes",
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -977,6 +2621,62 @@
       "hook",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        23.3,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        43.7,
+        [
+          "finger holes",
+          "hook"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger holes",
+          "hook"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -996,6 +2696,29 @@
     "svg": "one-sided/custom_t_hook_holder_length.svg",
     "features": [
       "hook"
+    ],
+    "regions_named": [
+      [
+        19.5,
+        [
+          "hook"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1013,7 +2736,9 @@
     "svg": "one-sided/custom_t_hook_gap_offset.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -1034,6 +2759,67 @@
       "finger holes",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        45.8,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        45.8,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        5.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        5.7,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        7.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        7.1,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1053,6 +2839,29 @@
     "svg": "one-sided/custom_t_hook_stem_offset.svg",
     "features": [
       "hook"
+    ],
+    "regions_named": [
+      [
+        12.4,
+        [
+          "hook"
+        ]
+      ],
+      [
+        6.9,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1072,6 +2881,23 @@
     "svg": "one-sided/custom_t_hook_catch_reach.svg",
     "features": [
       "hook"
+    ],
+    "regions_named": [
+      [
+        42.1,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1091,7 +2917,9 @@
     "svg": "one-sided/custom_t_hook_tip_drop.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -1110,6 +2938,23 @@
     "svg": "one-sided/custom_enable_plug_wall_notch.svg",
     "features": [
       "wall notch"
+    ],
+    "regions_named": [
+      [
+        99.5,
+        [
+          "wall notch"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1129,6 +2974,29 @@
     "svg": "one-sided/custom_plug_wall_notch_width.svg",
     "features": [
       "wall notch"
+    ],
+    "regions_named": [
+      [
+        12.7,
+        [
+          "wall notch"
+        ]
+      ],
+      [
+        12.7,
+        [
+          "wall notch"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1150,6 +3018,49 @@
       "wall notch",
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        140.0,
+        [
+          "zip-tie holes",
+          "wall notch"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes",
+          "wall notch"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1169,6 +3080,29 @@
     "svg": "one-sided/custom_plug_wall_notch_rounding.svg",
     "features": [
       "wall notch"
+    ],
+    "regions_named": [
+      [
+        1.7,
+        [
+          "wall notch"
+        ]
+      ],
+      [
+        1.8,
+        [
+          "wall notch"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wall notch"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1189,6 +3123,60 @@
     "features": [
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        9.6,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        9.6,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        18.2,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1209,6 +3197,60 @@
     "features": [
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        22.9,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        20.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        22.9,
+        [
+          "wing openings"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "wing openings"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1226,7 +3268,9 @@
     "svg": "one-sided/custom_zip_tie_width_spacing.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -1240,12 +3284,72 @@
     },
     "plug": "default",
     "regions": 7,
-    "changed_area_mm2": 81.0,
+    "changed_area_mm2": 81.1,
     "tags": [],
     "svg": "one-sided/custom_zip_tie_distance_from_notch.svg",
     "features": [
       "wing openings",
       "zip-tie holes"
+    ],
+    "regions_named": [
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        3.5,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        0.5,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        35.3,
+        [
+          "zip-tie holes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip-tie holes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "wing openings"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1286,6 +3390,29 @@
     "svg": "one-sided/custom_velcro_hole_length.svg",
     "features": [
       "classic slots"
+    ],
+    "regions_named": [
+      [
+        63.1,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        63.1,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1306,6 +3433,29 @@
     "svg": "one-sided/custom_velcro_hole_width.svg",
     "features": [
       "classic slots"
+    ],
+    "regions_named": [
+      [
+        58.2,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        58.2,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1326,6 +3476,29 @@
     "svg": "one-sided/custom_velcro_hole_x_center.svg",
     "features": [
       "classic slots"
+    ],
+    "regions_named": [
+      [
+        73.5,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        73.5,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1346,6 +3519,29 @@
     "svg": "one-sided/custom_velcro_hole_y_center.svg",
     "features": [
       "classic slots"
+    ],
+    "regions_named": [
+      [
+        68.7,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        68.7,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1366,6 +3562,29 @@
     "svg": "one-sided/custom_velcro_hole_rotation.svg",
     "features": [
       "classic slots"
+    ],
+    "regions_named": [
+      [
+        45.6,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        45.6,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1385,6 +3604,29 @@
     "svg": "one-sided/custom_body_side_rounding.svg",
     "features": [
       "body edge"
+    ],
+    "regions_named": [
+      [
+        77.5,
+        [
+          "body edge"
+        ]
+      ],
+      [
+        77.5,
+        [
+          "body edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "body edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1443,6 +3685,59 @@
     "svg": "one-sided/custom_velcro_side_rounding.svg",
     "features": [
       "classic slots"
+    ],
+    "regions_named": [
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.4,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        2.7,
+        [
+          "classic slots"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "classic slots"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "classic slots"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1501,6 +3796,23 @@
     "svg": "one-sided/custom_t_hook_holder_side_rounding.svg",
     "features": [
       "hook"
+    ],
+    "regions_named": [
+      [
+        0.7,
+        [
+          "hook"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "hook"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1518,7 +3830,9 @@
     "svg": "one-sided/custom_t_hook_gap_side_rounding.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "one-sided",
@@ -1557,6 +3871,73 @@
       "finger lobes",
       "plate edge",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        16.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        16.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        88.0,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        88.0,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        567.2,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        567.2,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip stations"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1574,6 +3955,29 @@
     "svg": "two-sided/measure_plug_length.svg",
     "features": [
       "arms"
+    ],
+    "regions_named": [
+      [
+        331.1,
+        [
+          "arms"
+        ]
+      ],
+      [
+        331.1,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1594,6 +3998,70 @@
       "cord channel",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        3.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        3.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        148.9,
+        [
+          "arms"
+        ]
+      ],
+      [
+        148.9,
+        [
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes",
+          "cord channel"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1613,6 +4081,51 @@
       "arms",
       "teeth",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        71.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        71.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        5.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        5.1,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1633,6 +4146,104 @@
       "cord channel",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        72.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        104.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        91.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.8,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        72.0,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        104.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        91.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.8,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes",
+          "cord channel"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        4,
+        [
+          "zip stations"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1668,7 +4279,9 @@
     "svg": "two-sided/show_plug_preview.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   },
   {
     "file": "two-sided",
@@ -1687,6 +4300,82 @@
       "arms",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1709,6 +4398,66 @@
       "finger lobes",
       "plate edge",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        627.3,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        627.3,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1730,6 +4479,51 @@
       "arms",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1751,6 +4545,51 @@
       "arms",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        251.8,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        3.0,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1771,7 +4610,76 @@
       "finger lobes",
       "plate edge",
       "zip stations"
-    ]
+    ],
+    "regions_named": [
+      [
+        150.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        150.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        686.6,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        360.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        360.9,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        686.6,
+        [
+          "finger lobes",
+          "arms",
+          "plate edge"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": []
   },
   {
     "file": "two-sided",
@@ -1790,6 +4698,94 @@
       "arms",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        15.3,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        15.3,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        118.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        118.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        217.5,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        217.5,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        20.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        20.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        15.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        15.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1889,6 +4885,77 @@
       "cord channel",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        8.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        8.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        31.4,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        31.4,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        46.1,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        46.1,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        40.4,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes",
+          "cord channel"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip stations"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1908,6 +4975,82 @@
       "arms",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        120.3,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        189.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        21.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1927,6 +5070,82 @@
       "arms",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        166.8,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        166.8,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        271.6,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        271.6,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        25.1,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "finger lobes"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1946,6 +5165,75 @@
       "arms",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        125.5,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        22.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        22.7,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        110.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        125.5,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        110.3,
+        [
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1963,6 +5251,125 @@
     "svg": "two-sided/plate_tooth_diameter.svg",
     "features": [
       "teeth"
+    ],
+    "regions_named": [
+      [
+        0.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.4,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.7,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        0.4,
+        [
+          "teeth"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1980,6 +5387,77 @@
     "svg": "two-sided/plate_tooth_pitch.svg",
     "features": [
       "teeth"
+    ],
+    "regions_named": [
+      [
+        3.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        3.5,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.6,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.6,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.2,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        3.4,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        3.4,
+        [
+          "teeth"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -1997,6 +5475,113 @@
     "svg": "two-sided/plate_tooth_depth.svg",
     "features": [
       "teeth"
+    ],
+    "regions_named": [
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ],
+      [
+        1.3,
+        [
+          "teeth"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "teeth"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2016,6 +5601,63 @@
       "arms",
       "teeth",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        41.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        41.0,
+        [
+          "teeth",
+          "arms"
+        ]
+      ],
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        11.7,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "teeth",
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2034,6 +5676,60 @@
     "features": [
       "arms",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        56.6,
+        [
+          "arms"
+        ]
+      ],
+      [
+        56.6,
+        [
+          "arms"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        18.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2054,6 +5750,67 @@
       "cord channel",
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        0.7,
+        [
+          "finger lobes",
+          "cord channel"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        0.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        36.8,
+        [
+          "arms"
+        ]
+      ],
+      [
+        36.8,
+        [
+          "arms"
+        ]
+      ],
+      [
+        7.3,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        7.3,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2072,6 +5829,48 @@
     "features": [
       "arms",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        87.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        87.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        23.4,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        23.4,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2126,6 +5925,79 @@
       "finger lobes",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        17.8,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ],
+      [
+        17.8,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ],
+      [
+        17.8,
+        [
+          "zip stations",
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        17.8,
+        [
+          "zip stations",
+          "finger lobes",
+          "arms"
+        ]
+      ],
+      [
+        16.0,
+        [
+          "zip stations",
+          "arms"
+        ]
+      ],
+      [
+        16.0,
+        [
+          "zip stations",
+          "arms"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations",
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations",
+          "finger lobes",
+          "arms"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "zip stations",
+          "strap slot"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2147,6 +6019,91 @@
       "arms",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        4.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        7.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        7.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        15.1,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        15.1,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        8.9,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        3,
+        [
+          "strap slot"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2168,6 +6125,48 @@
     "features": [
       "finger lobes",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "finger lobes"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "finger lobes"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "finger lobes"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        true
+      ]
     ]
   },
   {
@@ -2189,6 +6188,32 @@
     "features": [
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        58.9,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ],
+      [
+        58.9,
+        [
+          "zip stations",
+          "strap slot"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations",
+          "strap slot"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2211,6 +6236,67 @@
       "arms",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        34.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        34.0,
+        [
+          "arms"
+        ]
+      ],
+      [
+        46.0,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        46.0,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        12.5,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "arms"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "zip stations"
+        ],
+        true
+      ],
+      [
+        3,
+        [
+          "strap slot"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2232,6 +6318,51 @@
       "arms",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        189.2,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        189.2,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2253,6 +6384,51 @@
       "arms",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        172.9,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        172.9,
+        [
+          "strap slot",
+          "arms"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        2.6,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "zip stations"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "strap slot",
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2274,6 +6450,60 @@
       "arms",
       "strap slot",
       "zip stations"
+    ],
+    "regions_named": [
+      [
+        16.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        16.7,
+        [
+          "arms"
+        ]
+      ],
+      [
+        45.9,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        45.9,
+        [
+          "strap slot"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "zip stations"
+        ]
+      ],
+      [
+        1.0,
+        [
+          "zip stations"
+        ]
+      ]
+    ],
+    "callouts": [
+      [
+        1,
+        [
+          "strap slot"
+        ],
+        false
+      ],
+      [
+        2,
+        [
+          "arms"
+        ],
+        false
+      ]
     ]
   },
   {
@@ -2291,6 +6521,8 @@
     "svg": "two-sided/quality.svg",
     "features": [
       "none"
-    ]
+    ],
+    "regions_named": [],
+    "callouts": []
   }
 ]

@@ -8,11 +8,18 @@ the outline-sheet helpers (the shadow silhouette with its through-holes plus
 the pocket recess for the one-sided puller; the contact-face section for a
 two-sided plate; the Z-only dials get a vertical section instead, drawn
 with Z up the page), and the symmetric difference of the two views is the
-red dashed trace of "what this dial moves". Each diagram is an SVG at
-1 unit = 1 mm under ``docs/dials/<file>/<name>.svg``: the black default
-outline, the teal plug, the red trace, the legend line, and a ``<title>`` /
-``<desc>`` pair carrying the row's words. Rows whose ``view`` is ``none``
-get a small SVG saying the dial changes no shape.
+changed geometry of "what this dial moves". Each diagram is an SVG at
+1 unit = 1 mm under ``docs/dials/<file>/<name>.svg``. The pair layout (the
+default since R3, FD-48) draws three parts at one scale: the BEFORE panel
+(the tool at the dial's default, the plug in teal), an arrow with the two
+values, and the AFTER panel (the tool after the dial moved, drawn once in
+black, with the pieces of its outline that moved overdrawn in red dots),
+numbered dots on the moved edges and a key column beside the picture that
+names them; no dial name and no legend inside the picture. A feature that
+disappeared is drawn from its old outline in red dots and marked removed.
+``--layout single`` keeps the previous one-drawing picture for one release
+cycle. Rows whose ``view`` is ``none`` get a small SVG saying the dial
+changes no shape. Every SVG carries a ``<title>`` / ``<desc>`` pair.
 
 Renders are cached under ``tmp_renders/dial_diagrams/`` (gitignored), keyed
 by the parameter set and the SCAD sources, never by STL bytes (identical
@@ -517,6 +524,9 @@ BROAD_SHARE = 0.15  # a pocket, notch, lobe, channel or arm owns a region it cov
 FALLBACK_SHARE = 0.10  # below this the region is the body's or plate's edge
 COVERED_SHARE = 0.5  # a region that covers this much of a footprint's own area names it
 WHOLE_BODY_SHARE = 0.25  # a region this big against the body is the edge's too
+EDGE_BAND = 1.5  # mm: the strip inside the body's outer edge
+EDGE_SHARE = 0.5  # a region lying this much within the strip hugs the edge and is the edge's too
+EDGE_CONTACT_SHARE = 0.10  # a region touching this much of the outer edge's length (outside every footprint) is the edge's too
 TEETH_DEPTH = 3.0  # mm: the band along the arms' inner edges that the teeth occupy
 PROBE_HALF = 0.5  # mm: half the thickness of a section row's probe box
 
@@ -675,16 +685,30 @@ def _section_probe(region: Polygon, view: str, at: float) -> Polygon:
 
 def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
                      view: str = "top", at: float = 0.0,
-                     body_area: float = 0.0) -> List[str]:
-    """Name every changed region: the specific footprints (holes, slots,
-    teeth) covering at least half of it, the broad ones (pocket, notch,
-    seat, hook, lobes, channel, arms) covering at least a sixth of it,
-    and any footprint the region itself covers at least half of (a region
-    that swallows a whole feature); a region that swallows a quarter of the
-    body is also the edge's; a region nothing claims takes the footprint
-    covering most of it, if a tenth, else the edge."""
-    names = set()
+                     body_area: float = 0.0,
+                     edge_rings: Sequence[LineString] = ()) -> List[Tuple[Polygon, List[str]]]:
+    """Name every changed region, one name list per region in drawing order
+    (the most specific footprint first): the specific footprints (holes,
+    slots, teeth) covering at least half of it, the broad ones (pocket,
+    notch, seat, hook, lobes, channel, arms) covering at least a sixth of
+    it, and any footprint the region itself covers at least half of (a
+    region that swallows a whole feature); a region that swallows a quarter
+    of the body is also the edge's; a region nothing claims takes the
+    footprint covering most of it, if a tenth, else the edge. A region that
+    lies mostly within EDGE_BAND of one of ``edge_rings`` (the body's outer
+    edge before and after), outside every named footprint, is the edge's too."""
+    named: List[Tuple[Polygon, List[str]]] = []
     edge = FEATURE_FALLBACK[file_key]
+    order = [n for n, _g in fp.specific] + [n for n, _g in fp.broad] + [edge]
+    edge_strip = edge_lines = None
+    edge_length = 0.0
+    if edge_rings:
+        # the strip along the outer edge, minus every named footprint: a notch, a hook slot or a hole
+        # cut into the edge belongs to its own feature, not to the edge
+        claimed = _union([g for _n, g in list(fp.specific) + list(fp.broad)])
+        edge_strip = _fix(_union([r.buffer(EDGE_BAND) for r in edge_rings]).difference(claimed))
+        edge_lines = shapely.union_all(list(edge_rings)).difference(claimed)
+        edge_length = sum(r.length for r in edge_rings)
     for region in regions:
         probe = region if view == "top" else _section_probe(region, view, at)
         area = max(probe.area, 1e-9)
@@ -698,6 +722,11 @@ def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
                     hits.add(name)
         if view == "top" and body_area and region.area >= WHOLE_BODY_SHARE * body_area:
             hits.add(edge)
+        if view == "top" and edge_strip is not None and region.area > 0:
+            hugs = region.intersection(edge_strip).area / region.area >= EDGE_SHARE
+            contact = region.buffer(EDGE_BAND).intersection(edge_lines).length / max(edge_length, 1e-9)
+            if hugs or contact >= EDGE_CONTACT_SHARE:
+                hits.add(edge)
         if not hits and shares and view == "top":
             # A section probe is a thin box across the whole cut: a feature it
             # merely grazes must not name it, so the tenth-share fallback is
@@ -705,8 +734,14 @@ def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
             best = max(shares, key=shares.get)
             if shares[best] >= FALLBACK_SHARE:
                 hits.add(best)
-        names.update(hits or {edge})
-    return sorted(names)
+        names = sorted(hits or {edge}, key=lambda n: order.index(n) if n in order else len(order))
+        named.append((region, names))
+    return named
+
+
+def feature_names(named: Sequence[Tuple[Polygon, Sequence[str]]]) -> List[str]:
+    """The sorted, distinct feature names of a row (the index's ``features``)."""
+    return sorted({n for _region, names in named for n in names})
 
 
 # ---------------------------------------------------------------------------
@@ -943,6 +978,439 @@ def compose_none_svg(note: str, title: str = "", name: str = "") -> str:
     return "\n".join(svg) + "\n"
 
 
+
+# ---------------------------------------------------------------------------
+# The pair picture (R3, FD-48): before | arrow | after, the moved edges in red
+# ---------------------------------------------------------------------------
+
+PAIR_VIEWS = ("top",)  # B2 brings the section views into the same layout
+# Rows drawn as ONE panel of their default state with no marks: a layout switch
+# moves everything, so "what moved" says nothing (the two-sided print layout
+# puts both plates side by side; its picture is what you print).
+SINGLE_PANEL_ROWS = {(TWO_SIDED, "print_layout")}
+PAIR_GAP = 10.0  # mm between the panels; the arrow lives here
+KEY_W = 34.0  # mm, the key column beside the after panel
+KEY_PAD = 3.0
+KEY_LINE = 4.0  # mm between key entries
+KEY_SUBLINE = 3.1  # mm between the wrapped lines of one entry
+KEY_SIZE = 2.6
+KEY_WRAP_MM = KEY_W - KEY_PAD - 1.0
+ARROW_W = 0.6
+ARROW_HEAD = 2.5
+VALUES_SIZE = 2.8
+STRIP_LINE = 3.4  # mm per values line when the values go under the panels
+CALLOUT_D = 2.6  # mm, the numbered dot
+CALLOUT_STROKE = 0.35
+CALLOUT_TEXT = 2.2
+LEADER_W = 0.3
+LEADER_MIN_MM2 = 2.0  # a region smaller than this never carries the number's leader
+EDGE_TOL = 0.2  # mm: an after edge within this of a before edge did not move (render jitter is under 0.1)
+MIN_ARC = 0.6  # mm: shorter moved pieces are noise
+ARC_TOUCH = 0.5  # mm: an arc this close to a region bounds it
+REMOVED_MIN_MM2 = 5.0  # a region with no moved edge is a removed feature only from this size
+REMOVED_SUFFIX = " (removed)"
+DOTS_PER_NUMBER = 6  # a number shared by more regions than this shows its dot on the leadered region only
+DOT_W = 0.6  # the red dotted stroke; round caps make 0.6 mm dots at a 1.1 mm pitch
+DOT_DASH = "0.01,1.1"
+DIM_HEADROOM = 7.0  # mm added to the panel box on a dimension callout's side
+DIM_EXT_W = 0.25
+DIM_LINE_W = 0.3
+DIM_ARROW = 1.5
+DIM_TEXT = 2.6
+
+
+def _as_outline(geom) -> Outline:
+    return geom if isinstance(geom, Outline) else _outline_from_filled(geom)
+
+
+def _drawn_rings(outline: Outline) -> List[List[Tuple[float, float]]]:
+    """The rings _draw_outline() draws (cleaned), as coordinate lists."""
+    rings: List[List[Tuple[float, float]]] = []
+    for raw in list(outline.solids) + list(outline.recess):
+        poly = clean_polygon(raw)
+        if poly is None:
+            continue
+        rings.append(list(poly.exterior.coords))
+        rings.extend(list(i.coords) for i in poly.interiors)
+    return rings
+
+
+def moved_arcs(after_out: Outline, before_out: Outline) -> List[LineString]:
+    """The pieces of the after outline's rings farther than EDGE_TOL from every
+    ring of the before outline: the edges the dial moved."""
+    before = [LineString(r) for r in _drawn_rings(before_out)]
+    guard = shapely.union_all(before).buffer(EDGE_TOL) if before else None
+    arcs: List[LineString] = []
+    for coords in _drawn_rings(after_out):
+        line = LineString(coords)
+        moved = line.difference(guard) if guard is not None else line
+        for g in shapely.get_parts(moved):
+            if isinstance(g, LineString) and g.length >= MIN_ARC:
+                arcs.append(g)
+    return arcs
+
+
+def _arc_owner(arc: LineString, regions: Sequence[Polygon]) -> Optional[int]:
+    """The region the arc bounds: the one nearest to the arc's quarter points,
+    if all three lie within ARC_TOUCH of it."""
+    probes = [arc.interpolate(f, normalized=True) for f in (0.25, 0.5, 0.75)]
+    best, best_d = None, None
+    for i, region in enumerate(regions):
+        d = max(region.distance(pt) for pt in probes)
+        if d <= ARC_TOUCH and (best_d is None or d < best_d):
+            best, best_d = i, d
+    return best
+
+
+def wrap_key(line: str) -> List[str]:
+    words = line.split(" ")
+    out: List[str] = []
+    cur = ""
+    for w in words:
+        trial = (cur + " " + w).strip()
+        if cur and CHAR_W * KEY_SIZE * len(trial) > KEY_WRAP_MM:
+            out.append(cur)
+            cur = w
+        else:
+            cur = trial
+    if cur:
+        out.append(cur)
+    return out
+
+
+@dataclass
+class PairPlan:
+    """What the pair picture marks: the regions that get a dot (specks with no
+    moved edge dropped), their arcs, the numbering and the key."""
+
+    regions: List[Tuple[Polygon, List[str]]] = field(default_factory=list)
+    arcs: List[LineString] = field(default_factory=list)
+    region_arcs: List[List[LineString]] = field(default_factory=list)
+    removed: List[bool] = field(default_factory=list)
+    number_of: List[int] = field(default_factory=list)
+    key_lines: List[str] = field(default_factory=list)
+    dots: List[Point] = field(default_factory=list)
+
+    @property
+    def key_rows(self) -> List[List[Any]]:
+        """The key as index data: ``[number, names, removed]`` per entry."""
+        rows: Dict[int, List[Any]] = {}
+        for (region, names), n, rm in zip(self.regions, self.number_of, self.removed):
+            row = rows.setdefault(n, [n, list(names), True])
+            row[2] = row[2] and rm
+        return [rows[n] for n in sorted(rows)]
+
+
+def _dot_point(arcs: Sequence[LineString]) -> Point:
+    """The arc vertex nearest the key column: the greatest x, then the highest y."""
+    best = None
+    for a in arcs:
+        for x, y in a.coords:
+            if best is None or (x, y) > best:
+                best = (x, y)
+    return Point(best)
+
+
+def plan_callouts(before_out: Outline, after_out: Outline,
+                  regions_named: Sequence[Tuple[Polygon, Sequence[str]]],
+                  box: Optional[Polygon] = None) -> PairPlan:
+    """``box`` is the panel's drawing box in model mm (a crop): a region whose
+    marks all lie outside it is not numbered, so its leader cannot land on the
+    neighbouring panel."""
+    arcs = moved_arcs(after_out, before_out)
+    all_regions = [r for r, _n in regions_named]
+    owner = [_arc_owner(a, all_regions) for a in arcs]
+    arcs_of = {i: [a for a, o in zip(arcs, owner) if o == i] for i in range(len(all_regions))}
+    plan = PairPlan(arcs=arcs)
+    for i, (region, names) in enumerate(regions_named):
+        ra = arcs_of[i]
+        if not ra and region.area < REMOVED_MIN_MM2:
+            continue
+        dot = _dot_point(ra) if ra else region.representative_point()
+        if box is not None:
+            marks = shapely.union_all(ra) if ra else region.exterior
+            if not marks.intersects(box):
+                continue
+            if not box.contains(dot):
+                inside = marks.intersection(box)
+                dot = inside.representative_point() if not inside.is_empty else dot
+        plan.regions.append((region, list(names)))
+        plan.region_arcs.append(ra)
+        plan.removed.append(not ra)
+        plan.dots.append(dot)
+    groups: Dict[Tuple[str, ...], List[int]] = {}
+    for i, (_region, names) in enumerate(plan.regions):
+        groups.setdefault(tuple(names), []).append(i)
+    ordered = sorted(groups.items(), key=lambda kv: -max(plan.dots[i].y for i in kv[1]))
+    plan.number_of = [0] * len(plan.regions)
+    for n, (names, idxs) in enumerate(ordered, start=1):
+        for i in idxs:
+            plan.number_of[i] = n
+        suffix = REMOVED_SUFFIX if all(plan.removed[i] for i in idxs) else ""
+        plan.key_lines.append(f"{n} {' / '.join(names)}{suffix}")
+    return plan
+
+
+def _values_lines(before_value: Any, after_value: Any, unit: Optional[str],
+                  section: Optional[Tuple[str, float]]) -> List[str]:
+    if isinstance(before_value, str) or isinstance(after_value, str):
+        lines = [f"{_fmt_value(before_value)}", f"\u2192 {_fmt_value(after_value)}"]
+    else:
+        lines = [f"{_fmt_value(before_value)} \u2192 {_fmt_value(after_value)}" + (f" {unit}" if unit else "")]
+    if section:
+        axis = "x" if section[0] == "section-x" else "y"
+        lines.append(f"section at {axis} = {_fmt_value(section[1])} mm")
+    return lines
+
+
+def _svg_arrow_h(x0: float, x1: float, y: float) -> str:
+    hx = x1 - ARROW_HEAD
+    return (f'<line x1="{x0:.2f}" y1="{y:.2f}" x2="{hx:.2f}" y2="{y:.2f}" stroke="#000" stroke-width="{ARROW_W}"/>'
+            f'<polygon points="{x1:.2f},{y:.2f} {hx:.2f},{y - ARROW_HEAD * 0.45:.2f} {hx:.2f},{y + ARROW_HEAD * 0.45:.2f}" fill="#000"/>')
+
+
+def _pt(frame: _Frame, x: float, y: float) -> Tuple[float, float]:
+    return x - frame.x0, frame.top + (frame.y1 - y)
+
+
+def _dotted(frame: _Frame, line: LineString, color: str = COLOR_TRACE, width: float = DOT_W,
+            dash: str = DOT_DASH) -> str:
+    """A dotted line clipped to the drawing box (a crop), as the outlines are."""
+    pieces = [g for g in shapely.get_parts(line.intersection(frame.box)) if isinstance(g, LineString) and not g.is_empty]
+    return "".join(
+        f'<path d="M {frame._pts(g.coords)}" fill="none" stroke="{color}" stroke-width="{width}" '
+        f'stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="{dash}"/>'
+        for g in pieces
+    )
+
+
+def _dim_arrow(x: float, y: float, direction: float, color: str) -> str:
+    bx = x - direction * DIM_ARROW * 1.6
+    return f'<polygon points="{x:.2f},{y:.2f} {bx:.2f},{y - DIM_ARROW * 0.35:.2f} {bx:.2f},{y + DIM_ARROW * 0.35:.2f}" fill="{color}"/>'
+
+
+def draw_dimension(frame: _Frame, dim: Dict[str, Any]) -> List[str]:
+    """A horizontal dimension callout in the after panel, the outline sheets'
+    conventions: extension lines from the object's edge (``y_obj``), a line at
+    ``y_dim`` between ``x0`` and ``x1`` with two arrow heads, the ``label``
+    above it. The white halo is a separate text under the red one (an SVG
+    rasterizer may ignore paint-order)."""
+    c = COLOR_TRACE
+    (xa, ya), (xb, _yb) = _pt(frame, dim["x0"], dim["y_dim"]), _pt(frame, dim["x1"], dim["y_dim"])
+    (_xo, yo) = _pt(frame, dim["x0"], dim["y_obj"])
+    over = 1.0 if ya < yo else -1.0
+    out = ['<g class="dimension">']
+    for x in (xa, xb):
+        out.append(f'<line x1="{x:.2f}" y1="{yo:.2f}" x2="{x:.2f}" y2="{ya - over:.2f}" stroke="{c}" stroke-width="{DIM_EXT_W}"/>')
+    if (xb - xa) < 11.0:
+        out.append(f'<line x1="{xa - 5:.2f}" y1="{ya:.2f}" x2="{xb + 5:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+        out.append(_dim_arrow(xa, ya, -1.0, c))
+        out.append(_dim_arrow(xb, ya, 1.0, c))
+    else:
+        out.append(f'<line x1="{xa:.2f}" y1="{ya:.2f}" x2="{xb:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+        out.append(_dim_arrow(xa, ya, 1.0, c))
+        out.append(_dim_arrow(xb, ya, -1.0, c))
+    tx, ty = (xa + xb) / 2, ya - 1.0
+    label = _esc(dim["label"])
+    out.append(f'<text x="{tx:.2f}" y="{ty:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
+               f'text-anchor="middle" fill="white" stroke="white" stroke-width="0.8" stroke-linejoin="round">{label}</text>')
+    out.append(f'<text x="{tx:.2f}" y="{ty:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
+               f'text-anchor="middle" fill="{c}">{label}</text>')
+    out.append("</g>")
+    return out
+
+
+def _compose_single_panel(outline: Outline, plug: Optional[Polygon], title: str, changes: str,
+                          before_value: Any, after_value: Any, unit: Optional[str],
+                          desc: Optional[str]) -> str:
+    """One panel of the row's default state in black with the plug, the two
+    values in a strip under it, no marks and no key (SINGLE_PANEL_ROWS)."""
+    geoms = outline.solids + outline.recess + ([plug] if plug is not None else [])
+    bx0, by0, bx1, by1 = shapely.union_all(geoms).bounds
+    x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
+    width, height = x1 - x0, y1 - y0
+    lines = _values_lines(before_value, after_value, unit, None)
+    strip_h = 1.5 + len(lines) * STRIP_LINE
+    row_h = height + strip_h
+    frame = _Frame(x0, y0, x1, y1, 0.0)
+    text = desc or f"{changes} Before: {_fmt_value(before_value)}. After: {_fmt_value(after_value)}."
+    svg: List[str] = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:.2f}mm" height="{row_h:.2f}mm" '
+        f'viewBox="0 0 {width:.2f} {row_h:.2f}" role="img">',
+        f'<title>{_esc(title)}</title>',
+        f'<desc>{_esc(text)}</desc>',
+        f'<rect width="{width:.2f}" height="{row_h:.2f}" fill="white"/>',
+        '<g class="panel" id="single">',
+    ]
+    if plug is not None:
+        svg.append(_filled_polygon(frame, plug, COLOR_PLUG, PLUG_OPACITY))
+    svg.extend(_draw_outline(frame, outline, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+    svg.append("</g>")
+    svg.append('<g class="arrow">')
+    ty = height + 1.5 + VALUES_SIZE
+    for line in lines:
+        svg.append(_text(width / 2, ty, line, VALUES_SIZE))
+        ty += STRIP_LINE
+    svg.append("</g>")
+    svg.append("</svg>")
+    return "\n".join(s for s in svg if s) + "\n"
+
+
+def compose_pair_svg(
+    before_outline,
+    after_outline,
+    before_plug: Optional[Polygon],
+    after_plug: Optional[Polygon],
+    title: str,
+    changes: str,
+    name: str,
+    before_value: Any,
+    after_value: Any,
+    unit: Optional[str],
+    context: Dict[str, Any],
+    style: str,
+    crop: Optional[Sequence[float]],
+    regions_named: Sequence[Tuple[Polygon, Sequence[str]]],
+    dimension: Optional[Dict[str, Any]] = None,
+    desc: Optional[str] = None,
+    section: Optional[Tuple[str, float]] = None,
+    plan: Optional[PairPlan] = None,
+    single_panel: bool = False,
+) -> str:
+    """The pair picture as SVG text (1 unit = 1 mm): the BEFORE panel (the
+    outline in black, the before plug in teal), a 10 mm gap with the arrow
+    and the two values, the AFTER panel (the after outline in black, the
+    after plug in teal, the moved edges in red dots, a removed feature from
+    its old outline, an optional dimension callout, the numbered dots), and
+    the key column with one leader per entry. ``style`` no longer changes
+    the drawing (FD-48); ``context`` is the card's text, not the picture's.
+    """
+    del style, context
+    b_out, a_out = _as_outline(before_outline), _as_outline(after_outline)
+    if single_panel:
+        return _compose_single_panel(b_out, before_plug, title, changes, before_value, after_value, unit, desc)
+    if crop:
+        x0, y0, x1, y1 = (float(v) for v in crop)
+    else:
+        geoms = b_out.solids + b_out.recess + a_out.solids + a_out.recess
+        geoms += [g for g in (before_plug, after_plug) if g is not None]
+        bx0, by0, bx1, by1 = shapely.union_all(geoms).bounds
+        x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
+    if dimension:
+        if dimension.get("side", "above") == "above":
+            y1 += DIM_HEADROOM
+        else:
+            y0 -= DIM_HEADROOM
+    width, height = x1 - x0, y1 - y0
+    plan = plan or plan_callouts(b_out, a_out, regions_named, shapely.box(x0, y0, x1, y1) if crop else None)
+
+    key_entries = [wrap_key(line) for line in plan.key_lines]
+    key_h = 2.0 + sum(KEY_LINE + (len(e) - 1) * KEY_SUBLINE for e in key_entries) + 1.0
+    lines = _values_lines(before_value, after_value, unit, section)
+    widest = max(CHAR_W * VALUES_SIZE * len(t) for t in lines)
+    # a crop has no margin around the drawing, so only the gap itself may hold the values
+    under_arrow = widest <= PAIR_GAP - 1.0 + (0.0 if crop else 2 * MARGIN - 1.0)
+    strip_h = 0.0 if under_arrow else 1.5 + len(lines) * STRIP_LINE
+    row_w = 2 * width + PAIR_GAP + KEY_W
+    row_h = max(height, key_h) + strip_h
+
+    frame = _Frame(x0, y0, x1, y1, 0.0)
+    ax = width + PAIR_GAP
+    text = desc or f"{changes} Before: {_fmt_value(before_value)}. After: {_fmt_value(after_value)}."
+    svg: List[str] = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{row_w:.2f}mm" height="{row_h:.2f}mm" '
+        f'viewBox="0 0 {row_w:.2f} {row_h:.2f}" role="img">',
+        f'<title>{_esc(title)}</title>',
+        f'<desc>{_esc(text)}</desc>',
+        f'<rect width="{row_w:.2f}" height="{row_h:.2f}" fill="white"/>',
+        '<g class="panel" id="before">',
+    ]
+    if before_plug is not None:
+        svg.append(_filled_polygon(frame, before_plug, COLOR_PLUG, PLUG_OPACITY))
+    svg.extend(_draw_outline(frame, b_out, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+    svg.append("</g>")
+    svg.append('<g class="arrow">')
+    mid = height / 2
+    svg.append(_svg_arrow_h(width + 1.5, width + PAIR_GAP - 1.5, mid))
+    ty = mid + 3.0 + VALUES_SIZE if under_arrow else max(height, key_h) + 1.5 + VALUES_SIZE
+    for line in lines:
+        svg.append(_text(width + PAIR_GAP / 2, ty, line, VALUES_SIZE))
+        ty += STRIP_LINE
+    svg.append("</g>")
+    svg.append(f'<g class="panel" id="after" transform="translate({ax:.2f} 0)">')
+    if after_plug is not None:
+        svg.append(_filled_polygon(frame, after_plug, COLOR_PLUG, PLUG_OPACITY))
+    svg.extend(_draw_outline(frame, a_out, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
+    for arc in plan.arcs:
+        svg.append(_dotted(frame, arc))
+    for (region, _names), removed in zip(plan.regions, plan.removed):
+        if removed:
+            svg.append(_dotted(frame, LineString(region.exterior.coords)))
+    if dimension:
+        svg.extend(draw_dimension(frame, dimension))
+    dots_row: List[Tuple[int, float, float]] = []
+    for dot, n in zip(plan.dots, plan.number_of):
+        px, py = _pt(frame, dot.x, dot.y)
+        dots_row.append((n, px + ax, py))
+    dot_svg: Dict[int, str] = {}
+    for i, (n, rx, ry) in enumerate(dots_row):
+        px, py = rx - ax, ry
+        dot_svg[i] = (f'<circle cx="{px:.2f}" cy="{py:.2f}" r="{CALLOUT_D / 2}" fill="white" stroke="{COLOR_TRACE}" stroke-width="{CALLOUT_STROKE}"/>'
+                      + _text(px, py + CALLOUT_TEXT * 0.36, str(n), CALLOUT_TEXT, fill=COLOR_TRACE))
+    crowded = {n for n in set(plan.number_of) if plan.number_of.count(n) > DOTS_PER_NUMBER}
+    after_close = len(svg)  # the dots are inserted here, before the after panel closes
+    svg.append("</g>")
+    key_x = 2 * width + PAIR_GAP + KEY_PAD
+    svg.append('<g class="key">')
+    key_y: List[float] = []
+    y = 2.0 + KEY_SIZE
+    for entry in key_entries:
+        key_y.append(y)
+        for j, line in enumerate(entry):
+            svg.append(_text(key_x + (3.0 if j else 0.0), y, line, KEY_SIZE, anchor="start"))
+            y += KEY_SUBLINE
+        y += KEY_LINE - KEY_SUBLINE
+    svg.append("</g>")
+    # One leader per key entry, from the dot whose straight leader crosses the fewest drawn lines
+    # (then the fewest plug edges, then the dot nearest the key); a speck never carries it.
+    rings_row = [LineString([(x - x0 + ax, (y1 - y)) for x, y in r]) for r in _drawn_rings(a_out)]
+    plug_row = (Polygon([(x - x0 + ax, (y1 - y)) for x, y in after_plug.exterior.coords])
+                if after_plug is not None else None)
+    leaders: List[str] = []
+    shown: set = set()
+    for n in range(1, len(plan.key_lines) + 1):
+        idxs = [i for i, m in enumerate(plan.number_of) if m == n]
+        biggest = max(plan.regions[i][0].area for i in idxs)
+        big = [i for i in idxs if plan.regions[i][0].area >= max(LEADER_MIN_MM2, 0.1 * biggest)] or idxs
+        ex, ey = key_x - 1.0, key_y[n - 1] - KEY_SIZE * 0.35
+        best = None
+        for i in big:
+            _m, cx, cy = dots_row[i]
+            dx, dy = ex - cx, ey - cy
+            dist = (dx * dx + dy * dy) ** 0.5 or 1.0
+            sx, sy = cx + dx / dist * (CALLOUT_D / 2), cy + dy / dist * (CALLOUT_D / 2)
+            leader = LineString([(sx, sy), (ex, ey)])
+            crossings = sum(len([g for g in shapely.get_parts(leader.intersection(r)) if not g.is_empty]) for r in rings_row)
+            plug_x = (len([g for g in shapely.get_parts(leader.intersection(plug_row.exterior)) if not g.is_empty])
+                      if plug_row is not None else 0)
+            score = (crossings, plug_x, -cx)
+            if best is None or score < best[0]:
+                best = (score, sx, sy, i)
+        _score, sx, sy, i_best = best
+        leaders.append(f'<line x1="{sx:.2f}" y1="{sy:.2f}" x2="{ex:.2f}" y2="{ey:.2f}" stroke="{COLOR_TRACE}" stroke-width="{LEADER_W}"/>')
+        shown.add(i_best)
+        if n not in crowded:
+            shown.update(idxs)
+    svg[after_close:after_close] = [dot_svg[i] for i in sorted(shown)]
+    svg.append('<g class="leaders">')
+    svg.extend(leaders)
+    svg.append("</g>")
+    svg.append("</svg>")
+    return "\n".join(s for s in svg if s) + "\n"
+
+
 # ---------------------------------------------------------------------------
 # Driver
 # ---------------------------------------------------------------------------
@@ -953,7 +1421,12 @@ def svg_relpath(row: Dict[str, Any]) -> str:
 
 
 def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str],
-              features: Sequence[str]) -> Dict[str, Any]:
+              features: Sequence[str],
+              regions_named: Sequence[Tuple[Polygon, Sequence[str]]] = (),
+              callouts: Sequence[Sequence[Any]] = ()) -> Dict[str, Any]:
+    """One index entry: ``regions_named`` is ``[area_mm2, [names]]`` per
+    changed region in drawing order; ``callouts`` is the key of the pair
+    picture, ``[number, [names], removed]`` per entry."""
     d = row["diagram"]
     return {
         "file": row["file"],
@@ -969,6 +1442,8 @@ def index_row(row: Dict[str, Any], regions: int, area: float, tags: List[str],
         "tags": tags,
         "svg": svg_relpath(row),
         "features": list(features),
+        "regions_named": [[round(region.area, 1), list(names)] for region, names in regions_named],
+        "callouts": [list(c) for c in callouts],
     }
 
 
@@ -980,8 +1455,11 @@ def build_none(row: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
     return index_row(row, 0, 0.0, [], ["none"])
 
 
-def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path) -> Dict[str, Any]:
-    """A top-view or section diagram: two renders, two views, the diff."""
+def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any], out_dir: Path,
+               layout: str = "pair", unit: Optional[str] = None) -> Dict[str, Any]:
+    """A top-view or section diagram: two renders, two views, the diff; the
+    pair picture for the views in PAIR_VIEWS (``layout`` "pair"), else the
+    single drawing."""
     file_key = row["file"]
     d = row["diagram"]
     view = d["view"]
@@ -1005,8 +1483,10 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     context = dict(d.get("context") or {})
     if view == "top":
         plug = plug_polygon(file_key, after_params, a_out)
+        before_plug = plug_polygon(file_key, base, b_out)
     else:
         plug = section_plug_polygon(file_key, after_params, view, at, body)
+        before_plug = None
         context[view] = at  # the cut plane, shown with the context
     regions, area = outline_regions(b_out, a_out)
     if view == "top":
@@ -1015,27 +1495,56 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
         feats = footprints(file_key, base, top_view(file_key, stls[0], base),
                            top_view(file_key, stls[1], after_params), after_params)
     body_area = sum(p.area for p in b_out.solids) if view == "top" else 0.0
-    features = classify_regions(file_key, regions, feats, view, at, body_area) if regions else []
-    svg = compose_svg(
-        before=b_out.filled,
-        after=a_out.filled,
-        plug=plug,
-        title=row["title"],
-        changes=row["changes"],
-        name=row["name"],
-        before_value=d["before"],
-        after_value=d["after"],
-        context=context,
-        style=d["style"],
-        crop=d.get("crop"),
-        before_outline=b_out,
-        after_outline=a_out,
-        regions=regions,
-    )
+    edge_rings = ([LineString(max(o.solids, key=lambda q: q.area).exterior.coords) for o in (b_out, a_out) if o.solids]
+                  if view == "top" else [])
+    named = classify_regions(file_key, regions, feats, view, at, body_area, edge_rings) if regions else []
+    features = feature_names(named)
+    callouts: List[List[Any]] = []
+    if layout == "pair" and view in PAIR_VIEWS:
+        crop = d.get("crop")
+        single = (file_key, row["name"]) in SINGLE_PANEL_ROWS
+        plan = plan_callouts(b_out, a_out, named, shapely.box(*(float(v) for v in crop)) if crop else None)
+        callouts = [] if single else plan.key_rows
+        svg = compose_pair_svg(
+            before_outline=b_out,
+            after_outline=a_out,
+            before_plug=before_plug,
+            after_plug=plug,
+            title=row["title"],
+            changes=row["changes"],
+            name=row["name"],
+            before_value=d["before"],
+            after_value=d["after"],
+            unit=unit,
+            context=context,
+            style=d["style"],
+            crop=d.get("crop"),
+            regions_named=named,
+            section=(view, at) if view in SECTION_VIEWS else None,
+            plan=plan,
+            single_panel=single,
+        )
+    else:
+        svg = compose_svg(
+            before=b_out.filled,
+            after=a_out.filled,
+            plug=plug,
+            title=row["title"],
+            changes=row["changes"],
+            name=row["name"],
+            before_value=d["before"],
+            after_value=d["after"],
+            context=context,
+            style=d["style"],
+            crop=d.get("crop"),
+            before_outline=b_out,
+            after_outline=a_out,
+            regions=regions,
+        )
     path = out_dir / svg_relpath(row)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return index_row(row, len(regions), area, tags, features)
+    return index_row(row, len(regions), area, tags, features, named, callouts)
 
 
 def run_rows(
@@ -1044,12 +1553,14 @@ def run_rows(
     cache_dir: Path,
     force: bool = False,
     renderer: Optional[Renderer] = None,
+    layout: str = "pair",
 ) -> List[Dict[str, Any]]:
     """Build the diagrams of ``rows`` under ``out_dir``; return their index
     rows (rows with a view this script does not build are skipped with a log line)."""
     out_dir = Path(out_dir)
     renderer = renderer or Renderer(cache_dir=Path(cache_dir), force=force)
-    defaults = {key: mapping_defaults(load_mapping(key)) for key in SCADS}
+    mappings = {key: load_mapping(key) for key in SCADS}
+    defaults = {key: mapping_defaults(m) for key, m in mappings.items()}
     produced: List[Dict[str, Any]] = []
     for row in rows:
         view = row["diagram"]["view"]
@@ -1058,7 +1569,8 @@ def run_rows(
             entry = build_none(row, out_dir)
         elif view == "top" or view in SECTION_VIEWS:
             r0, h0 = renderer.renders, renderer.hits
-            entry = build_diff(row, renderer, defaults[row["file"]], out_dir)
+            unit = (mappings[row["file"]].get(row["name"]) or {}).get("unit")
+            entry = build_diff(row, renderer, defaults[row["file"]], out_dir, layout=layout, unit=unit)
             logger.info(
                 "%s %s: %d region(s), %.1f mm2, %d render(s), %d cache hit(s), %.1f s%s",
                 row["file"], row["name"], entry["regions"], entry["changed_area_mm2"],
@@ -1180,6 +1692,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--force", action="store_true", help="re-render even when the cache has the STL")
     parser.add_argument("--views", choices=VIEW_CHOICES, default="all", help="which catalog views to build (default: every view this script supports)")
     parser.add_argument("--readme", action="store_true", help="only rewrite docs/dials/README.md from the index on disk (no rows built)")
+    parser.add_argument("--layout", choices=("pair", "single"), default="pair", help="the pair picture (default) or the previous one-drawing picture")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -1198,7 +1711,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 1
     t0 = time.time()
     renderer = Renderer(cache_dir=args.cache, force=args.force)
-    produced = run_rows(rows, out_dir=args.out, cache_dir=args.cache, force=args.force, renderer=renderer)
+    produced = run_rows(rows, out_dir=args.out, cache_dir=args.cache, force=args.force, renderer=renderer, layout=args.layout)
     index_path = write_index(args.out, produced, catalog)
     index_rows = json.loads(index_path.read_text(encoding="utf-8"))
     if len(index_rows) == len(catalog):

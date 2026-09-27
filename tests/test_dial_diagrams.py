@@ -22,7 +22,7 @@ from scripts.generate_dial_diagrams import (
     NO_SHAPE_SENTENCE,
     changed_regions,
     compose_none_svg,
-    compose_svg,
+    compose_pair_svg,
     load_catalog,
     run_rows,
     section_polygons,
@@ -50,25 +50,31 @@ def test_small_slivers_dropped() -> None:
 
 
 def test_svg_text_equivalent() -> None:
-    svg = compose_svg(
-        before=BEFORE,
-        after=AFTER,
-        plug=None,
+    """The pair picture's text equivalent: a title, a desc carrying the
+    changes sentence and both values, no legend inside the picture (the page
+    carries it), nothing fetched from anywhere."""
+    region = Polygon([(40, 0), (43, 0), (43, 30), (40, 30)])
+    svg = compose_pair_svg(
+        before_outline=BEFORE,
+        after_outline=AFTER,
+        before_plug=None,
+        after_plug=None,
         title="Test dial",
         changes="Moves the right edge.",
         name="test_dial",
         before_value=40,
         after_value=43,
+        unit="mm",
         context={},
         style="fill",
         crop=None,
+        regions_named=[(region, ["body edge"])],
     )
     assert "<title>Test dial</title>" in svg
     assert "<desc>" in svg and "Moves the right edge." in svg
     assert "Before: 40. After: 43." in svg
     for piece in LEGEND_LINE.split("; "):
-        assert piece in svg
-    assert svg.count('stroke="#d81b1b"') == 1
+        assert piece not in svg
     assert "href=" not in svg and "url(http" not in svg
 
 
@@ -121,6 +127,71 @@ def test_readme_lists_every_dial() -> None:
         path = f"{row['file']}/{row['name']}.svg"
         assert path in images, f"{row['name']}: no image line"
         assert images[path] == row["changes"], f"{row['name']}: alt text is not the changes sentence"
+
+
+def test_pair_svg_two_panels() -> None:
+    """The pair picture (FD-48): a before panel, an arrow with the two values,
+    an after panel whose moved edges alone are red, and a numbered key beside
+    it; no dial name and no legend inside the picture."""
+    region = Polygon([(40, 0), (43, 0), (43, 30), (40, 30)])
+    svg = compose_pair_svg(
+        before_outline=BEFORE,
+        after_outline=AFTER,
+        before_plug=None,
+        after_plug=None,
+        title="Test dial",
+        changes="Moves the right edge.",
+        name="test_dial",
+        before_value=40,
+        after_value=43,
+        unit="mm",
+        context={},
+        style="fill",
+        crop=None,
+        regions_named=[(region, ["body edge"])],
+    )
+    assert svg.count('<g class="panel"') == 2
+    assert svg.count('<g class="arrow"') == 1
+    assert "40 \u2192 43 mm" in svg
+    assert svg.count('<g class="key"') == 1 and "1 body edge" in svg
+    assert "<title>Test dial</title>" in svg and "<desc>" in svg
+    assert "test_dial" not in svg
+    for words in ("black =", "teal =", "red dashed", "red dotted ="):
+        assert words not in svg
+    assert not re.search(r'<path[^>]*fill="#d81b1b"', svg)
+    before = svg[svg.index('<g class="panel" id="before"'):svg.index('<g class="arrow"')]
+    after = svg[svg.index('<g class="panel" id="after"'):svg.index('<g class="key"')]
+    red_paths = re.findall(r'<path[^>]*stroke="#d81b1b"', svg)
+    assert red_paths and len(re.findall(r'<path[^>]*stroke="#d81b1b"', after)) == len(red_paths)
+    assert "#d81b1b" not in before
+    assert "href=" not in svg and "url(http" not in svg
+
+
+def test_regions_named_in_index() -> None:
+    """Every top-view index row carries ``regions_named``, one ``[area_mm2,
+    [names]]`` pair per changed region in drawing order, whose distinct names
+    are the row's ``features``; a no-shape row's list is empty. (B2 brings
+    the section rows into the same layout.)"""
+    rows = {(r["file"], r["name"]): r for r in load_catalog()}
+    for entry in json.loads(INDEX.read_text(encoding="utf-8")):
+        row = rows[(entry["file"], entry["name"])]
+        view = row["diagram"]["view"]
+        if view not in ("top", "none") and "regions_named" not in entry:
+            continue
+        assert "regions_named" in entry, f"{entry['file']}/{entry['name']}: no regions_named"
+        named = entry["regions_named"]
+        assert isinstance(named, list), entry["name"]
+        if view == "none":
+            assert named == [], entry["name"]
+            continue
+        assert len(named) == entry["regions"], entry["name"]
+        for item in named:
+            assert isinstance(item, list) and len(item) == 2, entry["name"]
+            area, names = item
+            assert isinstance(area, (int, float)) and area > 0, entry["name"]
+            assert isinstance(names, list) and names and all(isinstance(n, str) for n in names), entry["name"]
+        distinct = sorted({n for _area, names in named for n in names})
+        assert distinct == sorted(entry["features"]), (entry["name"], distinct, entry["features"])
 
 
 @pytest.mark.requires_openscad

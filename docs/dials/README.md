@@ -26,7 +26,7 @@ Before: 25.5. After: 40. Moves: body edge, seat, wall notch, wing openings, zip-
 
 ![Widens or narrows the pocket, its seat and the wall notch at the plug end, and moves the zip-tie holes and wing openings with them.](one-sided/measure_plug_width_prong_end.svg)
 
-Before: 25. After: 32. Moves: seat, wall notch, wing openings, zip-tie holes.
+Before: 25. After: 32. Moves: body edge, seat, wall notch, wing openings, zip-tie holes.
 
 `measure_plug_width_cord_end`: Plug width at the cord end
 
@@ -76,13 +76,13 @@ Before: Medium. After: Large. Moves: body edge, finger holes, pocket, wing openi
 
 ![Widens both finger holes, spaces them farther apart and pushes them and the body up to keep the walls printable.](one-sided/measure_finger_width.svg)
 
-Before: 20. After: 26. Context: `size` = Measure my hand. Moves: finger holes, pocket, wall notch, wing openings.
+Before: 20. After: 26. Context: `size` = Measure my hand. Moves: body edge, finger holes, pocket, wall notch, wing openings.
 
 `measure_hand_width`: Hand width
 
 ![Widens the whole body outline and thickens the slab in step with the hand.](one-sided/measure_hand_width.svg)
 
-Before: 85. After: 100. Context: `size` = Measure my hand. Moves: wing openings.
+Before: 85. After: 100. Context: `size` = Measure my hand. Moves: body edge.
 
 ### Step 3 - Attachment
 
@@ -178,7 +178,7 @@ This dial changes no shape. Changes no shape: it only sets the number of segment
 
 ![Swaps every Custom slider for the Medium reference values for one render, so the whole tool snaps back to the Medium shape.](one-sided/reset_custom_to_medium.svg)
 
-Before: false. After: true. Context: `size` = Custom. Moves: finger holes, wall notch, wing openings, zip-tie holes.
+Before: false. After: true. Context: `size` = Custom. Moves: body edge, finger holes, wing openings, zip-tie holes.
 
 `custom_enable_auto_fit`: Auto-fit
 
