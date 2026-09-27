@@ -168,16 +168,13 @@ def test_pair_svg_two_panels() -> None:
 
 
 def test_regions_named_in_index() -> None:
-    """Every top-view index row carries ``regions_named``, one ``[area_mm2,
-    [names]]`` pair per changed region in drawing order, whose distinct names
-    are the row's ``features``; a no-shape row's list is empty. (B2 brings
-    the section rows into the same layout.)"""
+    """Every index row carries ``regions_named``, one ``[area_mm2, [names]]``
+    pair per changed region in drawing order, whose distinct names are the
+    row's ``features``; a no-shape row's list is empty."""
     rows = {(r["file"], r["name"]): r for r in load_catalog()}
     for entry in json.loads(INDEX.read_text(encoding="utf-8")):
         row = rows[(entry["file"], entry["name"])]
         view = row["diagram"]["view"]
-        if view not in ("top", "none") and "regions_named" not in entry:
-            continue
         assert "regions_named" in entry, f"{entry['file']}/{entry['name']}: no regions_named"
         named = entry["regions_named"]
         assert isinstance(named, list), entry["name"]
@@ -192,6 +189,47 @@ def test_regions_named_in_index() -> None:
             assert isinstance(names, list) and names and all(isinstance(n, str) for n in names), entry["name"]
         distinct = sorted({n for _area, names in named for n in names})
         assert distinct == sorted(entry["features"]), (entry["name"], distinct, entry["features"])
+
+
+def test_dimension_callout_endpoints() -> None:
+    """A dimension callout on the plug's width at the prong end: the anchor
+    gives the plug's top corners, and the picture draws a dimension group
+    whose line spans them, labelled with the dial's value."""
+    from scripts.generate_dial_diagrams import Outline, anchor_dimension
+
+    body = Polygon([(-20, 0), (20, 0), (20, 60), (-20, 60)])
+    recess = Polygon([(-10, 30), (10, 30), (10, 60), (-10, 60)])
+    after = Outline(solids=[body], recess=[recess])
+    plug = Polygon([(-10, 63), (10, 63), (10, 33), (-10, 33)])
+    dim = anchor_dimension("plug_width_prong_end", "one-sided", {}, after, plug, "top", 0.0, 20, "mm")
+    assert dim is not None and dim["kind"] == "h"
+    assert abs(dim["x0"] - (-10)) < 1e-6 and abs(dim["x1"] - 10) < 1e-6
+    assert abs(dim["y_obj"] - 63) < 1e-6 and dim["y_dim"] > 63
+    assert dim["label"] == "20 mm"
+    svg = compose_pair_svg(
+        before_outline=Outline(solids=[body], recess=[recess]),
+        after_outline=after,
+        before_plug=plug,
+        after_plug=plug,
+        title="Plug width at the prong end",
+        changes="Widens the pocket.",
+        name="measure_plug_width_prong_end",
+        before_value=18,
+        after_value=20,
+        unit="mm",
+        context={},
+        style="fill",
+        crop=None,
+        regions_named=[],
+        dimension=dim,
+    )
+    assert svg.count('<g class="dimension"') == 1
+    group = svg[svg.index('<g class="dimension"'):]
+    group = group[:group.index("</g>")]
+    assert ">20 mm<" in group
+    lines = re.findall(r'<line x1="([\d.-]+)" y1="([\d.-]+)" x2="([\d.-]+)" y2="([\d.-]+)"', group)
+    spans = [abs(float(x2) - float(x1)) for x1, y1, x2, y2 in lines if abs(float(y1) - float(y2)) < 1e-6]
+    assert any(abs(s - 20) < 0.05 for s in spans), spans
 
 
 @pytest.mark.requires_openscad

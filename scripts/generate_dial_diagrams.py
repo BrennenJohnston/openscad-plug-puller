@@ -983,7 +983,7 @@ def compose_none_svg(note: str, title: str = "", name: str = "") -> str:
 # The pair picture (R3, FD-48): before | arrow | after, the moved edges in red
 # ---------------------------------------------------------------------------
 
-PAIR_VIEWS = ("top",)  # B2 brings the section views into the same layout
+PAIR_VIEWS = ("top",) + SECTION_VIEWS
 # Rows drawn as ONE panel of their default state with no marks: a layout switch
 # moves everything, so "what moved" says nothing (the two-sided print layout
 # puts both plates side by side; its picture is what you print).
@@ -1012,7 +1012,6 @@ REMOVED_SUFFIX = " (removed)"
 DOTS_PER_NUMBER = 6  # a number shared by more regions than this shows its dot on the leadered region only
 DOT_W = 0.6  # the red dotted stroke; round caps make 0.6 mm dots at a 1.1 mm pitch
 DOT_DASH = "0.01,1.1"
-DIM_HEADROOM = 7.0  # mm added to the panel box on a dimension callout's side
 DIM_EXT_W = 0.25
 DIM_LINE_W = 0.3
 DIM_ARROW = 1.5
@@ -1189,35 +1188,213 @@ def _dim_arrow(x: float, y: float, direction: float, color: str) -> str:
     return f'<polygon points="{x:.2f},{y:.2f} {bx:.2f},{y - DIM_ARROW * 0.35:.2f} {bx:.2f},{y + DIM_ARROW * 0.35:.2f}" fill="{color}"/>'
 
 
-def draw_dimension(frame: _Frame, dim: Dict[str, Any]) -> List[str]:
-    """A horizontal dimension callout in the after panel, the outline sheets'
-    conventions: extension lines from the object's edge (``y_obj``), a line at
-    ``y_dim`` between ``x0`` and ``x1`` with two arrow heads, the ``label``
-    above it. The white halo is a separate text under the red one (an SVG
+def _dim_arrow_v(x: float, y: float, direction: float, color: str) -> str:
+    """A filled arrow head at (x, y) pointing along +y (direction 1, down the page) or -y."""
+    by = y - direction * DIM_ARROW * 1.6
+    return f'<polygon points="{x:.2f},{y:.2f} {x - DIM_ARROW * 0.35:.2f},{by:.2f} {x + DIM_ARROW * 0.35:.2f},{by:.2f}" fill="{color}"/>'
+
+
+def _dim_label(x: float, y: float, label: str, anchor: str, color: str) -> List[str]:
+    """The label with a white halo drawn as a separate text under it (an SVG
     rasterizer may ignore paint-order)."""
+    text = _esc(label)
+    return [
+        f'<text x="{x:.2f}" y="{y:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
+        f'text-anchor="{anchor}" fill="white" stroke="white" stroke-width="0.8" stroke-linejoin="round">{text}</text>',
+        f'<text x="{x:.2f}" y="{y:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
+        f'text-anchor="{anchor}" fill="{color}">{text}</text>',
+    ]
+
+
+def draw_dimension(frame: _Frame, dim: Dict[str, Any]) -> List[str]:
+    """A dimension callout in the after panel with the outline sheets'
+    conventions. Kind "h": extension lines from the object's edge ``y_obj``,
+    a line at ``y_dim`` between ``x0`` and ``x1`` with two arrow heads, the
+    label above it. Kind "v": the same turned upright (``x_obj``, ``x_dim``,
+    ``y0``, ``y1``), the label beside the line on the side with room. Kind
+    "dia": a line across the circle (``cx``, ``cy``, ``r``) with the arrow
+    heads at its edge, the label above."""
     c = COLOR_TRACE
-    (xa, ya), (xb, _yb) = _pt(frame, dim["x0"], dim["y_dim"]), _pt(frame, dim["x1"], dim["y_dim"])
-    (_xo, yo) = _pt(frame, dim["x0"], dim["y_obj"])
-    over = 1.0 if ya < yo else -1.0
     out = ['<g class="dimension">']
-    for x in (xa, xb):
-        out.append(f'<line x1="{x:.2f}" y1="{yo:.2f}" x2="{x:.2f}" y2="{ya - over:.2f}" stroke="{c}" stroke-width="{DIM_EXT_W}"/>')
-    if (xb - xa) < 11.0:
-        out.append(f'<line x1="{xa - 5:.2f}" y1="{ya:.2f}" x2="{xb + 5:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
-        out.append(_dim_arrow(xa, ya, -1.0, c))
-        out.append(_dim_arrow(xb, ya, 1.0, c))
+    kind = dim["kind"]
+    if kind == "h":
+        (xa, ya), (xb, _yb) = _pt(frame, dim["x0"], dim["y_dim"]), _pt(frame, dim["x1"], dim["y_dim"])
+        (_xo, yo) = _pt(frame, dim["x0"], dim["y_obj"])
+        over = 1.0 if ya < yo else -1.0
+        for x in (xa, xb):
+            out.append(f'<line x1="{x:.2f}" y1="{yo:.2f}" x2="{x:.2f}" y2="{ya - over:.2f}" stroke="{c}" stroke-width="{DIM_EXT_W}"/>')
+        if (xb - xa) < 11.0:
+            out.append(f'<line x1="{xa - 5:.2f}" y1="{ya:.2f}" x2="{xb + 5:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow(xa, ya, -1.0, c))
+            out.append(_dim_arrow(xb, ya, 1.0, c))
+        else:
+            out.append(f'<line x1="{xa:.2f}" y1="{ya:.2f}" x2="{xb:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow(xa, ya, 1.0, c))
+            out.append(_dim_arrow(xb, ya, -1.0, c))
+        out.extend(_dim_label((xa + xb) / 2, ya - 1.0, dim["label"], "middle", c))
+    elif kind == "v":
+        (xd, ya) = _pt(frame, dim["x_dim"], max(dim["y0"], dim["y1"]))
+        (_x, yb) = _pt(frame, dim["x_dim"], min(dim["y0"], dim["y1"]))
+        (xo, _y) = _pt(frame, dim["x_obj"], dim["y0"])
+        over = 1.0 if xd < xo else -1.0
+        for y in (ya, yb):
+            out.append(f'<line x1="{xo:.2f}" y1="{y:.2f}" x2="{xd - over:.2f}" y2="{y:.2f}" stroke="{c}" stroke-width="{DIM_EXT_W}"/>')
+        if (yb - ya) < 11.0:
+            out.append(f'<line x1="{xd:.2f}" y1="{ya - 5:.2f}" x2="{xd:.2f}" y2="{yb + 5:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow_v(xd, ya, -1.0, c))
+            out.append(_dim_arrow_v(xd, yb, 1.0, c))
+        else:
+            out.append(f'<line x1="{xd:.2f}" y1="{ya:.2f}" x2="{xd:.2f}" y2="{yb:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+            out.append(_dim_arrow_v(xd, ya, 1.0, c))
+            out.append(_dim_arrow_v(xd, yb, -1.0, c))
+        room_right = (frame.box.bounds[2] - frame.x0) - xd
+        if room_right >= CHAR_W * DIM_TEXT * len(dim["label"]) + 2.0:
+            out.extend(_dim_label(xd + 1.4, (ya + yb) / 2 + 1.0, dim["label"], "start", c))
+        else:
+            out.extend(_dim_label(xd - 1.4, (ya + yb) / 2 + 1.0, dim["label"], "end", c))
     else:
-        out.append(f'<line x1="{xa:.2f}" y1="{ya:.2f}" x2="{xb:.2f}" y2="{ya:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
-        out.append(_dim_arrow(xa, ya, 1.0, c))
-        out.append(_dim_arrow(xb, ya, -1.0, c))
-    tx, ty = (xa + xb) / 2, ya - 1.0
-    label = _esc(dim["label"])
-    out.append(f'<text x="{tx:.2f}" y="{ty:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
-               f'text-anchor="middle" fill="white" stroke="white" stroke-width="0.8" stroke-linejoin="round">{label}</text>')
-    out.append(f'<text x="{tx:.2f}" y="{ty:.2f}" font-family="{FONT}" font-size="{DIM_TEXT}" font-weight="bold" '
-               f'text-anchor="middle" fill="{c}">{label}</text>')
+        (cx, cy) = _pt(frame, dim["cx"], dim["cy"])
+        r = dim["r"]
+        out.append(f'<line x1="{cx - r:.2f}" y1="{cy:.2f}" x2="{cx + r:.2f}" y2="{cy:.2f}" stroke="{c}" stroke-width="{DIM_LINE_W}"/>')
+        out.append(_dim_arrow(cx - r, cy, -1.0, c))
+        out.append(_dim_arrow(cx + r, cy, 1.0, c))
+        out.extend(_dim_label(cx, cy - 1.0, dim["label"], "middle", c))
     out.append("</g>")
     return out
+
+
+
+# ---------------------------------------------------------------------------
+# The dimension callout: one red dimension line at the feature the dial sets
+# ---------------------------------------------------------------------------
+#
+# A catalog row's ``diagram.dimension`` names an anchor; the endpoints are
+# read from the AFTER state's outline, plug and numbers (never estimated by
+# eye). The label is the dial's value with its unit.
+
+DIM_OFFSET = 4.0  # mm from the object's edge to the dimension line
+DIM_LABEL_ROOM = 14.0  # mm of room a vertical dimension's label needs beside its line
+
+
+def _probe_gap(filled, y: float, near_x: float) -> Optional[Tuple[float, float]]:
+    """The gap in ``filled`` along the horizontal line at ``y`` that contains
+    or is nearest to ``near_x``: (left edge, right edge)."""
+    x0, _y0, x1, _y1 = filled.bounds
+    cut = LineString([(x0 - 1.0, y), (x1 + 1.0, y)]).intersection(filled)
+    spans = sorted((g.bounds[0], g.bounds[2]) for g in shapely.get_parts(cut) if not g.is_empty)
+    gaps = [(a[1], b[0]) for a, b in zip(spans, spans[1:]) if b[0] > a[1]]
+    if not gaps:
+        return None
+    return min(gaps, key=lambda g: 0.0 if g[0] <= near_x <= g[1] else min(abs(g[0] - near_x), abs(g[1] - near_x)))
+
+
+def _plug_edges(plug: Polygon) -> Tuple[float, float, float, float]:
+    x0, y0, x1, y1 = plug.bounds
+    return x0, y0, x1, y1
+
+
+def _label(value: Any, unit: Optional[str]) -> str:
+    return f"{_fmt_value(value)} {unit}" if unit else _fmt_value(value)
+
+
+def anchor_dimension(anchor: str, file_key: str, params: Dict[str, Any], outline: Outline,
+                     plug: Optional[Polygon], view: str, at: float, value: Any,
+                     unit: Optional[str]) -> Optional[Dict[str, Any]]:
+    """The dimension callout for ``anchor`` in model mm, or None when the
+    geometry cannot give it: kind "h" {x0, x1, y_obj, y_dim}, kind "v"
+    {y0, y1, x_obj, x_dim}, kind "dia" {cx, cy, r}; every kind has "label"."""
+    label = _label(value, unit)
+    filled = _union(outline.solids)
+    bx0, by0, bx1, by1 = filled.bounds
+    if anchor in ("plug_width_prong_end", "plug_width_cord_end"):
+        if plug is None:
+            return None
+        pts = list(plug.exterior.coords)[:-1]
+        edge_y = max(y for _x, y in pts) if anchor == "plug_width_prong_end" else min(y for _x, y in pts)
+        xs = sorted(x for x, y in pts if abs(y - edge_y) < 1e-6)
+        if len(xs) < 2:
+            return None
+        above = anchor == "plug_width_prong_end"
+        return {"kind": "h", "x0": xs[0], "x1": xs[-1], "y_obj": edge_y,
+                "y_dim": edge_y + (DIM_OFFSET if above else -DIM_OFFSET), "label": label}
+    if anchor == "pocket_length":
+        if not outline.recess:
+            return None
+        rx0, ry0, rx1, _ry1 = _union(outline.recess).bounds
+        return {"kind": "v", "y0": ry0, "y1": by1, "x_obj": rx1, "x_dim": rx1 + DIM_OFFSET + 1.0, "label": label}
+    if anchor in ("plug_thickness_prong_end", "plug_thickness_cord_end"):
+        if plug is None or view != "section-x":
+            return None
+        pts = list(plug.exterior.coords)[:-1]
+        floor = min(y for _x, y in pts)
+        u_plate, u_cord = min(x for x, _y in pts), max(x for x, _y in pts)
+        u_edge = u_plate if anchor == "plug_thickness_prong_end" else u_cord
+        top = max(y for x, y in pts if abs(x - u_edge) < 1e-6)
+        x_dim = u_edge - DIM_OFFSET if anchor == "plug_thickness_prong_end" else u_edge + DIM_OFFSET
+        return {"kind": "v", "y0": floor, "y1": top, "x_obj": u_edge, "x_dim": x_dim, "label": label}
+    if anchor == "hook_slot":
+        d = _one_sided_numbers(params)
+        hook_x = _hook_box(d, params).centroid.x
+        gap = _probe_gap(filled, by0 + 3.0, hook_x)  # 1.5 mm up the probe hits the hook's own foot
+        if gap is None:
+            return None
+        return {"kind": "h", "x0": gap[0], "x1": gap[1], "y_obj": by0, "y_dim": by0 - DIM_OFFSET, "label": label}
+    if anchor == "finger_hole":
+        circles = _circles(outline.solids)
+        if not circles:
+            return None
+        big = max(c.d for c in circles)
+        fingers = [c for c in circles if c.d >= big - 3.0]
+        c = max(fingers, key=lambda c: c.cx)
+        return {"kind": "dia", "cx": c.cx, "cy": c.cy, "r": c.d / 2, "label": label}
+    if anchor == "body_width":
+        best_y, best_w = by0, 0.0
+        y = by0 + 0.5
+        while y < by1:
+            cut = LineString([(bx0 - 1.0, y), (bx1 + 1.0, y)]).intersection(filled)
+            if not cut.is_empty:
+                w = cut.bounds[2] - cut.bounds[0]
+                if w > best_w:
+                    best_y, best_w = y, w
+            y += 1.0
+        return {"kind": "h", "x0": bx0, "x1": bx1, "y_obj": best_y, "y_dim": by0 - DIM_OFFSET, "label": label}
+    if anchor == "plug_length":
+        if plug is None:
+            return None
+        px0, py0, px1, py1 = _plug_edges(plug)
+        return {"kind": "v", "y0": py0, "y1": py1, "x_obj": px1, "x_dim": bx1 + DIM_OFFSET, "label": label}
+    if anchor in ("gap_tips", "gap_cord_end"):
+        m = effective_measurements(file_key, params)
+        y = by1 - 2.0 if anchor == "gap_tips" else by1 - m["measure_plug_length"]
+        gap = _probe_gap(filled, y, 0.0)
+        if gap is None:
+            return None
+        y_dim = by1 + DIM_OFFSET + 1.0 if anchor == "gap_tips" else y - DIM_OFFSET
+        return {"kind": "h", "x0": gap[0], "x1": gap[1], "y_obj": y, "y_dim": y_dim, "label": label}
+    if anchor == "channel":
+        gap = _probe_gap(filled, by0 + 3.0, 0.0)
+        if gap is None:
+            return None
+        return {"kind": "h", "x0": gap[0], "x1": gap[1], "y_obj": by0, "y_dim": by0 - DIM_OFFSET, "label": label}
+    if anchor == "slot_length":
+        slots = _hole_slots(outline.solids, 20.0)
+        if not slots:
+            return None
+        s = max(slots, key=lambda q: q.centroid.x)
+        sx0, sy0, sx1, sy1 = s.bounds
+        return {"kind": "v", "y0": sy0, "y1": sy1, "x_obj": sx1, "x_dim": sx1 + DIM_OFFSET, "label": label}
+    return None
+
+
+def _dimension_extent(dim: Dict[str, Any]) -> Tuple[float, float, float, float]:
+    """The model-space box the callout and its label need."""
+    if dim["kind"] == "h":
+        lo, hi = sorted((dim["y_obj"], dim["y_dim"]))
+        return dim["x0"] - 6.0, lo - 1.0, dim["x1"] + 6.0, hi + 5.0
+    if dim["kind"] == "v":
+        lo, hi = sorted((dim["x_obj"], dim["x_dim"]))
+        return lo - DIM_LABEL_ROOM, dim["y0"] - 6.0, hi + DIM_LABEL_ROOM, dim["y1"] + 6.0
+    return dim["cx"] - dim["r"] - 2.0, dim["cy"] - 2.0, dim["cx"] + dim["r"] + 2.0, dim["cy"] + 5.0
 
 
 def _compose_single_panel(outline: Outline, plug: Optional[Polygon], title: str, changes: str,
@@ -1297,11 +1474,9 @@ def compose_pair_svg(
         geoms += [g for g in (before_plug, after_plug) if g is not None]
         bx0, by0, bx1, by1 = shapely.union_all(geoms).bounds
         x0, y0, x1, y1 = bx0 - MARGIN, by0 - MARGIN, bx1 + MARGIN, by1 + MARGIN
-    if dimension:
-        if dimension.get("side", "above") == "above":
-            y1 += DIM_HEADROOM
-        else:
-            y0 -= DIM_HEADROOM
+    if dimension and not crop:
+        ex0, ey0, ex1, ey1 = _dimension_extent(dimension)
+        x0, y0, x1, y1 = min(x0, ex0), min(y0, ey0), max(x1, ex1), max(y1, ey1)
     width, height = x1 - x0, y1 - y0
     plan = plan or plan_callouts(b_out, a_out, regions_named, shapely.box(x0, y0, x1, y1) if crop else None)
 
@@ -1468,7 +1643,7 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     tags: List[str] = []
     outlines = []
     stls: List[Path] = []
-    body = None
+    bodies = []
     for params in (base, after_params):
         defines = defines_for(file_key, row["name"], params, defaults)
         stl, log, _hit = renderer.render(file_key, defines)
@@ -1479,15 +1654,22 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
         else:
             outline, body = section_view(stl, view, at)
             outlines.append(outline)
+            bodies.append(body)
     b_out, a_out = outlines
     context = dict(d.get("context") or {})
     if view == "top":
         plug = plug_polygon(file_key, after_params, a_out)
         before_plug = plug_polygon(file_key, base, b_out)
     else:
-        plug = section_plug_polygon(file_key, after_params, view, at, body)
-        before_plug = None
+        plug = section_plug_polygon(file_key, after_params, view, at, bodies[1])
+        before_plug = section_plug_polygon(file_key, base, view, at, bodies[0])
         context[view] = at  # the cut plane, shown with the context
+    dimension = None
+    if d.get("dimension"):
+        dimension = anchor_dimension(d["dimension"]["at"], file_key, after_params, a_out, plug, view, at,
+                                     d["after"], unit)
+        if dimension is None:
+            logger.warning("%s %s: the anchor %s gave no dimension callout", file_key, row["name"], d["dimension"]["at"])
     regions, area = outline_regions(b_out, a_out)
     if view == "top":
         feats = footprints(file_key, base, b_out, a_out, after_params)
@@ -1523,6 +1705,7 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
             section=(view, at) if view in SECTION_VIEWS else None,
             plan=plan,
             single_panel=single,
+            dimension=dimension,
         )
     else:
         svg = compose_svg(
@@ -1544,7 +1727,10 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     path = out_dir / svg_relpath(row)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
-    return index_row(row, len(regions), area, tags, features, named, callouts)
+    entry = index_row(row, len(regions), area, tags, features, named, callouts)
+    entry["dimension"] = ({"kind": dimension["kind"], "at": d["dimension"]["at"], "label": dimension["label"]}
+                          if dimension else None)
+    return entry
 
 
 def run_rows(

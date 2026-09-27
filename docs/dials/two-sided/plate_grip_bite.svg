@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="64.00mm" height="41.57mm" viewBox="0 0 64.00 41.57" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="157.32mm" height="24.30mm" viewBox="0 0 157.32 24.30" role="img">
 <title>Grip bite</title>
 <desc>Squeezes the plug harder or softer, because the arms close in by this much per side against the plug's width. Before: -1. After: -2.</desc>
-<rect width="64.00" height="41.57" fill="white"/>
-<text x="32.00" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">plate_grip_bite</text>
-<text x="32.00" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">-1 → -2</text>
-<text x="32.00" y="13.25" font-family="Helvetica, Arial, sans-serif" font-size="2.75" text-anchor="middle" fill="#000">(plug_sides: Flat sides, section-y: 45)</text>
-<path d="M 22.00 19.93 L 42.00 19.93 L 42.00 23.93 L 22.00 23.93 L 22.00 19.93 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
-<path d="M 9.67 22.74 L 9.71 19.94 L 22.35 19.97 L 22.35 23.65 L 21.88 23.90 L 10.75 23.92 L 10.29 23.76 L 10.00 23.54 L 9.75 23.14 L 9.67 22.74 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 41.65 19.99 L 41.70 19.93 L 54.29 19.94 L 54.29 23.02 L 54.15 23.35 L 53.91 23.63 L 53.49 23.86 L 53.13 23.93 L 42.12 23.90 L 41.65 23.65 L 41.65 19.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 10.45 19.93 L 10.49 23.03 L 10.71 23.45 L 10.97 23.70 L 11.30 23.86 L 11.67 23.93 L 10.87 23.93 L 10.39 23.82 L 10.00 23.54 L 9.71 23.03 L 9.67 19.93 L 10.45 19.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<path d="M 21.65 23.93 L 22.35 23.66 L 22.35 19.93 L 23.35 19.93 L 23.35 23.67 L 22.77 23.92 L 21.65 23.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<path d="M 41.65 19.93 L 41.65 23.66 L 42.00 23.86 L 42.35 23.93 L 41.23 23.92 L 40.65 23.67 L 40.65 19.93 L 41.65 19.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<path d="M 52.33 23.93 L 52.81 23.82 L 53.12 23.62 L 53.36 23.35 L 53.51 23.03 L 53.55 19.93 L 54.33 19.93 L 54.33 22.79 L 54.21 23.25 L 53.91 23.62 L 53.49 23.86 L 52.33 23.93 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<text x="32.00" y="33.53" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
-<text x="32.00" y="36.91" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
-<text x="32.00" y="40.29" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+<rect width="157.32" height="24.30" fill="white"/>
+<g class="panel" id="before">
+<path d="M 18.33 6.00 L 38.33 6.00 L 38.33 10.00 L 18.33 10.00 L 18.33 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 6.00 8.80 L 6.04 6.00 L 18.68 6.04 L 18.68 9.71 L 18.21 9.96 L 7.08 9.99 L 6.62 9.83 L 6.33 9.60 L 6.08 9.21 L 6.00 8.80 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 37.98 6.05 L 38.03 6.00 L 50.62 6.00 L 50.62 9.09 L 50.48 9.41 L 50.24 9.69 L 49.82 9.93 L 49.46 10.00 L 38.45 9.96 L 37.98 9.71 L 37.98 6.05 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g class="arrow">
+<line x1="58.16" y1="8.00" x2="62.66" y2="8.00" stroke="#000" stroke-width="0.6"/><polygon points="65.16,8.00 62.66,6.88 62.66,9.12" fill="#000"/>
+<text x="61.66" y="20.30" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">-1 → -2 mm</text>
+<text x="61.66" y="23.70" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">section at y = 45 mm</text>
+</g>
+<g class="panel" id="after" transform="translate(66.66 0)">
+<path d="M 18.33 6.00 L 38.33 6.00 L 38.33 10.00 L 18.33 10.00 L 18.33 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 6.79 8.81 L 6.82 6.00 L 19.68 6.04 L 19.68 9.71 L 19.21 9.96 L 7.88 9.99 L 7.41 9.83 L 7.11 9.60 L 6.86 9.21 L 6.79 8.81 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 36.98 6.05 L 37.03 6.00 L 49.84 6.00 L 49.84 9.09 L 49.70 9.41 L 49.45 9.69 L 49.03 9.93 L 48.66 10.00 L 37.45 9.96 L 36.98 9.71 L 36.98 6.05 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 6.79 8.81 L 6.78 6.20" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 18.87 6.00 L 19.63 6.00 L 19.66 6.01 L 19.68 6.04 L 19.68 9.71 L 19.66 9.75 L 19.54 9.83 L 19.33 9.93 L 19.21 9.96 L 18.98 10.00 L 18.65 10.00" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 7.36 9.80 L 7.21 9.69 L 7.11 9.60 L 6.97 9.42 L 6.86 9.21 L 6.80 8.98 L 6.79 8.81" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 36.98 6.05 L 37.00 6.01 L 37.03 6.00 L 37.79 6.00" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 49.88 6.20 L 49.88 8.78 L 49.84 9.09 L 49.80 9.21 L 49.70 9.41 L 49.62 9.52 L 49.45 9.69 L 49.30 9.80" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 38.01 10.00 L 37.68 10.00 L 37.45 9.96 L 37.33 9.93 L 37.12 9.83 L 37.00 9.75 L 36.98 9.71 L 36.98 6.05" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<circle cx="7.36" cy="9.80" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="7.36" y="10.59" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+<circle cx="19.68" cy="9.71" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="19.68" y="10.50" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
+<circle cx="38.01" cy="10.00" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="38.01" y="10.79" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
+<circle cx="49.88" cy="6.20" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="49.88" y="6.99" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+</g>
+<g class="key">
+<text x="126.32" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 arms</text>
+<text x="126.32" y="8.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">2 teeth / arms</text>
+</g>
+<g class="leaders">
+<line x1="117.79" y1="5.84" x2="125.32" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>
+<line x1="105.97" y1="9.85" x2="125.32" y2="7.69" stroke="#d81b1b" stroke-width="0.3"/>
+</g>
 </svg>

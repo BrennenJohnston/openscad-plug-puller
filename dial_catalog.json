@@ -14,7 +14,8 @@
       "after": "Standard 3-prong plug - NEMA 5-15",
       "context": {},
       "plug": "Standard 3-prong plug - NEMA 5-15",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -33,7 +34,11 @@
       "after": 40,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "v",
+        "at": "pocket_length"
+      }
     },
     "note": null
   },
@@ -52,7 +57,11 @@
       "after": 32,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "h",
+        "at": "plug_width_prong_end"
+      }
     },
     "note": null
   },
@@ -71,7 +80,11 @@
       "after": 15,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "h",
+        "at": "plug_width_cord_end"
+      }
     },
     "note": null
   },
@@ -91,7 +104,11 @@
       "context": {},
       "plug": "default",
       "crop": null,
-      "at": 0
+      "at": 0,
+      "dimension": {
+        "kind": "v",
+        "at": "plug_thickness_prong_end"
+      }
     },
     "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller."
   },
@@ -111,7 +128,11 @@
       "context": {},
       "plug": "default",
       "crop": null,
-      "at": 0
+      "at": 0,
+      "dimension": {
+        "kind": "v",
+        "at": "plug_thickness_cord_end"
+      }
     },
     "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller."
   },
@@ -130,7 +151,11 @@
       "after": 8,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "h",
+        "at": "hook_slot"
+      }
     },
     "note": null
   },
@@ -154,7 +179,8 @@
         48,
         22,
         68
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -173,7 +199,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: the see-through plug is a preview aid and is never exported."
   },
@@ -192,7 +219,8 @@
       "after": "Large",
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -213,7 +241,11 @@
         "size": "Measure my hand"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "dia",
+        "at": "finger_hole"
+      }
     },
     "note": "Only acts when size is Measure my hand."
   },
@@ -234,7 +266,11 @@
         "size": "Measure my hand"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "h",
+        "at": "body_width"
+      }
     },
     "note": "Only acts when size is Measure my hand."
   },
@@ -253,7 +289,8 @@
       "after": "Zip ties",
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -272,7 +309,8 @@
       "after": "Classic slot",
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -291,7 +329,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: it only sets the width the W-14 check compares the wing opening against."
   },
@@ -315,7 +354,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -339,7 +379,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -363,7 +404,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -389,7 +431,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when zip_placement is Manual."
   },
@@ -415,7 +458,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when zip_placement is Manual."
   },
@@ -442,7 +486,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when zip_placement is Manual and zip_row_count is 3."
   },
@@ -466,7 +511,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -485,7 +531,8 @@
       "after": "Manual",
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -507,7 +554,8 @@
         "velcro_placement": "Manual"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when velcro_placement is Manual."
   },
@@ -526,7 +574,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: it only sets the number of segments in every circle and arc."
   },
@@ -547,7 +596,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -566,7 +616,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape at the Custom defaults: it only clamps sliders that leave their safe range, and every clamp is reported in the console."
   },
@@ -587,7 +638,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -608,7 +660,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -629,7 +682,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -650,7 +704,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -671,7 +726,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -692,7 +748,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -714,7 +771,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 35
+      "at": 35,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -735,7 +793,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -761,7 +820,8 @@
         36,
         25,
         68
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -782,7 +842,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -803,7 +864,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -822,7 +884,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: the recess is a rounded-nose shape whose width at the plug end is the pocket width and whose walls follow the side taper, so this reference point cancels out; measured with straight and with tapered walls."
   },
@@ -844,7 +907,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 0
+      "at": 0,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -866,7 +930,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 0
+      "at": 0,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -887,7 +952,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -908,7 +974,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -929,7 +996,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -950,7 +1018,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -971,7 +1040,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -997,7 +1067,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1023,7 +1094,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1049,7 +1121,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1075,7 +1148,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1101,7 +1175,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1120,7 +1195,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
   },
@@ -1141,7 +1217,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom; the J-hook cord catch is drawn without this dial, and only the auto-fit clamp on the finger holes reads it."
   },
@@ -1167,7 +1244,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1193,7 +1271,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1214,7 +1293,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0."
   },
@@ -1240,7 +1320,8 @@
         48,
         22,
         68
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1266,7 +1347,8 @@
         48,
         22,
         68
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1292,7 +1374,8 @@
         48,
         22,
         68
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1318,7 +1401,8 @@
         48,
         22,
         68
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1344,7 +1428,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1370,7 +1455,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1389,7 +1475,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape of its own: the zip-tie columns sit zip_edge_offset inside the pocket wall; this dial only feeds the auto-fit finger keep-out, which trimmed the row spacing by 0.05 mm at the Custom defaults."
   },
@@ -1415,7 +1502,8 @@
         24,
         26,
         66
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1442,7 +1530,8 @@
         -30,
         10
       ],
-      "at": 10.4
+      "at": 10.4,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1464,7 +1553,8 @@
         "velcro_style": "Classic slot"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom and velcro_style is Classic slot."
   },
@@ -1486,7 +1576,8 @@
         "velcro_style": "Classic slot"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom and velcro_style is Classic slot."
   },
@@ -1508,7 +1599,8 @@
         "velcro_style": "Classic slot"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom and velcro_style is Classic slot."
   },
@@ -1530,7 +1622,8 @@
         "velcro_style": "Classic slot"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom and velcro_style is Classic slot."
   },
@@ -1552,7 +1645,8 @@
         "velcro_style": "Classic slot"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom and velcro_style is Classic slot."
   },
@@ -1573,7 +1667,8 @@
         "size": "Custom"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1595,7 +1690,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 35
+      "at": 35,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1617,7 +1713,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 35
+      "at": 35,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1639,7 +1736,8 @@
         "velcro_style": "Classic slot"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when size is Custom and velcro_style is Classic slot."
   },
@@ -1661,7 +1759,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 46
+      "at": 46,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1683,7 +1782,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 19.8
+      "at": 19.8,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1709,7 +1809,8 @@
         -3,
         14,
         18
-      ]
+      ],
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1728,7 +1829,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: the J-hook cord catch is drawn without this dial; it only appears in the Cutouts Only 2D debug overlay."
   },
@@ -1750,7 +1852,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 4.5
+      "at": 4.5,
+      "dimension": null
     },
     "note": "Only acts when size is Custom."
   },
@@ -1769,7 +1872,8 @@
       "after": "Heavy-duty extension cord - NEMA 5-15",
       "context": {},
       "plug": "Heavy-duty extension cord - NEMA 5-15",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -1788,7 +1892,11 @@
       "after": 40,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "v",
+        "at": "plug_length"
+      }
     },
     "note": null
   },
@@ -1807,7 +1915,11 @@
       "after": 28,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "h",
+        "at": "gap_tips"
+      }
     },
     "note": null
   },
@@ -1826,7 +1938,11 @@
       "after": 12,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "h",
+        "at": "gap_cord_end"
+      }
     },
     "note": null
   },
@@ -1845,7 +1961,11 @@
       "after": 9,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "h",
+        "at": "channel"
+      }
     },
     "note": null
   },
@@ -1865,7 +1985,8 @@
       "context": {},
       "plug": "default",
       "crop": null,
-      "at": 45
+      "at": 45,
+      "dimension": null
     },
     "note": null
   },
@@ -1884,7 +2005,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: the see-through plug is a preview aid and is never exported."
   },
@@ -1903,7 +2025,8 @@
       "after": "Large",
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -1924,7 +2047,11 @@
         "size": "Measure my hand"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": {
+        "kind": "dia",
+        "at": "finger_hole"
+      }
     },
     "note": "Only acts when size is Measure my hand."
   },
@@ -1950,7 +2077,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
   },
@@ -1976,9 +2104,10 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
-    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
+    "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot. At 25 mm the slot leaves too, because the plug is too short for one, so the after picture has no slot and no dimension line."
   },
   {
     "file": "two-sided",
@@ -1995,7 +2124,8 @@
       "after": "One plate",
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -2014,7 +2144,8 @@
       "after": 2,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -2034,7 +2165,8 @@
       "context": {},
       "plug": "default",
       "crop": null,
-      "at": 3
+      "at": 3,
+      "dimension": null
     },
     "note": null
   },
@@ -2056,7 +2188,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 45
+      "at": 45,
+      "dimension": null
     },
     "note": "Only acts when plug_sides is Flat sides or a plug preset is chosen."
   },
@@ -2078,7 +2211,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 45
+      "at": 45,
+      "dimension": null
     },
     "note": "Only acts when plug_sides is Rounded sides."
   },
@@ -2100,7 +2234,8 @@
       },
       "plug": "default",
       "crop": null,
-      "at": 45
+      "at": 45,
+      "dimension": null
     },
     "note": "Only acts when plug_sides is Rounded sides."
   },
@@ -2124,7 +2259,8 @@
         -2,
         16,
         32
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2143,7 +2279,8 @@
       "after": 4,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -2162,7 +2299,8 @@
       "after": 9,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -2181,7 +2319,8 @@
       "after": 6,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -2205,7 +2344,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2229,7 +2369,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2253,7 +2394,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2277,7 +2419,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2301,7 +2444,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2325,7 +2469,8 @@
         40,
         26,
         62
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2349,7 +2494,8 @@
         40,
         26,
         62
-      ]
+      ],
+      "dimension": null
     },
     "note": null
   },
@@ -2369,7 +2515,8 @@
       "context": {},
       "plug": "default",
       "crop": null,
-      "at": 3
+      "at": 3,
+      "dimension": null
     },
     "note": null
   },
@@ -2389,7 +2536,8 @@
       "context": {},
       "plug": "default",
       "crop": null,
-      "at": 3
+      "at": 3,
+      "dimension": null
     },
     "note": null
   },
@@ -2408,7 +2556,8 @@
       "after": 6,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": null
   },
@@ -2429,7 +2578,8 @@
         "measure_plug_length": 40
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Drawn on a 40 mm plug so the default manual positions sit on the arm."
   },
@@ -2451,7 +2601,8 @@
         "plate_zip_placement": "Manual"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
   },
@@ -2473,7 +2624,8 @@
         "plate_zip_placement": "Manual"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
   },
@@ -2495,7 +2647,8 @@
         "plate_zip_placement": "Manual"
       },
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm."
   },
@@ -2521,7 +2674,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
   },
@@ -2547,7 +2701,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
   },
@@ -2573,7 +2728,8 @@
         24,
         34,
         64
-      ]
+      ],
+      "dimension": null
     },
     "note": "Drawn on a 40 mm plug: on the default 25.5 mm plug the arms are too short for a strap slot."
   },
@@ -2592,7 +2748,8 @@
       "after": null,
       "context": {},
       "plug": "default",
-      "crop": null
+      "crop": null,
+      "dimension": null
     },
     "note": "Changes no shape: it only sets the number of segments in every circle and arc."
   }

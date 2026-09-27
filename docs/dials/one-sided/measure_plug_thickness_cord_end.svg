@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="77.50mm" height="65.26mm" viewBox="0 0 77.50 65.26" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="199.00mm" height="47.17mm" viewBox="0 0 199.00 47.17" role="img">
 <title>Plug thickness at the cord end</title>
 <desc>Deepens or shallows the two pocket floors, the round seat and the plug recess, when this end is the fatter end of the plug. Before: 20. After: 23.5.</desc>
-<rect width="77.50" height="65.26" fill="white"/>
-<text x="38.75" y="5.40" font-family="Helvetica, Arial, sans-serif" font-size="3.40" font-weight="bold" text-anchor="middle" fill="#000">measure_plug_thickness_cord_end</text>
-<text x="38.75" y="9.65" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">20 → 23.5</text>
-<text x="38.75" y="13.90" font-family="Helvetica, Arial, sans-serif" font-size="3.40" text-anchor="middle" fill="#000">(section-x: 0)</text>
-<path d="M 6.00 24.25 L 31.50 20.75 L 31.50 44.25 L 6.00 44.25 L 6.00 24.25 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
-<path d="M 71.50 43.80 L 71.48 47.60 L 66.43 47.60 L 66.44 41.28 L 69.09 41.27 L 70.05 41.51 L 70.67 41.93 L 71.14 42.50 L 71.42 43.18 L 71.50 43.80 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 21.22 44.44 L 21.41 44.16 L 22.05 43.81 L 31.50 43.80 L 31.94 43.61 L 32.38 43.25 L 32.56 42.55 L 32.61 41.27 L 61.29 41.27 L 61.34 47.57 L 9.81 47.58 L 9.85 44.44 L 21.22 44.44 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 9.81 44.44 L 21.24 44.44 L 21.41 44.17 L 22.04 43.81 L 31.50 43.81 L 31.94 43.61 L 32.38 43.26 L 32.56 42.56 L 32.56 43.00 L 32.38 43.70 L 31.94 44.05 L 31.50 44.25 L 22.04 44.25 L 21.41 44.67 L 21.25 45.00 L 9.81 45.00 L 9.81 44.44 Z" fill="#d81b1b" fill-rule="evenodd" fill-opacity="0.1" stroke="#d81b1b" stroke-width="0.45" stroke-linejoin="round" stroke-dasharray="1.2,0.9"/>
-<text x="38.75" y="57.22" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">black = the tool at its defaults;</text>
-<text x="38.75" y="60.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">teal = the plug you measured;</text>
-<text x="38.75" y="63.98" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="middle" fill="#444444">red dashed = what this dial moves</text>
+<rect width="199.00" height="47.17" fill="white"/>
+<g class="panel" id="before">
+<path d="M 6.00 9.06 L 31.50 9.06 L 31.50 29.06 L 6.00 29.06 L 6.00 9.06 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 71.50 29.05 L 71.48 32.85 L 66.43 32.85 L 66.44 26.53 L 69.09 26.52 L 70.05 26.76 L 70.66 27.17 L 71.14 27.75 L 71.42 28.43 L 71.50 29.05 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 21.22 29.69 L 21.41 29.41 L 22.05 29.06 L 31.50 29.05 L 31.94 28.86 L 32.38 28.50 L 32.56 27.80 L 32.61 26.52 L 61.29 26.52 L 61.34 32.82 L 9.81 32.83 L 9.85 29.69 L 21.22 29.69 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g class="arrow">
+<line x1="79.00" y1="19.43" x2="83.50" y2="19.43" stroke="#000" stroke-width="0.6"/><polygon points="86.00,19.43 83.50,18.31 83.50,20.56" fill="#000"/>
+<text x="82.50" y="43.17" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">20 → 23.5 mm</text>
+<text x="82.50" y="46.57" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">section at x = 0 mm</text>
+</g>
+<g class="panel" id="after" transform="translate(87.50 0)">
+<path d="M 6.00 9.50 L 31.50 6.00 L 31.50 29.50 L 6.00 29.50 L 6.00 9.50 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
+<path d="M 71.50 29.05 L 71.48 32.85 L 66.43 32.85 L 66.44 26.53 L 69.09 26.52 L 70.05 26.76 L 70.66 27.17 L 71.14 27.75 L 71.42 28.43 L 71.50 29.05 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 21.22 30.25 L 21.41 29.92 L 22.05 29.50 L 31.50 29.50 L 31.94 29.30 L 32.38 28.94 L 32.56 28.25 L 32.61 26.52 L 61.34 26.56 L 61.29 32.87 L 9.81 32.83 L 9.85 30.25 L 21.22 30.25 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 21.22 30.25 L 21.26 30.22 L 21.41 29.92 L 22.05 29.50 L 31.50 29.50 L 31.94 29.30 L 32.38 28.94 L 32.44 28.71" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 10.01 30.25 L 21.22 30.25" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<g class="dimension">
+<line x1="31.50" y1="6.00" x2="36.50" y2="6.00" stroke="#d81b1b" stroke-width="0.25"/>
+<line x1="31.50" y1="29.50" x2="36.50" y2="29.50" stroke="#d81b1b" stroke-width="0.25"/>
+<line x1="35.50" y1="6.00" x2="35.50" y2="29.50" stroke="#d81b1b" stroke-width="0.3"/>
+<polygon points="35.50,6.00 34.98,3.60 36.02,3.60" fill="#d81b1b"/>
+<polygon points="35.50,29.50 34.98,31.90 36.02,31.90" fill="#d81b1b"/>
+<text x="36.90" y="18.75" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="start" fill="white" stroke="white" stroke-width="0.8" stroke-linejoin="round">23.5 mm</text>
+<text x="36.90" y="18.75" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="start" fill="#d81b1b">23.5 mm</text>
+</g>
+<circle cx="32.44" cy="28.71" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="32.44" y="29.50" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+</g>
+<g class="key">
+<text x="168.00" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 seat / pocket</text>
+</g>
+<g class="leaders">
+<line x1="121.09" y1="28.10" x2="167.00" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>
+</g>
 </svg>
