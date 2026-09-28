@@ -2,7 +2,7 @@
 
 How to take each number the one-sided puller asks for, in the measuring form's order, with the typical range and an example.
 
-Model version 0.12.0. The printable packet is `docs/Plug_Puller_One_Sided_Guide.pdf`; its parts are [the quick start](quick-start.md), [the dial guide](dial-guide.md), [the measuring guide](measuring-guide.md) and [the measuring form](measuring-form.md). The dial names are written exactly as the Customizer shows them.
+Model version 0.13.0. The printable packet is `docs/Plug_Puller_One_Sided_Guide.pdf`; its parts are [the quick start](quick-start.md), [the dial guide](dial-guide.md), [the measuring guide](measuring-guide.md) and [the measuring form](measuring-form.md). The dial names are written exactly as the Customizer shows them.
 
 Everything here is in mm: a US plug is about 25 mm wide, so a 1 on your paper means you measured in inches. You need a caliper or a ruler with mm marks, the plug in its outlet, and your own hand only if you pick Measure my hand. Print the measuring form at 100 % and fill it in as you go: the sections below are the form's rows, in the same order, and the card names (R1, C1, F1 / F2) are the cards of the printed [measuring stencil](../print-preview-outlines.md).
 
