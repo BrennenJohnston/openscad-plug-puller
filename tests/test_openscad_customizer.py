@@ -63,7 +63,7 @@ ONE_SIDED_PLUG_PRESET_OPTIONS = [
 TWO_SIDED_SIZE_OPTIONS = ["Small", "Medium", "Large", "Measure my hand"]
 TWO_SIDED_ATTACHMENT_OPTIONS = ["Zip ties + Velcro strap", "Zip ties"]
 # The two-sided plug presets in Customizer order (R2 Gate A: Q-38 chose the
-# plugs and their file, Q-39 the labels; the USB charger cube joins once measured).
+# plugs and their file, Q-39 the labels).
 TWO_SIDED_PLUG_PRESET_OPTIONS = [
     "Measure my plug",
     "Heavy-duty extension cord - NEMA 5-15",

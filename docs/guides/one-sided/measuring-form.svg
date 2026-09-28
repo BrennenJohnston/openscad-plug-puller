@@ -1,0 +1,290 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="279mm" viewBox="0 0 210 279">
+<rect x="0" y="0" width="210" height="279" fill="white"/>
+<text x="105.000" y="12.000" font-family="Helvetica, Arial, sans-serif" font-size="5" font-weight="bold" text-anchor="middle" fill="black">Plug Puller — Measuring form, one-sided puller</text>
+<text x="105.000" y="18.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="middle" fill="black">Measure in mm. Fill in the blanks top to bottom, then type them into the Customizer in the same order.</text>
+<text x="146.000" y="24.600" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="end" fill="black">Print at 100 %</text>
+<line x1="150.000" y1="23.800" x2="200.000" y2="23.800" stroke="black" stroke-width="0.35"/>
+<line x1="150.000" y1="22.000" x2="150.000" y2="25.600" stroke="black" stroke-width="0.35"/>
+<line x1="200.000" y1="22.000" x2="200.000" y2="25.600" stroke="black" stroke-width="0.35"/>
+<text x="175.000" y="21.600" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">50 mm</text>
+<polygon points="110.000,46.000 148.250,46.000 148.250,83.500 110.000,83.500" fill="#20b2aa" fill-opacity="0.45" stroke="black" stroke-width="0.35" stroke-linejoin="round"/>
+<polygon points="148.250,61.750 156.250,61.750 156.250,67.750 148.250,67.750" fill="#20b2aa" fill-opacity="0.45" stroke="black" stroke-width="0.35" stroke-linejoin="round"/>
+<line x1="110.000" y1="43.000" x2="110.000" y2="85.000" stroke="black" stroke-width="0.5"/>
+<text x="108.800" y="88.100" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">wall plate</text>
+<text x="129.125" y="37.600" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="#555555">top view</text>
+<polygon points="165.000,104.000 195.000,104.000 195.000,142.250 165.000,142.250" fill="#20b2aa" fill-opacity="0.45" stroke="black" stroke-width="0.35" stroke-linejoin="round"/>
+<line x1="162.000" y1="104.000" x2="198.000" y2="104.000" stroke="black" stroke-width="0.5"/>
+<text x="198.500" y="104.800" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">wall plate</text>
+<text x="180.000" y="96.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="#555555">side view</text>
+<circle cx="190.000" cy="158.000" r="3.000" fill="#20b2aa" fill-opacity="0.45" stroke="black" stroke-width="0.35"/>
+<text x="190.000" y="153.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#555555">cord end</text>
+<rect x="110.000" y="174.000" width="20.000" height="22.000" rx="5" fill="none" stroke="black" stroke-width="0.35"/>
+<rect x="131.667" y="174.000" width="20.000" height="22.000" rx="5" fill="none" stroke="black" stroke-width="0.35"/>
+<rect x="153.333" y="174.000" width="20.000" height="22.000" rx="5" fill="none" stroke="black" stroke-width="0.35"/>
+<rect x="175.000" y="174.000" width="20.000" height="22.000" rx="5" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="195.000" y="172.500" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="end" fill="#555555">four knuckles, 1:1</text>
+<rect x="110.000" y="214.000" width="40.000" height="15.000" rx="3" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="130.000" y="222.400" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#555555">strap</text>
+<circle cx="15.000" cy="38.400" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="39.300" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">1</text>
+<text x="19.000" y="37.600" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="1" data-default="Measure my plug">plug_preset</text>
+<text x="19.000" y="40.900" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Plug preset</text>
+<rect x="19" y="41.7" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<circle cx="20.500" cy="43.200" r="0.650" fill="black" stroke="black" stroke-width="0.1"/>
+<text x="23.000" y="44.050" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="start" fill="black">Measure my plug</text>
+<rect x="44.72" y="41.7" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="48.720" y="44.050" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Flat 2-prong lamp plug - NEMA 1-15</text>
+<rect x="19" y="44.9" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="47.250" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Standard 3-prong plug - NEMA 5-15</text>
+<rect x="19" y="48.1" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="50.450" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Heavy-duty extension cord - NEMA 5-15</text>
+<rect x="19" y="51.3" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="53.650" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Wide 2-prong appliance plug - NEMA 1-15</text>
+<circle cx="15.000" cy="60.000" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="60.900" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">2</text>
+<text x="19.000" y="59.200" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="2" data-default="25.5 mm">measure_plug_length</text>
+<text x="19.000" y="62.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Plug length</text>
+<text x="19.000" y="66.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 25.5 mm →</text>
+<line x1="45.252" y1="66.400" x2="73.252" y2="66.400" stroke="black" stroke-width="0.3"/>
+<text x="74.752" y="66.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="82.252" y="66.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card R1</text>
+<circle cx="15.000" cy="72.000" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="72.900" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">3</text>
+<text x="19.000" y="71.200" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="3" data-default="25 mm">measure_plug_width_prong_end</text>
+<text x="19.000" y="74.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Plug width at the prong end</text>
+<text x="19.000" y="78.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 25 mm →</text>
+<line x1="42.340" y1="78.400" x2="70.340" y2="78.400" stroke="black" stroke-width="0.3"/>
+<text x="71.840" y="78.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="79.340" y="78.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card R1</text>
+<circle cx="15.000" cy="84.000" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="84.900" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">4</text>
+<text x="19.000" y="83.200" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="4" data-default="25 mm">measure_plug_width_cord_end</text>
+<text x="19.000" y="86.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Plug width at the cord end</text>
+<text x="19.000" y="90.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 25 mm →</text>
+<line x1="42.340" y1="90.400" x2="70.340" y2="90.400" stroke="black" stroke-width="0.3"/>
+<text x="71.840" y="90.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="79.340" y="90.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card R1</text>
+<circle cx="15.000" cy="96.000" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="96.900" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">5</text>
+<text x="19.000" y="95.200" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="5" data-default="20 mm">measure_plug_thickness_prong_end</text>
+<text x="19.000" y="98.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Plug thickness at the prong end</text>
+<text x="19.000" y="102.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 20 mm →</text>
+<line x1="42.340" y1="102.400" x2="70.340" y2="102.400" stroke="black" stroke-width="0.3"/>
+<text x="71.840" y="102.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="79.340" y="102.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card R1</text>
+<circle cx="15.000" cy="108.000" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="108.900" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">6</text>
+<text x="19.000" y="107.200" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="6" data-default="20 mm">measure_plug_thickness_cord_end</text>
+<text x="19.000" y="110.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Plug thickness at the cord end</text>
+<text x="19.000" y="114.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 20 mm →</text>
+<line x1="42.340" y1="114.400" x2="70.340" y2="114.400" stroke="black" stroke-width="0.3"/>
+<text x="71.840" y="114.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="79.340" y="114.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card R1</text>
+<circle cx="15.000" cy="120.000" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="120.900" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">7</text>
+<text x="19.000" y="119.200" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="7" data-default="4 mm">measure_cord_thickness</text>
+<text x="19.000" y="122.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Cord thickness</text>
+<text x="19.000" y="126.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 4 mm →</text>
+<line x1="40.884" y1="126.400" x2="68.884" y2="126.400" stroke="black" stroke-width="0.3"/>
+<text x="70.384" y="126.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="77.884" y="126.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card C1</text>
+<circle cx="15.000" cy="132.000" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="132.900" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">8</text>
+<text x="19.000" y="131.200" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="8" data-default="Standard flat plate">measure_wall_plate_style</text>
+<text x="19.000" y="134.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Outlet cover plate style</text>
+<rect x="19" y="135.3" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<circle cx="20.500" cy="136.800" r="0.650" fill="black" stroke="black" stroke-width="0.1"/>
+<text x="23.000" y="137.650" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="start" fill="black">Standard flat plate</text>
+<rect x="49.712" y="135.3" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="53.712" y="137.650" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Rocker / Decora</text>
+<rect x="19" y="138.5" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="140.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Oversized / Jumbo</text>
+<rect x="47.216" y="138.5" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="51.216" y="140.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">No plate / flush</text>
+<circle cx="15.000" cy="147.200" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="148.100" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">9</text>
+<text x="19.000" y="146.400" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="9" data-default="on">show_plug_preview</text>
+<text x="19.000" y="149.700" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Show the see-through plug</text>
+<rect x="19" y="150.5" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<circle cx="20.500" cy="152.000" r="0.650" fill="black" stroke="black" stroke-width="0.1"/>
+<text x="23.000" y="152.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="start" fill="black">leave on</text>
+<circle cx="15.000" cy="159.200" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="160.100" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">10</text>
+<text x="19.000" y="158.400" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="10" data-default="Medium">size</text>
+<text x="19.000" y="161.700" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Hand size</text>
+<rect x="19" y="162.5" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="164.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Small</text>
+<rect x="32.24" y="162.5" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<circle cx="33.740" cy="164.000" r="0.650" fill="black" stroke="black" stroke-width="0.1"/>
+<text x="36.240" y="164.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="start" fill="black">Medium</text>
+<rect x="46.728" y="162.5" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="50.728" y="164.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Large</text>
+<rect x="59.968" y="162.5" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="63.968" y="164.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Measure my hand</text>
+<rect x="19" y="165.7" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="168.050" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Custom</text>
+<circle cx="15.000" cy="174.400" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="175.300" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">11</text>
+<text x="19.000" y="173.600" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="11" data-default="20 mm">measure_finger_width</text>
+<text x="19.000" y="176.900" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Finger width</text>
+<text x="19.000" y="180.400" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 20 mm →</text>
+<line x1="42.340" y1="180.800" x2="70.340" y2="180.800" stroke="black" stroke-width="0.3"/>
+<text x="71.840" y="180.400" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="79.340" y="180.400" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card F1 / F2</text>
+<circle cx="15.000" cy="186.400" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="187.300" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">12</text>
+<text x="19.000" y="185.600" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="12" data-default="85 mm">measure_hand_width</text>
+<text x="19.000" y="188.900" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Hand width</text>
+<text x="19.000" y="192.400" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 85 mm →</text>
+<line x1="42.340" y1="192.800" x2="70.340" y2="192.800" stroke="black" stroke-width="0.3"/>
+<text x="71.840" y="192.400" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<text x="79.340" y="192.400" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="#555555">card R1</text>
+<circle cx="15.000" cy="198.400" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="199.300" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">13</text>
+<text x="19.000" y="197.600" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="13" data-default="Zip ties + Velcro">attachment</text>
+<text x="19.000" y="200.900" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Attachment</text>
+<rect x="19" y="201.7" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="204.050" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Zip ties</text>
+<rect x="35.984" y="201.7" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="39.984" y="204.050" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Velcro strap</text>
+<rect x="57.96" y="201.7" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<circle cx="59.460" cy="203.200" r="0.650" fill="black" stroke="black" stroke-width="0.1"/>
+<text x="61.960" y="204.050" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="start" fill="black">Zip ties + Velcro</text>
+<rect x="19" y="204.9" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="23.000" y="207.250" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">None</text>
+<circle cx="15.000" cy="213.600" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="214.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">14</text>
+<text x="19.000" y="212.800" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="14" data-default="Wing">velcro_style</text>
+<text x="19.000" y="216.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Strap opening style</text>
+<rect x="19" y="216.9" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<circle cx="20.500" cy="218.400" r="0.650" fill="black" stroke="black" stroke-width="0.1"/>
+<text x="23.000" y="219.250" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="start" fill="black">Wing</text>
+<rect x="30.992" y="216.9" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="34.992" y="219.250" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Classic slot</text>
+<circle cx="15.000" cy="225.600" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="226.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">15</text>
+<text x="19.000" y="224.800" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="15" data-default="15 mm">strap_width</text>
+<text x="19.000" y="228.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Strap width</text>
+<text x="19.000" y="231.600" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">default 15 mm →</text>
+<line x1="42.340" y1="232.000" x2="70.340" y2="232.000" stroke="black" stroke-width="0.3"/>
+<text x="71.840" y="231.600" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">mm</text>
+<circle cx="15.000" cy="237.600" r="2.000" fill="none" stroke="black" stroke-width="0.35"/>
+<text x="15.000" y="238.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="black">16</text>
+<text x="19.000" y="236.800" font-family="Consolas, Menlo, monospace" font-size="3" font-weight="normal" text-anchor="start" fill="black" class="dial" data-row="16" data-default="Right">hook_hand</text>
+<text x="19.000" y="240.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="black">Hook side</text>
+<rect x="19" y="240.9" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<circle cx="20.500" cy="242.400" r="0.650" fill="black" stroke="black" stroke-width="0.1"/>
+<text x="23.000" y="243.250" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="start" fill="black">Right</text>
+<rect x="32.24" y="240.9" width="3" height="3" fill="none" stroke="black" stroke-width="0.3"/>
+<text x="36.240" y="243.250" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="start" fill="black">Left</text>
+<g class="dimension" data-row="2">
+<line x1="110.000" y1="46.000" x2="110.000" y2="39.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="148.250" y1="46.000" x2="148.250" y2="39.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="110.000" y1="40.000" x2="148.250" y2="40.000" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="110.000,40.000 112.400,39.250 112.400,40.750" fill="#d81b1b"/>
+<polygon points="148.250,40.000 145.850,40.750 145.850,39.250" fill="#d81b1b"/>
+<circle cx="106.500" cy="40.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="106.500" y="40.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">2</text>
+</g>
+<g class="leader" data-row="2">
+<line x1="98.000" y1="65.000" x2="105.921" y2="41.704" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="3">
+<line x1="110.000" y1="46.000" x2="104.000" y2="46.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="110.000" y1="83.500" x2="104.000" y2="83.500" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="105.000" y1="46.000" x2="105.000" y2="83.500" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="105.000,46.000 105.750,48.400 104.250,48.400" fill="#d81b1b"/>
+<polygon points="105.000,83.500 104.250,81.100 105.750,81.100" fill="#d81b1b"/>
+<circle cx="105.000" cy="46.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="105.000" y="46.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">3</text>
+</g>
+<g class="leader" data-row="3">
+<line x1="98.000" y1="77.000" x2="104.604" y2="47.756" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="4">
+<line x1="148.250" y1="46.000" x2="161.250" y2="46.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="148.250" y1="83.500" x2="161.250" y2="83.500" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="160.250" y1="46.000" x2="160.250" y2="83.500" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="160.250,46.000 161.000,48.400 159.500,48.400" fill="#d81b1b"/>
+<polygon points="160.250,83.500 159.500,81.100 161.000,81.100" fill="#d81b1b"/>
+<line x1="160.250" y1="83.500" x2="160.250" y2="90.500" stroke="#d81b1b" stroke-width="0.25"/>
+<circle cx="160.250" cy="92.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="160.250" y="92.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">4</text>
+</g>
+<g class="leader" data-row="4">
+<line x1="98.000" y1="89.000" x2="158.452" y2="91.913" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="5">
+<line x1="165.000" y1="104.000" x2="165.000" y2="98.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="195.000" y1="104.000" x2="195.000" y2="98.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="165.000" y1="99.000" x2="195.000" y2="99.000" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="165.000,99.000 167.400,98.250 167.400,99.750" fill="#d81b1b"/>
+<polygon points="195.000,99.000 192.600,99.750 192.600,98.250" fill="#d81b1b"/>
+<circle cx="161.800" cy="99.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="161.800" y="99.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">5</text>
+</g>
+<g class="leader" data-row="5">
+<line x1="98.000" y1="101.000" x2="160.001" y2="99.056" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="6">
+<line x1="165.000" y1="142.250" x2="165.000" y2="148.250" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="195.000" y1="142.250" x2="195.000" y2="148.250" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="165.000" y1="147.250" x2="195.000" y2="147.250" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="165.000,147.250 167.400,146.500 167.400,148.000" fill="#d81b1b"/>
+<polygon points="195.000,147.250 192.600,148.000 192.600,146.500" fill="#d81b1b"/>
+<circle cx="161.800" cy="147.250" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="161.800" y="148.100" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">6</text>
+</g>
+<g class="leader" data-row="6">
+<line x1="98.000" y1="113.000" x2="160.214" y2="146.399" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="7">
+<line x1="187.000" y1="161.000" x2="187.000" y2="165.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="193.000" y1="161.000" x2="193.000" y2="165.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="182.000" y1="164.000" x2="198.000" y2="164.000" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="187.000,164.000 184.600,164.750 184.600,163.250" fill="#d81b1b"/>
+<polygon points="193.000,164.000 195.400,163.250 195.400,164.750" fill="#d81b1b"/>
+<circle cx="177.500" cy="164.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="177.500" y="164.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">7</text>
+</g>
+<g class="leader" data-row="7">
+<line x1="98.000" y1="125.000" x2="175.884" y2="163.207" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="11">
+<line x1="110.000" y1="174.000" x2="110.000" y2="169.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="130.000" y1="174.000" x2="130.000" y2="169.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="110.000" y1="170.000" x2="130.000" y2="170.000" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="110.000,170.000 112.400,169.250 112.400,170.750" fill="#d81b1b"/>
+<polygon points="130.000,170.000 127.600,170.750 127.600,169.250" fill="#d81b1b"/>
+<circle cx="106.000" cy="170.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="106.000" y="170.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">11</text>
+</g>
+<g class="leader" data-row="11">
+<line x1="98.000" y1="179.400" x2="104.833" y2="171.371" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="12">
+<line x1="110.000" y1="196.000" x2="110.000" y2="202.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="195.000" y1="196.000" x2="195.000" y2="202.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="110.000" y1="201.000" x2="195.000" y2="201.000" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="110.000,201.000 112.400,200.250 112.400,201.750" fill="#d81b1b"/>
+<polygon points="195.000,201.000 192.600,201.750 192.600,200.250" fill="#d81b1b"/>
+<circle cx="106.000" cy="201.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="106.000" y="201.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">12</text>
+</g>
+<g class="leader" data-row="12">
+<line x1="98.000" y1="191.400" x2="104.848" y2="199.617" stroke="black" stroke-width="0.35"/>
+</g>
+<g class="dimension" data-row="15">
+<line x1="110.000" y1="214.000" x2="104.000" y2="214.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="110.000" y1="229.000" x2="104.000" y2="229.000" stroke="#d81b1b" stroke-width="0.18"/>
+<line x1="105.000" y1="214.000" x2="105.000" y2="229.000" stroke="#d81b1b" stroke-width="0.25"/>
+<polygon points="105.000,214.000 105.750,216.400 104.250,216.400" fill="#d81b1b"/>
+<polygon points="105.000,229.000 104.250,226.600 105.750,226.600" fill="#d81b1b"/>
+<circle cx="105.000" cy="214.000" r="1.500" fill="white" stroke="#d81b1b" stroke-width="0.35"/>
+<text x="105.000" y="214.850" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="bold" text-anchor="middle" fill="#d81b1b">15</text>
+</g>
+<g class="leader" data-row="15">
+<line x1="98.000" y1="230.600" x2="104.301" y2="215.659" stroke="black" stroke-width="0.35"/>
+</g>
+<text x="105.000" y="262.000" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#555555">openscad-plug-puller · measuring form · one-sided puller · fill in, then type in order</text>
+</svg>

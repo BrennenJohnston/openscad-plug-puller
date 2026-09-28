@@ -7,7 +7,7 @@ This guide takes you from a plug that is hard to pull to a printed tool that fit
 There are two tools in two files. Measure your plug's thickness first.
 
 - **Up to 24 mm thick:** the **one-sided puller**, `src/Plug_Puller_Parametric.scad`. One printed part with a pocket for the plug, two finger holes and a cord hook.
-- **Thicker than 24 mm, or a plug you want held from both sides:** the **two-sided puller**, `src/Plug_Puller_Two_Sided.scad`. Two identical plates that zip-tie face to face around the plug. Pick it for a USB-C laptop tip, a round extension-cord plug, and a charger cube once a preset exists for it.
+- **Thicker than 24 mm, or a plug you want held from both sides:** the **two-sided puller**, `src/Plug_Puller_Two_Sided.scad`. Two identical plates that zip-tie face to face around the plug. Pick it for a USB-C laptop tip or a round extension-cord plug.
 
 If you give the one-sided file a plug 24 mm thick or more, it prints a red tag beside the part that says `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE`. That is the file telling you to switch, not a fault.
 
@@ -22,7 +22,7 @@ Every number is in millimeters. Typing inches is the most common mistake, and th
 
 ## 3. Customize
 
-Open the file in OpenSCAD (or in the browser: [Web Customizer Guide](web-customizer.md)) and show the Customizer panel. Each file has four steps at the top; fill them in top to bottom. What every dial moves is drawn in the [Dial Quick Start](dial-quick-start.md) (also a PDF: `docs/Plug_Puller_Dial_Quick_Start.pdf`), and every dial of both files is in the [Dial Reference](dial-reference.md).
+Open the file in OpenSCAD (or in the browser: [Web Customizer Guide](web-customizer.md)) and show the Customizer panel. Each file has four steps at the top; fill them in top to bottom. What every dial moves is drawn, before and after, in the tool's guide packet: [the one-sided quick start](one-sided/quick-start.md) and [dial guide](one-sided/dial-guide.md), or [the two-sided quick start](two-sided/quick-start.md) and [dial guide](two-sided/dial-guide.md); each packet is also one PDF, `docs/Plug_Puller_One_Sided_Guide.pdf` and `docs/Plug_Puller_Two_Sided_Guide.pdf`, with the measuring guide and the blank form at the end.
 
 The one-sided puller:
 

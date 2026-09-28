@@ -32,7 +32,29 @@ FILES = {
 }
 
 ROW_KEYS = {"file", "name", "section", "tier", "quick_start", "title", "changes",
-            "diagram", "note"}
+            "diagram", "note", "measure"}
+MEASURE_KEYS = {"how", "typical", "example", "stencil", "anchor"}
+STENCIL_CARDS = {"R1", "C1", "F1 / F2", None}
+# The anchors a measure row may point at on the measuring form's schematic plug
+# (the plan's Appendix C; the tool-side anchors are for dimension lines only).
+MEASURE_ANCHORS = {
+    "plug_length", "plug_width_prong_end", "plug_width_cord_end",
+    "plug_thickness_prong_end", "plug_thickness_cord_end", "cord", "finger_width",
+    "hand_width", "strap_width", "wall_plate", "plug_sides",
+}
+# The 17 Step dials that ask for a number or a look, in the catalog's order: the
+# one source for the measuring guide and the measuring form.
+MEASURE_ROWS = [
+    ("one-sided", "measure_plug_length"), ("one-sided", "measure_plug_width_prong_end"),
+    ("one-sided", "measure_plug_width_cord_end"), ("one-sided", "measure_plug_thickness_prong_end"),
+    ("one-sided", "measure_plug_thickness_cord_end"), ("one-sided", "measure_cord_thickness"),
+    ("one-sided", "measure_wall_plate_style"), ("one-sided", "measure_finger_width"),
+    ("one-sided", "measure_hand_width"), ("one-sided", "strap_width"),
+    ("two-sided", "measure_plug_length"), ("two-sided", "measure_plug_width_prong_end"),
+    ("two-sided", "measure_plug_width_cord_end"), ("two-sided", "measure_cord_thickness"),
+    ("two-sided", "plug_sides"), ("two-sided", "measure_finger_width"), ("two-sided", "strap_width"),
+]
+HOW_MAX_WORDS = 40
 DIAGRAM_KEYS = {"view", "style", "before", "after", "context", "plug", "crop", "dimension"}
 DIMENSION_KINDS = {"h", "v", "dia"}
 # The anchors a dimension callout may sit on (the plan's Appendix C).
@@ -291,6 +313,56 @@ def test_dimension_key(catalog) -> None:
         with_dimension.add((row["file"], row["name"]))
     assert with_dimension == DIMENSION_ROWS, (
         f"rows with a dimension: {sorted(with_dimension ^ DIMENSION_ROWS)} differ from the list")
+
+
+def _words(text: str) -> int:
+    """Words are runs of letters or digits (a "/" or a lone "-" is not a word)."""
+    return len(re.findall(r"[A-Za-z0-9]+(?:['\-][A-Za-z0-9]+)*", text))
+
+
+def test_measure_rows(catalog, mappings) -> None:
+    """Every row carries ``measure``: null, or an object with exactly how,
+    typical, example, stencil, anchor; exactly the MEASURE_ROWS carry one, in
+    the catalog's order. ``how`` is one or two plain sentences of at most
+    HOW_MAX_WORDS words; ``typical`` is [lo, hi] inside the mapping's range
+    for a number dial and null for a dropdown; ``example`` sits inside
+    ``typical`` or is null; ``stencil`` is a card of the measuring stencil or
+    null; ``anchor`` is one of the form's anchors."""
+    with_measure = []
+    for row in catalog:
+        assert "measure" in row, f"{row['name']}: no measure key"
+        measure = row["measure"]
+        if measure is None:
+            continue
+        name = f"{row['file']} {row['name']}"
+        assert isinstance(measure, dict) and set(measure.keys()) == MEASURE_KEYS, (
+            f"{name}: measure keys {sorted(measure.keys()) if isinstance(measure, dict) else measure!r}")
+        how = measure["how"]
+        assert isinstance(how, str) and how.strip() and how.endswith("."), f"{name}: how must end with a period"
+        assert how.count(". ") <= 1, f"{name}: how is one or two sentences"
+        assert _words(how) <= HOW_MAX_WORDS, f"{name}: how has {_words(how)} words (max {HOW_MAX_WORDS})"
+        lowered = how.lower()
+        for word in BANNED_WORDS:
+            assert not re.search(rf"\b{word}\b", lowered), f"{name}: how uses the banned word {word!r}"
+        for word in RETIRED_WORDS:
+            assert word not in lowered, f"{name}: how uses the retired word {word!r}"
+        mapping_row = mappings[row["file"]][row["name"]]
+        typical, example = measure["typical"], measure["example"]
+        if mapping_row["type"] == "enum":
+            assert typical is None and example is None, f"{name}: a dropdown has no typical range and no example"
+        else:
+            rng = mapping_row["range"]
+            assert isinstance(typical, list) and len(typical) == 2 and all(_is_number(v) for v in typical), (
+                f"{name}: typical is [lo, hi], not {typical!r}")
+            lo, hi = typical
+            assert lo < hi, f"{name}: typical needs lo < hi"
+            assert rng[0] <= lo and hi <= rng[1], f"{name}: typical {typical} outside the mapping's range {rng}"
+            assert _is_number(example) and lo <= example <= hi, f"{name}: example {example!r} outside typical {typical}"
+        assert measure["stencil"] in STENCIL_CARDS, f"{name}: stencil {measure['stencil']!r}"
+        assert measure["anchor"] in MEASURE_ANCHORS, f"{name}: anchor {measure['anchor']!r}"
+        with_measure.append((row["file"], row["name"]))
+    assert with_measure == MEASURE_ROWS, (
+        f"rows with a measure: {with_measure} differ from the 17 of MEASURE_ROWS")
 
 
 def test_counts(catalog) -> None:

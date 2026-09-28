@@ -16,7 +16,7 @@ licensor:
   name: Brennen Johnston
 documentation-language: en-US
 date-created: 2026-07-22
-date-updated: 2026-09-26
+date-updated: 2026-09-27
 function: |
   A handheld 3D-printed tool for pulling an electrical plug out of a wall outlet with a whole
   hand instead of a fingertip pinch, for anyone with arthritis, low grip strength, tremor,
@@ -40,6 +40,10 @@ bom: ./docs/guides/bom.md
 making-instructions:
   - path: ./docs/guides/maker-guide.md
     title: Choose the file, measure or match, customize, print, assemble
+  - path: ./docs/Plug_Puller_One_Sided_Guide.pdf
+    title: The one-sided puller's guide packet, with the quick start, the dial guide, the measuring guide and the form
+  - path: ./docs/Plug_Puller_Two_Sided_Guide.pdf
+    title: The two-sided puller's guide packet, with the quick start, the dial guide, the measuring guide and the form
 operation-instructions:
   - path: ./docs/guides/user-guide.md
     title: Using the one-sided and the two-sided puller, safety and care

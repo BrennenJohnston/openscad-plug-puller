@@ -6,8 +6,8 @@ The rules (from the Accessible MakerWorld Documentation Standard, section 1,
 and the AI-AT guardrails' documentation bloat scan):
 
 * exactly one H1;
-* no skipped heading level (an H4 is allowed only in the two generated dial
-  documents, ``docs/guides/dial-reference.md`` and ``dial-quick-start.md``);
+* no skipped heading level and no heading deeper than H3 (the generated
+  packet twins use H1 to H3, so ``H4_ALLOWED`` is empty);
 * every image has non-empty alt text that does not start with "image of",
   "photo of" or "picture of";
 * no "click here" link text and no "check the console";
@@ -40,7 +40,7 @@ from typing import Iterable, List, Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-H4_ALLOWED = {"docs/guides/dial-reference.md", "docs/guides/dial-quick-start.md"}
+H4_ALLOWED: set = set()
 MAX_CELL_WORDS = 22
 BANNED_WORDS = ("leverage", "utilize", "ensure", "facilitate", "streamline",
                 "comprehensive", "robust", "seamless", "harness", "empower")
