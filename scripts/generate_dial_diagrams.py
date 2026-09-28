@@ -13,10 +13,11 @@ changed geometry of "what this dial moves". Each diagram is an SVG at
 default since R3, FD-48) draws three parts at one scale: the BEFORE panel
 (the tool at the dial's default, the plug in teal), an arrow with the two
 values, and the AFTER panel (the tool after the dial moved, drawn once in
-black, with the pieces of its outline that moved overdrawn in red dots),
+black except the pieces of its outline that moved, which are thick red
+dashes instead of black line),
 numbered dots on the moved edges and a key column beside the picture that
 names them; no dial name and no legend inside the picture. A feature that
-disappeared is drawn from its old outline in red dots and marked removed.
+disappeared is drawn from its old outline in red dashes and marked removed.
 ``--layout single`` keeps the previous one-drawing picture for one release
 cycle. Rows whose ``view`` is ``none`` get a small SVG saying the dial
 changes no shape. Every SVG carries a ``<title>`` / ``<desc>`` pair.
@@ -100,7 +101,7 @@ CANONICAL_OPENSCAD = Path(r"C:\Program Files\OpenSCAD (Nightly)\openscad.com")
 
 # The picture key (strings pack S-421; the pages print it once, never the picture).
 LEGEND_LINE = (
-    "black = the tool; teal = your plug; red dotted = the edges this dial moved; "
+    "black = the tool; teal = your plug; red dashed = the edges this dial moved; "
     "the numbers match the key beside the picture"
 )
 NO_SHAPE_SENTENCE = "This dial changes no shape."
@@ -797,6 +798,13 @@ class _Frame:
         pieces = [g for g in getattr(clipped, "geoms", [clipped]) if isinstance(g, LineString) and not g.is_empty]
         return ["M " + self._pts(g.coords) for g in pieces]
 
+    def open_paths(self, coords) -> List[str]:
+        """An open line as paths, in pieces where the drawing box cuts it."""
+        line = shapely.simplify(LineString(coords), SIMPLIFY, preserve_topology=True)
+        clipped = line if self.box.contains(line) else line.intersection(self.box)
+        pieces = [g for g in getattr(clipped, "geoms", [clipped]) if isinstance(g, LineString) and not g.is_empty]
+        return ["M " + self._pts(g.coords) for g in pieces]
+
     def polygon_path(self, poly: Polygon) -> str:
         """A polygon with its holes (even-odd), clipped to the drawing box."""
         clipped = shapely.simplify(poly.intersection(self.box), SIMPLIFY, preserve_topology=True)
@@ -807,12 +815,25 @@ class _Frame:
         return " ".join(parts)
 
 
-def _stroke_paths(frame: _Frame, coords, color: str, width: float, dash: Optional[str] = None) -> List[str]:
+MIN_KEPT = 0.02  # mm: a shorter leftover of a cut ring is a numeric sliver, not an edge
+
+
+def _stroke_paths(frame: _Frame, coords, color: str, width: float, dash: Optional[str] = None,
+                  cut=None) -> List[str]:
+    """A ring as stroked paths; the parts inside ``cut`` (the red-dashed
+    edges) are left out, so those edges are drawn once, in red dashes."""
     dd = f' stroke-dasharray="{dash}"' if dash else ""
+    ring = LineString(coords)
+    if cut is not None and ring.intersects(cut):
+        kept = shapely.line_merge(ring.difference(cut))
+        paths = [d for g in shapely.get_parts(kept) if isinstance(g, LineString) and g.length >= MIN_KEPT
+                 for d in frame.open_paths(g.coords)]
+    else:
+        paths = frame.ring_paths(coords)
     return [
         f'<path d="{d}" fill="none" stroke="{color}" stroke-width="{width}" '
         f'stroke-linejoin="round" stroke-linecap="round"{dd}/>'
-        for d in frame.ring_paths(coords)
+        for d in paths
     ]
 
 
@@ -833,7 +854,9 @@ def _outline_from_filled(geom) -> Outline:
 
 
 def _draw_outline(frame: _Frame, outline: Outline, color: str, dashed_all: bool,
-                  width_outer: float, width_inner: float) -> List[str]:
+                  width_outer: float, width_inner: float, cut=None) -> List[str]:
+    """The outline's rings in black; with ``cut``, without the edges that
+    are drawn in red dashes instead."""
     out: List[str] = []
     # The drawn rings are cleaned of render noise (specks and slivers), as
     # the outline sheets do; the diff itself works on the raw geometry.
@@ -842,17 +865,17 @@ def _draw_outline(frame: _Frame, outline: Outline, color: str, dashed_all: bool,
         if poly is None:
             continue
         out.extend(_stroke_paths(frame, poly.exterior.coords, color, width_outer,
-                                 DASH_TRACE if dashed_all else None))
+                                 DASH_TRACE if dashed_all else None, cut))
         for ring in poly.interiors:
             out.extend(_stroke_paths(frame, ring.coords, color, width_inner,
-                                     DASH_TRACE if dashed_all else DASH_HOLE))
+                                     DASH_TRACE if dashed_all else DASH_HOLE, cut))
     for raw in outline.recess:
         poly = clean_polygon(raw)
         if poly is None:
             continue
         for ring in [poly.exterior] + list(poly.interiors):
             out.extend(_stroke_paths(frame, ring.coords, color if dashed_all else COLOR_RECESS,
-                                     width_inner, DASH_TRACE if dashed_all else DASH_POCKET))
+                                     width_inner, DASH_TRACE if dashed_all else DASH_POCKET, cut))
     return out
 
 
@@ -1016,8 +1039,15 @@ ARC_TOUCH = 0.5  # mm: an arc this close to a region bounds it
 REMOVED_MIN_MM2 = 5.0  # a region with no moved edge is a removed feature only from this size
 REMOVED_SUFFIX = " (removed)"
 DOTS_PER_NUMBER = 6  # a number shared by more regions than this shows its dot on the leadered region only
-DOT_W = 0.6  # the red dotted stroke; round caps make 0.6 mm dots at a 1.1 mm pitch
-DOT_DASH = "0.01,1.1"
+# A moved edge is drawn in thick red dashes only, with the black outline cut
+# away under it, so no edge is drawn twice (the owner, 2026-09-28: "no
+# overlap of line styles"; style A, chosen the same day over rimmed dots).
+# The dashes differ from the black lines in colour, dash and width at once,
+# so they read without colour; long dashes with short gaps are mostly ink,
+# calmer to look at than rows of dots. Red measures 5.1:1 on white and 3.3:1
+# on the see-through plug, above the 3:1 graphics need, so no rim is drawn.
+MARK_W = 0.8  # thicker than the outline (STROKE_OUTER) and the hole lines (STROKE_INNER)
+MARK_DASH = "3.5,1.2"  # long dashes, short gaps; the hole lines use DASH_HOLE
 DIM_EXT_W = 0.25
 DIM_LINE_W = 0.3
 DIM_ARROW = 1.5
@@ -1178,15 +1208,49 @@ def _pt(frame: _Frame, x: float, y: float) -> Tuple[float, float]:
     return x - frame.x0, frame.top + (frame.y1 - y)
 
 
-def _dotted(frame: _Frame, line: LineString, color: str = COLOR_TRACE, width: float = DOT_W,
-            dash: str = DOT_DASH) -> str:
-    """A dotted line clipped to the drawing box (a crop), as the outlines are."""
+def _marked(frame: _Frame, line: LineString, color: str = COLOR_TRACE, width: float = MARK_W,
+            dash: str = MARK_DASH) -> str:
+    """A moved edge in red dashes, clipped to the drawing box (a crop), as
+    the outlines are."""
     pieces = [g for g in shapely.get_parts(line.intersection(frame.box)) if isinstance(g, LineString) and not g.is_empty]
     return "".join(
-        f'<path d="M {frame._pts(g.coords)}" fill="none" stroke="{color}" stroke-width="{width}" '
-        f'stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="{dash}"/>'
+        f'<path d="M {frame._pts(g.coords)}" fill="none" stroke="{color}" stroke-width="{width:g}" '
+        f'stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="{dash}"/>'
         for g in pieces
     )
+
+
+def _red_marks(plan: PairPlan) -> List[LineString]:
+    """Every line a panel draws in red dashes: the moved edges, then the old
+    outline of each removed feature."""
+    marks = list(plan.arcs) + [LineString(region.exterior.coords)
+                               for (region, _names), removed in zip(plan.regions, plan.removed) if removed]
+    # Each stretch is drawn once: a mark loses whatever lies within EDGE_TOL
+    # of a mark before it (a pocket edge running along a hole edge would
+    # otherwise put two rows of dashes on one line).
+    kept: List[LineString] = []
+    covered = None
+    for mark in marks:
+        rest = mark if covered is None else mark.difference(covered)
+        kept += [g for g in shapely.get_parts(rest) if isinstance(g, LineString) and g.length >= MIN_ARC]
+        strip = mark.buffer(EDGE_TOL, cap_style="flat")
+        covered = strip if covered is None else covered.union(strip)
+    if not kept:
+        return []
+    # Pieces whose ends meet exactly (a moved stretch across a ring's first
+    # point comes as two) are joined, so the dashes run on at an even pitch.
+    merged = shapely.line_merge(shapely.multilinestrings(kept))
+    return [g for g in shapely.get_parts(merged) if isinstance(g, LineString) and not g.is_empty]
+
+
+def _marks_cut(marks: Sequence[LineString]):
+    """The strip the black outline is cut along: EDGE_TOL on each side of
+    every red-dashed line (an edge within EDGE_TOL did not move, so it is the
+    same edge), flat at the ends so the black line stops where the dashes
+    start. None when nothing is marked."""
+    if not marks:
+        return None
+    return shapely.union_all([m.buffer(EDGE_TOL, cap_style="flat") for m in marks])
 
 
 def _dim_arrow(x: float, y: float, direction: float, color: str) -> str:
@@ -1464,7 +1528,7 @@ def compose_pair_svg(
     """The pair picture as SVG text (1 unit = 1 mm): the BEFORE panel (the
     outline in black, the before plug in teal), a 10 mm gap with the arrow
     and the two values, the AFTER panel (the after outline in black, the
-    after plug in teal, the moved edges in red dots, a removed feature from
+    after plug in teal, the moved edges in red dashes, a removed feature from
     its old outline, an optional dimension callout, the numbered dots), and
     the key column with one leader per entry. ``style`` no longer changes
     the drawing (FD-48); ``context`` is the card's text, not the picture's.
@@ -1523,12 +1587,9 @@ def compose_pair_svg(
     svg.append(f'<g class="panel" id="after" transform="translate({ax:.2f} 0)">')
     if after_plug is not None:
         svg.append(_filled_polygon(frame, after_plug, COLOR_PLUG, PLUG_OPACITY))
-    svg.extend(_draw_outline(frame, a_out, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
-    for arc in plan.arcs:
-        svg.append(_dotted(frame, arc))
-    for (region, _names), removed in zip(plan.regions, plan.removed):
-        if removed:
-            svg.append(_dotted(frame, LineString(region.exterior.coords)))
+    marks = _red_marks(plan)
+    svg.extend(_draw_outline(frame, a_out, COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER, _marks_cut(marks)))
+    svg.extend(_marked(frame, mark) for mark in marks)
     if dimension:
         svg.extend(draw_dimension(frame, dimension))
     dots_row: List[Tuple[int, float, float]] = []
@@ -2071,13 +2132,9 @@ def compose_storyboard_svg(board: Dict[str, Any], stages: Sequence[Dict[str, Any
         svg.append(f'<g class="panel" id="stage{k}" transform="translate({ox:.2f} {oy:.2f}) scale({pn["s"]:.4f})">')
         if st["plug"] is not None:
             svg.append(_filled_polygon(fr, st["plug"], COLOR_PLUG, PLUG_OPACITY))
-        svg.extend(_draw_outline(fr, st["outline"], COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER))
-        plan = st["plan"]
-        for arc in plan.arcs:
-            svg.append(_dotted(fr, arc))
-        for (region, _names), removed in zip(plan.regions, plan.removed):
-            if removed:
-                svg.append(_dotted(fr, LineString(region.exterior.coords)))
+        marks = _red_marks(st["plan"])
+        svg.extend(_draw_outline(fr, st["outline"], COLOR_OUTLINE, False, STROKE_OUTER, STROKE_INNER, _marks_cut(marks)))
+        svg.extend(_marked(fr, mark) for mark in marks)
         svg.append("</g>")
 
     def arrow(xa: float, xb: float, y: float, step: int, caption_y: float, caption: Optional[str],
@@ -2121,7 +2178,7 @@ def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]],
     alt = f"{tool[0].upper()}{tool[1:]}, the four Customizer steps on a {board['plug_label']}, five stages left to right."
     plug_w = _fmt_value(effective_measurements(file_key, defaults)["measure_plug_width_prong_end"])
     overview = (f"Five stages of {tool}, left to right, the top row first, the plug end at the top; "
-                "red dots mark the edges each step moved.")
+                "red dashes mark the edges each step moved.")
 
     def stage_line(k: int, st: Dict[str, Any], level: int) -> str:
         """level 0: the dials with their values; 1: the dials' names; 2: at most three names and a count."""
@@ -2204,7 +2261,7 @@ README_INTRO = (
     "Every dial of the one-sided puller and the two-sided puller has a picture here: "
     "the tool at the dial's default on the left with the plug in teal, an arrow with the "
     "two values, and the tool after the dial moved on the right, drawn once in black with "
-    "the edges that moved in red dots; the numbered dots on those edges match the key "
+    "the edges that moved in red dashes; the numbered dots on those edges match the key "
     "beside the picture.",
     "The pictures are cut from the same OpenSCAD files you print from, at 1 unit = 1 mm. "
     "Under each picture: the long form of its text alternative, then the two values and "
