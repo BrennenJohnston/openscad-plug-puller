@@ -2,7 +2,7 @@
 
 The four Customizer steps of the one-sided puller, dial by dial: what each dial moves, in a picture and a sentence, with the numbers the Customizer allows.
 
-Model version 0.12.0. The printable packet is `docs/Plug_Puller_One_Sided_Guide.pdf`; its parts are [the quick start](quick-start.md), [the dial guide](dial-guide.md), [the measuring guide](measuring-guide.md) and [the measuring form](measuring-form.md). The dial names are written exactly as the Customizer shows them.
+Model version 0.13.0. The printable packet is `docs/Plug_Puller_One_Sided_Guide.pdf`; its parts are [the quick start](quick-start.md), [the dial guide](dial-guide.md), [the measuring guide](measuring-guide.md) and [the measuring form](measuring-form.md). The dial names are written exactly as the Customizer shows them.
 
 ## Which tool this is
 
