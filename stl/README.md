@@ -36,7 +36,7 @@ female hand, Large ≈ 95th-percentile male hand.
 > zip-tie the pair face to face around the plug.
 
 Not sure which plug you have, or which size fits? Print a
-[1:1 paper outline sheet](../docs/guides/print-preview-outlines.md) or the
+[1:1 paper outline sheet](../docs/guides/one-sided/full-guide.md#try-it-on-paper-first) or the
 measuring stencil below first.
 
 ## Measuring-Stencil/
@@ -45,7 +45,7 @@ Thin measuring cards that answer the fit worksheet without a caliper. Print the
 full packed set (`..._All-Cards.stl`) or just the one card you need. Two label
 modes — pick **`Visual/`** for debossed printed text, or **`Tactile/`** for
 raised ADA-size characters plus a fold-flat Grade 2 braille flap on every card
-(see the [Starter Guide](../docs/guides/starter-guide.md#tactile-version-raised-characters--braille)).
+(see ["Match a card instead of measuring" in either quick start](../docs/guides/one-sided/quick-start.md#match-a-card-instead-of-measuring)).
 
 | Card | Purpose |
 | ---- | ------- |

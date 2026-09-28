@@ -24,6 +24,19 @@ For the parameter min/max/step/type schemas and the validator, see
 and [`parameter_mapping_two_sided.json`](../parameter_mapping_two_sided.json)
 (39 rows, two-sided).
 
+- [1. Object purpose and physical context](#1-object-purpose-and-physical-context)
+- [2. The references and the Medium size](#2-the-references-and-the-medium-size)
+- [3. Coordinate systems](#3-coordinate-systems)
+- [4. Customizer architecture](#4-customizer-architecture)
+- [5. One-sided puller geometry](#5-one-sided-puller-geometry)
+- [6. Two-sided puller geometry](#6-two-sided-puller-geometry)
+- [7. CSG order](#7-csg-order)
+- [8. Derivation layer (`fit_measured.scad`)](#8-derivation-layer-fit_measuredscad)
+- [9. Render modes](#9-render-modes)
+- [10. In-model validation warnings](#10-in-model-validation-warnings)
+- [11. Source data authority](#11-source-data-authority)
+- [12. Implementation notes](#12-implementation-notes)
+
 ---
 
 ## 1. Object purpose and physical context
@@ -47,6 +60,8 @@ its own file**:
 The files are independent. A plug 24 mm thick or more gets W-20 in the
 one-sided file (`PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE`);
 the tool still builds.
+
+---
 
 ## 2. The references and the Medium size
 
@@ -83,11 +98,11 @@ strain-relief boot is skipped; the measuring script is no longer in the
 repository); the manual sliders are ignored unless
 `plug_preset = "Measure my plug"`. In the one-sided file:
 
-| Preset | length | width prong end/cord end | thickness prong end/cord end | cord |
-|--------|--------|--------------------------|------------------------------|------|
-| Flat 2-prong lamp plug - NEMA 1-15 | 37.0 | 25.0 / 11.2 | 18.6 / 8.6 | 3.6 |
-| Standard 3-prong plug - NEMA 5-15 | 46.2 | 26.6 / 13.4 | 18.9 / 15.0 | 7.0 |
-| Heavy-duty extension cord - NEMA 5-15 | 43.8 | 25.8 / 21.9 | **27.0** / 27.0 | 8.2 |
+| Preset                                | length | width prong end/cord end | thickness prong end/cord end | cord |
+| ------------------------------------- | ------ | ------------------------ | ---------------------------- | ---- |
+| Flat 2-prong lamp plug - NEMA 1-15    | 37.0   | 25.0 / 11.2              | 18.6 / 8.6                   | 3.6  |
+| Standard 3-prong plug - NEMA 5-15     | 46.2   | 26.6 / 13.4              | 18.9 / 15.0                  | 7.0  |
+| Heavy-duty extension cord - NEMA 5-15 | 43.8   | 25.8 / 21.9              | **27.0** / 27.0              | 8.2  |
 
 The heavy-duty preset's 27 mm thickness (`_eff_plug_thickness` = the
 fatter end) trips W-20 in the one-sided file. The two-sided file offers only
@@ -95,25 +110,29 @@ that preset: length 43.8, width 27.0 / 27.0 (the size the plates close
 across: the one-sided file's thickness pair), cord 8.2, always built with
 `Flat sides` and the bite (the preset's tested grip).
 
+---
+
 ## 3. Coordinate systems
 
 ### 3.1 One-sided puller
 
-| Axis | Direction | Zero | Positive |
-|------|-----------|------|----------|
-| **X** | Horizontal | Midline | Right |
+| Axis  | Direction         | Zero            | Positive        |
+| ----- | ----------------- | --------------- | --------------- |
+| **X** | Horizontal        | Midline         | Right           |
 | **Y** | Along body length | Cord / hook end | Toward plug end |
-| **Z** | Slab thickness | Print bed | Away from bed |
+| **Z** | Slab thickness    | Print bed       | Away from bed   |
 
 Symmetric about X = 0 except the chiral J-hook.
 
 ### 3.2 Two-sided plate (local frame)
 
-| Axis | Direction | Zero | Positive |
-|------|-----------|------|----------|
-| **X** | Across the plate | Midline (mirrored arms) | Right |
-| **Y** | Along the arms | Cord end | Toward the plug/arm tip |
-| **Z** | Plate thickness | Outer face (the print bed) | Mating face at Z = `plate_thickness`, where the two plates meet |
+| Axis  | Direction        | Zero                       | Positive                                                        |
+| ----- | ---------------- | -------------------------- | --------------------------------------------------------------- |
+| **X** | Across the plate | Midline (mirrored arms)    | Right                                                           |
+| **Y** | Along the arms   | Cord end                   | Toward the plug/arm tip                                         |
+| **Z** | Plate thickness  | Outer face (the print bed) | Mating face at Z = `plate_thickness`, where the two plates meet |
+
+---
 
 ## 4. Customizer architecture
 
@@ -165,9 +184,9 @@ Two-sided puller (`src/Plug_Puller_Two_Sided.scad`):
 /* [Hidden] */                 render_mode = Full | One plate, eps
 ```
 
-The beginner-facing walkthrough is `docs/guides/quick-start-beginner.md`;
-the Advanced/Custom tiers are documented for users in
-`docs/guides/power-user-guide.md`.
+The beginner-facing walkthrough is each tool's quick start under
+`docs/guides/<tool>/`; the Advanced/Custom tiers are documented for users
+in each tool's full guide, under "Advanced settings".
 
 ### 4.1 Routing
 
@@ -212,6 +231,8 @@ every `FIT_MEASURED` value equals `PRESET_MEDIUM` exactly. Pinned by:
 
 **Any change that breaks parity is a bug** unless `PRESET_MEDIUM`,
 `fit_measured.scad`, and `tests/fit_formulas.py` change together.
+
+---
 
 ## 5. One-sided puller geometry
 
@@ -271,6 +292,8 @@ length back, standing on `pocket_floor`, `_eff_plug_thickness` tall.
 `plug_preview_1s()` draws it as `%color("SkyBlue", 0.35)` when
 `show_plug_preview` is on (the default). The `%` modifier keeps it out of
 every render and export.
+
+---
 
 ## 6. Two-sided puller geometry
 
@@ -391,6 +414,8 @@ points. `print_layout = Both plates` (the default) exports the pair;
 `One plate` exports a single plate. The tool is the two plates: after
 printing, flip one over and zip-tie them face to face around the plug.
 
+---
+
 ## 7. CSG order
 
 ```
@@ -405,6 +430,8 @@ Two-sided puller: clamshell_plate_3d()  (× 2 in two_sided_pair())
 
 Boolean epsilon convention: subtractive extrusions extend `eps = 0.01`
 beyond the faces they cut.
+
+---
 
 ## 8. Derivation layer (`fit_measured.scad`)
 
@@ -452,23 +479,27 @@ channel, finger hole, strap slot or why it was left out, zip stations) and,
 with `Both plates`, `PRINT LAYOUT: both plates side by side - flip one after
 printing`.
 
+---
+
 ## 9. Render modes
 
 One-sided file:
 
-| Mode | Geometry |
-|------|----------|
-| `Full` | the tool + warnings (+ the see-through plug in preview) |
-| `Body Only` / `Body No Cutouts` | body variants |
-| `Only <Feature>` | plain body + one cutout |
-| `Cutouts Only 2D` | red 2D overlay of the cutouts + pocket |
+| Mode                            | Geometry                                                |
+| ------------------------------- | ------------------------------------------------------- |
+| `Full`                          | the tool + warnings (+ the see-through plug in preview) |
+| `Body Only` / `Body No Cutouts` | body variants                                           |
+| `Only <Feature>`                | plain body + one cutout                                 |
+| `Cutouts Only 2D`               | red 2D overlay of the cutouts + pocket                  |
 
 Two-sided file:
 
-| Mode | Geometry |
-|------|----------|
-| `Full` | `print_layout`: `Both plates` → `two_sided_pair()`, `One plate` → one plate; + warnings and the see-through plug |
-| `One plate` | one plate + warnings (the golden fixture, most tests and the outline sheets use it) |
+| Mode        | Geometry                                                                                                         |
+| ----------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Full`      | `print_layout`: `Both plates` → `two_sided_pair()`, `One plate` → one plate; + warnings and the see-through plug |
+| `One plate` | one plate + warnings (the golden fixture, most tests and the outline sheets use it)                              |
+
+---
 
 ## 10. In-model validation warnings
 
@@ -513,6 +544,8 @@ SHORT FOR ONE` note. MakerWorld renders the final STL only, so none of
 these show there; the OpenSCAD Playground shows the tags but not the
 see-through plug.
 
+---
+
 ## 11. Source data authority
 
 1. `src/Plug_Puller_Parametric.scad` — the one-sided puller's geometry,
@@ -532,6 +565,8 @@ see-through plug.
    two-sided plate's calibration target.
 8. This document — narrative reference. When it disagrees with the files
    above, the files win.
+
+---
 
 ## 12. Implementation notes
 

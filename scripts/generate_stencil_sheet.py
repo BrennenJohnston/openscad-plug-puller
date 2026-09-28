@@ -1,9 +1,9 @@
 """Generate the 1:1 paper measuring-stencil sheet.
 
 The paper alternative to the 3D-printable ``Measuring_Stencil.scad``:
-210 x 279 mm SVG pages (fit A4 and US Letter, same conventions as
-``docs/guides/measuring-template.svg``). Page 1 (``stencil-sheet.svg``)
-carries:
+210 x 279 mm SVG pages (fit A4 and US Letter, the outline sheets'
+conventions). They print at true size as the last pages of each tool's quick
+start and full guide PDFs. Page 1 (``stencil-sheet.svg``) carries:
 
 * the 50 x 50 mm calibration square,
 * the plug-preset silhouettes that fit one row (P1 / P2 / P3) at exact 1:1
@@ -179,14 +179,14 @@ def draw_header(svg: Svg) -> None:
         "Check the calibration square before trusting anything on this sheet.",
         2.8, anchor="middle",
     )
-    # Calibration square (same convention as measuring-template.svg).
+    # Calibration square (the outline sheets' convention).
     svg.rect(14, 26, 50, 50)
     svg.text(39, 49.5, "CALIBRATION", 3.4, "bold", "middle")
     svg.text(39, 54.5, "50 × 50 mm", 3.4, anchor="middle")
     svg.text(72, 32, "1. Measure this square with a ruler.", 3.0)
     svg.text(72, 36.5, "It must be exactly 50 × 50 mm — if not, your", 3.0)
     svg.text(72, 41, "print was scaled: re-print at 100%.", 3.0)
-    svg.text(72, 47.5, "Card legend: docs/guides/starter-guide.md", 2.8,
+    svg.text(72, 47.5, "Card legend: the quick start, under Match a card", 2.8,
              fill="#444444")
     svg.text(72, 52, "Works on A4 and US Letter paper.", 2.8, fill="#444444")
 

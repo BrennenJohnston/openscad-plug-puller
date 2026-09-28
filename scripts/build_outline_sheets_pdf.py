@@ -2,8 +2,7 @@
 
 Bundles every SVG in the public repo's ``docs/guides/outline-sheets/`` into
 one print-ready PDF (``docs/Plug_Puller_Outline_Sheets.pdf``), preceded by a
-styled cover/index page. Uses the same pipeline that produced
-``Plug_Puller_Measuring_Template.pdf``: the sheets are inlined into an HTML
+styled cover/index page. The sheets are inlined into an HTML
 shell whose ``@page`` size equals the SVG page (210 x 279 mm — prints on A4
 and US Letter), then printed to PDF with headless Edge/Chrome (Skia PDF,
 vector output). Because @page and the SVG share the same mm dimensions the
@@ -38,6 +37,19 @@ DEFAULT_OUT = PROJECT_ROOT / "docs" / "Plug_Puller_Outline_Sheets.pdf"
 
 PAGE_W_MM, PAGE_H_MM = 210.0, 279.0
 MM_TO_PT = 72.0 / 25.4
+
+# Shared document style for the three PDF builders (this module, plus
+# build_dial_reference.py, which already
+# import PAGE_W_MM/PAGE_H_MM/print_to_pdf/verify_pdf from here). The accent
+# reuses the dial diagrams' own plug teal (generate_dial_diagrams.COLOR_PLUG)
+# so the printed guides read as one family with the pictures instead of a
+# fourth, invented color. It is decorative only, never text: on white it
+# measures 2.6:1, below the 4.5:1 WCAG AA text minimum.
+ACCENT = "#20b2aa"
+ACCENT_TINT = "#eaf7f6"
+RULE_GRAY = "#ccc"
+BORDER_GRAY = "#bbb"
+TEXT_GRAY = "#444"
 
 logger = logging.getLogger(__name__)
 
@@ -126,14 +138,14 @@ def cover_html() -> str:
         plug pocket — poke through the two big finger circles.</li>
     <li>Hold the cutout against your plug on the wall and try the finger holes.</li>
     <li>Happy? Open the Customizer with the settings printed in the sheet's title
-        block and export your STL (docs/guides/quick-start-beginner.md).</li>
+        block and export your STL (the tool's quick start).</li>
   </ol>
   <p class="hint">Finger holes feel wrong on every sheet? Print the cards in
   <span class="mono">stl/Measuring-Stencil/</span> — their F1/F2 cards carry all 18
   finger-sizing holes (Ø 15–32 mm) — and measure your finger instead
-  (docs/guides/print-preview-outlines.md).</p>
+  (each full guide, under Try it on paper first).</p>
   <p class="footer">openscad-plug-puller · 1:1 outline sheets · works on A4 and US Letter ·
-  guide: docs/guides/print-preview-outlines.md</p>
+  guide: the full guides, under Try it on paper first</p>
 </section>
 """
 
@@ -156,32 +168,44 @@ def build_html(sheets: List[Path]) -> str:
   .page:last-child {{ page-break-after: auto; }}
   .page svg {{ display: block; }}
   .cover {{
-    box-sizing: border-box; padding: 22mm 20mm;
+    box-sizing: border-box; padding: 24mm 20mm;
     font-family: Helvetica, Arial, sans-serif; color: black;
   }}
-  .cover h1 {{ font-size: 7mm; text-align: center; margin: 0 0 4mm; }}
-  .cover .subtitle {{ font-size: 3.4mm; text-align: center; margin: 0 0 8mm; }}
+  .cover h1 {{ font-size: 7mm; text-align: center; margin: 0 0 3mm; }}
+  .cover h1::after {{
+    content: ""; display: block; width: 28mm; height: 0.7mm;
+    background: {ACCENT}; margin: 3mm auto 0;
+  }}
+  .cover .subtitle {{ font-size: 3.4mm; text-align: center; margin: 5mm 0 8mm; }}
   .cover .warn {{
-    border: 0.5mm solid black; padding: 3mm 5mm; margin: 0 0 8mm;
+    border: 0.5mm solid black; border-left: 1.3mm solid {ACCENT};
+    background: {ACCENT_TINT}; padding: 3mm 5mm; margin: 0 0 9mm;
     font-size: 3.2mm;
   }}
   .cover .warn p {{ margin: 1.5mm 0; }}
-  .cover h2 {{ font-size: 4.2mm; margin: 8mm 0 3mm; }}
+  .cover h2 {{
+    font-size: 4.2mm; margin: 8mm 0 3mm; padding-bottom: 1.3mm;
+    border-bottom: 0.3mm solid {RULE_GRAY};
+  }}
   .cover table.index {{
-    border-collapse: collapse; width: 100%; font-size: 3.1mm;
+    border-collapse: collapse; width: 100%; font-size: 3.1mm; margin-top: 1mm;
   }}
   .cover table.index th, .cover table.index td {{
-    border: 0.2mm solid #888; padding: 1.6mm 2.5mm; text-align: left;
+    border: 0.2mm solid {BORDER_GRAY}; padding: 1.8mm 2.5mm; text-align: left;
     font-weight: normal;
   }}
-  .cover table.index th {{ font-weight: bold; width: 40%; }}
+  .cover table.index th {{
+    font-weight: bold; width: 40%; background: {ACCENT_TINT};
+    border-bottom: 0.4mm solid {ACCENT};
+  }}
   .cover ol {{ font-size: 3.2mm; margin: 0; padding-left: 6mm; }}
-  .cover ol li {{ margin-bottom: 1.6mm; }}
-  .cover .hint {{ font-size: 3mm; color: #444; margin-top: 6mm; }}
+  .cover ol li {{ margin-bottom: 2mm; }}
+  .cover .hint {{ font-size: 3mm; color: {TEXT_GRAY}; margin-top: 6mm; }}
   .cover .mono {{ font-family: Consolas, monospace; }}
   .cover .footer {{
     position: absolute; left: 0; right: 0; bottom: 8mm;
-    text-align: center; font-size: 2.6mm; color: #444;
+    text-align: center; font-size: 2.6mm; color: {TEXT_GRAY};
+    padding-top: 1.5mm; margin: 0 20mm; border-top: 0.15mm solid {RULE_GRAY};
   }}
 </style></head>
 <body>{body}</body></html>
@@ -218,22 +242,38 @@ def print_to_pdf(
         user_data_dir.mkdir(parents=True, exist_ok=True)
         cmd.append(f"--user-data-dir={user_data_dir}")
     cmd += [f"--print-to-pdf={out_pdf}", html_path.as_uri()]
+    before = out_pdf.stat().st_mtime_ns if out_pdf.exists() else None
     logger.info("Printing with %s", browser.name)
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if not out_pdf.exists():
         raise RuntimeError(
             f"PDF printing failed (rc={result.returncode}): {result.stderr[-500:]}"
         )
+    # The browser exits cleanly when it cannot overwrite a PDF that a
+    # viewer holds open, which would leave the old file to be verified.
+    if before is not None and out_pdf.stat().st_mtime_ns == before:
+        raise RuntimeError(
+            f"PDF printing did not replace {out_pdf}; close it if a PDF viewer has it "
+            f"open (rc={result.returncode}): {result.stderr[-500:]}"
+        )
 
 
-def verify_pdf(out_pdf: Path, expected_pages: int) -> None:
+def verify_pdf(
+    out_pdf: Path,
+    expected_pages: int,
+    *,
+    page_w_mm: float = PAGE_W_MM,
+    page_h_mm: float = PAGE_H_MM,
+) -> None:
+    """The page count, and every page's box equal to ``page_w_mm`` x
+    ``page_h_mm`` (the sheets' own 210 x 279 mm unless given)."""
     data = out_pdf.read_bytes()
     n_pages = data.count(b"/Type /Page") - data.count(b"/Type /Pages")
     if n_pages != expected_pages:
         raise AssertionError(f"Expected {expected_pages} pages, found {n_pages}")
     boxes = set(re.findall(rb"/MediaBox\s*\[([^\]]*)\]", data))
-    want_w = PAGE_W_MM * MM_TO_PT
-    want_h = PAGE_H_MM * MM_TO_PT
+    want_w = page_w_mm * MM_TO_PT
+    want_h = page_h_mm * MM_TO_PT
     tol = 0.5 * MM_TO_PT
     for box in boxes:
         vals = [float(v) for v in box.split()]
@@ -245,7 +285,7 @@ def verify_pdf(out_pdf: Path, expected_pages: int) -> None:
             )
     logger.info(
         "Verified: %d pages, page box %.1f x %.1f mm (1:1 scale preserved).",
-        n_pages, PAGE_W_MM, PAGE_H_MM,
+        n_pages, page_w_mm, page_h_mm,
     )
 
 

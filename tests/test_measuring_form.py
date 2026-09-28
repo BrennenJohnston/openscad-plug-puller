@@ -48,9 +48,14 @@ def _svg(tool: str) -> str:
 
 
 def _twin(tool: str) -> str:
-    path = PROJECT_ROOT / "docs" / "guides" / tool / "measuring-form.md"
+    """The form's text as the tool's quick start carries it: the section
+    under "The measuring form", up to the next H2."""
+    path = PROJECT_ROOT / "docs" / "guides" / tool / "quick-start.md"
     assert path.exists(), f"{path} is missing"
-    return path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8")
+    start = text.index("### The measuring form")
+    end = text.find("\n## ", start)
+    return text[start:end if end > 0 else None]
 
 
 def _segments_cross(a: Tuple[float, float, float, float], b: Tuple[float, float, float, float]) -> bool:

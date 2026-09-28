@@ -11,7 +11,58 @@ public milestone**.
 
 ## [Unreleased]
 
-Nothing yet.
+### Changed
+
+- **Two documents per tool replace the guide packets and the cross-tool
+  guides.** Each tool now has a **quick start** (get the file, measure your
+  plug and your hand or match a stencil card, the four Customizer steps
+  with a picture per dial, render and print, assemble, use, safety) and a
+  **full guide** (the same, plus the browser notes, the outline sheets,
+  every optional dial, what to buy, care, the fit table, every red warning
+  tag, printing problems, how the advanced dials work, saved settings and
+  the command line), each as a page under `docs/guides/<tool>/` and as a
+  printable PDF (`docs/Plug_Puller_<Tool>_Quick_Start.pdf`,
+  `docs/Plug_Puller_<Tool>_Full_Guide.pdf`) whose last pages are the
+  measuring form and the 1:1 paper stencil sheets. The hand-written text
+  lives once, one topic per file under `docs/guides/source/`, and
+  `scripts/build_dial_reference.py` assembles all four documents from it
+  (`scripts/guide_text.py` loads and converts the sources). The README, the
+  OKH manifest and the MakerWorld quick start point at the new documents.
+
+### Removed
+
+- The guide packets `docs/Plug_Puller_One_Sided_Guide.pdf` and
+  `..._Two_Sided_Guide.pdf` with their `dial-guide.md`, `measuring-guide.md`
+  and `measuring-form.md` pages (folded into the quick starts and full
+  guides); the cross-tool guides `maker-guide.md`, `user-guide.md`,
+  `quick-start-beginner.md`, `web-customizer.md`, `fit-troubleshooting.md`,
+  `power-user-guide.md`, `print-preview-outlines.md` and the
+  `measuring-guide.md` router (their text lives in the new documents); the
+  starter guide (`starter-guide.md`, `Plug_Puller_Starter_Guide.pdf`,
+  `scripts/build_starter_guide_pdf.py`, `tests/test_starter_guide_sync.py`),
+  superseded by the quick starts; and the original measuring template
+  (`docs/guides/measuring-template.svg`, `docs/Plug_Puller_Measuring_Template.pdf`),
+  superseded by the stencil sheets and the measuring forms.
+
+- **The two guide packets read like a printed guide.**
+  `docs/Plug_Puller_One_Sided_Guide.pdf` and `docs/Plug_Puller_Two_Sided_Guide.pdf`
+  print on US Letter pages (the measuring form keeps its 210 × 279 mm sheet
+  at 1:1, centered), with a cover, a contents page with page numbers, and the
+  guide's name, the part's name and "Page N of M" on every page. Every dial is
+  headed by its plain title, with the name the Customizer shows on the line
+  under it, the sentence of what it does above its picture, and its numbers
+  in plain words (a check box reads On or Off); a dial that changes no shape
+  says so in one line instead of an empty picture box. The dial guide now
+  holds only the optional dials after the four steps, so no card is printed
+  twice (69 and 36 pages). The Markdown twins under `docs/guides/one-sided/`
+  and `docs/guides/two-sided/` follow the same layout.
+- **Each edge in the dial pictures is drawn in one style only.** In every
+  before-and-after picture and both storyboards, an edge that moved is drawn
+  only as thick red dashes (long dashes, short gaps, thicker than the black
+  outline); the black line under it is left out, and a stretch two red lines
+  shared is drawn once. Unmoved edges stay solid or dashed black. The picture
+  key now reads "red dashed = the edges this dial moved", and the key box in
+  both guides shows the same dashes.
 
 ## [0.13.0] - 2026-09-27
 

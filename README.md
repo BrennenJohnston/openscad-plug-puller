@@ -38,9 +38,13 @@ Not sure which? Start with the one-sided puller. If your plug measures
 > are CI-validated against golden fixtures, and the model is
 > customizable in the browser with nothing to install.
 
-The two guides to read first: the **[Maker Guide](docs/guides/maker-guide.md)**
-(choose the file, measure or match, customize, print, assemble) and the
-**[User Guide](docs/guides/user-guide.md)** (using the tool, safety, care).
+Each tool has two documents, as a page and as a printable PDF: a **quick
+start** (get the file, measure, the four Customizer steps, print, assemble,
+use) and a **full guide** (every dial, troubleshooting, the advanced dials).
+One-sided puller: [quick start](docs/guides/one-sided/quick-start.md) and
+[full guide](docs/guides/one-sided/full-guide.md). Two-sided puller:
+[quick start](docs/guides/two-sided/quick-start.md) and
+[full guide](docs/guides/two-sided/full-guide.md).
 
 ## How to obtain the device
 
@@ -51,9 +55,9 @@ form in your web browser (including on a phone):
 **[open the one-sided puller](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_SingleFile.scad)**
 or
 **[open the two-sided puller](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_Two_Sided_SingleFile.scad)**.
-The **[Web Customizer Guide](docs/guides/web-customizer.md)**
-covers it click by click, including the manual load path and phone
-usage notes. Each link loads a flattened single-file build:
+Each tool's quick start covers it click by click under "Get the file",
+and its full guide adds the manual load path and the phone notes. Each
+link loads a flattened single-file build:
 [`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad) or
 [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](dist/Plug_Puller_Two_Sided_SingleFile.scad).
 
@@ -74,7 +78,7 @@ Puller that fits **your** plug and **your** hand.
    **One-sided puller:**
    - **Step 1 - Your Plug**: pick a `plug_preset` (or leave it on
      `Measure my plug` and type your plug measurements — see the
-     [Measuring Guide](docs/guides/measuring-guide.md)). Skip both to
+     [quick start](docs/guides/one-sided/quick-start.md)). Skip both to
      get the reference plug pocket. The preview shows a see-through
      plug built from your numbers. The measurements are named for where
      you take them: the **prong end** and the **cord end** (the pocket,
@@ -110,14 +114,14 @@ Puller that fits **your** plug and **your** hand.
 Everything below Step 4 in the Customizer is optional: the `Advanced -`
 sections hold placement overrides (one-sided) and plate tuning
 (two-sided), and the `(Custom size only)` sections of the one-sided
-file only apply when `size = Custom` — see the
-[Power User Guide](docs/guides/power-user-guide.md). `Custom` size
-unlocks every individual slider of the one-sided puller for power users.
-What every dial moves is drawn, before and after, in each tool's guide
-packet: [`docs/Plug_Puller_One_Sided_Guide.pdf`](docs/Plug_Puller_One_Sided_Guide.pdf)
-and [`docs/Plug_Puller_Two_Sided_Guide.pdf`](docs/Plug_Puller_Two_Sided_Guide.pdf),
-with Markdown twins under [`docs/guides/one-sided/`](docs/guides/one-sided/quick-start.md)
-and [`docs/guides/two-sided/`](docs/guides/two-sided/quick-start.md).
+file only apply when `size = Custom`. `Custom` size unlocks every
+individual slider of the one-sided puller for power users. What every
+dial moves is drawn, before and after, in each tool's full guide
+([one-sided](docs/guides/one-sided/full-guide.md),
+[two-sided](docs/guides/two-sided/full-guide.md); printable as
+[`docs/Plug_Puller_One_Sided_Full_Guide.pdf`](docs/Plug_Puller_One_Sided_Full_Guide.pdf)
+and [`docs/Plug_Puller_Two_Sided_Full_Guide.pdf`](docs/Plug_Puller_Two_Sided_Full_Guide.pdf)),
+which also explains how the advanced dials work together.
 
 Prefer a single file (e.g. for the MakerWorld customizer or offline
 sharing)? Use [`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad)
@@ -158,7 +162,7 @@ full packed set (`..._All-Cards.stl`) or just the one card you need, in either
 label mode:
 
 - **Visual** ([`Measuring-Stencil/Visual/`](stl/Measuring-Stencil/Visual)) — debossed printed labels.
-- **Tactile** ([`Measuring-Stencil/Tactile/`](stl/Measuring-Stencil/Tactile)) — raised ADA-size characters plus a fold-flat Grade 2 braille title flap on every card (snap off the support fins, fold each flap back until flat — see the [Starter Guide](docs/guides/starter-guide.md#tactile-version-raised-characters--braille)).
+- **Tactile** ([`Measuring-Stencil/Tactile/`](stl/Measuring-Stencil/Tactile)) — raised ADA-size characters plus a fold-flat Grade 2 braille title flap on every card (snap off the support fins, fold each flap back until flat — see "Match a card instead of measuring" in either [quick start](docs/guides/one-sided/quick-start.md#match-a-card-instead-of-measuring)).
 
 | Card | Purpose |
 | ---- | ------- |
@@ -171,40 +175,29 @@ label mode:
 The whole library is regenerated from source by
 [`scripts/build_release_stls.py`](scripts/build_release_stls.py).
 
-Not sure which size? Print a **[1:1 paper outline sheet](docs/guides/print-preview-outlines.md)**
-of any preset-and-size combination first and test it against your real
-plug and hand — every sheet is also bundled in one printable
-PDF: [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf). For a tool matched to *your* plug and hand, spend five
-minutes with the [Measuring Guide](docs/guides/measuring-guide.md) and
-the Customizer instead.
+Not sure which size? Print a **1:1 paper outline sheet** of any
+preset-and-size combination first and test it against your real plug and
+hand: every sheet is in one printable PDF,
+[`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf),
+and each full guide's "Try it on paper first" section lists its tool's
+sheets. For a tool matched to *your* plug and hand, spend five minutes
+with the quick start's measuring section and the Customizer instead.
 
 ## Build instructions
 
-The **[Maker Guide](docs/guides/maker-guide.md)** carries the whole path in
-one page, in four steps:
-
-1. **Measure or match.** Get the six plug numbers with a ruler, or match
-   the plug against the printed stencil cards
-   ([Maker Guide, section 2](docs/guides/maker-guide.md#2-measure-or-match);
-   the details are in the [Measuring Guide](docs/guides/measuring-guide.md)).
-2. **Customize.** Fill in the four Customizer steps of the file for your
-   plug ([section 3](docs/guides/maker-guide.md#3-customize)).
-3. **Print.** The settings as text, below and in
-   [section 4](docs/guides/maker-guide.md#4-print).
-4. **Assemble.** Strap the one-sided puller onto the plug with two zip ties
-   or a strap, or zip-tie the two plates around the plug in six steps
-   ([section 5](docs/guides/maker-guide.md#5-assemble)).
-
-Two more guides carry every click of the customizing step: the
-**[Quick Start for Beginners](docs/guides/quick-start-beginner.md)**
-(install, type numbers, export) and the
-**[Starter Guide](docs/guides/starter-guide.md)** (also a printable PDF with
-a built-in 1:1 paper stencil sheet:
-[`docs/Plug_Puller_Starter_Guide.pdf`](docs/Plug_Puller_Starter_Guide.pdf)).
-If the print is snug or loose, the
-**[Fit Troubleshooting guide](docs/guides/fit-troubleshooting.md)** says
-which one number to nudge. What to buy is in the
-**[bill of materials](docs/guides/bom.md)**.
+Each tool's **quick start** carries the whole path, in order: get the
+file, measure your plug and your hand (or match a stencil card), fill in
+the four Customizer steps, render and print, assemble, use. It is a page
+([one-sided](docs/guides/one-sided/quick-start.md),
+[two-sided](docs/guides/two-sided/quick-start.md)) and a printable PDF
+whose last pages are the measuring form and the 1:1 paper stencil sheets
+([`docs/Plug_Puller_One_Sided_Quick_Start.pdf`](docs/Plug_Puller_One_Sided_Quick_Start.pdf),
+[`docs/Plug_Puller_Two_Sided_Quick_Start.pdf`](docs/Plug_Puller_Two_Sided_Quick_Start.pdf)).
+If the print is snug or loose, the tool's **full guide** says which one
+number to nudge and decodes every red warning tag
+([one-sided](docs/guides/one-sided/full-guide.md#if-the-print-does-not-fit),
+[two-sided](docs/guides/two-sided/full-guide.md#if-the-print-does-not-fit)).
+What to buy is in the **[bill of materials](docs/guides/bom.md)**.
 
 ### 3D printing tips
 
@@ -231,13 +224,13 @@ which one number to nudge. What to buy is in the
 
 ## How to use it
 
-The **[User Guide](docs/guides/user-guide.md)** covers it: seat the
-one-sided puller on the plugged-in plug, hook the cord, put two fingers in
-the holes and pull straight out; the two-sided puller stays on the plug and
-pulls the same way. It also carries the safety rules (nothing between the
-plug face and the outlet; pull straight, never lever) and the care of the
-tool. If red text appears beside the part in the preview, the
-[Fit Troubleshooting guide](docs/guides/fit-troubleshooting.md) decodes it.
+Each quick start's "Use it" section covers it: seat the one-sided puller
+on the plugged-in plug, hook the cord, put two fingers in the holes and
+pull straight out; the two-sided puller stays on the plug and pulls the
+same way. The safety rules follow it (nothing between the plug face and
+the outlet; pull straight, never lever), and the full guide adds the care
+of the tool. If red text appears beside the part in the preview, the full
+guide's "Red warning tags" section decodes it.
 
 ## How to improve this device
 
@@ -304,7 +297,7 @@ Both tools:
   to the part when a check trips (one-sided W-1…W-20; two-sided WC-1…WC-13),
   including hole-collision checks; the messages name the *measurement* to
   fix; a preview-only green tag confirms your numbers were applied.
-- **Try-before-you-print previews.** [1:1 dimensioned outline sheets](docs/guides/print-preview-outlines.md)
+- **Try-before-you-print previews.** [1:1 dimensioned outline sheets](docs/guides/one-sided/full-guide.md#try-it-on-paper-first)
   for every preset-and-size combination (cut out, hold against the plug, try
   the finger holes) plus the printable [measuring stencil](Measuring_Stencil.scad)
   with plug silhouettes, ruler, cord gauge, and finger holes.
@@ -443,7 +436,7 @@ a single plate.
 
 | Symptom | Likely cause | Where to look |
 | ------- | ------------ | ------------- |
-| Red warning tag lies flat on the bed past the end of the model | One of the in-model validation checks tripped | The tag names the failed check and the measurement to fix; see the [Fit Troubleshooting Guide](docs/guides/fit-troubleshooting.md) |
+| Red warning tag lies flat on the bed past the end of the model | One of the in-model validation checks tripped | The tag names the failed check and the measurement to fix; see the [Fit Troubleshooting Guide](docs/guides/one-sided/full-guide.md#red-warning-tags) |
 | Red tag `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | The plug is too thick for the one-sided puller's pocket | Open [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad) and fill in its Step 1 |
 | Orange `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE` in the two-sided preview | The plug is too short for a velcro strap slot in the arms; the zip ties still hold the plates | Nothing to fix; or pick `Zip ties` in Step 3 |
 | Green `Medium: …` (or `MEASURED: …`) tag in the preview | Not a problem: preview-only confirmation that your measurements were applied; never in the exported STL | — |
@@ -468,32 +461,28 @@ For makers and users:
 
 | Document | Description |
 | -------- | ----------- |
-| [`docs/guides/maker-guide.md`](docs/guides/maker-guide.md) | **Start here.** Choose the file, measure or match, customize, print, assemble |
-| [`docs/guides/user-guide.md`](docs/guides/user-guide.md) | Using the tool, safety, care, what the red tags mean |
+| [`docs/guides/one-sided/quick-start.md`](docs/guides/one-sided/quick-start.md) | **Start here for a plug up to 24 mm thick.** Measure or match a card, the four steps, print, assemble, use |
+| [`docs/guides/one-sided/full-guide.md`](docs/guides/one-sided/full-guide.md) | Everything about the one-sided puller: every dial with a picture, fit troubleshooting, every warning, the advanced dials |
+| [`docs/guides/two-sided/quick-start.md`](docs/guides/two-sided/quick-start.md) | **Start here for a thicker plug, a USB-C tip or a round cord plug.** The same path for the two-sided puller |
+| [`docs/guides/two-sided/full-guide.md`](docs/guides/two-sided/full-guide.md) | Everything about the two-sided puller |
+| [`docs/Plug_Puller_One_Sided_Quick_Start.pdf`](docs/Plug_Puller_One_Sided_Quick_Start.pdf) | The one-sided quick start to print, with the measuring form and the paper stencil sheets at 1:1 as its last pages |
+| [`docs/Plug_Puller_One_Sided_Full_Guide.pdf`](docs/Plug_Puller_One_Sided_Full_Guide.pdf) | The one-sided full guide to print |
+| [`docs/Plug_Puller_Two_Sided_Quick_Start.pdf`](docs/Plug_Puller_Two_Sided_Quick_Start.pdf) | The two-sided quick start to print, with the form and the stencil sheet |
+| [`docs/Plug_Puller_Two_Sided_Full_Guide.pdf`](docs/Plug_Puller_Two_Sided_Full_Guide.pdf) | The two-sided full guide to print |
 | [`docs/guides/bom.md`](docs/guides/bom.md) | Zip ties, the strap, filament per tool |
 | [`docs/guides/design-rationale.md`](docs/guides/design-rationale.md) | Why each default is what it is, with its number and its source |
-| [`docs/Plug_Puller_One_Sided_Guide.pdf`](docs/Plug_Puller_One_Sided_Guide.pdf) | The one-sided packet: quick start, every dial with a before-and-after picture, the measuring guide and the blank form |
-| [`docs/guides/one-sided/`](docs/guides/one-sided/quick-start.md) | The one-sided packet's Markdown twins: quick start, dial guide, measuring guide, measuring form |
-| [`docs/Plug_Puller_Two_Sided_Guide.pdf`](docs/Plug_Puller_Two_Sided_Guide.pdf) | The two-sided packet: the same four parts for the two-sided puller |
-| [`docs/guides/two-sided/`](docs/guides/two-sided/quick-start.md) | The two-sided packet's Markdown twins |
-| [`docs/guides/starter-guide.md`](docs/guides/starter-guide.md) | The whole path on one page: match your plug against the stencil cards (or measure it), fill in the steps, print |
-| [`docs/Plug_Puller_Starter_Guide.pdf`](docs/Plug_Puller_Starter_Guide.pdf) | The starter guide as a printable PDF, ending with the 1:1 paper stencil sheets |
-| [`docs/guides/stencil-sheet.svg`](docs/guides/stencil-sheet.svg) | The 1:1 paper stencil sheet on its own (A4 / Letter): calibration square, P1–P3 plug silhouettes, mm ruler, finger circles |
+| [`docs/guides/stencil-sheet.svg`](docs/guides/stencil-sheet.svg) | The 1:1 paper stencil sheet on its own: calibration square, P1–P3 plug silhouettes, mm ruler, finger circles |
 | [`docs/guides/stencil-sheet-2.svg`](docs/guides/stencil-sheet-2.svg) | The second stencil page: the P4 wide appliance plug silhouette |
-| [`docs/guides/quick-start-beginner.md`](docs/guides/quick-start-beginner.md) | Zero-experience walkthrough: install OpenSCAD, type your measurements, export the STL |
-| [`docs/guides/web-customizer.md`](docs/guides/web-customizer.md) | The same walkthrough with zero install: customize and export in your web browser (works on a phone) |
-| [`docs/guides/measuring-guide.md`](docs/guides/measuring-guide.md) | The router: pick your tool, then its measuring guide and its form |
-| [`docs/guides/measuring-template.svg`](docs/guides/measuring-template.svg) | Printable 1:1 sheet (A4 / Letter): calibration square, mm ruler, finger-sizing circles |
-| [`docs/Plug_Puller_Measuring_Template.pdf`](docs/Plug_Puller_Measuring_Template.pdf) | The same measuring template as a printable PDF |
-| [`docs/guides/print-preview-outlines.md`](docs/guides/print-preview-outlines.md) | Try before you print: 1:1 outline sheets for every preset-and-size combination + the measuring stencil |
+| [`docs/guides/one-sided/measuring-form.svg`](docs/guides/one-sided/measuring-form.svg) | The one-sided measuring form sheet on its own; its text is in the quick start |
+| [`docs/guides/two-sided/measuring-form.svg`](docs/guides/two-sided/measuring-form.svg) | The two-sided measuring form sheet on its own |
 | [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf) | Every 1:1 outline sheet in one printable PDF with a cover index |
-| [`docs/guides/fit-troubleshooting.md`](docs/guides/fit-troubleshooting.md) | Symptom → which measurement to nudge → by how much; warning-tag decoder |
+| [`docs/guides/source/`](docs/guides/source) | The hand-written text of the four guides, one topic per file; edit here, then rebuild |
 
 For power users (the Advanced and Custom tiers):
 
 | Document | Description |
 | -------- | ----------- |
-| [`docs/guides/power-user-guide.md`](docs/guides/power-user-guide.md) | The Advanced sections, Custom mode's full unlock, saved parameter sets, CLI batch export, hidden render modes, console diagnostics |
+| [Advanced settings, one-sided](docs/guides/one-sided/full-guide.md#advanced-settings) and [two-sided](docs/guides/two-sided/full-guide.md#advanced-settings) | The advanced dials explained, Custom size (one-sided), saved settings, the command line; render modes and console diagnostics are in the reference |
 | [`parameter_mapping.json`](parameter_mapping.json) | Machine-readable Customizer schema of the one-sided puller (79 parameters) |
 | [`parameter_mapping_two_sided.json`](parameter_mapping_two_sided.json) | The same for the two-sided puller (39 parameters) |
 | [`dial_catalog.json`](dial_catalog.json) | Every dial's title, sentence and diagram settings; the source of `docs/dials/` and the dial reference |
@@ -547,14 +536,15 @@ openscad-plug-puller/
     Measuring-Stencil/             # sizing cards, in Visual/ and Tactile/ label modes
   docs/
     Plug_Puller_Reference.md       # exhaustive engineering reference
-    Plug_Puller_One_Sided_Guide.pdf  # the one-sided packet: quick start, dial guide, measuring guide, form
-    Plug_Puller_Two_Sided_Guide.pdf  # the two-sided packet
-    Plug_Puller_Starter_Guide.pdf  # the starter guide with the 1:1 paper stencil sheets
-    Plug_Puller_Measuring_Template.pdf  # printable 1:1 measuring template
+    Plug_Puller_One_Sided_Quick_Start.pdf  # the one-sided quick start, with the form and the stencil sheets
+    Plug_Puller_One_Sided_Full_Guide.pdf   # the one-sided full guide
+    Plug_Puller_Two_Sided_Quick_Start.pdf  # the two-sided quick start
+    Plug_Puller_Two_Sided_Full_Guide.pdf   # the two-sided full guide
     Plug_Puller_Outline_Sheets.pdf # every 1:1 outline sheet as one printable PDF
-    guides/                        # the maker and user guides, the BOM, the rationale, the measuring router, the older guides
-      one-sided/                   # the one-sided packet's Markdown twins and its form sheet
-      two-sided/                   # the two-sided packet's Markdown twins and its form sheet
+    guides/                        # the BOM, the rationale, the paper stencil sheets, how the pictures are described
+      source/                      # the hand-written text of the guides, one topic per file
+      one-sided/                   # the one-sided quick start and full guide pages, and its form sheet
+      two-sided/                   # the two-sided quick start and full guide pages, and its form sheet
       outline-sheets/              # printable 1:1 outline sheets (one per preset-and-size combination)
     dials/                         # a diagram per dial, their index and README
     images/                        # guide photos and model preview renders

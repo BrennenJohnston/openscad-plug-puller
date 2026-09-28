@@ -8,7 +8,7 @@
 <text x="72.000" y="32.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">1. Measure this square with a ruler.</text>
 <text x="72.000" y="36.500" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">It must be exactly 50 × 50 mm — if not, your</text>
 <text x="72.000" y="41.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="normal" text-anchor="start" fill="black">print was scaled: re-print at 100%.</text>
-<text x="72.000" y="47.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="#444444">Card legend: docs/guides/starter-guide.md</text>
+<text x="72.000" y="47.500" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="#444444">Card legend: the quick start, under Match a card</text>
 <text x="72.000" y="52.000" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="normal" text-anchor="start" fill="#444444">Works on A4 and US Letter paper.</text>
 <text x="14.000" y="86.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">2. Plug silhouettes (1:1), continued — hold your plug against W (wide side) and T (thin side); if it matches, pick that preset in Step 1.</text>
 <polygon points="9.000,137.000 43.000,137.000 43.000,99.000 9.000,99.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
