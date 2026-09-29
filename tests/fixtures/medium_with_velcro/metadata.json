@@ -1,13 +1,13 @@
 {
   "fixture": "medium_with_velcro",
-  "generated_at_utc": "2026-07-23T20:05:13.917093+00:00",
+  "generated_at_utc": "2026-09-29T06:54:46.600126+00:00",
   "openscad_version": "OpenSCAD version 2026.01.03",
   "manifold_backend": true,
-  "render_duration_seconds": 0.76,
-  "stl_size_bytes": 4655404,
+  "render_duration_seconds": 0.506,
+  "stl_size_bytes": 6740307,
   "trimesh_properties": {
-    "volume_mm3": 11739.94170777624,
-    "surface_area_mm2": 7364.487055555299,
+    "volume_mm3": 11723.937963411869,
+    "surface_area_mm2": 7559.847693439697,
     "bounding_box_mm": [
       [
         -35.35115846246481,
@@ -17,7 +17,7 @@
       [
         35.3389580398798,
         65.5,
-        6.3469404587611375
+        6.35
       ]
     ],
     "is_watertight": true

@@ -88,6 +88,27 @@ public milestone**.
   key now reads "red dashed = the edges this dial moved", and the key box in
   both guides shows the same dashes.
 
+### Fixed
+
+- **Both tools preview in seconds in a web browser.** The rounded edges
+  (the one-sided puller's top edge, `body_top_rounding`, and its optional
+  bottom edge, `body_bottom_rounding`; the two-sided plate's outer edge,
+  `plate_edge_rounding`) were a `minkowski()` with a sphere. The
+  WebAssembly build of OpenSCAD that browsers run, the one in the
+  Assistive Forge, cannot compute that its fast way: its CGAL hull fails
+  and it falls back to a much slower method. Opened from its Assistive
+  Forge link, the one-sided puller took 22 s per preview and the
+  two-sided 65 s, against 0.4 s and 1.3 s in desktop OpenSCAD. Each
+  rounded edge is now a stack of 0.1 mm layers, each the rolling ball's
+  cross-section at the layer's top, so every step sits on or just inside
+  the old smooth surface: at most 0.09 mm inside it, and 0.1 to 0.3 % less
+  volume. The steps are half a typical 0.2 mm print layer. Uploaded to the
+  Assistive Forge, the one-sided file previews in 1.5 s and the two-sided
+  in 2.8 s. The rounding dials keep their ranges and defaults, now checked
+  with `assert()`, as is Render quality. The golden test fixtures and the
+  `stl/Plug-Puller/` library are regenerated; the layers add facets, so
+  the library grows from 229 MB to 286 MB.
+
 ## [0.13.0] - 2026-09-27
 
 ### Added
