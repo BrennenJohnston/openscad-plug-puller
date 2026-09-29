@@ -541,7 +541,7 @@ plug in both files; in the one-sided file the green `Medium: …` /
 SET SIZE = CUSTOM` and `AUTO-FIT ADJUSTED <n> VALUES - SEE CONSOLE`
 notices; in the two-sided file the orange `STRAP SLOT LEFT OUT - PLUG TOO
 SHORT FOR ONE` note. MakerWorld renders the final STL only, so none of
-these show there; the OpenSCAD Playground shows the tags but not the
+these show there; the OpenSCAD Assistive Forge shows the tags but not the
 see-through plug.
 
 ---

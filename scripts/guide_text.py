@@ -30,7 +30,11 @@ from typing import Callable, Dict, List, Optional
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = PROJECT_ROOT / "docs" / "guides" / "source"
 
-PLAYGROUND = "https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/"
+# The one-link path into the OpenSCAD Assistive Forge: each manifest, with a
+# copy of the tool's single file and presets, lives on the Forge's
+# example-manifest branch under plug-puller/.
+FORGE = ("https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/"
+         "openscad-assistive-forge/example-manifest/plug-puller/")
 
 # The words a source file may ask for, per tool.
 PLACEHOLDERS: Dict[str, Dict[str, str]] = {
@@ -40,7 +44,7 @@ PLACEHOLDERS: Dict[str, Dict[str, str]] = {
         "other_tool": "two-sided puller",
         "file": "src/Plug_Puller_Parametric.scad",
         "single_file": "dist/Plug_Puller_SingleFile.scad",
-        "playground_url": PLAYGROUND + "Plug_Puller_SingleFile.scad",
+        "forge_url": FORGE + "forge-manifest-one-sided.json",
         "orientation": "flat face down on the bed, the plug pocket facing up",
         "part_word": "the tool",
         "zip_ties": "two zip ties up to 4.8 mm wide (about 200 mm long), or one hook-and-loop strap 10 to 25 mm wide",
@@ -76,7 +80,7 @@ PLACEHOLDERS: Dict[str, Dict[str, str]] = {
         "other_tool": "one-sided puller",
         "file": "src/Plug_Puller_Two_Sided.scad",
         "single_file": "dist/Plug_Puller_Two_Sided_SingleFile.scad",
-        "playground_url": PLAYGROUND + "Plug_Puller_Two_Sided_SingleFile.scad",
+        "forge_url": FORGE + "forge-manifest-two-sided.json",
         "orientation": "both plates flat on the bed, exactly as the file lays them out",
         "part_word": "the plates",
         "zip_ties": "three zip ties up to 3.6 mm wide (about 200 mm long)",
@@ -124,12 +128,22 @@ def fill(text: str, values: Dict[str, str]) -> str:
     return _PLACEHOLDER.sub(one, text)
 
 
-def load_source(name: str, tool: str) -> str:
+_KIND_BLOCK = re.compile(r"<!-- (quick-start|full-guide) -->\n?(.*?)<!-- /\1 -->\n?", re.S)
+
+
+def load_source(name: str, tool: str, kind: Optional[str] = None) -> str:
     """The Markdown of one source file, filled for ``tool``, without a
-    trailing newline."""
+    trailing newline. Text between ``<!-- full-guide -->`` and
+    ``<!-- /full-guide -->`` (or ``quick-start``) is kept for that document
+    only, so a topic can say more in the full guide; without ``kind`` every
+    block stays."""
     path = SOURCE_DIR / f"{name}.md"
     text = fill(path.read_text(encoding="utf-8"), PLACEHOLDERS[tool])
-    # An empty placeholder leaves a gap; the page keeps one blank line.
+
+    def keep(m: re.Match) -> str:
+        return m.group(2) if kind is None or m.group(1) == kind else ""
+    text = _KIND_BLOCK.sub(keep, text)
+    # An empty placeholder or a dropped block leaves a gap; the page keeps one blank line.
     return re.sub(r"\n{3,}", "\n\n", text).strip("\n")
 
 

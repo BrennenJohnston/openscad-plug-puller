@@ -49,12 +49,12 @@ def _svg(tool: str) -> str:
 
 def _twin(tool: str) -> str:
     """The form's text as the tool's quick start carries it: the section
-    under "The measuring form", up to the next H2."""
+    under "The measuring form", up to the next heading."""
     path = PROJECT_ROOT / "docs" / "guides" / tool / "quick-start.md"
     assert path.exists(), f"{path} is missing"
     text = path.read_text(encoding="utf-8")
     start = text.index("### The measuring form")
-    end = text.find("\n## ", start)
+    end = text.find("\n##", start + 1)
     return text[start:end if end > 0 else None]
 
 

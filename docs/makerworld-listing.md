@@ -29,9 +29,10 @@ PolyForm NC.
   listing license closest to PolyForm NC's intent (recommended: **CC BY-NC-SA
   4.0** — noncommercial, attribution, share-alike). Downloads via MakerWorld
   follow that CC license; the GitHub repo stays PolyForm NC.
-- **Option B — stay playground-only:** skip MakerWorld; the zero-install path
-  remains the OpenSCAD Playground link in the README, which serves the file
-  straight from this repo under PolyForm NC with no platform grant.
+- **Option B — stay Forge-only:** skip MakerWorld; the zero-install path
+  remains the Assistive Forge link in the README, which opens a copy of the
+  file from the Forge's example branch under PolyForm NC with no platform
+  grant.
 
 Until Option A is explicitly chosen, **do not upload**.
 

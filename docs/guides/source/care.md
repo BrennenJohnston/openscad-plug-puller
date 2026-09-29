@@ -1,4 +1,4 @@
-## Care
+### Care
 
 - Before each use, look at the finger holes and the places the zip ties or the strap pass through for cracks. A cracked tool is replaced, not repaired.
 - Replace a zip tie that has loosened.

@@ -1,4 +1,4 @@
-## Safety
+### Safety
 
 - Nothing goes between the plug face and the outlet cover: the tool grips only the plug's sides and back.
 - Pull straight out. Never lever the tool sideways or up and down.

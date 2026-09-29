@@ -42,8 +42,9 @@ paper measuring stencil at true size:
    upload the file for your tool.
 2. Work the form top to bottom: **Step 1 - Your Plug** (a preset, or
    `Measure my plug` and your numbers in mm), **Step 2 - Size**, **Step 3 -
-   Attachment**, then Step 4. The quick start explains every field, with a
-   picture of what it changes. Everything below Step 4 is optional.
+   Attachment**, then Step 4. The quick start explains every field; the
+   full guide shows a picture of what each one changes. Everything below
+   Step 4 is optional.
 3. Generate and render, then look at the rendered model for **red text**
    beside the part. It names a measurement to fix, and it is part of the
    model: exported with it, it prints as an extra object on your bed. Clear
@@ -67,21 +68,18 @@ the browser, as the quick start's "Get the file" section describes.
 
 ## Other ways to customize
 
-- **The OpenSCAD Playground**, in your browser, no account and no upload:
-  [the one-sided puller](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_SingleFile.scad)
+- **The OpenSCAD Assistive Forge**, our browser version of OpenSCAD built
+  for keyboard and screen reader use, with no account and no upload. One
+  link opens the tool ready to customize, shows the four steps' dials
+  first, and offers to keep a copy in your browser:
+  [the one-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-one-sided.json)
   or
-  [the two-sided puller](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_Two_Sided_SingleFile.scad).
-  It shows the green and orange notes but not the see-through plug, and it
-  renders slowly. The full guide's "Working in the browser" section has the
-  details.
-- **Desktop OpenSCAD**, the most accessible of the three with a screen
-  reader: the design is a text file, the Customizer panel is native, and
-  the console messages are readable, including the auto-fit detail that
-  neither MakerWorld nor the Playground shows well.
-- This project is not bundled in
-  [OpenSCAD Assistive Forge](https://openscad-assistive-forge.pages.dev/).
-  It is a reasonable future candidate, which would add a screen-reader-first
-  parameter form, presets and offline use; it is not there today.
+  [the two-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-two-sided.json).
+  Like MakerWorld it shows the red warnings but not the see-through plug.
+  The full guide's "Working in the browser" section has the details.
+- **Desktop OpenSCAD**: the design is a text file, the Customizer panel is
+  native, and the console messages are readable, including the auto-fit
+  detail that neither MakerWorld nor the browser shows.
 
 ## Resources
 

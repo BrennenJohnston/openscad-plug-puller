@@ -88,3 +88,18 @@ def test_every_source_fills_for_both_tools() -> None:
                 assert level >= 2, f"{path.name}: H1 '{heading}' belongs to the assembled page"
             for target in re.findall(r"!\[[^\]]*\]\(([^)\s]+)\)", text):
                 assert (SOURCE_DIR.parent / "one-sided" / target).exists(), f"{path.name}: image {target} is missing"
+
+
+def test_kind_blocks() -> None:
+    """A source keeps a full-guide-only or quick-start-only block for that
+    document alone, drops the markers, and keeps every block without a
+    document named."""
+    both = load_source("stencil-cards", "one-sided")
+    quick = load_source("stencil-cards", "one-sided", "quick-start")
+    full = load_source("stencil-cards", "one-sided", "full-guide")
+    assert "<!--" not in quick and "<!--" not in full and "<!--" not in both
+    assert "Folding the tactile flaps" in full and "Folding the tactile flaps" not in quick
+    assert "The full guide covers a smaller bed" in quick and "The full guide covers a smaller bed" not in full
+    assert "Folding the tactile flaps" in both and "The full guide covers a smaller bed" in both
+    assert "\n\n\n" not in quick and "\n\n\n" not in full
+    assert "**No 3D printer yet?**" in quick and "**No 3D printer yet?**" in full
