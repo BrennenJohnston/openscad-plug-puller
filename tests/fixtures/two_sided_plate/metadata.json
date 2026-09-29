@@ -1,15 +1,13 @@
 {
   "fixture": "two_sided_plate",
-  "scad": "src/Plug_Puller_Two_Sided.scad",
-  "note": "reference.stl copied byte for byte from tests/fixtures/clamshell_plate/ in R1 phase A2; the fields below describe that render of the unified file.",
-  "generated_at_utc": "2026-07-23T20:05:09.068434+00:00",
+  "generated_at_utc": "2026-09-29T06:54:48.052847+00:00",
   "openscad_version": "OpenSCAD version 2026.01.03",
   "manifold_backend": true,
-  "render_duration_seconds": 1.757,
-  "stl_size_bytes": 7662626,
+  "render_duration_seconds": 0.506,
+  "stl_size_bytes": 9469316,
   "trimesh_properties": {
-    "volume_mm3": 6745.810463867948,
-    "surface_area_mm2": 6478.995232762107,
+    "volume_mm3": 6732.383072239354,
+    "surface_area_mm2": 6608.696700150112,
     "bounding_box_mm": [
       [
         -33.49566102027893,
@@ -19,14 +17,15 @@
       [
         33.49566102027893,
         73.79566103219986,
-        4.0
+        3.9999999999999996
       ]
     ],
     "is_watertight": true
   },
   "parameters": {
     "plug_preset": "Heavy-duty extension cord - NEMA 5-15",
-    "render_mode": "Clamshell Plate",
+    "render_mode": "One plate",
     "quality": 64
-  }
+  },
+  "scad": "src/Plug_Puller_Two_Sided.scad"
 }
