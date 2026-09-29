@@ -4,12 +4,13 @@ The {tool} is the file `{file}`. There are two ways to open it and fill in its f
 
 ### In your browser
 
-The OpenSCAD Playground runs the whole Customizer in your browser, on a laptop or a phone. Nothing is uploaded: your numbers stay on your device.
+The OpenSCAD Assistive Forge is a version of OpenSCAD that runs in your browser, on a computer or a phone, built for keyboard and screen reader use. Nothing is uploaded: your numbers stay on your device.
 
-1. Open [the {tool} in the OpenSCAD Playground]({playground_url}). The first visit downloads the OpenSCAD engine (10 to 20 MB), then the model. You will see code on the left (ignore it) and a preview on the right.
-2. Open the **Customize** panel: on a wide screen it is a panel or a tab beside the editor, on a phone a tab at the bottom.
+1. Open [the {tool} in the Assistive Forge]({forge_url}). On a first visit Forge asks which interface you want: choose **Assistive Forge**, then **Download & Continue**, and it downloads its engine once.
+2. Forge offers to keep a copy of the project in your browser. Choose **Save My Copy**: the tool is then listed on Forge's main page whenever you come back, no link needed.
+3. The form shows the four steps' dials first. The rest sit behind one button, **Show all parameters**.
 
-If the link does not load the model, download the whole tool as one file, [`{single_file}`](../../../{single_file}), and drag it into <https://ochafik.com/openscad2/>.
+If the link cannot load, Forge says why and offers **Try again**. You can also download the whole tool as one file, [`{single_file}`](../../../{single_file}), and open it from Forge's main page, under Open or start a project.
 
 ### On your computer
 

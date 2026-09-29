@@ -16,7 +16,7 @@ public milestone**.
 - **Two documents per tool replace the guide packets and the cross-tool
   guides.** Each tool now has a **quick start** (get the file, measure your
   plug and your hand or match a stencil card, the four Customizer steps
-  with a picture per dial, render and print, assemble, use, safety) and a
+  as tables of their dials, render and print, assemble, use, safety) and a
   **full guide** (the same, plus the browser notes, the outline sheets,
   every optional dial, what to buy, care, the fit table, every red warning
   tag, printing problems, how the advanced dials work, saved settings and
@@ -28,6 +28,24 @@ public milestone**.
   `scripts/build_dial_reference.py` assembles all four documents from it
   (`scripts/guide_text.py` loads and converts the sources). The README, the
   OKH manifest and the MakerWorld quick start point at the new documents.
+- **The browser path is the OpenSCAD Assistive Forge.** The README, the
+  MakerWorld quick start and each tool's documents now open the tool in
+  the [Assistive Forge](https://openscad-assistive-forge.pages.dev/), the
+  project's own browser OpenSCAD built for keyboard and screen reader use,
+  from one link that offers to keep a copy in the browser and shows the
+  four steps' dials first (the manifests, single files and presets live on
+  the Forge's `example-manifest` branch under `plug-puller/`); the OpenSCAD
+  Playground links are gone.
+- **Every major section of the four documents starts at the top of a new
+  page**, a heading is never left at the foot of a page without its text,
+  table or list, a short list or table is never split across pages, and
+  photos that follow each other stand in one row (assembly steps with a
+  photo each in three columns). The quick starts list each step's dials in
+  a table (the full guides keep the picture cards), the measuring section
+  is a table in the print, and the printed form section names the sheet's
+  page and leaves the sheet's text description to the web page. The quick
+  starts are 13 (two-sided) and 15 (one-sided) pages, four to five of them
+  the cover, the contents, the form and the stencil sheets.
 
 ### Removed
 

@@ -50,16 +50,19 @@ One-sided puller: [quick start](docs/guides/one-sided/quick-start.md) and
 
 ### Customize in your browser
 
-No install needed — the OpenSCAD Playground runs the full customizer
-form in your web browser (including on a phone):
-**[open the one-sided puller](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_SingleFile.scad)**
+No install needed: the [OpenSCAD Assistive Forge](https://openscad-assistive-forge.pages.dev/),
+our browser version of OpenSCAD built for keyboard and screen reader
+use, opens the tool from one link, ready to customize, and offers to
+keep a copy in your browser:
+**[open the one-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-one-sided.json)**
 or
-**[open the two-sided puller](https://ochafik.com/openscad2/#url=https://raw.githubusercontent.com/BrennenJohnston/openscad-plug-puller/main/dist/Plug_Puller_Two_Sided_SingleFile.scad)**.
-Each tool's quick start covers it click by click under "Get the file",
-and its full guide adds the manual load path and the phone notes. Each
-link loads a flattened single-file build:
-[`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad) or
-[`dist/Plug_Puller_Two_Sided_SingleFile.scad`](dist/Plug_Puller_Two_Sided_SingleFile.scad).
+**[open the two-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-two-sided.json)**.
+The form shows the four steps' dials first. Each tool's quick start
+covers it click by click under "Get the file", and its full guide adds
+the notes for working in the browser. The links open the flattened
+single-file builds, [`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad)
+and [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](dist/Plug_Puller_Two_Sided_SingleFile.scad),
+as copied to the Forge's example branch.
 
 ### Customize on your computer
 

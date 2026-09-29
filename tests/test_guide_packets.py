@@ -24,7 +24,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from scripts.build_dial_reference import build_html, build_markdown, load_catalog, settings_rows
+from scripts.build_dial_reference import build_html, build_markdown, dial_line, load_catalog, settings_rows
 from tests.test_dial_catalog import _mapping_rows
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -34,10 +34,17 @@ STORYBOARDS = PROJECT_ROOT / "docs" / "dials" / "storyboards_index.json"
 TOOLS = ("one-sided", "two-sided")
 OPENER_HEADING = "Which tool this is"
 MEASURE_HEADING = "Measure your plug and your hand"
-QUICK_START_H2 = ["Which tool this is", "Get the file", MEASURE_HEADING]
-QUICK_START_TAIL = ["Render, export and print", "Assemble", "Use it", "Safety", "If it does not fit"]
-FULL_GUIDE_TAIL = ["Render, export and print", "Assemble", "Use it", "Safety", "Care", "If the print does not fit",
+STEPS_HEADING = "The four Customizer steps"
+FRONT_H2 = ["Which tool this is", "Get the file", MEASURE_HEADING]
+# The quick start's steps are one H2 with an H3 per step; the full guide's
+# are an H2 each. Safety, care and the quick start's fit note are H3s
+# under "Use it".
+QUICK_START_H2 = FRONT_H2 + [STEPS_HEADING, "Render, export and print", "Assemble", "Use it"]
+QUICK_START_H3_TAIL = ["Safety", "If it does not fit"]
+FULL_GUIDE_TAIL = ["Render, export and print", "Assemble", "Use it", "If the print does not fit",
                    "Advanced settings", "Going deeper"]
+FULL_GUIDE_H3 = ["Working in the browser", "Try it on paper first", "What to buy", "Safety", "Care",
+                 "Red warning tags", "Printing problems", "Saved settings", "The command line"]
 
 SAMPLE_ROWS = [
     {
@@ -166,10 +173,10 @@ def _check_measuring(text: str, tool: str) -> None:
     """The measuring section: an H3 per measure row of the catalog in
     mapping order, each with the Customizer name and the form row, the how
     text and either the typical range with the example or the choices, and
-    the stencil card; then the cards, the form and its table."""
+    the stencil card; then the form and its table, then the cards."""
     catalog = load_catalog()
     measured = [r for r in catalog if r["file"] == tool and r["measure"] is not None]
-    section = text[text.index(f"## {MEASURE_HEADING}"):text.index("### Match a card instead of measuring")]
+    section = text[text.index(f"## {MEASURE_HEADING}"):text.index("### The measuring form")]
     h3 = [h[1] for h in _headings(section) if h[0] == 3]
     assert h3 == [r["title"] for r in measured], f"{tool}: an H3 per measured dial, its plain title, in order"
     chunks = re.split(r"^### ", section, flags=re.M)[1:]
@@ -185,29 +192,48 @@ def _check_measuring(text: str, tool: str) -> None:
             assert f"Typical: {lo:g} to {hi:g} mm. Example: {m['example']:g} mm." in chunk, f"{tool}: {row['name']} numbers"
         if m["stencil"]:
             assert f"card {m['stencil']}" in chunk, f"{tool}: {row['name']} without its stencil card"
-    form = text[text.index("### The measuring form"):]
+    form = text[text.index("### The measuring form"):text.index("### Match a card instead of measuring")]
     assert "[measuring-form.svg](measuring-form.svg)" in form and "| # | Customizer name |" in form, f"{tool}: the form"
     assert "[stencil-sheet.svg](../stencil-sheet.svg)" in form, f"{tool}: the paper stencil sheet"
 
 
+def _check_steps(text: str, tool: str, quick: List[Dict], mapping: Dict[str, Dict]) -> None:
+    """The quick start's steps: one H2, an H3 per Step section in mapping
+    order, each followed by its line and one list item per quick_start
+    dial in order (the plain title, the Customizer name, the sentence of
+    what it does, the numbers in plain words), no picture and no card."""
+    section = text[text.index(f"## {STEPS_HEADING}"):text.index("## Render, export and print")]
+    sections = []
+    for r in quick:
+        if r["section"] not in sections:
+            sections.append(r["section"])
+    assert [h[1] for h in _headings(section) if h[0] == 3] == sections, f"{tool}: an H3 per Step section, in order"
+    assert "![" not in section and not _card_titles(section), f"{tool}: the quick start's steps carry no picture and no card"
+    chunks = re.split(r"^### ", section, flags=re.M)[1:]
+    for chunk, name in zip(chunks, sections):
+        rows = [r for r in quick if r["section"] == name]
+        items = [ln for ln in chunk.splitlines() if ln.startswith("- ")]
+        assert items == [dial_line(r, mapping.get(r["name"])) for r in rows], f"{tool} {name}: one item per dial, in order"
+        for row, item in zip(rows, items):
+            assert item.startswith(f"- **{row['title']}**, `{row['name']}`: {row['changes']}"), f"{tool} {row['name']}"
+            assert re.search(r" Default [^;]+(; (range|choices) .+)?\.$", item), f"{tool} {row['name']}: the numbers"
+
+
 def test_quick_start_page() -> None:
     """Per tool: one H1, the sections in reading order, the storyboard with
-    its alt and long description, the measuring section, an H2 per Step
-    section with a card per quick_start row in mapping order, no other dial
-    named in backticks, no H4."""
+    its alt and long description, the measuring section, the four steps as
+    lists, safety and the fit note as H3s under Use it, no other dial named
+    in backticks, no H4."""
     catalog = load_catalog()
-    idx, boards = _index(), _storyboards()
+    boards = _storyboards()
     for tool in TOOLS:
         text = (GUIDES / tool / "quick-start.md").read_text(encoding="utf-8")
         heads = _headings(text)
         assert [h for h in heads if h[0] == 1] == [heads[0]] and heads[0] == (1, f"Quick start, {tool} puller"), f"{tool}: one H1 first"
         assert max(level for level, _ in heads) <= 3, f"{tool}: no H4"
-        step_rows = [r for r in _mapping_rows(tool) if r["section"].startswith("Step")]
-        sections = []
-        for r in step_rows:
-            if r["section"] not in sections:
-                sections.append(r["section"])
-        assert [h[1] for h in heads if h[0] == 2] == QUICK_START_H2 + sections + QUICK_START_TAIL, f"{tool}: the H2s in order"
+        assert [h[1] for h in heads if h[0] == 2] == QUICK_START_H2, f"{tool}: the H2s in order"
+        use_it = text[text.index("## Use it"):]
+        assert [h[1] for h in _headings(use_it) if h[0] == 3] == QUICK_START_H3_TAIL, f"{tool}: safety and the fit note under Use it"
         board = boards[tool]
         images = _images_with_descriptions(text)
         story = [im for im in images if im[1] == f"../../dials/{tool}/storyboard.svg"]
@@ -215,8 +241,8 @@ def test_quick_start_page() -> None:
             f"{tool}: the storyboard image and its long description")
         _check_measuring(text, tool)
         quick = [r for r in catalog if r["file"] == tool and r["quick_start"]]
-        assert _card_titles(text) == [r["title"] for r in quick], f"{tool}: a card per quick-start dial in order"
-        _check_cards(text, tool, quick, idx)
+        mapping = {r["openscad_name"]: r for r in _mapping_rows(tool)}
+        _check_steps(text, tool, quick, mapping)
         all_names = {r["name"] for r in catalog if r["file"] == tool}
         quick_names = {r["name"] for r in quick}
         for name in re.findall(r"`([a-z_0-9]+)`", text):
@@ -245,13 +271,20 @@ def test_full_guide_page() -> None:
             if r["section"] not in sections:
                 sections.append(r["section"])
         h2 = [h[1] for h in heads if h[0] == 2]
-        assert h2 == QUICK_START_H2 + sections[:4] + ["The optional dials"] + sections[4:] + FULL_GUIDE_TAIL, f"{tool}: the H2s in order"
+        assert h2 == FRONT_H2 + sections[:4] + ["The optional dials"] + sections[4:] + FULL_GUIDE_TAIL, f"{tool}: the H2s in order"
+        h3 = [h[1] for h in heads if h[0] == 3]
+        assert [h for h in h3 if h in FULL_GUIDE_H3] == FULL_GUIDE_H3, f"{tool}: the full guide's own H3 sections, in order"
+        optional = text[text.index("## The optional dials"):text.index(f"## {sections[4]}")]
+        counts = {s: sum(1 for r in ordered if r["section"] == s) for s in sections[4:]}
+        assert [ln for ln in optional.splitlines() if ln.startswith("- **")] == [
+            f"- **{s}**, {counts[s]} dial{'s' if counts[s] != 1 else ''}: "
+            + ", ".join(r["title"] for r in ordered if r["section"] == s) + "." for s in sections[4:]], (
+            f"{tool}: the optional dials page lists each section with its dials")
         defaults = re.findall(r"^- Default: .+$", text, re.M)
         assert len(defaults) == len(rows), f"{tool}: {len(defaults)} Default lines for {len(rows)} dials"
         _check_measuring(text, tool)
         _check_cards(text, tool, rows, idx)
         assert "](quick-start.md)" in text, f"{tool}: the full guide points at the quick start"
-        assert "### Red warning tags" in text and "### Try it on paper first" in text, f"{tool}: the full guide's own sections"
 
 
 def test_card_numbers_in_plain_words() -> None:
@@ -305,42 +338,81 @@ SAMPLE_STORYBOARD_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18
 SAMPLE_FORM_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="279mm" viewBox="0 0 210 279"><rect width="210" height="279" fill="white"/></svg>'
 
 
+def _sections_of(html: str) -> List[str]:
+    """The major sections of the print in order, by the id of the H2 each opens with."""
+    return re.findall(r'<section class="section">\s*(?:<section class="opener" id="([^"]+)"|(?:<div class="[a-z]+">\s*)*<h2 id="([^"]+)")', html)
+
+
 def test_document_html() -> None:
-    """The quick start's HTML, in order: the cover, the contents, the opener
+    """The full guide's HTML, in order: the cover, the contents, the opener
     with the storyboard figure, the get-the-file prose, the measuring
-    section, the card (the plain title, the Customizer name, a figure
-    holding the SVG with the long description as its caption), the assembly
-    prose, and last the form page and a stencil page with their SVGs at
-    210 mm; a photo from a source as an absolute file path; a link to
-    another file kept as words; US Letter pages; no figure scaled above
-    1:1; and the contents printing the page numbers it is given."""
+    section as a table, the card (the plain title, the Customizer name, a
+    figure holding the SVG with the long description as its caption), the
+    assembly prose, and last the form page and a stencil page with their
+    SVGs at 210 mm; every H2 opening a section of its own; a photo from a
+    source as an absolute file path; a link to another file kept as words;
+    US Letter pages; no figure scaled above 1:1; the picture key in the
+    page foot; and the contents printing the page numbers it is given."""
     args = dict(rows=SAMPLE_ROWS, mappings=SAMPLE_MAPPINGS, index=SAMPLE_INDEX, svgs=SAMPLE_SVGS, tool="one-sided",
-                kind="quick-start", storyboards=SAMPLE_STORYBOARDS, storyboard_svg=SAMPLE_STORYBOARD_SVG,
+                kind="full-guide", storyboards=SAMPLE_STORYBOARDS, storyboard_svg=SAMPLE_STORYBOARD_SVG,
                 form_svg=SAMPLE_FORM_SVG, stencil_svgs=[SAMPLE_FORM_SVG], form_section=SAMPLE_FORM)
     html = build_html(**args)
     order = [html.index(s) for s in ('class="page cover"', 'class="front contents"', 'class="opener"', 'id="get-the-file"',
-                                     'id="measure-your-plug-and-your-hand"', 'id="dial-one-sided-measure_plug_length"',
-                                     'id="assemble"', 'class="page form" id="part-form"')]
+                                     'id="measure-your-plug-and-your-hand"', '<table class="grid measures">',
+                                     'id="dial-one-sided-measure_plug_length"', 'id="assemble"',
+                                     'class="page form" id="part-form"')]
     assert order == sorted(order), "the document's sections are out of order"
     assert html.count('<section class="card"') == 1 and html.count('class="page form"') == 2
     assert "<h3>Plug length</h3>" in html and "Customizer name: <b>measure_plug_length</b>" in html
     assert "plate_thickness" not in html
     assert "<figcaption>Two top views of the one-sided puller, before left and after right.</figcaption>" in html
     assert "<figcaption>Five stages of the one-sided puller, left to right.</figcaption>" in html
+    opened = [a or b for a, b in _sections_of(html)]
+    assert opened == ["which-tool-this-is", "get-the-file", "measure-your-plug-and-your-hand", "sec-step-1---your-plug",
+                      "the-optional-dials", "render-export-and-print", "assemble", "use-it", "if-the-print-does-not-fit",
+                      "advanced-settings", "going-deeper"], "every H2 opens a section of its own"
+    assert html.count("<h2") == len(opened), "an H2 outside its section"
+    assert "| # | Customizer name |" not in html and "________" not in html, "the print carries the sheet, not its text twin"
     assert 'src="file:///' in html and "one-sided-lamp-plug-medium.jpg" in html, "a photo by its absolute path"
+    assert '<div class="photo-row">' in html, "photos that follow each other stand in a row"
     assert "bill of materials</a>" not in html and "bill of materials" in html, "a file link keeps its words"
     assert 'href="https://openscad.org/downloads.html"' in html, "a web link stays a link"
     assert "size: 215.9mm 279.4mm" in html, "the pages are not US Letter"
+    assert "@bottom-left" in html and "In every picture" in html, "the full guide's pages carry the picture key"
     figures = re.findall(r'<figure[^>]*>\s*<svg[^>]*viewBox="0 0 ([\d.]+) [\d.]+"[^>]*width="([\d.]+)mm"', html)
     assert len(figures) == 2, "the card figure and the storyboard"
     for vb_w, width in figures:
         assert float(width) <= float(vb_w) + 1e-6, "a figure is scaled above 1:1"
-    pages = {"which-tool-this-is": 3, "get-the-file": 4, "in-your-browser": 4, "on-your-computer": 4,
-             "measure-your-plug-and-your-hand": 5, "match-a-card-instead-of-measuring": 6, "the-measuring-form": 7,
-             "sec-step-1---your-plug": 8, "render-export-and-print": 9, "assemble": 10, "use-it": 11, "safety": 11,
-             "if-it-does-not-fit": 12, "part-form": 13}
+    anchors = re.findall(r'<a href="#([^"]+)">', html)
+    assert "part-form" not in anchors and len(anchors) == len(set(anchors)), "each contents entry once"
+    pages = {a: i + 3 for i, a in enumerate(anchors)}
+    pages["part-form"] = len(anchors) + 3
     numbered = build_html(**args, pages=pages)
-    assert '<a href="#assemble"><span class="t">Assemble</span><span class="dots"></span><span class="pg">10</span></a>' in numbered
-    assert "printed at true size on page 13" in numbered
-    anchors = re.findall(r'<a href="#([^"]+)">', numbered)
-    assert set(anchors) <= set(pages), f"contents links without a page: {set(anchors) - set(pages)}"
+    assert (f'<a href="#assemble"><span class="t">Assemble</span><span class="dots"></span><span class="pg">{pages["assemble"]}</span></a>'
+            in numbered)
+    assert f"printed at true size on page {pages['part-form']}" in numbered
+
+
+def test_quick_start_html() -> None:
+    """The quick start's HTML: the four steps as one section with a table
+    per step (the sample's one Step), the dial as a row with its title, its
+    Customizer name, its sentence and its numbers, no card and no dial
+    figure; the steps and their dials in the contents; no picture key in
+    the page foot."""
+    html = build_html(rows=SAMPLE_ROWS, mappings=SAMPLE_MAPPINGS, index=SAMPLE_INDEX, svgs=SAMPLE_SVGS, tool="one-sided",
+                      kind="quick-start", storyboards=SAMPLE_STORYBOARDS, storyboard_svg=SAMPLE_STORYBOARD_SVG,
+                      form_svg=SAMPLE_FORM_SVG, stencil_svgs=[SAMPLE_FORM_SVG], form_section=SAMPLE_FORM)
+    opened = [a or b for a, b in _sections_of(html)]
+    assert opened == ["which-tool-this-is", "get-the-file", "measure-your-plug-and-your-hand", "the-four-customizer-steps",
+                      "render-export-and-print", "assemble", "use-it"], "every H2 opens a section of its own"
+    assert '<section class="card"' not in html and html.count("<figure") == 1 + html.count('<figure class="photo">'), (
+        "the quick start draws the storyboard and the photos only")
+    assert ('<div class="keep"><h2 id="the-four-customizer-steps">The four Customizer steps</h2>' in html
+            and '<h3 id="sec-step-1---your-plug">Step 1 - Your Plug</h3>'
+            '<p class="step-intro">Pick a plug preset, or leave it on Measure my plug and type your plug\'s numbers.</p>'
+            '<table class="grid dials">' in html), "the section heading, its line and the first step in one box"
+    assert ('<tr id="dial-one-sided-measure_plug_length"><th scope="row">Plug length<span class="cname">measure_plug_length</span></th>'
+            "<td>Runs the pocket farther toward the finger holes.</td>"
+            "<td><b>Default:</b> 25.5 mm<br><b>Range:</b> 12 to 85 mm, in steps of 0.5 mm</td></tr>") in html
+    assert '<a href="#sec-step-1---your-plug"><span class="t">Step 1 - Your Plug</span>' in html and '<p class="dials">Plug length</p>' in html
+    assert '<h3 id="safety">' in html and "@bottom-left" not in html

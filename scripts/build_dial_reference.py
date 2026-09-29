@@ -124,7 +124,7 @@ PACKET_DIRS = {
 PACKET_EYEBROW = "Plug Puller"
 PACKET_FIGURE_MAX_SCALE = 1.0  # a packet never draws a picture above 1:1 (D-022)
 PACKET_TALL_MM = 120.0  # a card whose figure is taller than this starts a new page
-PACKET_STORY_MAX_H_MM = 96.0  # the storyboard's height cap, so the opener fits on one page
+PACKET_STORY_MAX_H_MM = 80.0  # the storyboard's height cap, so the opener fits on one page
 PACKET_OPENER_HEADING = "Which tool this is"
 PACKET_OPENERS = {
     "one-sided": (
@@ -147,7 +147,7 @@ PACKET_OPENERS = {
 # four steps filled in from PACKET_OPENERS.
 OPENER_SCOPE = {
     "quick-start": ("The Customizer's four steps are {steps}. This quick start covers getting the file, measuring "
-                    "your plug and your hand or matching a card, each step's dials with a picture, then printing, "
+                    "your plug and your hand or matching a card, each step's dials in a table, then printing, "
                     "assembly and use."),
     "full-guide": ("The Customizer's four steps are {steps}. This full guide covers getting the file, measuring "
                    "your plug and your hand or matching a card, every dial with a picture, printing, assembly, use "
@@ -385,6 +385,21 @@ FORM_NOTE = ("Print the form at 100 % (actual size, never fit to page) and check
              "the same order.")
 FORM_WHERE_PDF = "The form is printed at true size on page {page}, at the end of this guide; the paper stencil sheets follow it."
 FORM_WHERE_MD = "The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stencil sheets are {sheets}."
+# The quick start's four steps in one section, each step a table of its
+# dials (the owner's choice of 2026-09-28: no dial pictures in the quick
+# start; the full guide keeps the cards).
+STEPS_HEADING = "The four Customizer steps"
+STEPS_INTRO = ("Work the form top to bottom. Each step lists its dials: what each one does, then its default and the "
+               "choices or the range it allows. The full guide shows a picture of what every dial moves.")
+DIAL_COLUMNS = ("Dial", "What it does", "Default and choices")
+MEASURE_COLUMNS = ("Form row", "What to measure", "How", "Typical", "Stencil card")
+# A note that begins this way describes the picture's setup; it belongs to
+# the card only, never to a dial listed without its picture.
+PICTURE_NOTE_PREFIX = "Drawn on"
+# A list or table up to this long is kept on one page; a longer one breaks
+# between its items or rows.
+SHORT_LIST_ITEMS = 8
+SHORT_TABLE_ROWS = 8
 
 
 def _step_sections(quick: Sequence[Dict[str, Any]], mapping: Dict[str, Dict[str, Any]], tool: str):
@@ -418,16 +433,21 @@ def document_blocks(kind: str, tool: str, rows: Sequence[Dict[str, Any]],
     blocks: List[tuple] = [("head",), ("opener",), ("source", "get-the-file")]
     if full:
         blocks.append(("source", "browser-notes"))
-    blocks += [("measuring",), ("source", "stencil-cards")]
+    # The form comes right after the rows it holds; matching a card is the
+    # other way to fill it in.
+    blocks += [("measuring",), ("form",), ("source", "stencil-cards")]
     if full:
         blocks.append(("source", f"outline-sheets-{tool}"))
-    blocks.append(("form",))
-    for (section, in_section), intro in _step_sections(quick, mapping, tool):
-        blocks.append(("cards", section, in_section, intro))
+    steps =[(section, in_section, intro) for (section, in_section), intro in _step_sections(quick, mapping, tool)]
     if full:
-        blocks.append(("text", f"## {OPTIONAL_HEADING}\n\n{OPTIONAL_INTRO}"))
-        for section, in_section in _sections(_optional_rows(rows, tool), mapping):
+        for section, in_section, intro in steps:
+            blocks.append(("cards", section, in_section, intro))
+        optional = list(_sections(_optional_rows(rows, tool), mapping))
+        blocks.append(("text", _optional_markdown(optional)))
+        for section, in_section in optional:
             blocks.append(("cards", section, in_section, ""))
+    else:
+        blocks.append(("steps", steps))
     blocks.append(("source", "render-and-print"))
     if full:
         blocks.append(("source", "what-to-buy"))
@@ -440,6 +460,35 @@ def document_blocks(kind: str, tool: str, rows: Sequence[Dict[str, Any]],
         blocks.append(("source", "if-it-does-not-fit"))
     blocks.append(("sheets",))
     return blocks
+
+
+def _optional_markdown(optional: Sequence[tuple]) -> str:
+    """The page that opens the optional dials: the intro, then each
+    Customizer section with its dials, in the Customizer's order."""
+    items = [f"- **{section}**, {len(in_section)} dial{'s' if len(in_section) != 1 else ''}: "
+             + ", ".join(r["title"] for r in in_section) + "." for section, in_section in optional]
+    return "\n".join([f"## {OPTIONAL_HEADING}", "", OPTIONAL_INTRO, ""] + items)
+
+
+def dial_note(row: Dict[str, Any]) -> str:
+    """The dial's note for a list or table without its picture: the card's
+    note, unless it describes the picture's setup."""
+    note = row.get("note") or ""
+    return "" if note.startswith(PICTURE_NOTE_PREFIX) else note
+
+
+def dial_line(row: Dict[str, Any], mrow: Optional[Dict[str, Any]]) -> str:
+    """One dial as a list item: its plain title, the name the Customizer
+    shows, what it does, its note, then the numbers in plain words."""
+    parts = [f"**{row['title']}**, `{row['name']}`: {row['changes']}"]
+    note = dial_note(row)
+    if note:
+        parts.append(note)
+    facts = settings_rows(mrow)
+    if facts:
+        parts.append("; ".join((label if i == 0 else label.lower()) + " " + value
+                               for i, (label, value) in enumerate(facts)) + ".")
+    return "- " + " ".join(parts)
 
 
 def _measured_rows(rows: Sequence[Dict[str, Any]], tool: str) -> List[Dict[str, Any]]:
@@ -493,11 +542,13 @@ def _sections(rows_of_file: Sequence[Dict[str, Any]], mapping: Dict[str, Dict[st
 def _document_head(kind: str, tool: str) -> List[str]:
     other_kind, other_words = DOC_OTHER[kind]
     pdf = Path(DOC_PDFS[(tool, kind)]).name
+    named = ("Each step lists its dials by their plain names, with the name the Customizer shows beside each."
+             if kind == "quick-start" else
+             "Each dial is headed by its plain name, with the name the Customizer shows on the line under it.")
     return [f"# {DOC_TITLES[kind]}, {TOOL_WORDS[tool]}", "", DOC_BLURBS[kind].format(tool=TOOL_WORDS[tool]), "",
             f"Model version {MODEL_VERSION}. [The printable {DOC_TITLES[kind].lower()}](../../{pdf}) has the same "
             "text, with the measuring form and the paper stencil sheets at true size as its last pages. The other "
-            f"document for this tool is [{other_words}]({other_kind}.md). Each dial is headed by its plain name, "
-            "with the name the Customizer shows on the line under it.", ""]
+            f"document for this tool is [{other_words}]({other_kind}.md). {named}", ""]
 
 
 def _opener_markdown(tool: str, kind: str, storyboards: Dict[str, Dict[str, Any]]) -> List[str]:
@@ -538,6 +589,14 @@ def _form_markdown(tool: str, form_section: str) -> List[str]:
     return [f"### {FORM_HEADING}", "", FORM_WHERE_MD.format(sheets=sheets) + " " + FORM_NOTE, "", form_section, ""]
 
 
+def _steps_markdown(steps: Sequence[tuple], mapping: Dict[str, Dict[str, Any]]) -> List[str]:
+    lines = [f"## {STEPS_HEADING}", "", STEPS_INTRO, ""]
+    for section, in_section, intro in steps:
+        lines += [f"### {section}", "", intro, ""]
+        lines += [dial_line(row, mapping.get(row["name"])) for row in in_section] + [""]
+    return lines
+
+
 def build_markdown(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str, Dict[str, Any]]],
                    index: Sequence[Dict[str, Any]], tool: str, kind: str,
                    storyboards: Optional[Dict[str, Dict[str, Any]]] = None,
@@ -556,13 +615,15 @@ def build_markdown(rows: Sequence[Dict[str, Any]], mappings: Dict[str, Dict[str,
         elif block[0] == "opener":
             lines += _opener_markdown(tool, kind, storyboards or {})
         elif block[0] == "source":
-            lines += [load_source(block[1], tool), ""]
+            lines += [load_source(block[1], tool, kind), ""]
         elif block[0] == "text":
             lines += [block[1], ""]
         elif block[0] == "measuring":
             lines += _measuring_markdown(rows, mapping, tool)
         elif block[0] == "form":
             lines += _form_markdown(tool, form_section)
+        elif block[0] == "steps":
+            lines += _steps_markdown(block[1], mapping)
         elif block[0] == "cards":
             _kind, section, in_section, intro = block
             lines += [f"## {section}", ""] + ([intro, ""] if intro else [])
@@ -721,65 +782,143 @@ def _print_link(href: str) -> Optional[str]:
     return href if href.startswith(("http://", "https://")) else None
 
 
+def _grid_table(cls: str, columns: Sequence[str], body_rows: Sequence[str]) -> str:
+    head = "".join(f"<th>{_esc(c)}</th>" for c in columns)
+    return f'<table class="grid {cls}"><thead><tr>{head}</tr></thead><tbody>' + "".join(body_rows) + "</tbody></table>"
+
+
+def _title_cell(row: Dict[str, Any]) -> str:
+    """A table's row heading: the plain title over the name the Customizer shows."""
+    return f'<th scope="row">{_esc(row["title"])}<span class="cname">{_esc(row["name"])}</span></th>'
+
+
 def _measuring_html(rows, mapping, tool: str) -> List[str]:
+    """The measuring section for the print: one table, a row per measured
+    dial in the form's order (the page keeps a section per dial)."""
     m = [f'<h2 id="{anchor(MEASURE_HEADING)}">{_esc(MEASURE_HEADING)}</h2>',
          f'<p class="intro">{_esc(MEASURING_INTRO_PLAIN)}</p>']
     if tool == "two-sided":
         m.append(f'<p class="prose">{_esc(TWO_SIDED_WIDTHS)}</p>')
+    body = []
     for row in _measured_rows(rows, tool):
         mm = row["measure"]
         k = _form_row(mapping, row["name"])
+        how = _esc(mm["how"])
+        if row["name"] == "measure_finger_width":
+            how += f"<br>{_esc(RING_TRICK)}"
         if mm["typical"] is None:
-            facts = [("Choices", ", ".join((mapping.get(row["name"]) or {}).get("values", [])))]
+            typical = "Choices: " + _esc(", ".join((mapping.get(row["name"]) or {}).get("values", [])))
         else:
             lo, hi = mm["typical"]
-            facts = [("Typical", f"{lo:g} to {hi:g} mm"), ("Example", f"{mm['example']:g} mm")]
-        if mm.get("stencil"):
-            facts.append(("Stencil", f"card {mm['stencil']}"))
-        m += [f'<section class="measure" id="mg-{dial_id(row)}">', f"<h3>{_esc(row['title'])}</h3>",
-              f'<p class="cname"><span>{_esc(NAME_LABEL)}: <b>{_esc(row["name"])}</b></span>'
-              f'<span class="formrow">{_esc(f"Form row {k}" if k else "Not on the form")}</span></p>',
-              f'<p class="prose">{_esc(mm["how"])}</p>', _facts_table(facts)]
-        if row["name"] == "measure_finger_width":
-            m.append(f'<p class="prose">{_esc(RING_TRICK)}</p>')
-        m.append("</section>")
-    m += [f'<p class="callout">{_esc(SANITY_CHECK)}</p>', f'<p class="prose">{_esc(FOR_SOMEONE_ELSE)}</p>']
+            typical = _esc(f"{lo:g} to {hi:g} mm; example {mm['example']:g} mm")
+        card = _esc(f"card {mm['stencil']}") if mm.get("stencil") else "none"
+        body.append(f'<tr id="mg-{dial_id(row)}"><td class="num">{k if k else "none"}</td>{_title_cell(row)}'
+                    f"<td>{how}</td><td>{typical}</td><td>{card}</td></tr>")
+    m += [_grid_table("measures", MEASURE_COLUMNS, body),
+          f'<p class="callout">{_esc(SANITY_CHECK)}</p>', f'<p class="prose">{_esc(FOR_SOMEONE_ELSE)}</p>']
     return m
+
+
+def _dial_row_html(row: Dict[str, Any], mrow: Optional[Dict[str, Any]]) -> str:
+    what = _esc(row["changes"])
+    note = dial_note(row)
+    if note:
+        what += f" {_esc(note)}"
+    numbers = "<br>".join(f"<b>{_esc(label)}:</b> {_esc(value)}" for label, value in settings_rows(mrow))
+    return f'<tr id="{dial_id(row)}">{_title_cell(row)}<td>{what}</td><td>{numbers}</td></tr>'
+
+
+def _steps_html(steps: Sequence[tuple], mapping: Dict[str, Dict[str, Any]]) -> List[str]:
+    """The quick start's four steps: one section, a table of dials per
+    step, each step's heading kept with its table."""
+    head = f'<h2 id="{anchor(STEPS_HEADING)}">{_esc(STEPS_HEADING)}</h2><p class="intro">{_esc(STEPS_INTRO)}</p>'
+    out: List[str] = []
+    for section, in_section, intro in steps:
+        table = _grid_table("dials", DIAL_COLUMNS, [_dial_row_html(r, mapping.get(r["name"])) for r in in_section])
+        step = f'<h3 id="sec-{anchor(section)}">{_esc(section)}</h3><p class="step-intro">{_esc(intro)}</p>{table}'
+        # The section heading, its line and the first step stay on one page;
+        # a step too tall for that breaks between its rows.
+        out.append('<div class="keep">' + (head if not out else "") + step + "</div>")
+    return out
 
 
 def _keep_together(blocks: Sequence[str]) -> List[str]:
     """A heading and the block after it in one unbreakable box, so no
-    heading is left alone at the bottom of a page."""
+    heading is left alone at the bottom of a page; a table or list that
+    follows the heading's one paragraph goes in the box too."""
     out: List[str] = []
     i = 0
     while i < len(blocks):
         if blocks[i].startswith(("<h2", "<h3")) and i + 1 < len(blocks):
-            out.append('<div class="keep">' + blocks[i] + "\n" + blocks[i + 1] + "</div>")
-            i += 2
+            n = 2
+            if blocks[i + 1].startswith("<p") and i + 2 < len(blocks) and blocks[i + 2].startswith(("<table", "<ul", "<ol")):
+                n = 3
+            out.append('<div class="keep">' + "\n".join(blocks[i:i + n]) + "</div>")
+            i += n
         else:
             out.append(blocks[i])
             i += 1
     return out
 
 
+_PHOTO = '<figure class="photo">'
+
+
+def _page_layout(blocks: Sequence[str]) -> List[str]:
+    """The print's layout classes on the converter's blocks: photos that
+    follow each other stand in one row; a numbered list with a photo in
+    every item becomes two columns of steps; a short list or table stays on
+    one page (a longer one breaks between items or rows)."""
+    out: List[str] = []
+    i = 0
+    while i < len(blocks):
+        block = blocks[i]
+        if block.startswith(_PHOTO):
+            j = i
+            while j < len(blocks) and blocks[j].startswith(_PHOTO):
+                j += 1
+            if j - i > 1:
+                out.append('<div class="photo-row">' + "\n".join(blocks[i:j]) + "</div>")
+                i = j
+                continue
+        if block.startswith("<ol>") and block.count("<figure") == block.count("<li>"):
+            block = '<ol class="photo-steps">' + block[len("<ol>"):]
+        elif block.startswith(("<ul>", "<ol>")) and block.count("<li>") <= SHORT_LIST_ITEMS:
+            block = block[:3] + ' class="short"' + block[3:]
+        elif block.startswith("<table>") and block.count("<tr>") <= SHORT_TABLE_ROWS + 1:
+            block = '<table class="short">' + block[len("<table>"):]
+        out.append(block)
+        i += 1
+    return out
+
+
 def _prose_html(md: str, tool: str) -> str:
     blocks = markdown_to_blocks(md, image_src=_print_image_src(tool), link_src=_print_link)
-    return '<div class="prose">' + "\n".join(_keep_together(blocks)) + "</div>"
+    return '<div class="prose">' + "\n".join(_keep_together(_page_layout(blocks))) + "</div>"
+
+
+def _starts_section(md: str) -> bool:
+    """Whether a source opens a major section (its first heading is an H2)
+    or continues the one before it (an H3 first)."""
+    heads = headings(md)
+    return bool(heads) and heads[0][0] == 2
 
 
 def _contents_html(entries: Sequence[tuple], pages: Optional[Dict[str, int]]) -> str:
     """The contents page: every H2 with its page, its H3s indented, and the
-    dial titles of a card section in small type."""
+    dial titles of a section or a step in small type."""
     def link(anchor_id: str, text: str) -> str:
         return (f'<a href="#{anchor_id}"><span class="t">{_esc(text)}</span><span class="dots"></span>'
                 f'<span class="pg">{_page_of(pages, anchor_id)}</span></a>')
+
+    def dial_list(dials: Sequence[str]) -> str:
+        return f'<p class="dials">{_esc(", ".join(dials))}</p>' if dials else ""
     out = ['<section class="front contents">', f"<h1>{_esc(CONTENTS_HEADING)}</h1>", '<ol class="toc">']
     for anchor_id, text, subs, dials in entries:
-        out.append(f"<li>{link(anchor_id, text)}")
-        if dials:
-            out.append(f'<p class="dials">{_esc(", ".join(dials))}</p>')
+        out.append(f"<li>{link(anchor_id, text)}" + dial_list(dials))
         if subs:
-            out.append("<ol>" + "".join(f"<li>{link(a, t)}</li>" for a, t in subs) + "</ol>")
+            out.append("<ol>" + "".join(f"<li>{link(sub[0], sub[1])}{dial_list(sub[2] if len(sub) > 2 else ())}</li>"
+                                        for sub in subs) + "</ol>")
         out.append("</li>")
     out += ["</ol>", "</section>"]
     return "\n".join(out)
@@ -809,7 +948,9 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
     title = f"{DOC_TITLES[kind]}, {TOOL_WORDS[tool]}"
     key_line = f"In every picture: {LEGEND_LINE}."
     entries: List[list] = []
-    flow: List[str] = []
+    # The flow as (opens a major section, HTML): every major section starts
+    # at the top of a new page.
+    flow: List[Tuple[bool, str]] = []
 
     def add_entry(anchor_id: str, text: str, dials: Sequence[str] = ()) -> None:
         entries.append([anchor_id, text, [], list(dials)])
@@ -831,29 +972,37 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
             key = "".join(f"<li>{svg}<span>" + (f"<b>{_esc(word)}:</b> " if word else "") + f"{_esc(meaning)}</span></li>"
                           for svg, word, meaning in legend_items())
             opener_id = anchor(PACKET_OPENER_HEADING)
-            flow.append("\n".join(
+            flow.append((True, "\n".join(
                 [f'<section class="opener" id="{opener_id}">', f"<h2>{_esc(PACKET_OPENER_HEADING)}</h2>"]
                 + [f'<p class="prose">{_esc(par)}</p>' for par in opener_paragraphs(tool, kind)]
                 + [f'<p class="callout">{_esc(RED_TEXT)}</p>',
                    f'<div class="key"><p class="key-title">{_esc(KEY_TITLE)}</p><ul>{key}</ul></div>',
                    f'<figure class="story">{story_fig}<figcaption>{_esc(board.get("long_description", ""))}</figcaption></figure>',
                    '<ul class="captions">' + "".join(f"<li>{_esc(cap)}</li>" for cap in STEP_CAPTIONS[tool]) + "</ul>",
-                   "</section>"]))
+                   "</section>"])))
             add_entry(opener_id, PACKET_OPENER_HEADING)
         elif block[0] in ("source", "text"):
-            md = load_source(block[1], tool) if block[0] == "source" else block[1]
-            flow.append(_prose_html(md, tool))
+            md = load_source(block[1], tool, kind) if block[0] == "source" else block[1]
+            flow.append((_starts_section(md), _prose_html(md, tool)))
             add_source_entries(md)
         elif block[0] == "measuring":
-            flow += _measuring_html(rows, mapping, tool)
+            parts = _measuring_html(rows, mapping, tool)
+            flow += [(i == 0, part) for i, part in enumerate(parts)]
             add_entry(anchor(MEASURE_HEADING), MEASURE_HEADING, [r["title"] for r in _measured_rows(rows, tool)])
         elif block[0] == "form":
+            # The print carries the sheet itself at true size, so only where
+            # it is; the sheet's text twin is the page's.
             where = FORM_WHERE_PDF.format(page=_page_of(pages, "part-form"))
-            flow += [f'<div class="keep"><h3 id="{anchor(FORM_HEADING)}">{_esc(FORM_HEADING)}</h3>'
-                     f'<p class="callout">{_esc(where)} {_esc(FORM_NOTE)}</p></div>',
-                     _prose_html(form_section, tool)]
+            flow.append((False, f'<div class="keep"><h3 id="{anchor(FORM_HEADING)}">{_esc(FORM_HEADING)}</h3>'
+                                f'<p class="callout">{_esc(where)} {_esc(FORM_NOTE)}</p></div>'))
             if entries:
                 entries[-1][2].append((anchor(FORM_HEADING), FORM_HEADING))
+        elif block[0] == "steps":
+            parts = _steps_html(block[1], mapping)
+            flow += [(i == 0, part) for i, part in enumerate(parts)]
+            add_entry(anchor(STEPS_HEADING), STEPS_HEADING)
+            entries[-1][2] = [(f"sec-{anchor(section)}", section, [r["title"] for r in in_section])
+                              for section, in_section, _intro in block[1]]
         elif block[0] == "cards":
             _kind, section, in_section, intro = block
             sec_id = f"sec-{anchor(section)}"
@@ -863,11 +1012,18 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
             if intro:
                 head.append(f'<p class="step-intro">{_esc(intro)}</p>')
             # The heading, its line and the first card stay on one page.
-            flow.append('<div class="keep">' + "\n".join(head + cards[:1]) + "</div>")
-            flow += cards[1:]
+            flow.append((True, '<div class="keep">' + "\n".join(head + cards[:1]) + "</div>"))
+            flow += [(False, card) for card in cards[1:]]
             add_entry(sec_id, section, [r["title"] for r in in_section])
         elif block[0] == "sheets":
             pass
+    sections: List[str] = []
+    for opens, part in flow:
+        if opens:
+            sections.append(('</section>\n' if sections else "") + '<section class="section">\n' + part)
+        else:
+            sections.append(part)
+    sections.append("</section>")
     # The fixed pages: the cover, the contents, then the flow, then the sheets.
     cover = "\n".join([
         '<section class="page cover">', '<div class="band"></div>', '<div class="cover-body">',
@@ -877,9 +1033,13 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
         f'<p class="version">Model version {_esc(MODEL_VERSION)}</p>', "</section>"])
     sheets = [f'<section class="page form" id="part-form">{sheet_svg(form_svg)}</section>']
     sheets += [f'<section class="page form">{sheet_svg(svg)}</section>' for svg in stencil_svgs]
-    body = [cover, _contents_html(entries, pages), '<div class="flow">'] + flow + ["</div>"] + sheets
+    body = [cover, _contents_html(entries, pages), '<div class="flow">'] + sections + ["</div>"] + sheets
     page_w, page_h = f"{LETTER_W_MM:g}mm", f"{LETTER_H_MM:g}mm"
     font = "Helvetica, Arial, sans-serif"
+    # The picture key runs along the foot of the full guide's pages, where
+    # every dial has a picture; the quick start's one drawing is on its opener.
+    key_foot = (f"    @bottom-left {{ content: {_css_string(key_line)}; font: 2.3mm {font}; color: {TEXT_GRAY}; }}\n"
+                if kind == "full-guide" else "")
     return f"""<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><title>{_esc(title)}</title>
 <style>
@@ -893,8 +1053,7 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
   @page flow {{
     margin: 20mm 20mm 18mm;
     @top-left {{ content: {_css_string(f"Plug Puller · {TOOL_WORDS[tool]} · {DOC_TITLES[kind].lower()}")}; font: 2.6mm {font}; color: {TEXT_GRAY}; }}
-    @bottom-left {{ content: {_css_string(key_line)}; font: 2.3mm {font}; color: {TEXT_GRAY}; }}
-    @bottom-right {{ content: "Page " counter(page) " of " counter(pages); font: 2.6mm {font}; color: {TEXT_GRAY}; }}
+{key_foot}    @bottom-right {{ content: "Page " counter(page) " of " counter(pages); font: 2.6mm {font}; color: {TEXT_GRAY}; }}
   }}
   html, body {{ margin: 0; padding: 0; font-family: {font}; color: #111; }}
   .page {{
@@ -919,12 +1078,12 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
   .page.form svg {{ display: block; }}
   .front {{ page: front; }}
   .opener .key, .opener figure, .opener .captions {{ break-inside: avoid; }}
-  .contents h1, .opener h2, .flow > h2, .prose h2 {{ font-size: 8mm; line-height: 1.15; margin: 0 0 6mm; }}
-  .contents h1::after, .opener h2::after, .flow > h2::after, .prose h2::after {{
+  .section {{ break-before: page; }}
+  .flow > .section:first-child {{ break-before: auto; }}
+  .contents h1, .section h2 {{ font-size: 8mm; line-height: 1.15; margin: 0 0 6mm; break-after: avoid; }}
+  .contents h1::after, .section h2::after {{
     content: ""; display: block; width: 22mm; height: 1mm; background: {ACCENT}; margin: 3mm 0 0;
   }}
-  .flow > h2, .prose h2 {{ margin-top: 10mm; break-after: avoid; }}
-  .flow > h2:first-child, .prose:first-child h2 {{ margin-top: 0; }}
   .contents h1 {{ margin-bottom: 5mm; }}
   .contents ol {{ list-style: none; margin: 0; padding: 0; }}
   .contents a {{ display: flex; align-items: baseline; color: inherit; text-decoration: none; }}
@@ -940,13 +1099,31 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
   .prose, .intro, .prose p, .prose li {{ font-size: 3.4mm; line-height: 1.45; }}
   .prose p, .intro {{ margin: 0 0 3mm; }}
   .intro {{ margin-bottom: 5mm; }}
-  .prose h3, .flow > h3 {{ font-size: 5.2mm; margin: 8mm 0 2.5mm; break-after: avoid; }}
+  .prose h3, .section > h3, .keep > h3 {{ font-size: 5.2mm; margin: 8mm 0 2.5mm; break-after: avoid; }}
   .prose ol, .prose ul {{ margin: 0 0 3.5mm; padding-left: 6mm; }}
-  .prose li {{ margin: 0 0 1.5mm; }}
-  .prose table {{ border-collapse: collapse; width: 100%; font-size: 3mm; line-height: 1.35; margin: 2mm 0 4mm; }}
-  .prose th, .prose td {{ text-align: left; vertical-align: top; padding: 1.3mm 2.5mm; border-bottom: 0.25mm solid {RULE_GRAY}; }}
-  .prose th {{ background: {ACCENT_TINT}; border-bottom: 0.4mm solid {ACCENT}; }}
-  .prose tr {{ break-inside: avoid; }}
+  .prose li {{ margin: 0 0 1.5mm; break-inside: avoid; }}
+  .prose ul.short, .prose ol.short, .prose table.short {{ break-inside: avoid; }}
+  .prose table, table.grid {{ border-collapse: collapse; width: 100%; font-size: 3mm; line-height: 1.35; margin: 2mm 0 4mm; }}
+  .prose th, .prose td, table.grid th, table.grid td {{
+    text-align: left; vertical-align: top; padding: 1.3mm 2.5mm; border-bottom: 0.25mm solid {RULE_GRAY};
+  }}
+  .prose th, table.grid thead th {{ background: {ACCENT_TINT}; border-bottom: 0.4mm solid {ACCENT}; }}
+  .prose tr, table.grid tr {{ break-inside: avoid; }}
+  .prose thead, table.grid thead {{ display: table-header-group; }}
+  table.grid tbody th {{ width: 31mm; font-weight: bold; }}
+  table.grid .cname {{ display: block; font-weight: normal; font-size: 2.6mm; color: {TEXT_GRAY}; margin: 0.6mm 0 0; }}
+  table.dials td:last-child {{ width: 46mm; }}
+  table.measures td.num {{ width: 8mm; text-align: center; }}
+  table.measures td:nth-child(4) {{ width: 29mm; }}
+  table.measures td:last-child {{ width: 14mm; }}
+  .photo-steps {{ list-style: none; padding: 0; counter-reset: step; }}
+  .photo-steps li {{ display: inline-block; width: 31.4%; vertical-align: top; margin: 0 2.9% 3mm 0; counter-increment: step; }}
+  .photo-steps li:nth-child(3n) {{ margin-right: 0; }}
+  .photo-steps li::before {{ content: counter(step) ". "; font-weight: bold; }}
+  .photo-steps figure.photo img {{ max-width: 100%; max-height: 42mm; }}
+  .photo-row {{ display: flex; gap: 4mm; margin: 2mm 0 4mm; break-inside: avoid; }}
+  .photo-row figure.photo {{ flex: 1 1 0; min-width: 0; margin: 0; }}
+  .photo-row figure.photo img {{ max-width: 100%; max-height: 62mm; }}
   .prose code {{ font-family: Consolas, Menlo, monospace; font-size: 0.92em; }}
   .prose pre {{ font-family: Consolas, Menlo, monospace; font-size: 2.7mm; line-height: 1.4; background: #f3f4f4; padding: 2.5mm 3.5mm; margin: 0 0 3.5mm; white-space: pre-wrap; }}
   .prose blockquote, .callout {{
@@ -977,8 +1154,8 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
   h2 + .card, .step-intro + .card {{ border-top: 0; padding-top: 2mm; }}
   .card.tall {{ break-before: page; }}
   .card h3 {{ font-size: 4.8mm; margin: 0; }}
-  .cname {{ font-size: 2.8mm; color: {TEXT_GRAY}; margin: 1mm 0 2.5mm; }}
-  .cname b {{ color: #111; }}
+  p.cname {{ font-size: 2.8mm; color: {TEXT_GRAY}; margin: 1mm 0 2.5mm; }}
+  p.cname b {{ color: #111; }}
   .card .lead {{ font-size: 3.5mm; line-height: 1.45; margin: 0 0 3.5mm; }}
   .card figure {{ margin: 0 0 3mm; text-align: center; }}
   .nopic {{
@@ -997,10 +1174,6 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
     font-size: 3.1mm; line-height: 1.4; background: {ACCENT_TINT}; border-left: 1.2mm solid {ACCENT};
     padding: 2mm 3.5mm; margin: 0 0 1mm;
   }}
-  .measure {{ break-inside: avoid; padding: 4mm 0 1mm; border-top: 0.25mm solid {RULE_GRAY}; }}
-  .measure h3 {{ font-size: 4.8mm; margin: 0; padding: 0; border: 0; }}
-  .measure .cname {{ display: flex; justify-content: space-between; align-items: baseline; }}
-  .measure .formrow {{ font-size: 2.7mm; color: #111; border: 0.3mm solid {ACCENT}; border-radius: 3mm; padding: 0.4mm 2.5mm; }}
 </style></head>
 <body>{chr(10).join(body)}</body></html>
 """
@@ -1104,13 +1277,16 @@ def contents_anchors(html_text: str) -> List[str]:
 
 
 def verify_document_pdf(pdf: Path, cards: Sequence[Dict[str, Any]], html_text: str,
-                        pages: Optional[Dict[str, int]] = None, prose_pages: int = 30) -> Dict[str, int]:
+                        pages: Optional[Dict[str, int]] = None, prose_pages: int = 30,
+                        required_titles: Optional[Sequence[str]] = None) -> Dict[str, int]:
     """The document's PDF: every page US Letter; the page count between a
     third of the cards plus the fixed pages and every card on its own page
     plus the prose; one outline entry per heading the HTML carries (h1 to
-    h4), every dial's title among them; a link annotation for every
-    contents entry; and, given ``pages``, every contents page number equal
-    to the page its anchor landed on."""
+    h4), with ``required_titles`` among them (every dial's title unless
+    given: the quick start lists its dials in tables, so it requires its
+    step headings); a link annotation for every contents entry; and, given
+    ``pages``, every contents page number equal to the page its anchor
+    landed on."""
     n_pages = pdf_page_count(pdf)
     verify_pdf(pdf, n_pages, page_w_mm=LETTER_W_MM, page_h_mm=LETTER_H_MM)
     fixed = 5  # the cover, the contents, the opener, the form, a stencil sheet
@@ -1121,9 +1297,10 @@ def verify_document_pdf(pdf: Path, cards: Sequence[Dict[str, Any]], html_text: s
     titles = outline_titles(pdf)
     if len(titles) != want:
         raise AssertionError(f"Expected {want} outline entries (the HTML's h1 to h4), found {len(titles)}")
-    missing = {r["title"] for r in cards} - set(titles)
+    required = [r["title"] for r in cards] if required_titles is None else list(required_titles)
+    missing = set(required) - set(titles)
     if missing:
-        raise AssertionError(f"{len(missing)} dial titles missing from the outline, e.g. {sorted(missing)[:3]}")
+        raise AssertionError(f"{len(missing)} titles missing from the outline, e.g. {sorted(missing)[:3]}")
     anchors = contents_anchors(html_text)
     links = link_count(pdf)
     if links < len(anchors):
@@ -1168,8 +1345,12 @@ def print_document(kind: str, tool: str, rows, mappings, index, svgs, storyboard
     if not keep_html:
         html_path.unlink()
     of_file = [r for r in rows if r["file"] == tool]
-    cards = [r for r in of_file if r.get("quick_start")] if kind == "quick-start" else of_file
-    counts = verify_document_pdf(out_pdf, cards, html_text, pages)
+    if kind == "quick-start":
+        cards = [r for r in of_file if r.get("quick_start")]
+        required = [section for section, _rows in _sections(cards, mappings.get(tool, {}))]
+    else:
+        cards, required = of_file, [r["title"] for r in of_file]
+    counts = verify_document_pdf(out_pdf, cards, html_text, pages, required_titles=required)
     counts["prints"] = prints
     return counts
 
