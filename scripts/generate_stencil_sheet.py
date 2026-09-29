@@ -12,8 +12,7 @@ start and full guide PDFs. Page 1 (``stencil-sheet.svg``) carries:
 * the 18 finger-sizing circles (F1 / F2).
 
 Every further P card goes on a continuation page (``stencil-sheet-2.svg``,
-...) with its own calibration square: a silhouette is never scaled to fit
-(R2, Q-45).
+...) with its own calibration square: a silhouette is never scaled to fit.
 
 The preset plug numbers live in :data:`PLUG_PRESET_DIMS`;
 ``tests/test_stencil_data.py`` asserts they match the main SCAD and

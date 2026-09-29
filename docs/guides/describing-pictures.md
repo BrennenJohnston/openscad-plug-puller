@@ -13,7 +13,7 @@ Every picture in this project's guides has two text parts: a short alt text that
 7. **A process is a numbered list.** One line per stage, never a paragraph. Source: NCAM, guideline 6.
 8. **Say what did not change** when the change is small or none. Source: Zong and others, 2022 (readers compare); the project's accessibility rule that a text reader must never have to guess.
 9. **Where the text lives.** The SVG's `desc` element carries the long description; the Markdown page puts it as visible text right under the image; the PDF wraps the picture in a `figure` with the long description as its caption; no `longdesc` attribute. Source: the W3C tutorial's figure approach; WebAIM (`longdesc` is deprecated).
-10. **Every description is a reviewed string.** Each alt text and long description is a flagged row in the round's strings pack, proposed until the owner has read the sample. Source: the project's accessibility rule 12 and the planning kit's strings rule.
+10. **Every description is a reviewed string.** Each alt text and long description is proposed text until the project owner has read a sample of it. Source: the project's rule that accessibility-critical text is read by a person before it is final.
 
 ---
 

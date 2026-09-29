@@ -1,7 +1,7 @@
 """Two-sided puller: its red tags use the file's own measurement word, width.
 
 The two-sided file measures the plug's width across the arms (at the prong
-end and at the cord end). The owner chose the words at Q-21 ("Say WIDE and
+end and at the cord end). The owner chose the words ("Say WIDE and
 WIDTH"): WC-2 and WC-9 name the width, and no two-sided tag says "thick"
 about the plug.
 

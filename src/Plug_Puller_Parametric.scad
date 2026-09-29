@@ -300,7 +300,7 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 //   standard   = 46.2 / 26.6-13.4 / 18.9-15.0 / 7.0
 //   heavy-duty = 43.8 / 25.8-21.9 / 27.0-27.0 / 8.2
 // The wide 2-prong appliance plug (the owner's US vacuum plug, measured with
-// a ruler; R2 Gate A) is straight-sided:
+// a ruler) is straight-sided:
 //   wide 2-prong appliance = 38.0 / 34.0-34.0 / 16.0-16.0 / 5.0
 // The heavy-duty plug is 27.0 mm thick, past W-20's 24 mm limit: it belongs
 // to the two-sided puller file.

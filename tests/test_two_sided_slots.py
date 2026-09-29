@@ -1,16 +1,16 @@
 """Two-sided puller: the strap slot on short plugs, the thin-plug warning, and
-the derived-values echo (R1 phase B2).
+the derived-values echo.
 
 * A short plug (the owner's USB-C numbers, 23 mm long) with the default
   attachment keeps all six zip stations: the strap slot is left out instead
-  of running into them, and no red tag prints (defect D-001).
+  of running into them, and no red tag prints (an earlier defect).
 * A plug narrower than the cord-channel floor gets the WC-12 tag instead of
-  silently loose arms (D-006).
+  silently loose arms (an earlier defect).
 * A long plug still gets both strap slots (regression guard).
 * Manual zip placement keeps the slot where the stations put it and still
   reports a collision with a red tag (regression guard).
 * The heavy-duty preset plate is unchanged (regression guard).
-* Every render echoes the derived-values block (D-007).
+* Every render echoes the derived-values block.
 
 License: PolyForm Noncommercial 1.0.0
 """

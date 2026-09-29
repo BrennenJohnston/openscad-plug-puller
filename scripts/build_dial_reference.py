@@ -114,15 +114,15 @@ RED_TEXT = (
 # 2026-09-28; the measuring form keeps its 210 × 279 mm sheet, centered at 1:1.
 LETTER_W_MM, LETTER_H_MM = 215.9, 279.4
 
-# The per-tool guide packets (R3, FD-44): one folder of Markdown twins per
-# tool, the prose blocks below as their own strings rows.
+# The per-tool guide documents: one folder of Markdown pages per tool, the
+# prose blocks below as their own strings.
 TOOL_WORDS = {"one-sided": "one-sided puller", "two-sided": "two-sided puller"}
 PACKET_DIRS = {
     "one-sided": PROJECT_ROOT / "docs" / "guides" / "one-sided",
     "two-sided": PROJECT_ROOT / "docs" / "guides" / "two-sided",
 }
 PACKET_EYEBROW = "Plug Puller"
-PACKET_FIGURE_MAX_SCALE = 1.0  # a packet never draws a picture above 1:1 (D-022)
+PACKET_FIGURE_MAX_SCALE = 1.0  # a packet never draws a picture above 1:1
 PACKET_TALL_MM = 120.0  # a card whose figure is taller than this starts a new page
 PACKET_STORY_MAX_H_MM = 80.0  # the storyboard's height cap, so the opener fits on one page
 PACKET_OPENER_HEADING = "Which tool this is"

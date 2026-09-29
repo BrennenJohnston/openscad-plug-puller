@@ -49,6 +49,12 @@ public milestone**.
 
 ### Removed
 
+- The Cline rules file (`.clinerules/project-facts.md`) and the VS Code
+  workspace file: local development files, not part of the project.
+  `.gitignore` now keeps every AI assistant's rules, memory and skills files
+  and `*.code-workspace` out of the repository. Comments and docstrings that
+  cited the maintainer's private planning notes by ID now say the same in
+  plain words.
 - The guide packets `docs/Plug_Puller_One_Sided_Guide.pdf` and
   `..._Two_Sided_Guide.pdf` with their `dial-guide.md`, `measuring-guide.md`
   and `measuring-form.md` pages (folded into the quick starts and full

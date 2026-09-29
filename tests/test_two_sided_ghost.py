@@ -1,6 +1,6 @@
-"""Two-sided puller: the see-through plug in the preview (R1 phase B4).
+"""Two-sided puller: the see-through plug in the preview.
 
-The owner chose "Build it, on by default in preview" (Q-09). The plug is
+The owner chose "Build it, on by default in preview". The plug is
 drawn under OpenSCAD's ``%`` background modifier, so it shows in the preview
 and is never part of a render or an export:
 
@@ -66,7 +66,7 @@ def test_show_plug_preview_declared_in_step1() -> None:
     source = TWO_SIDED_SCAD.read_text(encoding="utf-8")
     step1 = source[source.index("/* [Step 1 - Your Plug] */"):source.index("/* [Step 2 - Size] */")]
     assert re.search(r"^show_plug_preview\s*=\s*true\s*;", step1, re.MULTILINE), (
-        "show_plug_preview must be declared in Step 1, on by default (Q-09)."
+        "show_plug_preview must be declared in Step 1, on by default."
     )
 
 

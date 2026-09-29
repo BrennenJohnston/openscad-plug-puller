@@ -2,7 +2,7 @@
 
 The Step 3 ``attachment`` dropdown gates the plate's velcro arm slot; the zip
 stations are always cut, because zip ties are what hold the two plates
-together (the owner dropped the "None" and "Velcro strap" options, Q-12).
+together (the owner dropped the "None" and "Velcro strap" options).
 This suite renders the plate at the heavy-duty preset with both Step 3
 choices and asserts:
 

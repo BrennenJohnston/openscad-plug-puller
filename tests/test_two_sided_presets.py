@@ -1,7 +1,7 @@
 """Every two-sided `plug_preset` renders clean with its own numbers and sides.
 
-The two-sided puller's dropdown carries the plugs the owner chose at R2's
-Gate A (Q-38) with the labels of Q-39. Each preset fills in the plug's
+The two-sided puller's dropdown carries the plugs the owner chose, with
+the labels the owner wrote. Each preset fills in the plug's
 length, its width at the prong end and at the cord end, and the cord, and
 carries its own sides: the heavy-duty extension cord keeps Flat sides and
 the grip bite (its plate is the golden fixture), the USB-C laptop tip builds
@@ -28,7 +28,7 @@ import pytest
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TWO_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
 
-# The dropdown's presets in Customizer order (Gate A, Q-38 and Q-39), with the
+# The dropdown's presets in Customizer order (the owner's choice of plugs and labels), with the
 # plug numbers each fills in (mm: length, width at the prong end, width at the
 # cord end, cord) and its sides.
 PRESETS: Dict[str, Dict[str, object]] = {

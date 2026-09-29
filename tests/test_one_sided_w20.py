@@ -1,6 +1,6 @@
 """One-sided puller: a plug too thick for it points to the two-sided file (W-20).
 
-Since R1 phase C1 the one-sided file builds only the one-sided puller. A plug
+The one-sided file builds only the one-sided puller. A plug
 24 mm thick or more no longer switches silently to another tool: it gets the
 red tag "PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE", whether the
 thickness is typed or comes from a plug preset. Thinner plugs stay silent.
