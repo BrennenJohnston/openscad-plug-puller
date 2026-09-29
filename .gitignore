@@ -21,13 +21,29 @@ __pycache__/
 # IDEs
 .vscode/
 .idea/
+*.code-workspace
 
 # OS cruft
 Thumbs.db
 .DS_Store
 
-# AI coding assistants
+# AI coding assistants: rules, memory and skills files are local personal
+# development files, never shared in this repository
 .cursor/
+.cursorrules
+.clinerules/
+.clinerules
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+GEMINI.md
+.github/copilot-instructions.md
+memory-bank/
+.aider*
+.windsurf/
+.windsurfrules
+.roo/
 
 # OpenSCAD scad-check output
 build/

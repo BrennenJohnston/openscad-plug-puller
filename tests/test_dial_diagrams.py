@@ -139,7 +139,7 @@ def test_readme_lists_every_dial() -> None:
 
 
 def test_pair_svg_two_panels() -> None:
-    """The pair picture (FD-48): a before panel, an arrow with the two values,
+    """The pair picture: a before panel, an arrow with the two values,
     an after panel whose moved edges alone are red, and a numbered key beside
     it; no dial name and no legend inside the picture."""
     region = Polygon([(40, 0), (43, 0), (43, 30), (40, 30)])
@@ -210,7 +210,7 @@ def test_regions_named_in_index() -> None:
 
 
 def test_descriptions_follow_rules() -> None:
-    """Every index row carries the two-part text alternative of FD-45: an
+    """Every index row carries the two-part two-part text alternative: an
     alt of at most 150 characters that never opens with "image of" and the
     like, names the row's title and, unless it says "named below", every
     feature red marks; a long description of at most 90 words that opens
