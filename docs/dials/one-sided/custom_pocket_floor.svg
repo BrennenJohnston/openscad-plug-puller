@@ -16,8 +16,8 @@
 <g class="panel" id="after" transform="translate(85.50 0)">
 <path d="M 6.00 7.81 L 31.50 7.81 L 31.50 27.81 L 6.00 27.81 L 6.00 7.81 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
 <path d="M 69.50 25.99 L 69.48 29.80 L 64.43 29.79 L 64.44 23.47 L 67.09 23.46 L 68.05 23.71 L 68.66 24.12 L 69.14 24.69 L 69.42 25.38 L 69.50 25.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 9.86 29.81 L 9.81 29.76 L 9.86 27.81 L 30.50 27.81 L 30.94 27.61 L 31.37 27.26 L 31.56 26.57 L 31.61 23.46 L 59.34 23.51 L 59.29 29.81 L 9.86 29.81 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 10.01 27.81 L 30.50 27.81 L 30.94 27.61 L 31.37 27.26 L 31.56 26.57 L 31.56 25.53" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 31.56 25.53 L 31.61 23.46 L 59.29 23.46 L 59.34 23.51 L 59.34 29.76 L 59.29 29.81 L 9.86 29.81 L 9.81 27.86 L 10.01 27.81" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 10.01 27.81 L 30.50 27.81 L 30.94 27.61 L 31.37 27.26 L 31.56 26.57 L 31.56 25.53" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <circle cx="31.56" cy="25.53" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="31.56" y="26.32" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 </g>
 <g class="key">

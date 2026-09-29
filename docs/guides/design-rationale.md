@@ -2,6 +2,8 @@
 
 Every default in the two files has a reason. This page gives each one in the same shape: the decision, the number, the evidence, and what happens if you change it. The numbers come from the files named beside them.
 
+---
+
 ## The 24 mm split between the two tools
 
 **The decision.** A plug up to 24 mm thick gets the one-sided puller; a thicker plug gets the two-sided puller.
@@ -12,6 +14,8 @@ Every default in the two files has a reason. This page gives each one in the sam
 
 **What you may change.** Nothing here is a dial. If you type a thickness of 24 mm or more into the one-sided file it prints the red tag `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` beside the part and the part is still built, so you can see it, but it will not hold that plug.
 
+---
+
 ## Three sizes from measured hands
 
 **The decision.** `Small`, `Medium` and `Large` are hand sizes, not tool sizes: each sets a finger width and a hand width, and the finger holes and the body follow.
@@ -20,7 +24,9 @@ Every default in the two files has a reason. This page gives each one in the sam
 
 **The evidence.** The pairs come from the ANSUR II (2012) hand breadth survey and Rogers (2008) knuckle breadth, as `README.md` (Sizes) states: Small is about a 5th-percentile female hand, Large about a 95th-percentile male hand, and Medium is the reference device the owner printed and tested. The reference does not state the exact percentile behind each number beyond that.
 
-**What you may change.** `Measure my hand` replaces the pair with your own two numbers and everything follows. A finger hole is sized to the knuckle, so a hole that is too tight pinches and one that is too loose lets the finger slip: measure at the widest knuckle, as the [Measuring Guide](measuring-guide.md) shows.
+**What you may change.** `Measure my hand` replaces the pair with your own two numbers and everything follows. A finger hole is sized to the knuckle, so a hole that is too tight pinches and one that is too loose lets the finger slip: measure at the widest knuckle, as the [quick start](one-sided/quick-start.md) shows.
+
+---
 
 ## The two-sided cradle and the bite
 
@@ -32,13 +38,17 @@ Every default in the two files has a reason. This page gives each one in the sam
 
 **What you may change.** A deeper cradle is steeper; the file will not let it go below the cord channel's width and says so with the tag `CRADLE SHALLOWER THAN ASKED - PLUG NARROW`. A bite of zero or more means the arms never squeeze a flat-sided plug, and the tag `NO GRIP BITE - PLUG WONT BE HELD` appears.
 
+---
+
 ## PETG
 
 **The decision.** PETG is the recommended filament; PLA, ABS and ASA work; flexible filament does not.
 
 **The evidence.** `README.md` (3D printing tips) and `docs/makerworld-listing.md` (print settings): the cord hook and the finger holes flex a little on every pull, and PETG takes that repeated flexing without cracking where PLA can; it also shrugs off the warmth near a misbehaving outlet. A flexible filament bends instead of pulling.
 
-**What you may change.** The material is your slicer's choice, not the file's. Whatever you print in, 3 to 4 walls keep the hook and the zip-tie holes strong (the [Fit Troubleshooting guide](fit-troubleshooting.md) names a snapped hook as the sign of too few walls).
+**What you may change.** The material is your slicer's choice, not the file's. Whatever you print in, 3 to 4 walls keep the hook and the zip-tie holes strong (the [full guide](one-sided/full-guide.md) names a snapped hook as the sign of too few walls).
+
+---
 
 ## Red tags as error messages you can hold
 
@@ -46,7 +56,9 @@ Every default in the two files has a reason. This page gives each one in the sam
 
 **The evidence.** `docs/Plug_Puller_Reference.md` section 10 lists the twenty one-sided checks (W-1 to W-20) and the thirteen two-sided checks (WC-1 to WC-13). The tag is geometry because the customizer on MakerWorld shows only the finished model: a message that lived only in a text pane would be invisible there. A red coupon in the preview, and on the bed if you export anyway, cannot be missed by anyone.
 
-**What you may change.** Nothing turns the tags off. Fix the number and the tag goes away; the [Fit Troubleshooting guide](fit-troubleshooting.md) decodes every one.
+**What you may change.** Nothing turns the tags off. Fix the number and the tag goes away; the [full guide](one-sided/full-guide.md) decodes every one.
+
+---
 
 ## The see-through plug in the preview
 
@@ -56,6 +68,8 @@ Every default in the two files has a reason. This page gives each one in the sam
 
 **What you may change.** `show_plug_preview` turns it off; nothing else changes.
 
+---
+
 ## Measured presets only
 
 **The decision.** A plug preset exists only for a plug the owner measured at two stations, the prong end and the cord end; there are no presets typed from a catalog.
@@ -64,9 +78,11 @@ Every default in the two files has a reason. This page gives each one in the sam
 
 **What you may change.** `Measure my plug` with your own six numbers is always the safer choice for a plug that is not on the list; the outline sheets and the stencil cards let you check before you print.
 
+---
+
 ## Print settings as text
 
-**The decision.** Every print setting is written out in words (the [Maker Guide](maker-guide.md), section 4), never only in a slicer profile or a screenshot.
+**The decision.** Every print setting is written out in words (each quick start, under "Render, export and print"), never only in a slicer profile or a screenshot.
 
 **The evidence.** The Accessible MakerWorld Documentation Standard, section 2 (its canonical evidence library), copied here as it stands:
 

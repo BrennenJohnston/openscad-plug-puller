@@ -38,17 +38,25 @@ archive-download: https://github.com/BrennenJohnston/openscad-plug-puller/releas
 
 bom: ./docs/guides/bom.md
 making-instructions:
-  - path: ./docs/guides/maker-guide.md
-    title: Choose the file, measure or match, customize, print, assemble
-  - path: ./docs/Plug_Puller_One_Sided_Guide.pdf
-    title: The one-sided puller's guide packet, with the quick start, the dial guide, the measuring guide and the form
-  - path: ./docs/Plug_Puller_Two_Sided_Guide.pdf
-    title: The two-sided puller's guide packet, with the quick start, the dial guide, the measuring guide and the form
+  - path: ./docs/guides/one-sided/quick-start.md
+    title: The one-sided puller's quick start, get the file, measure, the four steps, print, assemble, use
+  - path: ./docs/guides/two-sided/quick-start.md
+    title: The two-sided puller's quick start, the same path for the two-sided puller
+  - path: ./docs/Plug_Puller_One_Sided_Quick_Start.pdf
+    title: The one-sided quick start to print, with the measuring form and the paper stencil sheets at true size
+  - path: ./docs/Plug_Puller_Two_Sided_Quick_Start.pdf
+    title: The two-sided quick start to print, with the measuring form and the paper stencil sheet at true size
+  - path: ./docs/Plug_Puller_One_Sided_Full_Guide.pdf
+    title: The one-sided full guide, every dial with a picture, fit troubleshooting, every warning, the advanced dials
+  - path: ./docs/Plug_Puller_Two_Sided_Full_Guide.pdf
+    title: The two-sided full guide, every dial with a picture, fit troubleshooting, every warning, the advanced dials
 operation-instructions:
-  - path: ./docs/guides/user-guide.md
-    title: Using the one-sided and the two-sided puller, safety and care
-user-manual: ./docs/guides/user-guide.md
-manufacturing-instructions: ./docs/guides/maker-guide.md
+  - path: ./docs/guides/one-sided/full-guide.md
+    title: Using the one-sided puller, safety and care, under Use it, Safety and Care
+  - path: ./docs/guides/two-sided/full-guide.md
+    title: Using the two-sided puller, safety and care, under Use it, Safety and Care
+user-manual: ./docs/guides/one-sided/full-guide.md
+manufacturing-instructions: ./docs/guides/one-sided/quick-start.md
 
 design-files:
   - path: ./src/Plug_Puller_Parametric.scad

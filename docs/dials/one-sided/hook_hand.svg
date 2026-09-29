@@ -4,7 +4,7 @@
 <desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hook side set to Left: mirrors the cord hook at the cord end so its catch faces the other side, and nothing else moves. Marked in red: 1, the hook: the cord hook slot in the bottom edge. The body edge, the pocket, the seat and the wall notch stay where they were.</desc>
 <rect width="100.00" height="29.30" fill="white"/>
 <g class="panel" id="before">
-<path d="M 28.00 16.33 L 20.92 17.33 L 20.88 13.25 L 20.56 12.90 L 20.56 8.99 L 20.41 8.51 L 20.10 8.13 L 19.77 7.94 L 19.29 7.84 L 10.72 7.84 L 10.12 7.99 L 9.66 8.40 L 9.46 8.99 L 9.46 11.77 L 9.55 12.14 L 9.82 12.55 L 10.12 12.77 L 10.60 12.91 L 14.78 12.92 L 16.12 14.26 L 16.10 17.99 L 12.05 18.00 L 0.00 16.29" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 28.00 16.33 L 20.91 17.33 L 20.88 13.25 L 20.56 12.90 L 20.54 8.87 L 20.41 8.51 L 20.10 8.13 L 19.78 7.94 L 19.29 7.84 L 10.60 7.85 L 10.23 7.94 L 9.91 8.13 L 9.66 8.41 L 9.50 8.74 L 9.46 11.77 L 9.60 12.25 L 9.91 12.63 L 10.23 12.82 L 10.60 12.91 L 14.78 12.92 L 16.11 14.25 L 16.08 18.00 L 12.06 18.00 L 11.31 17.93 L 0.00 16.33" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 9.61 0.00 L 9.23 1.06 L 8.70 2.18 L 8.06 3.25 L 7.32 4.25 L 6.48 5.18 L 5.56 6.01 L 4.56 6.76 L 3.49 7.40 L 2.36 7.93 L 1.19 8.35 L 0.00 8.65" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
 <path d="M 28.00 8.65 L 26.82 8.35 L 25.64 7.93 L 24.52 7.40 L 23.45 6.76 L 22.45 6.02 L 21.52 5.18 L 20.69 4.26 L 19.94 3.26 L 19.30 2.19 L 18.77 1.06 L 18.39 0.00" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
 </g>
@@ -14,15 +14,18 @@
 <text x="33.00" y="28.70" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">→ Left</text>
 </g>
 <g class="panel" id="after" transform="translate(38.00 0)">
-<path d="M 28.00 16.33 L 16.13 18.00 L 12.05 18.00 L 11.88 17.94 L 11.88 14.26 L 13.20 12.93 L 17.40 12.91 L 17.88 12.77 L 18.34 12.36 L 18.54 11.77 L 18.54 8.99 L 18.40 8.51 L 18.09 8.13 L 17.77 7.94 L 17.28 7.84 L 8.71 7.84 L 8.22 7.94 L 7.90 8.13 L 7.59 8.51 L 7.44 8.99 L 7.44 12.90 L 7.12 13.25 L 7.08 17.33 L 0.00 16.33" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 7.12 17.14 L 7.08 17.33 L 0.00 16.33" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 28.00 16.33 L 20.70 17.37" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 17.95 8.04 L 17.28 7.84 L 9.99 7.84" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 16.32 17.98 L 12.05 18.00 L 11.91 17.98 L 11.88 17.78" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 13.02 13.12 L 13.24 12.92 L 15.06 12.92" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 9.61 0.00 L 9.23 1.06 L 8.70 2.18 L 8.06 3.25 L 7.32 4.25 L 6.48 5.18 L 5.56 6.01 L 4.56 6.76 L 3.49 7.40 L 2.36 7.93 L 1.19 8.35 L 0.00 8.65" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
 <path d="M 28.00 8.65 L 26.82 8.35 L 25.64 7.93 L 24.52 7.40 L 23.45 6.76 L 22.45 6.02 L 21.52 5.18 L 20.69 4.26 L 19.94 3.26 L 19.30 2.19 L 18.77 1.06 L 18.39 0.00" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
-<path d="M 20.70 17.37 L 16.69 17.93 L 16.32 17.98" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
-<path d="M 11.88 17.78 L 11.88 14.26 L 13.02 13.12" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
-<path d="M 15.06 12.92 L 17.40 12.91 L 17.65 12.87 L 17.88 12.77 L 17.99 12.70 L 18.18 12.55 L 18.34 12.36 L 18.45 12.13 L 18.50 12.02 L 18.54 11.77 L 18.54 8.99 L 18.50 8.74 L 18.40 8.51 L 18.26 8.30 L 18.09 8.13 L 17.95 8.04" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
-<path d="M 9.98 7.84 L 8.71 7.84 L 8.46 7.86 L 8.22 7.94 L 8.11 7.99 L 7.90 8.13 L 7.73 8.30 L 7.59 8.51 L 7.49 8.74 L 7.44 8.99 L 7.44 12.90 L 7.43 12.93 L 7.13 13.22 L 7.12 13.25 L 7.12 17.14" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 9.99 7.84 L 8.71 7.84 L 8.46 7.86 L 8.22 7.94 L 8.11 7.99 L 7.90 8.13 L 7.73 8.30 L 7.59 8.51 L 7.49 8.74 L 7.44 8.99 L 7.44 12.90 L 7.43 12.93 L 7.13 13.22 L 7.12 13.25 L 7.12 17.14" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 11.88 17.78 L 11.88 14.26 L 13.02 13.12" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 15.06 12.92 L 17.40 12.91 L 17.65 12.87 L 17.88 12.77 L 17.99 12.70 L 18.18 12.55 L 18.34 12.36 L 18.45 12.13 L 18.50 12.02 L 18.54 11.77 L 18.54 8.99 L 18.50 8.74 L 18.40 8.51 L 18.26 8.30 L 18.09 8.13 L 17.95 8.04" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 20.70 17.37 L 16.69 17.93 L 16.32 17.98" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <circle cx="20.70" cy="17.37" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="20.70" y="18.16" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
-<circle cx="13.02" cy="13.12" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="13.02" y="13.91" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 </g>
 <g class="key">
 <text x="69.00" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 hook</text>

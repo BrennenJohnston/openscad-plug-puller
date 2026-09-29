@@ -18,7 +18,10 @@ import trimesh
 from shapely.geometry import Polygon
 
 from scripts.generate_dial_diagrams import (
+    COLOR_TRACE,
     LEGEND_LINE,
+    MARK_DASH,
+    MARK_W,
     NO_SHAPE_SENTENCE,
     changed_regions,
     compose_none_svg,
@@ -171,6 +174,15 @@ def test_pair_svg_two_panels() -> None:
     assert red_paths and len(re.findall(r'<path[^>]*stroke="#d81b1b"', after)) == len(red_paths)
     assert "#d81b1b" not in before
     assert "href=" not in svg and "url(http" not in svg
+    # The moved edges are thick red dashes, with no black line or rim drawn with them.
+    marks = re.findall(r'<path d="[^"]+" fill="none" stroke="(#[0-9a-fA-F]+)" stroke-width="([\d.]+)"'
+                       rf'[^>]*stroke-dasharray="{MARK_DASH}"', after)
+    assert marks and all(color == COLOR_TRACE and float(w) == MARK_W for color, w in marks), marks
+    # No edge is drawn twice: the black outline stops where the moved edge's red dashes start
+    # (the before edge sits at x = 40 mm, 46 in picture units after the 6 mm margin).
+    black = re.findall(r'<path d="([^"]+)"[^>]*stroke="#000"', after)
+    xs = [float(x) for d in black for x, _y in re.findall(r"(-?[\d.]+) (-?[\d.]+)", d)]
+    assert xs and max(xs) <= 46.25, f"the black outline still runs along the moved edge (x up to {max(xs)})"
 
 
 def test_regions_named_in_index() -> None:

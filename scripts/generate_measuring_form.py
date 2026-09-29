@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the two measuring form sheets and their text twins.
+"""Draw the two measuring form sheets, and the form's text for the guides.
 
 One 210 × 279 mm SVG per tool under ``docs/guides/<tool>/measuring-form.svg``:
 the printed form a person fills in before opening the Customizer. The left
@@ -13,8 +13,10 @@ number in a red circle at the line. The page builder is the outline sheets'
 ``Sheet`` class (its dimension lines and leaders); the halo texts are drawn as
 a separate white text underneath so that every SVG rasterizer shows them.
 
-The text twin ``measuring-form.md`` is written from the same data: the rows
-as a table, then what the sheet shows, one line per numbered arrow.
+The form's text is built from the same data, the rows as a table, then what
+the sheet shows, one line per numbered arrow; ``build_sheet`` returns it and
+``scripts/build_dial_reference.py`` places it in each tool's quick start and
+full guide, under "The measuring form".
 
 The script checks its own drawing: no two leaders cross, and no leader runs
 through a drawn shape; it fails loudly otherwise.
@@ -492,16 +494,15 @@ def build_sheet(tool: str, catalog: Dict[Tuple[str, str], Dict[str, Any]]) -> Tu
 
 def build_twin(tool: str, table: List[Dict[str, Any]], anchors: Dict[int, str], schematic: Schematic) -> str:
     words = TOOL_WORDS[tool]
-    out = [f"# Measuring form, {words}", "", TWIN_INTRO, "",
-           "The printable sheet is [measuring-form.svg](measuring-form.svg); this page is its text twin.", "",
-           "| # | Customizer name | What you measure | Default | Yours |", "|---|---|---|---|---|"]
+    out = ["| # | Customizer name | What you measure | Default | Yours |", "|---|---|---|---|---|"]
     for t in table:
         out.append(f"| {t['k']} | `{t['row']['openscad_name']}` | {cell_text(t['row'], t['title'], t['measure'])} | "
                    f"{default_text(t['row'])} | ________ |")
-    out += ["", "## What the sheet shows", "",
-            f"The left column is the numbered list above, one row per dial in the Customizer's Step order, each with the "
-            f"dial's name, its plain title and either a blank after the default or a tick box per choice with the default "
-            f"marked. The right half is a schematic plug in teal drawn from the {words}'s defaults at 1.5 to 1, "
+    out += ["",
+            f"**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's "
+            f"Step order, each with the dial's name, its plain title and either a blank after the default or a tick box "
+            f"per choice with the default marked. The right half is a schematic plug in teal drawn from the {words}'s "
+            "defaults at 1.5 to 1, "
             + ("a top view with the prong end at the left against a wall plate line, a side view standing with its prong end up, "
                if tool == "one-sided" else "a top view with the prong end at the left against a wall plate line, ")
             + "the cord's end as a small circle, a bar of four knuckles at 1:1 and a strap bar at 1:1. A straight black arrow "
@@ -520,8 +521,7 @@ def build_twin(tool: str, table: List[Dict[str, Any]], anchors: Dict[int, str], 
             out.append(f"- Row {t['k']}, {t['title'].lower()}: one box marked, leave on.")
         elif t["measure"] is not None and t["measure"]["anchor"] in QUIZ_ANCHORS:
             out.append(f"- Row {t['k']}, {t['title'].lower()}: no arrow; the boxes carry the choice.")
-    out += ["", "Type them into the Customizer in this order.", "",
-            f"How each number is measured, with its typical range and an example: [the {words}'s measuring guide](measuring-guide.md).", ""]
+    out += ["", "Type them into the Customizer in this order."]
     return "\n".join(out)
 
 
@@ -529,7 +529,7 @@ def write_sheet(tool: str, catalog: Dict[Tuple[str, str], Dict[str, Any]], out_d
     sh, twin, summary = build_sheet(tool, catalog)
     out_dir.mkdir(parents=True, exist_ok=True)
     sh.save(out_dir / "measuring-form.svg")
-    (out_dir / "measuring-form.md").write_text(twin, encoding="utf-8", newline="\n")
+    del twin  # the form's text goes into the guides, through build_sheet()
     return summary
 
 

@@ -4,9 +4,9 @@
 <desc>Two vertical slices of the one-sided puller at y = 35 mm, before left and after right, the top face up. Left: the defaults with hand size set to Custom, the plug in teal in the cut. Right: body thickness at 9 mm: thickens the whole slab, so every hole and the pocket get deeper walls. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.</desc>
 <rect width="181.09" height="29.30" fill="white"/>
 <g class="panel" id="before">
-<path d="M 59.91 8.65 L 60.71 8.79 L 61.42 9.14 L 62.00 9.67 L 62.38 10.33 L 62.54 11.07 L 62.51 14.99 L 46.48 14.97 L 46.48 9.56 L 47.60 8.65 L 59.91 8.65 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 6.00 11.19 L 6.16 10.33 L 6.40 9.88 L 6.72 9.48 L 7.35 9.01 L 8.36 8.68 L 20.93 8.65 L 22.07 9.56 L 22.07 14.96 L 6.04 15.00 L 6.00 11.19 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 25.63 9.57 L 26.77 8.65 L 41.79 8.65 L 42.92 9.56 L 42.91 14.96 L 25.66 14.99 L 25.63 9.57 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 59.91 8.65 L 60.71 8.79 L 61.42 9.14 L 62.00 9.67 L 62.38 10.33 L 62.54 11.07 L 62.51 14.99 L 46.48 14.97 L 46.48 9.56 L 47.60 8.65 L 59.91 8.65 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 25.68 15.00 L 25.63 14.95 L 25.63 9.56 L 26.76 8.65 L 41.78 8.65 L 42.91 9.56 L 42.88 14.99 L 25.68 15.00 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 </g>
 <g class="arrow">
 <line x1="70.05" y1="10.50" x2="74.55" y2="10.50" stroke="#000" stroke-width="0.6"/><polygon points="77.05,10.50 74.55,9.37 74.55,11.62" fill="#000"/>
@@ -14,22 +14,20 @@
 <text x="73.55" y="28.70" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">section at y = 35 mm</text>
 </g>
 <g class="panel" id="after" transform="translate(78.55 0)">
-<path d="M 6.00 8.54 L 6.16 7.68 L 6.40 7.23 L 6.72 6.83 L 7.35 6.36 L 8.36 6.03 L 20.94 6.00 L 22.07 6.92 L 22.06 14.97 L 6.03 14.99 L 6.00 8.54 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 25.63 6.92 L 26.77 6.00 L 41.79 6.00 L 42.92 6.92 L 42.91 14.97 L 25.66 14.99 L 25.63 6.92 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 46.53 15.00 L 46.48 14.95 L 46.48 6.92 L 47.60 6.00 L 60.18 6.02 L 60.71 6.15 L 61.42 6.49 L 62.00 7.02 L 62.28 7.45 L 62.46 7.92 L 62.54 8.42 L 62.52 14.99 L 46.53 15.00 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 6.00 8.54 L 6.03 8.16 L 6.08 7.92 L 6.16 7.68 L 6.27 7.45 L 6.40 7.23 L 6.55 7.02 L 6.72 6.83 L 6.91 6.65 L 7.12 6.49 L 7.35 6.36 L 7.59 6.24 L 7.84 6.14 L 8.10 6.07 L 8.36 6.03 L 8.64 6.00 L 20.94 6.00 L 21.64 6.58 L 22.05 6.89 L 22.07 6.92 L 22.07 9.30" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
-<path d="M 6.00 10.20 L 6.00 8.54" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
-<path d="M 25.63 6.92 L 25.65 6.89 L 26.05 6.58 L 26.77 6.00 L 41.79 6.00 L 42.49 6.58 L 42.90 6.89 L 42.92 6.92 L 42.92 9.30" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
-<path d="M 25.63 9.30 L 25.63 6.92" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
-<path d="M 46.48 9.30 L 46.48 6.92 L 46.50 6.89 L 46.90 6.58 L 47.60 6.00 L 59.91 6.00 L 60.18 6.02 L 60.44 6.07 L 60.71 6.15 L 60.96 6.24 L 61.20 6.36 L 61.42 6.49 L 61.64 6.66 L 61.82 6.83 L 62.00 7.02 L 62.15 7.23 L 62.28 7.45 L 62.38 7.68 L 62.46 7.92 L 62.52 8.17 L 62.54 8.42 L 62.54 10.20" fill="none" stroke="#d81b1b" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01,1.1"/>
+<path d="M 22.07 9.30 L 22.02 15.00 L 6.03 14.99 L 6.00 10.20" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 62.55 10.20 L 62.52 14.99 L 46.53 15.00 L 46.48 9.30" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 42.92 9.30 L 42.87 15.00 L 25.66 14.99 L 25.63 9.30" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 6.00 10.20 L 6.00 8.54 L 6.03 8.16 L 6.08 7.92 L 6.16 7.68 L 6.27 7.45 L 6.40 7.23 L 6.55 7.02 L 6.72 6.83 L 6.91 6.65 L 7.12 6.49 L 7.35 6.36 L 7.59 6.24 L 7.84 6.14 L 8.10 6.07 L 8.36 6.03 L 8.64 6.00 L 20.94 6.00 L 21.64 6.58 L 22.05 6.89 L 22.07 6.92 L 22.07 9.30" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 25.63 9.30 L 25.63 6.92 L 25.65 6.89 L 26.05 6.58 L 26.77 6.00 L 41.79 6.00 L 42.49 6.58 L 42.90 6.89 L 42.92 6.92 L 42.92 9.30" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 46.48 9.30 L 46.48 6.92 L 46.50 6.89 L 46.90 6.58 L 47.59 6.01 L 59.91 6.00 L 60.19 6.03 L 60.44 6.07 L 60.71 6.14 L 60.96 6.24 L 61.20 6.36 L 61.43 6.50 L 61.63 6.65 L 61.82 6.83 L 62.00 7.03 L 62.15 7.23 L 62.28 7.45 L 62.38 7.68 L 62.46 7.92 L 62.52 8.17 L 62.55 8.56 L 62.55 10.20" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <circle cx="22.07" cy="6.92" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="22.07" y="7.71" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
-<circle cx="62.54" cy="10.20" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="62.54" y="10.99" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+<circle cx="62.55" cy="8.56" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="62.55" y="9.35" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 <circle cx="42.92" cy="6.92" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="42.92" y="7.71" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 </g>
 <g class="key">
 <text x="150.09" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 body edge</text>
 </g>
 <g class="leaders">
-<line x1="142.10" y1="9.38" x2="149.09" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>
+<line x1="142.20" y1="7.88" x2="149.09" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>
 </g>
 </svg>

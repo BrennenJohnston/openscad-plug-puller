@@ -15,9 +15,13 @@ Every picture in this project's guides has two text parts: a short alt text that
 9. **Where the text lives.** The SVG's `desc` element carries the long description; the Markdown page puts it as visible text right under the image; the PDF wraps the picture in a `figure` with the long description as its caption; no `longdesc` attribute. Source: the W3C tutorial's figure approach; WebAIM (`longdesc` is deprecated).
 10. **Every description is a reviewed string.** Each alt text and long description is a flagged row in the round's strings pack, proposed until the owner has read the sample. Source: the project's accessibility rule 12 and the planning kit's strings rule.
 
+---
+
 ## The sources, and the two not opened
 
 The W3C tutorial pages, WebAIM, NCAM and the arXiv abstract were read on 2026-09-26; the Perkins page on 2026-09-27 in a browser (it names the DIAGRAM Center and WebAIM as its own sources and adds "context is key", "consider your audience", "be concise", "be objective", "general to specific", "tone and language"; nothing in it contradicts the rules above). The DIAGRAM Center's [Image Description Guidelines](http://diagramcenter.org/table-of-contents-2.html) could not be opened on either day: the fetch tool rejected the site's certificate on 2026-09-26 and a browser showed an error page for both its http and https addresses on 2026-09-27. What this page says about them is by report only (a search result and the Perkins page): a two-part text alternative, and processes as nested lists, which rules 1 and 7 already say.
+
+---
 
 ## The alt text template
 
@@ -26,6 +30,8 @@ The W3C tutorial pages, WebAIM, NCAM and the arXiv abstract were read on 2026-09
 ```
 
 When that runs past 150 characters, the parts are counted instead: `…; red marks 6 parts, named below.` A dial that changes no shape gets `{title}: changes no shape.` The two-sided print layout, drawn as one panel, gets `{title}: one view, {before} to {after}; the layout with both plates, nothing marked.`
+
+---
 
 ## The long description template
 
@@ -38,6 +44,8 @@ Marked in red: 1, {the part}: {where it sits}. 2, {the parts}: {where they sit}{
 ```
 
 A section row opens with `Two vertical slices of {the tool} at {x | y} = {at} mm, before left and after right, the top face up.` and its left panel says `the plug in teal in the cut`. When the whole runs past 90 words, the generator drops the closing sentence first, then the changes sentence, then the locations of the entries that carry several names, then every location; the numbered list itself is never dropped. Where a part sits comes from one table per tool in the generator (`FEATURE_LOCATIONS`): for the one-sided puller the body edge is "the outer outline", the pocket "the plug recess on the centerline", the seat "the round recess at the plug end", the wall notch "the notch in the top edge", the wing openings "the two openings beside the pocket", the zip-tie holes "the four small holes beside the pocket", the finger holes "the two large holes in the lower half", the hook "the cord hook slot in the bottom edge"; for the two-sided puller the plate edge is "the outer outline", the arms "the two toothed arms in the upper half", the teeth "the serrated inner edges of the arms", the finger lobes "the two rounded lobes in the lower half", the cord channel "the gap between the lobes at the bottom", the zip stations "the three small holes along each arm", the strap slot "the long slot in each arm".
+
+---
 
 ## Three examples, as generated
 
@@ -61,6 +69,8 @@ Long description: Two top views of one plate of the two-sided puller, before lef
 
 Every generated text is in `docs/dials/dial_diagrams_index.json` (`alt` and `long_description`) and on the page [Dial diagrams](../dials/README.md), the alt on the image and the long description right under it.
 
+---
+
 ## When you write one by hand
 
-A photo in the Maker Guide or the User Guide follows the same rules, by hand: say what the photo shows and what the reader is meant to see in it, in the guides' own words for the parts; never open with "photo of"; keep it under 150 characters and put anything longer in the paragraph next to it; say the numbers with "mm"; and flag the text for the owner's reading before it ships, as the Accessible MakerWorld Documentation Standard, section 1.4, asks. The docs gate checks every image for an alt text and for the forbidden openers; it cannot check that the words are true, so someone reads them.
+A photo in the guides follows the same rules, by hand: say what the photo shows and what the reader is meant to see in it, in the guides' own words for the parts; never open with "photo of"; keep it under 150 characters and put anything longer in the paragraph next to it; say the numbers with "mm"; and flag the text for the owner's reading before it ships, as the Accessible MakerWorld Documentation Standard, section 1.4, asks. The docs gate checks every image for an alt text and for the forbidden openers; it cannot check that the words are true, so someone reads them.

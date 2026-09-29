@@ -25,7 +25,7 @@ allowance is a deliberate exception, and the comment says so where it stands.
 
 Usage:
     python scripts/check_docs.py            # prints "<file>:<line>: <rule>: <detail>", exit 1 on any finding
-    python scripts/check_docs.py README.md docs/guides/user-guide.md
+    python scripts/check_docs.py README.md docs/guides/bom.md
 
 Standard library only. License: PolyForm Noncommercial 1.0.0
 """
@@ -75,8 +75,13 @@ class Finding:
 
 
 def gate_files(root: Path = PROJECT_ROOT) -> List[Path]:
+    """README.md and every Markdown file under docs/ except the guide
+    sources (``docs/guides/source/``): those are the pieces the four guide
+    pages are assembled from, and it is the assembled pages, which carry
+    every word of them, that the gate reads."""
     files = [root / "README.md"]
-    files += sorted((root / "docs").rglob("*.md"))
+    source_dir = root / "docs" / "guides" / "source"
+    files += sorted(f for f in (root / "docs").rglob("*.md") if source_dir not in f.parents)
     return [f for f in files if f.exists()]
 
 

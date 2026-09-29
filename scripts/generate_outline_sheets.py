@@ -20,7 +20,7 @@ follows the Size selection, so it gets its own 3 sheets), this script:
    pure-Python mirror of ``fit_measured.scad``) and cross-checks them against
    the rendered mesh (print-scale + dimension-parity asserts).
 4. Composes each sheet as a 210 x 279 mm SVG (fits A4 and US Letter, same
-   conventions as ``docs/guides/measuring-template.svg``): the outline at
+   conventions as the stencil sheets): the outline at
    exact 1:1 scale with interior cutouts dashed, CAD-style dimension lines,
    a 50 x 50 mm calibration square, a title block with the matching
    Customizer settings, and a how-to strip.
@@ -665,7 +665,7 @@ def draw_chrome(sh: Sheet, info: SheetInfo) -> None:
         PAGE_W / 2,
         275.5,
         f"openscad-plug-puller v{MODEL_VERSION} · {info.filename} · scale 1:1 · "
-        "guide: docs/guides/print-preview-outlines.md",
+        "guide: the full guide, under Try it on paper first",
         2.4,
         anchor="middle",
         fill="#444444",
@@ -845,7 +845,7 @@ def build_flat_sheet(
             "2. Cut along the SOLID outline. Dashed lines are holes and the plug pocket — poke through the two big finger circles.",
             "3. Hold the cutout on your plug at the wall: the plug fits the dashed pocket, the top notch straddles the wall plate.",
             f"4. Try the finger holes ({size_word} size). Wrong size? Try a neighbouring sheet, or print the cards in stl/Measuring-Stencil/.",
-            "5. Happy? Open the Customizer with the title-block settings and export your STL (docs/guides/quick-start-beginner.md).",
+            "5. Happy? Open the Customizer with the title-block settings and export your STL (the tool's quick start).",
         ],
         footprint=(W, L),
     )
@@ -1030,7 +1030,7 @@ def build_clamshell_sheet(stl: Path, preset_key: str, size: str, out: Path) -> L
             "2. Cut along the SOLID outline (both arms). Dashed lines are holes and slots.",
             "3. Lay the cutout over your plug: the plug body sits between the serrated V-edges, the cord in the bottom channel.",
             "4. The real tool is TWO of these plates zip-tied face to face around the plug — this sheet previews one.",
-            "5. Happy? Open the Customizer with the title-block settings and export your STL (docs/guides/quick-start-beginner.md).",
+            "5. Happy? Open the Customizer with the title-block settings and export your STL (the tool's quick start).",
         ],
         footprint=(W, L),
     )

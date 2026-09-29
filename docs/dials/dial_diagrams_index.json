@@ -73,14 +73,6 @@
     ],
     "regions_named": [
       [
-        1045.6,
-        [
-          "wall notch",
-          "seat",
-          "body edge"
-        ]
-      ],
-      [
         37.8,
         [
           "zip-tie holes",
@@ -91,6 +83,14 @@
         30.8,
         [
           "zip-tie holes"
+        ]
+      ],
+      [
+        1045.6,
+        [
+          "wall notch",
+          "seat",
+          "body edge"
         ]
       ],
       [
@@ -169,17 +169,17 @@
         ]
       ],
       [
+        20.1,
+        [
+          "wing openings"
+        ]
+      ],
+      [
         51.1,
         [
           "wall notch",
           "seat",
           "body edge"
-        ]
-      ],
-      [
-        20.1,
-        [
-          "wing openings"
         ]
       ],
       [
@@ -397,7 +397,7 @@
     "context": {},
     "plug": "default",
     "regions": 1,
-    "changed_area_mm2": 2361.8,
+    "changed_area_mm2": 2361.9,
     "tags": [],
     "svg": "one-sided/measure_cord_thickness.svg",
     "features": [
@@ -410,7 +410,7 @@
     ],
     "regions_named": [
       [
-        2361.8,
+        2361.9,
         [
           "zip-tie holes",
           "finger holes",
@@ -471,6 +471,18 @@
         ]
       ],
       [
+        13.8,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        10.1,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
         80.5,
         [
           "wall notch",
@@ -487,18 +499,6 @@
         48.1,
         [
           "pocket"
-        ]
-      ],
-      [
-        10.1,
-        [
-          "zip-tie holes"
-        ]
-      ],
-      [
-        13.8,
-        [
-          "wing openings"
         ]
       ],
       [
@@ -592,12 +592,6 @@
         ]
       ],
       [
-        569.7,
-        [
-          "body edge"
-        ]
-      ],
-      [
         20.1,
         [
           "zip-tie holes"
@@ -607,12 +601,6 @@
         93.0,
         [
           "wing openings"
-        ]
-      ],
-      [
-        69.6,
-        [
-          "pocket"
         ]
       ],
       [
@@ -628,6 +616,12 @@
         ]
       ],
       [
+        569.7,
+        [
+          "body edge"
+        ]
+      ],
+      [
         20.1,
         [
           "zip-tie holes"
@@ -637,6 +631,12 @@
         92.9,
         [
           "wing openings"
+        ]
+      ],
+      [
+        69.6,
+        [
+          "pocket"
         ]
       ],
       [
@@ -952,7 +952,7 @@
     "after": "Left",
     "context": {},
     "plug": "default",
-    "regions": 2,
+    "regions": 1,
     "changed_area_mm2": 68.2,
     "tags": [],
     "svg": "one-sided/hook_hand.svg",
@@ -961,13 +961,7 @@
     ],
     "regions_named": [
       [
-        34.1,
-        [
-          "hook"
-        ]
-      ],
-      [
-        34.1,
+        68.2,
         [
           "hook"
         ]
@@ -1564,12 +1558,6 @@
         ]
       ],
       [
-        417.5,
-        [
-          "body edge"
-        ]
-      ],
-      [
         24.7,
         [
           "zip-tie holes"
@@ -1594,13 +1582,19 @@
         ]
       ],
       [
+        417.5,
+        [
+          "body edge"
+        ]
+      ],
+      [
         24.7,
         [
           "zip-tie holes"
         ]
       ],
       [
-        59.4,
+        59.3,
         [
           "wing openings"
         ]
@@ -1679,7 +1673,7 @@
     },
     "plug": "default",
     "regions": 1,
-    "changed_area_mm2": 1083.6,
+    "changed_area_mm2": 1083.4,
     "tags": [],
     "svg": "one-sided/custom_puller_length.svg",
     "features": [
@@ -1691,7 +1685,7 @@
     ],
     "regions_named": [
       [
-        1083.6,
+        1083.4,
         [
           "zip-tie holes",
           "wall notch",
@@ -1894,7 +1888,7 @@
         ]
       ],
       [
-        50.3,
+        50.4,
         [
           "wing openings"
         ]
@@ -1906,7 +1900,7 @@
         ]
       ],
       [
-        50.4,
+        50.3,
         [
           "wing openings"
         ]
@@ -1959,7 +1953,7 @@
         ]
       ],
       [
-        24.3,
+        24.4,
         [
           "wing openings"
         ]
@@ -2186,18 +2180,6 @@
         ]
       ],
       [
-        8.9,
-        [
-          "zip-tie holes"
-        ]
-      ],
-      [
-        8.4,
-        [
-          "wing openings"
-        ]
-      ],
-      [
         8.4,
         [
           "wing openings"
@@ -2211,16 +2193,28 @@
         ]
       ],
       [
-        11.9,
+        8.9,
         [
-          "seat",
-          "pocket"
+          "zip-tie holes"
         ]
       ],
       [
         8.9,
         [
           "zip-tie holes"
+        ]
+      ],
+      [
+        8.4,
+        [
+          "wing openings"
+        ]
+      ],
+      [
+        11.9,
+        [
+          "seat",
+          "pocket"
         ]
       ],
       [
@@ -2270,7 +2264,7 @@
     },
     "plug": "default",
     "regions": 3,
-    "changed_area_mm2": 36.3,
+    "changed_area_mm2": 36.4,
     "tags": [],
     "svg": "one-sided/custom_pocket_depth.svg",
     "features": [
@@ -2440,14 +2434,14 @@
     ],
     "regions_named": [
       [
-        142.2,
+        142.1,
         [
           "wing openings",
           "pocket"
         ]
       ],
       [
-        142.2,
+        142.1,
         [
           "wing openings",
           "pocket"
@@ -2556,7 +2550,7 @@
         ]
       ],
       [
-        11.0,
+        11.1,
         [
           "wing openings"
         ]
@@ -2609,7 +2603,7 @@
         ]
       ],
       [
-        1.3,
+        1.4,
         [
           "wing openings"
         ]
@@ -2621,7 +2615,7 @@
         ]
       ],
       [
-        1.4,
+        1.3,
         [
           "wing openings"
         ]
@@ -2802,7 +2796,7 @@
     },
     "plug": "default",
     "regions": 7,
-    "changed_area_mm2": 482.6,
+    "changed_area_mm2": 482.5,
     "tags": [],
     "svg": "one-sided/custom_t_hook_length.svg",
     "features": [
@@ -2826,9 +2820,15 @@
         ]
       ],
       [
-        24.7,
+        24.6,
         [
           "wing openings"
+        ]
+      ],
+      [
+        46.6,
+        [
+          "pocket"
         ]
       ],
       [
@@ -2845,15 +2845,9 @@
         ]
       ],
       [
-        24.6,
+        24.7,
         [
           "wing openings"
-        ]
-      ],
-      [
-        46.6,
-        [
-          "pocket"
         ]
       ]
     ],
@@ -2907,6 +2901,12 @@
         ]
       ],
       [
+        1.2,
+        [
+          "zip-tie holes"
+        ]
+      ],
+      [
         3.1,
         [
           "wing openings"
@@ -2917,12 +2917,6 @@
         [
           "finger holes",
           "hook"
-        ]
-      ],
-      [
-        1.2,
-        [
-          "zip-tie holes"
         ]
       ],
       [
@@ -3037,7 +3031,7 @@
     },
     "plug": "default",
     "regions": 6,
-    "changed_area_mm2": 117.1,
+    "changed_area_mm2": 117.2,
     "tags": [],
     "svg": "one-sided/custom_t_hook_leg_offset.svg",
     "features": [
@@ -3053,18 +3047,6 @@
         ]
       ],
       [
-        45.8,
-        [
-          "finger holes"
-        ]
-      ],
-      [
-        5.7,
-        [
-          "zip-tie holes"
-        ]
-      ],
-      [
         5.7,
         [
           "zip-tie holes"
@@ -3074,6 +3056,18 @@
         7.1,
         [
           "wing openings"
+        ]
+      ],
+      [
+        45.8,
+        [
+          "finger holes"
+        ]
+      ],
+      [
+        5.7,
+        [
+          "zip-tie holes"
         ]
       ],
       [
@@ -3166,7 +3160,7 @@
       "size": "Custom"
     },
     "plug": "default",
-    "regions": 1,
+    "regions": 2,
     "changed_area_mm2": 42.1,
     "tags": [],
     "svg": "one-sided/custom_t_hook_catch_reach.svg",
@@ -3175,7 +3169,13 @@
     ],
     "regions_named": [
       [
-        42.1,
+        24.6,
+        [
+          "hook"
+        ]
+      ],
+      [
+        17.5,
         [
           "hook"
         ]
@@ -3329,12 +3329,6 @@
         ]
       ],
       [
-        3.5,
-        [
-          "zip-tie holes"
-        ]
-      ],
-      [
         1.3,
         [
           "wing openings"
@@ -3345,6 +3339,12 @@
         [
           "zip-tie holes",
           "wall notch"
+        ]
+      ],
+      [
+        3.5,
+        [
+          "zip-tie holes"
         ]
       ],
       [
@@ -3502,7 +3502,7 @@
     },
     "plug": "default",
     "regions": 6,
-    "changed_area_mm2": 126.8,
+    "changed_area_mm2": 126.9,
     "tags": [],
     "svg": "one-sided/custom_zip_tie_height_spacing.svg",
     "features": [
@@ -3523,7 +3523,7 @@
         ]
       ],
       [
-        22.9,
+        23.0,
         [
           "wing openings"
         ]
@@ -3600,7 +3600,7 @@
     },
     "plug": "default",
     "regions": 7,
-    "changed_area_mm2": 81.1,
+    "changed_area_mm2": 81.0,
     "tags": [],
     "svg": "one-sided/custom_zip_tie_distance_from_notch.svg",
     "features": [
@@ -4136,7 +4136,7 @@
         ]
       ],
       [
-        1.4,
+        1.3,
         [
           "classic slots"
         ]
