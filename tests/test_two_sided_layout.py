@@ -1,6 +1,6 @@
-"""Two-sided puller: both plates in one download (R1 phase B3).
+"""Two-sided puller: both plates in one download.
 
-The owner chose "Both plates in one STL" (Q-04): with the default
+The owner chose "Both plates in one STL": with the default
 ``print_layout = "Both plates"`` the file exports the two identical plates
 side by side, so one file prints the whole tool. ``"One plate"`` keeps the
 single plate, which is also what the hidden ``render_mode = "One plate"``

@@ -98,7 +98,7 @@ class TestFlattenedArtifact:
 
         mapping = MAPPINGS[build.output.name]
         if not mapping.exists():
-            pytest.skip(f"{mapping.name} arrives in phase B1.")
+            pytest.skip(f"{mapping.name} is not written yet.")
         _require_artifact(build.output)
         validator = ParameterSchemaValidator(build.output, mapping)
         ok, results = validator.validate()

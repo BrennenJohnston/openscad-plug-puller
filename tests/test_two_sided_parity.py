@@ -1,4 +1,4 @@
-"""Two-sided puller extraction parity (R1 phase A2).
+"""Two-sided puller extraction parity.
 
 ``src/Plug_Puller_Two_Sided.scad`` is the clamshell lifted out of the unified
 ``src/Plug_Puller_Parametric.scad``. At the heavy-duty preset its plate must
@@ -10,9 +10,9 @@ counts are never compared: identical renders triangulate differently.
 
 The finger-bore table renders the two-sided file at Small / Medium / Large at
 the preset and prints the three bore widths (run with ``-s``): 17.5 / 21.0 /
-24.0 mm, the numbers phase A2 measured in both files. Since phase C1 the
-clamshell is gone from the unified file, so its old side-by-side comparison
-lives on only as those numbers.
+24.0 mm, the numbers measured in both files when the plate was lifted out.
+The two-sided puller is gone from the one-sided file, so its old side-by-side
+comparison lives on only as those numbers.
 
 These tests FAIL, never skip, when the two-sided file is missing.
 

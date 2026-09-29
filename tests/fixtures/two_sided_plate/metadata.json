@@ -1,7 +1,7 @@
 {
   "fixture": "two_sided_plate",
   "scad": "src/Plug_Puller_Two_Sided.scad",
-  "note": "reference.stl copied byte for byte from tests/fixtures/clamshell_plate/ in R1 phase A2; the fields below describe that render of the unified file.",
+  "note": "reference.stl copied byte for byte from tests/fixtures/clamshell_plate/; the fields below describe that render of the unified file.",
   "generated_at_utc": "2026-07-23T20:05:09.068434+00:00",
   "openscad_version": "OpenSCAD version 2026.01.03",
   "manifold_backend": true,

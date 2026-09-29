@@ -1,4 +1,4 @@
-"""Two-sided puller: the cradle edge for Rounded sides (R1 phase B5).
+"""Two-sided puller: the cradle edge for Rounded sides.
 
 With ``plug_sides = "Rounded sides"`` the gap between the arms is widest on
 the face where the two plates meet (the plug's width plus
@@ -6,7 +6,7 @@ the face where the two plates meet (the plug's width plus
 face, by the cradle depth on each side, so two stacked plates form a
 diamond-shaped channel that centres a rounded plug. The teeth ride the slope.
 
-The depth guard (plan section 4.3, row 3, as the owner set it at Q-20) lets
+The depth guard (as the owner set it) lets
 the outer-face gap come down to the cord channel's width but never below it:
 cradle per side = min(plate_cradle_depth, plate_thickness,
                       (mating-face gap - cord channel) / 2).
@@ -23,7 +23,7 @@ mating gap - 2 x cradle x (1 - z / 4). The slope is built from 10 slices of
 sections sit at slice mid-heights (1.4, 2.6 and 3.8 mm), all above the
 1.2 mm roundover on the outer-face edge, and are measured on a line just past
 the plug's back end, clear of the teeth. The heavy-duty preset keeps its
-straight, biting edge (Q-08).
+straight, biting edge.
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -169,5 +169,5 @@ def test_preset_plate_unchanged(openscad_runner, tmp_path) -> None:
     got, _ = _render(openscad_runner, tmp_path, "preset", params)
     ref = trimesh.load(FIXTURE / "reference.stl", force="mesh")
     assert abs(got.volume - ref.volume) < 1e-6 and abs(got.area - ref.area) < 1e-6, (
-        "The heavy-duty preset keeps its straight, biting edge (Q-08)."
+        "The heavy-duty preset keeps its straight, biting edge."
     )

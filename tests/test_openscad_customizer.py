@@ -28,7 +28,7 @@ Why each check exists (``TestCustomizerHygiene`` runs on both files):
   option contracts and its Step order (the routing, README and guides
   document them).
 * :class:`TestTwoSidedCustomizer` — the two-sided file leads with Step 1, its
-  size and attachment options are exactly the owner's choices (Q-12), and
+  size and attachment options are exactly the owner's choices, and
   none of the one-sided puller's controls appear in it.
 
 License: PolyForm Noncommercial 1.0.0
@@ -51,7 +51,7 @@ EXPECTED_ATTACHMENT_OPTIONS = [
     "Zip ties", "Velcro strap", "Zip ties + Velcro", "None",
 ]
 
-# The one-sided plug presets in Customizer order (R2 Gate A: Q-38 and Q-39).
+# The one-sided plug presets in Customizer order (the owner's choice of plugs and labels).
 # The heavy-duty cord stays as the signpost to the two-sided file (W-20).
 ONE_SIDED_PLUG_PRESET_OPTIONS = [
     "Measure my plug",
@@ -62,8 +62,8 @@ ONE_SIDED_PLUG_PRESET_OPTIONS = [
 ]
 TWO_SIDED_SIZE_OPTIONS = ["Small", "Medium", "Large", "Measure my hand"]
 TWO_SIDED_ATTACHMENT_OPTIONS = ["Zip ties + Velcro strap", "Zip ties"]
-# The two-sided plug presets in Customizer order (R2 Gate A: Q-38 chose the
-# plugs and their file, Q-39 the labels).
+# The two-sided plug presets in Customizer order (the owner chose the
+# plugs, their file and the labels).
 TWO_SIDED_PLUG_PRESET_OPTIONS = [
     "Measure my plug",
     "Heavy-duty extension cord - NEMA 5-15",
@@ -292,12 +292,12 @@ class TestOneSidedCustomizer:
         )
 
     def test_plug_preset_options(self, scad_content: str) -> None:
-        """The one-sided dropdown offers exactly the plugs chosen at R2's
-        Gate A, in that order, with labels the Customizer can carry."""
+        """The one-sided dropdown offers exactly the plugs the owner chose,
+        in that order, with labels the Customizer can carry."""
         default, options = _dropdown(scad_content, "plug_preset")
         assert options == ONE_SIDED_PLUG_PRESET_OPTIONS, (
             f"One-sided plug_preset options must be exactly "
-            f"{ONE_SIDED_PLUG_PRESET_OPTIONS} (Gate A, Q-38 and Q-39), got {options}."
+            f"{ONE_SIDED_PLUG_PRESET_OPTIONS} (the owner's list), got {options}."
         )
         assert default == "Measure my plug", (
             f"plug_preset default must be 'Measure my plug', got '{default}'."
@@ -307,7 +307,7 @@ class TestOneSidedCustomizer:
 
     def test_section_titles_name_no_tool(self, scad_content: str) -> None:
         """The file builds one tool, so no Customizer section title names a
-        tool (owner answer Q-24: drop "- Flat Tool")."""
+        tool (the owner's answer: drop "- Flat Tool")."""
         sections = re.findall(r"/\*\s*\[([^\]]+)\]\s*\*/", scad_content)
         named = [s for s in sections if "Flat Tool" in s or "Clamshell" in s]
         assert not named, f"Section titles still name a tool: {named}"
@@ -348,7 +348,7 @@ class TestTwoSidedCustomizer:
         default, options = _dropdown(scad_content, "attachment")
         assert options == TWO_SIDED_ATTACHMENT_OPTIONS, (
             f"Two-sided attachment options must be exactly "
-            f"{TWO_SIDED_ATTACHMENT_OPTIONS} (owner answer to Q-12: both other "
+            f"{TWO_SIDED_ATTACHMENT_OPTIONS} (the owner's answer: both other "
             f"options build a plate nothing holds together), got {options}."
         )
         assert default == "Zip ties + Velcro strap", (
@@ -357,12 +357,12 @@ class TestTwoSidedCustomizer:
         )
 
     def test_plug_preset_options(self, scad_content: str) -> None:
-        """The two-sided dropdown offers exactly the plugs chosen at R2's
-        Gate A, in that order, with labels the Customizer can carry."""
+        """The two-sided dropdown offers exactly the plugs the owner chose,
+        in that order, with labels the Customizer can carry."""
         default, options = _dropdown(scad_content, "plug_preset")
         assert options == TWO_SIDED_PLUG_PRESET_OPTIONS, (
             f"Two-sided plug_preset options must be exactly "
-            f"{TWO_SIDED_PLUG_PRESET_OPTIONS} (Gate A, Q-38 and Q-39), got {options}."
+            f"{TWO_SIDED_PLUG_PRESET_OPTIONS} (the owner's list), got {options}."
         )
         assert default == "Measure my plug", (
             f"plug_preset default must be 'Measure my plug', got '{default}'."

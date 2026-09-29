@@ -9,8 +9,8 @@ the pocket recess for the one-sided puller; the contact-face section for a
 two-sided plate; the Z-only dials get a vertical section instead, drawn
 with Z up the page), and the symmetric difference of the two views is the
 changed geometry of "what this dial moves". Each diagram is an SVG at
-1 unit = 1 mm under ``docs/dials/<file>/<name>.svg``. The pair layout (the
-default since R3, FD-48) draws three parts at one scale: the BEFORE panel
+1 unit = 1 mm under ``docs/dials/<file>/<name>.svg``. The pair layout
+draws three parts at one scale: the BEFORE panel
 (the tool at the dial's default, the plug in teal), an arrow with the two
 values, and the AFTER panel (the tool after the dial moved, drawn once in
 black except the pieces of its outline that moved, which are thick red
@@ -99,7 +99,7 @@ DEFAULT_CACHE = PROJECT_ROOT / "tmp_renders" / "dial_diagrams"
 INDEX_NAME = "dial_diagrams_index.json"
 CANONICAL_OPENSCAD = Path(r"C:\Program Files\OpenSCAD (Nightly)\openscad.com")
 
-# The picture key (strings pack S-421; the pages print it once, never the picture).
+# The picture key (the pages print it once, never the picture).
 LEGEND_LINE = (
     "black = the tool; teal = your plug; red dashed = the edges this dial moved; "
     "the numbers match the key beside the picture"
@@ -1009,7 +1009,7 @@ def compose_none_svg(note: str, title: str = "", name: str = "", desc: Optional[
 
 
 # ---------------------------------------------------------------------------
-# The pair picture (R3, FD-48): before | arrow | after, the moved edges in red
+# The pair picture: before | arrow | after, the moved edges in red
 # ---------------------------------------------------------------------------
 
 PAIR_VIEWS = ("top",) + SECTION_VIEWS
@@ -1531,7 +1531,7 @@ def compose_pair_svg(
     after plug in teal, the moved edges in red dashes, a removed feature from
     its old outline, an optional dimension callout, the numbered dots), and
     the key column with one leader per entry. ``style`` no longer changes
-    the drawing (FD-48); ``context`` is the card's text, not the picture's.
+    the drawing; ``context`` is the card's text, not the picture's.
     """
     del style, context
     b_out, a_out = _as_outline(before_outline), _as_outline(after_outline)
@@ -1655,10 +1655,10 @@ def compose_pair_svg(
 
 
 # ---------------------------------------------------------------------------
-# The text alternatives (R3 B3, FD-45): a short alt text and a long description
+# The text alternatives: a short alt text and a long description
 # ---------------------------------------------------------------------------
 #
-# The rules are docs/guides/describing-pictures.md (R1 to R10). The alt names
+# The rules are docs/guides/describing-pictures.md (rules 1 to 10). The alt names
 # the picture, the two values and what red marks; the long description is the
 # overview, the two panels, the numbered list matching the key, and what stayed.
 
@@ -2029,7 +2029,7 @@ def write_index(out_dir: Path, produced: Sequence[Dict[str, Any]], catalog: Sequ
 
 
 # ---------------------------------------------------------------------------
-# The storyboards (R3 B4): the four Customizer steps on one plug, five panels
+# The storyboards: the four Customizer steps on one plug, five panels
 # ---------------------------------------------------------------------------
 
 STORYBOARDS = PROJECT_ROOT / "dial_storyboards.json"

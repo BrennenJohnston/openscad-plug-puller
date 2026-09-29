@@ -1,7 +1,7 @@
 """Every one-sided `plug_preset` thinner than 24 mm renders clean with its own numbers.
 
-The one-sided puller's dropdown carries the plugs the owner chose at R2's
-Gate A (Q-38) with the labels of Q-39. Each preset fills in the plug's six
+The one-sided puller's dropdown carries the plugs the owner chose, with
+the labels the owner wrote. Each preset fills in the plug's six
 numbers (length; width at the prong end and at the cord end; thickness at
 both ends; cord). Only plugs thinner than 24 mm belong here: the heavy-duty
 extension cord stays in the dropdown as the signpost to the two-sided file
