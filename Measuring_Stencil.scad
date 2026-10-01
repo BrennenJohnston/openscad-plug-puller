@@ -5,7 +5,8 @@
 //
 // A set of thin measuring cards that answer the Plug Puller worksheet without
 // a caliper. Each card carries a raised 2-character ID you can read by touch;
-// the legend lives in docs/guides/starter-guide.md:
+// the legend is in both tools' guides, under "Match a card instead of
+// measuring" (written once, in docs/guides/source/stencil-cards.md):
 //
 //   P1 … P4      plug preset cards — hold your plug in the cutouts; if it
 //                 fills the W (width) and T (thickness) openings and the cord
@@ -127,7 +128,7 @@ I_F1 = N_PLUG + 2;
 I_F2 = N_PLUG + 3;
 
 // The 18 finger gauge holes, grouped into rows exactly like the paper
-// template (docs/guides/measuring-template.svg).
+// stencil sheet (docs/guides/stencil-sheet.svg).
 F1_ROWS = [[15, 16, 17, 18, 19, 20], [21, 22, 23, 24, 25]];
 F2_ROWS = [[26, 27, 28, 29], [30, 31, 32]];
 FINGER_RULE_TEXT = "FINGER WIDTH = HOLE No. - 5";

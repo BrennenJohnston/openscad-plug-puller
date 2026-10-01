@@ -33,7 +33,7 @@ Not sure which? Start with the one-sided puller. If your plug measures
 
 ![A gloved hand pulling the two-sided puller and its orange extension-cord plug straight out of a wall outlet, two fingers through the holes.](docs/images/two-sided-in-use-outlet.jpg)
 
-> **Version 0.12** — one step from the **v1.0** public milestone. The
+> **Public preview** — one step from the **v1.0** public milestone. The
 > geometry and guides are complete and print-tested, the shipped STLs
 > are CI-validated against golden fixtures, and the model is
 > customizable in the browser with nothing to install.
@@ -267,16 +267,17 @@ its scripts are all in the repository:
   are not uploaded alongside it. MakerWorld auto-detects a `.scad` upload
   and adds the **Customize** button; the parameter form mirrors the
   Customizer sections. Test the customizer behavior first via
-  **Creator Portal → Open SCAD File** before publishing. Draft listing text
+  **Creator Portal → Open SCAD File** before publishing. The listing text
   is in [`docs/makerworld-listing.md`](docs/makerworld-listing.md), and the
   user guide that goes with it is
   [`docs/MAKERWORLD_QUICK_START.md`](docs/MAKERWORLD_QUICK_START.md); both
   follow the shared
   [Accessible MakerWorld Documentation Standard](https://github.com/BrennenJohnston/accessible-makerworld-doc-standard/blob/main/ACCESSIBLE_MAKERWORLD_DOC_STANDARD.md).
-  Note the licensing decision recorded in the listing: publishing on
-  MakerWorld requires granting MakerWorld's platform license terms alongside
-  this repo's PolyForm NC 1.0.0 — the listing stays unpublished until the
-  maintainer signs off on that.
+  The licensing decision recorded in the listing is made: downloads from
+  MakerWorld use CC BY-NC-SA 4.0, the listing license closest to this
+  repo's PolyForm NC 1.0.0, which still covers the repository itself. The
+  maintainer runs the smoke test and publishes from their own MakerWorld
+  account.
 
 ### Features
 
@@ -439,7 +440,7 @@ a single plate.
 
 | Symptom | Likely cause | Where to look |
 | ------- | ------------ | ------------- |
-| Red warning tag lies flat on the bed past the end of the model | One of the in-model validation checks tripped | The tag names the failed check and the measurement to fix; see the [Fit Troubleshooting Guide](docs/guides/one-sided/full-guide.md#red-warning-tags) |
+| Red warning tag lies flat on the bed past the end of the model | One of the in-model validation checks tripped | The tag names the check and the measurement to fix; see Red warning tags in the [one-sided](docs/guides/one-sided/full-guide.md#red-warning-tags) or [two-sided](docs/guides/two-sided/full-guide.md#red-warning-tags) full guide |
 | Red tag `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | The plug is too thick for the one-sided puller's pocket | Open [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad) and fill in its Step 1 |
 | Orange `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE` in the two-sided preview | The plug is too short for a velcro strap slot in the arms; the zip ties still hold the plates | Nothing to fix; or pick `Zip ties` in Step 3 |
 | Green `Medium: …` (or `MEASURED: …`) tag in the preview | Not a problem: preview-only confirmation that your measurements were applied; never in the exported STL | — |
@@ -495,7 +496,7 @@ For contributors and engineers:
 | Document | Description |
 | -------- | ----------- |
 | [`docs/Plug_Puller_Reference.md`](docs/Plug_Puller_Reference.md) | Exhaustive reference: both tools, coordinate frames, the plug side rail, the plate geometry, CSG order, sizes, derivation layer, render modes, warnings |
-| [`docs/makerworld-listing.md`](docs/makerworld-listing.md) | The draft MakerWorld listing text |
+| [`docs/makerworld-listing.md`](docs/makerworld-listing.md) | The MakerWorld listing text |
 | [`docs/MAKERWORLD_QUICK_START.md`](docs/MAKERWORLD_QUICK_START.md) | The user guide that goes with the listing |
 | [`docs/guides/describing-pictures.md`](docs/guides/describing-pictures.md) | How every picture's alt text and long description are written, with the sources |
 | [`scripts/README.md`](scripts/README.md) | Every build and check script |
@@ -570,7 +571,6 @@ maintainer for commercial use.
   [OpenAT Template](https://github.com/makersmakingchange/OpenAT-Template)
   by Makers Making Change.
 - [`braille-stl-generator-openscad`](https://github.com/BrennenJohnston/braille-stl-generator-openscad) — sibling parametric OpenSCAD project; the pipeline conventions (presets.scad, in-model warnings) used here were adapted from it.
-- [`cad-to-openscad-pipeline`](https://github.com/BrennenJohnston/cad-to-openscad-pipeline) — the general-purpose CAD-to-OpenSCAD methodology and the DXF → polygon conversion tool.
 - The hand sizes come from the ANSUR II (2012) hand breadth survey and
   Rogers (2008) knuckle breadth; the documentation is written to the
   [Accessible MakerWorld Documentation Standard](https://github.com/BrennenJohnston/accessible-makerworld-doc-standard/blob/main/ACCESSIBLE_MAKERWORLD_DOC_STANDARD.md).

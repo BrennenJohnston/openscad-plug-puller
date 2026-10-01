@@ -12,7 +12,8 @@
 //      UNCHECKED (older builds: Window ▸ Customizer)
 //   3. Fill in the numbered Steps top to bottom:
 //        Step 1: Your plug — pick a plug preset, or measure your plug
-//                (docs/guides/measuring-guide.md shows every measurement).
+//                (docs/guides/one-sided/quick-start.md shows every
+//                measurement).
 //        Step 2: Size — Medium is the reference; Small / Large for other
 //                hands; "Measure my hand" to type two hand numbers.
 //        Step 3: Attachment — how the tool straps onto the plug.
@@ -23,7 +24,7 @@
 //     "Step 1" … "Step 4"       the guided path — beginners stop here
 //     "Advanced - …" sections   power dials: manual zip/velcro placement and
 //                               render quality
-//                               (see docs/guides/power-user-guide.md)
+//                               (see docs/guides/one-sided/full-guide.md)
 //     "… (Custom size only)"    expert geometry sliders, active only when
 //                               Size = Custom (all measurements are ignored)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -64,7 +65,7 @@
 // the selection to the default (MakerWorld PMM inherits this behaviour).
 
 /* [Step 1 - Your Plug] */
-// The fastest start: pick your plug from this list and every measurement below fills in automatically. Pick "Measure my plug" to type your own numbers instead - docs/guides/measuring-guide.md walks you through each one in about 5 minutes.
+// The fastest start: pick your plug from this list and every measurement below fills in automatically. Pick "Measure my plug" to type your own numbers instead - the quick start, docs/guides/one-sided/quick-start.md, walks you through each one in about 5 minutes.
 plug_preset = "Measure my plug"; // [Measure my plug, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15, Wide 2-prong appliance plug - NEMA 1-15]
 // How far the plug body sticks out, from the surface it plugs into to the plug's back end where the cord starts. On a wall outlet, measure from the wall plate; on a laptop or charger, from the device's edge. The tool's pocket runs this full length. Skip if you picked a plug preset. (mm)
 measure_plug_length = 25.5; // [12:0.5:85]

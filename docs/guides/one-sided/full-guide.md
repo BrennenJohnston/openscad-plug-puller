@@ -1627,7 +1627,7 @@ If the preview shows red text, or a red text tag printed next to your part, the 
 | `ZIP TIE HOLES HIT FINGER HOLES` | A zip-tie row landed too close to a finger hole; Auto placement avoids this, Manual positions or auto-fit off can cause it | Move that zip-tie pair position, or turn Auto placement back on |
 | `ZIP TIE ROWS OVERLAP EACH OTHER` | Two manual zip-tie rows landed on top of each other | Spread the zip-tie pair positions at least one hole diameter apart |
 | `ZIP TIE HOLES HIT VELCRO SLOTS` | A zip-tie row broke into a classic strap slot | Move the zip-tie pair or the strap slot position apart |
-| `SEAT HAS NO RECESS - PLUG WONT NEST`, `POCKET HAS NO RECESS - PLUG WONT NEST` | An internal geometry check; with measured numbers it should not happen | Check every number against the measuring guide; if it persists, open an issue with your numbers |
+| `SEAT HAS NO RECESS - PLUG WONT NEST`, `POCKET HAS NO RECESS - PLUG WONT NEST` | An internal geometry check; with measured numbers it should not happen | Measure every number again, following Measure your plug and your hand; if it persists, open an issue with your numbers |
 | `SEAT FLOOR TOO THIN TO PRINT`, `POCKET FLOOR TOO THIN TO PRINT` | The same internal check, on the pocket floors | As above |
 | `ZIP TIE GRID BELOW CORD END`, `ZIP TIE GRID OUTSIDE BODY`, anything else | The same internal check, on the zip-tie grid | As above |
 | `FINGER HOLES OUTSIDE BODY`, `POCKET SEAT WIDER THAN TOP EDGE`, `POCKET WIDER THAN BODY`, `WALL NOTCH WIDER THAN TOP EDGE` | Custom size only: the Custom-mode wording of the checks above | Adjust that feature's Custom dials, or turn Auto-fit back on |

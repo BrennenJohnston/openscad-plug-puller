@@ -66,6 +66,7 @@ from scripts.build_outline_sheets_pdf import (  # noqa: E402
     ACCENT,
     ACCENT_TINT,
     BORDER_GRAY,
+    EDGE_PROFILE,
     PAGE_H_MM,
     PAGE_W_MM,
     RULE_GRAY,
@@ -94,7 +95,6 @@ DIALS_DIR = PROJECT_ROOT / "docs" / "dials"
 INDEX = DIALS_DIR / "dial_diagrams_index.json"
 STORYBOARDS = DIALS_DIR / "storyboards_index.json"
 SCRATCH = PROJECT_ROOT / "tmp_renders" / "dial_reference"
-EDGE_PROFILE = PROJECT_ROOT / "tmp_renders" / "edge_profile"
 
 CONTENTS_HEADING = "Contents"
 NAME_LABEL = "Customizer name"
