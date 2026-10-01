@@ -60,6 +60,12 @@ FIT_POCKET_WIDTH_CLEARANCE = 6.7
 FIT_DOME_DROP = 2.15
 FIT_POCKET_FINGER_GAP = 5.5
 
+# The main SCAD's auto-fit trims a finger hole wider than this share of the
+# body's length or bottom width. A trim by the length would be silent, so
+# the fit lengthens the body (D-11a) to keep the full hole; a trim by the
+# width keeps its red tag, FINGER TOO BIG FOR HAND WIDTH.
+FIT_FINGER_HOLE_SHARE = 0.4
+
 FIT_RECESS_RATIO_SEAT = 0.15875
 FIT_RECESS_RATIO_BODY = 0.127
 FIT_MIN_POCKET_FLOOR = 1.5
@@ -139,6 +145,11 @@ def _round05(v: float) -> float:
     return math.floor(v * 20 + 0.5) / 20
 
 
+def _ceil05(v: float) -> float:
+    """Mirror of ``_fit_ceil05``: round up to the next 0.05 mm."""
+    return math.ceil(v * 20) / 20
+
+
 def _round_half(v: float) -> float:
     """Mirror of ``_fit_round_half``: snap to 0.5 (floor(v*2 + 0.5)/2)."""
     return math.floor(v * 2 + 0.5) / 2
@@ -190,6 +201,10 @@ def derive(measurements: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
             + math.sqrt(max(0.0, finger_reach**2 - finger_dx**2)),
         )
     )
+    # D-11a — the body length that holds the full hole; a hair over the
+    # exact share, so rounding never leaves the hole a micron past the
+    # auto-fit's ceiling (mirrors _fit_finger_room).
+    finger_room = _ceil05(finger_d / FIT_FINGER_HOLE_SHARE + 0.001)
 
     # D-12 … D-14 — plug wall notch (from the WALL-station width — the end
     # of the plug that meets the wall is the end the notch must straddle)
@@ -237,6 +252,7 @@ def derive(measurements: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
         max(
             pocket_depth + FIT_POCKET_FINGER_GAP + finger_y + finger_d / 2,
             length_for_zip,
+            finger_room,
         ),
         55, 120,
     )

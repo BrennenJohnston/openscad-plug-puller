@@ -201,6 +201,20 @@ public milestone**.
   from today's model; most one-sided ones still showed the outlines from
   before the layered edge rounding, which move by hundredths of a
   millimeter.
+- **A big finger keeps its full finger hole.** The auto-fit trims a finger
+  hole wider than 40 % of the one-sided body's length, and with a short
+  plug the fitted body was often too short: a 26 mm finger on an 85 mm
+  hand with the default plug got a 27.9 mm hole instead of 31.4 mm, and
+  plain Large got 27.06 mm instead of 28.4 mm, with only a console line to
+  say so. The fitting step now makes the body just long enough for the
+  full hole. A hand too narrow for its hole keeps its red tags, FINGER TOO
+  BIG FOR HAND WIDTH and FINGER HOLES OUTSIDE BODY; a band of hands 1 to
+  3 mm too narrow at the holes' height, such as a 25 mm finger on an
+  80 mm hand, now sees FINGER HOLES OUTSIDE BODY instead of a silently
+  smaller hole. The shipped STLs, the presets and the outline sheets do
+  not change; the `large` golden fixture is regenerated, now 71.05 mm long
+  instead of 67.65 mm, and the hand size and finger width pictures are
+  redrawn.
 
 ## [0.13.0] - 2026-09-27
 

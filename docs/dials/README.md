@@ -92,19 +92,19 @@ This dial changes no shape. Changes no shape: the see-through plug is a preview 
 
 `size`: Hand size
 
-![Hand size: before and after, Medium to Large; red marks the body edge, the finger holes, the pocket, the wing openings and the zip-tie holes.](one-sided/size.svg)
+![Hand size: before and after, Medium to Large; red marks the body edge, the finger holes, the wall notch, the wing openings and the zip-tie holes.](one-sided/size.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hand size set to Large. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the pocket: the plug recess on the centerline. 3, the wing openings: the two openings beside the pocket. 4, the finger holes: the two large holes in the lower half. 5, the body edge: the outer outline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hand size set to Large. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket, removed. 2, the finger holes: the two large holes in the lower half. 3, the zip-tie holes, the wing openings, the wall notch and the body edge.
 
-Before: Medium. After: Large. Moves: body edge, finger holes, pocket, wing openings, zip-tie holes.
+Before: Medium. After: Large. Moves: body edge, finger holes, wall notch, wing openings, zip-tie holes.
 
 `measure_finger_width`: Finger width
 
-![Finger width: before and after, 20 to 26 mm; red marks 6 parts, named below.](one-sided/measure_finger_width.svg)
+![Finger width: before and after, 20 to 26 mm; red marks 7 parts, named below.](one-sided/measure_finger_width.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27.9 mm across, wider than the finger. Marked in red: 1, the zip-tie holes and the pocket. 2, the wing openings. 3, the finger holes. 4, the zip-tie holes, the wall notch and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 31.4 mm across, wider than the finger. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the seat, the pocket and the body edge.
 
-Before: 20. After: 26. Context: `size` = Measure my hand. Moves: body edge, finger holes, pocket, wall notch, wing openings, zip-tie holes.
+Before: 20. After: 26. Context: `size` = Measure my hand. Moves: body edge, finger holes, pocket, seat, wall notch, wing openings, zip-tie holes.
 
 `measure_hand_width`: Hand width
 

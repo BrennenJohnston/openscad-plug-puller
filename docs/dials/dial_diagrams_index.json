@@ -590,74 +590,59 @@
     "after": "Large",
     "context": {},
     "plug": "default",
-    "regions": 10,
-    "changed_area_mm2": 1101.6,
+    "regions": 7,
+    "changed_area_mm2": 1598.8,
     "tags": [],
     "svg": "one-sided/size.svg",
     "features": [
       "body edge",
       "finger holes",
-      "pocket",
+      "wall notch",
       "wing openings",
       "zip-tie holes"
     ],
     "regions_named": [
       [
-        96.9,
+        128.6,
         [
           "finger holes"
         ]
       ],
       [
-        96.9,
+        1260.7,
         [
-          "finger holes"
-        ]
-      ],
-      [
-        569.7,
-        [
+          "zip-tie holes",
+          "wing openings",
+          "wall notch",
           "body edge"
         ]
       ],
       [
-        20.1,
+        20.2,
         [
           "zip-tie holes"
         ]
       ],
       [
-        20.1,
+        20.2,
         [
           "zip-tie holes"
         ]
       ],
       [
-        92.9,
+        128.6,
         [
-          "wing openings"
+          "finger holes"
         ]
       ],
       [
-        92.9,
-        [
-          "wing openings"
-        ]
-      ],
-      [
-        69.6,
-        [
-          "pocket"
-        ]
-      ],
-      [
-        21.2,
+        20.2,
         [
           "zip-tie holes"
         ]
       ],
       [
-        21.2,
+        20.2,
         [
           "zip-tie holes"
         ]
@@ -669,40 +654,29 @@
         [
           "zip-tie holes"
         ],
-        false
+        true
       ],
       [
         2,
-        [
-          "pocket"
-        ],
-        false
-      ],
-      [
-        3,
-        [
-          "wing openings"
-        ],
-        false
-      ],
-      [
-        4,
         [
           "finger holes"
         ],
         false
       ],
       [
-        5,
+        3,
         [
+          "zip-tie holes",
+          "wing openings",
+          "wall notch",
           "body edge"
         ],
         false
       ]
     ],
     "dimension": null,
-    "alt": "Hand size: before and after, Medium to Large; red marks the body edge, the finger holes, the pocket, the wing openings and the zip-tie holes.",
-    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hand size set to Large. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the pocket: the plug recess on the centerline. 3, the wing openings: the two openings beside the pocket. 4, the finger holes: the two large holes in the lower half. 5, the body edge: the outer outline."
+    "alt": "Hand size: before and after, Medium to Large; red marks the body edge, the finger holes, the wall notch, the wing openings and the zip-tie holes.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: hand size set to Large. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket, removed. 2, the finger holes: the two large holes in the lower half. 3, the zip-tie holes, the wing openings, the wall notch and the body edge."
   },
   {
     "file": "one-sided",
@@ -715,56 +689,30 @@
       "size": "Measure my hand"
     },
     "plug": "default",
-    "regions": 6,
-    "changed_area_mm2": 1017.2,
+    "regions": 1,
+    "changed_area_mm2": 1984.7,
     "tags": [],
     "svg": "one-sided/measure_finger_width.svg",
     "features": [
       "body edge",
       "finger holes",
       "pocket",
+      "seat",
       "wall notch",
       "wing openings",
       "zip-tie holes"
     ],
     "regions_named": [
       [
-        185.7,
-        [
-          "finger holes"
-        ]
-      ],
-      [
-        328.7,
+        1984.7,
         [
           "zip-tie holes",
+          "finger holes",
+          "wing openings",
           "wall notch",
+          "seat",
+          "pocket",
           "body edge"
-        ]
-      ],
-      [
-        56.8,
-        [
-          "wing openings"
-        ]
-      ],
-      [
-        203.5,
-        [
-          "zip-tie holes",
-          "pocket"
-        ]
-      ],
-      [
-        185.7,
-        [
-          "finger holes"
-        ]
-      ],
-      [
-        56.8,
-        [
-          "wing openings"
         ]
       ]
     ],
@@ -773,29 +721,11 @@
         1,
         [
           "zip-tie holes",
-          "pocket"
-        ],
-        false
-      ],
-      [
-        2,
-        [
-          "wing openings"
-        ],
-        false
-      ],
-      [
-        3,
-        [
-          "finger holes"
-        ],
-        false
-      ],
-      [
-        4,
-        [
-          "zip-tie holes",
+          "finger holes",
+          "wing openings",
           "wall notch",
+          "seat",
+          "pocket",
           "body edge"
         ],
         false
@@ -805,10 +735,10 @@
       "kind": "dia",
       "at": "finger_hole",
       "label": "26 mm",
-      "drawn": 27.9
+      "drawn": 31.4
     },
-    "alt": "Finger width: before and after, 20 to 26 mm; red marks 6 parts, named below.",
-    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27.9 mm across, wider than the finger. Marked in red: 1, the zip-tie holes and the pocket. 2, the wing openings. 3, the finger holes. 4, the zip-tie holes, the wall notch and the body edge."
+    "alt": "Finger width: before and after, 20 to 26 mm; red marks 7 parts, named below.",
+    "long_description": "Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 31.4 mm across, wider than the finger. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the seat, the pocket and the body edge."
   },
   {
     "file": "one-sided",
