@@ -393,7 +393,7 @@ centers itself. As built:
 | 3 | Arm tips | `_clam_tip_cx` steps in by `_cradle_eff`, so the slope runs to the tips |
 | 4 | Depth guard | `_cradle_eff ≤ min(plate_cradle_depth, plate_thickness, min(hw_wall, hw_cable) − cable_hw)`: the outer-face gap never closes below the cord channel's width |
 | 5 | WC-13 | `CRADLE SHALLOWER THAN ASKED - PLUG NARROW` when `_cradle_eff < plate_cradle_depth − 0.01` |
-| 6 | See-through plug | `plug_preview_2s()`: a `%` hull of two slices (cord-end width at `_clam_y_back`, prong-end width at `_clam_length + 2`), 0.55 × the width tall |
+| 6 | See-through plug | `plug_preview_2s()`: a `%` hull of two slices (cord-end width at `_clam_y_back`, prong-end width at the tips, `_clam_length`), 0.55 × the width tall |
 
 Row 2 in full: slice i cuts `clamshell_v_gap_2d(c)` (limited to Y past the
 throat) and `clamshell_serrations_2d(c)`, so the teeth ride the slope; the

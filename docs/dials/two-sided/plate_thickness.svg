@@ -4,9 +4,9 @@
 <desc>Two vertical slices of the two-sided puller at y = 3 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plate thickness at 6 mm. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. 2, the zip stations, the finger lobes and the cord channel: the three small holes along each arm; the two rounded lobes in the lower half; the gap between the lobes at the bottom.</desc>
 <rect width="168.14" height="26.30" fill="white"/>
 <g class="panel" id="before">
-<path d="M 36.07 11.99 L 25.99 11.99 L 25.97 8.05 L 28.62 8.02 L 28.67 11.00 L 33.41 11.00 L 33.45 8.02 L 36.05 8.00 L 36.07 11.99 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 6.00 10.81 L 6.04 8.00 L 22.10 8.04 L 22.06 12.00 L 7.87 11.99 L 7.01 11.83 L 6.53 11.61 L 6.12 11.21 L 6.00 10.81 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 40.02 12.00 L 39.97 11.95 L 40.01 8.00 L 56.07 8.04 L 56.04 10.98 L 55.88 11.31 L 55.67 11.52 L 55.25 11.76 L 54.86 11.88 L 53.97 12.00 L 40.02 12.00 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 6.01 10.82 L 6.04 8.00 L 22.10 8.04 L 22.06 12.00 L 8.26 12.00 L 8.17 11.91 L 7.32 11.91 L 7.24 11.81 L 6.96 11.81 L 6.89 11.71 L 6.71 11.70 L 6.19 11.29 L 6.01 10.82 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 40.02 12.00 L 39.97 11.95 L 40.01 8.00 L 56.07 8.04 L 56.04 10.98 L 55.87 11.29 L 55.53 11.60 L 55.18 11.71 L 55.11 11.81 L 54.82 11.81 L 54.75 11.91 L 53.90 11.91 L 53.81 12.00 L 40.02 12.00 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 26.02 12.00 L 25.97 11.95 L 26.00 8.00 L 28.62 8.02 L 28.67 11.00 L 33.42 11.00 L 33.45 8.02 L 36.10 8.03 L 36.07 12.00 L 26.02 12.00 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 </g>
 <g class="arrow">
 <line x1="63.57" y1="9.00" x2="68.07" y2="9.00" stroke="#000" stroke-width="0.6"/><polygon points="70.57,9.00 68.07,7.88 68.07,10.12" fill="#000"/>
@@ -14,17 +14,17 @@
 <text x="67.07" y="25.70" font-family="Helvetica, Arial, sans-serif" font-size="2.80" text-anchor="middle" fill="#000">section at y = 3 mm</text>
 </g>
 <g class="panel" id="after" transform="translate(72.07 0)">
-<path d="M 36.09 7.81 L 36.08 11.99 L 26.02 12.00 L 25.97 7.81" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 28.63 7.81 L 28.67 11.00 L 33.42 10.99 L 33.44 7.81" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 22.10 7.81 L 22.06 12.00 L 8.10 12.00 L 7.43 11.93 L 6.71 11.71 L 6.29 11.42 L 6.12 11.21 L 6.00 10.81 L 6.00 7.80" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 56.06 7.81 L 56.06 10.86 L 56.01 11.09 L 55.78 11.41 L 55.54 11.61 L 55.05 11.83 L 53.97 12.00 L 40.02 12.00 L 39.97 11.95 L 39.97 7.81" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 22.10 7.81 L 22.06 12.00 L 8.26 12.00 L 8.17 11.91 L 7.32 11.91 L 7.24 11.81 L 6.96 11.81 L 6.40 11.50 L 6.12 11.19 L 6.01 10.82 L 6.00 7.80" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 56.06 7.81 L 56.06 10.88 L 56.00 11.08 L 55.78 11.40 L 55.53 11.60 L 55.17 11.72 L 55.12 11.81 L 54.83 11.81 L 54.75 11.91 L 53.90 11.91 L 53.81 12.00 L 40.02 12.00 L 39.97 11.95 L 39.97 7.81" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 36.10 7.81 L 36.07 11.99 L 26.02 12.00 L 25.97 11.95 L 25.97 7.81" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 28.63 7.81 L 28.67 11.00 L 33.43 10.99 L 33.44 7.81" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 6.00 7.80 L 6.00 6.05 L 6.01 6.02 L 6.04 6.00 L 22.05 6.00 L 22.08 6.01 L 22.10 6.04 L 22.10 7.81" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <path d="M 25.97 7.81 L 25.97 6.05 L 25.99 6.01 L 28.58 6.00 L 28.63 6.03 L 28.63 7.81" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
-<path d="M 33.44 7.81 L 33.44 6.03 L 33.49 6.00 L 36.05 6.00 L 36.09 6.02 L 36.09 7.81" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 33.44 7.81 L 33.44 6.03 L 33.49 6.00 L 36.05 6.00 L 36.09 6.03 L 36.10 7.81" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <path d="M 39.97 7.81 L 39.97 6.05 L 40.00 6.00 L 56.02 6.00 L 56.06 6.03 L 56.06 7.81" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <circle cx="22.10" cy="7.81" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="22.10" y="8.60" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 <circle cx="28.63" cy="7.81" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="28.63" y="8.60" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
-<circle cx="36.09" cy="7.81" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="36.09" y="8.60" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
+<circle cx="36.10" cy="7.81" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="36.10" y="8.60" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
 <circle cx="56.06" cy="6.03" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="56.06" y="6.82" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 </g>
 <g class="key">

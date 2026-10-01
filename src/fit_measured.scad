@@ -104,6 +104,13 @@ FIT_DOME_DROP = 2.15;
 // (the finger holes sit closer to the pocket than v5's 6.5).
 FIT_POCKET_FINGER_GAP = 5.5;
 
+// The main SCAD's auto-fit trims a finger hole wider than this share of the
+// body's length or bottom width. A trim by the length would be silent, so
+// the fit lengthens the body (D-11a) to keep the full hole; a trim by the
+// width keeps its red tag, FINGER TOO BIG FOR HAND WIDTH, which asks the
+// user to recheck both measurements.
+FIT_FINGER_HOLE_SHARE = 0.4;
+
 // Seat recess = this x plug thickness: 0.15875 x 20 = 3.175 (1/8").
 FIT_RECESS_RATIO_SEAT = 0.15875;
 // Pocket-body recess = this x plug thickness: 0.127 x 20 = 2.54 (1/10").
@@ -176,6 +183,7 @@ FIT_ZIP_FINGER_WEB = 2.5;
 
 function _fit_clamp(v, lo, hi) = max(lo, min(v, hi));
 function _fit_round05(v) = floor(v * 20 + 0.5) / 20;
+function _fit_ceil05(v) = ceil(v * 20) / 20;
 function _fit_round_half(v) = floor(v * 2 + 0.5) / 2;
 
 // ---------------------------------------------------------------------------
@@ -212,6 +220,10 @@ _fit_finger_hole_y_position = _fit_round05(
         _fit_t_hook_length
             + sqrt(max(0, _fit_finger_reach * _fit_finger_reach
                           - _fit_finger_dx * _fit_finger_dx))));
+// D-11a (internal) — the body length that holds the full hole; a hair over
+// the exact share, so rounding never leaves the hole a micron past the
+// auto-fit's ceiling.
+_fit_finger_room = _fit_ceil05(_fit_finger_hole_diameter / FIT_FINGER_HOLE_SHARE + 0.001);
 
 // ---------------------------------------------------------------------------
 // D-12 … D-14 — Plug wall notch
@@ -270,8 +282,11 @@ _fit_length_for_zip = _fit_finger_hole_y_position + _fit_zip_dy_req             
 _fit_puller_length = _fit_clamp(                                                            // D-20
     max(_fit_pocket_depth + FIT_POCKET_FINGER_GAP
             + _fit_finger_hole_y_position + _fit_finger_hole_diameter / 2,
-        _fit_length_for_zip),
+        _fit_length_for_zip,
+        _fit_finger_room),
     55, 120);
+assert(_fit_finger_hole_diameter <= FIT_FINGER_HOLE_SHARE * _fit_puller_length,
+       "fit: the fitted body must be long enough for the full finger hole (D-11a)");
 
 // ---------------------------------------------------------------------------
 // D-21 — Slab thickness

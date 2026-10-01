@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="209.38mm" height="77.50mm" viewBox="0 0 209.38 77.50" role="img">
 <title>Plug width at the cord end</title>
-<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the cord end at 15 mm: tilts the pocket's side walls to match the plug's taper, and the zip-tie holes and wing openings lean in with them. The red line marks the plug's width at the cord end and reads 15 mm, the number you type. Marked in red: 1, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the cord end at 15 mm: tilts the pocket's side walls to match the plug's taper, and the zip-tie holes and wing openings lean in with them. The red line marks the plug's width at the cord end and reads 15 mm, the number you type. Marked in red: 1, the zip-tie holes, the wing openings and the pocket: the four small holes beside the pocket; the two openings beside the pocket; the plug recess on the centerline.</desc>
 <rect width="209.38" height="77.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 53.85 6.00 L 53.85 31.50 L 28.85 31.50 L 28.85 6.00 L 53.85 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
@@ -96,8 +96,9 @@
 <circle cx="61.10" cy="20.96" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="61.10" y="21.76" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 </g>
 <g class="key">
-<text x="178.38" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 wing openings /</text>
-<text x="181.38" y="7.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">pocket</text>
+<text x="178.38" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 zip-tie holes /</text>
+<text x="181.38" y="7.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">wing openings /</text>
+<text x="181.38" y="10.80" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">pocket</text>
 </g>
 <g class="leaders">
 <line x1="154.83" y1="20.20" x2="177.38" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>

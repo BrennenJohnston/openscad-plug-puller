@@ -563,7 +563,7 @@ plug_wall_notch_rounding = _auto_fit
 // --- Finger Holes (adapted) ---
 finger_hole_diameter = _auto_fit
     ? _clamp(_raw_finger_hole_diameter,
-             10, min(puller_bottom_width * 0.4, puller_length * 0.4))
+             10, FIT_FINGER_HOLE_SHARE * min(puller_bottom_width, puller_length))
     : _raw_finger_hole_diameter;
 finger_hole_spacing = _auto_fit
     ? _clamp(_raw_finger_hole_spacing,

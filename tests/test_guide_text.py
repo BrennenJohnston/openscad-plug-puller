@@ -76,14 +76,17 @@ def test_anchor() -> None:
 
 
 def test_every_source_fills_for_both_tools() -> None:
-    """Every source file loads for both tools, keeps its headings at H2 or
-    deeper (the assembled page owns the H1), and names only images that
-    exist."""
+    """Every source file loads for both tools with no ``{name}`` left
+    unfilled (a name may hold digits, like ``{step4}``), keeps its headings
+    at H2 or deeper (the assembled page owns the H1), and names only images
+    that exist."""
     sources = sorted(SOURCE_DIR.glob("*.md"))
     assert sources, f"no guide sources under {SOURCE_DIR}"
     for path in sources:
         for tool in ("one-sided", "two-sided"):
             text = load_source(path.stem, tool)
+            left = re.findall(r"\{[A-Za-z_][A-Za-z0-9_]*\}", text)
+            assert not left, f"{path.name} ({tool}): unfilled {left}"
             for level, heading in headings(text):
                 assert level >= 2, f"{path.name}: H1 '{heading}' belongs to the assembled page"
             for target in re.findall(r"!\[[^\]]*\]\(([^)\s]+)\)", text):

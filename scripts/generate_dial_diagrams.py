@@ -492,9 +492,6 @@ def outline_regions(before: Outline, after: Outline) -> Tuple[List[Polygon], flo
     return _regions_of(solids.union(recess))
 
 
-PLUG_PAST_TIPS = 2.0  # mm the two-sided plug is drawn past the arm tips, as the model's preview draws it
-
-
 def plug_polygon(file_key: str, params: Dict[str, Any], outline: Outline) -> Polygon:
     """The plug as the tool places it: a trapezoid from the prong-end width
     at the plate end to the cord-end width over the plug length."""
@@ -504,7 +501,7 @@ def plug_polygon(file_key: str, params: Dict[str, Any], outline: Outline) -> Pol
     length = m["measure_plug_length"]
     w_prong = m["measure_plug_width_prong_end"]
     w_cord = m["measure_plug_width_cord_end"]
-    y_prong = y1 + (PLUG_PAST_TIPS if file_key == TWO_SIDED else 0.0)
+    y_prong = y1
     y_cord = y1 - length
     return Polygon([
         (cx - w_prong / 2, y_prong),
@@ -524,7 +521,9 @@ def plug_polygon(file_key: str, params: Dict[str, Any], outline: Outline) -> Pol
 # region is named after the first footprint, in the order below (the most
 # specific first), that covers at least a quarter of it; failing that, the
 # footprint that covers most of it; failing that, the body's or plate's
-# edge.
+# edge. A hole or slot whose own outline moved is named on every region
+# whose outline encloses part of its change, even a region another part
+# owns (``moved_openings``).
 
 FEATURE_FALLBACK = {ONE_SIDED: "body edge", TWO_SIDED: "plate edge"}
 FOOTPRINT_PAD = 1.5  # mm: a moved edge's region lies just outside its old footprint
@@ -539,6 +538,10 @@ EDGE_SHARE = 0.5  # a region lying this much within the strip hugs the edge and 
 EDGE_CONTACT_SHARE = 0.10  # a region touching this much of the outer edge's length (outside every footprint) is the edge's too
 TEETH_DEPTH = 3.0  # mm: the band along the arms' inner edges that the teeth occupy
 PROBE_HALF = 0.5  # mm: half the thickness of a section row's probe box
+# How a through-opening is sorted, by the footprints and by the moved-opening check alike
+ZIP_MATCH = {ONE_SIDED: 2.0, TWO_SIDED: 1.5}  # mm: a circle this close to the zip-tie hole's diameter is one
+FINGER_MATCH = 3.0  # mm: a circle this close to the finger hole's diameter is one
+STRAP_MIN_AREA = {ONE_SIDED: 5.0, TWO_SIDED: 20.0}  # mm²: a non-circular opening this big is a strap opening
 
 
 @dataclass
@@ -617,6 +620,18 @@ def _hook_box(d: Dict[str, Any], params: Dict[str, Any]) -> Polygon:
                        max(hand * cl, hand * cr), d["t_hook_length"])
 
 
+def _wing_name(params: Dict[str, Any]) -> str:
+    return "classic slots" if params.get("velcro_style") == "Classic slot" else "wing openings"
+
+
+def _clamshell(params: Dict[str, Any]) -> Tuple[Dict[str, float], Dict[str, Any]]:
+    """The two-sided plug numbers and the clamshell mirror's numbers."""
+    m = effective_measurements(TWO_SIDED, params)
+    size = params.get("size", "Medium")
+    mirror_size = size if size in fit_formulas.FIT_SIZE_TABLE else "Medium"
+    return m, clamshell_mirror(mirror_size, {"measurements": m})
+
+
 def footprints_one_sided(params: Dict[str, Any], outline: Outline,
                          after: Optional[Outline] = None,
                          after_params: Optional[Dict[str, Any]] = None) -> Footprints:
@@ -626,10 +641,10 @@ def footprints_one_sided(params: Dict[str, Any], outline: Outline,
     top = body.bounds[3]
     solids = list(outline.solids) + (list(after.solids) if after else [])
     circles = _circles(solids)
-    fingers = [c for c in circles if abs(c.d - d["finger_hole_diameter"]) < 3.0]
-    zips = [c for c in circles if abs(c.d - d["zip_tie_hole_diameter"]) < 2.0]
-    wings = _hole_slots(solids, 5.0)
-    wing_name = "classic slots" if params.get("velcro_style") == "Classic slot" else "wing openings"
+    fingers = [c for c in circles if abs(c.d - d["finger_hole_diameter"]) < FINGER_MATCH]
+    zips = [c for c in circles if abs(c.d - d["zip_tie_hole_diameter"]) < ZIP_MATCH[ONE_SIDED]]
+    wings = _hole_slots(solids, STRAP_MIN_AREA[ONE_SIDED])
+    wing_name = _wing_name(params)
     notch = _union([shapely.box(-x["plug_wall_notch_width"] / 2, top - x["plug_wall_notch_height"],
                                 x["plug_wall_notch_width"] / 2, top + 1.0) for x in (d, d2)])
     seat = Point(0.0, top).buffer(max(d["pocket_seat_diameter"], d2["pocket_seat_diameter"]) / 2)
@@ -647,17 +662,14 @@ def footprints_one_sided(params: Dict[str, Any], outline: Outline,
 def footprints_two_sided(params: Dict[str, Any], outline: Outline,
                          after: Optional[Outline] = None,
                          after_params: Optional[Dict[str, Any]] = None) -> Footprints:
-    m = effective_measurements(TWO_SIDED, params)
-    size = params.get("size", "Medium")
-    mirror_size = size if size in fit_formulas.FIT_SIZE_TABLE else "Medium"
-    cm = clamshell_mirror(mirror_size, {"measurements": m})
+    m, cm = _clamshell(params)
     solids = list(outline.solids) + (list(after.solids) if after else [])
     x0, y0, x1, y1 = shapely.union_all(solids).bounds
     circles = _circles(solids)
     zip_d = float(params.get("plate_zip_hole_diameter", 4.0))
-    fingers = [c for c in circles if abs(c.d - cm["finger_dia"]) < 3.0]
-    zips = [c for c in circles if abs(c.d - zip_d) < 1.5]
-    slots = _hole_slots(solids, 20.0)
+    fingers = [c for c in circles if abs(c.d - cm["finger_dia"]) < FINGER_MATCH]
+    zips = [c for c in circles if abs(c.d - zip_d) < ZIP_MATCH[TWO_SIDED]]
+    slots = _hole_slots(solids, STRAP_MIN_AREA[TWO_SIDED])
     lobes = _union([_disc(c, CLAM_FINGER_WALL) for c in fingers])
     plug = plug_polygon(TWO_SIDED, params, outline)
     teeth = plug.buffer(TEETH_DEPTH).difference(plug).intersection(
@@ -684,6 +696,45 @@ def footprints(file_key: str, params: Dict[str, Any], outline: Outline,
     return footprints_two_sided(params, outline, after, after_params)
 
 
+def openings(file_key: str, params: Dict[str, Any], outline: Outline) -> Dict[str, List[Polygon]]:
+    """One top view's through-openings by the names the footprints give
+    them, each as the exact polygon of its ring, sorted with this state's
+    own numbers."""
+    found = []
+    for poly in outline.solids:
+        for ring in poly.interiors:
+            coords = np.asarray(ring.coords)
+            found.append((Polygon(coords), classify_circle(coords)))
+    if file_key == ONE_SIDED:
+        d = _one_sided_numbers(params)
+        zip_d, finger_d = d["zip_tie_hole_diameter"], d["finger_hole_diameter"]
+        names = ("zip-tie holes", "finger holes", _wing_name(params))
+    else:
+        _m, cm = _clamshell(params)
+        zip_d, finger_d = float(params.get("plate_zip_hole_diameter", 4.0)), cm["finger_dia"]
+        names = ("zip stations", "finger lobes", "strap slot")
+    return {
+        names[0]: [p for p, c in found if c and abs(c.d - zip_d) < ZIP_MATCH[file_key]],
+        names[1]: [p for p, c in found if c and abs(c.d - finger_d) < FINGER_MATCH],
+        names[2]: [p for p, c in found if c is None and p.area > STRAP_MIN_AREA[file_key]],
+    }
+
+
+def moved_openings(file_key: str, before_params: Dict[str, Any], before: Outline,
+                   after_params: Dict[str, Any], after: Outline) -> List[Tuple[str, Any]]:
+    """Every kind of through-opening whose outline changed between two top
+    views, with its change (the symmetric difference of its openings); a
+    change under MIN_REGION_AREA is render noise and left out."""
+    b = openings(file_key, before_params, before)
+    a = openings(file_key, after_params, after)
+    moved = []
+    for name in sorted(set(b) | set(a)):
+        change = _fix(_union(a.get(name, [])).symmetric_difference(_union(b.get(name, []))))
+        if not change.is_empty and change.area >= MIN_REGION_AREA:
+            moved.append((name, change))
+    return moved
+
+
 def _section_probe(region: Polygon, view: str, at: float) -> Polygon:
     """A section region mapped back onto the top view: a thin box along the
     cut plane over the region's span."""
@@ -696,7 +747,8 @@ def _section_probe(region: Polygon, view: str, at: float) -> Polygon:
 def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
                      view: str = "top", at: float = 0.0,
                      body_area: float = 0.0,
-                     edge_rings: Sequence[LineString] = ()) -> List[Tuple[Polygon, List[str]]]:
+                     edge_rings: Sequence[LineString] = (),
+                     moved: Sequence[Tuple[str, Any]] = ()) -> List[Tuple[Polygon, List[str]]]:
     """Name every changed region, one name list per region in drawing order
     (the most specific footprint first): the specific footprints (holes,
     slots, teeth) covering at least half of it, the broad ones (pocket,
@@ -706,7 +758,10 @@ def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
     of the body is also the edge's; a region nothing claims takes the
     footprint covering most of it, if a tenth, else the edge. A region that
     lies mostly within EDGE_BAND of one of ``edge_rings`` (the body's outer
-    edge before and after), outside every named footprint, is the edge's too."""
+    edge before and after), outside every named footprint, is the edge's too.
+    In a top view, a region whose outline encloses at least MIN_REGION_AREA
+    of a ``moved`` part's change (see ``moved_openings``) is that part's too,
+    even when its change merged into another part's region."""
     named: List[Tuple[Polygon, List[str]]] = []
     edge = FEATURE_FALLBACK[file_key]
     order = [n for n, _g in fp.specific] + [n for n, _g in fp.broad] + [edge]
@@ -737,6 +792,12 @@ def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
             contact = region.buffer(EDGE_BAND).intersection(edge_lines).length / max(edge_length, 1e-9)
             if hugs or contact >= EDGE_CONTACT_SHARE:
                 hits.add(edge)
+        if view == "top" and moved:
+            # the region's outline, not its area: a hole that lands in new material is an inner ring of the region
+            enclosed = Polygon(region.exterior)
+            for name, change in moved:
+                if enclosed.intersection(change).area >= MIN_REGION_AREA:
+                    hits.add(name)
         if not hits and shares and view == "top":
             # A section probe is a thin box across the whole cut: a feature it
             # merely grazes must not name it, so the tenth-share fallback is
@@ -744,7 +805,7 @@ def classify_regions(file_key: str, regions: Sequence[Polygon], fp: Footprints,
             best = max(shares, key=shares.get)
             if shares[best] >= FALLBACK_SHARE:
                 hits.add(best)
-        names = sorted(hits or {edge}, key=lambda n: order.index(n) if n in order else len(order))
+        names = sorted(hits or {edge}, key=lambda n: (order.index(n) if n in order else len(order), n))
         named.append((region, names))
     return named
 
@@ -1708,8 +1769,8 @@ LONG_MAX_WORDS_DIMENSION = 110  # a picture with a red dimension line also descr
 # part's short name, its size word, and why the part is drawn larger or
 # smaller than the number the line reads (each reason checked against the
 # model: the cord clearances, the finger-hole clearance, the body worked out
-# from the hand width, the preview's plug past the arm tips, the grip
-# clearance or bite; None where the drawing has no reason to give).
+# from the hand width, the grip clearance or bite; None where the drawing
+# has no reason to give).
 DIMENSION_WORDS: Dict[str, Tuple[str, str, str, Optional[str], Optional[str]]] = {
     "pocket_length": ("the pocket's length", "the pocket", "long", None, None),
     "plug_width_prong_end": ("the plug's width at the prong end", "the plug", "wide", None, None),
@@ -1720,8 +1781,7 @@ DIMENSION_WORDS: Dict[str, Tuple[str, str, str, Optional[str], Optional[str]]] =
     "finger_hole": ("a finger hole", "the hole", "across", "wider than the finger", None),
     "body_width": ("the body at its widest", "the body", "wide",
                    None, "narrower than the hand, as its width is worked out from the hand width"),
-    "plug_length": ("the plug's length", "the plug", "long",
-                    f"reaching {_fmt_value(PLUG_PAST_TIPS)} mm past the arm tips as in the preview", None),
+    "plug_length": ("the plug's length", "the plug", "long", None, None),
     "gap_tips": ("the gap between the arm tips", "the gap", "wide",
                  "leaving a little room around the plug", "so the arms squeeze the plug"),
     "gap_cord_end": ("the gap between the arms at the cord end", "the gap", "wide",
@@ -1746,8 +1806,10 @@ def describe_dimension(dim: Dict[str, Any], value: Any) -> str:
     return text + "."
 
 
-def _join_names(names: Sequence[str]) -> str:
-    items = [f"the {n}" for n in names]
+def _join_names(names: Sequence[str], one_article: bool = False) -> str:
+    """The names joined with "the" before each, or with ``one_article``
+    before the first only."""
+    items = [f"the {n}" if not one_article or i == 0 else n for i, n in enumerate(names)]
     if len(items) <= 1:
         return "".join(items)
     return ", ".join(items[:-1]) + " and " + items[-1]
@@ -1968,7 +2030,8 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     body_area = sum(p.area for p in b_out.solids) if view == "top" else 0.0
     edge_rings = ([LineString(max(o.solids, key=lambda q: q.area).exterior.coords) for o in (b_out, a_out) if o.solids]
                   if view == "top" else [])
-    named = classify_regions(file_key, regions, feats, view, at, body_area, edge_rings) if regions else []
+    moved = moved_openings(file_key, base, b_out, after_params, a_out) if view == "top" else []
+    named = classify_regions(file_key, regions, feats, view, at, body_area, edge_rings, moved) if regions else []
     features = feature_names(named)
     callouts: List[List[Any]] = []
     alt = long_description = None
@@ -2142,7 +2205,8 @@ def storyboard_stages(board: Dict[str, Any], renderer: Renderer, defaults: Dict[
                 body_area = sum(q.area for q in prev["outline"].solids)
                 edge_rings = [LineString(max(o.solids, key=lambda q: q.area).exterior.coords)
                               for o in (prev["outline"], outline) if o.solids]
-                named = classify_regions(file_key, regions, fp, "top", 0.0, body_area, edge_rings)
+                moved = moved_openings(file_key, prev["params"], prev["outline"], params, outline)
+                named = classify_regions(file_key, regions, fp, "top", 0.0, body_area, edge_rings, moved)
             plan = plan_callouts(prev["outline"], outline, named)
         stages.append({"step": stage["step"], "set": stage["set"], "params": params, "outline": outline,
                        "plug": plug, "named": named, "area": area, "plan": plan,
@@ -2273,7 +2337,8 @@ def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]],
     SB_LONG_MAX_WORDS: an overview, then one line per stage named as the
     picture names it, Start for the defaults and each step by its own name
     (the picture numbers its four arrows 1 to 4, one per step). Every dial a
-    step sets is named, with its value when the whole fits."""
+    step sets is named, with its value when the whole fits; when the names
+    alone still run long, each list of parts takes a single "the"."""
     file_key = board["file"]
     tool = TOOL_NAMES[file_key]
     alt = f"{tool[0].upper()}{tool[1:]}, the four Customizer steps on a {board['plug_label']}, five stages left to right."
@@ -2281,7 +2346,7 @@ def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]],
     overview = (f"Five stages of {tool}, left to right, the top row first, the plug end at the top; "
                 "arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved.")
 
-    def stage_line(k: int, st: Dict[str, Any], with_values: bool) -> str:
+    def stage_line(k: int, st: Dict[str, Any], with_values: bool, one_article: bool) -> str:
         if k == 0:
             return f"Start, the defaults: the tool as the file opens, with a {plug_w} mm wide plug in teal."
         if st["layout"]:
@@ -2291,17 +2356,17 @@ def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]],
         gone = feature_names([rn for rn, rm in zip(plan.regions, plan.removed) if rm])
         feats = [f for f in feature_names(st["named"]) if f not in gone]
         if feats or gone:
-            red = f"; red on {_join_names(feats)}" if feats else ""
+            red = f"; red on {_join_names(feats, one_article)}" if feats else ""
             if gone:
-                red += f"; {_join_names(gone)} removed, drawn in red from the old outline"
+                red += f"; {_join_names(gone, one_article)} removed, drawn in red from the old outline"
         elif file_key == TWO_SIDED and st["step"].startswith("Step 3"):
             red = "; no strap slot on a plug this short, so nothing moved"
         else:
             red = "; nothing moved"
         return f"{st['step']}: {', '.join(parts)}{red}."
 
-    for with_values in (True, False):
-        lines = [stage_line(k, st, with_values) for k, st in enumerate(stages)]
+    for with_values, one_article in ((True, False), (False, False), (False, True)):
+        lines = [stage_line(k, st, with_values, one_article) for k, st in enumerate(stages)]
         text = overview + " " + " ".join(lines)
         if len(text.split()) <= SB_LONG_MAX_WORDS:
             return alt, text

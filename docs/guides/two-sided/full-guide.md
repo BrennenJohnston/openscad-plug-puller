@@ -46,7 +46,7 @@ OpenSCAD is the free program that turns your numbers into a printable file. You 
 3. Open `src/Plug_Puller_Two_Sided.scad` (or the single file) in OpenSCAD: double-click it, or use **File ▸ Open**. A wall of code appears in an editor pane. Ignore it; you will not touch it.
 4. Show the Customizer, the form you type into: in the **View** menu, make sure **Hide Customizer** is unchecked. In older versions it is **Window ▸ Customizer**.
 
-The form's sections read top to bottom in the order you decide things: **Step 1 - Your Plug**, **Step 2 - Size**, **Step 3 - Attachment**, then **{step4}**. Everything below Step 4 is optional.
+The form's sections read top to bottom in the order you decide things: **Step 1 - Your Plug**, **Step 2 - Size**, **Step 3 - Attachment**, then **Step 4 - Print Layout**. Everything below Step 4 is optional.
 
 ### Working in the browser
 
@@ -225,13 +225,13 @@ Customizer name: `plug_preset`
 
 Fills in the plug's length, both widths, the cord and the sides from a measured reference plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.
 
-![Plug preset: before and after, Measure my plug to Heavy-duty extension cord - NEMA 5-15; red marks 4 parts, named below.](../../dials/two-sided/plug_preset.svg)
+![Plug preset: before and after, Measure my plug to Heavy-duty extension cord - NEMA 5-15; red marks 5 parts, named below.](../../dials/two-sided/plug_preset.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the finger lobes, the arms and the plate edge. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the zip stations, the strap slot, the finger lobes, the arms and the plate edge. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm.
 
 - Default: Measure my plug
 - Choices: Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15
-- Moves: arms, finger lobes, plate edge, zip stations
+- Moves: arms, finger lobes, plate edge, strap slot, zip stations
 
 ### Plug length
 
@@ -239,13 +239,13 @@ Customizer name: `measure_plug_length`
 
 Lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them.
 
-![Plug length: before and after, 25.5 to 40 mm; red marks the arms.](../../dials/two-sided/measure_plug_length.svg)
+![Plug length: before and after, 25.5 to 40 mm; red marks the arms, the strap slot and the zip stations.](../../dials/two-sided/measure_plug_length.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug length at 40 mm. The red line marks the plug's length and reads 40 mm, the number you type; the plug is drawn 42 mm long, reaching 2 mm past the arm tips as in the preview. Marked in red: 1, the arms: the two toothed arms in the upper half.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug length at 40 mm. The red line marks the plug's length and reads 40 mm, the number you type. Marked in red: 1, the zip stations, the strap slot and the arms: the three small holes along each arm; the long slot in each arm; the two toothed arms in the upper half.
 
 - Default: 25.5 mm
 - Range: 12 to 85 mm, in steps of 0.5 mm
-- Moves: arms
+- Moves: arms, strap slot, zip stations
 
 ### Plug width at the prong end
 
@@ -255,7 +255,7 @@ Opens or closes the gap between the arms at their tips, where the plug's prong e
 
 ![Plug width at the prong end: before and after, 20 to 28 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.](../../dials/two-sided/measure_plug_width_prong_end.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. The red line marks the gap between the arm tips and reads 28 mm, the number you type. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. The red line marks the gap between the arm tips and reads 28 mm, the number you type. Marked in red: 1, the zip stations and the arms. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel.
 
 - Default: 20 mm
 - Range: 5 to 40 mm, in steps of 0.5 mm
@@ -269,7 +269,7 @@ Opens or closes the gap between the arms at the plug's back end, so the arms tap
 
 ![Plug width at the cord end: before and after, 20 to 12 mm; red marks the arms, the teeth and the zip stations.](../../dials/two-sided/measure_plug_width_cord_end.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the cord end at 12 mm. The red line marks the gap between the arms at the cord end and reads 12 mm, the number you type. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the cord end at 12 mm. The red line marks the gap between the arms at the cord end and reads 12 mm, the number you type. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the zip stations, the teeth and the arms: the three small holes along each arm; the serrated inner edges of the arms; the two toothed arms in the upper half.
 
 - Default: 20 mm
 - Range: 5 to 40 mm, in steps of 0.5 mm
@@ -340,7 +340,7 @@ Widens both finger holes and their lobes.
 
 ![Finger width: before and after, 20 to 26 mm; red marks the arms, the finger lobes, the plate edge and the zip stations.](../../dials/two-sided/measure_finger_width.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 20 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27 mm across, wider than the finger. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes, the arms and the plate edge.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 20 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27 mm across, wider than the finger. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the zip stations, the finger lobes, the arms and the plate edge.
 
 - Default: 20 mm
 - Range: 14 to 32 mm, in steps of 0.5 mm
@@ -710,13 +710,13 @@ Customizer name: `plate_zip_pos_1`
 
 Slides the rear zip-tie station along each arm, measured from the cord end.
 
-![Zip-tie station 1 position: before and after, 4 to 27 mm; red marks the finger lobes and the zip stations.](../../dials/two-sided/plate_zip_pos_1.svg)
+![Zip-tie station 1 position: before and after, 4 to 27 mm; red marks the zip stations.](../../dials/two-sided/plate_zip_pos_1.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 1 position at 27 mm. Marked in red: 1, the finger lobes: the two rounded lobes in the lower half. 2, the zip stations: the three small holes along each arm, removed.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 1 position at 27 mm. Marked in red: 1, the zip stations: the three small holes along each arm.
 
 - Default: 4 mm
 - Range: 0 to 80 mm, in steps of 0.5 mm
-- Moves: finger lobes, zip stations
+- Moves: zip stations
 - Red warnings: ZIP STATION OFF THE ARM; ZIP STATIONS OVERLAP EACH OTHER; STRAP WIDER THAN ARM SLOT WINDOW - NARROW THE STRAP
 
 Note: Only acts when plate_zip_placement is Manual; drawn on a 40 mm plug so every station sits on the arm.
@@ -746,7 +746,7 @@ Slides the tip zip-tie station along each arm, and the strap slot's window moves
 
 ![Zip-tie station 3 position: before and after, 63 to 58 mm; red marks the arms, the strap slot and the zip stations.](../../dials/two-sided/plate_zip_pos_3.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 3 position at 58 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm, removed. 3, the strap slot: the long slot in each arm.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug length set to 40 and zip-tie station placement set to Manual, a 20 mm wide plug in teal. Right: zip-tie station 3 position at 58 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm, removed. 3, the zip stations and the strap slot.
 
 - Default: 63 mm
 - Range: 0 to 80 mm, in steps of 0.5 mm

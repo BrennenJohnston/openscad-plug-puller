@@ -16,7 +16,7 @@ In every picture: black = the tool; teal = your plug; red dashed = the edges thi
 
 ![The one-sided puller, the four Customizer steps on a US vacuum plug, five stages left to right.](../../dials/one-sided/storyboard.svg)
 
-Five stages of the one-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 25 mm wide plug in teal. Step 1 - Your Plug: plug length, plug width at both ends, plug thickness at both ends, cord thickness, outlet cover plate style; red on the body edge, the finger holes, the seat, the wall notch and the wing openings. Step 2 - Size: hand size, finger width, hand width; red on the body edge, the finger holes, the pocket, the wall notch, the wing openings and the zip-tie holes. Step 3 - Attachment: attachment; the wing openings removed, drawn in red from the old outline. Step 4 - Cord Hook: hook side; red on the hook.
+Five stages of the one-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 25 mm wide plug in teal. Step 1 - Your Plug: plug length, plug width at both ends, plug thickness at both ends, cord thickness, outlet cover plate style; red on the body edge, finger holes, seat, wall notch, wing openings and zip-tie holes. Step 2 - Size: hand size, finger width, hand width; red on the body edge, finger holes, pocket, wall notch, wing openings and zip-tie holes. Step 3 - Attachment: attachment; the wing openings removed, drawn in red from the old outline. Step 4 - Cord Hook: hook side; red on the hook.
 
 - Step 1: type your plug's numbers
 - Step 2: pick your hand size
@@ -46,7 +46,7 @@ OpenSCAD is the free program that turns your numbers into a printable file. You 
 3. Open `src/Plug_Puller_Parametric.scad` (or the single file) in OpenSCAD: double-click it, or use **File ▸ Open**. A wall of code appears in an editor pane. Ignore it; you will not touch it.
 4. Show the Customizer, the form you type into: in the **View** menu, make sure **Hide Customizer** is unchecked. In older versions it is **Window ▸ Customizer**.
 
-The form's sections read top to bottom in the order you decide things: **Step 1 - Your Plug**, **Step 2 - Size**, **Step 3 - Attachment**, then **{step4}**. Everything below Step 4 is optional.
+The form's sections read top to bottom in the order you decide things: **Step 1 - Your Plug**, **Step 2 - Size**, **Step 3 - Attachment**, then **Step 4 - Cord Hook**. Everything below Step 4 is optional.
 
 ## Measure your plug and your hand
 

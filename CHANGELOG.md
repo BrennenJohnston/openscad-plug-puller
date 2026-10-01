@@ -73,8 +73,7 @@ public milestone**.
   number is the one you type. Where the part is drawn at another size, the
   sentence gives that size and why: a hook slot or cord channel wider than
   the cord, a finger hole wider than the finger, a body narrower than the
-  hand, the two-sided plug drawn 2 mm past the arm tips as in the preview.
-  These 13 descriptions may run to 110 words instead of 90, so none loses
+  hand. These 13 descriptions may run to 110 words instead of 90, so none loses
   the phrases saying where each marked part sits.
 - **The storyboard descriptions follow the picture.** Their lines read
   Start, then Step 1 to Step 4, as the picture numbers its arrows, instead
@@ -177,6 +176,45 @@ public milestone**.
   `scripts/build_outline_sheets_pdf.py` checks the title and a bookmark on
   every page, and prints with a scratch browser profile, as the guide
   builder does, so a running Edge cannot stall it.
+- **The guides name the fourth step.** All four documents read "then
+  {step4}" in their Get the file section, because the pattern that finds
+  placeholders in the guide sources skipped a name with a digit; they now
+  read "then Step 4 - Cord Hook" or "then Step 4 - Print Layout". A test
+  fails if any placeholder is left unfilled. The fix is logged in
+  `docs/fixes.md`.
+- **The two-sided preview plug ends at the arm tips.** The see-through plug
+  in the two-sided preview reached 2 mm past the arm tips, and every
+  two-sided dial picture copied it, although the model places the plug's
+  face at the tips. It now spans exactly the plug's length, in the preview
+  and in the pictures. The printed plates do not change.
+- **The dial pictures name every hole and slot whose outline moved.** A
+  moved part whose change merged into another part's marked area went
+  unnamed: the plug width at the cord end and pocket side taper pictures
+  drew the zip-tie holes moving by up to 5 mm, while their key and
+  description named only the pocket and the wing openings. The generator
+  now compares each kind of hole and slot before and after the dial moves,
+  and names it on every marked area that encloses its change. Ten pictures
+  now name a part they left out; nine descriptions drop the sentence on
+  what the dial does or some part locations to stay within their word
+  limits, in the usual order. The one-sided storyboard keeps every name by
+  giving each list of parts a single "the". All 118 pictures are redrawn
+  from today's model; most one-sided ones still showed the outlines from
+  before the layered edge rounding, which move by hundredths of a
+  millimeter.
+- **A big finger keeps its full finger hole.** The auto-fit trims a finger
+  hole wider than 40 % of the one-sided body's length, and with a short
+  plug the fitted body was often too short: a 26 mm finger on an 85 mm
+  hand with the default plug got a 27.9 mm hole instead of 31.4 mm, and
+  plain Large got 27.06 mm instead of 28.4 mm, with only a console line to
+  say so. The fitting step now makes the body just long enough for the
+  full hole. A hand too narrow for its hole keeps its red tags, FINGER TOO
+  BIG FOR HAND WIDTH and FINGER HOLES OUTSIDE BODY; a band of hands 1 to
+  3 mm too narrow at the holes' height, such as a 25 mm finger on an
+  80 mm hand, now sees FINGER HOLES OUTSIDE BODY instead of a silently
+  smaller hole. The shipped STLs, the presets and the outline sheets do
+  not change; the `large` golden fixture is regenerated, now 71.05 mm long
+  instead of 67.65 mm, and the hand size and finger width pictures are
+  redrawn.
 
 ## [0.13.0] - 2026-09-27
 
