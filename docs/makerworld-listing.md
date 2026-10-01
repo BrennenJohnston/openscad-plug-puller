@@ -120,7 +120,9 @@ plug, a USB-C or charger tip (the plates get a sloped cradle that centers it), o
 finger knuckle width.
 
 *Step 3 — Attachment.* Zip ties plus a velcro strap slot in each arm (the
-default), or zip ties only. The zip ties hold the two plates together.
+default), or zip ties only. The zip ties hold the two plates together. On a
+short plug, such as a USB-C tip, there is no room for the strap slot and it
+is left out; the zip ties still hold the plates.
 
 *Step 4 — Print layout.* Keep `Both plates`: one download prints the whole tool.
 
@@ -228,15 +230,13 @@ of the actual printed result.
    the plug and the outlet.
 
 4. **The two-sided puller on an extension cord.** Two plates zip-tied face to
-   face around a fat round plug.
-   **Alt text:** Two printed plates zip-tied face to face around a thick round
-   extension-cord plug, their serrated inner arms gripping the plug body.
+   face around a fat round plug (`docs/images/two-sided-assembled-on-plug.jpg`).
+   **Alt text:** The blue two-sided puller zip-tied around an orange extension-cord plug, black zip ties through its arms, the brass prongs past the arm tips.
 
 5. **The two plates apart.** Both plates side by side, as they come off the
-   printer, showing the serrated grip zone and the zip-tie stations.
-   **Alt text:** Two identical printed plates side by side, each with two large
-   finger holes, two arms with serrated inner edges, and small round zip-tie
-   holes.
+   printer, with the plug between them, showing the serrated grip zone, the
+   strap slots and the zip-tie stations (`docs/images/two-sided-plates-and-plug.jpg`).
+   **Alt text:** Two identical blue plates with an orange extension-cord plug between them; each has two finger holes, toothed arms, strap slots and zip-tie holes.
 
 6. **The three hand sizes, printed.** Small, Medium, and Large one-sided pullers
    on three plugs (`docs/images/one-sided-three-sizes.jpg`).

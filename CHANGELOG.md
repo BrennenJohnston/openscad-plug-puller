@@ -121,6 +121,14 @@ public milestone**.
   with `assert()`, as is Render quality. The golden test fixtures and the
   `stl/Plug-Puller/` library are regenerated; the layers add facets, so
   the library grows from 229 MB to 286 MB.
+- **The two-sided red warning tags table lists only tags you can get.** The
+  `STEP 3 DISABLED ZIP HOLES - NOTHING SECURES THE TWO PLATES TOGETHER` row
+  is gone from the full guide, because every Step 3 choice keeps the zip
+  ties; the check stays in the model as a guard, with a comment saying why.
+- **The MakerWorld listing** says that on a short plug, such as a USB-C tip,
+  the strap slot is left out and the zip ties still hold the plates, since
+  MakerWorld does not show the preview note that says so. Its gallery items
+  4 and 5 name their photos, with alt text that describes them.
 
 ## [0.13.0] - 2026-09-27
 
