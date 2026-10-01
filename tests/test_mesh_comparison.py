@@ -12,7 +12,6 @@ import struct
 from pathlib import Path
 
 import trimesh
-from shapely.geometry import Polygon
 
 from tests.mesh_comparison import MeshComparator, binary_stl_facets, drop_collapsed_triangles, same_shape
 
@@ -69,14 +68,13 @@ def test_drop_collapsed_triangles(tmp_path: Path) -> None:
 def test_comparator_catches_a_drift_like_the_ignored_plug_numbers(tmp_path: Path) -> None:
     """A fixture once rendered 0.77 % smaller in volume while its plug numbers
     were being ignored, and the comparison still passed it. The committed
-    tolerances must fail that drift. A notch cut into one side of a flat
-    prism gives the same 0.77 % with the area and the bounds unchanged."""
+    tolerances must fail that drift. A flat box made 0.77 % taller gives the
+    same volume drift while its area (0.17 %) and its size (0.04 mm) change
+    too little for the old limits."""
     config = json.loads((PROJECT_ROOT / "tests" / "compare_config.json").read_text(encoding="utf-8"))
-    plain = Polygon([(0, 0), (40, 0), (40, 30), (0, 30)])
-    notched = Polygon([(0, 0), (17.5, 0), (17.5, 1.848), (22.5, 1.848), (22.5, 0), (40, 0), (40, 30), (0, 30)])
     reference, drifted = tmp_path / "reference.stl", tmp_path / "drifted.stl"
-    trimesh.creation.extrude_polygon(plain, 5.0).export(reference)
-    trimesh.creation.extrude_polygon(notched, 5.0).export(drifted)
+    trimesh.creation.box(extents=(40.0, 30.0, 5.0)).export(reference)
+    trimesh.creation.box(extents=(40.0, 30.0, 5.0 * 1.0077)).export(drifted)
     assert not MeshComparator(config).compare(reference, drifted).passed, (
         "a 0.77 % volume drift must fail the fixture comparison")
 
