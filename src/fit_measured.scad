@@ -15,9 +15,9 @@
 // What lives here
 // ---------------
 //   - Clearance / design constants calibrated against the v6.0 CAD reference
-//     (`v6.0/CAD/v6.0.stl` = "Plug Puller 3.1 - B", measured by
-//     scripts/extract_reference_dims.py + scripts/analyze_v6*.py). The
-//     reference is inch-native: 1/4" slab, 1" finger bores, 3/16" cord stem.
+//     ("Plug Puller 3.1 - B", measured during development; the CAD file
+//     is not part of this repository). The reference is inch-native:
+//     1/4" slab, 1" finger bores, 3/16" cord stem.
 //   - The "Measure my hand" passthrough; the size table itself (Small /
 //     Medium / Large hand pairs, ANSUR-II grounded) lives in fit_sizes.scad.
 //   - Derivations mapping the always-active plug measurements plus the hand
@@ -120,7 +120,7 @@ FIT_MIN_POCKET_FLOOR = 1.5;
 
 // Body envelope ratios — the v6 reference's own proportions (octagon control
 // values are PRE-ROUNDING; body_side_rounding turns them into the organic
-// outline; see scripts/fit_body_outline_v6.py, silhouette RMS ~0.15 mm).
+// outline; fitted during development to a silhouette RMS of ~0.15 mm).
 FIT_BODY_HAND_RATIO     = 81.55 / 85;   // octagon bottom_width / hand width
 FIT_BODY_CORNER_RATIO   = 3 / 81.55;    // bottom_corners / bottom_width
 FIT_BODY_TOP_RATIO      = 35.75 / 81.55; // top_width / bottom_width

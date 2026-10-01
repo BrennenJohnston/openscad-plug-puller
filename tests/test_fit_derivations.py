@@ -351,7 +351,7 @@ class TestFingerHoleRoom:
 
 
 # Plug quick-select prefills (mirrors the `_eff_*` ternaries in the v7 SCAD;
-# two-station values measured by scripts/measure_plug_references.py).
+# two-station values measured during development from `plug references/`).
 PLUG_PRESET_VECTORS: Dict[str, Dict[str, Any]] = {
     "lamp_1_15": {
         "measure_plug_length": 37.0,

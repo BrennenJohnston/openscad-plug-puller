@@ -316,8 +316,8 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 // A chosen plug preset overrides the Step 1 sliders (except when Size =
 // Custom, which ignores measurements entirely). "Measure my plug" (default)
 // keeps the sliders authoritative, so Medium parity holds. Preset values are
-// two-station measurements taken from the reference plug STLs in
-// `plug references/` by scripts/measure_plug_references.py: the plug LENGTH
+// two-station measurements taken during development from the reference
+// plug STLs in `plug references/`: the plug LENGTH
 // is the molded body only (wall plate to back face — the prongs live inside
 // the wall), the WALL station is measured just behind the prong face, and the
 // CABLE station at the cord end of the gripped body (the heavy-duty plug's
@@ -440,9 +440,9 @@ FIT_SIZE_FINGER_L = 23;    FIT_SIZE_HAND_L = 96;
 // What lives here
 // ---------------
 //   - Clearance / design constants calibrated against the v6.0 CAD reference
-//     (`v6.0/CAD/v6.0.stl` = "Plug Puller 3.1 - B", measured by
-//     scripts/extract_reference_dims.py + scripts/analyze_v6*.py). The
-//     reference is inch-native: 1/4" slab, 1" finger bores, 3/16" cord stem.
+//     ("Plug Puller 3.1 - B", measured during development; the CAD file
+//     is not part of this repository). The reference is inch-native:
+//     1/4" slab, 1" finger bores, 3/16" cord stem.
 //   - The "Measure my hand" passthrough; the size table itself (Small /
 //     Medium / Large hand pairs, ANSUR-II grounded) lives in fit_sizes.scad.
 //   - Derivations mapping the always-active plug measurements plus the hand
@@ -545,7 +545,7 @@ FIT_MIN_POCKET_FLOOR = 1.5;
 
 // Body envelope ratios — the v6 reference's own proportions (octagon control
 // values are PRE-ROUNDING; body_side_rounding turns them into the organic
-// outline; see scripts/fit_body_outline_v6.py, silhouette RMS ~0.15 mm).
+// outline; fitted during development to a silhouette RMS of ~0.15 mm).
 FIT_BODY_HAND_RATIO     = 81.55 / 85;   // octagon bottom_width / hand width
 FIT_BODY_CORNER_RATIO   = 3 / 81.55;    // bottom_corners / bottom_width
 FIT_BODY_TOP_RATIO      = 35.75 / 81.55; // top_width / bottom_width
@@ -892,10 +892,9 @@ if (size != "Custom") {
 //
 //   - PRESET_MEDIUM       : the calibration reference table. Its values are
 //                           the measured dimensions of the authoritative v6.0
-//                           CAD reference ("Plug Puller 3.1 - B",
-//                           `v6.0/CAD/v6.0.stl`, extracted by
-//                           scripts/extract_reference_dims.py +
-//                           scripts/analyze_v6*.py). The Medium size IS the
+//                           CAD reference ("Plug Puller 3.1 - B", measured
+//                           during development; the CAD file is not part
+//                           of this repository). The Medium size IS the
 //                           v6 Plug Puller.
 //   - preset_lookup(...)  : low-level table lookup; returns undef on miss.
 //   - preset_value(p, key, fallback)
@@ -907,7 +906,8 @@ if (size != "Custom") {
 // FIT_MEASURED value equals PRESET_MEDIUM's value exactly, and both equal the
 // measured v6 reference geometry. Pinned at three levels: tests/fit_formulas.py
 // (pure-Python mirror), the derivation echo parity test, and the mesh-level
-// reference-parity test (tests/test_reference_parity.py).
+// comparison of the Measure my hand render against the `medium` golden
+// fixture (both in tests/test_fit_derivations.py).
 //
 // Include-order dependency
 // ------------------------
@@ -925,9 +925,9 @@ if (size != "Custom") {
 /* [Hidden] */
 
 // ----------- "Medium" reference table (the v6 Plug Puller) -----------
-// Sources: v6.0/reference_dims.json (measured mesh), v6.0/outline_fit.json
-// (octagon + rounding fit, silhouette RMS ~0.15 mm), and
-// scripts/analyze_v6_features.py (seat/pocket/wing/J-hook).
+// Sources, all from development: the measured v6 reference mesh, an
+// octagon + rounding fit of its outline (silhouette RMS ~0.15 mm), and a
+// feature analysis of its seat, pocket, wings and J-hook.
 PRESET_MEDIUM = [
     // -- Body Shape (octagon control points; the rendered outline applies
     //    body_side_rounding below puller_middle_y) --
@@ -1597,8 +1597,8 @@ module body_octagon_2d(bottom_drop = 0) {
     ]);
 }
 
-// Fitted with the other octagon controls by scripts/fit_body_outline.py
-// (free parameter in the weighted outline optimization): drops the octagon's
+// Fitted with the other octagon controls during development (a free
+// parameter in the weighted outline optimization): drops the octagon's
 // cord-tip vertices below Y = 0 before the opening, so the clipped flat at
 // Y = 0 lands at the T-hook mouth width (the original outline is tangent to
 // Y = 0 at the mouth corners) and the tip arc tracks the original within

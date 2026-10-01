@@ -6,10 +6,9 @@
 //
 //   - PRESET_MEDIUM       : the calibration reference table. Its values are
 //                           the measured dimensions of the authoritative v6.0
-//                           CAD reference ("Plug Puller 3.1 - B",
-//                           `v6.0/CAD/v6.0.stl`, extracted by
-//                           scripts/extract_reference_dims.py +
-//                           scripts/analyze_v6*.py). The Medium size IS the
+//                           CAD reference ("Plug Puller 3.1 - B", measured
+//                           during development; the CAD file is not part
+//                           of this repository). The Medium size IS the
 //                           v6 Plug Puller.
 //   - preset_lookup(...)  : low-level table lookup; returns undef on miss.
 //   - preset_value(p, key, fallback)
@@ -21,7 +20,8 @@
 // FIT_MEASURED value equals PRESET_MEDIUM's value exactly, and both equal the
 // measured v6 reference geometry. Pinned at three levels: tests/fit_formulas.py
 // (pure-Python mirror), the derivation echo parity test, and the mesh-level
-// reference-parity test (tests/test_reference_parity.py).
+// comparison of the Measure my hand render against the `medium` golden
+// fixture (both in tests/test_fit_derivations.py).
 //
 // Include-order dependency
 // ------------------------
@@ -39,9 +39,9 @@
 /* [Hidden] */
 
 // ----------- "Medium" reference table (the v6 Plug Puller) -----------
-// Sources: v6.0/reference_dims.json (measured mesh), v6.0/outline_fit.json
-// (octagon + rounding fit, silhouette RMS ~0.15 mm), and
-// scripts/analyze_v6_features.py (seat/pocket/wing/J-hook).
+// Sources, all from development: the measured v6 reference mesh, an
+// octagon + rounding fit of its outline (silhouette RMS ~0.15 mm), and a
+// feature analysis of its seat, pocket, wings and J-hook.
 PRESET_MEDIUM = [
     // -- Body Shape (octagon control points; the rendered outline applies
     //    body_side_rounding below puller_middle_y) --

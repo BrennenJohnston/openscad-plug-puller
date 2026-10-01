@@ -28,4 +28,4 @@ Utility scripts used to build and validate the Plug Puller model's committed art
 
 ## Historical tooling
 
-Earlier development-era scripts (reference-mesh measurement, outline fitting, fidelity reports, DXF conversion helpers) live in the historical dev repo, [`plug-puller-openscad`](https://github.com/BrennenJohnston/plug-puller-openscad). The DXF → OpenSCAD polygon converter is its own package: [`cad-to-openscad-pipeline`](https://github.com/BrennenJohnston/cad-to-openscad-pipeline).
+Earlier development-era scripts (reference-mesh measurement, outline fitting, fidelity reports, DXF conversion helpers) stayed in a private development repository and are not part of this project; the comments that mention that work say "during development".

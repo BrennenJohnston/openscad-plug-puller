@@ -293,8 +293,8 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 // A chosen plug preset overrides the Step 1 sliders (except when Size =
 // Custom, which ignores measurements entirely). "Measure my plug" (default)
 // keeps the sliders authoritative, so Medium parity holds. Preset values are
-// two-station measurements taken from the reference plug STLs in
-// `plug references/` by scripts/measure_plug_references.py: the plug LENGTH
+// two-station measurements taken during development from the reference
+// plug STLs in `plug references/`: the plug LENGTH
 // is the molded body only (wall plate to back face — the prongs live inside
 // the wall), the WALL station is measured just behind the prong face, and the
 // CABLE station at the cord end of the gripped body (the heavy-duty plug's
@@ -940,8 +940,8 @@ module body_octagon_2d(bottom_drop = 0) {
     ]);
 }
 
-// Fitted with the other octagon controls by scripts/fit_body_outline.py
-// (free parameter in the weighted outline optimization): drops the octagon's
+// Fitted with the other octagon controls during development (a free
+// parameter in the weighted outline optimization): drops the octagon's
 // cord-tip vertices below Y = 0 before the opening, so the clipped flat at
 // Y = 0 lands at the T-hook mouth width (the original outline is tangent to
 // Y = 0 at the mouth corners) and the tip arc tracks the original within
