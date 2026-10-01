@@ -80,6 +80,28 @@ public milestone**.
   Start, then Step 1 to Step 4, as the picture numbers its arrows, instead
   of 1 to 5, and the one-sided storyboard names all seven Step 1 dials
   instead of three and "4 more".
+- **The four documents read like a printed guide.** The quick starts' and
+  full guides' PDFs print on US Letter pages (the measuring form keeps its
+  210 × 279 mm sheet at 1:1, centered), with a cover, a contents page with
+  page numbers, and the document's name, the tool's name and "Page N of M"
+  on every page. Every dial card is headed by its plain title, with the
+  name the Customizer shows on the line under it, the sentence of what it
+  does above its picture, and its numbers in plain words (a check box reads
+  On or Off); a dial that changes no shape says so in one line instead of
+  an empty picture box. The pages under `docs/guides/one-sided/` and
+  `docs/guides/two-sided/` follow the same layout.
+- **Each edge in the dial pictures is drawn in one style only.** In every
+  before-and-after picture and both storyboards, an edge that moved is drawn
+  only as thick red dashes (long dashes, short gaps, thicker than the black
+  outline); the black line under it is left out, and a stretch two red lines
+  shared is drawn once. Unmoved edges stay solid or dashed black. The picture
+  key now reads "red dashed = the edges this dial moved", and the key box in
+  both guides shows the same dashes.
+- **The MakerWorld listing is cleared to publish.** The maintainer chose to
+  publish on MakerWorld with CC BY-NC-SA 4.0 as the listing license; the
+  repository stays under PolyForm Noncommercial 1.0.0. The listing and the
+  README record the decision, and the upload waits only on the listing's
+  pre-publish checklist.
 
 ### Removed
 
@@ -101,26 +123,6 @@ public milestone**.
   superseded by the quick starts; and the original measuring template
   (`docs/guides/measuring-template.svg`, `docs/Plug_Puller_Measuring_Template.pdf`),
   superseded by the stencil sheets and the measuring forms.
-
-- **The two guide packets read like a printed guide.**
-  `docs/Plug_Puller_One_Sided_Guide.pdf` and `docs/Plug_Puller_Two_Sided_Guide.pdf`
-  print on US Letter pages (the measuring form keeps its 210 × 279 mm sheet
-  at 1:1, centered), with a cover, a contents page with page numbers, and the
-  guide's name, the part's name and "Page N of M" on every page. Every dial is
-  headed by its plain title, with the name the Customizer shows on the line
-  under it, the sentence of what it does above its picture, and its numbers
-  in plain words (a check box reads On or Off); a dial that changes no shape
-  says so in one line instead of an empty picture box. The dial guide now
-  holds only the optional dials after the four steps, so no card is printed
-  twice (69 and 36 pages). The Markdown twins under `docs/guides/one-sided/`
-  and `docs/guides/two-sided/` follow the same layout.
-- **Each edge in the dial pictures is drawn in one style only.** In every
-  before-and-after picture and both storyboards, an edge that moved is drawn
-  only as thick red dashes (long dashes, short gaps, thicker than the black
-  outline); the black line under it is left out, and a stretch two red lines
-  shared is drawn once. Unmoved edges stay solid or dashed black. The picture
-  key now reads "red dashed = the edges this dial moved", and the key box in
-  both guides shows the same dashes.
 
 ### Fixed
 
@@ -156,6 +158,25 @@ public milestone**.
   the strap slot is left out and the zip ties still hold the plates, since
   MakerWorld does not show the preview note that says so. Its gallery items
   4 and 5 name their photos, with alt text that describes them.
+- **No pointers to deleted guides.** The one-sided plug preset help text
+  and the file's opening comments send readers to the quick start and the
+  full guide instead of the deleted measuring and power-user guides. The
+  measuring stencil's comments name the guides' card table and the paper
+  stencil sheet. A red tag row in the one-sided full guide says to measure
+  again by Measure your plug and your hand instead of a deleted guide. The
+  README's first red tag row links both tools' red warning tags tables,
+  its preview note no longer names a version, and it drops a credit that
+  linked to a private repository. The MakerWorld listing names every
+  preset of both tools and no longer promises measuring photos. The
+  scripts index lists `scad-check.ps1`.
+- **The outline sheets PDF has a title and bookmarks.** It was titled
+  `outline_sheets.html`, the name of a temporary file, and had no
+  bookmarks. It is now titled "1:1 outline sheets, one-sided and two-sided
+  pullers", with a bookmark for each plug and each hand size, made from
+  headings a screen reader also finds. The printed pages are unchanged.
+  `scripts/build_outline_sheets_pdf.py` checks the title and a bookmark on
+  every page, and prints with a scratch browser profile, as the guide
+  builder does, so a running Edge cannot stall it.
 
 ## [0.13.0] - 2026-09-27
 

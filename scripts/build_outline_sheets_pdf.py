@@ -10,7 +10,7 @@ print scale is exactly 100%, preserving the sheets' 1:1 geometry.
 
 After printing, the script verifies the result: page count, and every page's
 MediaBox equal to 210 x 279 mm (within 0.5 mm) so a scaled render cannot ship
-silently.
+silently; then the document title, and a bookmark on every page.
 
 Run from the dev repo root after regenerating the sheets:
 
@@ -34,6 +34,8 @@ from typing import List
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SHEETS_DIR = PROJECT_ROOT / "docs" / "guides" / "outline-sheets"
 DEFAULT_OUT = PROJECT_ROOT / "docs" / "Plug_Puller_Outline_Sheets.pdf"
+EDGE_PROFILE = PROJECT_ROOT / "tmp_renders" / "edge_profile"
+DOCUMENT_TITLE = "1:1 outline sheets, one-sided and two-sided pullers"
 
 PAGE_W_MM, PAGE_H_MM = 210.0, 279.0
 MM_TO_PT = 72.0 / 25.4
@@ -150,14 +152,23 @@ def cover_html() -> str:
 """
 
 
+def sheet_headings(label: str, size: str) -> str:
+    """Headings a reader never sees on paper: the PDF's bookmarks and a
+    screen reader's page landmarks. A plug's first sheet opens its section;
+    each sheet names its hand size."""
+    first = f'<h2 class="sheet-heading">{label}</h2>' if size == SIZES[0] else ""
+    return f'{first}<h3 class="sheet-heading">{size.capitalize()} hand size</h3>'
+
+
 def build_html(sheets: List[Path]) -> str:
     pages = [cover_html()]
-    for svg in sheets:
+    names = [(label, size) for _, label in SHEET_ORDER for size in SIZES]
+    for svg, (label, size) in zip(sheets, names):
         content = svg.read_text(encoding="utf-8")
-        pages.append(f'<section class="page">{content}</section>')
+        pages.append(f'<section class="page sheet">{sheet_headings(label, size)}{content}</section>')
     body = "\n".join(pages)
     return f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8"><title>{DOCUMENT_TITLE}</title>
 <style>
   @page {{ size: {PAGE_W_MM:g}mm {PAGE_H_MM:g}mm; margin: 0; }}
   html, body {{ margin: 0; padding: 0; }}
@@ -167,6 +178,14 @@ def build_html(sheets: List[Path]) -> str:
   }}
   .page:last-child {{ page-break-after: auto; }}
   .page svg {{ display: block; }}
+  .sheet {{ position: relative; }}
+  /* Painted whole, never clipped: Chromium puts a bookmark where its
+     heading is painted (a clipped one falls back to page 1), and the PDF's
+     tags carry only the painted letters. */
+  .sheet-heading {{
+    position: absolute; top: 0; left: 0; margin: 0;
+    font-size: 1px; line-height: 1px; white-space: nowrap; color: transparent;
+  }}
   .cover {{
     box-sizing: border-box; padding: 24mm 20mm;
     font-family: Helvetica, Arial, sans-serif; color: black;
@@ -224,7 +243,7 @@ def print_to_pdf(
     ``outline=True`` asks the browser for a PDF document outline (bookmarks)
     built from the page's headings. ``user_data_dir`` gives the browser a
     scratch profile: without one, a headless call attaches to a running
-    Edge and never returns. The sheets' own build keeps both defaults.
+    Edge and never returns.
     """
     browser = find_browser()
     out_pdf.parent.mkdir(parents=True, exist_ok=True)
@@ -289,6 +308,58 @@ def verify_pdf(
     )
 
 
+_OBJ = re.compile(rb"(\d+)\s+\d+\s+obj(.*?)endobj", re.S)
+_REF = re.compile(rb"(\d+)\s+\d+\s+R")
+_STRING = rb"(<[0-9A-Fa-f\s]*>|\((?:\\.|[^\\)])*\))"
+
+
+def pdf_string(raw: bytes) -> str:
+    """A PDF string token: UTF-16 hex with its byte-order mark, or a
+    literal with backslash escapes."""
+    if raw.startswith(b"<"):
+        data = bytes.fromhex(re.sub(rb"\s", b"", raw[1:-1]).decode("ascii"))
+        return data[2:].decode("utf-16-be") if data.startswith(b"\xfe\xff") else data.decode("latin-1")
+    return re.sub(rb"\\(.)", rb"\1", raw[1:-1]).decode("latin-1")
+
+
+def bookmark_pages(pdf: Path) -> List[int]:
+    """The page each bookmark lands on, counted from 1 in the page tree's
+    order; 0 for a bookmark without a page."""
+    objs = {int(m.group(1)): m.group(2) for m in _OBJ.finditer(pdf.read_bytes())}
+    catalog = next(body for body in objs.values() if re.search(rb"/Type\s*/Catalog\b", body))
+
+    def leaves(num: int) -> List[int]:
+        kids = re.search(rb"/Kids\s*\[([^\]]*)\]", objs[num])
+        if kids is None:
+            return [num]
+        return [leaf for kid in _REF.findall(kids.group(1)) for leaf in leaves(int(kid))]
+
+    root = re.search(rb"/Pages\s+(\d+)\s+\d+\s+R", catalog)
+    order = {num: i + 1 for i, num in enumerate(leaves(int(root.group(1))))}
+    pages = []
+    for body in objs.values():
+        if b"/Title" in body and b"/Parent" in body:
+            dest = re.search(rb"/Dest\s*\[\s*(\d+)\s+\d+\s+R", body)
+            pages.append(order.get(int(dest.group(1)), 0) if dest else 0)
+    return pages
+
+
+def verify_title_and_bookmarks(out_pdf: Path, html_text: str, n_pages: int) -> None:
+    """The document title, one bookmark per heading, and a bookmark on every
+    page, so a title or a bookmark lost by the browser cannot ship."""
+    titles = {pdf_string(m.group(1)) for m in re.finditer(rb"/Title\s*" + _STRING, out_pdf.read_bytes())}
+    if DOCUMENT_TITLE not in titles:
+        raise AssertionError(f"The PDF's title is not {DOCUMENT_TITLE!r}")
+    pages = bookmark_pages(out_pdf)
+    want = len(re.findall(r"<h[1-6][ >]", html_text))
+    if len(pages) != want:
+        raise AssertionError(f"Expected {want} bookmarks (the HTML's headings), found {len(pages)}")
+    missing = sorted(set(range(1, n_pages + 1)) - set(pages))
+    if missing:
+        raise AssertionError(f"No bookmark lands on pages {missing}")
+    logger.info("Verified: the title, and %d bookmarks reaching all %d pages.", len(pages), n_pages)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
@@ -307,13 +378,14 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         html_path = Path(tmp) / "outline_sheets.html"
         html_path.write_text(html, encoding="utf-8")
-        print_to_pdf(html_path, args.out)
+        print_to_pdf(html_path, args.out, outline=True, user_data_dir=EDGE_PROFILE)
         if args.keep_html:
             keep = args.out.with_suffix(".html")
             keep.write_text(html, encoding="utf-8")
             logger.info("Kept HTML: %s", keep)
 
     verify_pdf(args.out, expected_pages=1 + len(sheets))
+    verify_title_and_bookmarks(args.out, html, n_pages=1 + len(sheets))
     logger.info("Wrote %s (%.1f KB)", args.out, args.out.stat().st_size / 1024)
     return 0
 

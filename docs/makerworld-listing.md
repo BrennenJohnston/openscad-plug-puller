@@ -1,7 +1,8 @@
 # MakerWorld Listing — Plug Puller
 
-Status: **draft — do not upload.** The licensing decision gate below is
-unresolved. Everything else in this document is finished and ready to paste.
+Status: **cleared to publish.** The licensing decision below is made. The
+text in this document is finished and ready to paste; upload once the
+pre-publish checklist at the end is done.
 
 Upload files: [`dist/Plug_Puller_SingleFile.scad`](../dist/Plug_Puller_SingleFile.scad)
 (the one-sided puller) and
@@ -13,7 +14,7 @@ Written to the shared
 
 ---
 
-## Licensing decision gate — maintainer sign-off required
+## Licensing decision — made 2026-09-30
 
 This repository is licensed **PolyForm Noncommercial 1.0.0**. Publishing to
 MakerWorld requires accepting MakerWorld's terms of service, which grant the
@@ -23,7 +24,11 @@ or Bambu Lab's Standard Digital File License) for downloaders. That platform gra
 sits **alongside** — and for MakerWorld downloads, effectively in front of —
 PolyForm NC.
 
-**Decision for the maintainer:**
+**The maintainer chose Option A on 2026-09-30:** publish on MakerWorld, with
+**CC BY-NC-SA 4.0** as the listing license. Downloads via MakerWorld follow
+that license; the GitHub repository stays PolyForm NC 1.0.0.
+
+The two options that were weighed:
 
 - **Option A — publish on MakerWorld:** accept the platform grant and pick the
   listing license closest to PolyForm NC's intent (recommended: **CC BY-NC-SA
@@ -34,8 +39,6 @@ PolyForm NC.
   file from the Forge's example branch under PolyForm NC with no platform
   grant.
 
-Until Option A is explicitly chosen, **do not upload**.
-
 ---
 
 ## Upload fields
@@ -45,7 +48,7 @@ Until Option A is explicitly chosen, **do not upload**.
 | Model title | `Plug Puller - Parametric Assistive Plug Remover (fits YOUR plug and YOUR hand)` |
 | Designer | Brennen Johnston |
 | Category | Health & Personal Care → Assistive Devices (or Tools → Hand Tools if unavailable) |
-| License | Blocked on the gate above. Recommended pick if Option A: **CC BY-NC-SA 4.0**. |
+| License | **CC BY-NC-SA 4.0**, the maintainer's choice; see the licensing decision above. |
 | Upload files | `dist/Plug_Puller_SingleFile.scad` (the one-sided puller) and `dist/Plug_Puller_Two_Sided_SingleFile.scad` (the two-sided puller), each as its own customizable file. Both are generated; see the pre-publish checklist. |
 | Tags | `assistive technology`, `accessibility`, `arthritis`, `grip aid`, `plug puller`, `outlet`, `parametric`, `openscad`, `customizer`, `adaptive equipment`, `occupational therapy` |
 | External link | <https://github.com/BrennenJohnston/openscad-plug-puller> (source repository) |
@@ -90,10 +93,10 @@ The sections are numbered and every measurement is in millimeters.
 In the one-sided puller:
 
 *Step 1 — Your plug.* Either pick a preset in `plug_preset` — flat 2-prong lamp
-plug (NEMA 1-15) or standard 3-prong (NEMA 5-15) — or set it to
-`Measure my plug` and type six numbers: plug length, width at the prong end,
-width at the cord end, thickness at the prong end, thickness at the cord end,
-and cord thickness. Then choose your wall-plate style in
+plug (NEMA 1-15), standard 3-prong (NEMA 5-15) or wide 2-prong appliance plug
+(NEMA 1-15) — or set it to `Measure my plug` and type six numbers: plug length,
+width at the prong end, width at the cord end, thickness at the prong end,
+thickness at the cord end, and cord thickness. Then choose your wall-plate style in
 `measure_wall_plate_style` (standard flat plate, Decora rocker, oversized jumbo,
 or no plate) so the tool straddles the plate and sits flat against the wall.
 
@@ -109,11 +112,13 @@ both (the default), or none.
 
 In the two-sided puller:
 
-*Step 1 — Your plug.* Pick the heavy-duty extension cord preset, or set
-`plug_preset` to `Measure my plug` and type four numbers: plug length, the
-plug's width at the prong end and at the cord end (the size the two plates close
-across), and cord thickness. Then pick `plug_sides`: `Rounded sides` for a round
-plug, a USB-C or charger tip (the plates get a sloped cradle that centers it), or
+*Step 1 — Your plug.* Either pick a preset in `plug_preset` — heavy-duty
+extension cord (NEMA 5-15), USB-C laptop tip, flat 2-prong lamp plug
+(NEMA 1-15) or standard 3-prong (NEMA 5-15) — or set it to `Measure my plug`
+and type four numbers: plug length, the plug's width at the prong end and at
+the cord end (the size the two plates close across), and cord thickness. If
+you measured, then pick `plug_sides`: `Rounded sides` for a round plug, a USB-C
+or charger tip (the plates get a sloped cradle that centers it), or
 `Flat sides` for a boxy plug.
 
 *Step 2 — Size.* Small, Medium (default), Large, or `Measure my hand` with your
@@ -175,9 +180,10 @@ separate file in the repository, not part of this MakerWorld model.
 
 **More resources**
 
-The full measuring guide with per-measurement photos, the outline sheets, the
-measuring stencil, fit troubleshooting, and the engineering reference are in the
-source repository: <https://github.com/BrennenJohnston/openscad-plug-puller>
+The source repository has each tool's quick start and full guide, as pages and
+as printable PDFs: how to measure, every dial, and fit troubleshooting. It also
+has the outline sheets, the measuring stencil and the engineering reference:
+<https://github.com/BrennenJohnston/openscad-plug-puller>
 
 **Credits**
 
@@ -259,9 +265,9 @@ profile.
 
 ## Pre-publish checklist
 
-- [ ] **Maintainer has signed off on the licensing decision above.** This is the
-      hard blocker; nothing else matters until it is resolved.
-- [ ] **Repo is public** — the listing links back to GitHub.
+- [x] **Maintainer has signed off on the licensing decision above.** Done
+      2026-09-30: Option A, CC BY-NC-SA 4.0.
+- [x] **Repo is public** — the listing links back to GitHub.
 - [ ] **Both single files are fresh** — `dist/Plug_Puller_SingleFile.scad` and
       `dist/Plug_Puller_Two_Sided_SingleFile.scad`. They are generated, not
       hand-edited. Run `python scripts/build_flattened.py --check` (it checks
@@ -289,7 +295,7 @@ profile.
       hosted renderer's timeout.
 - [ ] **Pair download verified.** The two-sided file's download holds both
       plates side by side (two separate parts in one STL).
-- [ ] **Plug preset label confirmed.** The maintainer has decided whether
+- [x] **Plug preset label confirmed.** The maintainer decided that
       `Heavy-duty extension cord - NEMA 5-15` keeps its name (it names the plug,
       not the tool).
 - [ ] **Warning tags confirmed visible on MakerWorld.** Set
