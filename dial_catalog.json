@@ -1425,7 +1425,7 @@
     "tier": "custom",
     "quick_start": false,
     "title": "Hook tip drop",
-    "changes": "Sags the slot's mouth farther below the cord end so a hooked cord cannot back out.",
+    "changes": "Changes no shape of the printed tool, because the hook slot's mouth already opens through the cord end.",
     "diagram": {
       "view": "none",
       "style": "fill",
@@ -1708,7 +1708,7 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "note": "Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.",
     "measure": null
   },
   {
@@ -1732,7 +1732,7 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "note": "Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.",
     "measure": null
   },
   {
@@ -1756,7 +1756,7 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "note": "Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.",
     "measure": null
   },
   {
@@ -1780,7 +1780,7 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "note": "Only acts when size is Custom, velcro_style is Classic slot and velcro_placement is Auto.",
     "measure": null
   },
   {
@@ -1804,7 +1804,7 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "note": "Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.",
     "measure": null
   },
   {
@@ -1899,7 +1899,7 @@
       "crop": null,
       "dimension": null
     },
-    "note": "Only acts when size is Custom and velcro_style is Classic slot.",
+    "note": "Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.",
     "measure": null
   },
   {
@@ -2030,7 +2030,7 @@
     "tier": "step",
     "quick_start": true,
     "title": "Plug preset",
-    "changes": "Fills in the plug's length, both widths and the cord from the measured heavy-duty cord plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.",
+    "changes": "Fills in the plug's length, both widths, the cord and the sides from a measured reference plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.",
     "diagram": {
       "view": "top",
       "style": "trace",
