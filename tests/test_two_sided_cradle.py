@@ -60,12 +60,12 @@ CASES = {
 }
 
 
-def _render(runner, tmp_path: Path, name: str, params: Dict[str, object]):
+def _render(runner, tmp_path: Path, name: str, params: Dict[str, object], binary: bool = False):
     import trimesh
 
     assert TWO_SIDED_SCAD.exists(), f"SCAD file missing: {TWO_SIDED_SCAD}"
     out = tmp_path / f"{name}.stl"
-    result = runner.generate_stl(scad_file=TWO_SIDED_SCAD, output_stl=out, parameters=params)
+    result = runner.generate_stl(scad_file=TWO_SIDED_SCAD, output_stl=out, parameters=params, binary=binary)
     assert result.success, f"Render failed (returncode={result.returncode}):\n{result.stderr}"
     return trimesh.load(out, force="mesh"), (result.stdout or "") + (result.stderr or "")
 
@@ -166,7 +166,7 @@ def test_preset_plate_unchanged(openscad_runner, tmp_path) -> None:
     import trimesh
 
     params = json.loads((FIXTURE / "params.json").read_text(encoding="utf-8"))["parameters"]
-    got, _ = _render(openscad_runner, tmp_path, "preset", params)
+    got, _ = _render(openscad_runner, tmp_path, "preset", params, binary=True)  # the fixture's format
     ref = trimesh.load(FIXTURE / "reference.stl", force="mesh")
     assert abs(got.volume - ref.volume) < 1e-6 and abs(got.area - ref.area) < 1e-6, (
         "The heavy-duty preset keeps its straight, biting edge."

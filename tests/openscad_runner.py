@@ -38,6 +38,7 @@ class OpenSCADResult:
     returncode: int
     duration_seconds: float
     command: str
+    dropped_triangles: int = 0
 
 
 class OpenSCADNotFoundError(Exception):
@@ -176,12 +177,18 @@ class OpenSCADRunner:
         output_stl: Path,
         parameters: Optional[Dict[str, Any]] = None,
         timeout_seconds: Optional[int] = None,
+        binary: bool = False,
     ) -> OpenSCADResult:
+        """Render ``scad_file`` to ``output_stl``. ``binary`` writes the format
+        of the committed library and fixtures: a binary STL without the
+        triangles its 32-bit coordinates collapse to no area, counted in
+        ``dropped_triangles``. Other renders stay in the text format, whose
+        coordinates keep every short edge."""
         if not scad_file.exists():
             raise FileNotFoundError(f"OpenSCAD file not found: {scad_file}")
 
         output_stl.parent.mkdir(parents=True, exist_ok=True)
-        cmd = self._build_command(scad_file, output_stl, parameters)
+        cmd = self._build_command(scad_file, output_stl, parameters, binary)
         timeout = timeout_seconds or self.default_timeout_seconds
 
         logger.info("Rendering %s -> %s", scad_file.name, output_stl.name)
@@ -264,6 +271,12 @@ class OpenSCADRunner:
                 if stderr_str:
                     logger.error("stderr: %s", stderr_str)
 
+            dropped = 0
+            if success and binary:
+                from tests.mesh_comparison import drop_collapsed_triangles
+
+                dropped = drop_collapsed_triangles(output_stl)
+
             return OpenSCADResult(
                 success=success,
                 output_path=output_stl if success else None,
@@ -272,6 +285,7 @@ class OpenSCADRunner:
                 returncode=process.returncode,
                 duration_seconds=duration,
                 command=" ".join(cmd),
+                dropped_triangles=dropped,
             )
 
         except Exception as exc:  # noqa: BLE001
@@ -309,12 +323,15 @@ class OpenSCADRunner:
         scad_file: Path,
         output_stl: Path,
         parameters: Optional[Dict[str, Any]] = None,
+        binary: bool = False,
     ) -> List[str]:
         cmd: List[str] = [
             str(self.openscad_path),
             "-o",
             str(output_stl),
         ]
+        if binary:
+            cmd.extend(["--export-format", "binstl"])
         if self.use_manifold:
             cmd.extend(["--backend", "Manifold"])
         if parameters:

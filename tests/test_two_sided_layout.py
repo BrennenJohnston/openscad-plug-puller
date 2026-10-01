@@ -22,13 +22,13 @@ HD_PRESET = "Heavy-duty extension cord - NEMA 5-15"
 LAYOUT_LINE = "PRINT LAYOUT: both plates side by side - flip one after printing"
 
 
-def _render(runner, tmp_path: Path, name: str, layout: str):
+def _render(runner, tmp_path: Path, name: str, layout: str, binary: bool = False):
     import trimesh
 
     assert TWO_SIDED_SCAD.exists(), f"SCAD file missing: {TWO_SIDED_SCAD}"
     out = tmp_path / f"{name}.stl"
     params = {"plug_preset": HD_PRESET, "render_mode": "Full", "print_layout": layout}
-    result = runner.generate_stl(scad_file=TWO_SIDED_SCAD, output_stl=out, parameters=params)
+    result = runner.generate_stl(scad_file=TWO_SIDED_SCAD, output_stl=out, parameters=params, binary=binary)
     assert result.success, f"Render failed (returncode={result.returncode}):\n{result.stderr}"
     console = (result.stdout or "") + (result.stderr or "")
     return trimesh.load(out, force="mesh"), console
@@ -58,7 +58,7 @@ def test_both_plates_by_default(openscad_runner, tmp_path) -> None:
 def test_one_plate_layout(openscad_runner, tmp_path) -> None:
     import trimesh
 
-    mesh, console = _render(openscad_runner, tmp_path, "single", "One plate")
+    mesh, console = _render(openscad_runner, tmp_path, "single", "One plate", binary=True)  # the fixture's format
     assert len(mesh.split(only_watertight=False)) == 1, "One plate must be one body."
     reference = trimesh.load(FIXTURE_STL, force="mesh")
     assert abs(mesh.volume - reference.volume) < 1e-6

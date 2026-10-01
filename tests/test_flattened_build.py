@@ -177,6 +177,7 @@ def test_two_sided_artifact_matches_fixture(
         scad_file=TWO_SIDED_ARTIFACT,
         output_stl=output_stl,
         parameters=payload["parameters"],
+        binary=True,  # the fixture's format, so its 32-bit coordinates compare exactly
     )
     assert result.success, (
         f"Flattened two-sided render failed (returncode={result.returncode}):\n"

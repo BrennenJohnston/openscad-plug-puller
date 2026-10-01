@@ -7,6 +7,8 @@ Everything here is generated from source by
 [`scripts/build_release_stls.py`](../scripts/build_release_stls.py); do not edit
 the STLs by hand. Re-run that script and commit the result after any intentional
 model change (the shipped files are guarded by `tests/test_shipped_stls.py`).
+The files are binary STLs, which every slicer opens, and a re-run leaves a file
+alone when its shape did not change.
 
 ```
 stl/

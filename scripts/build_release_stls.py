@@ -30,6 +30,13 @@ Files land under ``stl/`` in a folder tree that mirrors the upload layout
         Visual/   Measuring-Stencil_Visual_P1_Lamp-Plug-Gauge.stl  ...
         Tactile/  Measuring-Stencil_Tactile_P1_Lamp-Plug-Gauge.stl ...
 
+Every file is written as a binary STL. Its 32-bit coordinates collapse the
+few edges of OpenSCAD's shorter than about 0.00001 mm into triangles with no
+area, which would leave the mesh open, so those triangles are dropped; no
+surface moves. A file whose fresh render is the same shape as the committed
+binary copy is left as it is, so a run after a change that moved nothing adds
+nothing to the repository's history; ``--force`` replaces every file.
+
 Run from the repo root:
 
     python scripts/build_release_stls.py
@@ -43,7 +50,9 @@ from __future__ import annotations
 
 import argparse
 import logging
+import shutil
 import sys
+import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -51,6 +60,7 @@ from typing import Dict, List, Optional
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from tests.mesh_comparison import binary_stl_facets, same_shape  # noqa: E402
 from tests.openscad_runner import OpenSCADRunner  # noqa: E402
 
 logger = logging.getLogger(__name__)
@@ -184,6 +194,15 @@ def check_watertight(stl: Path) -> Optional[bool]:
     return bool(getattr(mesh, "is_watertight", False))
 
 
+def unchanged(committed: Path, fresh: Path, force: bool) -> bool:
+    """True when the committed file is already a binary STL of the same shape
+    as the fresh render, so it stays as it is and the repository's history
+    gets no new copy of it."""
+    if force or not committed.exists():
+        return False
+    return binary_stl_facets(committed) is not None and same_shape(committed, fresh)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument(
@@ -193,6 +212,10 @@ def main() -> int:
     parser.add_argument(
         "--only", choices=["plug-puller", "stencil"],
         help="Render only one model group.",
+    )
+    parser.add_argument(
+        "--force", action="store_true",
+        help="Replace every file, even one whose shape did not change.",
     )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
@@ -213,25 +236,39 @@ def main() -> int:
 
     failures: List[str] = []
     not_watertight: List[str] = []
-    for job in jobs:
-        out = args.out / job.out_rel
-        res = runner.generate_stl(job.scad, out, job.params)
-        if not res.success:
-            logger.error("FAIL %s\n%s", job.out_rel, res.stderr[-400:])
-            failures.append(str(job.out_rel))
-            continue
-        wt = check_watertight(out)
-        wt_note = {True: "watertight", False: "NOT watertight", None: "?"}[wt]
-        if wt is False:
-            not_watertight.append(str(job.out_rel))
-        size_kb = out.stat().st_size / 1024
-        logger.info(
-            "OK   %-58s %7.0f KB  %.1fs  %s",
-            job.out_rel.as_posix(), size_kb, res.duration_seconds, wt_note,
-        )
+    kept = 0
+    with tempfile.TemporaryDirectory(prefix="plug-puller-stl-") as tmp:
+        for job in jobs:
+            out = args.out / job.out_rel
+            fresh = Path(tmp) / job.out_rel.name
+            res = runner.generate_stl(job.scad, fresh, job.params, binary=True)
+            if not res.success:
+                logger.error("FAIL %s\n%s", job.out_rel, res.stderr[-400:])
+                failures.append(str(job.out_rel))
+                continue
+            dropped = res.dropped_triangles
+            wt = check_watertight(fresh)
+            wt_note = {True: "watertight", False: "NOT watertight", None: "?"}[wt]
+            if wt is False:
+                not_watertight.append(str(job.out_rel))
+            if unchanged(out, fresh, args.force):
+                kept += 1
+                action = "kept, same shape"
+            else:
+                out.parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(fresh), str(out))
+                action = "written"
+            size_kb = out.stat().st_size / 1024
+            note = f", {dropped} zero-area triangle(s) dropped" if dropped else ""
+            logger.info(
+                "OK   %-58s %7.0f KB  %.1fs  %s, %s%s",
+                job.out_rel.as_posix(), size_kb, res.duration_seconds, wt_note, action, note,
+            )
 
     logger.info("-" * 72)
-    logger.info("Done: %d rendered, %d failed.", len(jobs) - len(failures), len(failures))
+    rendered = len(jobs) - len(failures)
+    logger.info("Done: %d rendered (%d written, %d kept as committed), %d failed.",
+                rendered, rendered - kept, kept, len(failures))
     if not_watertight:
         logger.warning("Not watertight (%d): %s", len(not_watertight), not_watertight)
     if failures:

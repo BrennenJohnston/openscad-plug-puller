@@ -42,10 +42,10 @@ def _require_two_sided_scad() -> Path:
     return TWO_SIDED_SCAD
 
 
-def _render(runner, scad: Path, out: Path, params: Dict[str, object]):
+def _render(runner, scad: Path, out: Path, params: Dict[str, object], binary: bool = False):
     import trimesh
 
-    result = runner.generate_stl(scad_file=scad, output_stl=out, parameters=params)
+    result = runner.generate_stl(scad_file=scad, output_stl=out, parameters=params, binary=binary)
     assert result.success, (
         f"Render of {scad.name} failed (returncode={result.returncode}):\n{result.stderr}"
     )
@@ -66,7 +66,7 @@ def test_preset_plate_matches_fixture(openscad_runner, mesh_comparator, tmp_path
 
     scad = _require_two_sided_scad()
     out = tmp_path / "two_sided_preset.stl"
-    plate = _render(openscad_runner, scad, out, PRESET_PARAMS)
+    plate = _render(openscad_runner, scad, out, PRESET_PARAMS, binary=True)  # the fixture's format
     comparison = mesh_comparator.compare(FIXTURE_STL, out)
     assert comparison.passed, "; ".join(comparison.failures)
     _assert_same_geometry(plate, trimesh.load(FIXTURE_STL, force="mesh"), "two-sided vs fixture")
