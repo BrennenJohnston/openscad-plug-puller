@@ -28,6 +28,7 @@ import pytest
 
 from tests.fit_formulas import (
     DEFAULT_MEASUREMENTS,
+    FIT_FINGER_HOLE_SHARE,
     FIT_SIZE_TABLE,
     FIT_ZIP_FINGER_WEB,
     derive,
@@ -323,6 +324,32 @@ class TestMonotonicity:
         self._assert_monotonic("measure_hand_width", "puller_bottom_width")
 
 
+class TestFingerHoleRoom:
+    """The fitted body is long enough for the full finger hole: the main
+    SCAD's auto-fit trims a hole wider than FIT_FINGER_HOLE_SHARE of the
+    body's length with no red tag, so the fit lengthens the body instead. A
+    trim by the width stays: its condition is the red tag FINGER TOO BIG
+    FOR HAND WIDTH, which asks the user to recheck both measurements."""
+
+    def test_no_measured_hand_gets_a_silent_trim(self) -> None:
+        trimmed = []
+        for length in (12, 25.5, 38, 46.2, 85):
+            for finger in range(14, 33):
+                for hand in range(60, 111, 5):
+                    d = derive({"size": "Measure my hand", "measure_plug_length": length,
+                                "measure_finger_width": finger, "measure_hand_width": hand})
+                    room = FIT_FINGER_HOLE_SHARE * d["puller_length"]
+                    if d["finger_hole_diameter"] > room:
+                        trimmed.append((length, finger, hand, d["finger_hole_diameter"], round(room, 2)))
+        assert not trimmed, f"{len(trimmed)} hands get a silently trimmed hole, e.g. {trimmed[:3]}"
+
+    @pytest.mark.parametrize("size_name", sorted(FIT_SIZE_TABLE))
+    def test_named_sizes_keep_their_hole(self, size_name: str) -> None:
+        d = derive({"size": size_name})
+        assert d["finger_hole_diameter"] <= FIT_FINGER_HOLE_SHARE * d["puller_length"]
+        assert d["finger_hole_diameter"] <= FIT_FINGER_HOLE_SHARE * d["puller_bottom_width"]
+
+
 # Plug quick-select prefills (mirrors the `_eff_*` ternaries in the v7 SCAD;
 # two-station values measured by scripts/measure_plug_references.py).
 PLUG_PRESET_VECTORS: Dict[str, Dict[str, Any]] = {
@@ -404,9 +431,11 @@ class TestZipFingerBarrier:
             )
         )
 
-    def test_shipped_sizes_unchanged_at_defaults(self) -> None:
+    def test_zip_floor_inactive_at_default_sizes(self) -> None:
         """The zip-grid floor must be inactive for the golden-fixture sizes
-        (default measurements) — those meshes are pinned by fixtures."""
+        (default measurements) — those meshes are pinned by fixtures. The
+        length is the pocket/finger formula, or the room for the full finger
+        hole where that is longer (Large, with the default plug)."""
         for size in ("Small", "Medium", "Large"):
             derived = derive({"size": size})
             gap_driven = (
@@ -414,10 +443,11 @@ class TestZipFingerBarrier:
                 + derived["finger_hole_y_position"]
                 + derived["finger_hole_diameter"] / 2
             )
-            assert derived["puller_length"] == pytest.approx(gap_driven), (
-                f"Size {size}: puller_length is no longer the pocket/finger "
-                "formula — the zip-grid floor engaged at default "
-                "measurements, which changes the shipped fixtures."
+            room = math.ceil((derived["finger_hole_diameter"] / FIT_FINGER_HOLE_SHARE + 0.001) * 20) / 20
+            assert derived["puller_length"] == pytest.approx(max(gap_driven, room)), (
+                f"Size {size}: puller_length is neither the pocket/finger "
+                "formula nor the finger-hole room — the zip-grid floor "
+                "engaged at default measurements, which changes the shipped fixtures."
             )
 
 
@@ -434,6 +464,8 @@ ECHO_VECTORS = [
     ("vacuum_plug", VACUUM_PLUG_VECTOR),
     ("all_min", ALL_MIN_VECTOR),
     ("all_max", ALL_MAX_VECTOR),
+    # a big finger on a modest hand: the body grows in length to hold the full hole
+    ("big_finger", {"size": "Measure my hand", "measure_finger_width": 26, "measure_hand_width": 75}),
 ]
 
 
