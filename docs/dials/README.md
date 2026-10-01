@@ -12,7 +12,7 @@ black = the tool; teal = your plug; red dashed = the edges this dial moved; the 
 
 ![The one-sided puller, the four Customizer steps on a US vacuum plug, five stages left to right.](one-sided/storyboard.svg)
 
-Five stages of the one-sided puller, left to right, the top row first, the plug end at the top; red dashes mark the edges each step moved. 1, the defaults: the tool as the file opens, with a 25 mm wide plug in teal. 2, Step 1 - Your Plug: plug length, plug width at the prong end, plug width at the cord end, and 4 more; red on the body edge, the finger holes, the seat, the wall notch and the wing openings. 3, Step 2 - Size: hand size, finger width, hand width; red on the body edge, the finger holes, the pocket, the wall notch, the wing openings and the zip-tie holes. 4, Step 3 - Attachment: attachment; the wing openings removed, drawn in red from the old outline. 5, Step 4 - Cord Hook: hook side; red on the hook.
+Five stages of the one-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 25 mm wide plug in teal. Step 1 - Your Plug: plug length, plug width at both ends, plug thickness at both ends, cord thickness, outlet cover plate style; red on the body edge, the finger holes, the seat, the wall notch and the wing openings. Step 2 - Size: hand size, finger width, hand width; red on the body edge, the finger holes, the pocket, the wall notch, the wing openings and the zip-tie holes. Step 3 - Attachment: attachment; the wing openings removed, drawn in red from the old outline. Step 4 - Cord Hook: hook side; red on the hook.
 
 ### Step 1 - Your Plug
 
@@ -28,7 +28,7 @@ Before: Measure my plug. After: Standard 3-prong plug - NEMA 5-15. Moves: body e
 
 ![Plug length: before and after, 25.5 to 40 mm; red marks the body edge, the seat, the wall notch, the wing openings and the zip-tie holes.](one-sided/measure_plug_length.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug length at 40 mm. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the zip-tie holes and the wing openings. 3, the wall notch, the seat and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug length at 40 mm. The red line marks the pocket's length and reads 40 mm, the number you type. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the zip-tie holes and the wing openings: the four small holes beside the pocket; the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline.
 
 Before: 25.5. After: 40. Moves: body edge, seat, wall notch, wing openings, zip-tie holes.
 
@@ -36,7 +36,7 @@ Before: 25.5. After: 40. Moves: body edge, seat, wall notch, wing openings, zip-
 
 ![Plug width at the prong end: before and after, 25 to 32 mm; red marks 5 parts, named below.](one-sided/measure_plug_width_prong_end.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the prong end at 32 mm. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the prong end at 32 mm. The red line marks the plug's width at the prong end and reads 32 mm, the number you type. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline.
 
 Before: 25. After: 32. Moves: body edge, seat, wall notch, wing openings, zip-tie holes.
 
@@ -44,7 +44,7 @@ Before: 25. After: 32. Moves: body edge, seat, wall notch, wing openings, zip-ti
 
 ![Plug width at the cord end: before and after, 25 to 15 mm; red marks the pocket and the wing openings.](one-sided/measure_plug_width_cord_end.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the cord end at 15 mm: tilts the pocket's side walls to match the plug's taper, and the zip-tie holes and wing openings lean in with them. Marked in red: 1, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the cord end at 15 mm: tilts the pocket's side walls to match the plug's taper, and the zip-tie holes and wing openings lean in with them. The red line marks the plug's width at the cord end and reads 15 mm, the number you type. Marked in red: 1, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline.
 
 Before: 25. After: 15. Moves: pocket, wing openings.
 
@@ -52,7 +52,7 @@ Before: 25. After: 15. Moves: pocket, wing openings.
 
 ![Plug thickness at the prong end: before and after, 20 to 23.5 mm; red marks the pocket and the seat.](one-sided/measure_plug_thickness_prong_end.svg)
 
-Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the prong end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline.
+Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the prong end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers. The red line marks the plug's thickness at the prong end and reads 23.5 mm, the number you type. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline.
 
 Before: 20. After: 23.5. Section at x = 0 mm. Moves: pocket, seat.
 
@@ -60,7 +60,7 @@ Before: 20. After: 23.5. Section at x = 0 mm. Moves: pocket, seat.
 
 ![Plug thickness at the cord end: before and after, 20 to 23.5 mm; red marks the pocket and the seat.](one-sided/measure_plug_thickness_cord_end.svg)
 
-Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the cord end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, when this end is the fatter end of the plug. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline.
+Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the cord end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, when this end is the fatter end of the plug. The red line marks the plug's thickness at the cord end and reads 23.5 mm, the number you type. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline.
 
 Before: 20. After: 23.5. Section at x = 0 mm. Moves: pocket, seat.
 
@@ -68,7 +68,7 @@ Before: 20. After: 23.5. Section at x = 0 mm. Moves: pocket, seat.
 
 ![Cord thickness: before and after, 4 to 8 mm; red marks 6 parts, named below.](one-sided/measure_cord_thickness.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: cord thickness at 8 mm. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the pocket and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: cord thickness at 8 mm. The red line marks the cord hook slot and reads 8 mm, the number you type; the slot is drawn 8.8 mm wide, so the cord slips in. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the pocket and the body edge.
 
 Before: 4. After: 8. Moves: body edge, finger holes, pocket, wall notch, wing openings, zip-tie holes.
 
@@ -102,7 +102,7 @@ Before: Medium. After: Large. Moves: body edge, finger holes, pocket, wing openi
 
 ![Finger width: before and after, 20 to 26 mm; red marks the body edge, the finger holes, the pocket, the wall notch and the wing openings.](one-sided/measure_finger_width.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the wall notch and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27.9 mm across, wider than the finger. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the wall notch and the body edge.
 
 Before: 20. After: 26. Context: `size` = Measure my hand. Moves: body edge, finger holes, pocket, wall notch, wing openings.
 
@@ -110,7 +110,7 @@ Before: 20. After: 26. Context: `size` = Measure my hand. Moves: body edge, fing
 
 ![Hand width: before and after, 85 to 100 mm; red marks the body edge.](one-sided/measure_hand_width.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: hand width at 100 mm: widens the whole body outline and thickens the slab in step with the hand. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: hand width at 100 mm: widens the whole body outline and thickens the slab in step with the hand. The red line marks the body at its widest and reads 100 mm, the number you type; the body is drawn 80.3 mm wide, narrower than the hand, as its width is worked out from the hand width. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.
 
 Before: 85. After: 100. Context: `size` = Measure my hand. Moves: body edge.
 
@@ -684,7 +684,7 @@ Before: 0. After: 2. Context: `size` = Custom. Section at x = 4.5 mm. Moves: hoo
 
 ![The two-sided puller, the four Customizer steps on a USB-C laptop plug, five stages left to right.](two-sided/storyboard.svg)
 
-Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; red dashes mark the edges each step moved. 1, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. 2, Step 1 - Your Plug: plug length 23 mm, plug width at the prong end 13 mm, plug width at the cord end 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. 3, Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. 4, Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. 5, Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
+Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. Step 1 - Your Plug: plug length 23 mm, plug width at both ends 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
 
 ### Step 1 - Your Plug
 
@@ -700,7 +700,7 @@ Before: Measure my plug. After: Heavy-duty extension cord - NEMA 5-15. Moves: ar
 
 ![Plug length: before and after, 25.5 to 40 mm; red marks the arms.](two-sided/measure_plug_length.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug length at 40 mm: lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them. Marked in red: 1, the arms: the two toothed arms in the upper half. The plate edge, the teeth, the finger lobes and the cord channel stay where they were.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug length at 40 mm: lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them. The red line marks the plug's length and reads 40 mm, the number you type; the plug is drawn 42 mm long, reaching 2 mm past the arm tips as in the preview. Marked in red: 1, the arms: the two toothed arms in the upper half.
 
 Before: 25.5. After: 40. Moves: arms.
 
@@ -708,7 +708,7 @@ Before: 25.5. After: 40. Moves: arms.
 
 ![Plug width at the prong end: before and after, 20 to 28 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.](two-sided/measure_plug_width_prong_end.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. The red line marks the gap between the arm tips and reads 28 mm, the number you type. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom.
 
 Before: 20. After: 28. Moves: arms, cord channel, finger lobes, zip stations.
 
@@ -716,7 +716,7 @@ Before: 20. After: 28. Moves: arms, cord channel, finger lobes, zip stations.
 
 ![Plug width at the cord end: before and after, 20 to 12 mm; red marks the arms, the teeth and the zip stations.](two-sided/measure_plug_width_cord_end.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the cord end at 12 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the cord end at 12 mm. The red line marks the gap between the arms at the cord end and reads 12 mm, the number you type. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half.
 
 Before: 20. After: 12. Moves: arms, teeth, zip stations.
 
@@ -724,7 +724,7 @@ Before: 20. After: 12. Moves: arms, teeth, zip stations.
 
 ![Cord thickness: before and after, 4 to 9 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.](two-sided/measure_cord_thickness.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. The red line marks the cord channel and reads 9 mm, the number you type; the channel is drawn 9.8 mm wide, so the cord slips in. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm.
 
 Before: 4. After: 9. Moves: arms, cord channel, finger lobes, zip stations.
 
@@ -758,7 +758,7 @@ Before: Medium. After: Large. Moves: arms, finger lobes, zip stations.
 
 ![Finger width: before and after, 20 to 26 mm; red marks the arms, the finger lobes, the plate edge and the zip stations.](two-sided/measure_finger_width.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 20 mm wide plug in teal. Right: finger width at 26 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes, the arms and the plate edge: the two rounded lobes in the lower half; the two toothed arms in the upper half; the outer outline.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 20 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27 mm across, wider than the finger. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes, the arms and the plate edge.
 
 Before: 20. After: 26. Context: `size` = Measure my hand. Moves: arms, finger lobes, plate edge, zip stations.
 

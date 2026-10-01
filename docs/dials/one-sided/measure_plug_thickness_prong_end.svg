@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="223.00mm" height="47.17mm" viewBox="0 0 223.00 47.17" role="img">
 <title>Plug thickness at the prong end</title>
-<desc>Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the prong end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline.</desc>
+<desc>Two vertical slices of the one-sided puller at x = 0 mm, before left and after right, the top face up. Left: the defaults, the plug in teal in the cut. Right: plug thickness at the prong end at 23.5 mm: deepens or shallows the two pocket floors, the round seat and the plug recess, to suit the fatter of the two thickness numbers. The red line marks the plug's thickness at the prong end and reads 23.5 mm, the number you type. Marked in red: 1, the seat and the pocket: the round recess at the plug end; the plug recess on the centerline.</desc>
 <rect width="223.00" height="47.17" fill="white"/>
 <g class="panel" id="before">
 <path d="M 18.00 9.06 L 43.50 9.06 L 43.50 29.06 L 18.00 29.06 L 18.00 9.06 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
-<path d="M 83.50 29.05 L 83.48 32.85 L 78.43 32.85 L 78.44 26.53 L 81.09 26.52 L 82.05 26.76 L 82.66 27.17 L 83.14 27.75 L 83.42 28.43 L 83.50 29.05 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 33.22 29.69 L 33.41 29.41 L 34.05 29.06 L 43.50 29.05 L 43.94 28.86 L 44.38 28.50 L 44.56 27.80 L 44.61 26.52 L 73.29 26.52 L 73.34 32.82 L 21.81 32.83 L 21.85 29.69 L 33.22 29.69 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 80.91 26.52 L 81.00 26.60 L 81.62 26.61 L 81.69 26.70 L 81.90 26.70 L 81.96 26.79 L 82.29 26.90 L 82.87 27.40 L 83.30 28.10 L 83.50 28.97 L 83.47 32.86 L 78.42 32.83 L 78.42 26.55 L 80.91 26.52 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 33.22 29.69 L 33.41 29.41 L 34.05 29.06 L 43.50 29.05 L 43.94 28.86 L 44.38 28.50 L 44.56 27.80 L 44.61 26.52 L 73.34 26.56 L 73.29 32.87 L 21.81 32.83 L 21.85 29.69 L 33.22 29.69 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 </g>
 <g class="arrow">
 <line x1="91.00" y1="19.43" x2="95.50" y2="19.43" stroke="#000" stroke-width="0.6"/><polygon points="98.00,19.43 95.50,18.31 95.50,20.56" fill="#000"/>
@@ -15,7 +15,7 @@
 </g>
 <g class="panel" id="after" transform="translate(99.50 0)">
 <path d="M 18.00 6.00 L 43.50 9.50 L 43.50 29.50 L 18.00 29.50 L 18.00 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
-<path d="M 83.50 29.05 L 83.48 32.85 L 78.43 32.85 L 78.44 26.53 L 81.09 26.52 L 82.05 26.76 L 82.66 27.17 L 83.14 27.75 L 83.42 28.43 L 83.50 29.05 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 80.91 26.52 L 81.00 26.60 L 81.62 26.61 L 81.69 26.70 L 81.90 26.70 L 81.96 26.79 L 82.29 26.90 L 82.87 27.40 L 83.30 28.10 L 83.50 28.97 L 83.47 32.86 L 78.42 32.83 L 78.42 26.55 L 80.91 26.52 Z" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 44.44 28.71 L 44.56 28.25 L 44.61 26.52 L 73.29 26.52 L 73.34 26.56 L 73.34 32.81 L 73.29 32.87 L 21.86 32.87 L 21.81 30.30 L 22.01 30.25" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 22.01 30.25 L 33.22 30.25 L 33.26 30.22 L 33.41 29.92 L 34.05 29.50 L 43.50 29.50 L 43.94 29.30 L 44.38 28.94 L 44.44 28.71" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <g class="dimension">

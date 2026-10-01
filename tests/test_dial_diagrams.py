@@ -213,12 +213,21 @@ def test_descriptions_follow_rules() -> None:
     """Every index row carries the two-part two-part text alternative: an
     alt of at most 150 characters that never opens with "image of" and the
     like, names the row's title and, unless it says "named below", every
-    feature red marks; a long description of at most 90 words that opens
+    feature red marks; a long description of at most 90 words (110 with a
+    red dimension line) that opens
     with "Two " (a pair), "One " (a single panel) or "This dial changes no
     shape" (a no-shape row), carries one numbered item per key entry, and
     whose numbered list names only the features of its own tool (the quoted
-    changes sentence is the catalog's own words)."""
-    from scripts.generate_dial_diagrams import FEATURE_LOCATIONS, SINGLE_PANEL_ROWS
+    changes sentence is the catalog's own words). A row with a red dimension
+    line has one sentence about it: the label it reads, that the label is
+    the number you type, and the size the part is drawn at when that size
+    differs from the number by half a millimeter or more."""
+    from scripts.generate_dial_diagrams import (
+        DIM_SAME_TOLERANCE,
+        FEATURE_LOCATIONS,
+        SINGLE_PANEL_ROWS,
+        _fmt_value,
+    )
 
     rows = {(r["file"], r["name"]): r for r in load_catalog()}
     for entry in json.loads(INDEX.read_text(encoding="utf-8")):
@@ -233,7 +242,8 @@ def test_descriptions_follow_rules() -> None:
             for name in entry["features"]:
                 assert name in alt, (key, name, alt)
         assert isinstance(long, str) and long.strip(), f"{key}: no long_description"
-        assert len(long.split()) <= 90, (key, len(long.split()))
+        limit = 110 if entry.get("dimension") else 90  # rule 6: a red dimension line adds a sentence
+        assert len(long.split()) <= limit, (key, len(long.split()))
         if entry["view"] == "none":
             assert long.startswith("This dial changes no shape"), key
         elif key in SINGLE_PANEL_ROWS:
@@ -242,6 +252,14 @@ def test_descriptions_follow_rules() -> None:
             assert long.startswith("Two "), key
             for n, names, _removed in entry["callouts"]:
                 assert f"{n}, the {names[0]}" in long, (key, n, names, long)
+        dim = entry.get("dimension")
+        if dim:
+            red = [s for s in re.split(r"(?<=\.)\s+(?=[A-Z])", long) if s.startswith("The red line")]
+            assert len(red) == 1, (key, "one sentence about the red dimension line", long)
+            assert f"reads {dim['label']}, the number you type" in red[0], (key, red[0])
+            value = float(dim["label"].split()[0])
+            if abs(dim["drawn"] - value) >= DIM_SAME_TOLERANCE:
+                assert f"drawn {_fmt_value(dim['drawn'])} mm" in red[0], (key, dim, red[0])
         own = FEATURE_LOCATIONS[entry["file"]]
         marked = long[long.find("Marked in red:"):] if "Marked in red:" in long else ""
         for other, table in FEATURE_LOCATIONS.items():
@@ -297,11 +315,16 @@ def test_storyboards() -> None:
     """dial_storyboards.json: two storyboards, each five cumulative stages in
     Customizer Step order whose dials and values the file's mapping allows;
     each tool's storyboard.svg has five panels and four arrow groups; the
-    storyboard index carries an alt and a long description with five
-    numbered lines per storyboard."""
+    storyboard index carries an alt and a long description whose lines
+    follow the picture: Start, then each step by its own name in order (the
+    picture numbers its four arrows 1 to 4, one per step), never numbered 1
+    to 5, and naming every dial each step sets."""
     from scripts.generate_dial_diagrams import STORYBOARDS, STORYBOARD_INDEX_NAME
     from tests.test_dial_catalog import _mapping_rows, _value_allowed
 
+    titles: dict = {}
+    for r in load_catalog():
+        titles.setdefault(r["file"], {})[r["name"]] = r["title"]
     assert STORYBOARDS.exists(), f"{STORYBOARDS} is missing"
     boards = json.loads(STORYBOARDS.read_text(encoding="utf-8"))
     assert isinstance(boards, list) and len(boards) == 2
@@ -337,7 +360,23 @@ def test_storyboards() -> None:
         assert entry["alt"] and len(entry["alt"]) <= 150 and not entry["alt"].lower().startswith(("image of", "picture of"))
         long = entry["long_description"]
         assert len(long.split()) <= 150, len(long.split())
-        assert all(f" {n}, " in f" {long}" for n in (1, 2, 3, 4, 5)), long
+        assert "numbered 1 to 4" in long, ("the overview says how the arrows are numbered", long)
+        start = long.find(" Start, the defaults: ")
+        assert start > 0, ("the first stage is named Start", long)
+        step_names = [s["step"] for s in board["stages"][1:]]
+        assert all(long.count(f" {name}: ") == 1 for name in step_names), (step_names, long)
+        found = [long.find(f" {name}: ") for name in step_names]
+        assert start < found[0] and found == sorted(found), ("Start, then Step 1 to Step 4 in order", long)
+        assert not re.search(r"(?:^|\. )[1-5], ", long), ("the stages are named, not numbered 1 to 5", long)
+        assert not re.search(r"and \d+ more", long), ("every dial is named", long)
+        lowered = long.lower()
+        for stage in board["stages"][1:]:
+            for dial in stage["set"]:
+                name = titles[board["file"]][dial].lower()
+                stem, _sep, end = name.partition(" at the ")
+                named = name in lowered or bool(end) and (
+                    f"{stem} at both ends" in lowered or (stem in lowered and f"at the {end}" in lowered))
+                assert named, (board["key"], dial, long)
         assert len(entry["stages"]) == 5
 
 

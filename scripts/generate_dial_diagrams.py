@@ -492,6 +492,9 @@ def outline_regions(before: Outline, after: Outline) -> Tuple[List[Polygon], flo
     return _regions_of(solids.union(recess))
 
 
+PLUG_PAST_TIPS = 2.0  # mm the two-sided plug is drawn past the arm tips, as the model's preview draws it
+
+
 def plug_polygon(file_key: str, params: Dict[str, Any], outline: Outline) -> Polygon:
     """The plug as the tool places it: a trapezoid from the prong-end width
     at the plate end to the cord-end width over the plug length."""
@@ -501,7 +504,7 @@ def plug_polygon(file_key: str, params: Dict[str, Any], outline: Outline) -> Pol
     length = m["measure_plug_length"]
     w_prong = m["measure_plug_width_prong_end"]
     w_cord = m["measure_plug_width_cord_end"]
-    y_prong = y1 + (2.0 if file_key == TWO_SIDED else 0.0)
+    y_prong = y1 + (PLUG_PAST_TIPS if file_key == TWO_SIDED else 0.0)
     y_cord = y1 - length
     return Polygon([
         (cx - w_prong / 2, y_prong),
@@ -1344,6 +1347,17 @@ def draw_dimension(frame: _Frame, dim: Dict[str, Any]) -> List[str]:
 
 DIM_OFFSET = 4.0  # mm from the object's edge to the dimension line
 DIM_LABEL_ROOM = 14.0  # mm of room a vertical dimension's label needs beside its line
+DIM_SAME_TOLERANCE = 0.5  # mm: under one slider step, the drawn size reads as the number on the line
+
+
+def dimension_span(dim: Dict[str, Any]) -> float:
+    """The length of the part a callout marks, in model mm: the span of an
+    "h" or "v" line, the diameter of a "dia" circle."""
+    if dim["kind"] == "h":
+        return dim["x1"] - dim["x0"]
+    if dim["kind"] == "v":
+        return dim["y1"] - dim["y0"]
+    return 2 * dim["r"]
 
 
 def _probe_gap(filled, y: float, near_x: float) -> Optional[Tuple[float, float]]:
@@ -1689,6 +1703,47 @@ FEATURE_LOCATIONS = {
         "strap slot": "the long slot in each arm",
     },
 }
+LONG_MAX_WORDS_DIMENSION = 110  # a picture with a red dimension line also describes the line
+# The sentence on a red dimension line, per anchor: what the line marks, the
+# part's short name, its size word, and why the part is drawn larger or
+# smaller than the number the line reads (each reason checked against the
+# model: the cord clearances, the finger-hole clearance, the body worked out
+# from the hand width, the preview's plug past the arm tips, the grip
+# clearance or bite; None where the drawing has no reason to give).
+DIMENSION_WORDS: Dict[str, Tuple[str, str, str, Optional[str], Optional[str]]] = {
+    "pocket_length": ("the pocket's length", "the pocket", "long", None, None),
+    "plug_width_prong_end": ("the plug's width at the prong end", "the plug", "wide", None, None),
+    "plug_width_cord_end": ("the plug's width at the cord end", "the plug", "wide", None, None),
+    "plug_thickness_prong_end": ("the plug's thickness at the prong end", "the plug", "thick", None, None),
+    "plug_thickness_cord_end": ("the plug's thickness at the cord end", "the plug", "thick", None, None),
+    "hook_slot": ("the cord hook slot", "the slot", "wide", "so the cord slips in", None),
+    "finger_hole": ("a finger hole", "the hole", "across", "wider than the finger", None),
+    "body_width": ("the body at its widest", "the body", "wide",
+                   None, "narrower than the hand, as its width is worked out from the hand width"),
+    "plug_length": ("the plug's length", "the plug", "long",
+                    f"reaching {_fmt_value(PLUG_PAST_TIPS)} mm past the arm tips as in the preview", None),
+    "gap_tips": ("the gap between the arm tips", "the gap", "wide",
+                 "leaving a little room around the plug", "so the arms squeeze the plug"),
+    "gap_cord_end": ("the gap between the arms at the cord end", "the gap", "wide",
+                     "leaving a little room around the plug", "so the arms squeeze the plug"),
+    "channel": ("the cord channel", "the channel", "wide", "so the cord slips in", None),
+    "slot_length": ("the strap slot's length", "the slot", "long", None, None),
+}
+
+
+def describe_dimension(dim: Dict[str, Any], value: Any) -> str:
+    """One sentence on a picture's red dimension line: what it marks and the
+    label it reads, which is the number you type; when the part is drawn at
+    another size (by DIM_SAME_TOLERANCE or more), that size and why."""
+    part, noun, word, larger, smaller = DIMENSION_WORDS.get(
+        dim["at"], ("the measured part", "the part", "long", None, None))
+    text = f"The red line marks {part} and reads {dim['label']}, the number you type"
+    drawn = dim.get("drawn")
+    if drawn is not None and isinstance(value, (int, float)) and not isinstance(value, bool):
+        if abs(drawn - float(value)) >= DIM_SAME_TOLERANCE:
+            reason = larger if drawn > float(value) else smaller
+            text += f"; {noun} is drawn {_fmt_value(drawn)} mm {word}" + (f", {reason}" if reason else "")
+    return text + "."
 
 
 def _join_names(names: Sequence[str]) -> str:
@@ -1729,11 +1784,14 @@ def describe_alt(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any]
 
 def describe_long(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any],
                   plug_width: Optional[float] = None, titles: Optional[Dict[str, str]] = None) -> str:
-    """The long description (at most LONG_MAX_WORDS): an overview sentence,
-    the left panel, the right panel, the numbered list that matches the key,
-    and what stayed. When the whole runs long, the closing sentence goes
-    first, then the changes sentence, then the locations of the entries
-    that carry several names, then every location."""
+    """The long description (at most LONG_MAX_WORDS, or
+    LONG_MAX_WORDS_DIMENSION with a red dimension line): an overview
+    sentence, the left panel, the right panel, the red dimension line when
+    the picture has one, the numbered list that matches the key, and what
+    stayed. When the whole runs long, the closing sentence goes first, then
+    the changes sentence, then the locations of the entries that carry
+    several names, then every location; the dimension sentence, like the
+    numbered list, is never dropped."""
     file_key = row["file"]
     d = row["diagram"]
     view = d["view"]
@@ -1768,6 +1826,9 @@ def describe_long(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any
         after_words = "at " + _fmt_value(d["after"]) + (f" {unit}" if unit else "")
     right_short = f"Right: {_lower_first(title)} {after_words}."
     right_full = f"Right: {_lower_first(title)} {after_words}: {_lower_first(row['changes'])}"
+    dim = entry.get("dimension")
+    dimension = describe_dimension(dim, d["after"]) if dim else ""
+    max_words = LONG_MAX_WORDS_DIMENSION if dim else LONG_MAX_WORDS
     locations = FEATURE_LOCATIONS[file_key]
     callouts = entry.get("callouts") or []
 
@@ -1795,13 +1856,13 @@ def describe_long(row: Dict[str, Any], unit: Optional[str], entry: Dict[str, Any
     else:
         closing = ""
     text = ""
-    for parts in ([overview, left, right_full, marked("all"), closing],
-                  [overview, left, right_full, marked("all")],
-                  [overview, left, right_short, marked("all")],
-                  [overview, left, right_short, marked("single")],
-                  [overview, left, right_short, marked("none")]):
+    for parts in ([overview, left, right_full, dimension, marked("all"), closing],
+                  [overview, left, right_full, dimension, marked("all")],
+                  [overview, left, right_short, dimension, marked("all")],
+                  [overview, left, right_short, dimension, marked("single")],
+                  [overview, left, right_short, dimension, marked("none")]):
         text = " ".join(part for part in parts if part)
-        if len(text.split()) <= LONG_MAX_WORDS:
+        if len(text.split()) <= max_words:
             return text
     return text
 
@@ -1895,6 +1956,9 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
                                      d["after"], unit)
         if dimension is None:
             logger.warning("%s %s: the anchor %s gave no dimension callout", file_key, row["name"], d["dimension"]["at"])
+    dim_entry = ({"kind": dimension["kind"], "at": d["dimension"]["at"], "label": dimension["label"],
+                  "drawn": round(dimension_span(dimension), 1)}
+                 if dimension else None)
     regions, area = outline_regions(b_out, a_out)
     if view == "top":
         feats = footprints(file_key, base, b_out, a_out, after_params)
@@ -1914,6 +1978,7 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
         plan = plan_callouts(b_out, a_out, named, shapely.box(*(float(v) for v in crop)) if crop else None)
         callouts = [] if single else plan.key_rows
         draft = index_row(row, len(regions), area, tags, features, named, callouts)
+        draft["dimension"] = dim_entry
         plug_width = effective_measurements(file_key, base)["measure_plug_width_prong_end"] if view == "top" else None
         alt = describe_alt(row, unit, draft)
         long_description = describe_long(row, unit, draft, plug_width, titles)
@@ -1959,8 +2024,7 @@ def build_diff(row: Dict[str, Any], renderer: Renderer, defaults: Dict[str, Any]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(svg, encoding="utf-8")
     entry = index_row(row, len(regions), area, tags, features, named, callouts)
-    entry["dimension"] = ({"kind": dimension["kind"], "at": d["dimension"]["at"], "label": dimension["label"]}
-                          if dimension else None)
+    entry["dimension"] = dim_entry
     entry["alt"] = alt if alt is not None else describe_alt(row, unit, entry)
     entry["long_description"] = (long_description if long_description is not None
                                  else describe_long(row, unit, entry, None, titles))
@@ -1981,7 +2045,8 @@ def run_rows(
     renderer = renderer or Renderer(cache_dir=Path(cache_dir), force=force)
     mappings = {key: load_mapping(key) for key in SCADS}
     defaults = {key: mapping_defaults(m) for key, m in mappings.items()}
-    titles = {key: {r["name"]: r["title"] for r in rows if r["file"] == key} for key in SCADS}
+    catalog = load_catalog()  # the whole catalog: a context dial's title is needed even when its row is not rebuilt
+    titles = {key: {r["name"]: r["title"] for r in catalog if r["file"] == key} for key in SCADS}
     produced: List[Dict[str, Any]] = []
     for row in rows:
         view = row["diagram"]["view"]
@@ -2169,34 +2234,59 @@ def compose_storyboard_svg(board: Dict[str, Any], stages: Sequence[Dict[str, Any
     return "\n".join(x for x in svg if x) + "\n"
 
 
+def _stage_dials(stage_set: Dict[str, Any], titles: Dict[str, str], units: Dict[str, Optional[str]],
+                 with_values: bool) -> List[str]:
+    """The dials a storyboard stage sets, by name, with their values when
+    ``with_values``; a pair named "... at the prong end" and "... at the cord
+    end" is named once ("plug width at both ends")."""
+    items = []
+    for dial, value in stage_set.items():
+        unit = units.get(dial)
+        shown = f"{_fmt_value(value)} {unit}" if unit and not isinstance(value, (str, bool)) else _fmt_value(value)
+        items.append((_lower_first(titles.get(dial, dial)), shown))
+    names = [name for name, _shown in items]
+    parts: List[str] = []
+    done: set = set()
+    for i, (name, shown) in enumerate(items):
+        if i in done:
+            continue
+        stem, _sep, end = name.partition(" at the ")
+        other = {"prong end": f"{stem} at the cord end", "cord end": f"{stem} at the prong end"}.get(end)
+        j = names.index(other) if other in names else None
+        if j is None or j in done:
+            parts.append(f"{name} {shown}" if with_values else name)
+            continue
+        done.add(j)
+        prong, cord = (shown, items[j][1]) if end == "prong end" else (items[j][1], shown)
+        if not with_values:
+            parts.append(f"{stem} at both ends")
+        elif prong == cord:
+            parts.append(f"{stem} at both ends {prong}")
+        else:
+            parts.append(f"{stem} {prong} at the prong end and {cord} at the cord end")
+    return parts
+
+
 def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]], titles: Dict[str, str],
                         units: Dict[str, Optional[str]], defaults: Dict[str, Any]) -> Tuple[str, str]:
-    """The storyboard's alt text and long description (an overview, then one
-    numbered line per stage, at most SB_LONG_MAX_WORDS)."""
+    """The storyboard's alt text and long description, at most
+    SB_LONG_MAX_WORDS: an overview, then one line per stage named as the
+    picture names it, Start for the defaults and each step by its own name
+    (the picture numbers its four arrows 1 to 4, one per step). Every dial a
+    step sets is named, with its value when the whole fits."""
     file_key = board["file"]
     tool = TOOL_NAMES[file_key]
     alt = f"{tool[0].upper()}{tool[1:]}, the four Customizer steps on a {board['plug_label']}, five stages left to right."
     plug_w = _fmt_value(effective_measurements(file_key, defaults)["measure_plug_width_prong_end"])
     overview = (f"Five stages of {tool}, left to right, the top row first, the plug end at the top; "
-                "red dashes mark the edges each step moved.")
+                "arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved.")
 
-    def stage_line(k: int, st: Dict[str, Any], level: int) -> str:
-        """level 0: the dials with their values; 1: the dials' names; 2: at most three names and a count."""
+    def stage_line(k: int, st: Dict[str, Any], with_values: bool) -> str:
         if k == 0:
-            return f"1, the defaults: the tool as the file opens, with a {plug_w} mm wide plug in teal."
+            return f"Start, the defaults: the tool as the file opens, with a {plug_w} mm wide plug in teal."
         if st["layout"]:
-            return f"{k + 1}, {st['step']}: both plates side by side in one file, what you print; nothing marked."
-        parts = []
-        for dial, value in st["set"].items():
-            name = _lower_first(titles.get(dial, dial))
-            if level == 0:
-                unit = units.get(dial)
-                shown = f"{_fmt_value(value)} {unit}" if unit and not isinstance(value, (str, bool)) else _fmt_value(value)
-                parts.append(f"{name} {shown}")
-            else:
-                parts.append(name)
-        if level >= 2 and len(parts) > 3:
-            parts = parts[:3] + [f"and {len(parts) - 3} more"]
+            return f"{st['step']}: both plates side by side in one file, what you print; nothing marked."
+        parts = _stage_dials(st["set"], titles, units, with_values)
         plan = st["plan"]
         gone = feature_names([rn for rn, rm in zip(plan.regions, plan.removed) if rm])
         feats = [f for f in feature_names(st["named"]) if f not in gone]
@@ -2208,10 +2298,10 @@ def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]],
             red = "; no strap slot on a plug this short, so nothing moved"
         else:
             red = "; nothing moved"
-        return f"{k + 1}, {st['step']}: {', '.join(parts)}{red}."
+        return f"{st['step']}: {', '.join(parts)}{red}."
 
-    for level in (0, 1, 2):
-        lines = [stage_line(k, st, level) for k, st in enumerate(stages)]
+    for with_values in (True, False):
+        lines = [stage_line(k, st, with_values) for k, st in enumerate(stages)]
         text = overview + " " + " ".join(lines)
         if len(text.split()) <= SB_LONG_MAX_WORDS:
             return alt, text
