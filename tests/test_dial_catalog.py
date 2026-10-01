@@ -43,7 +43,7 @@ MEASURE_ANCHORS = {
     "hand_width", "strap_width", "wall_plate", "plug_sides",
 }
 # The 17 Step dials that ask for a number or a look, in the catalog's order: the
-# one source for the measuring guide and the measuring form.
+# one source for the guides' measuring section and the measuring form.
 MEASURE_ROWS = [
     ("one-sided", "measure_plug_length"), ("one-sided", "measure_plug_width_prong_end"),
     ("one-sided", "measure_plug_width_cord_end"), ("one-sided", "measure_plug_thickness_prong_end"),

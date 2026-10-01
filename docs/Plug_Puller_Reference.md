@@ -10,7 +10,7 @@
 > **Entry points**: open either file in OpenSCAD; the single-file builds
 > are `dist/Plug_Puller_SingleFile.scad` and
 > `dist/Plug_Puller_Two_Sided_SingleFile.scad`
-> **One-sided heritage**: `v6.0/CAD/v6.0.stl` ("Plug Puller 3.1 - B")
+> **One-sided heritage**: the v6.0 CAD model "Plug Puller 3.1 - B", measured during development (not part of this repository)
 > **Two-sided reference**: `plug references/3 Prong Heavy Ideal Sample/…Plug_Bottom.stl`
 > **Last Updated**: 2026-09-24
 > **Purpose**: Authoritative reference for the geometry of both tools,
@@ -84,9 +84,9 @@ now:
    envelope + feature-inventory + grip-gap parity against the idealized
    heavy-duty plate.
 
-The v6-CAD feature-by-feature parity suite (`test_reference_parity.py`)
-was **retired**: the pocket and rail placement are re-parametrised on
-purpose.
+A feature-by-feature parity suite against the v6 CAD model ran during
+development and was **retired**: the pocket and rail placement are
+re-parametrised on purpose.
 
 ### 2.1 Plug presets (two-station, re-measured)
 
