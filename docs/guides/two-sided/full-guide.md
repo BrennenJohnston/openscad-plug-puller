@@ -223,7 +223,7 @@ Pick a plug preset, or leave it on Measure my plug and type your plug's numbers;
 
 Customizer name: `plug_preset`
 
-Fills in the plug's length, both widths and the cord from the measured heavy-duty cord plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.
+Fills in the plug's length, both widths, the cord and the sides from a measured reference plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.
 
 ![Plug preset: before and after, Measure my plug to Heavy-duty extension cord - NEMA 5-15; red marks 4 parts, named below.](../../dials/two-sided/plug_preset.svg)
 

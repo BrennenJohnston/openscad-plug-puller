@@ -36,6 +36,13 @@ public milestone**.
   four steps' dials first (the manifests, single files and presets live on
   the Forge's `example-manifest` branch under `plug-puller/`); the OpenSCAD
   Playground links are gone.
+- **Dial texts checked against the model.** The hook tip drop card says it
+  changes no shape, as its own note always did. The two-sided plug preset
+  card speaks of any of its four reference plugs and says each sets the plug
+  sides. The strap slot placement help says Manual placement gives classic
+  slots even with the Wing style, and the classic-slot notes now include
+  that case. Three help texts lose a British spelling, an old "T-shaped"
+  name for the J-shaped cord hook, and internal version names.
 - **Every major section of the four documents starts at the top of a new
   page**, a heading is never left at the foot of a page without its text,
   table or list, a short list or table is never split across pages, and

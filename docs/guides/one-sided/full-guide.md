@@ -1132,7 +1132,7 @@ Note: Only acts when size is Custom.
 
 Customizer name: `custom_t_hook_tip_drop`
 
-Sags the slot's mouth farther below the cord end so a hooked cord cannot back out.
+Changes no shape of the printed tool, because the hook slot's mouth already opens through the cord end.
 
 No picture. Only acts when size is Custom. Changes no shape: the hook slot's mouth already opens through the cord end (the body ends at Y = 0), so sagging the mouth farther below that edge cuts only air; measured at 1.98, 4 and 0.
 
@@ -1298,7 +1298,7 @@ Two top views of the one-sided puller, before left and after right, the plug end
 - Range: 6 to 20 mm, in steps of 0.5 mm
 - Moves: classic slots
 
-Note: Only acts when size is Custom and velcro_style is Classic slot.
+Note: Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.
 
 ### Strap slot width
 
@@ -1314,7 +1314,7 @@ Two top views of the one-sided puller, before left and after right, the plug end
 - Range: 3 to 14 mm, in steps of 0.5 mm
 - Moves: classic slots
 
-Note: Only acts when size is Custom and velcro_style is Classic slot.
+Note: Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.
 
 ### Strap slot distance from the centerline
 
@@ -1330,7 +1330,7 @@ Two top views of the one-sided puller, before left and after right, the plug end
 - Range: 5 to 35 mm, in steps of 0.05 mm
 - Moves: classic slots
 
-Note: Only acts when size is Custom and velcro_style is Classic slot.
+Note: Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.
 
 ### Strap slot position along the body
 
@@ -1346,7 +1346,7 @@ Two top views of the one-sided puller, before left and after right, the plug end
 - Range: 30 to 80 mm, in steps of 0.5 mm
 - Moves: classic slots
 
-Note: Only acts when size is Custom and velcro_style is Classic slot.
+Note: Only acts when size is Custom, velcro_style is Classic slot and velcro_placement is Auto.
 
 ### Strap slot lean
 
@@ -1362,7 +1362,7 @@ Two top views of the one-sided puller, before left and after right, the plug end
 - Range: 0 to 180 degrees, in steps of 0.5 degrees
 - Moves: classic slots
 
-Note: Only acts when size is Custom and velcro_style is Classic slot.
+Note: Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.
 
 ## Edge Rounding (Custom size only)
 
@@ -1428,7 +1428,7 @@ Two top views of the one-sided puller, before left and after right, the plug end
 - Range: 0 to 3 mm, in steps of 0.5 mm
 - Moves: classic slots
 
-Note: Only acts when size is Custom and velcro_style is Classic slot.
+Note: Only acts when size is Custom and velcro_style is Classic slot, or when velcro_placement is Manual.
 
 ### Strap opening edge rounding
 

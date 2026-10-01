@@ -191,7 +191,7 @@ Work the form top to bottom. Each step lists its dials: what each one does, then
 
 Pick a plug preset, or leave it on Measure my plug and type your plug's numbers; then pick Rounded sides or Flat sides.
 
-- **Plug preset**, `plug_preset`: Fills in the plug's length, both widths and the cord from the measured heavy-duty cord plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once. Default Measure my plug; choices Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15.
+- **Plug preset**, `plug_preset`: Fills in the plug's length, both widths, the cord and the sides from a measured reference plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once. Default Measure my plug; choices Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15.
 - **Plug length**, `measure_plug_length`: Lengthens both arms so the teeth cover the whole plug body, and moves the zip-tie stations and the strap slot with them. Default 25.5 mm; range 12 to 85 mm, in steps of 0.5 mm.
 - **Plug width at the prong end**, `measure_plug_width_prong_end`: Opens or closes the gap between the arms at their tips, where the plug's prong end sits. Default 20 mm; range 5 to 40 mm, in steps of 0.5 mm.
 - **Plug width at the cord end**, `measure_plug_width_cord_end`: Opens or closes the gap between the arms at the plug's back end, so the arms taper to match the plug. Default 20 mm; range 5 to 40 mm, in steps of 0.5 mm.
