@@ -13,6 +13,20 @@ public milestone**.
 
 ### Changed
 
+- **The STL library and the test fixtures are binary STLs**, the same shapes
+  in about a fifth of the bytes: the 46 files shrink from 500 MB to 87 MB,
+  each proven the same shape as its text version. Binary STL's 32-bit
+  coordinates collapse a few of OpenSCAD's shortest edges into triangles
+  with no area, 36 of them in three files, so those are dropped and every
+  file stays watertight; no surface moves. `scripts/build_release_stls.py`
+  and `scripts/regenerate_fixtures.py` now leave a file alone when its shape
+  did not change (`--force` replaces every file), so a rebuild that moved
+  nothing adds nothing to the repository's history.
+- **The golden-fixture comparison is tighter:** volume and surface area
+  within 0.05 % and the overall size within 0.01 mm, instead of 1 %, 0.5 %
+  and 0.1 mm. Two renders of a fixture differ by at most 0.000006 %, and a
+  drift like the 0.77 % one a fixture once showed while its plug numbers
+  were ignored now fails.
 - **Two documents per tool replace the guide packets and the cross-tool
   guides.** Each tool now has a **quick start** (get the file, measure your
   plug and your hand or match a stencil card, the four Customizer steps
@@ -103,6 +117,12 @@ public milestone**.
 
 ### Fixed
 
+- **`scripts/scad-check.ps1` checks a setting whose value has spaces**, such
+  as a plug preset name, from Windows PowerShell and from Git Bash, with or
+  without its quotes; before, Windows PowerShell stripped the quotes and
+  OpenSCAD stopped at a syntax error. A text value that is not one of the
+  setting's dropdown choices now fails the check instead of quietly checking
+  the default shape. The fix is logged in `docs/fixes.md`.
 - **Both tools preview in seconds in a web browser.** The rounded edges
   (the one-sided puller's top edge, `body_top_rounding`, and its optional
   bottom edge, `body_bottom_rounding`; the two-sided plate's outer edge,

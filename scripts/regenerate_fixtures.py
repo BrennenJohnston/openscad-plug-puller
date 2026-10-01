@@ -11,6 +11,13 @@ For each fixture directory containing a ``params.json``, this script:
    surface area, bounding box, and watertightness so reviewers can sanity
    check a regeneration without re-running pytest.
 
+``reference.stl`` is a binary STL, without the triangles that its 32-bit
+coordinates collapse to no area (see ``scripts/build_release_stls.py``). A
+fixture whose fresh render is the same shape as its committed binary
+``reference.stl`` is left as it is, ``metadata.json`` included, so a run
+after a change that moved nothing adds nothing to the repository's history;
+``--force`` replaces every fixture.
+
 Run manually after intentional SCAD changes:
 
     python scripts/regenerate_fixtures.py
@@ -28,19 +35,22 @@ import argparse
 import datetime as _dt
 import json
 import logging
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 from typing import List
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from tests.mesh_comparison import binary_stl_facets, same_shape  # noqa: E402
 from tests.openscad_runner import OpenSCADRunner  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
 
-def regenerate(only: List[str] | None = None, verbose: bool = False) -> int:
+def regenerate(only: List[str] | None = None, verbose: bool = False, force: bool = False) -> int:
     logging.basicConfig(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(asctime)s - %(levelname)s - %(message)s",
@@ -66,77 +76,93 @@ def regenerate(only: List[str] | None = None, verbose: bool = False) -> int:
             return 2
 
     failures: list[str] = []
-    for fixture in fixture_dirs:
-        params_path = fixture / "params.json"
-        if not params_path.exists():
-            logger.warning("Skipping %s (no params.json)", fixture.name)
-            continue
-        with open(params_path, "r", encoding="utf-8") as fh:
-            payload = json.load(fh)
-        parameters = payload.get("parameters", payload)
-        scad_rel = payload.get("scad")
-        fixture_scad = PROJECT_ROOT / scad_rel if scad_rel else scad
-        if not fixture_scad.exists():
-            failures.append(fixture.name)
-            logger.error("  SCAD not found for '%s': %s", fixture.name, fixture_scad)
-            continue
-
-        output = fixture / "reference.stl"
-        logger.info("Rendering fixture '%s' from %s -> %s", fixture.name, fixture_scad.name, output)
-        result = runner.generate_stl(fixture_scad, output, parameters)
-        if not result.success:
-            failures.append(fixture.name)
-            logger.error(
-                "  FAILED (rc=%s) %s", result.returncode, result.stderr[-400:]
-            )
-            continue
-
-        # Compute provenance + sanity metrics.
-        try:
-            import trimesh
-
-            mesh = trimesh.load(output, force="mesh")
-            volume = float(mesh.volume) if isinstance(mesh, trimesh.Trimesh) else None
-            area = float(mesh.area) if isinstance(mesh, trimesh.Trimesh) else None
-            bbox = mesh.bounds.tolist() if isinstance(mesh, trimesh.Trimesh) else None
-            watertight = (
-                bool(mesh.is_watertight) if isinstance(mesh, trimesh.Trimesh) else None
-            )
-        except Exception as exc:  # noqa: BLE001
-            logger.warning("trimesh measurement failed for %s: %s", fixture.name, exc)
-            volume = area = bbox = watertight = None
-
-        metadata = {
-            "fixture": fixture.name,
-            "generated_at_utc": _dt.datetime.now(_dt.timezone.utc).isoformat(),
-            "openscad_version": runner.version_string,
-            "manifold_backend": runner.use_manifold,
-            "render_duration_seconds": round(result.duration_seconds, 3),
-            "stl_size_bytes": output.stat().st_size if output.exists() else 0,
-            "trimesh_properties": {
-                "volume_mm3": volume,
-                "surface_area_mm2": area,
-                "bounding_box_mm": bbox,
-                "is_watertight": watertight,
-            },
-            "parameters": parameters,
-        }
-        if scad_rel:
-            metadata["scad"] = scad_rel
-        with open(fixture / "metadata.json", "w", encoding="utf-8") as fh:
-            json.dump(metadata, fh, indent=2)
-        logger.info(
-            "  OK (rc=0, %.2fs, %d bytes, watertight=%s)",
-            result.duration_seconds,
-            output.stat().st_size,
-            watertight,
-        )
+    with tempfile.TemporaryDirectory(prefix="plug-puller-fixtures-") as tmp:
+        for fixture in fixture_dirs:
+            if not _regenerate_one(fixture, scad, runner, Path(tmp), force):
+                failures.append(fixture.name)
 
     if failures:
         logger.error("Failed fixtures: %s", failures)
         return 1
     logger.info("All fixtures regenerated successfully.")
     return 0
+
+
+def _regenerate_one(fixture: Path, scad: Path, runner: OpenSCADRunner, tmp: Path, force: bool) -> bool:
+    """Render one fixture into ``tmp``; replace its reference.stl and
+    metadata.json unless the committed file is already a binary STL of the
+    same shape. False when the render failed."""
+    params_path = fixture / "params.json"
+    if not params_path.exists():
+        logger.warning("Skipping %s (no params.json)", fixture.name)
+        return True
+    with open(params_path, "r", encoding="utf-8") as fh:
+        payload = json.load(fh)
+    parameters = payload.get("parameters", payload)
+    scad_rel = payload.get("scad")
+    fixture_scad = PROJECT_ROOT / scad_rel if scad_rel else scad
+    if not fixture_scad.exists():
+        logger.error("  SCAD not found for '%s': %s", fixture.name, fixture_scad)
+        return False
+
+    output = fixture / "reference.stl"
+    fresh = tmp / f"{fixture.name}.stl"
+    logger.info("Rendering fixture '%s' from %s -> %s", fixture.name, fixture_scad.name, output)
+    result = runner.generate_stl(fixture_scad, fresh, parameters, binary=True)
+    if not result.success:
+        logger.error(
+            "  FAILED (rc=%s) %s", result.returncode, result.stderr[-400:]
+        )
+        return False
+    if result.dropped_triangles:
+        logger.info("  %d zero-area triangle(s) dropped from the binary STL", result.dropped_triangles)
+    if not force and output.exists():
+        if binary_stl_facets(output) is not None and same_shape(output, fresh):
+            logger.info("  unchanged: '%s' keeps its reference.stl and metadata.json", fixture.name)
+            return True
+    shutil.move(str(fresh), str(output))
+
+    # Compute provenance + sanity metrics.
+    try:
+        import trimesh
+
+        mesh = trimesh.load(output, force="mesh")
+        volume = float(mesh.volume) if isinstance(mesh, trimesh.Trimesh) else None
+        area = float(mesh.area) if isinstance(mesh, trimesh.Trimesh) else None
+        bbox = mesh.bounds.tolist() if isinstance(mesh, trimesh.Trimesh) else None
+        watertight = (
+            bool(mesh.is_watertight) if isinstance(mesh, trimesh.Trimesh) else None
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("trimesh measurement failed for %s: %s", fixture.name, exc)
+        volume = area = bbox = watertight = None
+
+    metadata = {
+        "fixture": fixture.name,
+        "generated_at_utc": _dt.datetime.now(_dt.timezone.utc).isoformat(),
+        "openscad_version": runner.version_string,
+        "manifold_backend": runner.use_manifold,
+        "render_duration_seconds": round(result.duration_seconds, 3),
+        "stl_size_bytes": output.stat().st_size if output.exists() else 0,
+        "trimesh_properties": {
+            "volume_mm3": volume,
+            "surface_area_mm2": area,
+            "bounding_box_mm": bbox,
+            "is_watertight": watertight,
+        },
+        "parameters": parameters,
+    }
+    if scad_rel:
+        metadata["scad"] = scad_rel
+    with open(fixture / "metadata.json", "w", encoding="utf-8") as fh:
+        json.dump(metadata, fh, indent=2)
+    logger.info(
+        "  OK (rc=0, %.2fs, %d bytes, watertight=%s)",
+        result.duration_seconds,
+        output.stat().st_size,
+        watertight,
+    )
+    return True
 
 
 def main() -> int:
@@ -146,9 +172,14 @@ def main() -> int:
         nargs="+",
         help="Limit regeneration to these fixture names (default: all).",
     )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Replace every fixture, even one whose shape did not change.",
+    )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
-    return regenerate(only=args.only, verbose=args.verbose)
+    return regenerate(only=args.only, verbose=args.verbose, force=args.force)
 
 
 if __name__ == "__main__":

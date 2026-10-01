@@ -1,23 +1,23 @@
 {
   "fixture": "two_sided_plate",
-  "generated_at_utc": "2026-09-29T06:54:48.052847+00:00",
+  "generated_at_utc": "2026-10-01T01:37:01.820922+00:00",
   "openscad_version": "OpenSCAD version 2026.01.03",
   "manifold_backend": true,
-  "render_duration_seconds": 0.506,
-  "stl_size_bytes": 9469316,
+  "render_duration_seconds": 0.761,
+  "stl_size_bytes": 1704584,
   "trimesh_properties": {
-    "volume_mm3": 6732.383072239354,
-    "surface_area_mm2": 6608.696700150112,
+    "volume_mm3": 6732.383024457505,
+    "surface_area_mm2": 6608.696631065044,
     "bounding_box_mm": [
       [
-        -33.49566102027893,
+        -33.495662689208984,
         0.0,
         0.0
       ],
       [
-        33.49566102027893,
-        73.79566103219986,
-        3.9999999999999996
+        33.495662689208984,
+        73.79566192626953,
+        4.0
       ]
     ],
     "is_watertight": true

@@ -24,12 +24,69 @@ import logging
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional, Union
 
 import numpy as np
 import trimesh
 
 logger = logging.getLogger(__name__)
+
+
+def binary_stl_facets(path: Path) -> Optional[int]:
+    """The facet count of a binary STL, or None when the file is not one: a
+    binary STL is an 80-byte header, a 4-byte facet count and 50 bytes per
+    facet, so its size is exactly 84 plus 50 times the count."""
+    size = Path(path).stat().st_size
+    if size < 84:
+        return None
+    with Path(path).open("rb") as fh:
+        fh.seek(80)
+        count = int.from_bytes(fh.read(4), "little")
+    return count if size == 84 + 50 * count else None
+
+
+STL_RECORD = np.dtype([("normal", "<f4", (3,)), ("corners", "<f4", (3, 3)), ("attribute", "<u2")])
+
+
+def drop_collapsed_triangles(path: Path) -> int:
+    """Rewrite a binary STL without the triangles whose corners coincide.
+    Binary STL stores 32-bit coordinates, so an edge of OpenSCAD's shorter
+    than about 0.00001 mm collapses into a triangle with no area, which opens
+    the mesh where it meets its neighbors; dropping it closes the mesh again
+    and moves no surface. Returns how many triangles were dropped; the header
+    and every other triangle stay byte for byte."""
+    path = Path(path)
+    if binary_stl_facets(path) is None:
+        raise ValueError(f"not a binary STL: {path}")
+    data = path.read_bytes()
+    records = np.frombuffer(data, dtype=STL_RECORD, offset=84)
+    c = records["corners"]
+    collapsed = (np.all(c[:, 0] == c[:, 1], axis=1) | np.all(c[:, 1] == c[:, 2], axis=1)
+                 | np.all(c[:, 2] == c[:, 0], axis=1))
+    dropped = int(collapsed.sum())
+    if dropped:
+        kept = records[~collapsed]
+        path.write_bytes(data[:80] + len(kept).to_bytes(4, "little") + kept.tobytes())
+    return dropped
+
+
+def same_shape(a: Union[Path, trimesh.Trimesh], b: Union[Path, trimesh.Trimesh],
+               rel: float = 1e-6, bounds_mm: float = 1e-4) -> bool:
+    """True when two meshes are the same shape for the purpose of keeping a
+    committed STL: both watertight, volume and surface area equal to one part
+    in a million, and every bound within 0.0001 mm. Two renders of the same
+    model meet this, and so does a text STL beside its binary copy, whose
+    coordinates are 32-bit floats."""
+    meshes = [m if isinstance(m, trimesh.Trimesh) else trimesh.load(m, force="mesh") for m in (a, b)]
+    if not all(isinstance(m, trimesh.Trimesh) and m.is_watertight for m in meshes):
+        return False
+    ma, mb = meshes
+
+    def close(x: float, y: float) -> bool:
+        return abs(x - y) <= rel * max(abs(x), abs(y))
+
+    return (close(float(ma.volume), float(mb.volume)) and close(float(ma.area), float(mb.area))
+            and bool(np.all(np.abs(ma.bounds - mb.bounds) <= bounds_mm)))
 
 
 @dataclass

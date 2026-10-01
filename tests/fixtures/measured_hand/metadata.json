@@ -1,23 +1,23 @@
 {
   "fixture": "measured_hand",
-  "generated_at_utc": "2026-09-29T06:54:44.519649+00:00",
+  "generated_at_utc": "2026-10-01T01:36:58.384005+00:00",
   "openscad_version": "OpenSCAD version 2026.01.03",
   "manifold_backend": true,
-  "render_duration_seconds": 0.508,
-  "stl_size_bytes": 6262003,
+  "render_duration_seconds": 0.509,
+  "stl_size_bytes": 1057484,
   "trimesh_properties": {
-    "volume_mm3": 18757.373838817755,
-    "surface_area_mm2": 9800.525075445772,
+    "volume_mm3": 18757.374937278797,
+    "surface_area_mm2": 9800.525346320914,
     "bounding_box_mm": [
       [
-        -37.838739313185215,
+        -37.83873748779297,
         0.0,
         0.0
       ],
       [
-        37.84277652949095,
-        82.60000000149012,
-        6.549999999999999
+        37.842777252197266,
+        82.5999984741211,
+        6.550000190734863
       ]
     ],
     "is_watertight": true

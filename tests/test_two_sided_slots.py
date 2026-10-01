@@ -123,7 +123,8 @@ def test_preset_plate_unchanged(openscad_runner, mesh_comparator, tmp_path) -> N
 
     params = json.loads((FIXTURE / "params.json").read_text(encoding="utf-8"))["parameters"]
     out = tmp_path / "preset.stl"
-    result = openscad_runner.generate_stl(scad_file=TWO_SIDED_SCAD, output_stl=out, parameters=params)
+    result = openscad_runner.generate_stl(scad_file=TWO_SIDED_SCAD, output_stl=out, parameters=params,
+                                          binary=True)  # the fixture's format, so it compares exactly
     assert result.success, result.stderr
     comparison = mesh_comparator.compare(FIXTURE / "reference.stl", out)
     assert comparison.passed, "; ".join(comparison.failures)

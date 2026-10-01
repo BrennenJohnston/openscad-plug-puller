@@ -11,6 +11,8 @@ Quick lane (no OpenSCAD):
 * Every shipped STL exists, is watertight, and has consistent winding — the
   historical failure class here was non-watertight minkowski output (v5-era),
   so this pins the fix permanently across the whole library.
+* Every committed STL, shipped or golden fixture, is a binary STL: the same
+  shape in about a fifth of the text format's bytes, which keeps clones small.
 
 Render lane (``@requires_openscad``):
 
@@ -29,6 +31,7 @@ from pathlib import Path
 import pytest
 
 from scripts.build_release_stls import Job, plug_jobs, stencil_jobs
+from tests.mesh_comparison import binary_stl_facets
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 STL_DIR = PROJECT_ROOT / "stl"
@@ -39,6 +42,19 @@ SHIPPED_IDS = [job.out_rel.as_posix() for job in SHIPPED_JOBS]
 
 def _shipped_path(job: Job) -> Path:
     return STL_DIR / job.out_rel
+
+
+COMMITTED_STLS = [_shipped_path(job) for job in SHIPPED_JOBS] + sorted(
+    (PROJECT_ROOT / "tests" / "fixtures").glob("*/reference.stl"))
+
+
+@pytest.mark.parametrize("path", COMMITTED_STLS, ids=[p.relative_to(PROJECT_ROOT).as_posix() for p in COMMITTED_STLS])
+def test_committed_stl_is_binary(path: Path) -> None:
+    assert path.exists(), f"Committed STL missing: {path}"
+    assert binary_stl_facets(path) is not None, (
+        f"{path.relative_to(PROJECT_ROOT).as_posix()} is not a binary STL. Re-render it with "
+        f"python scripts/build_release_stls.py (the library) or python scripts/regenerate_fixtures.py (a fixture)."
+    )
 
 
 @pytest.mark.parametrize("job", SHIPPED_JOBS, ids=SHIPPED_IDS)

@@ -3,21 +3,21 @@
   "title": "Plug Puller v5 STL Comparison Configuration",
   "description": "Tolerances and required checks for OpenSCAD-vs-golden-fixture mesh comparison. Tight thresholds reflect single-generator determinism (OpenSCAD + Manifold backend).",
   "version": "1.0.0",
-  "last_updated": "2026-05-31",
+  "last_updated": "2026-09-30",
   "profile": "baseline",
 
   "tolerances": {
     "volume": {
-      "percent": 1.0,
-      "description": "Maximum allowed volume drift vs golden fixture, as a percentage of the reference volume."
+      "percent": 0.05,
+      "description": "Maximum allowed volume drift vs golden fixture, as a percentage of the reference volume. Two renders of a fixture differed by at most 0.000006 % (70 renders, 2026-09-30); 0.05 % fails a drift like the 0.77 % one a fixture once showed while its plug numbers were ignored."
     },
     "surface_area": {
-      "percent": 0.5,
-      "description": "Maximum allowed surface-area drift vs golden fixture, as a percentage."
+      "percent": 0.05,
+      "description": "Maximum allowed surface-area drift vs golden fixture, as a percentage. Measured noise: at most 0.000003 %."
     },
     "bounding_box": {
-      "mm": 0.1,
-      "description": "Maximum allowed bounding-box extent drift in millimetres (max per-axis |refExtent - testExtent|)."
+      "mm": 0.01,
+      "description": "Maximum allowed bounding-box extent drift in millimetres (max per-axis |refExtent - testExtent|). Measured noise: at most 0.000003 mm."
     }
   },
 
