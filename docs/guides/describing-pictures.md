@@ -1,6 +1,6 @@
 # Describing pictures
 
-Every picture in this project's guides has two text parts: a short alt text that says what the picture is, and a long description that carries what the picture shows. The dial pictures under `docs/dials/`, the storyboards and the measuring form sheets get theirs from `scripts/generate_dial_diagrams.py` and `scripts/generate_measuring_form.py`, written by rules, so all of them have the same shape; the owner reads a sample before they ship. This page gives the ten rules with their sources, the two templates the generator fills in, three examples as generated, and what to do when you write one by hand for a photo.
+Every picture in this project's guides has two text parts: a short alt text that says what the picture is, and a long description that carries what the picture shows. The dial pictures under `docs/dials/`, the storyboards and the measuring form sheets get theirs from `scripts/generate_dial_diagrams.py` and `scripts/generate_measuring_form.py`, written by rules, so all of them have the same shape; the owner reads a sample before they ship. This page gives the ten rules with their sources, the three templates the generator fills in, three examples as generated, and what to do when you write one by hand for a photo.
 
 ## The ten rules
 
@@ -9,8 +9,8 @@ Every picture in this project's guides has two text parts: a short alt text that
 3. **Overview first, then details.** One sentence on what the picture is, then the panels left to right, then the marked parts as a numbered list whose numbers are the ones drawn on the picture. Source: [NCAM, Guidelines for Describing STEM Images](https://www.wgbh.org/foundation/services/ncam/tools-resources/effective-practices-for-description-of-science-content-guidelines-for-describing-stem-images), guideline 4, read 2026-09-26; Zong and others, [Rich Screen Reader Experiences for Accessible Data Visualization](https://arxiv.org/abs/2205.04917), 2022, on structure and navigation; the Perkins School for the Blind, [Creating image descriptions](https://www.perkins.org/resource/creating-image-descriptions-alt-text/), "general to specific", read 2026-09-27.
 4. **Say the data, not the appearance.** The values with their units, the direction of the change, and the part names the guides use; a color is named in the key and never carries the meaning alone. Source: NCAM, guidelines 2 and 5; WebAIM (accurate and equivalent); Perkins, "be objective".
 5. **One spatial vocabulary everywhere.** The plug end is the top of the picture and the cord end the bottom; left and right as printed; the part names are the ones the catalog's "Moves" lines and the picture's key use. Source: Perkins, "consider your audience" and "tone and language" (the reader's own vocabulary); the DIAGRAM Center's image description guidelines say the same by report (see the note under the sources).
-6. **Short.** An alt text of at most 150 characters; a dial's long description of at most 90 words, a storyboard's of at most 150; no sentence repeats the card's own text. Source: WebAIM (succinct, not redundant); NCAM, guideline 1 (brevity); Perkins, "be concise".
-7. **A process is a numbered list.** One line per stage, never a paragraph. Source: NCAM, guideline 6.
+6. **Short.** An alt text of at most 150 characters; a dial's long description of at most 90 words, or 110 when its picture has a red dimension line, which the description also explains; a storyboard's of at most 150; no sentence repeats the card's own text. Source: WebAIM (succinct, not redundant); NCAM, guideline 1 (brevity); Perkins, "be concise".
+7. **A process is a numbered list.** One line per stage, never a paragraph, each line named as the picture names it: a storyboard's lines read Start, then Step 1 to Step 4, the numbers on its arrows. Source: NCAM, guideline 6.
 8. **Say what did not change** when the change is small or none. Source: Zong and others, 2022 (readers compare); the project's accessibility rule that a text reader must never have to guess.
 9. **Where the text lives.** The SVG's `desc` element carries the long description; the Markdown page puts it as visible text right under the image; the PDF wraps the picture in a `figure` with the long description as its caption; no `longdesc` attribute. Source: the W3C tutorial's figure approach; WebAIM (`longdesc` is deprecated).
 10. **Every description is a reviewed string.** Each alt text and long description is proposed text until the project owner has read a sample of it. Source: the project's rule that accessibility-critical text is read by a person before it is final.
@@ -39,11 +39,28 @@ When that runs past 150 characters, the parts are counted instead: `…; red mar
 Two top views of {the one-sided puller | one plate of the two-sided puller}, before left and after right, the plug end at the top.
 Left: the defaults{ with {dial} set to {value}}, a {w} mm wide plug in teal.
 Right: {title} {at {value} {unit} | set to {value}}: {the changes sentence}.
+The red line marks {the part} and reads {value} {unit}, the number you type{; {the part} is drawn {size} mm {wide | long | across}, {why}}.
 Marked in red: 1, {the part}: {where it sits}. 2, {the parts}: {where they sit}{, removed}. …
 {The unnamed parts, up to four} stay where they were. | Everything else follows the outline.
 ```
 
-A section row opens with `Two vertical slices of {the tool} at {x | y} = {at} mm, before left and after right, the top face up.` and its left panel says `the plug in teal in the cut`. When the whole runs past 90 words, the generator drops the closing sentence first, then the changes sentence, then the locations of the entries that carry several names, then every location; the numbered list itself is never dropped. Where a part sits comes from one table per tool in the generator (`FEATURE_LOCATIONS`): for the one-sided puller the body edge is "the outer outline", the pocket "the plug recess on the centerline", the seat "the round recess at the plug end", the wall notch "the notch in the top edge", the wing openings "the two openings beside the pocket", the zip-tie holes "the four small holes beside the pocket", the finger holes "the two large holes in the lower half", the hook "the cord hook slot in the bottom edge"; for the two-sided puller the plate edge is "the outer outline", the arms "the two toothed arms in the upper half", the teeth "the serrated inner edges of the arms", the finger lobes "the two rounded lobes in the lower half", the cord channel "the gap between the lobes at the bottom", the zip stations "the three small holes along each arm", the strap slot "the long slot in each arm".
+A section row opens with `Two vertical slices of {the tool} at {x | y} = {at} mm, before left and after right, the top face up.` and its left panel says `the plug in teal in the cut`. When the whole runs past 90 words, or 110 with a red dimension line, the generator drops the closing sentence first, then the changes sentence, then the locations of the entries that carry several names, then every location; the numbered list and the red-line sentence are never dropped.
+
+The red-line sentence comes only on the measuring pictures that draw a dimension line. It gives the drawn size only when that size differs from the number by half a millimeter or more, one slider step, with the reason from one table per anchor in the generator (`DIMENSION_WORDS`): a hook slot or cord channel drawn wider than the cord so the cord slips in, a finger hole drawn wider than the finger, a body narrower than the hand because its width is worked out from the hand width, and a two-sided plug drawn 2 mm past the arm tips as the preview draws it. Where a part sits comes from one table per tool in the generator (`FEATURE_LOCATIONS`): for the one-sided puller the body edge is "the outer outline", the pocket "the plug recess on the centerline", the seat "the round recess at the plug end", the wall notch "the notch in the top edge", the wing openings "the two openings beside the pocket", the zip-tie holes "the four small holes beside the pocket", the finger holes "the two large holes in the lower half", the hook "the cord hook slot in the bottom edge"; for the two-sided puller the plate edge is "the outer outline", the arms "the two toothed arms in the upper half", the teeth "the serrated inner edges of the arms", the finger lobes "the two rounded lobes in the lower half", the cord channel "the gap between the lobes at the bottom", the zip stations "the three small holes along each arm", the strap slot "the long slot in each arm".
+
+---
+
+## The storyboard template
+
+```text
+Five stages of {the tool}, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved.
+Start, the defaults: the tool as the file opens, with a {w} mm wide plug in teal.
+Step 1 - {name}: {each dial with its value | each dial's name}; red on {the parts}{; {the parts} removed, drawn in red from the old outline}.
+…
+Step 4 - {name}: {the same}.
+```
+
+Every dial a step sets is named: with its value when the whole fits in 150 words, by its name alone when it does not. A pair of dials taken at the prong end and at the cord end is named once, as "plug width at both ends", with one value when the two match. A step that moves nothing says so, and the two-sided print layout step says it puts both plates side by side in one file.
 
 ---
 
@@ -53,7 +70,7 @@ A section row opens with `Two vertical slices of {the tool} at {x | y} = {at} mm
 
 Alt text: Plug width at the prong end: before and after, 25 to 32 mm; red marks 5 parts, named below.
 
-Long description: Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the prong end at 32 mm. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline.
+Long description: Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the prong end at 32 mm. The red line marks the plug's width at the prong end and reads 32 mm, the number you type. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline.
 
 **Pocket depth** (one-sided, Custom size, 24.5 to 34 mm).
 
@@ -65,7 +82,7 @@ Long description: Two top views of the one-sided puller, before left and after r
 
 Alt text: Cord thickness: before and after, 4 to 9 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.
 
-Long description: Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm.
+Long description: Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. The red line marks the cord channel and reads 9 mm, the number you type; the channel is drawn 9.8 mm wide, so the cord slips in. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm.
 
 Every generated text is in `docs/dials/dial_diagrams_index.json` (`alt` and `long_description`) and on the page [Dial diagrams](../dials/README.md), the alt on the image and the long description right under it.
 

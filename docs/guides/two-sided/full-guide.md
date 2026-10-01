@@ -16,7 +16,7 @@ In every picture: black = the tool; teal = your plug; red dashed = the edges thi
 
 ![The two-sided puller, the four Customizer steps on a USB-C laptop plug, five stages left to right.](../../dials/two-sided/storyboard.svg)
 
-Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; red dashes mark the edges each step moved. 1, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. 2, Step 1 - Your Plug: plug length 23 mm, plug width at the prong end 13 mm, plug width at the cord end 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. 3, Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. 4, Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. 5, Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
+Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. Step 1 - Your Plug: plug length 23 mm, plug width at both ends 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
 
 - Step 1: type your plug's numbers and pick Rounded sides or Flat sides
 - Step 2: pick your hand size
@@ -241,7 +241,7 @@ Lengthens both arms so the teeth cover the whole plug body, and moves the zip-ti
 
 ![Plug length: before and after, 25.5 to 40 mm; red marks the arms.](../../dials/two-sided/measure_plug_length.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug length at 40 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. The plate edge, the teeth, the finger lobes and the cord channel stay where they were.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug length at 40 mm. The red line marks the plug's length and reads 40 mm, the number you type; the plug is drawn 42 mm long, reaching 2 mm past the arm tips as in the preview. Marked in red: 1, the arms: the two toothed arms in the upper half.
 
 - Default: 25.5 mm
 - Range: 12 to 85 mm, in steps of 0.5 mm
@@ -255,7 +255,7 @@ Opens or closes the gap between the arms at their tips, where the plug's prong e
 
 ![Plug width at the prong end: before and after, 20 to 28 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.](../../dials/two-sided/measure_plug_width_prong_end.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. The red line marks the gap between the arm tips and reads 28 mm, the number you type. Marked in red: 1, the arms: the two toothed arms in the upper half. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel: the two rounded lobes in the lower half; the gap between the lobes at the bottom.
 
 - Default: 20 mm
 - Range: 5 to 40 mm, in steps of 0.5 mm
@@ -269,7 +269,7 @@ Opens or closes the gap between the arms at the plug's back end, so the arms tap
 
 ![Plug width at the cord end: before and after, 20 to 12 mm; red marks the arms, the teeth and the zip stations.](../../dials/two-sided/measure_plug_width_cord_end.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the cord end at 12 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the cord end at 12 mm. The red line marks the gap between the arms at the cord end and reads 12 mm, the number you type. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the teeth and the arms: the serrated inner edges of the arms; the two toothed arms in the upper half.
 
 - Default: 20 mm
 - Range: 5 to 40 mm, in steps of 0.5 mm
@@ -283,7 +283,7 @@ Widens the cord channel between the finger holes, and the finger lobes move outw
 
 ![Cord thickness: before and after, 4 to 9 mm; red marks the arms, the cord channel, the finger lobes and the zip stations.](../../dials/two-sided/measure_cord_thickness.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: cord thickness at 9 mm. The red line marks the cord channel and reads 9 mm, the number you type; the channel is drawn 9.8 mm wide, so the cord slips in. Marked in red: 1, the finger lobes and the cord channel. 2, the finger lobes: the two rounded lobes in the lower half. 3, the finger lobes and the arms. 4, the zip stations: the three small holes along each arm.
 
 - Default: 4 mm
 - Range: 1.5 to 12 mm, in steps of 0.5 mm
@@ -340,7 +340,7 @@ Widens both finger holes and their lobes.
 
 ![Finger width: before and after, 20 to 26 mm; red marks the arms, the finger lobes, the plate edge and the zip stations.](../../dials/two-sided/measure_finger_width.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 20 mm wide plug in teal. Right: finger width at 26 mm. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes, the arms and the plate edge: the two rounded lobes in the lower half; the two toothed arms in the upper half; the outer outline.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 20 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27 mm across, wider than the finger. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes, the arms and the plate edge.
 
 - Default: 20 mm
 - Range: 14 to 32 mm, in steps of 0.5 mm

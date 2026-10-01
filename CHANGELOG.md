@@ -46,6 +46,19 @@ public milestone**.
   page and leaves the sheet's text description to the web page. The quick
   starts are 13 (two-sided) and 15 (one-sided) pages, four to five of them
   the cover, the contents, the form and the stencil sheets.
+- **The measuring pictures say what their red line measures.** Each of the
+  13 before-and-after pictures with a red dimension line now has one
+  sentence in its description saying what the line marks and that its
+  number is the one you type. Where the part is drawn at another size, the
+  sentence gives that size and why: a hook slot or cord channel wider than
+  the cord, a finger hole wider than the finger, a body narrower than the
+  hand, the two-sided plug drawn 2 mm past the arm tips as in the preview.
+  These 13 descriptions may run to 110 words instead of 90, so none loses
+  the phrases saying where each marked part sits.
+- **The storyboard descriptions follow the picture.** Their lines read
+  Start, then Step 1 to Step 4, as the picture numbers its arrows, instead
+  of 1 to 5, and the one-sided storyboard names all seven Step 1 dials
+  instead of three and "4 more".
 
 ### Removed
 

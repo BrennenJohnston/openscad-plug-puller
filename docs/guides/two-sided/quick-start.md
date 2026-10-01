@@ -16,7 +16,7 @@ In every picture: black = the tool; teal = your plug; red dashed = the edges thi
 
 ![The two-sided puller, the four Customizer steps on a USB-C laptop plug, five stages left to right.](../../dials/two-sided/storyboard.svg)
 
-Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; red dashes mark the edges each step moved. 1, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. 2, Step 1 - Your Plug: plug length 23 mm, plug width at the prong end 13 mm, plug width at the cord end 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. 3, Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. 4, Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. 5, Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
+Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. Step 1 - Your Plug: plug length 23 mm, plug width at both ends 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
 
 - Step 1: type your plug's numbers and pick Rounded sides or Flat sides
 - Step 2: pick your hand size
