@@ -14,8 +14,8 @@ clamp-edge, size-override, and monotonicity checks without invoking
 OpenSCAD.
 
 Calibration: all constants are anchored to the v6.0 CAD reference
-("Plug Puller 3.1 - B"), measured during development in the historical
-dev repo (plug-puller-openscad).
+("Plug Puller 3.1 - B"), measured during development (the CAD file and
+the measuring scripts are not part of this repository).
 ``derive()`` with ``size="Medium"`` and default measurements reproduces
 ``PRESET_MEDIUM`` exactly.
 

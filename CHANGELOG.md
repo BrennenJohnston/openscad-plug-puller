@@ -215,6 +215,12 @@ public milestone**.
   not change; the `large` golden fixture is regenerated, now 71.05 mm long
   instead of 67.65 mm, and the hand size and finger width pictures are
   redrawn.
+- **No pointers to files a reader cannot open.** Comments in the models
+  and tests, the engineering reference and one fixture description named
+  development scripts and CAD files that were never public; they now say
+  the work was done during development. The scripts index no longer links
+  two private repositories, and a test comment no longer names a deleted
+  guide.
 
 ## [0.13.0] - 2026-09-27
 

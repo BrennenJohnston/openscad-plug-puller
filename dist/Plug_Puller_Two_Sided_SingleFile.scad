@@ -243,7 +243,7 @@ echo(str("TOOL: Two-sided puller"));
 // plug/arm tip; extruded +Z to plate_thickness (Z = 0 = the OUTER face,
 // Z = thickness = the plug-contact face). Calibrated to the idealized
 // heavy-duty plate (66.6 x 73.7 x 4.5, goggle lobes tangent to Y = 0, arms
-// tapering to ~9 mm rounded tips); see scripts/measure_clamshell_ideal.py.
+// tapering to ~9 mm rounded tips), as measured during development.
 
 // Finger width recovered from the size-table bore (bore = finger width +
 // FIT_GRIP_CLEARANCE) so the fit tracks the Size selection.
