@@ -9,3 +9,11 @@
 **The check that passed.** From Windows PowerShell and from Git Bash, on `src/Plug_Puller_Parametric.scad`: `-Defines 'size=Measure my hand'` and `-Defines 'size="Measure my hand"'` both print "Derived values for size 'Measure my hand'" and CHECK PASSED; `-Defines 'plug_preset=Standard 3-prong plug - NEMA 5-15'` changes the pocket depth from 25.5 to 46.2 mm; `-Defines 'measure_plug_length=40'` gives a pocket depth of 40 mm; `-Defines 'size=Nonsense size'` prints the warning and CHECK FAILED; and with no `-Defines` the check passes as before.
 
 A known limit, not changed: when PowerShell starts the script with `-File`, several settings given as `'a','b'` arrive joined into one, so give one setting per run there.
+
+## 2026-10-01: the guides printed "{step4}" instead of the fourth step's name
+
+**The bug.** All four documents, the quick starts and the full guides of both tools, as pages and as PDFs, ended a sentence in their Get the file section with "then {step4}" instead of "then Step 4 - Cord Hook" (one-sided puller) or "then Step 4 - Print Layout" (two-sided puller), and a screen reader read the braces aloud. The guide builder fills a source file's `{name}` placeholders from a table, and an unknown name stops the build. The pattern that finds them in `scripts/guide_text.py` accepted letters and underscores only, so a name with a digit, like `step4`, was neither filled nor reported. No release carried it.
+
+**The fix.** The pattern now accepts a name that starts with a letter or an underscore and goes on with letters, digits or underscores, so `{step4}` is filled like every other placeholder, and an unknown name with a digit stops the build. A quick-lane test loads every guide source for both tools and fails if any `{name}` is left unfilled. All four documents are rebuilt; each PDF changes on one page.
+
+**The check that passed.** `tests/test_guide_text.py::test_every_source_fills_for_both_tools` failed before the change ("unfilled ['{step4}']") and passes after it. After rebuilding the four documents, `{step4}` appears under `docs/guides` only in its source file, `docs/guides/source/get-the-file.md`. The builders' PDF checks pass with 15, 88, 13 and 54 pages, as before. The quick lane passes (243) and `scripts/check_docs.py` is clean.

@@ -177,6 +177,12 @@ public milestone**.
   `scripts/build_outline_sheets_pdf.py` checks the title and a bookmark on
   every page, and prints with a scratch browser profile, as the guide
   builder does, so a running Edge cannot stall it.
+- **The guides name the fourth step.** All four documents read "then
+  {step4}" in their Get the file section, because the pattern that finds
+  placeholders in the guide sources skipped a name with a digit; they now
+  read "then Step 4 - Cord Hook" or "then Step 4 - Print Layout". A test
+  fails if any placeholder is left unfilled. The fix is logged in
+  `docs/fixes.md`.
 
 ## [0.13.0] - 2026-09-27
 

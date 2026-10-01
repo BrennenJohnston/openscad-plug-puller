@@ -114,7 +114,7 @@ PLACEHOLDERS: Dict[str, Dict[str, str]] = {
     },
 }
 
-_PLACEHOLDER = re.compile(r"\{([a-z_]+)\}", re.I)
+_PLACEHOLDER = re.compile(r"\{([a-z_][a-z0-9_]*)\}", re.I)
 
 
 def fill(text: str, values: Dict[str, str]) -> str:
