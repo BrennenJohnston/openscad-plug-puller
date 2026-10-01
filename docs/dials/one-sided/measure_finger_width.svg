@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="211.03mm" height="81.75mm" viewBox="0 0 211.03 81.75" role="img">
 <title>Finger width</title>
-<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27.9 mm across, wider than the finger. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the wall notch and the body edge.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27.9 mm across, wider than the finger. Marked in red: 1, the zip-tie holes and the pocket. 2, the wing openings. 3, the finger holes. 4, the zip-tie holes, the wall notch and the body edge.</desc>
 <rect width="211.03" height="81.75" fill="white"/>
 <g class="panel" id="before">
 <path d="M 54.26 10.25 L 54.26 35.75 L 29.26 35.75 L 29.26 10.25 L 54.26 10.25 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
@@ -88,11 +88,11 @@
 <path d="M 58.05 27.89 L 57.77 27.64 L 57.49 27.42 L 57.29 27.20 L 57.14 26.95 L 57.04 26.67 L 57.00 26.38 L 57.01 26.10 L 57.09 25.80 L 57.15 25.66 L 57.95 24.30 L 58.72 22.68 L 58.87 22.27 L 58.96 22.07 L 59.04 21.94 L 59.22 21.71 L 59.45 21.52 L 59.71 21.39 L 59.99 21.30 L 60.28 21.27 L 60.57 21.30 L 60.72 21.34 L 60.99 21.45 L 61.23 21.62 L 61.44 21.82 L 61.53 21.94 L 61.67 22.21 L 65.70 32.00 L 65.74 32.13 L 65.79 32.43 L 65.79 32.58 L 65.74 32.86 L 65.64 33.14 L 65.57 33.27 L 65.40 33.50 L 65.38 33.53" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <path d="M 65.05 33.78 L 64.93 33.85 L 64.65 33.95 L 64.51 33.98 L 64.21 34.00 L 63.12 33.84 L 61.41 33.75 L 61.27 33.72 L 61.00 33.62 L 60.86 33.55 L 60.63 33.38 L 60.43 33.16 L 60.28 32.91 L 60.23 32.78 L 60.16 32.49 L 60.13 32.05 L 60.03 31.42 L 59.88 30.79 L 59.66 30.19 L 59.39 29.61 L 59.05 29.05 L 58.67 28.54 L 58.35 28.18" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <g class="dimension">
-<line x1="47.15" y1="52.56" x2="75.05" y2="52.56" stroke="#d81b1b" stroke-width="0.3"/>
-<polygon points="47.15,52.56 49.55,52.04 49.55,53.09" fill="#d81b1b"/>
-<polygon points="75.05,52.56 72.65,52.04 72.65,53.09" fill="#d81b1b"/>
-<text x="61.10" y="51.56" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="white" stroke="white" stroke-width="0.8" stroke-linejoin="round">26 mm</text>
-<text x="61.10" y="51.56" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="#d81b1b">26 mm</text>
+<line x1="47.30" y1="52.49" x2="75.19" y2="52.49" stroke="#d81b1b" stroke-width="0.3"/>
+<polygon points="47.30,52.49 49.70,51.96 49.70,53.01" fill="#d81b1b"/>
+<polygon points="75.19,52.49 72.79,51.96 72.79,53.01" fill="#d81b1b"/>
+<text x="61.25" y="51.49" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="white" stroke="white" stroke-width="0.8" stroke-linejoin="round">26 mm</text>
+<text x="61.25" y="51.49" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="bold" text-anchor="middle" fill="#d81b1b">26 mm</text>
 </g>
 <circle cx="36.22" cy="52.70" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="36.22" y="53.49" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">3</text>
 <circle cx="77.52" cy="56.83" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="77.52" y="57.62" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">4</text>
@@ -102,16 +102,18 @@
 <circle cx="65.79" cy="32.43" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="65.79" y="33.22" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
 </g>
 <g class="key">
-<text x="180.03" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 pocket</text>
-<text x="180.03" y="8.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">2 wing openings</text>
-<text x="180.03" y="12.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">3 finger holes</text>
-<text x="180.03" y="16.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">4 wall notch / body</text>
-<text x="183.03" y="19.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">edge</text>
+<text x="180.03" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 zip-tie holes /</text>
+<text x="183.03" y="7.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">pocket</text>
+<text x="180.03" y="11.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">2 wing openings</text>
+<text x="180.03" y="15.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">3 finger holes</text>
+<text x="180.03" y="19.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">4 zip-tie holes /</text>
+<text x="183.03" y="22.80" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">wall notch / body</text>
+<text x="183.03" y="25.90" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">edge</text>
 </g>
 <g class="leaders">
 <line x1="152.42" y1="17.46" x2="179.03" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>
-<line x1="160.11" y1="31.41" x2="179.03" y2="7.69" stroke="#d81b1b" stroke-width="0.3"/>
-<line x1="169.05" y1="51.44" x2="179.03" y2="11.69" stroke="#d81b1b" stroke-width="0.3"/>
-<line x1="171.28" y1="55.55" x2="179.03" y2="15.69" stroke="#d81b1b" stroke-width="0.3"/>
+<line x1="160.18" y1="31.47" x2="179.03" y2="10.79" stroke="#d81b1b" stroke-width="0.3"/>
+<line x1="169.07" y1="51.44" x2="179.03" y2="14.79" stroke="#d81b1b" stroke-width="0.3"/>
+<line x1="171.30" y1="55.56" x2="179.03" y2="18.79" stroke="#d81b1b" stroke-width="0.3"/>
 </g>
 </svg>

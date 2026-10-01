@@ -16,7 +16,7 @@ In every picture: black = the tool; teal = your plug; red dashed = the edges thi
 
 ![The one-sided puller, the four Customizer steps on a US vacuum plug, five stages left to right.](../../dials/one-sided/storyboard.svg)
 
-Five stages of the one-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 25 mm wide plug in teal. Step 1 - Your Plug: plug length, plug width at both ends, plug thickness at both ends, cord thickness, outlet cover plate style; red on the body edge, the finger holes, the seat, the wall notch and the wing openings. Step 2 - Size: hand size, finger width, hand width; red on the body edge, the finger holes, the pocket, the wall notch, the wing openings and the zip-tie holes. Step 3 - Attachment: attachment; the wing openings removed, drawn in red from the old outline. Step 4 - Cord Hook: hook side; red on the hook.
+Five stages of the one-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 25 mm wide plug in teal. Step 1 - Your Plug: plug length, plug width at both ends, plug thickness at both ends, cord thickness, outlet cover plate style; red on the body edge, finger holes, seat, wall notch, wing openings and zip-tie holes. Step 2 - Size: hand size, finger width, hand width; red on the body edge, finger holes, pocket, wall notch, wing openings and zip-tie holes. Step 3 - Attachment: attachment; the wing openings removed, drawn in red from the old outline. Step 4 - Cord Hook: hook side; red on the hook.
 
 - Step 1: type your plug's numbers
 - Step 2: pick your hand size
@@ -260,13 +260,13 @@ Customizer name: `plug_preset`
 
 Fills in all six plug numbers from a measured reference plug, so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.
 
-![Plug preset: before and after, Measure my plug to Standard 3-prong plug - NEMA 5-15; red marks 6 parts, named below.](../../dials/one-sided/plug_preset.svg)
+![Plug preset: before and after, Measure my plug to Standard 3-prong plug - NEMA 5-15; red marks 7 parts, named below.](../../dials/one-sided/plug_preset.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug preset set to Standard 3-prong plug - NEMA 5-15. Marked in red: 1, the zip-tie holes, the wing openings, the wall notch, the seat, the pocket and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug preset set to Standard 3-prong plug - NEMA 5-15. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the seat, the pocket and the body edge.
 
 - Default: Measure my plug
 - Choices: Measure my plug, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15, Wide 2-prong appliance plug - NEMA 1-15
-- Moves: body edge, pocket, seat, wall notch, wing openings, zip-tie holes
+- Moves: body edge, finger holes, pocket, seat, wall notch, wing openings, zip-tie holes
 
 ### Plug length
 
@@ -276,7 +276,7 @@ Runs the pocket farther toward the finger holes and stretches the whole body to 
 
 ![Plug length: before and after, 25.5 to 40 mm; red marks the body edge, the seat, the wall notch, the wing openings and the zip-tie holes.](../../dials/one-sided/measure_plug_length.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug length at 40 mm. The red line marks the pocket's length and reads 40 mm, the number you type. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the zip-tie holes and the wing openings: the four small holes beside the pocket; the two openings beside the pocket. 3, the wall notch, the seat and the body edge: the notch in the top edge; the round recess at the plug end; the outer outline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug length at 40 mm. The red line marks the pocket's length and reads 40 mm, the number you type. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the zip-tie holes and the wing openings. 3, the zip-tie holes, the wing openings, the wall notch, the seat and the body edge.
 
 - Default: 25.5 mm
 - Range: 12 to 85 mm, in steps of 0.5 mm
@@ -302,13 +302,13 @@ Customizer name: `measure_plug_width_cord_end`
 
 Tilts the pocket's side walls to match the plug's taper, and the zip-tie holes and wing openings lean in with them.
 
-![Plug width at the cord end: before and after, 25 to 15 mm; red marks the pocket and the wing openings.](../../dials/one-sided/measure_plug_width_cord_end.svg)
+![Plug width at the cord end: before and after, 25 to 15 mm; red marks the pocket, the wing openings and the zip-tie holes.](../../dials/one-sided/measure_plug_width_cord_end.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the cord end at 15 mm. The red line marks the plug's width at the cord end and reads 15 mm, the number you type. Marked in red: 1, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug width at the cord end at 15 mm. The red line marks the plug's width at the cord end and reads 15 mm, the number you type. Marked in red: 1, the zip-tie holes, the wing openings and the pocket: the four small holes beside the pocket; the two openings beside the pocket; the plug recess on the centerline.
 
 - Default: 25 mm
 - Range: 8 to 38 mm, in steps of 0.5 mm
-- Moves: pocket, wing openings
+- Moves: pocket, wing openings, zip-tie holes
 
 ### Plug thickness at the prong end
 
@@ -405,13 +405,13 @@ Customizer name: `measure_finger_width`
 
 Widens both finger holes, spaces them farther apart and pushes them and the body up to keep the walls printable.
 
-![Finger width: before and after, 20 to 26 mm; red marks the body edge, the finger holes, the pocket, the wall notch and the wing openings.](../../dials/one-sided/measure_finger_width.svg)
+![Finger width: before and after, 20 to 26 mm; red marks 6 parts, named below.](../../dials/one-sided/measure_finger_width.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27.9 mm across, wider than the finger. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the wall notch and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: finger width at 26 mm. The red line marks a finger hole and reads 26 mm, the number you type; the hole is drawn 27.9 mm across, wider than the finger. Marked in red: 1, the zip-tie holes and the pocket. 2, the wing openings. 3, the finger holes. 4, the zip-tie holes, the wall notch and the body edge.
 
 - Default: 20 mm
 - Range: 14 to 32 mm, in steps of 0.5 mm
-- Moves: body edge, finger holes, pocket, wall notch, wing openings
+- Moves: body edge, finger holes, pocket, wall notch, wing openings, zip-tie holes
 
 Note: Only acts when size is Measure my hand.
 
@@ -421,13 +421,13 @@ Customizer name: `measure_hand_width`
 
 Widens the whole body outline and thickens the slab in step with the hand.
 
-![Hand width: before and after, 85 to 100 mm; red marks the body edge.](../../dials/one-sided/measure_hand_width.svg)
+![Hand width: before and after, 85 to 100 mm; red marks the body edge and the wing openings.](../../dials/one-sided/measure_hand_width.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: hand width at 100 mm. The red line marks the body at its widest and reads 100 mm, the number you type; the body is drawn 80.3 mm wide, narrower than the hand, as its width is worked out from the hand width. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: hand width at 100 mm. The red line marks the body at its widest and reads 100 mm, the number you type; the body is drawn 80.3 mm wide, narrower than the hand, as its width is worked out from the hand width. Marked in red: 1, the wing openings and the body edge: the two openings beside the pocket; the outer outline.
 
 - Default: 85 mm
 - Range: 60 to 110 mm, in steps of 1 mm
-- Moves: body edge
+- Moves: body edge, wing openings
 
 Note: Only acts when size is Measure my hand.
 
@@ -455,13 +455,13 @@ Customizer name: `velcro_style`
 
 Swaps the curved wing openings for a pair of plain rectangular slots that lean along the body's sides.
 
-![Strap opening style: before and after, Wing to Classic slot; red marks the wing openings.](../../dials/one-sided/velcro_style.svg)
+![Strap opening style: before and after, Wing to Classic slot; red marks the classic slots and the wing openings.](../../dials/one-sided/velcro_style.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: strap opening style set to Classic slot. Marked in red: 1, the wing openings: the two openings beside the pocket. The body edge, the pocket, the seat and the wall notch stay where they were.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: strap opening style set to Classic slot. Marked in red: 1, the wing openings and the classic slots: the two openings beside the pocket; the two slots beside the pocket.
 
 - Default: Wing
 - Choices: Wing, Classic slot
-- Moves: wing openings
+- Moves: classic slots, wing openings
 - Red warnings: WING OPENING SMALLER THAN STRAP WIDTH
 
 ### Strap width
@@ -662,7 +662,7 @@ Swaps every Custom slider for the Medium reference values for one render, so the
 
 ![Reset Custom to the Medium reference: before and after, false to true; red marks 4 parts, named below.](../../dials/one-sided/reset_custom_to_medium.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: reset Custom to the Medium reference set to true. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the body edge: the outer outline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: reset Custom to the Medium reference set to true. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the wing openings: the two openings beside the pocket. 3, the finger holes: the two large holes in the lower half. 4, the zip-tie holes and the body edge.
 
 - Default: Off
 - Choices: On or off (a check box)
@@ -690,13 +690,13 @@ Customizer name: `custom_puller_length`
 
 Stretches the whole body from the cord end to the plug end.
 
-![Body length: before and after, 63.5 to 73.5 mm; red marks the body edge, the pocket, the seat, the wall notch and the zip-tie holes.](../../dials/one-sided/custom_puller_length.svg)
+![Body length: before and after, 63.5 to 73.5 mm; red marks 6 parts, named below.](../../dials/one-sided/custom_puller_length.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body length at 73.5 mm. Marked in red: 1, the zip-tie holes, the wall notch, the seat, the pocket and the body edge: the four small holes beside the pocket; the notch in the top edge; the round recess at the plug end; the plug recess on the centerline; the outer outline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: body length at 73.5 mm. Marked in red: 1, the zip-tie holes, the wing openings, the wall notch, the seat, the pocket and the body edge.
 
 - Default: 63.5 mm
 - Range: 50 to 120 mm, in steps of 0.5 mm
-- Moves: body edge, pocket, seat, wall notch, zip-tie holes
+- Moves: body edge, pocket, seat, wall notch, wing openings, zip-tie holes
 
 Note: Only acts when size is Custom.
 
@@ -911,13 +911,13 @@ Customizer name: `custom_pocket_side_angle`
 
 Tilts the pocket's side walls inward toward the cord end, and the zip-tie holes and strap slots lean in along the same line.
 
-![Pocket side taper: before and after, 0 to 10 mm; red marks the pocket and the wing openings.](../../dials/one-sided/custom_pocket_side_angle.svg)
+![Pocket side taper: before and after, 0 to 10 mm; red marks the pocket, the wing openings and the zip-tie holes.](../../dials/one-sided/custom_pocket_side_angle.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: pocket side taper at 10 mm. Marked in red: 1, the wing openings and the pocket: the two openings beside the pocket; the plug recess on the centerline.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: pocket side taper at 10 mm. Marked in red: 1, the zip-tie holes, the wing openings and the pocket: the four small holes beside the pocket; the two openings beside the pocket; the plug recess on the centerline.
 
 - Default: 0 mm
 - Range: -15 to 25 mm, in steps of 0.5 mm
-- Moves: pocket, wing openings
+- Moves: pocket, wing openings, zip-tie holes
 
 Note: Only acts when size is Custom.
 
@@ -977,13 +977,13 @@ Customizer name: `custom_finger_hole_y_position`
 
 Slides both finger holes up toward the pocket or down toward the cord hook.
 
-![Finger hole position: before and after, 19.8 to 26 mm; red marks the finger holes and the pocket.](../../dials/one-sided/custom_finger_hole_y_position.svg)
+![Finger hole position: before and after, 19.8 to 26 mm; red marks the finger holes, the pocket, the wing openings and the zip-tie holes.](../../dials/one-sided/custom_finger_hole_y_position.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: finger hole position at 26 mm. Marked in red: 1, the pocket: the plug recess on the centerline. 2, the finger holes: the two large holes in the lower half.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: finger hole position at 26 mm. Marked in red: 1, the zip-tie holes and the pocket. 2, the zip-tie holes, the finger holes and the wing openings.
 
 - Default: 19.8 mm
 - Range: 10 to 50 mm, in steps of 0.1 mm
-- Moves: finger holes, pocket
+- Moves: finger holes, pocket, wing openings, zip-tie holes
 
 Note: Only acts when size is Custom.
 

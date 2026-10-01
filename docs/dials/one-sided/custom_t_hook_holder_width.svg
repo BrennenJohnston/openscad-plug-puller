@@ -4,7 +4,7 @@
 <desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Custom, a 25 mm wide plug in teal. Right: hook crossbar width at 16 mm. Marked in red: 1, the finger holes and the hook: the two large holes in the lower half; the cord hook slot in the bottom edge. 2, the finger holes: the two large holes in the lower half.</desc>
 <rect width="100.00" height="25.90" fill="white"/>
 <g class="panel" id="before">
-<path d="M 28.00 16.51 L 20.92 17.41 L 20.88 13.25 L 20.56 12.90 L 20.56 8.99 L 20.41 8.51 L 20.10 8.13 L 19.78 7.94 L 19.29 7.84 L 10.72 7.84 L 10.12 7.99 L 9.66 8.40 L 9.46 8.99 L 9.46 11.77 L 9.60 12.25 L 9.82 12.55 L 10.12 12.77 L 10.60 12.91 L 14.78 12.92 L 16.12 14.26 L 16.10 17.99 L 11.85 18.00 L 0.00 16.50" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 28.00 16.51 L 20.92 17.41 L 20.88 13.25 L 20.56 12.90 L 20.56 8.99 L 20.41 8.51 L 20.10 8.13 L 19.78 7.94 L 19.29 7.84 L 10.72 7.84 L 10.23 7.94 L 9.91 8.13 L 9.66 8.40 L 9.46 8.99 L 9.46 11.77 L 9.60 12.25 L 9.82 12.55 L 10.12 12.77 L 10.60 12.91 L 14.78 12.92 L 16.12 14.27 L 16.10 17.99 L 11.50 17.97 L 0.00 16.51" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 10.06 0.00 L 9.96 0.67 L 9.65 1.88 L 9.23 3.06 L 8.70 4.18 L 8.06 5.25 L 7.32 6.25 L 6.48 7.18 L 5.56 8.01 L 4.56 8.76 L 3.49 9.40 L 2.36 9.93 L 1.19 10.35 L 0.00 10.65" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
 <path d="M 28.00 10.65 L 26.82 10.35 L 25.64 9.93 L 24.52 9.40 L 23.45 8.76 L 22.45 8.02 L 21.52 7.18 L 20.69 6.26 L 19.94 5.26 L 19.30 4.19 L 18.77 3.06 L 18.35 1.89 L 18.04 0.68 L 17.94 0.00" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
 </g>
@@ -14,18 +14,18 @@
 </g>
 <g class="panel" id="after" transform="translate(38.00 0)">
 <path d="M 18.01 0.00 L 18.04 0.22 L 18.35 1.43 L 18.77 2.60 L 19.32 3.76" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 20.03 7.84 L 10.60 7.85 L 10.01 8.05 L 9.74 8.31 L 9.46 8.99 L 9.46 11.77 L 9.60 12.25 L 9.83 12.55 L 10.12 12.77 L 10.60 12.91 L 14.78 12.92 L 16.11 14.25 L 16.11 17.98 L 11.85 18.00 L 0.00 16.50" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 28.00 16.50 L 20.91 17.40 L 20.89 12.96" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 20.03 7.84 L 10.72 7.84 L 10.23 7.94 L 9.74 8.30 L 9.46 8.99 L 9.46 11.77 L 9.60 12.25 L 9.82 12.55 L 10.12 12.77 L 10.60 12.91 L 14.78 12.92 L 16.12 14.26 L 16.10 17.99 L 11.85 18.00 L 0.00 16.50" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 28.00 16.50 L 20.90 17.40 L 20.89 12.96" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 22.49 7.84 L 21.95 7.84" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 25.45 10.06 L 25.45 9.62" fill="none" stroke="#000" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 9.99 0.00 L 9.96 0.21 L 9.65 1.42 L 9.23 2.60 L 8.68 3.76" fill="none" stroke="#000" stroke-width="0.35" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="1.6,1.1"/>
 <path d="M 8.68 3.76 L 8.06 4.79 L 7.32 5.79 L 6.48 6.72 L 5.56 7.56 L 4.56 8.30 L 3.49 8.94 L 2.36 9.47 L 1.19 9.89 L 0.00 10.19" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
-<path d="M 19.32 3.76 L 19.94 4.80 L 20.68 5.80 L 21.52 6.72 L 22.44 7.56 L 22.71 7.75 L 22.72 7.79 L 22.71 7.82 L 22.67 7.84 L 22.55 7.84" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 19.32 3.76 L 19.94 4.80 L 20.68 5.80 L 21.52 6.72 L 22.44 7.56 L 22.71 7.75 L 22.72 7.81 L 22.67 7.84 L 22.55 7.84" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <path d="M 21.95 7.84 L 20.03 7.84" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
-<path d="M 20.89 12.96 L 20.89 12.95 L 20.93 12.92 L 25.40 12.92 L 25.43 12.91 L 25.45 12.87 L 25.45 10.06" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
-<path d="M 25.45 9.62 L 25.45 9.46 L 25.47 9.42 L 25.52 9.42 L 25.64 9.48 L 26.82 9.89 L 28.00 10.19" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
-<circle cx="4.56" cy="8.30" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="4.56" y="9.09" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
+<path d="M 20.89 12.96 L 20.90 12.93 L 20.93 12.92 L 25.40 12.92 L 25.43 12.91 L 25.45 12.87 L 25.45 10.06" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
+<path d="M 25.45 9.62 L 25.45 9.46 L 25.46 9.44 L 25.49 9.42 L 26.81 9.89 L 28.00 10.19" fill="none" stroke="#d81b1b" stroke-width="0.8" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="3.5,1.2"/>
 <circle cx="22.67" cy="7.84" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="22.67" y="8.63" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
+<circle cx="4.56" cy="8.30" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="4.56" y="9.09" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">2</text>
 </g>
 <g class="key">
 <text x="69.00" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 finger holes /</text>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="228.55mm" height="77.50mm" viewBox="0 0 228.55 77.50" role="img">
 <title>Hand width</title>
-<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: hand width at 100 mm: widens the whole body outline and thickens the slab in step with the hand. The red line marks the body at its widest and reads 100 mm, the number you type; the body is drawn 80.3 mm wide, narrower than the hand, as its width is worked out from the hand width. Marked in red: 1, the body edge: the outer outline. Everything else follows the outline.</desc>
+<desc>Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults with hand size set to Measure my hand, a 25 mm wide plug in teal. Right: hand width at 100 mm. The red line marks the body at its widest and reads 100 mm, the number you type; the body is drawn 80.3 mm wide, narrower than the hand, as its width is worked out from the hand width. Marked in red: 1, the wing openings and the body edge: the two openings beside the pocket; the outer outline.</desc>
 <rect width="228.55" height="77.50" fill="white"/>
 <g class="panel" id="before">
 <path d="M 58.63 6.00 L 58.63 31.50 L 33.63 31.50 L 33.63 6.00 L 58.63 6.00 Z" fill="#20b2aa" fill-rule="evenodd" fill-opacity="0.45" stroke="none"/>
@@ -62,7 +62,8 @@
 <circle cx="86.27" cy="48.78" r="1.3" fill="white" stroke="#d81b1b" stroke-width="0.35"/><text x="86.27" y="49.57" font-family="Helvetica, Arial, sans-serif" font-size="2.20" text-anchor="middle" fill="#d81b1b">1</text>
 </g>
 <g class="key">
-<text x="197.55" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 body edge</text>
+<text x="197.55" y="4.60" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">1 wing openings /</text>
+<text x="200.55" y="7.70" font-family="Helvetica, Arial, sans-serif" font-size="2.60" text-anchor="start" fill="#000">body edge</text>
 </g>
 <g class="leaders">
 <line x1="188.77" y1="47.50" x2="196.55" y2="3.69" stroke="#d81b1b" stroke-width="0.3"/>

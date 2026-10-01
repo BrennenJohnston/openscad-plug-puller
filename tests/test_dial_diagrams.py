@@ -10,12 +10,13 @@ the committed index.
 from __future__ import annotations
 
 import json
+import math
 import re
 from pathlib import Path
 
 import pytest
 import trimesh
-from shapely.geometry import Polygon
+from shapely.geometry import Point, Polygon, box
 
 from scripts.generate_dial_diagrams import (
     COLOR_TRACE,
@@ -23,10 +24,18 @@ from scripts.generate_dial_diagrams import (
     MARK_DASH,
     MARK_W,
     NO_SHAPE_SENTENCE,
+    ONE_SIDED,
+    Footprints,
+    Outline,
+    _one_sided_numbers,
     changed_regions,
+    classify_regions,
     compose_none_svg,
     compose_pair_svg,
     load_catalog,
+    load_mapping,
+    mapping_defaults,
+    moved_openings,
     run_rows,
     section_polygons,
 )
@@ -50,6 +59,47 @@ def test_small_slivers_dropped() -> None:
     regions, area = changed_regions(BEFORE, BEFORE.buffer(0.005))
     assert regions == []
     assert area == 0.0
+
+
+def test_moved_opening_named_on_the_region_holding_its_change() -> None:
+    """A part whose own outline moved is named on a region holding at least
+    MIN_REGION_AREA of its change, even a region another part owns, and even
+    when the hole sits in the region's inner ring (a hole in new material);
+    a smaller change names nothing."""
+    wing = box(0, 0, 30, 20)
+    fp = Footprints(specific=[("zip-tie holes", Point(-50, -50).buffer(1.0)),
+                              ("wing openings", wing.buffer(1.5))])
+    moved_hole = Point(10, 10).buffer(2.54).symmetric_difference(Point(15, 10).buffer(2.54))
+    [(_region, names)] = classify_regions(ONE_SIDED, [wing], fp, moved=[("zip-tie holes", moved_hole)])
+    assert names == ["zip-tie holes", "wing openings"]
+    new_hole = Point(15, 10).buffer(2.54)
+    [(_region, names)] = classify_regions(ONE_SIDED, [wing.difference(new_hole)], fp,
+                                          moved=[("zip-tie holes", new_hole)])
+    assert names == ["zip-tie holes", "wing openings"]
+    [(_region, names)] = classify_regions(ONE_SIDED, [wing], fp, moved=[("zip-tie holes", Point(10, 10).buffer(0.3))])
+    assert names == ["wing openings"]
+
+
+def test_moved_openings_finds_the_hole_that_moved() -> None:
+    """Each kind of opening is compared before against after: one zip-tie
+    hole moved 5 mm gives a zip-tie change of about two hole areas, and the
+    finger holes and the strap opening that stayed give none."""
+    params = mapping_defaults(load_mapping(ONE_SIDED))
+    d = _one_sided_numbers(params)
+    r_zip, r_finger = d["zip_tie_hole_diameter"] / 2, d["finger_hole_diameter"] / 2
+
+    def outline(zips):
+        holes = [Point(x, y).buffer(r_zip, quad_segs=32) for x, y in zips]
+        holes += [Point(x, 20).buffer(r_finger, quad_segs=32) for x in (-17, 17)]
+        holes.append(box(-25, 45, -20, 55))
+        return Outline(solids=[Polygon(box(-40, 0, 40, 70).exterior.coords, [h.exterior.coords for h in holes])])
+
+    before = outline([(-10, 40), (10, 40), (-10, 50), (10, 50)])
+    after = outline([(-10, 40), (10, 40), (-10, 50), (15, 50)])
+    moved = dict(moved_openings(ONE_SIDED, params, before, params, after))
+    assert set(moved) == {"zip-tie holes"}
+    assert abs(moved["zip-tie holes"].area - 2 * math.pi * r_zip ** 2) < 0.5
+    assert moved_openings(ONE_SIDED, params, before, params, before) == []
 
 
 def test_svg_text_equivalent() -> None:

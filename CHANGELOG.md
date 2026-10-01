@@ -73,8 +73,7 @@ public milestone**.
   number is the one you type. Where the part is drawn at another size, the
   sentence gives that size and why: a hook slot or cord channel wider than
   the cord, a finger hole wider than the finger, a body narrower than the
-  hand, the two-sided plug drawn 2 mm past the arm tips as in the preview.
-  These 13 descriptions may run to 110 words instead of 90, so none loses
+  hand. These 13 descriptions may run to 110 words instead of 90, so none loses
   the phrases saying where each marked part sits.
 - **The storyboard descriptions follow the picture.** Their lines read
   Start, then Step 1 to Step 4, as the picture numbers its arrows, instead
@@ -183,6 +182,25 @@ public milestone**.
   read "then Step 4 - Cord Hook" or "then Step 4 - Print Layout". A test
   fails if any placeholder is left unfilled. The fix is logged in
   `docs/fixes.md`.
+- **The two-sided preview plug ends at the arm tips.** The see-through plug
+  in the two-sided preview reached 2 mm past the arm tips, and every
+  two-sided dial picture copied it, although the model places the plug's
+  face at the tips. It now spans exactly the plug's length, in the preview
+  and in the pictures. The printed plates do not change.
+- **The dial pictures name every hole and slot whose outline moved.** A
+  moved part whose change merged into another part's marked area went
+  unnamed: the plug width at the cord end and pocket side taper pictures
+  drew the zip-tie holes moving by up to 5 mm, while their key and
+  description named only the pocket and the wing openings. The generator
+  now compares each kind of hole and slot before and after the dial moves,
+  and names it on every marked area that encloses its change. Ten pictures
+  now name a part they left out; nine descriptions drop the sentence on
+  what the dial does or some part locations to stay within their word
+  limits, in the usual order. The one-sided storyboard keeps every name by
+  giving each list of parts a single "the". All 118 pictures are redrawn
+  from today's model; most one-sided ones still showed the outlines from
+  before the layered edge rounding, which move by hundredths of a
+  millimeter.
 
 ## [0.13.0] - 2026-09-27
 
