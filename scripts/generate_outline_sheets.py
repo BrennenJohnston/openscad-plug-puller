@@ -915,7 +915,7 @@ def build_flat_sheet(
             top_pair[1].cx,
             (top_pair[0].cy + bot_pair[0].cy) / 2,
             top_pair[0].cy,
-            f"{fmt(top_pair[1].cx - top_pair[0].cx)}",
+            f"{fmt(abs(top_pair[1].cx - top_pair[0].cx))}",
             2.6,
         )
         col = [top_pair[0], bot_pair[0]]

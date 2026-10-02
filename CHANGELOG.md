@@ -221,6 +221,14 @@ public milestone**.
   the work was done during development. The scripts index no longer links
   two private repositories, and a test comment no longer names a deleted
   guide.
+- **No outline sheet label reads negative.** The label between the top two
+  zip-tie holes on a one-sided sheet printed a signed difference, so the
+  lamp plug's Medium and Small sheets read "-20.5" and "-17.71"; it now
+  prints the distance, as the label beside it already did. All 21 sheets
+  and their PDF are regenerated, which also brings their outlines up to
+  date with the layered edge rounding; the measured labels move by at most
+  0.08 mm. A test fails if any label starts with a minus sign. The fix is
+  logged in `docs/fixes.md`.
 
 ## [0.13.0] - 2026-09-27
 

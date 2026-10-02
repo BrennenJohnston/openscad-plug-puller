@@ -17,3 +17,11 @@ A known limit, not changed: when PowerShell starts the script with `-File`, seve
 **The fix.** The pattern now accepts a name that starts with a letter or an underscore and goes on with letters, digits or underscores, so `{step4}` is filled like every other placeholder, and an unknown name with a digit stops the build. A quick-lane test loads every guide source for both tools and fails if any `{name}` is left unfilled. All four documents are rebuilt; each PDF changes on one page.
 
 **The check that passed.** `tests/test_guide_text.py::test_every_source_fills_for_both_tools` failed before the change ("unfilled ['{step4}']") and passes after it. After rebuilding the four documents, `{step4}` appears under `docs/guides` only in its source file, `docs/guides/source/get-the-file.md`. The builders' PDF checks pass with 15, 88, 13 and 54 pages, as before. The quick lane passes (243) and `scripts/check_docs.py` is clean.
+
+## 2026-10-01: an outline sheet's zip-tie spacing label could read negative
+
+**The bug.** On a one-sided outline sheet, the label between the top two zip-tie holes printed the signed difference between their positions, so it read negative whenever the sheet generator found the right-hand hole first. The committed lamp-plug sheets read "-20.5" (Medium) and "-17.71" (Small), and regenerating the sheets for 0.14.0 would have added "-20.54" (lamp, Large) and "-30.98" (wide appliance plug, Large). The vertical label beside it already printed the plain distance.
+
+**The fix.** `scripts/generate_outline_sheets.py` prints the plain distance for that label too. All 21 sheets and the outline sheets PDF are regenerated. A quick-lane test, `tests/test_outline_sheets.py`, fails if any label on any sheet starts with a minus sign.
+
+**The check that passed.** The new test failed before the change on the two committed lamp sheets and passes after it. The four labels read 17.71, 20.52, 20.54 and 30.98, each equal to the length of its drawn line. All 21 sheets pass the generator's parity checks, the PDF passes its own checks (22 pages, the title, 31 bookmarks), the quick lane passes (250) and `scripts/check_docs.py` is clean.
