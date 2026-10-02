@@ -7,7 +7,7 @@ okhv: OKH-LOSHv1.0
 
 name: "Plug Puller: parametric assistive plug remover"
 repo: https://github.com/BrennenJohnston/openscad-plug-puller
-version: 0.13.0
+version: 0.14.0
 license:
   hardware: PolyForm-Noncommercial-1.0.0
   documentation: PolyForm-Noncommercial-1.0.0

@@ -2,7 +2,7 @@
 
 [![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20NC%201.0.0-blue.svg)](LICENSE)
 [![OpenSCAD](https://img.shields.io/badge/OpenSCAD-2021.01%2B-orange.svg)](https://openscad.org/downloads.html)
-[![Version](https://img.shields.io/badge/version-0.13.0-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.14.0-brightgreen.svg)](CHANGELOG.md)
 [![CI: STL Validation](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml/badge.svg)](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml)
 
 ## Overview

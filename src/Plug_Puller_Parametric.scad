@@ -1,4 +1,4 @@
-// Plug Puller 0.13.0 — Parametric Generator for the one-sided puller
+// Plug Puller 0.14.0 — Parametric Generator for the one-sided puller
 // The one-sided puller is the reworked v6 flat puller: a slab with a
 // two-level plug pocket whose side walls follow a parametric "plug side
 // rail", plus rail-placed zip-tie holes and velcro slots, finger bores, and a
