@@ -2,7 +2,7 @@
 
 The shortest path from a stuck plug to a printed two-sided puller that fits it and your hand: get the file, measure, fill in the four Customizer steps, print, assemble, use.
 
-Model version 0.13.0. [The printable quick start](../../Plug_Puller_Two_Sided_Quick_Start.pdf) has the same text, with the measuring form and the paper stencil sheets at true size as its last pages. The other document for this tool is [the full guide](full-guide.md). Each step lists its dials by their plain names, with the name the Customizer shows beside each.
+Model version 0.14.0. [The printable quick start](../../Plug_Puller_Two_Sided_Quick_Start.pdf) has the same text, with the measuring form and the paper stencil sheets at true size as its last pages. The other document for this tool is [the full guide](full-guide.md). Each step lists its dials by their plain names, with the name the Customizer shows beside each.
 
 ## Which tool this is
 

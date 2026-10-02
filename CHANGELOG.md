@@ -11,6 +11,10 @@ public milestone**.
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.14.0] - 2026-10-01
+
 ### Changed
 
 - **The STL library and the test fixtures are binary STLs**, the same shapes
@@ -684,6 +688,7 @@ First public release.
   (`docs/Plug_Puller_Reference.md`).
 - Ready-to-print Small / Medium / Large sample STLs in `stl/`.
 
+[0.14.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.14.0
 [0.13.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.13.0
 [0.12.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.12.0
 [0.11.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.11.0

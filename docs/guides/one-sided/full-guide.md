@@ -2,7 +2,7 @@
 
 Everything about the one-sided puller: getting the file, measuring, every dial with a picture, printing, assembly, use and care, what to do when a print does not fit, every warning, and how the advanced dials work.
 
-Model version 0.13.0. [The printable full guide](../../Plug_Puller_One_Sided_Full_Guide.pdf) has the same text, with the measuring form and the paper stencil sheets at true size as its last pages. The other document for this tool is [the quick start](quick-start.md). Each dial is headed by its plain name, with the name the Customizer shows on the line under it.
+Model version 0.14.0. [The printable full guide](../../Plug_Puller_One_Sided_Full_Guide.pdf) has the same text, with the measuring form and the paper stencil sheets at true size as its last pages. The other document for this tool is [the quick start](quick-start.md). Each dial is headed by its plain name, with the name the Customizer shows on the line under it.
 
 ## Which tool this is
 
