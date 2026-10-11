@@ -3,8 +3,8 @@
 ``src/Plug_Puller_Two_Sided.scad`` is the clamshell lifted out of the unified
 ``src/Plug_Puller_Parametric.scad``. At the heavy-duty preset its plate must
 be the same object as the golden fixture
-``tests/fixtures/two_sided_plate/reference.stl`` (a byte copy of the old
-``clamshell_plate`` fixture). "Same" means the fixture comparator passes and
+``tests/fixtures/two_sided_plate/reference.stl`` (rendered once more when the
+preset took the owner's measured plug). "Same" means the fixture comparator passes and
 volume, surface area and bounds agree to 6 decimals. STL bytes and facet
 counts are never compared: identical renders triangulate differently.
 

@@ -692,7 +692,7 @@ Five stages of the two-sided puller, left to right, the top row first, the plug 
 
 ![Plug preset: before and after, Measure my plug to Heavy-duty extension cord - NEMA 5-15; red marks 5 parts, named below.](two-sided/plug_preset.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the zip stations, the strap slot, the finger lobes, the arms and the plate edge. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations, the strap slot, the finger lobes, the arms and the plate edge.
 
 Before: Measure my plug. After: Heavy-duty extension cord - NEMA 5-15. Moves: arms, finger lobes, plate edge, strap slot, zip stations.
 
@@ -711,6 +711,14 @@ Before: 25.5. After: 40. Moves: arms, strap slot, zip stations.
 Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug width at the prong end at 28 mm. The red line marks the gap between the arm tips and reads 28 mm, the number you type. Marked in red: 1, the zip stations and the arms. 2, the zip stations: the three small holes along each arm. 3, the finger lobes and the cord channel.
 
 Before: 20. After: 28. Moves: arms, cord channel, finger lobes, zip stations.
+
+`measure_plug_head_length`: Plug head length
+
+![Plug head length: before and after, 0 to 15 mm; red marks the teeth and the zip stations.](two-sided/measure_plug_head_length.svg)
+
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug width at the cord end set to 12, a 20 mm wide plug in teal. Right: plug head length at 15 mm. The red line marks the plug's head length and reads 15 mm, the number you type. Marked in red: 1, the teeth: the serrated inner edges of the arms. 2, the zip stations: the three small holes along each arm.
+
+Before: 0. After: 15. Context: `measure_plug_width_cord_end` = 12. Moves: teeth, zip stations.
 
 `measure_plug_width_cord_end`: Plug width at the cord end
 

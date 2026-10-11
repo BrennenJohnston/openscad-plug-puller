@@ -2030,7 +2030,7 @@
     "tier": "step",
     "quick_start": true,
     "title": "Plug preset",
-    "changes": "Fills in the plug's length, both widths, the cord and the sides from a measured reference plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.",
+    "changes": "Fills in the plug's length, both widths, the head length, the cord and the sides from that plug's measurements, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.",
     "diagram": {
       "view": "top",
       "style": "trace",
@@ -2069,10 +2069,10 @@
     "measure": {
       "how": "With the plug in the outlet, ruler from the wall plate face to the plug's back face. On a laptop or charger plug, measure from the device's edge.",
       "typical": [
-        20,
-        50
+        15,
+        55
       ],
-      "example": 23,
+      "example": 32.5,
       "stencil": "R1",
       "anchor": "plug_length"
     }
@@ -2102,12 +2102,47 @@
     "measure": {
       "how": "Caliper across the plug body just behind the prongs, the size the two plates close across. On a USB-C or charger tip, just behind the metal tip; on a round plug it is the diameter.",
       "typical": [
-        12,
+        10,
         40
       ],
-      "example": 13,
+      "example": 20,
       "stencil": "R1",
       "anchor": "plug_width_prong_end"
+    }
+  },
+  {
+    "file": "two-sided",
+    "name": "measure_plug_head_length",
+    "section": "Step 1 - Your Plug",
+    "tier": "step",
+    "quick_start": true,
+    "title": "Plug head length",
+    "changes": "Keeps the gap between the arms at its prong-end width for the length of the plug's head, so the gap narrows only behind the head.",
+    "diagram": {
+      "view": "top",
+      "style": "fill",
+      "before": 0,
+      "after": 15,
+      "context": {
+        "measure_plug_width_cord_end": 12
+      },
+      "plug": "default",
+      "crop": null,
+      "dimension": {
+        "kind": "v",
+        "at": "plug_head"
+      }
+    },
+    "note": null,
+    "measure": {
+      "how": "Ruler along the plug from the prong end to where the plug starts to narrow. If it narrows right from the prong end, type 0.",
+      "typical": [
+        0,
+        25
+      ],
+      "example": 15.2,
+      "stencil": "R1",
+      "anchor": "plug_head"
     }
   },
   {
@@ -2133,12 +2168,12 @@
     },
     "note": null,
     "measure": {
-      "how": "The same direction across the plates, measured where the cord leaves the plug body. Skip the soft rubber strain relief.",
+      "how": "The same direction across the plates, measured at the plug's back end where the cord comes out. A rubber strain relief counts as part of the plug.",
       "typical": [
-        12,
+        10,
         40
       ],
-      "example": 13,
+      "example": 11.1,
       "stencil": "R1",
       "anchor": "plug_width_cord_end"
     }
@@ -2166,10 +2201,10 @@
     },
     "note": null,
     "measure": {
-      "how": "Caliper across the cord just behind the plug, on its thin side: flat cord the narrow way, round cord the diameter. With the stencil, the smallest C1 slot that slips over the cord is this number.",
+      "how": "Caliper across the cord just behind the plug, the way the widths run: a flat cord's wide side, a round cord's diameter. On the stencil, it is the smallest C1 slot that takes the cord's wide side.",
       "typical": [
         3,
-        9
+        10
       ],
       "example": 7,
       "stencil": "C1",

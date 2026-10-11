@@ -76,7 +76,7 @@ Customizer name: `measure_plug_length`. Row 2 of the measuring form.
 
 With the plug in the outlet, ruler from the wall plate face to the plug's back face. On a laptop or charger plug, measure from the device's edge.
 
-Typical: 20 to 50 mm. Example: 23 mm.
+Typical: 15 to 55 mm. Example: 32.5 mm.
 
 With the stencil: card R1.
 
@@ -86,33 +86,43 @@ Customizer name: `measure_plug_width_prong_end`. Row 3 of the measuring form.
 
 Caliper across the plug body just behind the prongs, the size the two plates close across. On a USB-C or charger tip, just behind the metal tip; on a round plug it is the diameter.
 
-Typical: 12 to 40 mm. Example: 13 mm.
+Typical: 10 to 40 mm. Example: 20 mm.
+
+With the stencil: card R1.
+
+### Plug head length
+
+Customizer name: `measure_plug_head_length`. Row 4 of the measuring form.
+
+Ruler along the plug from the prong end to where the plug starts to narrow. If it narrows right from the prong end, type 0.
+
+Typical: 0 to 25 mm. Example: 15.2 mm.
 
 With the stencil: card R1.
 
 ### Plug width at the cord end
 
-Customizer name: `measure_plug_width_cord_end`. Row 4 of the measuring form.
+Customizer name: `measure_plug_width_cord_end`. Row 5 of the measuring form.
 
-The same direction across the plates, measured where the cord leaves the plug body. Skip the soft rubber strain relief.
+The same direction across the plates, measured at the plug's back end where the cord comes out. A rubber strain relief counts as part of the plug.
 
-Typical: 12 to 40 mm. Example: 13 mm.
+Typical: 10 to 40 mm. Example: 11.1 mm.
 
 With the stencil: card R1.
 
 ### Cord thickness
 
-Customizer name: `measure_cord_thickness`. Row 5 of the measuring form.
+Customizer name: `measure_cord_thickness`. Row 6 of the measuring form.
 
-Caliper across the cord just behind the plug, on its thin side: flat cord the narrow way, round cord the diameter. With the stencil, the smallest C1 slot that slips over the cord is this number.
+Caliper across the cord just behind the plug, the way the widths run: a flat cord's wide side, a round cord's diameter. On the stencil, it is the smallest C1 slot that takes the cord's wide side.
 
-Typical: 3 to 9 mm. Example: 7 mm.
+Typical: 3 to 10 mm. Example: 7 mm.
 
 With the stencil: card C1.
 
 ### Plug sides
 
-Customizer name: `plug_sides`. Row 6 of the measuring form.
+Customizer name: `plug_sides`. Row 7 of the measuring form.
 
 Look at the plug body where the plates will grip it. Rounded sides for a round cord plug, a USB-C or charger tip; Flat sides for a boxy plug.
 
@@ -120,7 +130,7 @@ The choices: Rounded sides, Flat sides.
 
 ### Finger width
 
-Customizer name: `measure_finger_width`. Row 9 of the measuring form.
+Customizer name: `measure_finger_width`. Row 10 of the measuring form.
 
 Caliper across the widest knuckle of your middle finger, the finger that goes into the pull hole. With the stencil, find the smallest F1 or F2 hole your finger passes through comfortably and subtract 5 from its number.
 
@@ -132,7 +142,7 @@ No caliper? Take a ring that fits that finger snugly, measure the ring's inner d
 
 ### Strap width
 
-Customizer name: `strap_width`. Row 11 of the measuring form.
+Customizer name: `strap_width`. Row 12 of the measuring form.
 
 Read the width on the strap's packaging. ONE-WRAP comes in 10, 13, 16, 20 and 25 mm.
 
@@ -151,31 +161,33 @@ The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stenci
 | 1 | `plug_preset` | Plug preset: pick one | Measure my plug | ________ |
 | 2 | `measure_plug_length` | With the plug in the outlet, ruler from the wall plate face to the plug's back face. | 25.5 mm | ________ |
 | 3 | `measure_plug_width_prong_end` | Caliper across the plug body just behind the prongs, the size the two plates close across. | 20 mm | ________ |
-| 4 | `measure_plug_width_cord_end` | The same direction across the plates, measured where the cord leaves the plug body. | 20 mm | ________ |
-| 5 | `measure_cord_thickness` | Caliper across the cord just behind the plug, on its thin side: flat cord the narrow way, round cord the diameter. | 4 mm | ________ |
-| 6 | `plug_sides` | Look at the plug body where the plates will grip it. | Rounded sides | ________ |
-| 7 | `show_plug_preview` | Show the see-through plug: leave on | on | ________ |
-| 8 | `size` | Hand size: pick one | Medium | ________ |
-| 9 | `measure_finger_width` | Caliper across the widest knuckle of your middle finger, the finger that goes into the pull hole. | 20 mm | ________ |
-| 10 | `attachment` | Attachment: pick one | Zip ties + Velcro strap | ________ |
-| 11 | `strap_width` | Read the width on the strap's packaging. | 15 mm | ________ |
-| 12 | `print_layout` | Print layout: pick one | Both plates | ________ |
+| 4 | `measure_plug_head_length` | Ruler along the plug from the prong end to where the plug starts to narrow. | 0 mm | ________ |
+| 5 | `measure_plug_width_cord_end` | The same direction across the plates, measured at the plug's back end where the cord comes out. | 20 mm | ________ |
+| 6 | `measure_cord_thickness` | Caliper across the cord just behind the plug, the way the widths run: a flat cord's wide side, a round cord's diameter. | 4 mm | ________ |
+| 7 | `plug_sides` | Look at the plug body where the plates will grip it. | Rounded sides | ________ |
+| 8 | `show_plug_preview` | Show the see-through plug: leave on | on | ________ |
+| 9 | `size` | Hand size: pick one | Medium | ________ |
+| 10 | `measure_finger_width` | Caliper across the widest knuckle of your middle finger, the finger that goes into the pull hole. | 20 mm | ________ |
+| 11 | `attachment` | Attachment: pick one | Zip ties + Velcro strap | ________ |
+| 12 | `strap_width` | Read the width on the strap's packaging. | 15 mm | ________ |
+| 13 | `print_layout` | Print layout: pick one | Both plates | ________ |
 
-**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's Step order, each with the dial's name, its plain title and either a blank after the default or a tick box per choice with the default marked. The right half is a schematic plug in teal drawn from the two-sided puller's defaults at 1.5 to 1, a top view with the prong end at the left against a wall plate line, the cord's end as a small circle, a bar of four knuckles at 1:1 and a strap bar at 1:1. A straight black arrow runs from each measured row's blank to a red dimension line on the schematic, the row's number in a red circle at the line:
+**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's Step order, each with the dial's name, its plain title and either a blank after the default or a tick box per choice with the default marked. The right half is a schematic plug in teal at 1.5 to 1, as long and as wide at the prong end as the two-sided puller's defaults: a top view with the prong end at the left against a wall plate line, the plug keeping its full width along its head and then narrowing toward the cord end, the cord's end as a small circle, a bar of four knuckles at 1:1 and a strap bar at 1:1. A straight black arrow runs from each measured row's blank to a red dimension line on the schematic, the row's number in a red circle at the line:
 
 - Arrow 2 points to the plug's length on the top view, from the wall plate to the plug's back end.
 - Arrow 3 points to the plug's width at the prong end, the left edge of the top view.
-- Arrow 4 points to the plug's width at the cord end, the right edge of the top view where the cord leaves.
-- Arrow 5 points to the cord's thickness on the small circle, the cord seen end on.
-- Arrow 9 points to one knuckle of the knuckle bar, drawn 20 mm wide at 1:1.
-- Arrow 11 points to the strap bar's width, a 40 by 15 mm bar at 1:1.
+- Arrow 4 points to the plug's head on the top view, from the wall plate to where the plug starts to narrow.
+- Arrow 5 points to the plug's width at the cord end, the right edge of the top view where the cord leaves.
+- Arrow 6 points to the cord's thickness on the small circle, the cord seen end on.
+- Arrow 10 points to one knuckle of the knuckle bar, drawn 20 mm wide at 1:1.
+- Arrow 12 points to the strap bar's width, a 40 by 15 mm bar at 1:1.
 
 - Row 1, plug preset: 5 boxes, Measure my plug marked as the default; the choices are Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15.
-- Row 6, plug sides: 2 boxes, Rounded sides marked as the default; the choices are Rounded sides, Flat sides.
-- Row 7, show the see-through plug: one box marked, leave on.
-- Row 8, hand size: 4 boxes, Medium marked as the default; the choices are Small, Medium, Large, Measure my hand.
-- Row 10, attachment: 2 boxes, Zip ties + Velcro strap marked as the default; the choices are Zip ties + Velcro strap, Zip ties.
-- Row 12, print layout: 2 boxes, Both plates marked as the default; the choices are Both plates, One plate.
+- Row 7, plug sides: 2 boxes, Rounded sides marked as the default; the choices are Rounded sides, Flat sides.
+- Row 8, show the see-through plug: one box marked, leave on.
+- Row 9, hand size: 4 boxes, Medium marked as the default; the choices are Small, Medium, Large, Measure my hand.
+- Row 11, attachment: 2 boxes, Zip ties + Velcro strap marked as the default; the choices are Zip ties + Velcro strap, Zip ties.
+- Row 13, print layout: 2 boxes, Both plates marked as the default; the choices are Both plates, One plate.
 
 Type them into the Customizer in this order.
 
@@ -223,11 +235,11 @@ Pick a plug preset, or leave it on Measure my plug and type your plug's numbers;
 
 Customizer name: `plug_preset`
 
-Fills in the plug's length, both widths, the cord and the sides from a measured reference plug, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.
+Fills in the plug's length, both widths, the head length, the cord and the sides from that plug's measurements, so the arms, the grip gap, the cord channel and the plate length all take that plug's shape at once.
 
 ![Plug preset: before and after, Measure my plug to Heavy-duty extension cord - NEMA 5-15; red marks 5 parts, named below.](../../dials/two-sided/plug_preset.svg)
 
-Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the zip stations, the strap slot, the finger lobes, the arms and the plate edge. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations: the three small holes along each arm.
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 20 mm wide plug in teal. Right: plug preset set to Heavy-duty extension cord - NEMA 5-15. Marked in red: 1, the zip stations: the three small holes along each arm. 2, the finger lobes: the two rounded lobes in the lower half. 3, the zip stations, the strap slot, the finger lobes, the arms and the plate edge.
 
 - Default: Measure my plug
 - Choices: Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15
@@ -260,6 +272,20 @@ Two top views of one plate of the two-sided puller, before left and after right,
 - Default: 20 mm
 - Range: 5 to 40 mm, in steps of 0.5 mm
 - Moves: arms, cord channel, finger lobes, zip stations
+
+### Plug head length
+
+Customizer name: `measure_plug_head_length`
+
+Keeps the gap between the arms at its prong-end width for the length of the plug's head, so the gap narrows only behind the head.
+
+![Plug head length: before and after, 0 to 15 mm; red marks the teeth and the zip stations.](../../dials/two-sided/measure_plug_head_length.svg)
+
+Two top views of one plate of the two-sided puller, before left and after right, the plug end at the top. Left: the defaults with plug width at the cord end set to 12, a 20 mm wide plug in teal. Right: plug head length at 15 mm. The red line marks the plug's head length and reads 15 mm, the number you type. Marked in red: 1, the teeth: the serrated inner edges of the arms. 2, the zip stations: the three small holes along each arm.
+
+- Default: 0 mm
+- Range: 0 to 60 mm, in steps of 0.5 mm
+- Moves: teeth, zip stations
 
 ### Plug width at the cord end
 
@@ -917,7 +943,7 @@ Printed your plates and something is not quite right? Every fix is one dial. Cha
 | A plate flexes under load, or feels flimsy | A larger Extra wall on the plate, or a thicker Plate thickness |
 | The arms are shorter than the plug, or much longer | Plug length: measure from the surface it plugs into to the plug's back end, not including the cord |
 
-The dials named here are in **Advanced - Two-Sided Puller**, described one by one in this guide. Reports from printed two-sided pullers on the USB-C, lamp and standard presets have not been gathered yet; when they are, their fits go here.
+The dials named here are in **Advanced - Two-Sided Puller**, described one by one in this guide. In version 0.14.0 the four presets held their plugs loosely in test prints: their numbers had come from other sample plugs, and the gap narrowed in a straight line from the prong end, so a plug with a wide head touched the teeth only at the head's back corners. From version 0.15.0 the presets carry numbers measured on their own plugs and a head length that keeps the gap at the prong-end width along the head. Reports from plates printed on the new presets go here when they come in.
 
 ### Red warning tags
 
@@ -955,7 +981,7 @@ Everything below Step 4 in the Customizer is optional. The **Advanced - Two-Side
 
 ### How the plate is sized
 
-The plate takes its main sizes from Step 1. The arm's gripping edge follows the plug's own two widths, the prong-end width at the arm tips and the cord-end width at the plug's back end, blended in between. The arms grow so they always cover the whole plug length. The throat, where the gap closes down to the cord channel, sits just below the plug's back end. The cord channel comes from the cord thickness, and the finger holes from the Step 2 hand size. The plate dials tune that result; their defaults carry the field-tested grip: 2 mm teeth on a 2.8 mm pitch biting 1 mm deep, a grip bite of −1, with the toothed zone set automatically to the whole plug body.
+The plate takes its main sizes from Step 1. The arm's gripping edge follows the plug's own two widths, the prong-end width at the arm tips and the cord-end width at the plug's back end, blended in between; with a plug head length, the edge holds the prong-end width along the head and blends only behind it. The arms grow so they always cover the whole plug length. The throat, where the gap closes down to the cord channel, sits just below the plug's back end. The cord channel comes from the cord thickness, and the finger holes from the Step 2 hand size. The plate dials tune that result; their defaults carry the field-tested grip: 2 mm teeth on a 2.8 mm pitch biting 1 mm deep, a grip bite of −1, with the toothed zone set automatically to the whole plug body.
 
 Step 3's attachment offers Zip ties + Velcro strap (the default) and Zip ties. The three zip-tie stations per arm are always there, because the ties are what cinch the two plates together; the strap slot in each arm comes with the strap choice. The strap width sets the slot's length so the strap always threads through. In Auto placement, a plug too short for a slot gets none, with the orange preview note `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE`.
 
@@ -965,7 +991,7 @@ Step 1's plug sides choice picks how the arms meet the plug. **Rounded sides**, 
 
 The cradle never makes the outer-face gap narrower than the cord channel. When a narrow plug would need that, the file builds a shallower cradle and shows `CRADLE SHALLOWER THAN ASKED - PLUG NARROW`; a smaller cradle depth, or measuring the cord itself rather than its strain relief, clears it.
 
-**Flat sides** keeps the straight toothed edge, and there the grip bite sets the squeeze. The cradle depth and the grip clearance apply to Rounded sides only; the grip bite applies to Flat sides and to the plug presets, which carry their own tested grip.
+**Flat sides** keeps the straight toothed edge, and there the grip bite sets the squeeze. The cradle depth and the grip clearance apply to Rounded sides only, and the grip bite to Flat sides. The plug presets carry their own sides; the USB-C laptop tip's Rounded sides also carry their own cradle depth, 1.9 mm, the most that fits beside its cord channel.
 
 ### Print layout
 

@@ -72,10 +72,13 @@ MODEL_VERSION = "0.14.0"
 
 SIZES = ["Small", "Medium", "Large"]
 
-# Station measurements each plug_preset prefills (mirrors the `_eff_plug_*`
-# quick-select tables in both SCAD files — keep in sync), and the tool files
-# that offer the preset: "one-sided" gets a flat sheet per size, "two-sided"
-# a plate sheet per size. The two-sided file uses the width numbers only.
+# The numbers each plug_preset fills in, per tool file (mirrors the
+# `_eff_plug_*` quick-select tables in the SCAD file each key names — keep in
+# sync), and the tool files that offer the preset: "one-sided" gets a flat
+# sheet per size, "two-sided" a plate sheet per size. The two files measure
+# some plugs differently: the two-sided plates close across the plug's width
+# and hold it flat, so its cord is the side across the channel, and it adds
+# the head length.
 ONE_SIDED = "one-sided"
 TWO_SIDED = "two-sided"
 PLUG_PRESETS: Dict[str, Dict] = {
@@ -85,12 +88,21 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "short": "Flat 2-prong lamp plug",
         "files": (ONE_SIDED, TWO_SIDED),
         "measurements": {
-            "measure_plug_length": 37.0,
-            "measure_plug_width_prong_end": 25.0,
-            "measure_plug_width_cord_end": 11.2,
-            "measure_plug_thickness_prong_end": 18.6,
-            "measure_plug_thickness_cord_end": 8.6,
-            "measure_cord_thickness": 3.6,
+            ONE_SIDED: {
+                "measure_plug_length": 37.0,
+                "measure_plug_width_prong_end": 25.0,
+                "measure_plug_width_cord_end": 11.2,
+                "measure_plug_thickness_prong_end": 18.6,
+                "measure_plug_thickness_cord_end": 8.6,
+                "measure_cord_thickness": 3.6,
+            },
+            TWO_SIDED: {
+                "measure_plug_length": 32.5,
+                "measure_plug_width_prong_end": 20.0,
+                "measure_plug_width_cord_end": 11.1,
+                "measure_plug_head_length": 15.2,
+                "measure_cord_thickness": 7.0,
+            },
         },
     },
     "standard-3-prong": {
@@ -99,12 +111,21 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "short": "Standard 3-prong plug",
         "files": (ONE_SIDED, TWO_SIDED),
         "measurements": {
-            "measure_plug_length": 46.2,
-            "measure_plug_width_prong_end": 26.6,
-            "measure_plug_width_cord_end": 13.4,
-            "measure_plug_thickness_prong_end": 18.9,
-            "measure_plug_thickness_cord_end": 15.0,
-            "measure_cord_thickness": 7.0,
+            ONE_SIDED: {
+                "measure_plug_length": 46.2,
+                "measure_plug_width_prong_end": 26.6,
+                "measure_plug_width_cord_end": 13.4,
+                "measure_plug_thickness_prong_end": 18.9,
+                "measure_plug_thickness_cord_end": 15.0,
+                "measure_cord_thickness": 7.0,
+            },
+            TWO_SIDED: {
+                "measure_plug_length": 46.1,
+                "measure_plug_width_prong_end": 24.66,
+                "measure_plug_width_cord_end": 13.6,
+                "measure_plug_head_length": 15.6,
+                "measure_cord_thickness": 9.25,
+            },
         },
     },
     "heavy-duty-round": {
@@ -113,28 +134,32 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "short": "Heavy-duty extension cord",
         "files": (TWO_SIDED,),
         "measurements": {
-            "measure_plug_length": 43.8,
-            "measure_plug_width_prong_end": 25.8,
-            "measure_plug_width_cord_end": 21.9,
-            "measure_plug_thickness_prong_end": 27.0,
-            "measure_plug_thickness_cord_end": 27.0,
-            "measure_cord_thickness": 8.2,
+            TWO_SIDED: {
+                "measure_plug_length": 51.0,
+                "measure_plug_width_prong_end": 26.56,
+                "measure_plug_width_cord_end": 24.5,
+                "measure_plug_head_length": 23.0,
+                "measure_cord_thickness": 8.25,
+            },
         },
     },
-    # The USB-C tip is a two-sided-only plug: the four numbers the two-sided
-    # file carries. Its thin dimension is not measured yet, so no thickness
-    # keys (the plate sheet needs the length and the cord only).
+    # The USB-C tip is a two-sided-only plug with Rounded sides and its own
+    # cradle depth.
     "usb-c-laptop-tip": {
         "customizer": "USB-C laptop tip",
         "label": "USB-C laptop tip",
         "short": "USB-C laptop tip",
         "files": (TWO_SIDED,),
         "sides": "Rounded sides",
+        "cradle": 1.9,
         "measurements": {
-            "measure_plug_length": 23.0,
-            "measure_plug_width_prong_end": 13.0,
-            "measure_plug_width_cord_end": 13.0,
-            "measure_cord_thickness": 7.0,
+            TWO_SIDED: {
+                "measure_plug_length": 17.0,
+                "measure_plug_width_prong_end": 10.25,
+                "measure_plug_width_cord_end": 10.25,
+                "measure_plug_head_length": 0.0,
+                "measure_cord_thickness": 6.1,
+            },
         },
     },
     "wide-2-prong-appliance": {
@@ -143,12 +168,14 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "short": "Wide 2-prong appliance plug",
         "files": (ONE_SIDED,),
         "measurements": {
-            "measure_plug_length": 38.0,
-            "measure_plug_width_prong_end": 34.0,
-            "measure_plug_width_cord_end": 34.0,
-            "measure_plug_thickness_prong_end": 16.0,
-            "measure_plug_thickness_cord_end": 16.0,
-            "measure_cord_thickness": 5.0,
+            ONE_SIDED: {
+                "measure_plug_length": 38.0,
+                "measure_plug_width_prong_end": 34.0,
+                "measure_plug_width_cord_end": 34.0,
+                "measure_plug_thickness_prong_end": 16.0,
+                "measure_plug_thickness_cord_end": 16.0,
+                "measure_cord_thickness": 5.0,
+            },
         },
     },
 }
@@ -204,10 +231,10 @@ CLAM_GRIP_BITE = -1.0
 CLAM_CRADLE_DEPTH = 2.5
 
 
-def clamshell_mirror(size: str, plug: Dict) -> Dict[str, float]:
+def clamshell_mirror(size: str, m: Dict[str, float]) -> Dict[str, float]:
     """Pure-Python mirror of the clamshell envelope derivations (see the
-    'CLAMSHELL DERIVED VALUES' block in the v7 SCAD)."""
-    m = plug["measurements"]
+    'CLAMSHELL DERIVED VALUES' block in the v7 SCAD) for the two-sided plug
+    numbers ``m``."""
     finger_width = fit_formulas.FIT_SIZE_TABLE[size][0]
     finger_dia = finger_width + CLAM_FINGER_FIT
     cable_gap = max(2.0, m["measure_cord_thickness"] + CLAM_CABLE_CLEARANCE)
@@ -706,7 +733,7 @@ def build_flat_sheet(
     stl: Path, preset_key: str, size: str, out: Path
 ) -> List[Check]:
     plug = PLUG_PRESETS[preset_key]
-    d = fit_formulas.derive({**plug["measurements"], "size": size})
+    d = fit_formulas.derive({**plug["measurements"][ONE_SIDED], "size": size})
     mesh = trimesh.load(stl, force="mesh")
     (xmin, ymin, zmin), (xmax, ymax, zmax) = mesh.bounds
 
@@ -948,7 +975,7 @@ def build_flat_sheet(
 
 def build_clamshell_sheet(stl: Path, preset_key: str, size: str, out: Path) -> List[Check]:
     plug = PLUG_PRESETS[preset_key]
-    cm = clamshell_mirror(size, plug)
+    cm = clamshell_mirror(size, plug["measurements"][TWO_SIDED])
     mesh = trimesh.load(stl, force="mesh")
     (xmin, ymin, zmin), (xmax, ymax, zmax) = mesh.bounds
 
@@ -982,7 +1009,7 @@ def build_clamshell_sheet(stl: Path, preset_key: str, size: str, out: Path) -> L
     else:
         slot_line = "Velcro slots: none (plug too short for one)"
     sides_line = (
-        f"Rounded sides: cradle, {fmt(CLAM_CRADLE_DEPTH)} mm per side"
+        f"Rounded sides: cradle, {fmt(plug.get('cradle', CLAM_CRADLE_DEPTH))} mm per side"
         if plug.get("sides") == "Rounded sides"
         else "Flat sides: straight, serrated V-edges grip the plug"
     )
