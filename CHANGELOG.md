@@ -55,6 +55,14 @@ public milestone**.
   run (a flat cord's wide side, not its thin side), and a rubber strain
   relief counts as part of the plug at the cord end instead of being
   skipped. The one-sided puller's instructions are unchanged.
+- **The Grip bite help, its note in the guide and the `NO GRIP BITE` tag's
+  row said the bite acts on every plug preset.** It acts with Flat sides
+  only, typed or from a preset; the USB-C tip's preset has Rounded sides.
+- **The two-sided outline sheets' "cable strip (outer face)" label lay over
+  the zip-tie holes beside the throat.** It now reads up the cord channel.
+- **The two-sided storyboard typed old USB-C numbers in Step 1.** It now
+  picks the `USB-C laptop tip` preset, so the picture shows the measured
+  plug.
 
 ## [0.14.0] - 2026-10-01
 

@@ -7,7 +7,7 @@ If the preview shows red text, or a red text tag printed next to your part, the 
 | `CHECK PLUG LENGTH MEASUREMENT (MM?)`, and the same for `PLUG WIDTH`, `CORD THICKNESS`, `FINGER WIDTH` | That number is outside any plausible mm value: usually inches typed into a mm field (1.25 instead of 32) | Measure again with the mm side of the ruler and type it again |
 | `CORD TOO THICK FOR CABLE CHANNEL` | The cord will not fit the channel with clearance | Measure the cord thickness again, or raise the cord channel clearance |
 | `PLUG TOO WIDE - ARMS BULGE PAST FINGER LOBES` | The plug is so wide that the arms would bulge wider than the finger lobes | Check the plug width; a truly huge plug is beyond this tool |
-| `NO GRIP BITE - PLUG WONT BE HELD` | Flat sides or a plug preset with a grip bite of 0 or more, so the arms do not squeeze | Set the grip bite negative, for example −1, so the arms bite the plug |
+| `NO GRIP BITE - PLUG WONT BE HELD` | Flat sides, typed or from a preset, with a grip bite of 0 or more, so the arms do not squeeze | Set the grip bite negative, for example −1, so the arms bite the plug |
 | `PLATE THINNER THAN 2MM - TOO FLIMSY` | The plate thickness is under 2 mm | Raise the plate thickness to 3 to 5 mm |
 | `ZIP STATION OFF THE ARM` | A manual zip-tie station fell past the arm | Bring that station position back within the arm's length |
 | `ZIP STATIONS OVERLAP EACH OTHER` | Two manual zip-tie stations landed on top of each other | Spread the station positions at least one hole diameter apart |

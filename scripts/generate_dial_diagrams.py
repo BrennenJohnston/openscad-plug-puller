@@ -2366,7 +2366,12 @@ def describe_storyboard(board: Dict[str, Any], stages: Sequence[Dict[str, Any]],
             return f"{st['step']}: both plates side by side in one file, what you print; nothing marked."
         parts = _stage_dials(st["set"], titles, units, with_values)
         plan = st["plan"]
-        gone = feature_names([rn for rn, rm in zip(plan.regions, plan.removed) if rm])
+        # Removed only when none of the feature's regions has a new edge, as
+        # the picture's key decides: a hole whose old place filled in while a
+        # new one was cut has moved.
+        kept = feature_names([rn for rn, rm in zip(plan.regions, plan.removed) if not rm])
+        gone = [f for f in feature_names([rn for rn, rm in zip(plan.regions, plan.removed) if rm])
+                if f not in kept]
         feats = [f for f in feature_names(st["named"]) if f not in gone]
         if feats or gone:
             red = f"; red on {_join_names(feats, one_article)}" if feats else ""

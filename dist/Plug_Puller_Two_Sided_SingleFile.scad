@@ -69,7 +69,7 @@ print_layout = "Both plates"; // [Both plates, One plate]
 plate_wall_boost = 0; // [0:0.25:5]
 // Thickness of each plate. The two identical plates meet face to face around the plug, so the finished sandwich is twice this. (mm)
 plate_thickness = 4; // [2:0.25:8]
-// Flat sides and plug presets only. Grip clearance per side against the plug width. NEGATIVE squeezes the plug so the teeth bite (recommended); 0 = exact fit; positive = loose. The gap between the arms follows the plug's width at the prong end and at the cord end, plus 2x this. (mm)
+// Flat sides only, typed or from a preset. Grip clearance per side against the plug width. NEGATIVE squeezes the plug so the teeth bite (recommended); 0 = exact fit; positive = loose. The gap between the arms follows the plug's width at the prong end and at the cord end, plus 2x this. (mm)
 plate_grip_bite = -1; // [-2:0.1:2]
 // Rounded sides only. How much narrower the gap is on each side at the outer face of each plate than where the plates meet; deeper = a steeper cradle. 0 = straight edge. (mm)
 plate_cradle_depth = 2.5; // [0:0.25:3.5]
