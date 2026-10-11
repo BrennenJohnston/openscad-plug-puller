@@ -529,9 +529,9 @@ def build_twin(tool: str, table: List[Dict[str, Any]], anchors: Dict[int, str], 
         out.append(f"| {t['k']} | `{t['row']['openscad_name']}` | {cell_text(t['row'], t['title'], t['measure'])} | "
                    f"{default_text(t['row'])} | ________ |")
     out += ["",
-            f"**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's "
-            f"Step order, each with the dial's name, its plain title and either a blank after the default or a tick box "
-            f"per choice with the default marked. The right half is a schematic plug in teal "
+            "**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's "
+            "Step order, each with the dial's name, its plain title and either a blank after the default or a tick box "
+            "per choice with the default marked. The right half is a schematic plug in teal "
             + (f"drawn from the {words}'s defaults at 1.5 to 1, " if tool == "one-sided" else
                f"at 1.5 to 1, as long and as wide at the prong end as the {words}'s defaults: ")
             + ("a top view with the prong end at the left against a wall plate line, a side view standing with its prong end up, "
