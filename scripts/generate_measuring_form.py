@@ -6,8 +6,9 @@ the printed form a person fills in before opening the Customizer. The left
 column has one row per Step dial in Customizer order, read from the tool's
 parameter mapping (the name, the plain title from ``dial_catalog.json``, the
 default and a blank for a number, tick boxes for a dropdown). The right half
-is a schematic plug drawn from the tool's defaults at 1.5:1, a knuckle bar and
-a strap bar; every row that asks for a number gets a straight leader to a red
+is a schematic plug drawn from the tool's defaults at 1.5:1 (the two-sided
+plug with a head and a narrower cord end, so its head length has a place to
+point at), a knuckle bar and a strap bar; every row that asks for a number gets a straight leader to a red
 dimension line on the feature its catalog ``measure.anchor`` names, the row's
 number in a red circle at the line. The page builder is the outline sheets'
 ``Sheet`` class (its dimension lines and leaders); the halo texts are drawn as
@@ -79,6 +80,11 @@ LEADER_X = COL_X1 + 2.0
 SCALE = 1.5
 SCH_X0 = 110.0
 CIRCLE_D = 3.0
+# The two-sided top view's shape: the defaults are one width from end to end,
+# so the head and the narrower cord end are drawn as these shares of the
+# default length and prong-end width.
+HEAD_SHARE = 0.45
+CORD_END_SHARE = 0.6
 FOOTER_Y = 262.0
 HEADER_LINE = "Measure in mm. Fill in the blanks top to bottom, then type them into the Customizer in the same order."
 TWIN_INTRO = ("Everything on this sheet is in mm. Fill in the blanks top to bottom, then type the numbers into the "
@@ -286,6 +292,14 @@ class Schematic:
         self.shapes.append((x0, y0, x1, y1))
         self.sh.polygon_fill([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], TEAL, TEAL_OPACITY)
 
+    def headed_body(self, x0: float, y0: float, xh: float, x1: float, y1: float, wc: float) -> None:
+        """A top view that keeps its full width from x0 to xh, then narrows to
+        ``wc`` at x1."""
+        self.shapes.append((x0, y0, x1, y1))
+        cy = (y0 + y1) / 2
+        self.sh.polygon_fill([(x0, y0), (xh, y0), (x1, cy - wc / 2), (x1, cy + wc / 2), (xh, y1), (x0, y1)],
+                             TEAL, TEAL_OPACITY)
+
     def draw(self) -> None:
         d, sh = self.d, self.sh
         L = d["measure_plug_length"] * SCALE
@@ -294,11 +308,22 @@ class Schematic:
         x0, x1 = SCH_X0, SCH_X0 + L
         # The top view, the plug lying with its prong end at the left against the wall plate.
         ty0, ty1 = 46.0, 46.0 + W
-        self.body(x0, ty0, x1, ty1)
         cy = (ty0 + ty1) / 2
+        headed = self.tool == "two-sided"
+        if headed:
+            xh, wc = x0 + HEAD_SHARE * L, CORD_END_SHARE * W
+            self.headed_body(x0, ty0, xh, x1, ty1, wc)
+        else:
+            wc = W
+            self.body(x0, ty0, x1, ty1)
         self.body(x1, cy - cord / 2, x1 + 8.0, cy + cord / 2)
         sh.line(x0, ty0 - 3.0, x0, ty1 + 1.5, 0.5)
-        sh.text(x0 - 1.2, ty1 + 4.6, "wall plate", 2.4, anchor="start", fill=GRAY)
+        # With a head, its dimension line hangs from the wall plate line, so
+        # the label moves to the line's left.
+        if headed:
+            sh.text(x0 - 1.5, ty1 + 4.6, "wall plate", 2.4, anchor="end", fill=GRAY)
+        else:
+            sh.text(x0 - 1.2, ty1 + 4.6, "wall plate", 2.4, anchor="start", fill=GRAY)
         caption = "top view, widths across the plates" if self.tool == "two-sided" else "top view"
         sh.text((x0 + x1) / 2, ty0 - 8.4, caption, 2.6, "bold", "middle", fill=GRAY)
         self.dims["plug_length"] = ("h", x0, x1, ty0 - 6.0, ty0)
@@ -307,10 +332,15 @@ class Schematic:
         self.dims["plug_width_prong_end"] = ("v", ty0, ty1, x0 - 5.0, x0)
         self.circles["plug_width_prong_end"] = (x0 - 5.0, ty0)
         self.words["plug_width_prong_end"] = "the plug's width at the prong end, the left edge of the top view"
+        if headed:
+            self.dims["plug_head"] = ("h", x0, xh, ty1 + 9.0, ty1)
+            self.circles["plug_head"] = (x0 - 3.5, ty1 + 9.0)
+            self.words["plug_head"] = ("the plug's head on the top view, from the wall plate to where the plug "
+                                       "starts to narrow")
         wc_x = x1 + 12.0
-        self.dims["plug_width_cord_end"] = ("v", ty0, ty1, wc_x, x1)
+        self.dims["plug_width_cord_end"] = ("v", cy - wc / 2, cy + wc / 2, wc_x, x1)
         self.circles["plug_width_cord_end"] = (wc_x, ty1 + 8.5)
-        self.tails["plug_width_cord_end"] = (wc_x, ty1, wc_x, ty1 + 7.0)
+        self.tails["plug_width_cord_end"] = (wc_x, cy + wc / 2, wc_x, ty1 + 7.0)
         self.words["plug_width_cord_end"] = "the plug's width at the cord end, the right edge of the top view where the cord leaves"
         if "measure_plug_thickness_prong_end" in d:
             # The side view stands with its prong end up, to the right, below the top view.
@@ -501,10 +531,13 @@ def build_twin(tool: str, table: List[Dict[str, Any]], anchors: Dict[int, str], 
     out += ["",
             f"**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's "
             f"Step order, each with the dial's name, its plain title and either a blank after the default or a tick box "
-            f"per choice with the default marked. The right half is a schematic plug in teal drawn from the {words}'s "
-            "defaults at 1.5 to 1, "
+            f"per choice with the default marked. The right half is a schematic plug in teal "
+            + (f"drawn from the {words}'s defaults at 1.5 to 1, " if tool == "one-sided" else
+               f"at 1.5 to 1, as long and as wide at the prong end as the {words}'s defaults: ")
             + ("a top view with the prong end at the left against a wall plate line, a side view standing with its prong end up, "
-               if tool == "one-sided" else "a top view with the prong end at the left against a wall plate line, ")
+               if tool == "one-sided" else
+               "a top view with the prong end at the left against a wall plate line, the plug keeping its full width along "
+               "its head and then narrowing toward the cord end, ")
             + "the cord's end as a small circle, a bar of four knuckles at 1:1 and a strap bar at 1:1. A straight black arrow "
               "runs from each measured row's blank to a red dimension line on the schematic, the row's number in a red circle "
               "at the line:", ""]

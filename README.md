@@ -243,7 +243,7 @@ its scripts are all in the repository:
 - **The Customizer schemas:** [`parameter_mapping.json`](parameter_mapping.json)
   (one-sided, 79 parameters) and
   [`parameter_mapping_two_sided.json`](parameter_mapping_two_sided.json)
-  (two-sided, 39 parameters) list every name, type, range, step and default;
+  (two-sided, 40 parameters) list every name, type, range, step and default;
   [`dial_catalog.json`](dial_catalog.json) holds every dial's title, sentence
   and diagram settings, and the diagrams themselves are under
   [`docs/dials/`](docs/dials/README.md).
@@ -407,7 +407,7 @@ ships sets for the two-sided puller:
 | Name in JSON | Loads as | Notes |
 | ------------ | -------- | ----- |
 | `Round extension cord - NEMA 5-15` | `plug_preset` | the heavy-duty extension-cord plug, Medium, zip ties + velcro strap |
-| `USB-C laptop plug - measured` | `Measure my plug` | 23 mm long, 13 mm wide at both ends, 7 mm cord, `Rounded sides`, zip ties only |
+| `USB-C laptop plug - measured` | `Measure my plug` | 17 mm long, 10.25 mm wide at both ends, 6.1 mm cord, `Rounded sides`, 1.9 mm cradle, zip ties only |
 | `USB-C laptop tip`, `Flat 2-prong lamp plug - NEMA 1-15`, `Standard 3-prong plug - NEMA 5-15` | `plug_preset` | the three presets added after 0.12, Medium |
 
 ### Auto-fit and `custom_enable_auto_fit`
@@ -488,7 +488,7 @@ For power users (the Advanced and Custom tiers):
 | -------- | ----------- |
 | [Advanced settings, one-sided](docs/guides/one-sided/full-guide.md#advanced-settings) and [two-sided](docs/guides/two-sided/full-guide.md#advanced-settings) | The advanced dials explained, Custom size (one-sided), saved settings, the command line; render modes and console diagnostics are in the reference |
 | [`parameter_mapping.json`](parameter_mapping.json) | Machine-readable Customizer schema of the one-sided puller (79 parameters) |
-| [`parameter_mapping_two_sided.json`](parameter_mapping_two_sided.json) | The same for the two-sided puller (39 parameters) |
+| [`parameter_mapping_two_sided.json`](parameter_mapping_two_sided.json) | The same for the two-sided puller (40 parameters) |
 | [`dial_catalog.json`](dial_catalog.json) | Every dial's title, sentence and diagram settings; the source of `docs/dials/` and the dial reference |
 
 For contributors and engineers:
@@ -554,7 +554,7 @@ openscad-plug-puller/
     images/                        # guide photos and model preview renders
   dial_catalog.json                # every dial's title, sentence and diagram settings
   parameter_mapping.json           # one-sided Customizer schema (79 parameters)
-  parameter_mapping_two_sided.json # two-sided Customizer schema (39 parameters)
+  parameter_mapping_two_sided.json # two-sided Customizer schema (40 parameters)
   CHANGELOG.md
   LICENSE                          # PolyForm Noncommercial 1.0.0
 ```

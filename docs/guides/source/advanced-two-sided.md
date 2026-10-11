@@ -4,7 +4,7 @@ Everything below Step 4 in the Customizer is optional. The **Advanced - Two-Side
 
 ### How the plate is sized
 
-The plate takes its main sizes from Step 1. The arm's gripping edge follows the plug's own two widths, the prong-end width at the arm tips and the cord-end width at the plug's back end, blended in between. The arms grow so they always cover the whole plug length. The throat, where the gap closes down to the cord channel, sits just below the plug's back end. The cord channel comes from the cord thickness, and the finger holes from the Step 2 hand size. The plate dials tune that result; their defaults carry the field-tested grip: 2 mm teeth on a 2.8 mm pitch biting 1 mm deep, a grip bite of −1, with the toothed zone set automatically to the whole plug body.
+The plate takes its main sizes from Step 1. The arm's gripping edge follows the plug's own two widths, the prong-end width at the arm tips and the cord-end width at the plug's back end, blended in between; with a plug head length, the edge holds the prong-end width along the head and blends only behind it. The arms grow so they always cover the whole plug length. The throat, where the gap closes down to the cord channel, sits just below the plug's back end. The cord channel comes from the cord thickness, and the finger holes from the Step 2 hand size. The plate dials tune that result; their defaults carry the field-tested grip: 2 mm teeth on a 2.8 mm pitch biting 1 mm deep, a grip bite of −1, with the toothed zone set automatically to the whole plug body.
 
 Step 3's attachment offers Zip ties + Velcro strap (the default) and Zip ties. The three zip-tie stations per arm are always there, because the ties are what cinch the two plates together; the strap slot in each arm comes with the strap choice. The strap width sets the slot's length so the strap always threads through. In Auto placement, a plug too short for a slot gets none, with the orange preview note `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE`.
 
@@ -14,7 +14,7 @@ Step 1's plug sides choice picks how the arms meet the plug. **Rounded sides**, 
 
 The cradle never makes the outer-face gap narrower than the cord channel. When a narrow plug would need that, the file builds a shallower cradle and shows `CRADLE SHALLOWER THAN ASKED - PLUG NARROW`; a smaller cradle depth, or measuring the cord itself rather than its strain relief, clears it.
 
-**Flat sides** keeps the straight toothed edge, and there the grip bite sets the squeeze. The cradle depth and the grip clearance apply to Rounded sides only; the grip bite applies to Flat sides and to the plug presets, which carry their own tested grip.
+**Flat sides** keeps the straight toothed edge, and there the grip bite sets the squeeze. The cradle depth and the grip clearance apply to Rounded sides only, and the grip bite to Flat sides. The plug presets carry their own sides; the USB-C laptop tip's Rounded sides also carry their own cradle depth, 1.9 mm, the most that fits beside its cord channel.
 
 ### Print layout
 

@@ -119,6 +119,7 @@ MEASURE_KEYS = (
     "measure_plug_length",
     "measure_plug_width_prong_end",
     "measure_plug_width_cord_end",
+    "measure_plug_head_length",
     "measure_plug_thickness_prong_end",
     "measure_plug_thickness_cord_end",
     "measure_cord_thickness",
@@ -322,7 +323,7 @@ def effective_measurements(file_key: str, params: Dict[str, Any]) -> Dict[str, f
     if preset != "Measure my plug":
         for plug in PLUG_PRESETS.values():
             if plug["customizer"] == preset and file_key in plug["files"]:
-                return dict(plug["measurements"])
+                return dict(plug["measurements"][file_key])
         raise KeyError(f"no measurements for the preset {preset!r} in {file_key}")
     return {k: params[k] for k in MEASURE_KEYS if k in params}
 
@@ -440,7 +441,8 @@ def section_plug_polygon(file_key: str, params: Dict[str, Any], view: str, at: f
     y_back = y1 - length
     if not (y_back <= at <= y1 + 2.0):
         return None
-    f = min(1.0, max(0.0, (at - y_back) / max(1e-6, length)))
+    y_head = y1 - min(length, m.get("measure_plug_head_length", 0.0))
+    f = min(1.0, max(0.0, (at - y_back) / max(1e-6, y_head - y_back)))
     w = m["measure_plug_width_cord_end"] + f * (m["measure_plug_width_prong_end"] - m["measure_plug_width_cord_end"])
     mid = z1 / 2
     return Polygon([(-w / 2, mid - z1 / 2), (w / 2, mid - z1 / 2), (w / 2, mid + z1 / 2), (-w / 2, mid + z1 / 2)])
@@ -493,22 +495,26 @@ def outline_regions(before: Outline, after: Outline) -> Tuple[List[Polygon], flo
 
 
 def plug_polygon(file_key: str, params: Dict[str, Any], outline: Outline) -> Polygon:
-    """The plug as the tool places it: a trapezoid from the prong-end width
-    at the plate end to the cord-end width over the plug length."""
+    """The plug as the tool places it: the prong-end width at the plate end,
+    held along the head (the two-sided file's head length; 0 elsewhere),
+    then narrowing to the cord-end width over the rest of the plug length."""
     m = effective_measurements(file_key, params)
     x0, _y0, x1, y1 = shapely.union_all(outline.solids).bounds
     cx = (x0 + x1) / 2
     length = m["measure_plug_length"]
     w_prong = m["measure_plug_width_prong_end"]
     w_cord = m["measure_plug_width_cord_end"]
+    head = min(length, m.get("measure_plug_head_length", 0.0))
     y_prong = y1
     y_cord = y1 - length
-    return Polygon([
-        (cx - w_prong / 2, y_prong),
-        (cx + w_prong / 2, y_prong),
-        (cx + w_cord / 2, y_cord),
-        (cx - w_cord / 2, y_cord),
-    ])
+    has_head = 0 < head < length
+    pts = [(cx - w_prong / 2, y_prong), (cx + w_prong / 2, y_prong)]
+    if has_head:
+        pts.append((cx + w_prong / 2, y_prong - head))
+    pts += [(cx + w_cord / 2, y_cord), (cx - w_cord / 2, y_cord)]
+    if has_head:
+        pts.append((cx - w_prong / 2, y_prong - head))
+    return Polygon(pts)
 
 
 # ---------------------------------------------------------------------------
@@ -629,7 +635,7 @@ def _clamshell(params: Dict[str, Any]) -> Tuple[Dict[str, float], Dict[str, Any]
     m = effective_measurements(TWO_SIDED, params)
     size = params.get("size", "Medium")
     mirror_size = size if size in fit_formulas.FIT_SIZE_TABLE else "Medium"
-    return m, clamshell_mirror(mirror_size, {"measurements": m})
+    return m, clamshell_mirror(mirror_size, m)
 
 
 def footprints_one_sided(params: Dict[str, Any], outline: Outline,
@@ -1508,6 +1514,12 @@ def anchor_dimension(anchor: str, file_key: str, params: Dict[str, Any], outline
             return None
         px0, py0, px1, py1 = _plug_edges(plug)
         return {"kind": "v", "y0": py0, "y1": py1, "x_obj": px1, "x_dim": bx1 + DIM_OFFSET, "label": label}
+    if anchor == "plug_head":
+        if plug is None or not isinstance(value, (int, float)) or value <= 0:
+            return None
+        px0, py0, px1, py1 = _plug_edges(plug)
+        return {"kind": "v", "y0": py1 - float(value), "y1": py1, "x_obj": px1, "x_dim": bx1 + DIM_OFFSET,
+                "label": label}
     if anchor in ("gap_tips", "gap_cord_end"):
         m = effective_measurements(file_key, params)
         y = by1 - 2.0 if anchor == "gap_tips" else by1 - m["measure_plug_length"]
@@ -1782,6 +1794,7 @@ DIMENSION_WORDS: Dict[str, Tuple[str, str, str, Optional[str], Optional[str]]] =
     "body_width": ("the body at its widest", "the body", "wide",
                    None, "narrower than the hand, as its width is worked out from the hand width"),
     "plug_length": ("the plug's length", "the plug", "long", None, None),
+    "plug_head": ("the plug's head length", "the head", "long", None, None),
     "gap_tips": ("the gap between the arm tips", "the gap", "wide",
                  "leaving a little room around the plug", "so the arms squeeze the plug"),
     "gap_cord_end": ("the gap between the arms at the cord end", "the gap", "wide",

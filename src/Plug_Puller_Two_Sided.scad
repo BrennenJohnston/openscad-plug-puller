@@ -9,15 +9,17 @@
 // License: PolyForm Noncommercial 1.0.0
 
 /* [Step 1 - Your Plug] */
-// Pick your plug if it is on this list and every number below fills in, including its sides. Otherwise leave Measure my plug and type four numbers.
+// Pick your plug if it is on this list and every number below fills in, including its sides. Otherwise leave Measure my plug and type the numbers below.
 plug_preset = "Measure my plug"; // [Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15]
 // How far the plug body sticks out, from the surface it plugs into to the plug's back end where the cord starts. On a laptop or charger, measure from the device's edge. Skip if you picked a plug preset. (mm)
 measure_plug_length = 25.5; // [12:0.5:85]
 // Plug width at the PRONG END: the size the two plates will close across, measured across the plug body just behind the prongs. On a USB-C or charger tip, just behind the metal tip. (mm)
 measure_plug_width_prong_end = 20; // [5:0.5:40]
-// Plug width at the CORD END: the same direction, measured where the cord leaves the plug body. Skip the soft rubber strain relief. (mm)
+// How far back from the prong end the plug stays as wide as the prong-end width before it narrows. 0 = it narrows from the prong end. Skip if you picked a plug preset. (mm)
+measure_plug_head_length = 0; // [0:0.5:60]
+// Plug width at the CORD END: the same direction, measured at the plug's back end where the cord comes out. A rubber strain relief counts as part of the plug, because the whole plug lies between the plates. (mm)
 measure_plug_width_cord_end = 20; // [5:0.5:40]
-// Measure the cord just behind the plug, across its THIN side (flat lamp cord: the narrow way; round cord: the diameter). Skip if you picked a plug preset. (mm)
+// Measure the cord just behind the plug, the way the plug widths run: the plug lies flat between the plates, so a flat lamp cord is measured across its WIDE side; a round cord, its diameter. Skip if you picked a plug preset. (mm)
 measure_cord_thickness = 4; // [1.5:0.5:12]
 // Look at the plug body where the plates will grip it. Rounded sides: a round cord plug, a USB-C or charger tip; the plates get a sloped cradle that centers the plug and forgives a small measuring error. Flat sides: a boxy plug; the plates stay straight so the teeth bite along the whole side. Ignored when a plug preset is chosen: presets carry their own tested grip.
 plug_sides = "Rounded sides"; // [Rounded sides, Flat sides]
@@ -122,37 +124,50 @@ include <fit_sizes.scad>
 // ROUTING
 // ═══════════════════════════════════════════════════════════════════════════════
 // Plug preset -> effective plug measurements. Each preset carries the
-// numbers measured on its reference plug: the heavy-duty cord (the same
-// numbers as the one-sided file's prefill), the USB-C laptop tip (the
-// owner's measured and printed set), and the lamp and standard plugs (their
-// one-sided preset numbers; the plates close across the plug's wider face,
-// so the two-sided widths are those plugs' widths). "Measure my plug" keeps
-// the Step 1 sliders authoritative.
+// numbers measured with a caliper on its own plug: the whole length the
+// plates cover (a strain relief included), the width the plates close
+// across at the prong end and at the cord end, how far the head keeps the
+// prong-end width, and the cord across the channel (a flat lamp cord's wide
+// side, since the plug lies flat between the plates). The heavy-duty plug
+// widens behind its prong face, so its prong-end width is the widest
+// measurement, 26.56; the USB-C length leaves out the metal tip. "Measure
+// my plug" keeps the Step 1 sliders authoritative.
 _pp_active = (plug_preset != "Measure my plug");
 _eff_plug_length =
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 43.8 :
-    plug_preset == "USB-C laptop tip"                        ? 23.0 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 37.0 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 46.2 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 51.0 :
+    plug_preset == "USB-C laptop tip"                        ? 17.0 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 32.5 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 46.1 :
     measure_plug_length;
 _eff_plug_width_prong_end =
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
-    plug_preset == "USB-C laptop tip"                        ? 13.0 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 25.0 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 26.6 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 26.56 :
+    plug_preset == "USB-C laptop tip"                        ? 10.25 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 20.0 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 24.66 :
     measure_plug_width_prong_end;
 _eff_plug_width_cord_end =
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 27.0 :
-    plug_preset == "USB-C laptop tip"                        ? 13.0 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.2 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.4 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 24.5 :
+    plug_preset == "USB-C laptop tip"                        ? 10.25 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.1 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.6 :
     measure_plug_width_cord_end;
 _eff_cord_thickness =
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 8.2 :
-    plug_preset == "USB-C laptop tip"                        ? 7.0 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 3.6 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 7.0 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 8.25 :
+    plug_preset == "USB-C laptop tip"                        ? 6.1 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 7.0 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 9.25 :
     measure_cord_thickness;
+// How far the plug keeps its prong-end width before it narrows; never more
+// than the plug is long.
+assert(measure_plug_head_length >= 0 && measure_plug_head_length <= 60,
+       "measure_plug_head_length must be 0 to 60 mm");
+_head_length_asked =
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 23.0 :
+    plug_preset == "USB-C laptop tip"                        ? 0 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 15.2 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 15.6 :
+    measure_plug_head_length;
+_eff_plug_head_length = max(0, min(_head_length_asked, _eff_plug_length));
 
 // Zip ties are what hold the two plates together, so every choice keeps them.
 _attach_zip    = true;
@@ -215,7 +230,7 @@ _clam_slot_out_wall   = 2.2 + plate_wall_boost;
 // plug) comes from the prong-end width, half-gap at the plug's back end from
 // the cord-end width, interpolated linearly in between. Each station is floored
 // 1 mm outside the cable channel so the V can never pinch shut on the cord.
-_clam_cable_gap = max(2, _eff_cord_thickness + plate_cable_clearance);      // ~9.0
+_clam_cable_gap = max(2, _eff_cord_thickness + plate_cable_clearance);      // ~9.05
 _clam_cable_hw  = _clam_cable_gap / 2;
 // Grip per side against the plug's width at the face where the plates meet.
 // Rounded sides get a small clearance and the cradle below does the holding;
@@ -224,16 +239,18 @@ _clam_cable_hw  = _clam_cable_gap / 2;
 _grip_term      = (_sides_eff == "Rounded sides") ? plate_grip_clearance / 2
                                                   : plate_grip_bite;
 _clam_hw_wall   = max(_clam_cable_hw + 1,
-                      _eff_plug_width_prong_end / 2 + _grip_term);           // ~12.5 (HD)
+                      _eff_plug_width_prong_end / 2 + _grip_term);           // ~12.3 (HD)
 _clam_hw_cable  = max(_clam_cable_hw + 1,
                       _eff_plug_width_cord_end / 2 + _grip_term);
 // Cradle (Rounded sides): the gap narrows by this much per side from the
 // mating face down to the outer face, so two plates form a diamond channel.
 // Guard: the outer-face gap may come down to the cord channel's width but
 // never below it, and the step-in never exceeds the plate. 0 = today's
-// straight edge.
+// straight edge. A preset with Rounded sides carries its own depth, sized to
+// fit its plug beside its cord channel.
+_eff_cradle_depth = plug_preset == "USB-C laptop tip" ? 1.9 : plate_cradle_depth;
 _cradle_eff     = (_sides_eff == "Rounded sides")
-    ? max(0, min(plate_cradle_depth, plate_thickness,
+    ? max(0, min(_eff_cradle_depth, plate_thickness,
                  min(_clam_hw_wall, _clam_hw_cable) - _clam_cable_hw))
     : 0;
 
@@ -259,7 +276,7 @@ _clam_length    = max(_clam_y_back_min + plate_grip_zone_start
                           + (plate_grip_zone_length > 0
                                  ? plate_grip_zone_length : 0) + 12,
                       _eff_plug_length + 11,
-                      _clam_y_back_min + _eff_plug_length);                // ~73.8 (HD)
+                      _clam_y_back_min + _eff_plug_length);                // ~81.0 (HD)
 _clam_y_back    = _clam_length - _eff_plug_length;                         // ~30.0 (HD)
 // Serration span: 0 = auto — cover the full plug body span (back end up to
 // plate_grip_zone_start behind the tips); a positive slider value overrides.
@@ -268,13 +285,18 @@ _clam_grip_len_eff = (plate_grip_zone_length > 0)
     : max(0, _clam_length - plate_grip_zone_start - _clam_y_back);
 _clam_grip_y0   = max(_clam_y_back,
                       _clam_length - plate_grip_zone_start - _clam_grip_len_eff);
-_clam_tip_hw    = _clam_hw_wall + plate_tip_flare / 2;                      // ~12.9
+_clam_tip_hw    = _clam_hw_wall + plate_tip_flare / 2;                      // ~12.6
+
+// Where the plug's head ends: from here to the arm tips the plug keeps its
+// prong-end width. Equal to _clam_length when the head length is 0.
+_clam_head_y = _clam_length - _eff_plug_head_length;
 
 // Plug-profile half-gap at a given Y (valid on [_clam_y_back, _clam_length]):
-// the plug's own thickness interpolated between the two Step 1 stations,
-// plus the grip bite per side.
+// the prong-end width along the head, then the plug's own width
+// interpolated down to the cord-end station, plus the grip bite per side.
 function _clam_plug_hw(y) =
-    let (f = (y - _clam_y_back) / max(eps, _eff_plug_length))
+    (y >= _clam_head_y) ? _clam_hw_wall :
+    let (f = (y - _clam_y_back) / max(eps, _clam_head_y - _clam_y_back))
     _clam_hw_cable + (_clam_hw_wall - _clam_hw_cable) * f;
 
 // Right-half arm inner-edge X at a given Y: cable channel, then the throat
@@ -296,8 +318,8 @@ function _clam_inner_x(y) =
 // arm is the 2D hull of the goggle lobe, the mid-arm bulge circle (below),
 // and this tip circle, so it tapers like the ideal.
 _clam_tip_r  = plate_arm_tip_width / 2;                                     // ~5.5
-_clam_tip_cx = _clam_tip_hw - _cradle_eff + _clam_tip_r;                   // ~18.4
-_clam_tip_cy = _clam_length - _clam_tip_r;                                 // ~68.3
+_clam_tip_cx = _clam_tip_hw - _cradle_eff + _clam_tip_r;                   // ~18.1
+_clam_tip_cy = _clam_length - _clam_tip_r;                                 // ~75.5
 
 // Zip stations along the arm (Y from the cord end). Auto: rear beside the
 // cable channel, mid just past the plug's back end (where the throat mouth
@@ -414,6 +436,10 @@ echo("=== Two-sided puller derived values (mm) ===");
 echo(str("  plate length = ", _clam_length));
 echo(str("  grip gap at the prong end = ", 2 * _clam_hw_wall));
 echo(str("  grip gap at the cord end = ", 2 * _clam_hw_cable));
+echo(_eff_plug_head_length < _head_length_asked
+     ? str("  plug head length = ", _eff_plug_head_length,
+           " (clamped from ", _head_length_asked, ", the plug length)")
+     : str("  plug head length = ", _eff_plug_head_length));
 echo(str("  cradle depth per side = ", _cradle_eff));
 echo(str("  cord channel = ", _clam_cable_gap));
 echo(str("  finger hole = ", _clam_finger_dia));
@@ -468,10 +494,11 @@ function _vw_clam_zip_hits_slot() =
 function _vw_clam_plug_too_long() =
     _clam_length > 120;
 // The two width stations describe an implausibly steep taper — more
-// than ~20 degrees per side is almost certainly a mis-measurement.
+// than ~20 degrees per side is almost certainly a mis-measurement. The
+// taper runs over the body behind the head.
 function _vw_clam_taper_steep() =
     abs(_eff_plug_width_prong_end - _eff_plug_width_cord_end) / 2
-        > tan(20) * max(1, _eff_plug_length);
+        > tan(20) * max(1, _eff_plug_length - _eff_plug_head_length);
 // WC-10 — Step 3 turned the zip stations off on a clamshell build. Zip ties
 // are what cinch the two plates together, so without them nothing holds the
 // sandwich closed. It cannot fire today, because every Step 3 choice keeps
@@ -493,9 +520,10 @@ function _vw_clam_plug_narrow() =
     || (_eff_plug_width_cord_end / 2 + _grip_term < floor_hw
          && _eff_plug_width_cord_end < 2 * floor_hw);
 // WC-13 — the depth guard made the cradle shallower than plate_cradle_depth
-// asks for, because the plug is narrow next to its cord channel.
+// (or the preset's own depth) asks for, because the plug is narrow next to
+// its cord channel.
 function _vw_clam_cradle_clamped() =
-    _sides_eff == "Rounded sides" && _cradle_eff < plate_cradle_depth - 0.01;
+    _sides_eff == "Rounded sides" && _cradle_eff < _eff_cradle_depth - 0.01;
 
 // Heavy-duty clamshell warnings, in the clamshell's own local frame. Same
 // red-coupon + console-mirror convention as validation_warnings().
@@ -604,10 +632,15 @@ module roundover_layers_3d(r) {
 
 // Right-half V gap: everything inboard of the inner-edge profile. The knots
 // follow _clam_inner_x(): cable channel to the throat, the plug's back end,
-// the serration-zone start (where the tip flare kicks in — emitted only when
-// it sits above the back end), and the flared tip. From the throat on, the
-// edge steps in by c: the cradle at one height (0 = the mating face).
+// then in order of Y the serration-zone start (where the tip flare kicks in)
+// and the end of the plug's head, each emitted only when it sits between the
+// back end and the tip, and the flared tip. From the throat on, the edge
+// steps in by c: the cradle at one height (0 = the mating face).
 module clamshell_v_gap_2d(c = 0) {
+    _y_lo = min(_clam_grip_y0, _clam_head_y);
+    _y_hi = max(_clam_grip_y0, _clam_head_y);
+    _knots = [for (y = (_y_hi - _y_lo > 0.01) ? [_y_lo, _y_hi] : [_y_lo])
+                  if (y > _clam_y_back + 0.01 && y < _clam_length - 0.01) y];
     polygon(concat(
         [
             [-1, -1],
@@ -615,9 +648,7 @@ module clamshell_v_gap_2d(c = 0) {
             [_clam_cable_hw, _clam_throat_y0],
             [_clam_inner_x(_clam_y_back) - c, _clam_y_back],
         ],
-        (_clam_grip_y0 > _clam_y_back + 0.01)
-            ? [[_clam_inner_x(_clam_grip_y0) - c, _clam_grip_y0]]
-            : [],
+        [for (y = _knots) [_clam_inner_x(y) - c, y]],
         [
             [_clam_tip_hw - c, _clam_length],
             [_clam_tip_hw - c, _clam_length + 1],
@@ -792,8 +823,8 @@ module clamshell_plate_3d() {
 
 // See-through plug for the preview only: the % background modifier keeps it
 // out of every render and export. It spans the plug's length, from its back
-// end to its face at the arm tips. Its width follows the two Step 1 widths and
-// it sits on the mating face (Z = plate_thickness), where the plug's middle
+// end to its face at the arm tips. Its width follows the two Step 1 widths,
+// held at the prong-end width along the head, and it sits on the mating face (Z = plate_thickness), where the plug's middle
 // lies once the two plates meet. Its height is 0.55 x its width, a stand-in
 // for the plug's other side, which the two-sided puller never needs.
 module plug_preview_2s() {
@@ -808,12 +839,19 @@ module plug_preview_2s() {
                         offset(r = 0.15 * _ratio * w) offset(delta = -0.15 * _ratio * w)
                             square([w, _ratio * w], center = true);
     }
+    // Two hulls, body then head, so the step stays exact whichever end of
+    // the plug is wider.
     if (show_plug_preview)
-        %color("SkyBlue", 0.35)
+        %color("SkyBlue", 0.35) {
             hull() {
                 slice(_clam_y_back, _eff_plug_width_cord_end);
+                slice(_clam_head_y, _eff_plug_width_prong_end);
+            }
+            hull() {
+                slice(_clam_head_y, _eff_plug_width_prong_end);
                 slice(_clam_length, _eff_plug_width_prong_end);
             }
+        }
 }
 
 // Both identical plates side by side, outer face down, 8 mm apart, so one

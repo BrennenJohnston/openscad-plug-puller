@@ -82,7 +82,8 @@ now:
    and prints the finger-bore table (17.5 / 21.0 / 24.0 mm at Small /
    Medium / Large); `tests/test_clamshell_parity.py` asserts loose
    envelope + feature-inventory + grip-gap parity against the idealized
-   heavy-duty plate.
+   heavy-duty plate, rendered for that plate's own sample plug (43.8 /
+   27.0 / 27.0 / 8.2 typed in, `Flat sides`).
 
 A feature-by-feature parity suite against the v6 CAD model ran during
 development and was **retired**: the pocket and rail placement are
@@ -105,10 +106,23 @@ repository); the manual sliders are ignored unless
 | Heavy-duty extension cord - NEMA 5-15 | 43.8   | 25.8 / 21.9              | **27.0** / 27.0              | 8.2  |
 
 The heavy-duty preset's 27 mm thickness (`_eff_plug_thickness` = the
-fatter end) trips W-20 in the one-sided file. The two-sided file offers only
-that preset: length 43.8, width 27.0 / 27.0 (the size the plates close
-across: the one-sided file's thickness pair), cord 8.2, always built with
-`Flat sides` and the bite (the preset's tested grip).
+fatter end) trips W-20 in the one-sided file. The two-sided file's four
+presets carry numbers measured with a caliper on their own plugs (the whole
+length the plates cover, a strain relief included; the widths the plates
+close across; the head length, how far the plug keeps its prong-end width;
+the cord across the channel, a flat cord's wide side):
+
+| Preset                                | length | width prong end/cord end | head | cord | sides, cradle |
+| ------------------------------------- | ------ | ------------------------ | ---- | ---- | ------------- |
+| Heavy-duty extension cord - NEMA 5-15 | 51.0   | 26.56 / 24.5             | 23.0 | 8.25 | Flat sides    |
+| USB-C laptop tip                      | 17.0   | 10.25 / 10.25            | 0    | 6.1  | Rounded sides, 1.9 |
+| Flat 2-prong lamp plug - NEMA 1-15    | 32.5   | 20.0 / 11.1              | 15.2 | 7.0  | Flat sides    |
+| Standard 3-prong plug - NEMA 5-15     | 46.1   | 24.66 / 13.6             | 15.6 | 9.25 | Flat sides    |
+
+The heavy-duty plug widens behind its prong face (25.25 to 26.56), so its
+prong-end width is the widest measurement. Flat sides build the bite; the
+USB-C tip's Rounded sides carry their own cradle depth, 1.9 mm, which fits
+beside its cord channel.
 
 ---
 
@@ -203,9 +217,13 @@ Custom + reset_custom_to_medium -> "Medium Defaults" -> PRESET_MEDIUM
 Two-sided file:
 
 ```
-plug_preset == the heavy-duty preset -> _eff_* = 43.8 / 27.0 / 27.0 / 8.2,
-                                        _sides_eff = "Flat sides"
-plug_preset == "Measure my plug"     -> the sliders; _sides_eff = plug_sides
+plug_preset == a preset           -> _eff_* = its length / widths / head / cord
+                                     (the table in Section 2.1),
+                                     _sides_eff = its sides,
+                                     _eff_cradle_depth = 1.9 (USB-C tip)
+plug_preset == "Measure my plug"  -> the sliders; _sides_eff = plug_sides;
+                                     _eff_cradle_depth = plate_cradle_depth
+_eff_plug_head_length = head clamped to [0, _eff_plug_length]
 _attach_zip = true ; _attach_velcro = (attachment == "Zip ties + Velcro strap")
 finger bore = finger width (size table or measure_finger_width)
               + FIT_GRIP_CLEARANCE, clamped 15-40;
@@ -340,8 +358,10 @@ deepest tooth bite, so enlarging the teeth never silently thins it.
 
 `_clam_inner_x(y)` is the piecewise V profile: cable channel to
 `_clam_throat_y0`, a throat ramp up to the plug's back end
-(`_clam_y_back`), then `_clam_plug_hw(y)` — the plug's own width
-interpolated between the two ends plus `_grip_term` — with the tip flare
+(`_clam_y_back`), then `_clam_plug_hw(y)` — the prong-end width along the
+head (from `_clam_head_y = _clam_length - _eff_plug_head_length` to the
+tips), the plug's own width interpolated from the cord end up to the head
+behind it, plus `_grip_term` — with the tip flare
 added from the serration-zone start. The throat position therefore
 derives from where the plug actually ends. `_clam_outer_x_at(y)` is the
 conservative chord bound of the arm's tapered outer edge, used to cap
@@ -559,7 +579,7 @@ see-through plug.
 5. `src/fit_measured.scad` — derivation formulas (one-sided; mirrored by
    `tests/fit_formulas.py`).
 6. `parameter_mapping.json` (79 parameters) and
-   `parameter_mapping_two_sided.json` (39 parameters) — the Customizer
+   `parameter_mapping_two_sided.json` (40 parameters) — the Customizer
    schemas.
 7. `plug references/3 Prong Heavy Ideal Sample/…Plug_Bottom.stl` — the
    two-sided plate's calibration target.

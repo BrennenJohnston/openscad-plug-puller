@@ -25,3 +25,11 @@ A known limit, not changed: when PowerShell starts the script with `-File`, seve
 **The fix.** `scripts/generate_outline_sheets.py` prints the plain distance for that label too. All 21 sheets and the outline sheets PDF are regenerated. A quick-lane test, `tests/test_outline_sheets.py`, fails if any label on any sheet starts with a minus sign.
 
 **The check that passed.** The new test failed before the change on the two committed lamp sheets and passes after it. The four labels read 17.71, 20.52, 20.54 and 30.98, each equal to the length of its drawn line. All 21 sheets pass the generator's parity checks, the PDF passes its own checks (22 pages, the title, 31 bookmarks), the quick lane passes (250) and `scripts/check_docs.py` is clean.
+
+## 2026-10-11: the two-sided presets held their plugs loosely
+
+**The bug.** Test prints of the four two-sided presets of 0.14.0 held every plug loosely. Their numbers had come from development sample plugs, not from these plugs: each grip gap was 1 to 5 mm too wide. The gap also narrowed in a straight line from the prong end to the cord end, so a plug with a wide head and a narrower body, like the lamp and standard plugs, touched the teeth only at the head's back corners and rocked.
+
+**The fix.** The presets carry numbers measured with a caliper on their own plugs, and a new Step 1 number, the plug head length, holds the gap at the prong-end width along the head before it narrows. The USB-C tip's preset carries its own 1.9 mm cradle so it builds no red tag. The numbers are in `CHANGELOG.md`.
+
+**The check that passed.** Each preset rendered headlessly prints no `WARNING:` line, and its grip gap at each end is the plug's width there plus twice the grip term, or the cord channel plus 2 mm where that floor is wider: 24.56 and 22.5 mm (heavy-duty), 10.75 mm with a 1.9 mm cradle (USB-C), 18 and 9.8 mm (lamp), 22.66 and 12.05 mm (standard). `tests/test_two_sided_presets.py` asserts these numbers and the head lengths; the quick lane (250) and the render lane (113) pass. The fit itself is judged by a test print of the new presets, still to come.

@@ -11,7 +11,39 @@ public milestone**.
 
 ## [Unreleased]
 
-Nothing yet.
+### Added
+
+- **Plug head length**, a new Step 1 dial of the two-sided puller
+  (`measure_plug_head_length`, 0 to 60 mm, default 0): how far back from
+  the prong end the plug keeps its prong-end width before it narrows. The
+  arms hold the gap at that width along the head and taper only behind
+  it, so a plug with a wide head and a narrower body is gripped along the
+  head instead of only at its back corners. At 0 the plate is the same as
+  before. The measuring form, the guides and the dial pictures carry it.
+
+### Changed
+
+- **The four two-sided presets are re-measured on their own plugs.** Test
+  prints of the 0.14.0 presets held every plug loosely: their numbers had
+  come from development sample plugs, 1 to 5 mm too wide. Length, prong-end
+  width, cord-end width, head length and cord, in mm: heavy-duty extension
+  cord 51.0, 26.56, 24.5, 23.0, 8.25; USB-C laptop tip 17.0, 10.25, 10.25,
+  0, 6.1; flat 2-prong lamp plug 32.5, 20.0, 11.1, 15.2, 7.0; standard
+  3-prong plug 46.1, 24.66, 13.6, 15.6, 9.25. The heavy-duty plate and its
+  golden fixture grow to 81 mm long.
+- **The USB-C laptop tip preset carries its own cradle depth, 1.9 mm**, the
+  most that fits beside its cord channel, so the preset builds no
+  `CRADLE SHALLOWER THAN ASKED` tag. A typed plug still uses the Cradle
+  depth dial and still gets the tag; the saved `USB-C laptop plug -
+  measured` set types the same numbers and a 1.9 mm cradle.
+
+### Fixed
+
+- **Two two-sided measuring instructions did not fit a plug lying flat
+  between the plates.** The cord is now measured the way the plug widths
+  run (a flat cord's wide side, not its thin side), and a rubber strain
+  relief counts as part of the plug at the cord end instead of being
+  skipped. The one-sided puller's instructions are unchanged.
 
 ## [0.14.0] - 2026-10-01
 

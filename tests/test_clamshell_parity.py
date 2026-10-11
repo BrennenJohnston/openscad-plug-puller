@@ -4,7 +4,8 @@ idealized reference plate.
 The authoritative reference is the idealized heavy-duty plate under
 ``plug references/3 Prong Heavy Ideal Sample/`` ("...Plug_Bottom.stl",
 66.6 x 73.7 x 4.5 mm). This suite renders the v7 model as a single clamshell
-plate at the heavy-duty plug preset and asserts *loose* parity: the clamshell
+plate for the plug that plate was drawn for (the development sample's numbers,
+typed in) and asserts *loose* parity: the clamshell
 is a fresh parametric re-derivation of the reference, not a mesh clone, so
 only the gross envelope, the feature inventory (finger / zip / velcro
 cutouts), and the two grip gaps are pinned — and those with generous
@@ -30,7 +31,17 @@ IDEAL_PLATE = (
     / "3 Prong Heavy Ideal Sample"
     / "Plug Puller_3_Prong_Idealized_Sample_Plug_Bottom.stl"
 )
-HD_PRESET = "Heavy-duty extension cord - NEMA 5-15"
+# The plug the idealized plate was drawn for: the development CAD sample's
+# numbers, typed in. The heavy-duty preset now carries the owner's measured
+# plug, which is longer, so the preset no longer matches this plate.
+SAMPLE_PLUG = {
+    "plug_preset": "Measure my plug",
+    "measure_plug_length": 43.8,
+    "measure_plug_width_prong_end": 27.0,
+    "measure_plug_width_cord_end": 27.0,
+    "measure_cord_thickness": 8.2,
+    "plug_sides": "Flat sides",
+}
 
 
 def _loop_area(loop: np.ndarray) -> float:
@@ -114,7 +125,7 @@ def rendered_dims(two_sided_scad_file: Path, openscad_runner, tmp_path_factory) 
         scad_file=two_sided_scad_file,
         output_stl=out,
         parameters={
-            "plug_preset": HD_PRESET,
+            **SAMPLE_PLUG,
             "render_mode": "One plate",
             "quality": 64,
         },

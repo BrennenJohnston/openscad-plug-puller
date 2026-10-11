@@ -38,11 +38,11 @@ STENCIL_CARDS = {"R1", "C1", "F1 / F2", None}
 # The anchors a measure row may point at on the measuring form's schematic plug
 # (the plan's Appendix C; the tool-side anchors are for dimension lines only).
 MEASURE_ANCHORS = {
-    "plug_length", "plug_width_prong_end", "plug_width_cord_end",
+    "plug_length", "plug_width_prong_end", "plug_width_cord_end", "plug_head",
     "plug_thickness_prong_end", "plug_thickness_cord_end", "cord", "finger_width",
     "hand_width", "strap_width", "wall_plate", "plug_sides",
 }
-# The 17 Step dials that ask for a number or a look, in the catalog's order: the
+# The 18 Step dials that ask for a number or a look, in the catalog's order: the
 # one source for the guides' measuring section and the measuring form.
 MEASURE_ROWS = [
     ("one-sided", "measure_plug_length"), ("one-sided", "measure_plug_width_prong_end"),
@@ -51,22 +51,23 @@ MEASURE_ROWS = [
     ("one-sided", "measure_wall_plate_style"), ("one-sided", "measure_finger_width"),
     ("one-sided", "measure_hand_width"), ("one-sided", "strap_width"),
     ("two-sided", "measure_plug_length"), ("two-sided", "measure_plug_width_prong_end"),
-    ("two-sided", "measure_plug_width_cord_end"), ("two-sided", "measure_cord_thickness"),
-    ("two-sided", "plug_sides"), ("two-sided", "measure_finger_width"), ("two-sided", "strap_width"),
+    ("two-sided", "measure_plug_head_length"), ("two-sided", "measure_plug_width_cord_end"),
+    ("two-sided", "measure_cord_thickness"), ("two-sided", "plug_sides"),
+    ("two-sided", "measure_finger_width"), ("two-sided", "strap_width"),
 ]
 HOW_MAX_WORDS = 40
 DIAGRAM_KEYS = {"view", "style", "before", "after", "context", "plug", "crop", "dimension"}
 DIMENSION_KINDS = {"h", "v", "dia"}
 # The anchors a dimension callout may sit on (the plan's Appendix C).
 DIMENSION_ANCHORS = {
-    "plug_length", "plug_width_prong_end", "plug_width_cord_end",
+    "plug_length", "plug_width_prong_end", "plug_width_cord_end", "plug_head",
     "plug_thickness_prong_end", "plug_thickness_cord_end", "cord", "finger_width",
     "hand_width", "strap_width", "wall_plate", "plug_sides",
     "pocket_length", "hook_slot", "finger_hole", "body_width", "gap_tips",
     "gap_cord_end", "channel", "slot_length", "floor",
 }
-# The numeric Step dials that carry a dimension callout, and nothing else: 13
-# of the 14 (the two-sided strap_width's nudge leaves the plug without a
+# The numeric Step dials that carry a dimension callout, and nothing else: 14
+# of the 15 (the two-sided strap_width's nudge leaves the plug without a
 # strap slot, so there is nothing to dimension on its after state).
 DIMENSION_ROWS = {
     ("one-sided", "measure_plug_length"), ("one-sided", "measure_plug_width_prong_end"),
@@ -74,8 +75,8 @@ DIMENSION_ROWS = {
     ("one-sided", "measure_plug_thickness_cord_end"), ("one-sided", "measure_cord_thickness"),
     ("one-sided", "measure_finger_width"), ("one-sided", "measure_hand_width"),
     ("two-sided", "measure_plug_length"), ("two-sided", "measure_plug_width_prong_end"),
-    ("two-sided", "measure_plug_width_cord_end"), ("two-sided", "measure_cord_thickness"),
-    ("two-sided", "measure_finger_width"),
+    ("two-sided", "measure_plug_width_cord_end"), ("two-sided", "measure_plug_head_length"),
+    ("two-sided", "measure_cord_thickness"), ("two-sided", "measure_finger_width"),
 }
 VIEWS = {"top", "side", "section-x", "section-y", "none"}
 STYLES = {"fill", "trace"}
@@ -362,9 +363,9 @@ def test_measure_rows(catalog, mappings) -> None:
         assert measure["anchor"] in MEASURE_ANCHORS, f"{name}: anchor {measure['anchor']!r}"
         with_measure.append((row["file"], row["name"]))
     assert with_measure == MEASURE_ROWS, (
-        f"rows with a measure: {with_measure} differ from the 17 of MEASURE_ROWS")
+        f"rows with a measure: {with_measure} differ from the 18 of MEASURE_ROWS")
 
 
 def test_counts(catalog) -> None:
-    assert len(catalog) == 118, f"expected 118 rows, found {len(catalog)}"
-    assert sum(1 for r in catalog if r["quick_start"]) == 28, "28 quick-start rows (Steps 1-4)"
+    assert len(catalog) == 119, f"expected 119 rows, found {len(catalog)}"
+    assert sum(1 for r in catalog if r["quick_start"]) == 29, "29 quick-start rows (Steps 1-4)"

@@ -9,11 +9,13 @@
         },
         "USB-C laptop plug - measured": {
             "plug_preset": "Measure my plug",
-            "measure_plug_length": "23",
-            "measure_plug_width_prong_end": "13",
-            "measure_plug_width_cord_end": "13",
-            "measure_cord_thickness": "7",
+            "measure_plug_length": "17",
+            "measure_plug_width_prong_end": "10.25",
+            "measure_plug_head_length": "0",
+            "measure_plug_width_cord_end": "10.25",
+            "measure_cord_thickness": "6.1",
             "plug_sides": "Rounded sides",
+            "plate_cradle_depth": "1.9",
             "size": "Medium",
             "attachment": "Zip ties",
             "quality": "64"

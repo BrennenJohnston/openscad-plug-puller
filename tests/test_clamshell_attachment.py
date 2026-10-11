@@ -3,8 +3,8 @@
 The Step 3 ``attachment`` dropdown gates the plate's velcro arm slot; the zip
 stations are always cut, because zip ties are what hold the two plates
 together (the owner dropped the "None" and "Velcro strap" options).
-This suite renders the plate at the heavy-duty preset with both Step 3
-choices and asserts:
+This suite renders the plate for the idealized plate's own plug (the
+development sample's numbers, typed in) with both Step 3 choices and asserts:
 
 * every render is watertight;
 * material ordering holds — "Zip ties" (holes but no slot) is denser than
@@ -35,7 +35,17 @@ IDEAL_PLATE = (
     / "3 Prong Heavy Ideal Sample"
     / "Plug Puller_3_Prong_Idealized_Sample_Plug_Bottom.stl"
 )
-HD_PRESET = "Heavy-duty extension cord - NEMA 5-15"
+# The plug the idealized plate was drawn for: the development CAD sample's
+# numbers, typed in. The heavy-duty preset now carries the owner's measured
+# plug, which is longer, so the preset no longer matches this plate.
+SAMPLE_PLUG = {
+    "plug_preset": "Measure my plug",
+    "measure_plug_length": 43.8,
+    "measure_plug_width_prong_end": 27.0,
+    "measure_plug_width_cord_end": 27.0,
+    "measure_cord_thickness": 8.2,
+    "plug_sides": "Flat sides",
+}
 
 ATTACHMENT_CHOICES = {
     "default": "Zip ties + Velcro strap",
@@ -107,7 +117,7 @@ def attachment_renders(
             scad_file=two_sided_scad_file,
             output_stl=out,
             parameters={
-                "plug_preset": HD_PRESET,
+                **SAMPLE_PLUG,
                 "attachment": choice,
                 "render_mode": "One plate",
                 "quality": 64,

@@ -14,4 +14,4 @@ Printed your plates and something is not quite right? Every fix is one dial. Cha
 | A plate flexes under load, or feels flimsy | A larger Extra wall on the plate, or a thicker Plate thickness |
 | The arms are shorter than the plug, or much longer | Plug length: measure from the surface it plugs into to the plug's back end, not including the cord |
 
-The dials named here are in **Advanced - Two-Sided Puller**, described one by one in this guide. Reports from printed two-sided pullers on the USB-C, lamp and standard presets have not been gathered yet; when they are, their fits go here.
+The dials named here are in **Advanced - Two-Sided Puller**, described one by one in this guide. In version 0.14.0 the four presets held their plugs loosely in test prints: their numbers had come from other sample plugs, and the gap narrowed in a straight line from the prong end, so a plug with a wide head touched the teeth only at the head's back corners. From version 0.15.0 the presets carry numbers measured on their own plugs and a head length that keeps the gap at the prong-end width along the head. Reports from plates printed on the new presets go here when they come in.
