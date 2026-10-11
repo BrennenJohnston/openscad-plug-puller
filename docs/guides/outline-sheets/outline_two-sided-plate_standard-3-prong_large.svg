@@ -62,7 +62,8 @@
 <line x1="94.031" y1="195.070" x2="96.831" y2="195.070" stroke="black" stroke-width="0.2"/>
 <line x1="95.431" y1="193.670" x2="95.431" y2="196.470" stroke="black" stroke-width="0.2"/>
 <path d="M 98.475 199.048 L 111.525 199.048 L 111.525 168.048 L 98.475 168.048 Z" fill="none" stroke="#888888" stroke-width="0.25" stroke-linejoin="round" stroke-dasharray="2.4,1.4"/>
-<text x="105.000" y="166.548" font-family="Helvetica, Arial, sans-serif" font-size="2.2" font-weight="normal" text-anchor="middle" fill="#888888" paint-order="stroke" stroke="white" stroke-width="0.9">cable strip (outer face)</text>
+<text x="104.600" y="183.548" font-family="Helvetica, Arial, sans-serif" font-size="2" font-weight="normal" text-anchor="middle" fill="#888888" paint-order="stroke" stroke="white" stroke-width="0.9" transform="rotate(-90 104.600 183.548)">cable strip</text>
+<text x="106.900" y="183.548" font-family="Helvetica, Arial, sans-serif" font-size="2" font-weight="normal" text-anchor="middle" fill="#888888" paint-order="stroke" stroke="white" stroke-width="0.9" transform="rotate(-90 106.900 183.548)">(outer face)</text>
 <line x1="67.979" y1="119.952" x2="57.979" y2="119.952" stroke="black" stroke-width="0.18"/>
 <line x1="67.979" y1="199.048" x2="57.979" y2="199.048" stroke="black" stroke-width="0.18"/>
 <line x1="58.979" y1="119.952" x2="58.979" y2="199.048" stroke="black" stroke-width="0.25"/>

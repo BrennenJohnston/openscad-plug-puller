@@ -2466,7 +2466,7 @@
       "at": 45,
       "dimension": null
     },
-    "note": "Only acts when plug_sides is Flat sides or a plug preset is chosen.",
+    "note": "Only acts with Flat sides, typed or from a plug preset.",
     "measure": null
   },
   {

@@ -466,6 +466,7 @@ class Sheet:
         anchor: str = "start",
         fill: str = "black",
         halo: bool = False,
+        rotate: float = 0.0,
     ) -> None:
         s = (
             s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -473,6 +474,8 @@ class Sheet:
         extra = (
             ' paint-order="stroke" stroke="white" stroke-width="0.9"' if halo else ""
         )
+        if rotate:
+            extra += f' transform="rotate({rotate:g} {x:.3f} {y:.3f})"'
         self.parts.append(
             f'<text x="{x:.3f}" y="{y:.3f}" font-family="{FONT}" '
             f'font-size="{size:g}" font-weight="{weight}" text-anchor="{anchor}" '
@@ -1076,9 +1079,13 @@ def build_clamshell_sheet(stl: Path, preset_key: str, size: str, out: Path) -> L
     hw = cm["cable_gap"] / 2 + 1.5
     strip = [(-hw, 0), (hw, 0), (hw, cm["throat_y0"]), (-hw, cm["throat_y0"])]
     sh.ring_path(strip, 0.25, DASH_POCKET, color="#888888")
-    (tsx, tsy) = sh.pt(0, cm["throat_y0"] + 1.5)
-    sh.text(tsx, tsy, "cable strip (outer face)", 2.2, anchor="middle",
-            fill="#888888", halo=True)
+    # The label reads up the middle of the cord channel, two short lines,
+    # clear of the zip-tie holes beside the throat.
+    (tsx, tsy) = sh.pt(0, cm["throat_y0"] / 2)
+    sh.text(tsx - 0.4, tsy, "cable strip", 2.0, anchor="middle",
+            fill="#888888", halo=True, rotate=-90)
+    sh.text(tsx + 1.9, tsy, "(outer face)", 2.0, anchor="middle",
+            fill="#888888", halo=True, rotate=-90)
 
     sh.dim_v(0, L, xmin - 9, xmin, f"{fmt(L)}")
     sh.dim_h(xmin, xmax, -8, 0, f"{fmt(W)}", label_above=False)

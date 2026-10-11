@@ -16,7 +16,7 @@ In every picture: black = the tool; teal = your plug; red dashed = the edges thi
 
 ![The two-sided puller, the four Customizer steps on a USB-C laptop plug, five stages left to right.](../../dials/two-sided/storyboard.svg)
 
-Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. Step 1 - Your Plug: plug length 23 mm, plug width at both ends 13 mm, cord thickness 7 mm, plug sides Rounded sides; red on the arms, the finger lobes and the zip stations. Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
+Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. Step 1 - Your Plug: plug preset USB-C laptop tip; red on the arms, the finger lobes and the zip stations. Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
 
 - Step 1: type your plug's numbers and pick Rounded sides or Flat sides
 - Step 2: pick your hand size
@@ -482,7 +482,7 @@ Two vertical slices of the two-sided puller at y = 45 mm, before left and after 
 - Moves: arms, teeth
 - Red warnings: NO GRIP BITE - PLUG WONT BE HELD
 
-Note: Only acts when plug_sides is Flat sides or a plug preset is chosen.
+Note: Only acts with Flat sides, typed or from a plug preset.
 
 ### Cradle depth
 
@@ -954,7 +954,7 @@ If the preview shows red text, or a red text tag printed next to your part, the 
 | `CHECK PLUG LENGTH MEASUREMENT (MM?)`, and the same for `PLUG WIDTH`, `CORD THICKNESS`, `FINGER WIDTH` | That number is outside any plausible mm value: usually inches typed into a mm field (1.25 instead of 32) | Measure again with the mm side of the ruler and type it again |
 | `CORD TOO THICK FOR CABLE CHANNEL` | The cord will not fit the channel with clearance | Measure the cord thickness again, or raise the cord channel clearance |
 | `PLUG TOO WIDE - ARMS BULGE PAST FINGER LOBES` | The plug is so wide that the arms would bulge wider than the finger lobes | Check the plug width; a truly huge plug is beyond this tool |
-| `NO GRIP BITE - PLUG WONT BE HELD` | Flat sides or a plug preset with a grip bite of 0 or more, so the arms do not squeeze | Set the grip bite negative, for example −1, so the arms bite the plug |
+| `NO GRIP BITE - PLUG WONT BE HELD` | Flat sides, typed or from a preset, with a grip bite of 0 or more, so the arms do not squeeze | Set the grip bite negative, for example −1, so the arms bite the plug |
 | `PLATE THINNER THAN 2MM - TOO FLIMSY` | The plate thickness is under 2 mm | Raise the plate thickness to 3 to 5 mm |
 | `ZIP STATION OFF THE ARM` | A manual zip-tie station fell past the arm | Bring that station position back within the arm's length |
 | `ZIP STATIONS OVERLAP EACH OTHER` | Two manual zip-tie stations landed on top of each other | Spread the station positions at least one hole diameter apart |
