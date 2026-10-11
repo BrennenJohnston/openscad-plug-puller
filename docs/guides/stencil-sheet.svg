@@ -124,71 +124,71 @@
 <line x1="175.000" y1="64.000" x2="175.000" y2="67.000" stroke="black" stroke-width="0.2"/>
 <line x1="176.000" y1="64.000" x2="176.000" y2="70.000" stroke="black" stroke-width="0.3"/>
 <text x="176.000" y="73.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">100</text>
-<text x="14.000" y="86.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">2. Plug silhouettes (1:1) — hold your plug against W (wide side) and T (thin side); if it matches, pick that preset in Step 1.</text>
-<polygon points="9.000,137.000 34.000,137.000 27.100,100.000 15.900,100.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
-<polygon points="37.000,137.000 55.600,137.000 50.600,100.000 42.000,100.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
-<circle cx="60.400" cy="135.200" r="1.800" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="21.500" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
-<text x="46.300" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
-<text x="60.400" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
-<text x="9.000" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P1</text>
-<text x="17.500" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Lamp 2-prong NEMA 1-15</text>
-<polygon points="66.700,137.000 93.300,137.000 86.700,90.800 73.300,90.800" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
-<polygon points="96.300,137.000 115.200,137.000 113.250,90.800 98.250,90.800" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
-<circle cx="121.700" cy="133.500" r="3.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="80.000" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
-<text x="105.750" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
-<text x="121.700" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
-<text x="66.700" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P2</text>
-<text x="75.200" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Standard 3-prong NEMA 5-15</text>
-<polygon points="129.700,137.000 155.500,137.000 153.550,93.200 131.650,93.200" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
-<polygon points="158.500,137.000 185.500,137.000 185.500,93.200 158.500,93.200" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
-<circle cx="192.600" cy="132.900" r="4.100" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="142.600" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
-<text x="172.000" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
-<text x="192.600" y="141.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
-<text x="129.700" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P3</text>
-<text x="138.200" y="147.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Heavy-duty cord NEMA 5-15</text>
-<text x="14.000" y="152.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">3. F1 / F2 — finger circles: smallest circle your middle finger passes through, minus 5 = finger width.</text>
-<circle cx="47.500" cy="164.000" r="7.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="47.500" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">15</text>
-<circle cx="68.000" cy="164.000" r="8.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="68.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">16</text>
-<circle cx="89.500" cy="164.000" r="8.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="89.500" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">17</text>
-<circle cx="112.000" cy="164.000" r="9.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="112.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">18</text>
-<circle cx="135.500" cy="164.000" r="9.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="135.500" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">19</text>
-<circle cx="160.000" cy="164.000" r="10.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="160.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">20</text>
-<text x="14.000" y="165.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F1</text>
-<circle cx="48.000" cy="189.000" r="10.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="48.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">21</text>
-<circle cx="74.500" cy="189.000" r="11.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="74.500" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">22</text>
-<circle cx="102.000" cy="189.000" r="11.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="102.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">23</text>
-<circle cx="130.500" cy="189.000" r="12.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="130.500" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">24</text>
-<circle cx="160.000" cy="189.000" r="12.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="160.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">25</text>
-<text x="14.000" y="190.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F1</text>
-<circle cx="55.500" cy="218.000" r="13.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="55.500" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">26</text>
-<circle cx="87.000" cy="218.000" r="13.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="87.000" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">27</text>
-<circle cx="119.500" cy="218.000" r="14.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="119.500" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">28</text>
-<circle cx="153.000" cy="218.000" r="14.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="153.000" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">29</text>
-<text x="14.000" y="219.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F2</text>
-<circle cx="68.500" cy="250.000" r="15.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="68.500" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">30</text>
-<circle cx="104.000" cy="250.000" r="15.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="104.000" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">31</text>
-<circle cx="140.500" cy="250.000" r="16.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
-<text x="140.500" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">32</text>
-<text x="14.000" y="251.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F2</text>
+<text x="14.000" y="84.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">2. Plug silhouettes (1:1) — hold your plug against W (wide side) and T (thin side); if it matches, pick that preset in Step 1.</text>
+<polygon points="9.000,139.000 29.000,139.000 24.550,106.500 13.450,106.500" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<polygon points="32.000,139.000 50.600,139.000 45.600,106.500 37.000,106.500" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<circle cx="55.400" cy="137.200" r="1.800" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="19.000" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
+<text x="41.300" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
+<text x="55.400" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
+<text x="9.000" y="149.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P1</text>
+<text x="17.500" y="149.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Lamp 2-prong NEMA 1-15</text>
+<polygon points="61.700,139.000 86.360,139.000 80.830,92.900 67.230,92.900" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<polygon points="89.360,139.000 108.260,139.000 106.310,92.900 91.310,92.900" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<circle cx="115.885" cy="134.375" r="4.625" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="74.030" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
+<text x="98.810" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
+<text x="115.885" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
+<text x="61.700" y="149.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P2</text>
+<text x="70.200" y="149.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Standard 3-prong NEMA 5-15</text>
+<polygon points="125.010,139.000 151.570,139.000 150.540,88.000 126.040,88.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<polygon points="154.570,139.000 181.570,139.000 181.570,88.000 154.570,88.000" fill="none" stroke="black" stroke-width="0.4" stroke-linejoin="round" stroke-dasharray="1.6,1.1"/>
+<circle cx="188.695" cy="134.875" r="4.125" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="138.290" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">W</text>
+<text x="168.070" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="middle" fill="black">T</text>
+<text x="188.695" y="143.500" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="middle" fill="black">cord</text>
+<text x="125.010" y="149.000" font-family="Helvetica, Arial, sans-serif" font-size="4.2" font-weight="bold" text-anchor="start" fill="black">P3</text>
+<text x="133.510" y="149.000" font-family="Helvetica, Arial, sans-serif" font-size="2.6" font-weight="normal" text-anchor="start" fill="#444444">Heavy-duty cord NEMA 5-15</text>
+<text x="14.000" y="154.000" font-family="Helvetica, Arial, sans-serif" font-size="3" font-weight="bold" text-anchor="start" fill="black">3. F1 / F2 — finger circles: smallest circle your middle finger passes through, minus 5 = finger width.</text>
+<circle cx="47.500" cy="166.000" r="7.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="47.500" y="167.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">15</text>
+<circle cx="68.000" cy="166.000" r="8.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="68.000" y="167.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">16</text>
+<circle cx="89.500" cy="166.000" r="8.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="89.500" y="167.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">17</text>
+<circle cx="112.000" cy="166.000" r="9.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="112.000" y="167.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">18</text>
+<circle cx="135.500" cy="166.000" r="9.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="135.500" y="167.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">19</text>
+<circle cx="160.000" cy="166.000" r="10.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="160.000" y="167.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">20</text>
+<text x="14.000" y="167.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F1</text>
+<circle cx="48.000" cy="191.000" r="10.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="48.000" y="192.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">21</text>
+<circle cx="74.500" cy="191.000" r="11.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="74.500" y="192.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">22</text>
+<circle cx="102.000" cy="191.000" r="11.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="102.000" y="192.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">23</text>
+<circle cx="130.500" cy="191.000" r="12.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="130.500" y="192.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">24</text>
+<circle cx="160.000" cy="191.000" r="12.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="160.000" y="192.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">25</text>
+<text x="14.000" y="192.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F1</text>
+<circle cx="55.500" cy="220.000" r="13.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="55.500" y="221.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">26</text>
+<circle cx="87.000" cy="220.000" r="13.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="87.000" y="221.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">27</text>
+<circle cx="119.500" cy="220.000" r="14.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="119.500" y="221.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">28</text>
+<circle cx="153.000" cy="220.000" r="14.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="153.000" y="221.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">29</text>
+<text x="14.000" y="221.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F2</text>
+<circle cx="68.500" cy="252.000" r="15.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="68.500" y="253.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">30</text>
+<circle cx="104.000" cy="252.000" r="15.500" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="104.000" y="253.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">31</text>
+<circle cx="140.500" cy="252.000" r="16.000" fill="none" stroke="black" stroke-width="0.35" stroke-dasharray="1.6,1.1"/>
+<text x="140.500" y="253.100" font-family="Helvetica, Arial, sans-serif" font-size="2.8" font-weight="bold" text-anchor="middle" fill="black">32</text>
+<text x="14.000" y="253.100" font-family="Helvetica, Arial, sans-serif" font-size="3.4" font-weight="bold" text-anchor="start" fill="#444444">F2</text>
 <text x="105.000" y="274.500" font-family="Helvetica, Arial, sans-serif" font-size="2.4" font-weight="normal" text-anchor="middle" fill="#444444">openscad-plug-puller · measuring stencil sheet · scale 1:1 · prefer plastic? print stl/Measuring-Stencil/ · page 1 of 2</text>
 </svg>

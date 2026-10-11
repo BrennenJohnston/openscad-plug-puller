@@ -104,13 +104,14 @@ IS_TACTILE = (label_mode == "Tactile");
 // [id, length, width wall, width cable, thickness wall, thickness cable, cord]
 // Copied from the `_eff_*` preset ternaries in src/Plug_Puller_Parametric.scad
 // (lamp, standard 3-prong, heavy-duty, wide 2-prong appliance — the Step 1
-// dropdown order).
+// dropdown order). The P1 to P3 thicknesses are estimates until those plugs'
+// thin sides are measured; see the main SCAD.
 // tests/test_stencil_data.py asserts these numbers match the main SCAD and
 // scripts/generate_stencil_sheet.py — keep all three in lock-step.
 PLUG_PRESET_DIMS = [
-    ["P1", 37.0, 25.0, 11.2, 18.6, 8.6, 3.6],
-    ["P2", 46.2, 26.6, 13.4, 18.9, 15.0, 7.0],
-    ["P3", 43.8, 25.8, 21.9, 27.0, 27.0, 8.2],
+    ["P1", 32.5, 20.0, 11.1, 18.6, 8.6, 3.6],
+    ["P2", 46.1, 24.66, 13.6, 18.9, 15.0, 9.25],
+    ["P3", 51.0, 26.56, 24.5, 27.0, 27.0, 8.25],
     ["P4", 38.0, 34.0, 34.0, 16.0, 16.0, 5.0],
 ];
 PLUG_PRESET_NAMES = [

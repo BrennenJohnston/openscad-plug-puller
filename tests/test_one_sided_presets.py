@@ -10,7 +10,8 @@ and prints W-20 by design, so it is not in this table.
 The green confirmation tag is preview-only geometry and never reaches a CLI
 render or its console, so this suite reads the derived-values echo block
 instead: the pocket runs the plug's length (D-19b), the hook slot is the cord
-plus its 0.7625 mm clearance (D-3), and the wall notch is the prong-end width
+plus its 0.7625 mm clearance, held to 3 to 10 mm (D-3; the standard plug's
+9.25 mm cord meets the 10 mm limit), and the wall notch is the prong-end width
 plus twice the 0.835 mm sliding clearance (D-12). Together they prove the
 preset's numbers reached the routing.
 
@@ -31,12 +32,12 @@ ONE_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
 # Presets thinner than 24 mm, in Customizer order, with their six numbers (mm).
 PRESETS: Dict[str, Dict[str, float]] = {
     "Flat 2-prong lamp plug - NEMA 1-15": {
-        "length": 37.0, "width_prong_end": 25.0, "width_cord_end": 11.2,
+        "length": 32.5, "width_prong_end": 20.0, "width_cord_end": 11.1,
         "thickness_prong_end": 18.6, "thickness_cord_end": 8.6, "cord": 3.6,
     },
     "Standard 3-prong plug - NEMA 5-15": {
-        "length": 46.2, "width_prong_end": 26.6, "width_cord_end": 13.4,
-        "thickness_prong_end": 18.9, "thickness_cord_end": 15.0, "cord": 7.0,
+        "length": 46.1, "width_prong_end": 24.66, "width_cord_end": 13.6,
+        "thickness_prong_end": 18.9, "thickness_cord_end": 15.0, "cord": 9.25,
     },
     "Wide 2-prong appliance plug - NEMA 1-15": {
         "length": 38, "width_prong_end": 34, "width_cord_end": 34,
@@ -45,6 +46,7 @@ PRESETS: Dict[str, Dict[str, float]] = {
 }
 
 FIT_CORD_CLEARANCE = 0.7625    # src/fit_measured.scad, D-3
+HOOK_SLOT_RANGE = (3.0, 10.0)  # src/fit_measured.scad, D-3: the slot's clamp
 FIT_SLIDE_CLEARANCE = 0.835    # src/fit_measured.scad, D-12 (per side)
 TOLERANCE = 1e-3
 
@@ -99,8 +101,10 @@ def test_preset_renders_clean_with_its_own_numbers(openscad_runner, tmp_path, la
         f"{label}: pocket depth {pocket_depth} mm, expected the plug length {spec['length']} mm")
 
     hook_slot = _derived(console, "t_hook_base_gap")
-    assert abs(hook_slot - (spec["cord"] + FIT_CORD_CLEARANCE)) <= TOLERANCE, (
-        f"{label}: hook slot {hook_slot} mm, expected the cord {spec['cord']} plus {FIT_CORD_CLEARANCE}")
+    expected_slot = min(max(spec["cord"] + FIT_CORD_CLEARANCE, HOOK_SLOT_RANGE[0]), HOOK_SLOT_RANGE[1])
+    assert abs(hook_slot - expected_slot) <= TOLERANCE, (
+        f"{label}: hook slot {hook_slot} mm, expected the cord {spec['cord']} plus {FIT_CORD_CLEARANCE}, "
+        f"held to {HOOK_SLOT_RANGE[0]:g} to {HOOK_SLOT_RANGE[1]:g} mm")
 
     notch = _derived(console, "plug_wall_notch_width")
     expected_notch = spec["width_prong_end"] + 2 * FIT_SLIDE_CLEARANCE

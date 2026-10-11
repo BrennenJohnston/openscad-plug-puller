@@ -89,9 +89,9 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "files": (ONE_SIDED, TWO_SIDED),
         "measurements": {
             ONE_SIDED: {
-                "measure_plug_length": 37.0,
-                "measure_plug_width_prong_end": 25.0,
-                "measure_plug_width_cord_end": 11.2,
+                "measure_plug_length": 32.5,
+                "measure_plug_width_prong_end": 20.0,
+                "measure_plug_width_cord_end": 11.1,
                 "measure_plug_thickness_prong_end": 18.6,
                 "measure_plug_thickness_cord_end": 8.6,
                 "measure_cord_thickness": 3.6,
@@ -112,12 +112,12 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "files": (ONE_SIDED, TWO_SIDED),
         "measurements": {
             ONE_SIDED: {
-                "measure_plug_length": 46.2,
-                "measure_plug_width_prong_end": 26.6,
-                "measure_plug_width_cord_end": 13.4,
+                "measure_plug_length": 46.1,
+                "measure_plug_width_prong_end": 24.66,
+                "measure_plug_width_cord_end": 13.6,
                 "measure_plug_thickness_prong_end": 18.9,
                 "measure_plug_thickness_cord_end": 15.0,
-                "measure_cord_thickness": 7.0,
+                "measure_cord_thickness": 9.25,
             },
             TWO_SIDED: {
                 "measure_plug_length": 46.1,

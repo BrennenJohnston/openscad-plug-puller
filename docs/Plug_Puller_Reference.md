@@ -92,18 +92,20 @@ re-parametrised on purpose.
 ### 2.1 Plug presets (two-station, re-measured)
 
 `plug_preset` prefills the effective plug measurements (`_eff_*`) from
-two-station measurements of the three reference plugs (length = the molded
-body only, the prong-end station just behind the prongs, the cord-end
-station at the cord end of the gripped body; the heavy-duty plug's narrower
-strain-relief boot is skipped; the measuring script is no longer in the
-repository); the manual sliders are ignored unless
-`plug_preset = "Measure my plug"`. In the one-sided file:
+two-station caliper measurements of the owner's plugs, the same plugs the
+two-sided presets carry (length from the wall plate to the plug's back end,
+the prong-end station just behind the prongs, the cord-end station where the
+cord leaves the plug). The lamp, standard and heavy-duty thicknesses are
+still the development sample plugs' numbers, estimates until those plugs'
+thin sides are measured; a thickness only sets the pocket's recess. The
+manual sliders are ignored unless `plug_preset = "Measure my plug"`. In the
+one-sided file:
 
 | Preset                                | length | width prong end/cord end | thickness prong end/cord end | cord |
 | ------------------------------------- | ------ | ------------------------ | ---------------------------- | ---- |
-| Flat 2-prong lamp plug - NEMA 1-15    | 37.0   | 25.0 / 11.2              | 18.6 / 8.6                   | 3.6  |
-| Standard 3-prong plug - NEMA 5-15     | 46.2   | 26.6 / 13.4              | 18.9 / 15.0                  | 7.0  |
-| Heavy-duty extension cord - NEMA 5-15 | 43.8   | 25.8 / 21.9              | **27.0** / 27.0              | 8.2  |
+| Flat 2-prong lamp plug - NEMA 1-15    | 32.5   | 20.0 / 11.1              | 18.6 / 8.6 (estimated)       | 3.6  |
+| Standard 3-prong plug - NEMA 5-15     | 46.1   | 24.66 / 13.6             | 18.9 / 15.0 (estimated)      | 9.25 |
+| Heavy-duty extension cord - NEMA 5-15 | 51.0   | 26.56 / 24.5             | **27.0** / 27.0 (estimated)  | 8.25 |
 
 The heavy-duty preset's 27 mm thickness (`_eff_plug_thickness` = the
 fatter end) trips W-20 in the one-sided file. The two-sided file's four

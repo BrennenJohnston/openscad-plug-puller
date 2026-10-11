@@ -46,9 +46,9 @@ DASH_CUT = "1.6,1.1"
 # the `_eff_*` ternaries in src/Plug_Puller_Parametric.scad and
 # PLUG_PRESET_DIMS in Measuring_Stencil.scad (drift-tested).
 PLUG_PRESET_DIMS = [
-    ("P1", "Lamp 2-prong NEMA 1-15", 37.0, 25.0, 11.2, 18.6, 8.6, 3.6),
-    ("P2", "Standard 3-prong NEMA 5-15", 46.2, 26.6, 13.4, 18.9, 15.0, 7.0),
-    ("P3", "Heavy-duty cord NEMA 5-15", 43.8, 25.8, 21.9, 27.0, 27.0, 8.2),
+    ("P1", "Lamp 2-prong NEMA 1-15", 32.5, 20.0, 11.1, 18.6, 8.6, 3.6),
+    ("P2", "Standard 3-prong NEMA 5-15", 46.1, 24.66, 13.6, 18.9, 15.0, 9.25),
+    ("P3", "Heavy-duty cord NEMA 5-15", 51.0, 26.56, 24.5, 27.0, 27.0, 8.25),
     ("P4", "Wide 2-prong NEMA 1-15", 38.0, 34.0, 34.0, 16.0, 16.0, 5.0),
 ]
 SILHOUETTE_GAP = 3.0        # W -> T -> cord spacing inside a block
@@ -215,6 +215,11 @@ def draw_plug_silhouettes(
          "T (thin side); if it matches, pick that preset in Step 1."),
         3.0, "bold",
     )
+    tallest = max(length for _pid, _name, length, *_rest in blocks)
+    if y_base - tallest < y_header + 3.0:
+        raise AssertionError(
+            f"Plug silhouettes ({tallest} mm tall) reach the row's heading"
+        )
     gap = SILHOUETTE_GAP
     block_gap = SILHOUETTE_BLOCK_GAP
     x = SILHOUETTE_X0
@@ -265,11 +270,12 @@ def build_sheet() -> Svg:
     draw_header(svg)
     # Ruler in the header row, right of the calibration square.
     draw_ruler(svg, x0=76, y0=64)
-    # Plug silhouettes: bases on one line, tallest preset is 46.2 mm.
-    draw_plug_silhouettes(svg, y_header=86, y_base=137, blocks=pages[0])
+    # Plug silhouettes: bases on one line, tallest preset (the heavy-duty
+    # plug) is 51 mm.
+    draw_plug_silhouettes(svg, y_header=84, y_base=139, blocks=pages[0])
     # Finger circles: rows sized so the largest circle of each row clears
     # the next header/footer.
-    draw_finger_circles(svg, y_header=152, row_centers=[164, 189, 218, 250])
+    draw_finger_circles(svg, y_header=154, row_centers=[166, 191, 220, 252])
     more = f" · page 1 of {len(pages)}" if len(pages) > 1 else ""
     svg.text(
         PAGE_W / 2, 274.5,

@@ -36,6 +36,17 @@ public milestone**.
   `CRADLE SHALLOWER THAN ASKED` tag. A typed plug still uses the Cradle
   depth dial and still gets the tag; the saved `USB-C laptop plug -
   measured` set types the same numbers and a 1.9 mm cradle.
+- **The one-sided lamp, standard and heavy-duty presets and stencil cards
+  P1 to P3 take the same measured plugs.** Length, prong-end width,
+  cord-end width and cord, in mm: lamp 32.5, 20.0, 11.1, 3.6; standard
+  46.1, 24.66, 13.6, 9.25; heavy-duty 51.0, 26.56, 24.5, 8.25. Their
+  thicknesses are still the development samples' numbers (lamp 18.6 to
+  8.6, standard 18.9 to 15.0, heavy-duty 27.0), estimates until those
+  plugs' thin sides are measured; a thickness only sets how deep the
+  pocket is cut. The standard plug's 9.25 mm cord is past the Cord
+  thickness slider's 9 mm but inside the cord hook's limit, so the preset
+  builds a 10 mm hook slot. The paper stencil sheet makes room for the
+  taller heavy-duty silhouettes.
 
 ### Fixed
 

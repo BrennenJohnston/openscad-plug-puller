@@ -9,7 +9,7 @@
     "context": {},
     "plug": "Standard 3-prong plug - NEMA 5-15",
     "regions": 1,
-    "changed_area_mm2": 3116.9,
+    "changed_area_mm2": 3571.3,
     "tags": [],
     "svg": "one-sided/plug_preset.svg",
     "features": [
@@ -23,7 +23,7 @@
     ],
     "regions_named": [
       [
-        3116.9,
+        3571.3,
         [
           "zip-tie holes",
           "finger holes",

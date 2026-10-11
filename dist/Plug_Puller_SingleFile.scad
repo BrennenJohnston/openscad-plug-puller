@@ -315,18 +315,20 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 // --- Step 1 plug preset -> effective plug measurements ---------------------
 // A chosen plug preset overrides the Step 1 sliders (except when Size =
 // Custom, which ignores measurements entirely). "Measure my plug" (default)
-// keeps the sliders authoritative, so Medium parity holds. Preset values are
-// two-station measurements taken during development from the reference
-// plug STLs in `plug references/`: the plug LENGTH
-// is the molded body only (wall plate to back face — the prongs live inside
-// the wall), the WALL station is measured just behind the prong face, and the
-// CABLE station at the cord end of the gripped body (the heavy-duty plug's
-// narrower molded strain-relief boot is skipped, exactly as the Step 1
-// description tells a user to). length / width wall-cable / thickness
-// wall-cable / cord:
-//   lamp       = 37.0 / 25.0-11.2 / 18.6-8.6  / 3.6
-//   standard   = 46.2 / 26.6-13.4 / 18.9-15.0 / 7.0
-//   heavy-duty = 43.8 / 25.8-21.9 / 27.0-27.0 / 8.2
+// keeps the sliders authoritative, so Medium parity holds. The lamp,
+// standard and heavy-duty lengths, widths and cords are caliper
+// measurements of the owner's plugs, the same plugs the two-sided presets
+// carry: the LENGTH from the wall plate to the plug's back end, the WALL
+// station's width just behind the prong face, the CABLE station's where the
+// cord leaves the plug, the cord across its thin side. Their thicknesses are
+// estimates, not yet measured on these plugs: the development sample plugs'
+// numbers from `plug references/`. A thickness only sets the pocket's
+// recess, about 0.13 to 0.16 mm per millimeter, so a few millimeters of
+// error move the pocket floor by well under a millimeter. length / width
+// wall-cable / thickness wall-cable (estimated) / cord:
+//   lamp       = 32.5 / 20.0-11.1  / 18.6-8.6  / 3.6
+//   standard   = 46.1 / 24.66-13.6 / 18.9-15.0 / 9.25
+//   heavy-duty = 51.0 / 26.56-24.5 / 27.0-27.0 / 8.25
 // The wide 2-prong appliance plug (the owner's US vacuum plug, measured with
 // a ruler) is straight-sided:
 //   wide 2-prong appliance = 38.0 / 34.0-34.0 / 16.0-16.0 / 5.0
@@ -336,21 +338,21 @@ custom_t_hook_top_bottom_rounding = 0; // [0:0.1:3]
 /* [Hidden] */
 _pp_active = (plug_preset != "Measure my plug");
 _eff_plug_length =
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 37.0 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 46.2 :
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 43.8 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 32.5 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 46.1 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 51.0 :
     plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 38.0 :
     measure_plug_length;
 _eff_plug_width_wall =
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 25.0 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 26.6 :
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 25.8 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 20.0 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 24.66 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 26.56 :
     plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 34.0 :
     measure_plug_width_prong_end;
 _eff_plug_width_cable =
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.2 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.4 :
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 21.9 :
+    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.1 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.6 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 24.5 :
     plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 34.0 :
     measure_plug_width_cord_end;
 _eff_plug_thickness_wall =
@@ -367,8 +369,8 @@ _eff_plug_thickness_cable =
     measure_plug_thickness_cord_end;
 _eff_cord_thickness =
     plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 3.6 :
-    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 7.0 :
-    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 8.2 :
+    plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 9.25 :
+    plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 8.25 :
     plug_preset == "Wide 2-prong appliance plug - NEMA 1-15"  ? 5.0 :
     measure_cord_thickness;
 // Plug side taper (degrees), DERIVED from the two width stations over the

@@ -148,16 +148,17 @@ class TestStencilData:
 
     def test_dims_are_plausible(self) -> None:
         """Cheap sanity net: every dimension physically plausible for a US
-        plug. (Presets can sit below the Customizer slider floors — e.g.
-        P1's cord-end width is 11.2 mm against a 12 mm slider minimum of the
-        old range — so these are looser physical bounds, not the slider
-        ranges.)"""
+        plug. (Presets can sit outside the Customizer slider ranges — e.g.
+        P1's cord-end width is 11.1 mm against a 12 mm slider minimum of the
+        old range, and P2's measured 9.25 mm cord is past the 9 mm cord
+        slider but inside the cord hook's 9.5 mm limit — so these are looser
+        physical bounds, not the slider ranges.)"""
         for dims in list(_main_scad_dims().values()) + _stencil_scad_dims():
             length, ww, wc, tw, tc, cord = dims
             assert 12 <= length <= 85
             assert 8 <= ww <= 45 and 8 <= wc <= 45
             assert 6 <= tw <= 40 and 6 <= tc <= 40
-            assert 2 <= cord <= 9
+            assert 2 <= cord <= 9.5
 
 
 if __name__ == "__main__":
