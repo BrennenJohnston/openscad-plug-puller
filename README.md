@@ -394,8 +394,8 @@ Customizer values):
 | Name in JSON | Loads as | Notes |
 | ------------ | -------- | ----- |
 | `Medium (v6 reference)` | `Medium` | the one-sided reference device, zip ties + wing velcro |
-| `Flat 2-prong lamp plug (NEMA 1-15)` | `plug_preset` | 37 mm long, width 25 → 11.2, thickness 18.6 → 8.6 (prong end → cord end), 3.6 mm cord |
-| `Standard 3-prong plug (NEMA 5-15)` | `plug_preset` | 46.2 mm long, width 26.6 → 13.4, thickness 18.9 → 15, 7 mm cord |
+| `Flat 2-prong lamp plug (NEMA 1-15)` | `plug_preset` | 32.5 mm long, width 20 → 11.1, thickness 18.6 → 8.6 (estimated), 3.6 mm cord |
+| `Standard 3-prong plug (NEMA 5-15)` | `plug_preset` | 46.1 mm long, width 24.66 → 13.6, thickness 18.9 → 15 (estimated), 9.25 mm cord |
 | `Wide 2-prong appliance plug - NEMA 1-15` | `plug_preset` | 38 mm long, 34 wide and 16 thick at both ends, 5 mm cord |
 | `Small hands` / `Large hands` | `Small` / `Large` | ANSUR-II grip scaling |
 | `Measure my plug + hand (US vacuum plug)` | `Measure my hand` | the same plug typed by hand, Decora plate, 22 / 88 mm hand |

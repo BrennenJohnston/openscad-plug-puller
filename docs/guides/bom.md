@@ -19,12 +19,12 @@ The numbers below are upper bounds: they are the solid volume of each shipped ST
 
 | Tool and plug                                      | Small  | Medium | Large  |
 | -------------------------------------------------- | ------ | ------ | ------ |
-| One-sided, flat 2-prong lamp plug                  | 12.0 g | 17.0 g | 21.2 g |
-| One-sided, standard 3-prong plug                   | 16.7 g | 23.8 g | 30.1 g |
+| One-sided, flat 2-prong lamp plug                  | 11.6 g | 15.9 g | 19.6 g |
+| One-sided, standard 3-prong plug                   | 17.4 g | 25.1 g | 32.1 g |
 | One-sided, wide 2-prong appliance plug             | 15.2 g | 21.3 g | 26.8 g |
 | Two-sided, heavy-duty extension cord (both plates) | 17.0 g | 19.2 g | 21.2 g |
 | Two-sided, USB-C laptop tip (both plates)          | 11.2 g | 12.9 g | 14.4 g |
 | Two-sided, flat 2-prong lamp plug (both plates)    | 16.4 g | 18.5 g | 20.4 g |
 | Two-sided, standard 3-prong plug (both plates)     | 17.5 g | 19.7 g | 21.6 g |
 
-The solid volumes behind these grams: one-sided lamp 9.48, 13.36 and 16.66 cubic centimeters; one-sided standard 13.13, 18.70 and 23.69; one-sided wide appliance 11.99, 16.81 and 21.11; two-sided heavy-duty cord 13.35, 15.15 and 16.70; two-sided USB-C 8.81, 10.15 and 11.33; two-sided lamp 12.94, 14.60 and 16.03; two-sided standard 13.75, 15.48 and 16.98. A custom tool lands near the preset closest to its plug. For PLA multiply the grams by 0.98.
+The solid volumes behind these grams: one-sided lamp 9.12, 12.52 and 15.43 cubic centimeters; one-sided standard 13.67, 19.78 and 25.24; one-sided wide appliance 11.99, 16.81 and 21.11; two-sided heavy-duty cord 13.35, 15.15 and 16.70; two-sided USB-C 8.81, 10.15 and 11.33; two-sided lamp 12.94, 14.60 and 16.03; two-sided standard 13.75, 15.48 and 16.98. A custom tool lands near the preset closest to its plug. For PLA multiply the grams by 0.98.
