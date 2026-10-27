@@ -1,13 +1,13 @@
 """Every two-sided `plug_preset` renders clean with its own numbers and sides.
 
 The two-sided puller's dropdown carries the plugs the owner chose, with
-the labels the owner wrote. Each preset fills in the numbers measured with a
-caliper on its own plug: the length, the width at the prong end and at the
-cord end, how far the head keeps the prong-end width, and the cord; and it
-carries its own sides: the heavy-duty extension cord keeps Flat sides and
-the grip bite (its plate is the golden fixture), the USB-C laptop tip builds
-Rounded sides with its own cradle depth, the lamp and standard plugs build
-Flat sides.
+the labels the owner wrote: the 3-prong plugs (2-prong plugs and the USB-C
+tip belong to the one-sided file). Each preset fills in the numbers measured
+with a caliper on its own plug: the length, the width at the prong end and
+at the cord end, how far the head keeps the prong-end width, and the cord;
+and it carries its own sides: the heavy-duty extension cord keeps Flat sides
+and the grip bite (its plate is the golden fixture), and the standard plug
+builds Flat sides too.
 
 For every preset this suite renders one plate and reads the derived-values
 echo block: no ``WARNING:`` line, a watertight mesh, the grip gap at each end
@@ -15,7 +15,7 @@ equal to the preset's width there plus twice its grip term (the default
 ``plate_grip_clearance`` / 2 per side with Rounded sides, the default
 ``plate_grip_bite`` per side with Flat sides) or the cord channel plus 1 mm
 per side where that floor is wider, the head length, and the cradle depth
-the preset carries.
+(none with Flat sides).
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -35,20 +35,12 @@ TWO_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
 # plug numbers each fills in (mm: length, width at the prong end, width at the
 # cord end, head length, cord), its sides and, with Rounded sides, its cradle.
 PRESETS: Dict[str, Dict[str, object]] = {
-    "Heavy-duty extension cord - NEMA 5-15": {
-        "length": 51.0, "width_prong_end": 26.56, "width_cord_end": 24.5, "head": 23.0, "cord": 8.25,
-        "sides": "Flat sides", "cradle": 0.0,
-    },
-    "USB-C laptop tip": {
-        "length": 17.0, "width_prong_end": 10.25, "width_cord_end": 10.25, "head": 0.0, "cord": 6.1,
-        "sides": "Rounded sides", "cradle": 1.9,
-    },
-    "Flat 2-prong lamp plug - NEMA 1-15": {
-        "length": 32.5, "width_prong_end": 20.0, "width_cord_end": 11.1, "head": 15.2, "cord": 7.0,
-        "sides": "Flat sides", "cradle": 0.0,
-    },
     "Standard 3-prong plug - NEMA 5-15": {
         "length": 46.1, "width_prong_end": 24.66, "width_cord_end": 13.6, "head": 15.6, "cord": 9.25,
+        "sides": "Flat sides", "cradle": 0.0,
+    },
+    "Heavy-duty extension cord - NEMA 5-15": {
+        "length": 51.0, "width_prong_end": 26.56, "width_cord_end": 24.5, "head": 23.0, "cord": 8.25,
         "sides": "Flat sides", "cradle": 0.0,
     },
 }

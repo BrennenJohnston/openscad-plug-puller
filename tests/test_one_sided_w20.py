@@ -2,8 +2,8 @@
 
 The one-sided file builds only the one-sided puller. A plug
 24 mm thick or more no longer switches silently to another tool: it gets the
-red tag "PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE", whether the
-thickness is typed or comes from a plug preset. Thinner plugs stay silent.
+red tag "PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE". Thinner
+plugs stay silent, and so do the file's presets, which are all thinner.
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -22,7 +22,8 @@ CASES = {
     # name: (parameters, whether W-20 must fire)
     "typed_27mm": ({"measure_plug_thickness_prong_end": 27, "measure_plug_thickness_cord_end": 27}, True),
     "typed_20mm": ({"measure_plug_thickness_prong_end": 20, "measure_plug_thickness_cord_end": 20}, False),
-    "heavy_duty_preset": ({"plug_preset": "Heavy-duty extension cord - NEMA 5-15"}, True),
+    "typed_24mm_at_cord_end": ({"measure_plug_thickness_prong_end": 20, "measure_plug_thickness_cord_end": 24}, True),
+    "usb_c_preset": ({"plug_preset": "USB-C laptop tip"}, False),
 }
 
 

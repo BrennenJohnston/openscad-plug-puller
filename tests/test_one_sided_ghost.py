@@ -24,7 +24,7 @@ import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ONE_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
-STANDARD_PLUG = {"plug_preset": "Standard 3-prong plug - NEMA 5-15"}
+STANDARD_PLUG = {"plug_preset": "Flat 2-prong lamp plug - NEMA 1-15"}
 # SkyBlue at 35 % opacity, as OpenSCAD writes it in a CSG export.
 GHOST_RE = re.compile(
     r"^\s*%\s*color\(\[0\.529412, 0\.807843, 0\.921569, 0\.35\]\)", re.MULTILINE

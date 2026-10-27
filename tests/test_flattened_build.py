@@ -1,7 +1,7 @@
 """Tests for the flattened single-file builds in ``dist/``.
 
 ``scripts/build_flattened.py`` writes one artifact per tool (``BUILDS``):
-``dist/Plug_Puller_SingleFile.scad`` (the one-sided puller) and
+``dist/Plug_Puller_One_Sided_SingleFile.scad`` (the one-sided puller) and
 ``dist/Plug_Puller_Two_Sided_SingleFile.scad`` (the two-sided puller).
 
 Quick lane (no OpenSCAD), for every artifact:
@@ -40,7 +40,7 @@ from scripts.build_flattened import BUILDS, OUTPUT_FILE, build_flattened_source
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 BUILD_IDS = [build.output.name for build in BUILDS]
 MAPPINGS = {
-    "Plug_Puller_SingleFile.scad": PROJECT_ROOT / "parameter_mapping.json",
+    "Plug_Puller_One_Sided_SingleFile.scad": PROJECT_ROOT / "parameter_mapping.json",
     "Plug_Puller_Two_Sided_SingleFile.scad": PROJECT_ROOT / "parameter_mapping_two_sided.json",
 }
 TWO_SIDED_ARTIFACT = next(

@@ -351,26 +351,27 @@ class TestFingerHoleRoom:
 
 
 # Plug quick-select prefills (mirrors the `_eff_*` ternaries in the v7 SCAD;
-# lengths, widths and cords measured on the owner's plugs, thicknesses still
-# the development samples' estimates).
+# lengths, widths and cords measured on the owner's plugs; thicknesses are
+# estimates: the lamp's development sample, the USB-C overmold limit).
 PLUG_PRESET_VECTORS: Dict[str, Dict[str, Any]] = {
+    "usb_c_tip": {
+        "measure_plug_length": 17.0,
+        "measure_plug_width_prong_end": 10.25, "measure_plug_width_cord_end": 10.25,
+        "measure_plug_thickness_prong_end": 6.5, "measure_plug_thickness_cord_end": 6.5,
+        "measure_cord_thickness": 6.1,
+        "measure_wall_plate_style": "No plate / flush",
+    },
     "lamp_1_15": {
         "measure_plug_length": 32.5,
         "measure_plug_width_prong_end": 20.0, "measure_plug_width_cord_end": 11.1,
         "measure_plug_thickness_prong_end": 18.6, "measure_plug_thickness_cord_end": 8.6,
         "measure_cord_thickness": 3.6,
     },
-    "standard_5_15": {
-        "measure_plug_length": 46.1,
-        "measure_plug_width_prong_end": 24.66, "measure_plug_width_cord_end": 13.6,
-        "measure_plug_thickness_prong_end": 18.9, "measure_plug_thickness_cord_end": 15.0,
-        "measure_cord_thickness": 9.25,
-    },
-    "heavy_duty_5_15": {
-        "measure_plug_length": 51.0,
-        "measure_plug_width_prong_end": 26.56, "measure_plug_width_cord_end": 24.5,
-        "measure_plug_thickness_prong_end": 27.0, "measure_plug_thickness_cord_end": 27.0,
-        "measure_cord_thickness": 8.25,
+    "wide_appliance_1_15": {
+        "measure_plug_length": 38.0,
+        "measure_plug_width_prong_end": 34.0, "measure_plug_width_cord_end": 34.0,
+        "measure_plug_thickness_prong_end": 16.0, "measure_plug_thickness_cord_end": 16.0,
+        "measure_cord_thickness": 5.0,
     },
 }
 

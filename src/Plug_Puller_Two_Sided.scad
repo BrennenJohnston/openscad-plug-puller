@@ -1,4 +1,8 @@
 // Plug Puller — two-sided puller: two identical plates that zip-tie face to face around a plug. Print both plates, flip one over.
+// This file makes the two-sided puller, for 3-prong plugs and any plug 24 mm
+// or thicker. The one-sided puller, for 2-prong plugs and USB-C tips, is a
+// separate file: src/Plug_Puller_Parametric.scad. Switching tools means
+// opening that file.
 //
 // Coordinate frame (plate; docs/Plug_Puller_Reference.md section 3.2):
 //   X = 0 at the mirror line between the two arms (midline), positive right
@@ -9,19 +13,19 @@
 // License: PolyForm Noncommercial 1.0.0
 
 /* [Step 1 - Your Plug] */
-// Pick your plug if it is on this list and every number below fills in, including its sides. Otherwise leave Measure my plug and type the numbers below.
-plug_preset = "Measure my plug"; // [Measure my plug, Heavy-duty extension cord - NEMA 5-15, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15]
-// How far the plug body sticks out, from the surface it plugs into to the plug's back end where the cord starts. On a laptop or charger, measure from the device's edge. Skip if you picked a plug preset. (mm)
+// This file makes the TWO-SIDED puller, for plugs with 3 prongs and any plug 24 mm or thicker. A 2-prong plug or a USB-C tip needs the one-sided puller, which is a separate file: open it instead (Plug_Puller_One_Sided_SingleFile.scad, or src/Plug_Puller_Parametric.scad in the full download). Pick your plug if it is on this list and every number below fills in, including its sides. Otherwise leave Measure my plug and type the numbers below.
+plug_preset = "Measure my plug"; // [Measure my plug, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15]
+// How far the plug body sticks out, from the surface it plugs into to the plug's back end where the cord starts. Skip if you picked a plug preset. (mm)
 measure_plug_length = 25.5; // [12:0.5:85]
-// Plug width at the PRONG END: the size the two plates will close across, measured across the plug body just behind the prongs. On a USB-C or charger tip, just behind the metal tip. (mm)
+// Plug width at the PRONG END: the size the two plates will close across, measured across the plug body just behind the prongs. Skip if you picked a plug preset. (mm)
 measure_plug_width_prong_end = 20; // [5:0.5:40]
 // How far back from the prong end the plug stays as wide as the prong-end width before it narrows. 0 = it narrows from the prong end. Skip if you picked a plug preset. (mm)
 measure_plug_head_length = 0; // [0:0.5:60]
 // Plug width at the CORD END: the same direction, measured at the plug's back end where the cord comes out. A rubber strain relief counts as part of the plug, because the whole plug lies between the plates. (mm)
 measure_plug_width_cord_end = 20; // [5:0.5:40]
-// Measure the cord just behind the plug, the way the plug widths run: the plug lies flat between the plates, so a flat lamp cord is measured across its WIDE side; a round cord, its diameter. Skip if you picked a plug preset. (mm)
+// Measure the cord just behind the plug, the way the plug widths run: the plug lies flat between the plates, so a flat cord is measured across its WIDE side; a round cord, its diameter. Skip if you picked a plug preset. (mm)
 measure_cord_thickness = 4; // [1.5:0.5:12]
-// Look at the plug body where the plates will grip it. Rounded sides: a round cord plug, a USB-C or charger tip; the plates get a sloped cradle that centers the plug and forgives a small measuring error. Flat sides: a boxy plug; the plates stay straight so the teeth bite along the whole side. Ignored when a plug preset is chosen: presets carry their own tested grip.
+// Look at the plug body where the plates will grip it. Rounded sides: a round plug body; the plates get a sloped cradle that centers the plug and forgives a small measuring error. Flat sides: a boxy plug; the plates stay straight so the teeth bite along the whole side. Ignored when a plug preset is chosen: presets carry their own tested grip.
 plug_sides = "Rounded sides"; // [Rounded sides, Flat sides]
 // Show a see-through plug built from these numbers in the preview so you can check the fit. It is never part of the exported file. MakerWorld shows the finished plates only.
 show_plug_preview = true;
@@ -127,34 +131,28 @@ include <fit_sizes.scad>
 // numbers measured with a caliper on its own plug: the whole length the
 // plates cover (a strain relief included), the width the plates close
 // across at the prong end and at the cord end, how far the head keeps the
-// prong-end width, and the cord across the channel (a flat lamp cord's wide
-// side, since the plug lies flat between the plates). The heavy-duty plug
-// widens behind its prong face, so its prong-end width is the widest
-// measurement, 26.56; the USB-C length leaves out the metal tip. "Measure
-// my plug" keeps the Step 1 sliders authoritative.
+// prong-end width, and the cord across the channel (a flat cord's wide
+// side, since the plug lies flat between the plates). The presets are the
+// plugs this tool holds well in test prints: 3-prong plugs (2-prong plugs
+// and the USB-C tip slipped out of it and belong to the one-sided puller
+// file). The heavy-duty plug widens behind its prong face, so its prong-end
+// width is the widest measurement, 26.56. "Measure my plug" keeps the
+// Step 1 sliders authoritative.
 _pp_active = (plug_preset != "Measure my plug");
 _eff_plug_length =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 51.0 :
-    plug_preset == "USB-C laptop tip"                        ? 17.0 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 32.5 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 46.1 :
     measure_plug_length;
 _eff_plug_width_prong_end =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 26.56 :
-    plug_preset == "USB-C laptop tip"                        ? 10.25 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 20.0 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 24.66 :
     measure_plug_width_prong_end;
 _eff_plug_width_cord_end =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 24.5 :
-    plug_preset == "USB-C laptop tip"                        ? 10.25 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 11.1 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 13.6 :
     measure_plug_width_cord_end;
 _eff_cord_thickness =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 8.25 :
-    plug_preset == "USB-C laptop tip"                        ? 6.1 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 7.0 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 9.25 :
     measure_cord_thickness;
 // How far the plug keeps its prong-end width before it narrows; never more
@@ -163,8 +161,6 @@ assert(measure_plug_head_length >= 0 && measure_plug_head_length <= 60,
        "measure_plug_head_length must be 0 to 60 mm");
 _head_length_asked =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? 23.0 :
-    plug_preset == "USB-C laptop tip"                        ? 0 :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? 15.2 :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? 15.6 :
     measure_plug_head_length;
 _eff_plug_head_length = max(0, min(_head_length_asked, _eff_plug_length));
@@ -175,13 +171,10 @@ _attach_velcro = (attachment == "Zip ties + Velcro strap");
 strap_width_eff = max(8, min(strap_width, 30));
 _is_clamshell = true;
 // Each preset carries its own sides: the heavy-duty cord keeps the straight
-// edge and the bite (its plate is the golden fixture), the USB-C tip builds
-// the cradle the owner printed and tested, and the lamp and standard plugs
-// are boxy. "Measure my plug" follows the Step 1 dropdown.
+// edge and the bite (its plate is the golden fixture), and the standard
+// plug is boxy. "Measure my plug" follows the Step 1 dropdown.
 _preset_sides =
     plug_preset == "Heavy-duty extension cord - NEMA 5-15"   ? "Flat sides" :
-    plug_preset == "USB-C laptop tip"                        ? "Rounded sides" :
-    plug_preset == "Flat 2-prong lamp plug - NEMA 1-15"      ? "Flat sides" :
     plug_preset == "Standard 3-prong plug - NEMA 5-15"       ? "Flat sides" :
     plug_sides;
 _sides_eff = _pp_active ? _preset_sides : plug_sides;
@@ -246,11 +239,9 @@ _clam_hw_cable  = max(_clam_cable_hw + 1,
 // mating face down to the outer face, so two plates form a diamond channel.
 // Guard: the outer-face gap may come down to the cord channel's width but
 // never below it, and the step-in never exceeds the plate. 0 = today's
-// straight edge. A preset with Rounded sides carries its own depth, sized to
-// fit its plug beside its cord channel.
-_eff_cradle_depth = plug_preset == "USB-C laptop tip" ? 1.9 : plate_cradle_depth;
+// straight edge.
 _cradle_eff     = (_sides_eff == "Rounded sides")
-    ? max(0, min(_eff_cradle_depth, plate_thickness,
+    ? max(0, min(plate_cradle_depth, plate_thickness,
                  min(_clam_hw_wall, _clam_hw_cable) - _clam_cable_hw))
     : 0;
 
@@ -520,10 +511,9 @@ function _vw_clam_plug_narrow() =
     || (_eff_plug_width_cord_end / 2 + _grip_term < floor_hw
          && _eff_plug_width_cord_end < 2 * floor_hw);
 // WC-13 — the depth guard made the cradle shallower than plate_cradle_depth
-// (or the preset's own depth) asks for, because the plug is narrow next to
-// its cord channel.
+// asks for, because the plug is narrow next to its cord channel.
 function _vw_clam_cradle_clamped() =
-    _sides_eff == "Rounded sides" && _cradle_eff < _eff_cradle_depth - 0.01;
+    _sides_eff == "Rounded sides" && _cradle_eff < plate_cradle_depth - 0.01;
 
 // Heavy-duty clamshell warnings, in the clamshell's own local frame. Same
 // red-coupon + console-mirror convention as validation_warnings().

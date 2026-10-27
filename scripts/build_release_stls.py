@@ -3,11 +3,12 @@
 Every default preset the two models ship gets its own named STL so downloaders
 can print a standard configuration without opening OpenSCAD:
 
-* Plug Puller — every plug preset x each of the 3 finger/hand sizes, in every
-  tool file that offers the preset = 21 plug tools: 9 one-sided (the lamp,
-  standard and wide appliance presets) + 12 two-sided pairs (the lamp,
-  standard, round extension-cord and USB-C presets). Only ``plug_preset``
-  and ``size`` vary; every other dial stays at its default. The one-sided
+* Plug Puller — every plug preset x each of the 3 finger/hand sizes, in the
+  tool file that offers the preset = 15 plug tools: 9 one-sided (the USB-C
+  tip, lamp and wide appliance presets: the 2-prong plugs) + 6 two-sided
+  pairs (the standard and round extension-cord presets: the 3-prong plugs).
+  Only ``plug_preset`` and ``size`` vary; every other dial stays at its
+  default. The one-sided
   puller is ``src/Plug_Puller_Parametric.scad``; the two-sided puller
   (``src/Plug_Puller_Two_Sided.scad``) renders both plates side by side in
   one file (flip one after printing).
@@ -23,7 +24,7 @@ Files land under ``stl/`` in a folder tree that mirrors the upload layout
 
     stl/
       Plug-Puller/
-        Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_Small.stl
+        Plug-Puller_USB-C-Laptop-Tip_Small.stl
         Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_Small.stl
         ...
       Measuring-Stencil/
@@ -73,36 +74,36 @@ DEFAULT_OUT = PROJECT_ROOT / "stl"
 SIZES = ["Small", "Medium", "Large"]
 
 # Plug presets exactly as they read in the Step 1 dropdown, paired with a
-# filesystem-safe descriptor and the tool files that offer the preset: the
-# one-sided file renders one tool per size, the two-sided file renders both
-# plates in one file per size. A preset in both files ships both.
+# filesystem-safe descriptor and the tool file that offers the preset: the
+# one-sided file (2-prong plugs and the USB-C tip) renders one tool per size,
+# the two-sided file (3-prong plugs) renders both plates in one file per size.
 ONE_SIDED = "one-sided"
 TWO_SIDED = "two-sided"
 PLUG_PRESETS = [
     {
-        "customizer": "Flat 2-prong lamp plug - NEMA 1-15",
-        "desc": "Flat-2-Prong-Lamp-NEMA-1-15",
-        "files": (ONE_SIDED, TWO_SIDED),
-    },
-    {
-        "customizer": "Standard 3-prong plug - NEMA 5-15",
-        "desc": "Standard-3-Prong-NEMA-5-15",
-        "files": (ONE_SIDED, TWO_SIDED),
-    },
-    {
-        "customizer": "Heavy-duty extension cord - NEMA 5-15",
-        "desc": "Round-Extension-Cord-NEMA-5-15",
-        "files": (TWO_SIDED,),
-    },
-    {
         "customizer": "USB-C laptop tip",
         "desc": "USB-C-Laptop-Tip",
-        "files": (TWO_SIDED,),
+        "files": (ONE_SIDED,),
+    },
+    {
+        "customizer": "Flat 2-prong lamp plug - NEMA 1-15",
+        "desc": "Flat-2-Prong-Lamp-NEMA-1-15",
+        "files": (ONE_SIDED,),
     },
     {
         "customizer": "Wide 2-prong appliance plug - NEMA 1-15",
         "desc": "Wide-2-Prong-Appliance",
         "files": (ONE_SIDED,),
+    },
+    {
+        "customizer": "Standard 3-prong plug - NEMA 5-15",
+        "desc": "Standard-3-Prong-NEMA-5-15",
+        "files": (TWO_SIDED,),
+    },
+    {
+        "customizer": "Heavy-duty extension cord - NEMA 5-15",
+        "desc": "Round-Extension-Cord-NEMA-5-15",
+        "files": (TWO_SIDED,),
     },
 ]
 

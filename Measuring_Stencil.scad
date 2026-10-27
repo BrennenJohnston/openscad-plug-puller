@@ -11,11 +11,12 @@
 //   P1 … P4      plug preset cards — hold your plug in the cutouts; if it
 //                 fills the W (width) and T (thickness) openings and the cord
 //                 slips sideways into the open cord slot, that preset fits —
-//                 pick it in Step 1 and skip measuring entirely.
-//                   P1 = flat 2-prong lamp plug (NEMA 1-15)
-//                   P2 = standard 3-prong plug (NEMA 5-15)
-//                   P3 = heavy-duty extension cord (NEMA 5-15)
-//                   P4 = wide 2-prong appliance plug (NEMA 1-15)
+//                 open that plug's tool file, pick the preset in Step 1 and
+//                 skip measuring entirely.
+//                   P1 = flat 2-prong lamp plug (NEMA 1-15), one-sided puller
+//                   P2 = standard 3-prong plug (NEMA 5-15), two-sided puller
+//                   P3 = heavy-duty extension cord (NEMA 5-15), two-sided puller
+//                   P4 = wide 2-prong appliance plug (NEMA 1-15), one-sided puller
 //   R1            ruler card — raised tactile ticks (1 mm short, 5 mm medium,
 //                 10 mm tall), debossed numerals, and touch-countable edge
 //                 notches every 10 mm (worksheet measurements 1-5).
@@ -102,12 +103,14 @@ IS_TACTILE = (label_mode == "Tactile");
 
 // ── Preset plug dimensions ──────────────────────────────────────────────────
 // [id, length, width wall, width cable, thickness wall, thickness cable, cord]
-// Copied from the `_eff_*` preset ternaries in src/Plug_Puller_Parametric.scad
-// (lamp, standard 3-prong, heavy-duty, wide 2-prong appliance — the Step 1
-// dropdown order). The P1 to P3 thicknesses are estimates until those plugs'
-// thin sides are measured; see the main SCAD.
-// tests/test_stencil_data.py asserts these numbers match the main SCAD and
-// scripts/generate_stencil_sheet.py — keep all three in lock-step.
+// Each card's length, widths and cord are copied from the `_eff_*` preset
+// ternaries of the tool file that offers its plug: P1 and P4 from
+// src/Plug_Puller_Parametric.scad (the one-sided puller, 2-prong plugs), P2
+// and P3 from src/Plug_Puller_Two_Sided.scad (the two-sided puller, 3-prong
+// plugs). P1 and P4 carry the one-sided presets' thicknesses too; the
+// two-sided puller reads no thickness, so the P2 and P3 thicknesses are the
+// development sample plugs' estimates, kept for the T opening only.
+// tests/test_stencil_data.py asserts these numbers match the tool files.
 PLUG_PRESET_DIMS = [
     ["P1", 32.5, 20.0, 11.1, 18.6, 8.6, 3.6],
     ["P2", 46.1, 24.66, 13.6, 18.9, 15.0, 9.25],
