@@ -33,3 +33,11 @@ A known limit, not changed: when PowerShell starts the script with `-File`, seve
 **The fix.** The presets carry numbers measured with a caliper on their own plugs, and a new Step 1 number, the plug head length, holds the gap at the prong-end width along the head before it narrows. The USB-C tip's preset carries its own 1.9 mm cradle so it builds no red tag. The numbers are in `CHANGELOG.md`.
 
 **The check that passed.** Each preset rendered headlessly prints no `WARNING:` line, and its grip gap at each end is the plug's width there plus twice the grip term, or the cord channel plus 2 mm where that floor is wider: 24.56 and 22.5 mm (heavy-duty), 10.75 mm with a 1.9 mm cradle (USB-C), 18 and 9.8 mm (lamp), 22.66 and 12.05 mm (standard). `tests/test_two_sided_presets.py` asserts these numbers and the head lengths; the quick lane (250) and the render lane (113) pass. The fit itself is judged by a test print of the new presets, still to come.
+
+## 2026-10-27: the guides pointed to the measuring form "on page 00"
+
+**The bug.** In the printed quick starts and full guides of both tools, the sentence that says where the measuring form is printed read "The form is printed at true size on page 00, at the end of this guide". Version 0.14.0's PDFs carry it. The builder fills that number from where the form's page landed in the last print, and it reads those positions from the PDF's named destinations; Chromium writes a named destination only for an id that a link points at, and nothing linked to the form's page, so its number was never known and the placeholder "00" stayed. The new sentence that points to the plug size finder had the same fault.
+
+**The fix.** Each "page N" in those two sentences is now a link to its sheet, so Chromium records where the sheet lands, and the builder tracks the two sheets' pages with the contents' pages until they settle.
+
+**The check that passed.** After rebuilding the four documents, every "printed at true size on page N" names the page that sheet is on: the one-sided quick start pages 13 (the plug size finder) and 14 (the form), the one-sided full guide 86 and 87, the two-sided quick start 13 and 14, the two-sided full guide 54 and 55, each checked by reading the page it names. `tests/test_guide_packets.py` passes with the linked sentence.

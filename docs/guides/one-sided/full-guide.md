@@ -2,11 +2,11 @@
 
 Everything about the one-sided puller: getting the file, measuring, every dial with a picture, printing, assembly, use and care, what to do when a print does not fit, every warning, and how the advanced dials work.
 
-Model version 0.14.0. [The printable full guide](../../Plug_Puller_One_Sided_Full_Guide.pdf) has the same text, with the measuring form and the paper stencil sheets at true size as its last pages. The other document for this tool is [the quick start](quick-start.md). Each dial is headed by its plain name, with the name the Customizer shows on the line under it.
+Model version 1.0.0. [The printable full guide](../../Plug_Puller_One_Sided_Full_Guide.pdf) has the same text, with the measuring form and the paper stencil sheets at true size as its last pages. The other document for this tool is [the quick start](quick-start.md). Each dial is headed by its plain name, with the name the Customizer shows on the line under it.
 
 ## Which tool this is
 
-This guide is for the one-sided puller, src/Plug_Puller_Parametric.scad: the tool for a wall plug up to 24 mm thick, a pocket around the plug's back and sides with two finger holes below it, pulled with one hand. Measure your plug's thickness first. Thicker than 24 mm, or a plug you want held from both sides such as a USB-C tip or a round extension-cord plug, is the two-sided puller's job, and that tool has its own guide.
+This guide is for the one-sided puller, src/Plug_Puller_Parametric.scad (as one file, Plug_Puller_One_Sided_SingleFile.scad): the tool for a plug with 2 prongs or a USB-C tip, a pocket around the plug's back and sides with two finger holes below it, pulled with one hand. A plug with 3 prongs, or any plug 24 mm thick or more, is the two-sided puller's job: that tool is a separate file, with its own guide.
 
 The Customizer's four steps are your plug, your size, the attachment and the hook's side. This full guide covers getting the file, measuring your plug and your hand or matching a card, every dial with a picture, printing, assembly, use and care, what to do when a print does not fit, every warning, and how the advanced dials work.
 
@@ -27,6 +27,8 @@ Five stages of the one-sided puller, left to right, the top row first, the plug 
 
 The one-sided puller is the file `src/Plug_Puller_Parametric.scad`. There are two ways to open it and fill in its form: in your web browser with nothing to install, or in the free OpenSCAD program on your computer. Both show the same form, called the Customizer.
 
+**Two tools, two files.** The one-sided puller is for a plug with 2 prongs or a USB-C tip. A plug with 3 prongs, or any plug 24 mm thick or more, needs the two-sided puller, which is a separate file, [`src/Plug_Puller_Two_Sided.scad`](../../../src/Plug_Puller_Two_Sided.scad) (as one file, [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](../../../dist/Plug_Puller_Two_Sided_SingleFile.scad)), with its own guide; in your browser it is [the two-sided puller in the Assistive Forge](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-two-sided.json). No setting inside one file makes the other tool, as a setting did in older versions: to get the other tool, open its file.
+
 ### In your browser
 
 The OpenSCAD Assistive Forge is a version of OpenSCAD that runs in your browser, on a computer or a phone, built for keyboard and screen reader use. Nothing is uploaded: your numbers stay on your device.
@@ -35,14 +37,14 @@ The OpenSCAD Assistive Forge is a version of OpenSCAD that runs in your browser,
 2. Forge offers to keep a copy of the project in your browser. Choose **Save My Copy**: the tool is then listed on Forge's main page whenever you come back, no link needed.
 3. The form shows the four steps' dials first. The rest sit behind one button, **Show all parameters**.
 
-If the link cannot load, Forge says why and offers **Try again**. You can also download the whole tool as one file, [`dist/Plug_Puller_SingleFile.scad`](../../../dist/Plug_Puller_SingleFile.scad), and open it from Forge's main page, under Open or start a project.
+If the link cannot load, Forge says why and offers **Try again**. You can also download the whole tool as one file, [`dist/Plug_Puller_One_Sided_SingleFile.scad`](../../../dist/Plug_Puller_One_Sided_SingleFile.scad), and open it from Forge's main page, under Open or start a project.
 
 ### On your computer
 
 OpenSCAD is the free program that turns your numbers into a printable file. You use one panel of it and never touch the code.
 
 1. Download OpenSCAD from <https://openscad.org/downloads.html>: the **Development Snapshot** for your system. This project is tested with the snapshot of 2026-01-03; any recent snapshot works. The regular release works too, only slower.
-2. Get the project: on its GitHub page press the green **Code** button, then **Download ZIP**, and unzip it anywhere. Or download only [`dist/Plug_Puller_SingleFile.scad`](../../../dist/Plug_Puller_SingleFile.scad), the whole tool in one file.
+2. Get the project: on its GitHub page press the green **Code** button, then **Download ZIP**, and unzip it anywhere. Or download only [`dist/Plug_Puller_One_Sided_SingleFile.scad`](../../../dist/Plug_Puller_One_Sided_SingleFile.scad), the whole tool in one file.
 3. Open `src/Plug_Puller_Parametric.scad` (or the single file) in OpenSCAD: double-click it, or use **File ▸ Open**. A wall of code appears in an editor pane. Ignore it; you will not touch it.
 4. Show the Customizer, the form you type into: in the **View** menu, make sure **Hide Customizer** is unchecked. In older versions it is **Window ▸ Customizer**.
 
@@ -52,7 +54,7 @@ The form's sections read top to bottom in the order you decide things: **Step 1 
 
 Forge and the desktop program show the same form and make the same tool. What differs:
 
-- Forge draws the tool as it will print, with any red warning text beside it. It does not draw the see-through plug, or the green and orange notes of the desktop program's preview.
+- Forge draws the tool with the see-through plug in its preview and any red warning text beside it. It does not draw the green and orange notes of the desktop program's preview.
 - A render takes longer in the browser than on the desktop, and longest on a phone. Forge says **Preview ready** under the picture when it is done.
 - On a phone the screen is tight. The parameter search finds any dial by its name, and searching also brings back the dials behind **Show all parameters**.
 - Forge can be installed as an app that works offline: use your browser's install button at the right end of the address bar.
@@ -67,6 +69,20 @@ Forge and the desktop program show the same form and make the same tool. What di
 ## Measure your plug and your hand
 
 Everything here is in mm: a US plug is about 25 mm wide, so a 1 on your paper means you measured in inches. You need a caliper or a ruler with mm marks, the plug in its outlet, and your own hand only if you pick Measure my hand. Print the measuring form at 100 % and fill it in as you go: the sections below are the form's rows, in the same order, and the card names (R1, C1, F1 / F2) are the cards of the printed measuring stencil, described under Match a card instead of measuring.
+
+### Start with the plug size finder
+
+Count the plug's prongs first. A plug with 2 prongs, or a USB-C tip, is the one-sided puller's; a plug with 3 prongs is the two-sided puller's. The two tools are separate files, so a plug of the other kind needs the other tool's file and guide. Then print the plug size finder page at 100 % (actual size), check its 50 mm square with a ruler, and lay the plug flat on the outlines of its group, prongs up. When an outline matches, pick that preset in Step 1 and skip the plug rows below; the hand rows still apply. Between two outlines, or none close? Measure every row. The page is the sheet [plug-size-finder.svg](../plug-size-finder.svg).
+
+The page shows five plugs at true size, each lying on its wide side with its prongs up and every prong face on one dashed line, the cord drawn below each at its true width. The left group, under "2 prongs or a USB-C tip: the ONE-SIDED puller", holds the one-sided puller's presets; the right group, under "3 prongs: the TWO-SIDED puller", the two-sided puller's. Each outline is labelled with the preset to pick. A 50 by 50 mm calibration square sits at the bottom left, the five steps below beside it.
+
+| Preset to pick | Tool file | Prongs | Length (mm) | Width at the prong end (mm) | Width at the cord end (mm) | Cord (mm) |
+|---|---|---|---|---|---|---|
+| USB-C laptop tip | one-sided puller | USB-C metal tip | 17 | 10.25 | 10.25 | 6.1 (round) |
+| Flat 2-prong lamp plug - NEMA 1-15 | one-sided puller | 2 | 32.5 | 20 | 11.1 | 7 (flat, 3.6 thick) |
+| Wide 2-prong appliance plug - NEMA 1-15 | one-sided puller | 2 | 38 | 34 | 34 | 5 (round) |
+| Standard 3-prong plug - NEMA 5-15 | two-sided puller | 3 | 46.1 | 24.66 | 13.6 | 9.25 (round) |
+| Heavy-duty extension cord - NEMA 5-15 | two-sided puller | 3 | 51 | 26.56 | 24.5 | 8.25 (round) |
 
 ### Plug length
 
@@ -112,7 +128,7 @@ With the stencil: card R1.
 
 Customizer name: `measure_plug_thickness_cord_end`. Row 6 of the measuring form.
 
-The same thin direction, where the cord leaves the plug body, skipping the soft strain relief. On a round extension-cord plug this can be as fat as the prong end.
+The same thin direction, where the cord leaves the plug body, skipping the soft strain relief. On a straight-sided plug, such as a wide appliance plug, it is the same as at the prong end.
 
 Typical: 8 to 30 mm. Example: 9 mm.
 
@@ -172,7 +188,9 @@ When you measure for someone else, a relative or a client, measure their hand fo
 
 ### The measuring form
 
-The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stencil sheets are [stencil-sheet.svg](../stencil-sheet.svg) and [stencil-sheet-2.svg](../stencil-sheet-2.svg). Print the form at 100 % (actual size, never fit to page) and check its 50 mm bar with a ruler before you trust it. Fill in the blanks top to bottom as you measure, then type the numbers into the Customizer in the same order.
+The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stencil sheet is [stencil-sheet.svg](../stencil-sheet.svg). Print the form at 100 % (actual size, never fit to page) and check its 50 mm bar with a ruler before you trust it. Fill in the blanks top to bottom as you measure, then type the numbers into the Customizer in the same order.
+
+**Start here.** Two tick boxes ask how many prongs the plug has: "2 prongs or USB-C tip: this form" or "3 prongs: two-sided form". Then a blank: "Closest outline on the plug size finder:" Lay the plug on the plug size finder page; when an outline in this tool's group matches, write its preset there, tick that preset in row 1 and skip the plug numbers. Otherwise fill in every row.
 
 | # | Customizer name | What you measure | Default | Yours |
 |---|---|---|---|---|
@@ -193,7 +211,7 @@ The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stenci
 | 15 | `strap_width` | Read the width on the strap's packaging. | 15 mm | ________ |
 | 16 | `hook_hand` | Hook side: pick one | Right | ________ |
 
-**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's Step order, each with the dial's name, its plain title and either a blank after the default or a tick box per choice with the default marked. The right half is a schematic plug in teal drawn from the one-sided puller's defaults at 1.5 to 1, a top view with the prong end at the left against a wall plate line, a side view standing with its prong end up, the cord's end as a small circle, a bar of four knuckles at 1:1 and a strap bar at 1:1. A straight black arrow runs from each measured row's blank to a red dimension line on the schematic, the row's number in a red circle at the line:
+**What the sheet shows.** Under the title, the Start here box holds the two prong tick boxes and the finder blank. Below it, the left column is the numbered list above, one row per dial in the Customizer's Step order, each with the dial's name, its plain title and either a blank after the default or a tick box per choice with the default marked. The right half is a schematic plug in teal drawn from the one-sided puller's defaults at 1.5 to 1, a top view with the prong end at the left against a wall plate line, a side view standing with its prong end up, the cord's end as a small circle, a bar of four knuckles at 1:1 and a strap bar at 1:1. A straight black arrow runs from each measured row's blank to a red dimension line on the schematic, the row's number in a red circle at the line:
 
 - Arrow 2 points to the plug's length on the top view, from the wall plate to the plug's back end.
 - Arrow 3 points to the plug's width at the prong end, the left edge of the top view.
@@ -205,7 +223,7 @@ The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stenci
 - Arrow 12 points to the whole knuckle bar, four knuckles 85 mm across at 1:1.
 - Arrow 15 points to the strap bar's width, a 40 by 15 mm bar at 1:1.
 
-- Row 1, plug preset: 5 boxes, Measure my plug marked as the default; the choices are Measure my plug, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15, Wide 2-prong appliance plug - NEMA 1-15.
+- Row 1, plug preset: 4 boxes, Measure my plug marked as the default; the choices are Measure my plug, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Wide 2-prong appliance plug - NEMA 1-15.
 - Row 8, outlet cover plate style: 4 boxes, Standard flat plate marked as the default; the choices are Standard flat plate, Rocker / Decora, Oversized / Jumbo, No plate / flush.
 - Row 9, show the see-through plug: one box marked, leave on.
 - Row 10, hand size: 5 boxes, Medium marked as the default; the choices are Small, Medium, Large, Measure my hand, Custom.
@@ -217,26 +235,26 @@ Type them into the Customizer in this order.
 
 ### Match a card instead of measuring
 
-The measuring stencil is a set of thin printed cards. Each has a two-letter name raised on its face, so you can find it by touch. Hold your plug in the plug cards: if it fills one card's openings, snug with no big gaps, that card names the preset to pick in Step 1, and you type no numbers at all.
+The measuring stencil is a set of thin printed cards. Each has a two-letter name raised on its face, so you can find it by touch. Hold your plug in the plug cards: if it fills one card's openings, snug with no big gaps, that card names the preset to pick in Step 1, and the tool whose file holds it, and you type no numbers at all.
 
 | Card | What it is | What it answers |
 | ---- | ---------- | --------------- |
-| P1 | The flat 2-prong lamp plug (NEMA 1-15) | the preset `Flat 2-prong lamp plug - NEMA 1-15` |
-| P2 | The standard 3-prong plug (NEMA 5-15) | the preset `Standard 3-prong plug - NEMA 5-15` |
+| P1 | The flat 2-prong lamp plug (NEMA 1-15) | the one-sided puller's preset `Flat 2-prong lamp plug - NEMA 1-15` |
+| P2 | The standard 3-prong plug (NEMA 5-15) | the two-sided puller's preset `Standard 3-prong plug - NEMA 5-15` |
 | P3 | The heavy-duty extension cord plug (NEMA 5-15) | the two-sided puller's preset `Heavy-duty extension cord - NEMA 5-15` |
 | P4 | The wide 2-prong appliance plug (NEMA 1-15) | the one-sided puller's preset `Wide 2-prong appliance plug - NEMA 1-15` |
 | R1 | A ruler: raised mm ticks, numbers every 10 mm, and a notch every 10 mm you can count by touch | the plug's length, widths and thicknesses |
 | C1 | A cord gauge: open slots 3 to 9 mm wide along one edge, slid onto the cord from the side | the cord thickness: the smallest slot that slips over the cord |
 | F1, F2 | Finger holes 15 to 25 mm across (F1) and 26 to 32 mm (F2) | your finger width: the smallest hole your middle finger passes through comfortably, minus 5 |
 
-Each P card has three openings: W for the plug's width, T for its thickness, and an open slot that slides onto the cord. If no card fits, your plug is between presets: measure it instead. The measured tool fits better than any preset.
+Each P card has three openings: W for the plug's width, T for its thickness, and an open slot that slides onto the cord. The USB-C laptop tip has no card: its metal tip names it. If no card fits, your plug is between presets: measure it instead. The measured tool fits better than any preset.
 
 **Printing the cards.** Print [`stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl`](../../../stl/Measuring-Stencil/Visual/Measuring-Stencil_Visual_All-Cards.stl): 1.2 mm thick cards, no supports, any rigid filament, packed onto sheets for a 200 by 200 mm bed. The tactile version, [`stl/Measuring-Stencil/Tactile/`](../../../stl/Measuring-Stencil/Tactile), prints every label as a raised character at ADA size and adds a Grade 2 braille title flap to every card.
 Or print one card at a time from [`stl/Measuring-Stencil/`](../../../stl/Measuring-Stencil). For a smaller bed, open [`Measuring_Stencil.scad`](../../../Measuring_Stencil.scad) in OpenSCAD, set `bed_width` and `bed_depth` to your bed, and export `part_index` 1, then 2, and so on, one sheet at a time. `part_index` 0 previews every sheet at once; do not print that one.
 
 **Folding the tactile flaps.** The tactile version is also `label_mode` set to Tactile in the file. Each flap prints leaning back, held by thin fins. Snap the fins off, then fold the flap away from the card until it lies flat, so the braille lands face up beyond the card's edge. Fold once, gently; a PETG or PP hinge folds more reliably than PLA.
 
-**No 3D printer yet?** The last pages of the printed quick start and full guide are paper versions of the cards at true size: the plug outlines, a 100 mm ruler and the finger circles. Print them at 100 % (actual size, never fit to page) and check the 50 by 50 mm square with a ruler before you trust them. On their own they are [`stencil-sheet.svg`](../stencil-sheet.svg) and [`stencil-sheet-2.svg`](../stencil-sheet-2.svg).
+**No 3D printer yet?** The last pages of the printed quick start and full guide are the paper versions at true size: the plug size finder in place of the P cards (every preset's outline, for both tools) and the stencil sheet, with a 100 mm ruler and the finger circles. Print them at 100 % (actual size, never fit to page) and check the 50 by 50 mm square with a ruler before you trust them. On their own they are [`plug-size-finder.svg`](../plug-size-finder.svg) and [`stencil-sheet.svg`](../stencil-sheet.svg).
 
 ### Try it on paper first
 
@@ -244,8 +262,8 @@ Every preset at every size has a printable sheet with the tool's exact outline a
 
 | Plug preset | Small | Medium | Large |
 | ----------- | ----- | ------ | ----- |
+| USB-C laptop tip | [sheet](../outline-sheets/outline_usb-c-laptop-tip_small.svg) | [sheet](../outline-sheets/outline_usb-c-laptop-tip_medium.svg) | [sheet](../outline-sheets/outline_usb-c-laptop-tip_large.svg) |
 | Flat 2-prong lamp plug (NEMA 1-15) | [sheet](../outline-sheets/outline_flat-2-prong_small.svg) | [sheet](../outline-sheets/outline_flat-2-prong_medium.svg) | [sheet](../outline-sheets/outline_flat-2-prong_large.svg) |
-| Standard 3-prong plug (NEMA 5-15) | [sheet](../outline-sheets/outline_standard-3-prong_small.svg) | [sheet](../outline-sheets/outline_standard-3-prong_medium.svg) | [sheet](../outline-sheets/outline_standard-3-prong_large.svg) |
 | Wide 2-prong appliance plug (NEMA 1-15) | [sheet](../outline-sheets/outline_wide-2-prong-appliance_small.svg) | [sheet](../outline-sheets/outline_wide-2-prong-appliance_medium.svg) | [sheet](../outline-sheets/outline_wide-2-prong-appliance_large.svg) |
 
 Every sheet, for both tools, is also in one printable PDF with an index: [`docs/Plug_Puller_Outline_Sheets.pdf`](../../Plug_Puller_Outline_Sheets.pdf). The sheets cover the presets only; a plug or a hand between sizes is better served by measuring.
@@ -258,15 +276,15 @@ Pick a plug preset, or leave it on Measure my plug and type your plug's numbers.
 
 Customizer name: `plug_preset`
 
-Fills in all six plug numbers from a measured reference plug, so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.
+Fills in all six plug numbers from a measured reference plug (and, for the USB-C tip, the No plate / flush wall notch), so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.
 
-![Plug preset: before and after, Measure my plug to Standard 3-prong plug - NEMA 5-15; red marks 7 parts, named below.](../../dials/one-sided/plug_preset.svg)
+![Plug preset: before and after, Measure my plug to Flat 2-prong lamp plug - NEMA 1-15; red marks 5 parts, named below.](../../dials/one-sided/plug_preset.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug preset set to Standard 3-prong plug - NEMA 5-15. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the seat, the pocket and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug preset set to Flat 2-prong lamp plug - NEMA 1-15. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the finger holes: the two large holes in the lower half. 3, the zip-tie holes, the wing openings, the wall notch and the body edge.
 
 - Default: Measure my plug
-- Choices: Measure my plug, Flat 2-prong lamp plug - NEMA 1-15, Standard 3-prong plug - NEMA 5-15, Heavy-duty extension cord - NEMA 5-15, Wide 2-prong appliance plug - NEMA 1-15
-- Moves: body edge, finger holes, pocket, seat, wall notch, wing openings, zip-tie holes
+- Choices: Measure my plug, USB-C laptop tip, Flat 2-prong lamp plug - NEMA 1-15, Wide 2-prong appliance plug - NEMA 1-15
+- Moves: body edge, finger holes, wall notch, wing openings, zip-tie holes
 
 ### Plug length
 
@@ -1539,9 +1557,7 @@ The tool goes onto the plug while the plug is in the outlet. You need two zip ti
 4. Pass the tie around the plug body and up through the hole on the other side of the pocket.
 5. Pull the tie tight and cut off the tail.
 6. Fit the second zip tie through the other pair of holes the same way.
-7. Instead of the ties, or as well: thread the strap through the two wing openings and around the plug, and close it. The picture shows a strap holding the tool on a three-prong plug.
-
-   ![The one-sided puller at Medium size held on a black three-prong plug by a strap through its wing openings, on the printer bed beside a printed hand model for scale.](../../images/one-sided-3-prong-plug-medium.jpg)
+7. Instead of the ties, or as well: thread the strap through the two wing openings and around the plug, and close it.
 
 The tool can stay on the plug between uses. The pictures below show the finished one-sided puller strapped to a lamp plug at Small, Medium and Large, next to a printed hand for scale.
 
@@ -1603,6 +1619,9 @@ Printed your tool and something is not quite right? Find your symptom below. Eve
 | 16 | A smooth round plug still slips out of the zip-tie hold | Thread a zip tie down one zip-tie hole, around the plug body, up the opposite hole, and cinch it | |
 | 17 | The hook is on the wrong side for your hand | Step 4: Hook side, Left or Right | |
 | 18 | The strap will not thread through the wing opening | Step 3: a smaller Strap width, or a narrower strap; the wing is sized to it | |
+| 19 | A 3-prong plug slips out of the tool | The two-sided puller, a separate file: it holds 3-prong plugs from both sides | |
+
+In test prints of the presets, the one-sided puller held every 2-prong plug well, and 3-prong plugs slipped out of it, which is why they belong to the two-sided puller. The USB-C laptop tip preset is new in version 1.0.0 and has not been test-printed yet; its thickness is an estimate.
 
 ### Red warning tags
 
@@ -1690,9 +1709,9 @@ The Customizer panel has a preset bar above the sections: the **+** button saves
 Every dial can be set from the command line, which makes batches and A/B tests scriptable:
 
 ```bash
-# A left-handed hook and the standard 3-prong preset
+# A left-handed hook and the flat 2-prong lamp plug preset
 openscad -o puller.stl --backend Manifold \
-  -D 'plug_preset="Standard 3-prong plug - NEMA 5-15"' -D 'hook_hand="Left"' \
+  -D 'plug_preset="Flat 2-prong lamp plug - NEMA 1-15"' -D 'hook_hand="Left"' \
   src/Plug_Puller_Parametric.scad
 
 # A saved set of settings
@@ -1703,7 +1722,7 @@ openscad -o puller.stl -p presets/Plug_Puller_Parametric.json \
 ## Going deeper
 
 - The two-sided puller has its own quick start and full guide, in the folder beside this one.
-- [The design rationale](../design-rationale.md): why each default is what it is, with its number and its source.
+- [The design rationale](../../../Documentation/Plug_Puller_Design_Rationale.md): why each default is what it is, with its number and its source.
 - [The engineering reference](../../Plug_Puller_Reference.md): both tools' geometry, coordinate frames, the derivation layer, render modes, the console messages and every validation check.
 - [The dial pictures](../../dials/README.md): every picture in this guide with its text alternative, and [how the pictures are described](../describing-pictures.md).
 - [The bill of materials](../bom.md): zip ties, the strap, filament per tool.

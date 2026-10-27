@@ -1,29 +1,29 @@
 ## Assemble
 
-You need three zip ties; the size is in the [bill of materials](../bom.md). The two plates are identical; one is flipped over so the toothed arms face each other.
+You need three zip ties; the size is in the [bill of materials](../bom.md). The two plates are identical: one lies flat, the plug goes on it, and the other is turned over on top, so the toothed arms close on the plug from both sides.
 
-1. Print both plates. The picture shows the two plates on a table with the plug between them.
+1. Lay both printed plates flat, their toothed arms pointing away from you.
 
-   ![The two plates of the two-sided puller on a table with the orange extension-cord plug between them, ready to assemble.](../../images/two-sided-assembly-step-1.jpg)
+   ![The two printed plates of a two-sided puller lying side by side on a cutting mat, their toothed arms pointing up.](../../../Photos/two-sided/overview-two-sided-plates.jpg)
 
-2. Thread one end of each zip tie through the first plate, then through the second, so the ties lie between the plates. Make sure the cord channel of both plates faces the same way. The picture shows three ties through one plate, lying toward the other.
+2. Lay the plug on the first plate between its arms: the prongs past the arm tips, the cord in the channel between the finger holes.
 
-   ![Three zip ties threaded through one plate of the two-sided puller and lying flat toward the second plate, the plug beside them.](../../images/two-sided-assembly-step-2.jpg)
+   ![The orange plug lying on the first plate, between its two toothed arms, prongs past the arm tips and the cord running out between the finger holes; the second plate waits beside it.](../../../Photos/two-sided/stage-plug-on-first-plate.jpg)
 
-3. Place your plug between the two plates, its prongs toward the arms. The picture shows the plug lying on the first plate between the ties.
+3. Turn the second plate over and lay it on top, its outline over the first plate's and its finger holes over the first plate's finger holes.
 
-   ![The orange plug placed on the first plate between the zip ties, its prongs toward the plate's arms.](../../images/two-sided-assembly-step-3.jpg)
+   ![The plug sandwiched between the two plates, the second plate laid on top so its outline matches the first.](../../../Photos/two-sided/stage-second-plate-on.jpg)
 
-4. Thread the zip ties through the matching holes of the second plate. The picture shows the second plate over the plug with the ties through it and their tails loose.
+4. Thread each zip tie down through a hole on one side of both plates, under the pair, up through the matching holes on the other side, and into its own head, so it crosses over the plug.
 
-   ![The second plate laid over the plug, with the zip ties threaded through its matching holes and their tails hanging loose.](../../images/two-sided-assembly-step-4.jpg)
+   ![Three black zip ties threaded down through the holes on one side of both plates, their long tails loose to the right.](../../../Photos/two-sided/stage-zip-ties-threaded.jpg)
 
-5. Pull the zip ties tight enough to hold the plug between the plates. The picture shows the ties cinched with their tails still on.
+5. Pull the ties tight, a little at a time on each, until the plug no longer moves between the plates.
 
-   ![The zip ties pulled tight around both plates and the orange plug, their tails still sticking out.](../../images/two-sided-assembly-step-5.jpg)
+   ![The three zip ties pulled snug around both plates and the plug, their tails not yet cut.](../../../Photos/two-sided/stage-zip-ties-pulled.jpg)
 
-6. Cut off the zip-tie tails. The picture shows the finished tool holding the plug.
+6. Cut off the zip-tie tails.
 
-   ![The finished two-sided puller with the zip-tie tails cut off, holding the orange plug with its prongs clear.](../../images/two-sided-assembly-step-6.jpg)
+   ![The finished two-sided puller zip-tied around the orange heavy-duty extension-cord plug: one tie near the prongs, one behind the plug body and one around the cord between the finger holes.](../../../Photos/two-sided/finished-two-sided-heavy-duty-plug.jpg)
 
-The tool stays on the plug: the serrated arms do the gripping, and the zip ties hold the two plates together.
+The tool stays on the plug: the toothed arms do the gripping, and the zip ties hold the two plates together.

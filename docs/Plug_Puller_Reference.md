@@ -8,11 +8,11 @@
 > `src/Plug_Puller_Two_Sided.scad`, the two-sided puller (`include`s
 > `src/fit_sizes.scad`)
 > **Entry points**: open either file in OpenSCAD; the single-file builds
-> are `dist/Plug_Puller_SingleFile.scad` and
+> are `dist/Plug_Puller_One_Sided_SingleFile.scad` and
 > `dist/Plug_Puller_Two_Sided_SingleFile.scad`
 > **One-sided heritage**: the v6.0 CAD model "Plug Puller 3.1 - B", measured during development (not part of this repository)
 > **Two-sided reference**: `plug references/3 Prong Heavy Ideal Sample/…Plug_Bottom.stl`
-> **Last Updated**: 2026-09-24
+> **Last Updated**: 2026-10-27
 > **Purpose**: Authoritative reference for the geometry of both tools,
 > parameters, sizes, the measurement derivation layer, CSG construction,
 > render modes, in-model validation warnings, and the parity story.
@@ -22,7 +22,7 @@
 For the parameter min/max/step/type schemas and the validator, see
 [`parameter_mapping.json`](../parameter_mapping.json) (79 rows, one-sided)
 and [`parameter_mapping_two_sided.json`](../parameter_mapping_two_sided.json)
-(39 rows, two-sided).
+(40 rows, two-sided).
 
 - [1. Object purpose and physical context](#1-object-purpose-and-physical-context)
 - [2. The references and the Medium size](#2-the-references-and-the-medium-size)
@@ -92,39 +92,43 @@ re-parametrised on purpose.
 ### 2.1 Plug presets (two-station, re-measured)
 
 `plug_preset` prefills the effective plug measurements (`_eff_*`) from
-two-station caliper measurements of the owner's plugs, the same plugs the
-two-sided presets carry (length from the wall plate to the plug's back end,
-the prong-end station just behind the prongs, the cord-end station where the
-cord leaves the plug). The lamp, standard and heavy-duty thicknesses are
-still the development sample plugs' numbers, estimates until those plugs'
-thin sides are measured; a thickness only sets the pocket's recess. The
-manual sliders are ignored unless `plug_preset = "Measure my plug"`. In the
-one-sided file:
+caliper measurements of the owner's plugs. The presets are split by the
+prong count, the line test prints drew: the one-sided puller held every
+2-prong plug and 3-prong plugs slipped out of it; the two-sided plates held
+both 3-prong plugs and every 2-prong plug and the USB-C tip slipped out of
+them. So the one-sided file carries the 2-prong plugs and the USB-C tip,
+the two-sided file the 3-prong plugs, and no preset is in both. The manual
+sliders are ignored unless `plug_preset = "Measure my plug"`.
 
-| Preset                                | length | width prong end/cord end | thickness prong end/cord end | cord |
-| ------------------------------------- | ------ | ------------------------ | ---------------------------- | ---- |
-| Flat 2-prong lamp plug - NEMA 1-15    | 32.5   | 20.0 / 11.1              | 18.6 / 8.6 (estimated)       | 3.6  |
-| Standard 3-prong plug - NEMA 5-15     | 46.1   | 24.66 / 13.6             | 18.9 / 15.0 (estimated)      | 9.25 |
-| Heavy-duty extension cord - NEMA 5-15 | 51.0   | 26.56 / 24.5             | **27.0** / 27.0 (estimated)  | 8.25 |
+In the one-sided file (length from the surface the plug goes into to the
+plug's back end; the prong-end station just behind the prongs, on the USB-C
+tip just behind the metal tip; the cord-end station where the cord leaves
+the plug; the cord across its thin side):
 
-The heavy-duty preset's 27 mm thickness (`_eff_plug_thickness` = the
-fatter end) trips W-20 in the one-sided file. The two-sided file's four
-presets carry numbers measured with a caliper on their own plugs (the whole
-length the plates cover, a strain relief included; the widths the plates
-close across; the head length, how far the plug keeps its prong-end width;
-the cord across the channel, a flat cord's wide side):
+| Preset                                  | length | width prong end/cord end | thickness prong end/cord end | cord |
+| --------------------------------------- | ------ | ------------------------ | ---------------------------- | ---- |
+| USB-C laptop tip                        | 17.0   | 10.25 / 10.25            | 6.5 / 6.5 (estimated)        | 6.1  |
+| Flat 2-prong lamp plug - NEMA 1-15      | 32.5   | 20.0 / 11.1              | 18.6 / 8.6 (estimated)       | 3.6  |
+| Wide 2-prong appliance plug - NEMA 1-15 | 38.0   | 34.0 / 34.0              | 16.0 / 16.0                  | 5.0  |
 
-| Preset                                | length | width prong end/cord end | head | cord | sides, cradle |
-| ------------------------------------- | ------ | ------------------------ | ---- | ---- | ------------- |
-| Heavy-duty extension cord - NEMA 5-15 | 51.0   | 26.56 / 24.5             | 23.0 | 8.25 | Flat sides    |
-| USB-C laptop tip                      | 17.0   | 10.25 / 10.25            | 0    | 6.1  | Rounded sides, 1.9 |
-| Flat 2-prong lamp plug - NEMA 1-15    | 32.5   | 20.0 / 11.1              | 15.2 | 7.0  | Flat sides    |
-| Standard 3-prong plug - NEMA 5-15     | 46.1   | 24.66 / 13.6             | 15.6 | 9.25 | Flat sides    |
+The thicknesses marked estimated are not yet measured on these plugs: the
+lamp's is the development sample plug's, the USB-C tip's the USB Type-C
+overmold limit, so both err thick; a thickness only sets the pocket's
+recess. The USB-C tip also carries the `No plate / flush` wall notch
+(`_eff_wall_plate_style`), since a laptop or charger has no cover plate.
+
+The two-sided file's presets carry the whole length the plates cover (a
+strain relief included), the widths the plates close across, the head
+length (how far the plug keeps its prong-end width) and the cord across
+the channel:
+
+| Preset                                | length | width prong end/cord end | head | cord | sides      |
+| ------------------------------------- | ------ | ------------------------ | ---- | ---- | ---------- |
+| Standard 3-prong plug - NEMA 5-15     | 46.1   | 24.66 / 13.6             | 15.6 | 9.25 | Flat sides |
+| Heavy-duty extension cord - NEMA 5-15 | 51.0   | 26.56 / 24.5             | 23.0 | 8.25 | Flat sides |
 
 The heavy-duty plug widens behind its prong face (25.25 to 26.56), so its
-prong-end width is the widest measurement. Flat sides build the bite; the
-USB-C tip's Rounded sides carry their own cradle depth, 1.9 mm, which fits
-beside its cord channel.
+prong-end width is the widest measurement. Flat sides build the bite.
 
 ---
 
@@ -184,9 +188,12 @@ Two-sided puller (`src/Plug_Puller_Two_Sided.scad`):
 
 ```
 /* [Step 1 - Your Plug] */     plug_preset = Measure my plug |
+                               Standard 3-prong plug - NEMA 5-15 |
                                Heavy-duty extension cord - NEMA 5-15,
                                measure_plug_length [12:85],
-                               measure_plug_width_prong_end/_cord_end [5:40],
+                               measure_plug_width_prong_end [5:40],
+                               measure_plug_head_length [0:60],
+                               measure_plug_width_cord_end [5:40],
                                measure_cord_thickness [1.5:12],
                                plug_sides = Rounded sides | Flat sides,
                                show_plug_preview
@@ -209,7 +216,9 @@ in each tool's full guide, under "Advanced settings".
 One-sided file:
 
 ```
-plug_preset != "Measure my plug"  ->  prefills _eff_* ; sliders ignored.
+plug_preset != "Measure my plug"  ->  prefills _eff_* ; sliders ignored;
+                                      the USB-C tip also sets the
+                                      No plate / flush wall notch.
 _eff_plug_thickness >= 24         ->  W-20 tag (the tool still builds).
 size != "Custom"  ->  FIT_MEASURED table (fit_measured.scad)
 size == "Custom"  ->  custom_* sliders (measurements ignored)
@@ -221,10 +230,8 @@ Two-sided file:
 ```
 plug_preset == a preset           -> _eff_* = its length / widths / head / cord
                                      (the table in Section 2.1),
-                                     _sides_eff = its sides,
-                                     _eff_cradle_depth = 1.9 (USB-C tip)
-plug_preset == "Measure my plug"  -> the sliders; _sides_eff = plug_sides;
-                                     _eff_cradle_depth = plate_cradle_depth
+                                     _sides_eff = its sides (Flat sides)
+plug_preset == "Measure my plug"  -> the sliders; _sides_eff = plug_sides
 _eff_plug_head_length = head clamped to [0, _eff_plug_length]
 _attach_zip = true ; _attach_velcro = (attachment == "Zip ties + Velcro strap")
 finger bore = finger width (size table or measure_finger_width)

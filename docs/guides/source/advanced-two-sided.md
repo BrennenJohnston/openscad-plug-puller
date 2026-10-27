@@ -14,7 +14,7 @@ Step 1's plug sides choice picks how the arms meet the plug. **Rounded sides**, 
 
 The cradle never makes the outer-face gap narrower than the cord channel. When a narrow plug would need that, the file builds a shallower cradle and shows `CRADLE SHALLOWER THAN ASKED - PLUG NARROW`; a smaller cradle depth, or measuring the cord itself rather than its strain relief, clears it.
 
-**Flat sides** keeps the straight toothed edge, and there the grip bite sets the squeeze. The cradle depth and the grip clearance apply to Rounded sides only, and the grip bite to Flat sides. The plug presets carry their own sides; the USB-C laptop tip's Rounded sides also carry their own cradle depth, 1.9 mm, the most that fits beside its cord channel.
+**Flat sides** keeps the straight toothed edge, and there the grip bite sets the squeeze. The cradle depth and the grip clearance apply to Rounded sides only, and the grip bite to Flat sides. The plug presets carry their own sides: both are Flat sides, gripped by the bite.
 
 ### Print layout
 

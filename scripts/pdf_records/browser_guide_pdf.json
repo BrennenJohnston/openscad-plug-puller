@@ -1,0 +1,19 @@
+{
+  "pdf": "Documentation/Step_1_Guide_Option_1_Plug_Puller_Browser_Customizer_Guide.pdf",
+  "pdf_sha256": "888b10168a88286d2f7539d1146d3da70a448b52e2155586fd121217df1aebce",
+  "inputs": {
+    "Documentation/Step_1_Guide_Option_1_Plug_Puller_Browser_Customizer_Guide.md": "9112f1d9e1c5e85bf7f427a35d6ac4575afd56d9551fbb6fce6b9761f23da9f8",
+    "Photos/screens/screen-browser-first-visit.png": "fc604cc2a2d50ddb1e833bc6dfb914e8d2e200cc3f4e47b82a1159e3bc232b37",
+    "Photos/screens/screen-browser-save-copy.png": "f99a01b297278484016653c568cdf448e6ef2e56108958496815c8d834f78d0b",
+    "Photos/screens/screen-browser-step-1-preset.png": "533802feaa3599db90f8931c3a985d26f6abe4b22304b96c341eacfbbe85b126",
+    "Photos/screens/screen-browser-generate.png": "d22ba1f16dc69c971830c40217c3083a0f5230f685635f71e1fa5a13b841f0d6",
+    "Photos/screens/screen-browser-download.png": "336ed054a43191e6fdce7c4b9f7a8c666d0dc51ec7ebf892787b1731f6558b0f",
+    "scripts/build_open_at_pdf.py": "272c366f54493dfd1b99eb65bc52c397f9c5b4a4d1a88e4a9fca0959dbaff5ae"
+  },
+  "pages": 6,
+  "bookmarks": 10,
+  "links": 16,
+  "pictures": 5,
+  "captions": 3,
+  "producer": "Skia/PDF m156"
+}

@@ -2,6 +2,8 @@
 
 The {tool} is the file `{file}`. There are two ways to open it and fill in its form: in your web browser with nothing to install, or in the free OpenSCAD program on your computer. Both show the same form, called the Customizer.
 
+**Two tools, two files.** The {tool} is for {plugs}. {Other_plugs} needs the {other_tool}, which is a separate file, [`{other_file}`](../../../{other_file}) (as one file, [`{other_single_file}`](../../../{other_single_file})), with its own guide; in your browser it is [the {other_tool} in the Assistive Forge]({other_forge_url}). No setting inside one file makes the other tool, as a setting did in older versions: to get the other tool, open its file.
+
 ### In your browser
 
 The OpenSCAD Assistive Forge is a version of OpenSCAD that runs in your browser, on a computer or a phone, built for keyboard and screen reader use. Nothing is uploaded: your numbers stay on your device.

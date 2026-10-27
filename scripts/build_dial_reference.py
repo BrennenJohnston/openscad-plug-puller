@@ -128,18 +128,18 @@ PACKET_STORY_MAX_H_MM = 80.0  # the storyboard's height cap, so the opener fits 
 PACKET_OPENER_HEADING = "Which tool this is"
 PACKET_OPENERS = {
     "one-sided": (
-        "This guide is for the one-sided puller, src/Plug_Puller_Parametric.scad: the tool for a wall plug up to "
-        "24 mm thick, a pocket around the plug's back and sides with two finger holes below it, pulled with one "
-        "hand. Measure your plug's thickness first. Thicker than 24 mm, or a plug you want held from both sides "
-        "such as a USB-C tip or a round extension-cord plug, is the two-sided puller's job, and that tool has its "
-        "own guide.",
+        "This guide is for the one-sided puller, src/Plug_Puller_Parametric.scad (as one file, "
+        "Plug_Puller_One_Sided_SingleFile.scad): the tool for a plug with 2 prongs or a USB-C tip, a pocket around "
+        "the plug's back and sides with two finger holes below it, pulled with one hand. A plug with 3 prongs, or "
+        "any plug 24 mm thick or more, is the two-sided puller's job: that tool is a separate file, with its own "
+        "guide.",
         "your plug, your size, the attachment and the hook's side",
     ),
     "two-sided": (
-        "This guide is for the two-sided puller, src/Plug_Puller_Two_Sided.scad: two serrated plates that "
-        "zip-tie around the plug and close across it, for a plug 24 mm thick or more and for a plug held from "
-        "both sides, a USB-C tip or a round extension-cord plug. A thinner wall plug is the one-sided puller's "
-        "job, and that tool has its own guide.",
+        "This guide is for the two-sided puller, src/Plug_Puller_Two_Sided.scad (as one file, "
+        "Plug_Puller_Two_Sided_SingleFile.scad): two serrated plates that zip-tie around the plug and close "
+        "across it, for a plug with 3 prongs and any plug 24 mm thick or more. A plug with 2 prongs or a USB-C "
+        "tip is the one-sided puller's job: that tool is a separate file, with its own guide.",
         "your plug, your size, the attachment and the print layout",
     ),
 }
@@ -161,8 +161,8 @@ def opener_paragraphs(tool: str, kind: str) -> Tuple[str, str]:
 STEP_CAPTIONS = {
     "one-sided": ("Step 1: type your plug's numbers", "Step 2: pick your hand size",
                   "Step 3: pick how it attaches", "Step 4: pick the hook's side"),
-    "two-sided": ("Step 1: type your plug's numbers and pick Rounded sides or Flat sides", "Step 2: pick your hand size",
-                  "Step 3: pick how it attaches; a plug this short gets no strap slot", "Step 4: both plates in one file"),
+    "two-sided": ("Step 1: pick your plug's preset", "Step 2: pick your hand size",
+                  "Step 3: pick how it attaches", "Step 4: both plates in one file"),
 }
 # One line under each Step heading of the quick start, in the Step sections'
 # order. No default is named here: the card below it prints the default from
@@ -372,7 +372,19 @@ DOC_BLURBS = {
                    "advanced dials work."),
 }
 DOC_OTHER = {"quick-start": ("full-guide", "the full guide"), "full-guide": ("quick-start", "the quick start")}
-STENCIL_SHEETS = {"one-sided": ("stencil-sheet.svg", "stencil-sheet-2.svg"), "two-sided": ("stencil-sheet.svg",)}
+STENCIL_SHEETS = {"one-sided": ("stencil-sheet.svg",), "two-sided": ("stencil-sheet.svg",)}
+FINDER_SHEET = "plug-size-finder.svg"
+FINDER_HEADING = "Start with the plug size finder"
+FINDER_INTRO = (
+    "Count the plug's prongs first. A plug with 2 prongs, or a USB-C tip, is the one-sided puller's; a plug with "
+    "3 prongs is the two-sided puller's. The two tools are separate files, so a plug of the other kind needs the "
+    "other tool's file and guide. Then print the plug size finder page at 100 % (actual size), check its 50 mm "
+    "square with a ruler, and lay the plug flat on the outlines of its group, prongs up. When an outline matches, "
+    "pick that preset in Step 1 and skip the plug rows below; the hand rows still apply. Between two outlines, or "
+    "none close? Measure every row."
+)
+FINDER_WHERE_PDF = "The page is printed at true size on page {page}, at the end of this guide."
+FINDER_WHERE_MD = "The page is the sheet [plug-size-finder.svg](../plug-size-finder.svg)."
 MEASURE_HEADING = "Measure your plug and your hand"
 FORM_HEADING = "The measuring form"
 OPTIONAL_HEADING = "The optional dials"
@@ -383,8 +395,8 @@ OPTIONAL_INTRO = ("Everything below Step 4 in the Customizer is optional. These 
 FORM_NOTE = ("Print the form at 100 % (actual size, never fit to page) and check its 50 mm bar with a ruler before you "
              "trust it. Fill in the blanks top to bottom as you measure, then type the numbers into the Customizer in "
              "the same order.")
-FORM_WHERE_PDF = "The form is printed at true size on page {page}, at the end of this guide; the paper stencil sheets follow it."
-FORM_WHERE_MD = "The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stencil sheets are {sheets}."
+FORM_WHERE_PDF = "The form is printed at true size on page {page}, at the end of this guide; the paper stencil sheet follows it."
+FORM_WHERE_MD = "The form is the sheet [measuring-form.svg](measuring-form.svg); the paper stencil sheet is {sheets}."
 # The quick start's four steps in one section, each step a table of its
 # dials (the owner's choice of 2026-09-28: no dial pictures in the quick
 # start; the full guide keeps the cards).
@@ -562,10 +574,17 @@ def _opener_markdown(tool: str, kind: str, storyboards: Dict[str, Dict[str, Any]
     return lines
 
 
+def finder_section_text() -> str:
+    """The plug size finder page as text: what it shows and its table."""
+    from scripts.generate_plug_finder import finder_text
+    return finder_text()
+
+
 def _measuring_markdown(rows, mapping, tool: str) -> List[str]:
     lines = [f"## {MEASURE_HEADING}", "", MEASURING_INTRO, ""]
     if tool == "two-sided":
         lines += [TWO_SIDED_WIDTHS, ""]
+    lines += [f"### {FINDER_HEADING}", "", FINDER_INTRO + " " + FINDER_WHERE_MD, "", finder_section_text(), ""]
     for row in _measured_rows(rows, tool):
         m = row["measure"]
         k = _form_row(mapping, row["name"])
@@ -768,6 +787,21 @@ def _page_of(pages: Optional[Dict[str, int]], anchor_id: str, offset: int = 0) -
     return str(pages[anchor_id] + offset) if pages and anchor_id in pages else "00"
 
 
+# The true-size sheets at the end of a document that the text points to by
+# page. Chromium records where an id lands only when a link points at it, so
+# each "page N" is a link to its sheet.
+SHEET_ANCHORS = ("part-finder", "part-form")
+
+
+def _sheet_link(template: str, pages: Optional[Dict[str, int]], anchor_id: str) -> str:
+    """The escaped sentence of ``template`` with its "page N" a link to the
+    sheet ``anchor_id``."""
+    page = _page_of(pages, anchor_id)
+    head, _sep, tail = template.partition("{page}")
+    return (f'{_esc(head[:-len("page ")])}<a href="#{anchor_id}">page {page}</a>{_esc(tail)}'
+            if head.endswith("page ") else _esc(template.format(page=page)))
+
+
 def _print_image_src(tool: str) -> Callable[[str], str]:
     """A picture path as the page under docs/guides/<tool>/ writes it, made
     absolute for the print."""
@@ -792,13 +826,17 @@ def _title_cell(row: Dict[str, Any]) -> str:
     return f'<th scope="row">{_esc(row["title"])}<span class="cname">{_esc(row["name"])}</span></th>'
 
 
-def _measuring_html(rows, mapping, tool: str) -> List[str]:
+def _measuring_html(rows, mapping, tool: str, pages: Optional[Dict[str, int]] = None) -> List[str]:
     """The measuring section for the print: one table, a row per measured
     dial in the form's order (the page keeps a section per dial)."""
     m = [f'<h2 id="{anchor(MEASURE_HEADING)}">{_esc(MEASURE_HEADING)}</h2>',
          f'<p class="intro">{_esc(MEASURING_INTRO_PLAIN)}</p>']
     if tool == "two-sided":
         m.append(f'<p class="prose">{_esc(TWO_SIDED_WIDTHS)}</p>')
+    where = _sheet_link(FINDER_WHERE_PDF, pages, "part-finder")
+    m.append(f'<div class="keep"><h3 id="{anchor(FINDER_HEADING)}">{_esc(FINDER_HEADING)}</h3>'
+             f'<p class="prose">{_esc(FINDER_INTRO)}</p><p class="callout">{where}</p></div>')
+    m.append(_prose_html(finder_section_text(), tool))
     body = []
     for row in _measured_rows(rows, tool):
         mm = row["measure"]
@@ -941,8 +979,10 @@ def _toc_entries_of_source(md: str) -> List[tuple]:
 
 def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards, storyboard_svg: str,
                   form_svg: str, stencil_svgs: Sequence[str], form_section: str,
-                  pages: Optional[Dict[str, int]] = None) -> str:
+                  pages: Optional[Dict[str, int]] = None, finder_svg: Optional[str] = None) -> str:
     """One document as the HTML the print is made from."""
+    if finder_svg is None:
+        finder_svg = (PROJECT_ROOT / "docs" / "guides" / FINDER_SHEET).read_text(encoding="utf-8")
     idx = {(e["file"], e["name"]): e for e in index}
     mapping = mappings.get(tool, {})
     title = f"{DOC_TITLES[kind]}, {TOOL_WORDS[tool]}"
@@ -986,15 +1026,16 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
             flow.append((_starts_section(md), _prose_html(md, tool)))
             add_source_entries(md)
         elif block[0] == "measuring":
-            parts = _measuring_html(rows, mapping, tool)
+            parts = _measuring_html(rows, mapping, tool, pages)
             flow += [(i == 0, part) for i, part in enumerate(parts)]
             add_entry(anchor(MEASURE_HEADING), MEASURE_HEADING, [r["title"] for r in _measured_rows(rows, tool)])
+            entries[-1][2].append((anchor(FINDER_HEADING), FINDER_HEADING))
         elif block[0] == "form":
             # The print carries the sheet itself at true size, so only where
             # it is; the sheet's text twin is the page's.
-            where = FORM_WHERE_PDF.format(page=_page_of(pages, "part-form"))
+            where = _sheet_link(FORM_WHERE_PDF, pages, "part-form")
             flow.append((False, f'<div class="keep"><h3 id="{anchor(FORM_HEADING)}">{_esc(FORM_HEADING)}</h3>'
-                                f'<p class="callout">{_esc(where)} {_esc(FORM_NOTE)}</p></div>'))
+                                f'<p class="callout">{where} {_esc(FORM_NOTE)}</p></div>'))
             if entries:
                 entries[-1][2].append((anchor(FORM_HEADING), FORM_HEADING))
         elif block[0] == "steps":
@@ -1031,7 +1072,8 @@ def document_html(kind: str, tool: str, rows, mappings, index, svgs, storyboards
         f"<h1>{_esc(title)}</h1>", '<div class="rule"></div>',
         f'<p class="subtitle">{_esc(DOC_BLURBS[kind].format(tool=TOOL_WORDS[tool]))}</p>', "</div>",
         f'<p class="version">Model version {_esc(MODEL_VERSION)}</p>', "</section>"])
-    sheets = [f'<section class="page form" id="part-form">{sheet_svg(form_svg)}</section>']
+    sheets = [f'<section class="page form" id="part-finder">{sheet_svg(finder_svg)}</section>',
+              f'<section class="page form" id="part-form">{sheet_svg(form_svg)}</section>']
     sheets += [f'<section class="page form">{sheet_svg(svg)}</section>' for svg in stencil_svgs]
     body = [cover, _contents_html(entries, pages), '<div class="flow">'] + sections + ["</div>"] + sheets
     page_w, page_h = f"{LETTER_W_MM:g}mm", f"{LETTER_H_MM:g}mm"
@@ -1333,10 +1375,10 @@ def print_document(kind: str, tool: str, rows, mappings, index, svgs, storyboard
         print_to_pdf(html_path.resolve(), out_pdf, outline=True, user_data_dir=EDGE_PROFILE)
         landed = dest_pages(out_pdf)
         anchors = contents_anchors(html_text)
-        unplaced = [a for a in anchors if a not in landed]
+        unplaced = [a for a in anchors + list(SHEET_ANCHORS) if a not in landed]
         if unplaced:
-            raise AssertionError(f"The PDF has no destination for the contents links {unplaced}")
-        found = {a: landed[a] for a in anchors}
+            raise AssertionError(f"The PDF has no destination for the links {unplaced}")
+        found = {a: landed[a] for a in anchors + list(SHEET_ANCHORS)}
         if found == pages:
             break
         pages = found

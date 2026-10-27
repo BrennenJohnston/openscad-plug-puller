@@ -1,9 +1,10 @@
 """Generate the 1:1 dimensioned outline sheets for the public repo.
 
-For every quick-select combination (the lamp and standard ``plug_preset``
-families x 3 sizes for the one-sided puller, plus one plate of the two-sided
-puller for the round extension cord at all 3 sizes — the plate geometry
-follows the Size selection, so it gets its own 3 sheets), this script:
+For every quick-select combination (each ``plug_preset`` x 3 sizes, in the
+tool file that offers it: the USB-C tip, lamp and wide appliance plug as
+one-sided pullers, the standard and round extension-cord plugs as one plate
+of the two-sided puller, whose geometry follows the Size selection too),
+this script:
 
 1. Renders the v7 SCAD via the OpenSCAD CLI (``render_mode="Body Only"`` /
    ``"One plate"`` from ``src/Plug_Puller_Two_Sided.scad`` for the plate
@@ -28,7 +29,7 @@ follows the Size selection, so it gets its own 3 sheets), this script:
 Run from the repo root:
 
     python scripts/generate_outline_sheets.py
-    python scripts/generate_outline_sheets.py --only standard-3-prong_medium
+    python scripts/generate_outline_sheets.py --only flat-2-prong_medium
     python scripts/generate_outline_sheets.py --skip-render   # reuse STLs
 
 License: PolyForm Noncommercial 1.0.0
@@ -64,7 +65,7 @@ TWO_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Two_Sided.scad"
 STL_DIR = PROJECT_ROOT / "tmp_renders" / "outline_sheets"
 DEFAULT_OUT = PROJECT_ROOT / "docs" / "guides" / "outline-sheets"
 
-MODEL_VERSION = "0.14.0"
+MODEL_VERSION = "1.0.0"
 
 # ---------------------------------------------------------------------------
 # The quick-select matrix
@@ -74,19 +75,37 @@ SIZES = ["Small", "Medium", "Large"]
 
 # The numbers each plug_preset fills in, per tool file (mirrors the
 # `_eff_plug_*` quick-select tables in the SCAD file each key names — keep in
-# sync), and the tool files that offer the preset: "one-sided" gets a flat
-# sheet per size, "two-sided" a plate sheet per size. The two files measure
-# some plugs differently: the two-sided plates close across the plug's width
-# and hold it flat, so its cord is the side across the channel, and it adds
-# the head length.
+# sync), and the tool file that offers the preset: "one-sided" (2-prong plugs
+# and the USB-C tip) gets a flat sheet per size, "two-sided" (3-prong plugs)
+# a plate sheet per size. The two files measure a plug differently: the
+# two-sided plates close across the plug's width and hold it flat, so its
+# cord is the side across the channel, and it adds the head length. The
+# USB-C tip carries the "No plate / flush" wall notch, as its preset does.
 ONE_SIDED = "one-sided"
 TWO_SIDED = "two-sided"
 PLUG_PRESETS: Dict[str, Dict] = {
+    "usb-c-laptop-tip": {
+        "customizer": "USB-C laptop tip",
+        "label": "USB-C laptop tip",
+        "short": "USB-C laptop tip",
+        "files": (ONE_SIDED,),
+        "measurements": {
+            ONE_SIDED: {
+                "measure_plug_length": 17.0,
+                "measure_plug_width_prong_end": 10.25,
+                "measure_plug_width_cord_end": 10.25,
+                "measure_plug_thickness_prong_end": 6.5,
+                "measure_plug_thickness_cord_end": 6.5,
+                "measure_cord_thickness": 6.1,
+                "measure_wall_plate_style": "No plate / flush",
+            },
+        },
+    },
     "flat-2-prong": {
         "customizer": "Flat 2-prong lamp plug - NEMA 1-15",
         "label": "Flat 2-prong lamp plug (NEMA 1-15)",
         "short": "Flat 2-prong lamp plug",
-        "files": (ONE_SIDED, TWO_SIDED),
+        "files": (ONE_SIDED,),
         "measurements": {
             ONE_SIDED: {
                 "measure_plug_length": 32.5,
@@ -96,12 +115,21 @@ PLUG_PRESETS: Dict[str, Dict] = {
                 "measure_plug_thickness_cord_end": 8.6,
                 "measure_cord_thickness": 3.6,
             },
-            TWO_SIDED: {
-                "measure_plug_length": 32.5,
-                "measure_plug_width_prong_end": 20.0,
-                "measure_plug_width_cord_end": 11.1,
-                "measure_plug_head_length": 15.2,
-                "measure_cord_thickness": 7.0,
+        },
+    },
+    "wide-2-prong-appliance": {
+        "customizer": "Wide 2-prong appliance plug - NEMA 1-15",
+        "label": "Wide 2-prong appliance plug (NEMA 1-15)",
+        "short": "Wide 2-prong appliance plug",
+        "files": (ONE_SIDED,),
+        "measurements": {
+            ONE_SIDED: {
+                "measure_plug_length": 38.0,
+                "measure_plug_width_prong_end": 34.0,
+                "measure_plug_width_cord_end": 34.0,
+                "measure_plug_thickness_prong_end": 16.0,
+                "measure_plug_thickness_cord_end": 16.0,
+                "measure_cord_thickness": 5.0,
             },
         },
     },
@@ -109,16 +137,8 @@ PLUG_PRESETS: Dict[str, Dict] = {
         "customizer": "Standard 3-prong plug - NEMA 5-15",
         "label": "Standard 3-prong plug (NEMA 5-15)",
         "short": "Standard 3-prong plug",
-        "files": (ONE_SIDED, TWO_SIDED),
+        "files": (TWO_SIDED,),
         "measurements": {
-            ONE_SIDED: {
-                "measure_plug_length": 46.1,
-                "measure_plug_width_prong_end": 24.66,
-                "measure_plug_width_cord_end": 13.6,
-                "measure_plug_thickness_prong_end": 18.9,
-                "measure_plug_thickness_cord_end": 15.0,
-                "measure_cord_thickness": 9.25,
-            },
             TWO_SIDED: {
                 "measure_plug_length": 46.1,
                 "measure_plug_width_prong_end": 24.66,
@@ -140,41 +160,6 @@ PLUG_PRESETS: Dict[str, Dict] = {
                 "measure_plug_width_cord_end": 24.5,
                 "measure_plug_head_length": 23.0,
                 "measure_cord_thickness": 8.25,
-            },
-        },
-    },
-    # The USB-C tip is a two-sided-only plug with Rounded sides and its own
-    # cradle depth.
-    "usb-c-laptop-tip": {
-        "customizer": "USB-C laptop tip",
-        "label": "USB-C laptop tip",
-        "short": "USB-C laptop tip",
-        "files": (TWO_SIDED,),
-        "sides": "Rounded sides",
-        "cradle": 1.9,
-        "measurements": {
-            TWO_SIDED: {
-                "measure_plug_length": 17.0,
-                "measure_plug_width_prong_end": 10.25,
-                "measure_plug_width_cord_end": 10.25,
-                "measure_plug_head_length": 0.0,
-                "measure_cord_thickness": 6.1,
-            },
-        },
-    },
-    "wide-2-prong-appliance": {
-        "customizer": "Wide 2-prong appliance plug - NEMA 1-15",
-        "label": "Wide 2-prong appliance plug (NEMA 1-15)",
-        "short": "Wide 2-prong appliance plug",
-        "files": (ONE_SIDED,),
-        "measurements": {
-            ONE_SIDED: {
-                "measure_plug_length": 38.0,
-                "measure_plug_width_prong_end": 34.0,
-                "measure_plug_width_cord_end": 34.0,
-                "measure_plug_thickness_prong_end": 16.0,
-                "measure_plug_thickness_cord_end": 16.0,
-                "measure_cord_thickness": 5.0,
             },
         },
     },
@@ -767,12 +752,22 @@ def build_flat_sheet(
     # floor against the full footprint. (A near-top-face section won't do:
     # the top-edge ball roundover already pulls the outer wall inward
     # there.) The tiny erode/dilate scrubs the hairline band where the
-    # roundover has just started at this height.
+    # roundover has just started at this height. A shallow pocket (the
+    # USB-C tip's is 1 mm deep) puts this height well inside the
+    # roundover, so the band the roundover pulls in at this height is cut
+    # away first, or it would read as a pocket around the whole body.
     z_pocket = max(d["pocket_seat_floor"], d["pocket_floor"]) + 0.15
     s_filled = filled_union(section_rings(mesh, z_pocket))
     # body (not just its exterior) so the through-holes, already drawn from
     # the shadow's interior rings, don't reappear as "pockets".
-    pocket_geo = _fix(body.difference(s_filled)).buffer(-0.05).buffer(0.05)
+    pocket_raw = body.difference(s_filled)
+    r_top = d["body_top_rounding"]
+    z_in = z_pocket - (d["body_thickness"] - r_top)
+    if r_top > 0 and z_in > 0:
+        inset = r_top - math.sqrt(max(0.0, r_top * r_top - z_in * z_in))
+        band = body.difference(Polygon(body.exterior).buffer(-(inset + 0.1)))
+        pocket_raw = pocket_raw.difference(band)
+    pocket_geo = _fix(pocket_raw).buffer(-0.05).buffer(0.05)
     pockets = [
         shapely.simplify(p, 0.01, preserve_topology=True)
         for p in as_polygons(pocket_geo)
@@ -874,7 +869,7 @@ def build_flat_sheet(
             "1. Print at 100% and measure the calibration square — it must be exactly 50 × 50 mm.",
             "2. Cut along the SOLID outline. Dashed lines are holes and the plug pocket — poke through the two big finger circles.",
             "3. Hold the cutout on your plug at the wall: the plug fits the dashed pocket, the top notch straddles the wall plate.",
-            f"4. Try the finger holes ({size_word} size). Wrong size? Try a neighbouring sheet, or print the cards in stl/Measuring-Stencil/.",
+            f"4. Try the finger holes ({size_word} size). Wrong size? Try a neighboring sheet, or print the cards in stl/Measuring-Stencil/.",
             "5. Happy? Open the Customizer with the title-block settings and export your STL (the tool's quick start).",
         ],
         footprint=(W, L),

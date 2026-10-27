@@ -1,0 +1,16 @@
+{
+  "pdf": "Documentation/Step_3_Guide_Plug_Puller_User_Guide.pdf",
+  "pdf_sha256": "26144bae0050096da1ddcc64feafaedc49f2dee41cd50f69a0dccfaa9326c90f",
+  "inputs": {
+    "Documentation/Step_3_Guide_Plug_Puller_User_Guide.md": "c2c60a425399c07583b915ea130e398c92beed077d0c557e4421c1b6b14de127",
+    "Photos/two-sided/stage-pull-standard-plug.jpg": "0fb4629e95c53aa930bbc590a2f77dfcee2c11e876ce1a02e7462e4c37378779",
+    "Photos/two-sided/stage-pull-heavy-duty-plug.jpg": "efc86e0ba5beebce100e3e4eff5093e201e64637621eef65c2bbfc6b4a0c31eb",
+    "scripts/build_open_at_pdf.py": "272c366f54493dfd1b99eb65bc52c397f9c5b4a4d1a88e4a9fca0959dbaff5ae"
+  },
+  "pages": 5,
+  "bookmarks": 12,
+  "links": 15,
+  "pictures": 2,
+  "captions": 2,
+  "producer": "Skia/PDF m156"
+}

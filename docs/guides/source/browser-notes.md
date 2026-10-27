@@ -2,7 +2,7 @@
 
 Forge and the desktop program show the same form and make the same tool. What differs:
 
-- Forge draws the tool as it will print, with any red warning text beside it. It does not draw the see-through plug, or the green and orange notes of the desktop program's preview.
+- Forge draws the tool with the see-through plug in its preview and any red warning text beside it. It does not draw the green and orange notes of the desktop program's preview.
 - A render takes longer in the browser than on the desktop, and longest on a phone. Forge says **Preview ready** under the picture when it is done.
 - On a phone the screen is tight. The parameter search finds any dial by its name, and searching also brings back the dials behind **Show all parameters**.
 - Forge can be installed as an app that works offline: use your browser's install button at the right end of the address bar.

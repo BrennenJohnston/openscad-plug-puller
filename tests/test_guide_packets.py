@@ -34,6 +34,7 @@ STORYBOARDS = PROJECT_ROOT / "docs" / "dials" / "storyboards_index.json"
 TOOLS = ("one-sided", "two-sided")
 OPENER_HEADING = "Which tool this is"
 MEASURE_HEADING = "Measure your plug and your hand"
+FINDER_HEADING = "Start with the plug size finder"
 STEPS_HEADING = "The four Customizer steps"
 FRONT_H2 = ["Which tool this is", "Get the file", MEASURE_HEADING]
 # The quick start's steps are one H2 with an H3 per step; the full guide's
@@ -173,13 +174,18 @@ def _check_measuring(text: str, tool: str) -> None:
     """The measuring section: an H3 per measure row of the catalog in
     mapping order, each with the Customizer name and the form row, the how
     text and either the typical range with the example or the choices, and
-    the stencil card; then the form and its table, then the cards."""
+    the stencil card; then the form and its table, then the cards. The plug
+    size finder comes first, with its link and its table."""
     catalog = load_catalog()
     measured = [r for r in catalog if r["file"] == tool and r["measure"] is not None]
     section = text[text.index(f"## {MEASURE_HEADING}"):text.index("### The measuring form")]
     h3 = [h[1] for h in _headings(section) if h[0] == 3]
-    assert h3 == [r["title"] for r in measured], f"{tool}: an H3 per measured dial, its plain title, in order"
+    assert h3 == [FINDER_HEADING] + [r["title"] for r in measured], (
+        f"{tool}: the finder, then an H3 per measured dial, its plain title, in order")
     chunks = re.split(r"^### ", section, flags=re.M)[1:]
+    finder = chunks.pop(0)
+    assert "[plug-size-finder.svg](../plug-size-finder.svg)" in finder, f"{tool}: the finder page's link"
+    assert "| Preset to pick | Tool file |" in finder, f"{tool}: the finder page's table"
     for chunk, row in zip(chunks, measured):
         assert f"Customizer name: `{row['name']}`." in chunk, f"{tool}: {row['name']} not named in its section"
         assert re.search(r"(Row \d+ of|Not on) the measuring form\.", chunk), f"{tool}: {row['name']} without its form row"
@@ -321,7 +327,7 @@ def test_builder_tool_filter() -> None:
     assert "![Plate thickness: before and after, 4 to 6 mm; red marks the cord channel and the finger lobes.](../../dials/two-sided/plate_thickness.svg)" in md
     assert "Two vertical slices of one plate of the two-sided puller." in md
     assert "#### " not in md
-    assert "src/Plug_Puller_Two_Sided.scad" in md and "Plug_Puller_Parametric" not in md, "the sources are filled for the tool"
+    assert "The two-sided puller is the file `src/Plug_Puller_Two_Sided.scad`" in md, "the sources are filled for the tool"
 
 
 SAMPLE_SVGS = {
@@ -360,9 +366,9 @@ def test_document_html() -> None:
     order = [html.index(s) for s in ('class="page cover"', 'class="front contents"', 'class="opener"', 'id="get-the-file"',
                                      'id="measure-your-plug-and-your-hand"', '<table class="grid measures">',
                                      'id="dial-one-sided-measure_plug_length"', 'id="assemble"',
-                                     'class="page form" id="part-form"')]
+                                     'class="page form" id="part-finder"', 'class="page form" id="part-form"')]
     assert order == sorted(order), "the document's sections are out of order"
-    assert html.count('<section class="card"') == 1 and html.count('class="page form"') == 2
+    assert html.count('<section class="card"') == 1 and html.count('class="page form"') == 3
     assert "<h3>Plug length</h3>" in html and "Customizer name: <b>measure_plug_length</b>" in html
     assert "plate_thickness" not in html
     assert "<figcaption>Two top views of the one-sided puller, before left and after right.</figcaption>" in html
@@ -384,13 +390,16 @@ def test_document_html() -> None:
     for vb_w, width in figures:
         assert float(width) <= float(vb_w) + 1e-6, "a figure is scaled above 1:1"
     anchors = re.findall(r'<a href="#([^"]+)">', html)
-    assert "part-form" not in anchors and len(anchors) == len(set(anchors)), "each contents entry once"
+    sheets = [a for a in anchors if a in ("part-finder", "part-form")]
+    entries = [a for a in anchors if a not in sheets]
+    assert len(entries) == len(set(entries)), "each contents entry once"
+    assert sorted(sheets) == ["part-finder", "part-form"], "the text links each true-size sheet by its page"
     pages = {a: i + 3 for i, a in enumerate(anchors)}
     pages["part-form"] = len(anchors) + 3
     numbered = build_html(**args, pages=pages)
     assert (f'<a href="#assemble"><span class="t">Assemble</span><span class="dots"></span><span class="pg">{pages["assemble"]}</span></a>'
             in numbered)
-    assert f"printed at true size on page {pages['part-form']}" in numbered
+    assert f'printed at true size on <a href="#part-form">page {pages["part-form"]}</a>' in numbered
 
 
 def test_quick_start_html() -> None:

@@ -1,0 +1,19 @@
+Device:,Plug Puller,,,,,,,,,,,,
+Version:,V1.0.0,,,,,,,,,,,,
+Last Updated:,2026-10-27,,,,,,,,,,,,
+,,,,,,,,Total filament (g),,Unit Cost,Total Estimated Cost,Build Cost,
+,,,,,,,,15.9 (one-sided puller) or 19.7 (two-sided pair) at Medium; upper bounds from STL volume,,,$0.25 or $0.32 (filament at $15.99/kg),,
+ID,Commercial Parts,,,,,,,,,,,,
+,Part,Description,,Manufacturer,Supplier,QTY / Device,QTY / PKG,PKGs,$ / PKG,$ / Device,Total Estimated Cost,,Link
+C01,Zip tie (one-sided puller),"Nylon zip tie up to 4.8 mm wide, about 200 mm long; goes through the zip-tie holes beside the pocket and around the plug body.",,Any,Any hardware store,2,,,,,,,
+C02,Zip tie (two-sided puller),"Nylon zip tie up to 3.6 mm wide, about 200 mm long; goes through the matching holes of both plates and across the plug.",,Any,Any hardware store,3,,,,,,,
+C03,Hook-and-loop strap (optional),"One-wrap hook-and-loop strap 10 to 25 mm wide; threads through the one-sided puller's two wing openings. Set the strap width in Step 3.",,Any,Any hardware store,1,,,,,,,
+,,,,,,,,,,,,,
+,3D Printed Parts,,,,,,,,,,,,
+,Part,Description,Filament Type,Filament,Color,QTY / Device,Mass (g) / Part,Total Mass,$ / kg,$ / Device,Total Estimated Cost,,Link
+P01,One-sided puller,"For a plug with 2 prongs or a USB-C tip. One part with a pocket for the plug, two finger holes and a cord hook; made in the customizer. Medium, flat 2-prong lamp plug preset shown; 11.6 to 26.8 g across the presets and sizes.",PETG or PLA,Any,Any,1,15.9,15.9,$15.99,$0.25,$0.25,,https://github.com/BrennenJohnston/openscad-plug-puller/tree/main/stl/Plug-Puller
+P02,Two-sided plate,"For a plug with 3 prongs. Two identical plates with toothed arms, zip-tied face to face around the plug; both in one file. Medium, standard 3-prong plug preset shown; 17.0 to 21.6 g a pair across the presets and sizes.",PETG or PLA,Any,Any,2,9.85,19.7,$15.99,$0.32,$0.32,,https://github.com/BrennenJohnston/openscad-plug-puller/tree/main/stl/Plug-Puller
+,,,,,,,,,,,,,
+,Custom PCB,,,,,,,,,,,,
+,Part,Description,,Manufacturer,Supplier,QTY / Device,QTY / PKG,PKGs,$ / PKG,$ / Device,Total Estimated Cost,,Link
+,(none),No PCB or electronics in this device.,,,,0,0,0,$0.00,$0.00,$0.00,,

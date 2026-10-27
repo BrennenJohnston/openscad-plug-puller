@@ -1,0 +1,14 @@
+{
+  "pdf": "Documentation/Plug_Puller_Device_Summary.pdf",
+  "pdf_sha256": "01c93866920b5f0114b12ca1793c2d51fa38c2c7ff3347b2043856a349be8409",
+  "inputs": {
+    "Documentation/Plug_Puller_Device_Summary.md": "b8eddcaac119a26679dde482873d49cf61171eb835474249274a8797703303f8",
+    "scripts/build_open_at_pdf.py": "272c366f54493dfd1b99eb65bc52c397f9c5b4a4d1a88e4a9fca0959dbaff5ae"
+  },
+  "pages": 5,
+  "bookmarks": 10,
+  "links": 15,
+  "pictures": 0,
+  "captions": 0,
+  "producer": "Skia/PDF m156"
+}

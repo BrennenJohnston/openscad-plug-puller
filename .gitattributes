@@ -3,6 +3,10 @@
 *.stl binary
 *.3mf binary
 *.pdf binary
+*.jpg binary
+*.png binary
+*.docx binary
+*.zip binary
 
 # Ensure consistent line endings
 *.py text eol=lf
@@ -14,6 +18,7 @@
 *.scad text eol=lf
 *.sh text eol=lf
 *.svg text eol=lf
+*.csv text eol=lf
 
 # Windows batch files should use CRLF
 *.bat text eol=crlf

@@ -28,14 +28,14 @@
   },
   {
     "file": "two-sided",
-    "key": "two-sided-usb-c",
-    "title": "The four steps on a USB-C laptop plug",
-    "plug_label": "USB-C laptop plug",
+    "key": "two-sided-standard-plug",
+    "title": "The four steps on a standard 3-prong plug",
+    "plug_label": "standard 3-prong plug",
     "stages": [
       {"step": "defaults", "set": {}},
       {
         "step": "Step 1 - Your Plug",
-        "set": {"plug_preset": "USB-C laptop tip"}
+        "set": {"plug_preset": "Standard 3-prong plug - NEMA 5-15"}
       },
       {"step": "Step 2 - Size", "set": {"size": "Large"}},
       {"step": "Step 3 - Attachment", "set": {"attachment": "Zip ties"}},

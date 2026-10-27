@@ -43,8 +43,13 @@ PLACEHOLDERS: Dict[str, Dict[str, str]] = {
         "Tool": "One-sided puller",
         "other_tool": "two-sided puller",
         "file": "src/Plug_Puller_Parametric.scad",
-        "single_file": "dist/Plug_Puller_SingleFile.scad",
+        "single_file": "dist/Plug_Puller_One_Sided_SingleFile.scad",
         "forge_url": FORGE + "forge-manifest-one-sided.json",
+        "plugs": "a plug with 2 prongs or a USB-C tip",
+        "Other_plugs": "A plug with 3 prongs, or any plug 24 mm thick or more,",
+        "other_file": "src/Plug_Puller_Two_Sided.scad",
+        "other_single_file": "dist/Plug_Puller_Two_Sided_SingleFile.scad",
+        "other_forge_url": FORGE + "forge-manifest-two-sided.json",
         "orientation": "flat face down on the bed, the plug pocket facing up",
         "part_word": "the tool",
         "zip_ties": "two zip ties up to 4.8 mm wide (about 200 mm long), or one hook-and-loop strap 10 to 25 mm wide",
@@ -61,9 +66,9 @@ PLACEHOLDERS: Dict[str, Dict[str, str]] = {
         "strength_fix": "Reprint in PETG with 4 walls",
         "cli_example": (
             "```bash\n"
-            "# A left-handed hook and the standard 3-prong preset\n"
+            "# A left-handed hook and the flat 2-prong lamp plug preset\n"
             "openscad -o puller.stl --backend Manifold \\\n"
-            "  -D 'plug_preset=\"Standard 3-prong plug - NEMA 5-15\"' -D 'hook_hand=\"Left\"' \\\n"
+            "  -D 'plug_preset=\"Flat 2-prong lamp plug - NEMA 1-15\"' -D 'hook_hand=\"Left\"' \\\n"
             "  src/Plug_Puller_Parametric.scad\n"
             "\n"
             "# A saved set of settings\n"
@@ -81,6 +86,11 @@ PLACEHOLDERS: Dict[str, Dict[str, str]] = {
         "file": "src/Plug_Puller_Two_Sided.scad",
         "single_file": "dist/Plug_Puller_Two_Sided_SingleFile.scad",
         "forge_url": FORGE + "forge-manifest-two-sided.json",
+        "plugs": "a plug with 3 prongs, or any plug 24 mm thick or more",
+        "Other_plugs": "A plug with 2 prongs or a USB-C tip",
+        "other_file": "src/Plug_Puller_Parametric.scad",
+        "other_single_file": "dist/Plug_Puller_One_Sided_SingleFile.scad",
+        "other_forge_url": FORGE + "forge-manifest-one-sided.json",
         "orientation": "both plates flat on the bed, exactly as the file lays them out",
         "part_word": "the plates",
         "zip_ties": "three zip ties up to 3.6 mm wide (about 200 mm long)",
@@ -106,7 +116,7 @@ PLACEHOLDERS: Dict[str, Dict[str, str]] = {
             "\n"
             "# A saved set of settings\n"
             "openscad -o plates.stl -p presets/Plug_Puller_Two_Sided.json \\\n"
-            "  -P \"USB-C laptop tip\" src/Plug_Puller_Two_Sided.scad\n"
+            "  -P \"Standard 3-prong plug - NEMA 5-15\" src/Plug_Puller_Two_Sided.scad\n"
             "```"
         ),
         "presets_json": "presets/Plug_Puller_Two_Sided.json",

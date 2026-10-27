@@ -5,14 +5,51 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-Versions below 1.0.0 are public preview releases: the model is complete
-and print-tested, but small refinements are expected before the **v1.0
-public milestone**.
+Versions below 1.0.0 were public preview releases.
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [1.0.0] - 2026-10-27
+
 ### Added
 
+- **A USB-C laptop tip preset on the one-sided puller**: 17.0 mm long,
+  10.25 mm wide at both ends, a 6.1 mm cord, from the owner's caliper
+  measurements, and 6.5 mm thick at both ends, an estimate (the USB Type-C
+  overmold limit, so it errs thick). It carries the No plate / flush wall
+  notch, since a laptop or charger has no cover plate. Its three STLs are
+  in `stl/Plug-Puller/`; it has not been test-printed yet.
+- **The plug size finder**, `docs/guides/plug-size-finder.svg`, written by
+  `scripts/generate_plug_finder.py`: one page with every preset of both
+  tools at true size, each plug lying on its wide side with its prongs (or
+  its USB-C metal tip) and its cord, grouped by tool and labelled with the
+  preset to pick, and a 50 mm calibration square. It prints at 1:1 among
+  the last pages of every quick start and full guide, and each guide's
+  measuring section carries its text and a table of the outlines.
+- **A Start here box on both measuring forms**: two tick boxes for the
+  prong count (this form, or the other tool's) and a blank for the
+  closest outline on the plug size finder.
+- **The Makers Making Change Open AT document set** in `Documentation/`:
+  three Step 1 guides (the browser customizer with marked screenshots,
+  the OpenSCAD desktop program, MakerWorld), the Visual Assembly Guide,
+  the Assembly Guide By Touch, the Maker Guide, the User Guide, the Device
+  Summary, the Design Rationale (moved from `docs/guides/`), the bill of
+  materials as CSV, the compliance checklist, the MakerWorld listing with
+  a Word copy and a plain-Markdown description, the shot list, and the
+  parts and pictures registries. Each page is printed to a tagged PDF by
+  `scripts/build_open_at_pdf.py`, whose records the quick lane checks.
+- **New photographs**: the October 2026 test series of the two-sided
+  puller on the standard and heavy-duty 3-prong plugs, cropped into
+  `Photos/` for the guides and into `MakerWorld_Photos/` (two covers, real
+  photos, renders) for the listing, by `scripts/photo_import.py` and
+  `scripts/makerworld_photos.py`; the browser guide's screenshots by
+  `scripts/forge_screenshots.py`.
+- **The repository record** of the Open AT layout: `NOTES/` (the decision
+  log, the open questions, asset requests, the string register and the
+  rest), `LICENSES/`, `CHANGES.txt`, and the Makers Making Change README
+  sections with their `update-about-mmc.yml` workflow.
 - **Plug head length**, a new Step 1 dial of the two-sided puller
   (`measure_plug_head_length`, 0 to 60 mm, default 0): how far back from
   the prong end the plug keeps its prong-end width before it narrows. The
@@ -23,33 +60,64 @@ public milestone**.
 
 ### Changed
 
-- **The four two-sided presets are re-measured on their own plugs.** Test
-  prints of the 0.14.0 presets held every plug loosely: their numbers had
-  come from development sample plugs, 1 to 5 mm too wide. Length, prong-end
-  width, cord-end width, head length and cord, in mm: heavy-duty extension
-  cord 51.0, 26.56, 24.5, 23.0, 8.25; USB-C laptop tip 17.0, 10.25, 10.25,
-  0, 6.1; flat 2-prong lamp plug 32.5, 20.0, 11.1, 15.2, 7.0; standard
-  3-prong plug 46.1, 24.66, 13.6, 15.6, 9.25. The heavy-duty plate and its
-  golden fixture grow to 81 mm long.
-- **The USB-C laptop tip preset carries its own cradle depth, 1.9 mm**, the
-  most that fits beside its cord channel, so the preset builds no
-  `CRADLE SHALLOWER THAN ASKED` tag. A typed plug still uses the Cradle
-  depth dial and still gets the tag; the saved `USB-C laptop plug -
-  measured` set types the same numbers and a 1.9 mm cradle.
-- **The one-sided lamp, standard and heavy-duty presets and stencil cards
-  P1 to P3 take the same measured plugs.** Length, prong-end width,
-  cord-end width and cord, in mm: lamp 32.5, 20.0, 11.1, 3.6; standard
-  46.1, 24.66, 13.6, 9.25; heavy-duty 51.0, 26.56, 24.5, 8.25. Their
-  thicknesses are still the development samples' numbers (lamp 18.6 to
-  8.6, standard 18.9 to 15.0, heavy-duty 27.0), estimates until those
-  plugs' thin sides are measured; a thickness only sets how deep the
-  pocket is cut. The standard plug's 9.25 mm cord is past the Cord
-  thickness slider's 9 mm but inside the cord hook's limit, so the preset
-  builds a 10 mm hook slot. The paper stencil sheet makes room for the
-  taller heavy-duty silhouettes.
+- **The presets are split by the plug's prong count.** The one-sided
+  puller carries the plugs with 2 prongs and the USB-C tip (USB-C laptop
+  tip, flat 2-prong lamp plug, wide 2-prong appliance plug); the two-sided
+  puller carries the plugs with 3 prongs (standard 3-prong plug,
+  heavy-duty extension cord). Test prints showed the one-sided puller
+  holding every 2-prong plug while 3-prong plugs slipped out, and the
+  two-sided plates holding both 3-prong plugs while every 2-prong plug and
+  the USB-C tip fell out however tight the zip ties were. The one-sided
+  standard 3-prong and heavy-duty presets and the two-sided lamp and USB-C
+  presets are removed, with their nine STLs, their nine outline sheets and
+  the saved two-sided USB-C sets; the 24 mm red tag still sends any thick
+  typed plug to the two-sided file.
+- **Each file's plug preset help says which plugs the file is for** and
+  names the other tool's file, and every guide says plainly that the two
+  tools are separate files: a setting inside one file no longer makes the
+  other tool.
+- **The one-sided upload file is renamed
+  `dist/Plug_Puller_One_Sided_SingleFile.scad`** (was
+  `Plug_Puller_SingleFile.scad`), so the two customizer files are told
+  apart by name on MakerWorld and in the browser.
+- **The two-sided assembly follows the October photographs** in every
+  guide: the plug on the first plate, the second plate on top, then each
+  zip tie through both plates and across the plug.
+- **The paper stencil sheet is one page**: the calibration square, the
+  ruler and the finger circles; the plug size finder takes the place of
+  its plug outlines. The printed stencil's P1 to P4 cards are unchanged;
+  the guides now name the tool each card's preset belongs to (P2 and P3,
+  the two-sided puller).
+- **The presets are re-measured on their own plugs.** Test prints of the
+  0.14.0 two-sided presets held every plug loosely: their numbers had come
+  from development sample plugs, 1 to 5 mm too wide. Two-sided, length,
+  prong-end width, cord-end width, head length and cord, in mm: standard
+  3-prong plug 46.1, 24.66, 13.6, 15.6, 9.25; heavy-duty extension cord
+  51.0, 26.56, 24.5, 23.0, 8.25. The heavy-duty plate and its golden
+  fixture grow to 81 mm long. One-sided, the flat 2-prong lamp plug: 32.5
+  long, 20.0 and 11.1 wide, a 3.6 mm cord; its thicknesses, 18.6 and
+  8.6 mm, are still the development sample's, estimates until the plug's
+  thin side is measured. The stencil cards P1 to P3 take the same plugs.
+
+### Removed
+
+- Four photographs of the one-sided puller on 3-prong plugs
+  (`one-sided-3-prong-plug-*.jpg`, `one-sided-three-sizes.jpg`), which
+  suggested it for plugs it does not hold, and the July two-sided assembly
+  photographs the October series replaces.
 
 ### Fixed
 
+- **The outline-sheet generator read a 1 mm deep pocket as a ring around
+  the whole body**, because the top edge's rounding had begun at the height
+  it slices; the USB-C tip's sheets failed their pocket check. The
+  rounding's band is now cut away first; the other sheets are unchanged.
+- **The quick starts and full guides said the measuring form was printed
+  "on page 00".** The page number was never filled, because nothing linked
+  to the form's page; each such "page N" is now a link to its sheet and
+  names its real page.
+- **The browser notes said the Assistive Forge does not draw the
+  see-through plug.** It does; the notes and the MakerWorld guide say so.
 - **Two two-sided measuring instructions did not fit a plug lying flat
   between the plates.** The cord is now measured the way the plug widths
   run (a flat cord's wide side, not its thin side), and a rubber strain
@@ -57,12 +125,12 @@ public milestone**.
   skipped. The one-sided puller's instructions are unchanged.
 - **The Grip bite help, its note in the guide and the `NO GRIP BITE` tag's
   row said the bite acts on every plug preset.** It acts with Flat sides
-  only, typed or from a preset; the USB-C tip's preset has Rounded sides.
+  only, typed or from a preset.
 - **The two-sided outline sheets' "cable strip (outer face)" label lay over
   the zip-tie holes beside the throat.** It now reads up the cord channel.
-- **The two-sided storyboard typed old USB-C numbers in Step 1.** It now
-  picks the `USB-C laptop tip` preset, so the picture shows the measured
-  plug.
+- **The two-sided storyboard typed old sample numbers in Step 1.** It now
+  picks the `Standard 3-prong plug - NEMA 5-15` preset, so the picture
+  shows a measured plug.
 
 ## [0.14.0] - 2026-10-01
 
@@ -739,6 +807,7 @@ First public release.
   (`docs/Plug_Puller_Reference.md`).
 - Ready-to-print Small / Medium / Large sample STLs in `stl/`.
 
+[1.0.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v1.0.0
 [0.14.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.14.0
 [0.13.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.13.0
 [0.12.0]: https://github.com/BrennenJohnston/openscad-plug-puller/releases/tag/v0.12.0

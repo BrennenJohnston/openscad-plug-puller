@@ -4,8 +4,8 @@ Every preset at every size has a printable sheet with the tool's exact outline a
 
 | Plug preset | Small | Medium | Large |
 | ----------- | ----- | ------ | ----- |
+| USB-C laptop tip | [sheet](../outline-sheets/outline_usb-c-laptop-tip_small.svg) | [sheet](../outline-sheets/outline_usb-c-laptop-tip_medium.svg) | [sheet](../outline-sheets/outline_usb-c-laptop-tip_large.svg) |
 | Flat 2-prong lamp plug (NEMA 1-15) | [sheet](../outline-sheets/outline_flat-2-prong_small.svg) | [sheet](../outline-sheets/outline_flat-2-prong_medium.svg) | [sheet](../outline-sheets/outline_flat-2-prong_large.svg) |
-| Standard 3-prong plug (NEMA 5-15) | [sheet](../outline-sheets/outline_standard-3-prong_small.svg) | [sheet](../outline-sheets/outline_standard-3-prong_medium.svg) | [sheet](../outline-sheets/outline_standard-3-prong_large.svg) |
 | Wide 2-prong appliance plug (NEMA 1-15) | [sheet](../outline-sheets/outline_wide-2-prong-appliance_small.svg) | [sheet](../outline-sheets/outline_wide-2-prong-appliance_medium.svg) | [sheet](../outline-sheets/outline_wide-2-prong-appliance_large.svg) |
 
 Every sheet, for both tools, is also in one printable PDF with an index: [`docs/Plug_Puller_Outline_Sheets.pdf`](../../Plug_Puller_Outline_Sheets.pdf). The sheets cover the presets only; a plug or a hand between sizes is better served by measuring.
