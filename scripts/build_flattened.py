@@ -4,7 +4,7 @@ Deterministically inlines each tool's include tree into one file in
 ``dist/`` so the model can be loaded by front-ends that do not support local
 ``include <>`` trees:
 
-* ``dist/Plug_Puller_SingleFile.scad`` — the one-sided puller
+* ``dist/Plug_Puller_One_Sided_SingleFile.scad`` — the one-sided puller
   (``src/Plug_Puller_Parametric.scad`` with ``fit_sizes.scad`` +
   ``fit_measured.scad`` + ``presets.scad`` inlined), and
 * ``dist/Plug_Puller_Two_Sided_SingleFile.scad`` — the two-sided puller
@@ -68,7 +68,7 @@ BUILDS: Tuple[Build, ...] = (
     Build(
         main=SRC_DIR / "Plug_Puller_Parametric.scad",
         includes=("fit_sizes.scad", "fit_measured.scad", "presets.scad"),
-        output=DIST_DIR / "Plug_Puller_SingleFile.scad",
+        output=DIST_DIR / "Plug_Puller_One_Sided_SingleFile.scad",
         title="Plug Puller — one-sided puller",
     ),
     Build(

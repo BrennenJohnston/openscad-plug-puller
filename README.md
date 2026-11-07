@@ -1,576 +1,240 @@
-# openscad-plug-puller
+<!--- Open Source Assistive Technology: GitHub Readme based on OpenAT-Template v1.2 (2025-Feb-04). Original template: https://github.com/makersmakingchange/OpenAT-Template --->
+
+# Plug Puller, Version 1.0
 
 [![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20NC%201.0.0-blue.svg)](LICENSE)
 [![OpenSCAD](https://img.shields.io/badge/OpenSCAD-2021.01%2B-orange.svg)](https://openscad.org/downloads.html)
-[![Version](https://img.shields.io/badge/version-0.14.0-brightgreen.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](CHANGELOG.md)
 [![CI: STL Validation](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml/badge.svg)](https://github.com/BrennenJohnston/openscad-plug-puller/actions/workflows/stl-validation.yml)
 
 ## Overview
 
-The **Plug Puller** is a handheld assistive device that helps you grip and
-remove an electrical plug from a wall outlet with your whole hand instead of
-a fingertip pinch: two finger holes take the pull, and the tool touches only
-the plug's sides and back, never the outlet. It is for anyone with
-arthritis, low grip strength, tremor, a small hand or one hand. It is a
-parametric OpenSCAD model: measure a few things with a ruler (or match your
-plug against a printed stencil card), type them into a form, export, print.
+The **Plug Puller** is a 3D-printed tool for pulling an electrical plug out of an outlet with the whole hand instead of a fingertip pinch: two fingers go through two finger holes and pull straight back, and the tool touches only the plug's sides and back, never the outlet. It is for anyone who cannot grip a plug and pull it: arthritis, low grip strength, tremor, a small hand, one hand. It is a parametric OpenSCAD model: pick a preset or measure the plug and the hand, fill in a form, export, print.
 
-It comes as **two tools**, each in its own file:
+It comes as **two tools, each its own file**. Count the plug's prongs:
 
-- the **one-sided puller**,
-  [`src/Plug_Puller_Parametric.scad`](src/Plug_Puller_Parametric.scad):
-  a slab with a plug pocket, finger holes, a cord hook, and zip-tie /
-  velcro attachment, for lamp plugs, standard 3-prong plugs and other
-  plugs thinner than 24 mm;
-- the **two-sided puller**,
-  [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad):
-  two identical serrated plates that zip-tie face to face around a
-  thick round plug, a USB-C tip or a charger plug.
+- **2 prongs, or a USB-C tip: the one-sided puller**, [`src/Plug_Puller_Parametric.scad`](src/Plug_Puller_Parametric.scad) (as one file, [`dist/Plug_Puller_One_Sided_SingleFile.scad`](dist/Plug_Puller_One_Sided_SingleFile.scad)): one printed part with a pocket the plug lies in, two finger holes, a cord hook, and zip-tie holes or strap openings. Presets: USB-C laptop tip, flat 2-prong lamp plug, wide 2-prong appliance plug.
+- **3 prongs, or any plug 24 mm thick or more: the two-sided puller**, [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad) (as one file, [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](dist/Plug_Puller_Two_Sided_SingleFile.scad)): two identical toothed plates zip-tied face to face around the plug. Presets: standard 3-prong plug, heavy-duty extension cord.
 
-Not sure which? Start with the one-sided puller. If your plug measures
-24 mm thick or more, it shows a red tag:
-`PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE`.
+No setting inside one file makes the other tool, as a setting did in older versions: to get the other tool, open its file. The split follows test prints; the [Design Rationale](Documentation/Plug_Puller_Design_Rationale.md) has the details. The USB-C laptop tip preset is new in 1.0 and not yet test-printed.
 
-![A gloved hand pulling the two-sided puller and its orange extension-cord plug straight out of a wall outlet, two fingers through the holes.](docs/images/two-sided-in-use-outlet.jpg)
+![A gloved hand with two fingers through the finger holes of a two-sided puller, pulling a black 3-prong plug straight out of a yellow power strip.](Photos/two-sided/stage-pull-standard-plug.jpg)
 
-> **Public preview** — one step from the **v1.0** public milestone. The
-> geometry and guides are complete and print-tested, the shipped STLs
-> are CI-validated against golden fixtures, and the model is
-> customizable in the browser with nothing to install.
+## Makers Making Change Assistive Device Library
 
-Each tool has two documents, as a page and as a printable PDF: a **quick
-start** (get the file, measure, the four Customizer steps, print, assemble,
-use) and a **full guide** (every dial, troubleshooting, the advanced dials).
-One-sided puller: [quick start](docs/guides/one-sided/quick-start.md) and
-[full guide](docs/guides/one-sided/full-guide.md). Two-sided puller:
-[quick start](docs/guides/two-sided/quick-start.md) and
-[full guide](docs/guides/two-sided/full-guide.md).
+- <MMCWebLink>
 
-## How to obtain the device
+## How to Obtain the Device
 
-### Customize in your browser
+### 1. Do-it-Yourself (DIY) or Do-it-Together (DIT)
 
-No install needed: the [OpenSCAD Assistive Forge](https://openscad-assistive-forge.pages.dev/),
-our browser version of OpenSCAD built for keyboard and screen reader
-use, opens the tool from one link, ready to customize, and offers to
-keep a copy in your browser:
-**[open the one-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-one-sided.json)**
-or
-**[open the two-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-two-sided.json)**.
-The form shows the four steps' dials first. Each tool's quick start
-covers it click by click under "Get the file", and its full guide adds
-the notes for working in the browser. The links open the flattened
-single-file builds, [`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad)
-and [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](dist/Plug_Puller_Two_Sided_SingleFile.scad),
-as copied to the Forge's example branch.
+This is an open-source assistive technology, so anyone is free to build it. All of the files and instructions required to build the device are in this repository: a 3D printer, a little filament, two or three zip ties, and a customizer, in the browser, on the desktop or on MakerWorld.
 
-### Customize on your computer
+- **Customize in your browser**, nothing to install: the [OpenSCAD Assistive Forge](https://openscad-assistive-forge.pages.dev/), a browser version of OpenSCAD built for keyboard and screen reader use, opens each tool from one link: **[the one-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-one-sided.json)** or **[the two-sided puller](https://openscad-assistive-forge.pages.dev/?manifest=https://raw.githubusercontent.com/BrennenJohnston/openscad-assistive-forge/example-manifest/plug-puller/forge-manifest-two-sided.json)**. The [Browser Customizer Guide](Documentation/Step_1_Guide_Option_1_Plug_Puller_Browser_Customizer_Guide.md) walks through it.
+- **Customize on your computer** in the free OpenSCAD desktop program: the [OpenSCAD Guide](Documentation/Step_1_Guide_Option_2_Plug_Puller_OpenSCAD_Guide.md).
+- **Customize on MakerWorld**: the [MakerWorld Guide](Documentation/Step_1_Guide_Option_3_Plug_Puller_MakerWorld_Guide.md).
+- **Download a ready-made STL**: [`stl/Plug-Puller/`](stl/Plug-Puller) holds every preset at Small, Medium and Large hand sizes, 15 tools, listed in [`stl/README.md`](stl/README.md).
 
-You don't need to know OpenSCAD (or any 3D modeling) to make a Plug
-Puller that fits **your** plug and **your** hand.
+Not sure which preset? Print the [plug size finder](docs/guides/plug-size-finder.svg) at 100 %, check its 50 mm square, and lay the plug on the outlines. Each tool's quick start has the measuring form for a plug that matches none.
 
-1. Open the file for your tool in OpenSCAD (v2021.01 or later; recent
-   builds with the Manifold backend render fastest):
-   [`src/Plug_Puller_Parametric.scad`](src/Plug_Puller_Parametric.scad)
-   for the one-sided puller, or
-   [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad)
-   for the two-sided puller.
-2. Open the **Customizer** panel (`View ▸ Hide Customizer` unchecked;
-   older builds: `Window ▸ Customizer`).
+### 2. Request a build of this device
 
-   **One-sided puller:**
-   - **Step 1 - Your Plug**: pick a `plug_preset` (or leave it on
-     `Measure my plug` and type your plug measurements — see the
-     [quick start](docs/guides/one-sided/quick-start.md)). Skip both to
-     get the reference plug pocket. The preview shows a see-through
-     plug built from your numbers. The measurements are named for where
-     you take them: the **prong end** and the **cord end** (the pocket,
-     notch, cord hook, and the plug side rail are built from them — no
-     protractor needed).
-   - **Step 2 - Size**: keep `Medium` for the reference tool, pick
-     `Small` / `Large` (research-grounded ANSUR-II hand pairs), or pick
-     `Measure my hand` and fill in the two hand measurements below the
-     dropdown.
-   - **Step 3 - Attachment**: `Zip ties + Velcro` (default), `Zip ties`,
-     `Velcro strap`, or `None`; `velcro_style` is `Wing` (default) or
-     `Classic slot`, with a `strap_width` setting.
-   - **Step 4 - Cord Hook**: `hook_hand` = `Right` (the reference
-     device) or `Left`; it picks the J-hook's chirality.
+You may also submit a build request through the [Makers Making Change Assistive Device Library Listing](<MMCWebLink>) to have a volunteer maker build the device. As the requestor, you are responsible for reimbursing the maker for the cost of materials and any shipping.
 
-   **Two-sided puller:**
-   - **Step 1 - Your Plug**: pick the `plug_preset`, or type four
-     numbers (the plug's length, its width at the prong end and at the
-     cord end, and the cord), then pick `Rounded sides` (a round plug,
-     a USB-C or charger tip: the plates get a sloped cradle that
-     centers it) or `Flat sides` (a boxy plug: the teeth bite along the
-     whole side).
-   - **Step 2 - Size**: `Small` / `Medium` / `Large`, or
-     `Measure my hand` and your finger width.
-   - **Step 3 - Attachment**: `Zip ties + Velcro strap` (default) or
-     `Zip ties`. The zip ties are what hold the two plates together.
-   - **Step 4 - Print Layout**: `Both plates` (default) puts both
-     plates in one file; `One plate` exports a single plate.
-3. Press **F6** to render, then `File ▸ Export ▸ STL` to save the
-   print file. For the two-sided puller: print both plates, flip one
-   over, zip-tie the pair face to face around the plug.
+### 3. Build this device for someone else
 
-Everything below Step 4 in the Customizer is optional: the `Advanced -`
-sections hold placement overrides (one-sided) and plate tuning
-(two-sided), and the `(Custom size only)` sections of the one-sided
-file only apply when `size = Custom`. `Custom` size unlocks every
-individual slider of the one-sided puller for power users. What every
-dial moves is drawn, before and after, in each tool's full guide
-([one-sided](docs/guides/one-sided/full-guide.md),
-[two-sided](docs/guides/two-sided/full-guide.md); printable as
-[`docs/Plug_Puller_One_Sided_Full_Guide.pdf`](docs/Plug_Puller_One_Sided_Full_Guide.pdf)
-and [`docs/Plug_Puller_Two_Sided_Full_Guide.pdf`](docs/Plug_Puller_Two_Sided_Full_Guide.pdf)),
-which also explains how the advanced dials work together.
+If you have the skills and equipment to build this device, and would like to donate your time to create the device for someone who needs it, visit the [MMC Maker Wanted](https://makersmakingchange.com/maker-wanted/) section.
 
-Prefer a single file (e.g. for the MakerWorld customizer or offline
-sharing)? Use [`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad)
-(one-sided) or
-[`dist/Plug_Puller_Two_Sided_SingleFile.scad`](dist/Plug_Puller_Two_Sided_SingleFile.scad)
-(two-sided) — each model flattened into one file.
+## Build Instructions
 
-### Download a ready-to-print STL
+### 1. Make the tool for the plug and the hand
 
-No OpenSCAD needed — the [`stl/`](stl) folder ships a pre-rendered copy of
-every preset at every hand size, named so you can grab yours without opening
-the Customizer. [`stl/README.md`](stl/README.md) is a one-line index of the
-whole library; the two groups are:
+The printed tool is the custom part: count the prongs to pick the tool, then pick a preset or type the plug's numbers and the hand size in a customizer. The Step 1 guides cover the [browser](Documentation/Step_1_Guide_Option_1_Plug_Puller_Browser_Customizer_Guide.md), the [desktop](Documentation/Step_1_Guide_Option_2_Plug_Puller_OpenSCAD_Guide.md) and [MakerWorld](Documentation/Step_1_Guide_Option_3_Plug_Puller_MakerWorld_Guide.md); each tool's quick start and full guide explain every setting with a picture ([one-sided quick start](docs/guides/one-sided/quick-start.md), [one-sided full guide](docs/guides/one-sided/full-guide.md), [two-sided quick start](docs/guides/two-sided/quick-start.md), [two-sided full guide](docs/guides/two-sided/full-guide.md)).
 
-**Plug pullers** — [`stl/Plug-Puller/`](stl/Plug-Puller):
+### 2. Print it
 
-Pick your plug family, then your hand size (`Small` / `Medium` / `Large` —
-Medium is the reference device, so start there; Small ≈ 5th-percentile female
-hand, Large ≈ 95th-percentile male hand).
+Flat on the bed as the file comes, no supports, 0.2 mm layers, 3 to 4 walls, 25 to 35 % infill, PETG or PLA. The [Maker Guide](Documentation/Step_2_Guide_Option_3_Plug_Puller_Maker_Guide.md) has the print table; the [bill of materials](Documentation/Plug_Puller_BOM.csv) lists the filament and the zip ties.
 
-| Plug family | Files (`_Small` / `_Medium` / `_Large`) | Tool |
-| ----------- | --------------------------------------- | ---- |
-| Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_*.stl` | one-sided puller (one part) |
-| Standard 3-prong — NEMA 5-15 | `Plug-Puller_Standard-3-Prong-NEMA-5-15_*.stl` | one-sided puller (one part) |
-| Wide 2-prong appliance — NEMA 1-15 | `Plug-Puller_Wide-2-Prong-Appliance_*.stl` | one-sided puller (one part) |
-| Heavy-duty extension cord — NEMA 5-15 | `Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_*.stl` | two-sided puller (both plates) |
-| USB-C laptop tip | `Plug-Puller_Two-Sided_USB-C-Laptop-Tip_*.stl` | two-sided puller (both plates) |
-| Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Two-Sided_Flat-2-Prong-Lamp-NEMA-1-15_*.stl` | two-sided puller (both plates) |
-| Standard 3-prong — NEMA 5-15 | `Plug-Puller_Two-Sided_Standard-3-Prong-NEMA-5-15_*.stl` | two-sided puller (both plates) |
+### 3. Assemble the device
 
-Each two-sided file holds both plates: flip one after printing, then zip-tie
-the pair face to face around the plug.
+The [Maker Guide](Documentation/Step_2_Guide_Option_3_Plug_Puller_Maker_Guide.md) walks through it in a few pages. The [Assembly Guide By Touch](Documentation/Step_2_Guide_Option_2_Plug_Puller_Assembly_Guide_By_Touch.md) says every step for the hands, and the [Visual Assembly Guide](Documentation/Step_2_Guide_Option_1_Plug_Puller_Visual_Assembly_Guide.md) shows it without words. The [User Guide](Documentation/Step_3_Guide_Plug_Puller_User_Guide.md) teaches the pull. Each is also printed as a tagged PDF.
 
-**Measuring stencil** — [`stl/Measuring-Stencil/`](stl/Measuring-Stencil):
+## How to Improve this Device
 
-Thin measuring cards that answer the fit worksheet without a caliper. Print the
-full packed set (`..._All-Cards.stl`) or just the one card you need, in either
-label mode:
+As open-source assistive technology, you are welcomed and encouraged to improve upon the design. The model is built to be changed and checked; its data files, tests and scripts are all here.
 
-- **Visual** ([`Measuring-Stencil/Visual/`](stl/Measuring-Stencil/Visual)) — debossed printed labels.
-- **Tactile** ([`Measuring-Stencil/Tactile/`](stl/Measuring-Stencil/Tactile)) — raised ADA-size characters plus a fold-flat Grade 2 braille title flap on every card (snap off the support fins, fold each flap back until flat — see "Match a card instead of measuring" in either [quick start](docs/guides/one-sided/quick-start.md#match-a-card-instead-of-measuring)).
-
-| Card | Purpose |
-| ---- | ------- |
-| `All-Cards` | the full packed set — every card on one plate |
-| `P1_Lamp-Plug-Gauge` / `P2_Standard-3-Prong-Gauge` / `P3_Heavy-Duty-Cord-Gauge` / `P4_Wide-2-Prong-Appliance-Gauge` | plug-preset silhouettes |
-| `R1_Ruler-100mm` | a tactile 100 mm ruler |
-| `C1_Cord-Gauge` | open-slot cord gauge that slides onto an installed cord |
-| `F1_Finger-Sizing-15-25mm` / `F2_Finger-Sizing-26-32mm` | all 18 finger-sizing holes |
-
-The whole library is regenerated from source by
-[`scripts/build_release_stls.py`](scripts/build_release_stls.py).
-
-Not sure which size? Print a **1:1 paper outline sheet** of any
-preset-and-size combination first and test it against your real plug and
-hand: every sheet is in one printable PDF,
-[`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf),
-and each full guide's "Try it on paper first" section lists its tool's
-sheets. For a tool matched to *your* plug and hand, spend five minutes
-with the quick start's measuring section and the Customizer instead.
-
-## Build instructions
-
-Each tool's **quick start** carries the whole path, in order: get the
-file, measure your plug and your hand (or match a stencil card), fill in
-the four Customizer steps, render and print, assemble, use. It is a page
-([one-sided](docs/guides/one-sided/quick-start.md),
-[two-sided](docs/guides/two-sided/quick-start.md)) and a printable PDF
-whose last pages are the measuring form and the 1:1 paper stencil sheets
-([`docs/Plug_Puller_One_Sided_Quick_Start.pdf`](docs/Plug_Puller_One_Sided_Quick_Start.pdf),
-[`docs/Plug_Puller_Two_Sided_Quick_Start.pdf`](docs/Plug_Puller_Two_Sided_Quick_Start.pdf)).
-If the print is snug or loose, the tool's **full guide** says which one
-number to nudge and decodes every red warning tag
-([one-sided](docs/guides/one-sided/full-guide.md#if-the-print-does-not-fit),
-[two-sided](docs/guides/two-sided/full-guide.md#if-the-print-does-not-fit)).
-What to buy is in the **[bill of materials](docs/guides/bom.md)**.
-
-### 3D printing tips
-
-- **Orientation:** print with `Z = 0` flat on the print bed (the flat
-  bottom face) so the plug pocket faces upward. The pocket floors are
-  flat terraces — no supports required.
-- **Two-sided puller:** print the file as exported — both plates lie
-  flat on their outer faces, no supports. After printing, flip one
-  plate over so the two plates meet face to face around the plug.
-- **Layer height:** 0.2 mm gives a clean finish on the pocket walls;
-  0.16 mm sharpens the rim fillets on the 6.35 mm slab.
-- **Infill:** 25–35 % cubic or gyroid is plenty for hand strength. The
-  pull cord, not the slab, takes most of the load.
-- **Walls / perimeters:** 3–4 walls. The zip-tie holes and optional
-  velcro slots cut close to the pocket, so thin walls make those
-  regions fragile.
-- **Material:** PETG is the recommended default — it tolerates the
-  cord-tension fatigue cycle better than PLA and resists outlet heat
-  near a misbehaving plug. ABS / ASA work too. Avoid soft TPU; the
-  device needs to stay rigid for the hook to grip the cord.
-- **Quality slider:** the default `quality = 64` is already
-  print-ready. Drop to `32` for fast previews; push to `96` or `128`
-  only if you specifically need crisp curvature on a very large export.
-
-## How to use it
-
-Each quick start's "Use it" section covers it: seat the one-sided puller
-on the plugged-in plug, hook the cord, put two fingers in the holes and
-pull straight out; the two-sided puller stays on the plug and pulls the
-same way. The safety rules follow it (nothing between the plug face and
-the outlet; pull straight, never lever), and the full guide adds the care
-of the tool. If red text appears beside the part in the preview, the full
-guide's "Red warning tags" section decodes it.
-
-## How to improve this device
-
-The model is built to be changed and checked. Its data files, its tests and
-its scripts are all in the repository:
-
-- **The Customizer schemas:** [`parameter_mapping.json`](parameter_mapping.json)
-  (one-sided, 79 parameters) and
-  [`parameter_mapping_two_sided.json`](parameter_mapping_two_sided.json)
-  (two-sided, 40 parameters) list every name, type, range, step and default;
-  [`dial_catalog.json`](dial_catalog.json) holds every dial's title, sentence
-  and diagram settings, and the diagrams themselves are under
-  [`docs/dials/`](docs/dials/README.md).
-- **The engineering deep-dive:**
-  [`docs/Plug_Puller_Reference.md`](docs/Plug_Puller_Reference.md) (both
-  tools, coordinate frames, the plug side rail, the two-sided plate geometry,
-  CSG order, sizes, the derivation layer, render modes, validation warnings)
-  and the [Design rationale](docs/guides/design-rationale.md) (why each
-  default is what it is).
-- **The scripts:** [`scripts/README.md`](scripts/README.md) lists every
-  build and check script (the release library, the outline sheets, the PDFs,
-  the dial diagrams, the docs gate).
-- **The tests:** `python -m pytest -m "not requires_openscad" -p no:cacheprovider`
-  runs the quick lane; the render lane (`-m requires_openscad`) needs the
-  OpenSCAD 2026.01.03 nightly; CI runs both.
-- **Publishing to MakerWorld:** its Parametric Model Maker runs OpenSCAD
-  files directly. Upload the single-file build of each tool
-  ([`dist/Plug_Puller_SingleFile.scad`](dist/Plug_Puller_SingleFile.scad)
-  and [`dist/Plug_Puller_Two_Sided_SingleFile.scad`](dist/Plug_Puller_Two_Sided_SingleFile.scad));
-  the multi-file `src/` tree will not work there because `include <>` files
-  are not uploaded alongside it. MakerWorld auto-detects a `.scad` upload
-  and adds the **Customize** button; the parameter form mirrors the
-  Customizer sections. Test the customizer behavior first via
-  **Creator Portal → Open SCAD File** before publishing. The listing text
-  is in [`docs/makerworld-listing.md`](docs/makerworld-listing.md), and the
-  user guide that goes with it is
-  [`docs/MAKERWORLD_QUICK_START.md`](docs/MAKERWORLD_QUICK_START.md); both
-  follow the shared
-  [Accessible MakerWorld Documentation Standard](https://github.com/BrennenJohnston/accessible-makerworld-doc-standard/blob/main/ACCESSIBLE_MAKERWORLD_DOC_STANDARD.md).
-  The licensing decision recorded in the listing is made: downloads from
-  MakerWorld use CC BY-NC-SA 4.0, the listing license closest to this
-  repo's PolyForm NC 1.0.0, which still covers the repository itself. The
-  maintainer runs the smoke test and publishes from their own MakerWorld
-  account.
+- **The Customizer schemas:** [`parameter_mapping.json`](parameter_mapping.json) (one-sided, 79 parameters) and [`parameter_mapping_two_sided.json`](parameter_mapping_two_sided.json) (two-sided, 40 parameters) list every name, type, range, step and default; [`dial_catalog.json`](dial_catalog.json) holds every dial's title, sentence and diagram settings, and the diagrams are under [`docs/dials/`](docs/dials/README.md).
+- **The engineering reference:** [`docs/Plug_Puller_Reference.md`](docs/Plug_Puller_Reference.md) (both tools, coordinate frames, the plug side rail, the plate geometry, CSG order, sizes, the derivation layer, render modes, validation warnings) and the [Design Rationale](Documentation/Plug_Puller_Design_Rationale.md) (why each default is what it is).
+- **The scripts:** [`scripts/README.md`](scripts/README.md) lists every build and check script (the release library, the outline sheets, the plug size finder, the PDFs, the dial diagrams, the docs gate).
+- **The tests:** `python -m pytest -m "not requires_openscad" -p no:cacheprovider` runs the quick lane; the render lane (`-m requires_openscad`) needs the OpenSCAD 2026.01.03 nightly; CI runs both.
+- **Publishing to MakerWorld:** its Parametric Model Maker runs one OpenSCAD file without `include` files, so upload the single-file builds in `dist/`, each as its own customizable file, and test them first in the Creator Portal. The listing is [`Documentation/Plug_Puller_MakerWorld_Listing.md`](Documentation/Plug_Puller_MakerWorld_Listing.md), its pictures are in [`MakerWorld_Photos/`](MakerWorld_Photos/README.md). MakerWorld downloads use CC BY-NC-SA 4.0, the listing license closest to this repository's PolyForm Noncommercial 1.0.0; the maintainer publishes from their own account.
+- **Other regions' plugs:** the presets are US (NEMA) plugs; the measured path may suit others, untested.
 
 ### Features
 
 Both tools:
 
-- **Two tools, two files.** The one-sided puller and the two-sided puller
-  share one size table (`src/fit_sizes.scad`); a plug 24 mm thick or more
-  gets a red tag in the one-sided file that points to the two-sided file.
-- **Measurement-first Customizer.** Plug measurements are Step 1 and always
-  active, named for where you take them: the **prong end** and the **cord
-  end**; sizes and attachment are one dropdown each.
-- **Plug quick-select.** `plug_preset` prefills the measured US plug
-  families: the lamp, standard and wide appliance plugs in the one-sided
-  file; the round extension cord, the USB-C laptop tip, the lamp and the
-  standard plug in the two-sided file. `Measure my plug` keeps the sliders
-  authoritative.
-- **See-through plug.** The preview draws a translucent plug built from your
-  numbers in the pocket or between the plates (`show_plug_preview`, on by
-  default), so you can check the fit before printing; it is never exported.
-- **In-model validation.** A red warning tag is printed flat on the bed next
-  to the part when a check trips (one-sided W-1…W-20; two-sided WC-1…WC-13),
-  including hole-collision checks; the messages name the *measurement* to
-  fix; a preview-only green tag confirms your numbers were applied.
-- **Try-before-you-print previews.** [1:1 dimensioned outline sheets](docs/guides/one-sided/full-guide.md#try-it-on-paper-first)
-  for every preset-and-size combination (cut out, hold against the plug, try
-  the finger holes) plus the printable [measuring stencil](Measuring_Stencil.scad)
-  with plug silhouettes, ruler, cord gauge, and finger holes.
+- **Two tools, two files, split by the prong count.** They share one size table (`src/fit_sizes.scad`); a plug 24 mm thick or more gets a red tag in the one-sided file that points to the two-sided file.
+- **Measurement-first Customizer.** Plug measurements are Step 1, named for where you take them: the **prong end** and the **cord end**; sizes and attachment are one dropdown each.
+- **Plug presets.** `plug_preset` fills in a measured plug: the USB-C laptop tip, the lamp plug and the wide appliance plug in the one-sided file; the standard 3-prong plug and the heavy-duty extension cord in the two-sided file. `Measure my plug` keeps the sliders authoritative.
+- **See-through plug.** The preview draws a translucent plug built from your numbers (`show_plug_preview`, on by default), so you can check the fit before printing; it is never exported.
+- **In-model validation.** A red warning tag is printed flat on the bed next to the part when a check trips (one-sided W-1 to W-20; two-sided WC-1 to WC-13), naming the measurement to fix.
+- **Try-before-you-print.** The [plug size finder](docs/guides/plug-size-finder.svg), 1:1 [outline sheets](docs/Plug_Puller_Outline_Sheets.pdf) for every preset and size, and the printable [measuring stencil](Measuring_Stencil.scad).
 
 The one-sided puller:
 
-- **Plug side rail.** The pocket walls, zip stations, and velcro slot follow
-  one rail down the plug's side; the rail's taper angle is derived from the
-  two Step 1 width stations over the plug length, so one taper moves
-  everything coherently.
-- **Organic body.** A rounded organic silhouette reproduced by a fitted
-  octagon + side rounding; crisp plug end, blob-rounded cord end, wider
-  shoulder ears.
-- **Dome plug pocket.** A two-level pocket: a plug-shaped recess plus a
-  deeper circular seat centered on the top edge; the two floor heights are
-  directly settable in Custom.
-- **Finger holes.** A mirrored pair, Ø 25.4 mm at Medium, quarter-round rim
-  fillets on both faces.
-- **Cord J-hook.** A chiral J-hook cord catch: an offset stem, a catch lip
-  that reaches past the stem, and a tip that drops below Y = 0 so a hooked
-  cord cannot back out (`hook_hand` mirrors left/right).
-- **Plug wall notch.** A rounded-corner notch that straddles the outlet wall
-  plate; its depth follows the wall-plate style dropdown.
-- **Zip-tie holes.** A 2×2 grid of Ø 5.08 mm holes, with a top-face
-  countersink flare on the exposed lower row.
-- **Wing velcro slots.** The default `Wing` style: curved triangular cutouts
-  filling the dead space between finger hole, pocket, side edge, and zip
-  holes; `strap_width` is checked against them; a `Classic slot` fallback
-  keeps rectangular slots.
-- **Round-plug retention.** Smooth-sided round plugs are held by the pocket
-  walls plus a zip tie cinched through the existing zip-tie hole grid; fat
-  round plugs are gripped between the two-sided puller's serrated plates.
-- **Auto-fit.** Every feature is bounds-clamped against the body envelope so
-  measured sizes never self-intersect; in Custom mode every clamp is
-  reported in the console (`(clamped from …)`) with a preview HUD notice.
-- **Render mode dispatch.** The file renders the full tool, body only,
-  isolated cutouts, or a 2D cutout overlay.
+- **Plug side rail.** The pocket walls, zip stations, and velcro slot follow one rail down the plug's side; its taper comes from the two width stations over the plug length.
+- **Organic body.** A fitted octagon with side rounding: a crisp plug end, a rounded cord end, wider shoulder ears.
+- **Dome plug pocket.** A plug-shaped recess plus a deeper circular seat centered on the top edge.
+- **Finger holes.** A mirrored pair, Ø 25.4 mm at Medium, with rounded rims.
+- **Cord J-hook.** An offset stem and a catch lip, so a hooked cord cannot back out (`hook_hand` mirrors it).
+- **Plug wall notch.** A notch that straddles the outlet cover plate; its depth follows the wall-plate style, and the USB-C preset takes No plate / flush.
+- **Zip-tie holes and wing openings.** A 2×2 grid of Ø 5.08 mm holes, and curved wing openings for a strap, checked against `strap_width`.
+- **Auto-fit.** Every feature is bounds-clamped against the body, and each clamp is reported in the console.
 
 The two-sided puller:
 
-- **Two identical plates.** Serrated plates that zip-tie face to face around
-  the plug; `print_layout = Both plates` (the default) puts both side by
-  side in one file — flip one after printing.
-- **Rounded or flat sides.** `plug_sides`: `Rounded sides` gives each plate
-  a sloped cradle (`plate_cradle_depth`, 2.5 mm per side, with
-  `plate_grip_clearance` 0.5 mm where the plates meet) that centers a round
-  plug, a USB-C or charger tip; `Flat sides` keeps the edge straight so the
-  teeth bite along a boxy plug's whole side.
-- **Serrated grip.** Teeth along both arms follow the cradle's slope;
-  `plate_grip_bite` tunes the bite for `Flat sides` and the plug presets.
-- **Cord channel.** A channel between the finger holes carries the cord out
-  of the pair.
-- **Finger holes.** Your finger width plus `plate_finger_fit` (1 mm):
-  Ø 17.5 / 21 / 24 mm at Small / Medium / Large.
-- **Zip-tie stations and strap slots.** Zip-tie holes along both arms, and a
-  velcro strap slot in each arm when the plug is long enough (on a short
-  plug it is left out, with an orange preview note).
-- **Plate dials.** `Advanced - Two-Sided Puller`: 26 `plate_*` dials, led by
-  `plate_wall_boost`, which thickens every wall at once.
+- **Two identical plates.** `print_layout = Both plates` (the default) puts both side by side in one file.
+- **A head station.** The gap between the arms keeps the plug's prong-end width along its head, then follows the plug's taper to the cord end.
+- **Rounded or flat sides.** `plug_sides`: `Rounded sides` gives each plate a sloped cradle that centers a round plug; `Flat sides`, which both presets use, keeps the edge straight so the teeth bite along the whole side.
+- **Serrated grip, cord channel, finger holes.** Teeth along both arms, a channel for the cord, finger holes of Ø 17.5 / 21 / 24 mm at Small / Medium / Large.
+- **Zip-tie stations and strap slots.** Three tie stations per arm, and a strap slot in each arm when the plug is long enough.
+- **Plate dials.** `Advanced - Two-Sided Puller`: 26 `plate_*` dials, led by `plate_wall_boost`, which thickens every wall at once.
 
 ### Sizes
 
-Both files read the same Small / Medium / Large finger widths from
-[`src/fit_sizes.scad`](src/fit_sizes.scad). In the one-sided puller,
-all non-Custom sizes route through the measurement derivation layer
-([`src/fit_measured.scad`](src/fit_measured.scad)): the plug
-measurements (or a `plug_preset`) drive the pocket / notch / J-hook, and
-the size picks the hand pair that drives the grip and body envelope. The
-hand pairs are research-grounded (ANSUR II 2012 hand breadth + Rogers 2008
-PIP-joint breadth): Small ≈ 5th %ile female, Large ≈ 95th %ile male.
+Both files read the same Small / Medium / Large finger widths from [`src/fit_sizes.scad`](src/fit_sizes.scad). In the one-sided puller every non-Custom size routes through the measurement derivation layer ([`src/fit_measured.scad`](src/fit_measured.scad)): the plug numbers drive the pocket, notch and hook, and the size picks the hand pair that drives the grip and the body. The pairs come from ANSUR II (2012) hand breadth and Rogers (2008) knuckle breadth: Small ≈ 5th-percentile female hand, Large ≈ 95th-percentile male hand.
 
 | Size | Hand pair (finger / hand) | Body | Notes |
 | ---- | ------------------------- | ---- | ----- |
 | `Small` | 16.5 / 72 mm | ≈ 60 × 65 × 5.4 mm | scaled-down grip |
-| `Medium` | 20 / 85 mm | 81.55 × 65.5 × 6.35 mm (octagon) | **= the reference device** |
+| `Medium` | 20 / 85 mm | 81.55 × 65.5 × 6.35 mm | the reference device |
 | `Large` | 23 / 96 mm | ≈ 78 × 66 × 7.2 mm | scaled-up grip |
 | `Measure my hand` | your two measurements | derived | defaults reproduce Medium exactly |
-| `Custom` | — | sliders | measurements ignored; every slider unlocked |
+| `Custom` | none | sliders | measurements ignored; every slider unlocked |
 
-The two-sided puller uses the finger width only: its finger holes are
-Ø 17.5 / 21 / 24 mm at Small / Medium / Large, `Measure my hand` asks
-for your finger width alone, and there is no `Custom` size.
+The two-sided puller uses the finger width only, and has no `Custom` size.
 
 ### Saved Customizer parameter sets
 
-[`presets/Plug_Puller_Parametric.json`](presets/Plug_Puller_Parametric.json)
-ships example parameter sets for the one-sided puller (snapshots of
-Customizer values):
+[`presets/Plug_Puller_Parametric.json`](presets/Plug_Puller_Parametric.json) ships example sets for the one-sided puller:
 
 | Name in JSON | Loads as | Notes |
 | ------------ | -------- | ----- |
-| `Medium (v6 reference)` | `Medium` | the one-sided reference device, zip ties + wing velcro |
+| `Medium (v6 reference)` | `Medium` | the reference device, zip ties + wing velcro |
+| `USB-C laptop tip` | `plug_preset` | 17 mm long, 10.25 wide, 6.5 thick (estimated), 6.1 mm cord, No plate / flush |
 | `Flat 2-prong lamp plug (NEMA 1-15)` | `plug_preset` | 32.5 mm long, width 20 → 11.1, thickness 18.6 → 8.6 (estimated), 3.6 mm cord |
-| `Standard 3-prong plug (NEMA 5-15)` | `plug_preset` | 46.1 mm long, width 24.66 → 13.6, thickness 18.9 → 15 (estimated), 9.25 mm cord |
 | `Wide 2-prong appliance plug - NEMA 1-15` | `plug_preset` | 38 mm long, 34 wide and 16 thick at both ends, 5 mm cord |
-| `Small hands` / `Large hands` | `Small` / `Large` | ANSUR-II grip scaling |
+| `Small hands` / `Large hands` | `Small` / `Large` | ANSUR II grip scaling |
 | `Measure my plug + hand (US vacuum plug)` | `Measure my hand` | the same plug typed by hand, Decora plate, 22 / 88 mm hand |
 | `Left-handed + classic velcro slots` | `Medium` | `hook_hand = Left`, `velcro_style = Classic slot` |
 
-[`presets/Plug_Puller_Two_Sided.json`](presets/Plug_Puller_Two_Sided.json)
-ships sets for the two-sided puller:
-
-| Name in JSON | Loads as | Notes |
-| ------------ | -------- | ----- |
-| `Round extension cord - NEMA 5-15` | `plug_preset` | the heavy-duty extension-cord plug, Medium, zip ties + velcro strap |
-| `USB-C laptop plug - measured` | `Measure my plug` | 17 mm long, 10.25 mm wide at both ends, 6.1 mm cord, `Rounded sides`, 1.9 mm cradle, zip ties only |
-| `USB-C laptop tip`, `Flat 2-prong lamp plug - NEMA 1-15`, `Standard 3-prong plug - NEMA 5-15` | `plug_preset` | the three presets added after 0.12, Medium |
-
-### Auto-fit and `custom_enable_auto_fit`
-
-Auto-fit clamps geometry into safe ranges (always on for the measured
-sizes, toggleable in Custom). When enabled, feature placement is
-re-derived from the current body envelope. Disable it only when you
-specifically need to push features outside the envelope; the
-**in-model validation warnings** (red text past the plug end) will tell
-you which checks failed.
+[`presets/Plug_Puller_Two_Sided.json`](presets/Plug_Puller_Two_Sided.json) ships `Round extension cord - NEMA 5-15` and `Standard 3-prong plug - NEMA 5-15`, each its preset at Medium.
 
 ### Render modes
 
-The hidden `render_mode` parameter controls which subset of geometry is
-built. In the one-sided file:
-
-| Mode | What it renders |
-| ---- | --------------- |
-| `Full` | The tool: pocketed body + cutouts + warnings |
-| `Body Only` | Pocketed body + cutouts |
-| `Body No Cutouts` | Solid body, no pocket, no holes (debug view) |
-| `Only Finger Holes` / `Only T Hook` / `Only Plug Wall Notch` / `Only Zip Tie Holes` / `Only Velcro Strap Holes` | Plain body + a single feature cutout |
-| `Cutouts Only 2D` | 2D overlay of every cutout + pocket profile (debug) |
-
-In the two-sided file, `Full` builds what Step 4's `print_layout` picks
-(both plates side by side, or one plate) and `One plate` always builds
-a single plate.
+The hidden `render_mode` parameter picks which geometry is built. In the one-sided file: `Full` (the tool with its cutouts and warnings), `Body Only`, `Body No Cutouts`, one `Only …` mode per feature, and `Cutouts Only 2D`. In the two-sided file, `Full` builds what Step 4's `print_layout` picks and `One plate` always builds one plate.
 
 ### Troubleshooting
 
 | Symptom | Likely cause | Where to look |
 | ------- | ------------ | ------------- |
-| Red warning tag lies flat on the bed past the end of the model | One of the in-model validation checks tripped | The tag names the check and the measurement to fix; see Red warning tags in the [one-sided](docs/guides/one-sided/full-guide.md#red-warning-tags) or [two-sided](docs/guides/two-sided/full-guide.md#red-warning-tags) full guide |
-| Red tag `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | The plug is too thick for the one-sided puller's pocket | Open [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad) and fill in its Step 1 |
-| Orange `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE` in the two-sided preview | The plug is too short for a velcro strap slot in the arms; the zip ties still hold the plates | Nothing to fix; or pick `Zip ties` in Step 3 |
-| Green `Medium: …` (or `MEASURED: …`) tag in the preview | Not a problem: preview-only confirmation that your measurements were applied; never in the exported STL | — |
-| Orange `CUSTOM SLIDERS IGNORED - SET SIZE = CUSTOM` tag in the preview | A `custom_*` slider was moved while a non-Custom size is active; those sliders only apply when `size = Custom` | The `size` dropdown (Step 2) |
-| Typed measurements but the model doesn't change | `size` is set to `Custom` — measurements are ignored there. Pick any other size | The `size` dropdown (Step 2) |
-| Sliders ignored | The measured sizes override the custom sliders via the derivation layer (the preview shows the orange HUD tag). Switch `size` to `Custom` | [`src/presets.scad`](src/presets.scad) |
-| Smooth round plug slips out of the pocket | Round cord ends have no shoulders for the notch to catch | Thread a zip tie down one zip-tie hole, around the plug barrel, up the opposite hole, and cinch it |
-| Hand sliders do nothing | `measure_finger_width` / `measure_hand_width` apply only when `size = Measure my hand` | Step 2 of the Customizer |
-| Customizer never shows a slider you expected | Either the parameter lives under `/* [Hidden] */` (e.g. `render_mode`), or you are not in `Custom` size | [`parameter_mapping.json`](parameter_mapping.json) lists every user-facing parameter |
-
-Every warning is also echoed to the console, and in the measured sizes the
-message names the *measurement* to fix. The orange `CUSTOM SLIDERS IGNORED`
-notice lists each ignored slider by name in the console.
+| Red warning tag beside the model | A validation check tripped | The tag names the measurement to fix; see Red warning tags in the [one-sided](docs/guides/one-sided/full-guide.md#red-warning-tags) or [two-sided](docs/guides/two-sided/full-guide.md#red-warning-tags) full guide |
+| Red tag `PLUG THICKER THAN 24MM - USE THE TWO-SIDED PULLER FILE` | Too thick for the one-sided pocket | Open [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad) and fill in its Step 1 |
+| A 3-prong plug slips out of a one-sided puller | 3-prong plugs belong to the two-sided puller | Make a two-sided puller for it |
+| A 2-prong plug or USB-C tip slips out of a two-sided puller | Those plugs belong to the one-sided puller | Make a one-sided puller for it |
+| Orange `STRAP SLOT LEFT OUT - PLUG TOO SHORT FOR ONE` | Too short a plug for a strap slot; the ties still hold | Nothing to fix; or pick `Zip ties` in Step 3 |
+| Typed measurements but the model does not change | `size` is `Custom`, which ignores measurements | Pick another size in Step 2 |
+| Hand sliders do nothing | They apply only when `size = Measure my hand` | Step 2 of the Customizer |
 
 ## Files
 
 ### Documentation
 
-Organized by audience — start in the row that matches you.
+| Document | Version | Link |
+|---|---|---|
+| Step 1, option 1: Browser customizer guide | 1.0 | [Markdown](Documentation/Step_1_Guide_Option_1_Plug_Puller_Browser_Customizer_Guide.md), [PDF](Documentation/Step_1_Guide_Option_1_Plug_Puller_Browser_Customizer_Guide.pdf) |
+| Step 1, option 2: OpenSCAD guide | 1.0 | [Markdown](Documentation/Step_1_Guide_Option_2_Plug_Puller_OpenSCAD_Guide.md), [PDF](Documentation/Step_1_Guide_Option_2_Plug_Puller_OpenSCAD_Guide.pdf) |
+| Step 1, option 3: MakerWorld guide | 1.0 | [Markdown](Documentation/Step_1_Guide_Option_3_Plug_Puller_MakerWorld_Guide.md), [PDF](Documentation/Step_1_Guide_Option_3_Plug_Puller_MakerWorld_Guide.pdf) |
+| Step 2, option 1: Visual assembly guide | 1.0 | [Markdown](Documentation/Step_2_Guide_Option_1_Plug_Puller_Visual_Assembly_Guide.md), [PDF](Documentation/Step_2_Guide_Option_1_Plug_Puller_Visual_Assembly_Guide.pdf) |
+| Step 2, option 2: Assembly guide by touch | 1.0 | [Markdown](Documentation/Step_2_Guide_Option_2_Plug_Puller_Assembly_Guide_By_Touch.md), [PDF](Documentation/Step_2_Guide_Option_2_Plug_Puller_Assembly_Guide_By_Touch.pdf) |
+| Step 2, option 3: Maker guide | 1.0 | [Markdown](Documentation/Step_2_Guide_Option_3_Plug_Puller_Maker_Guide.md), [PDF](Documentation/Step_2_Guide_Option_3_Plug_Puller_Maker_Guide.pdf) |
+| Step 3: User guide | 1.0 | [Markdown](Documentation/Step_3_Guide_Plug_Puller_User_Guide.md), [PDF](Documentation/Step_3_Guide_Plug_Puller_User_Guide.pdf) |
+| Bill of materials | 1.0 | [CSV](Documentation/Plug_Puller_BOM.csv) |
+| Device summary | 1.0 | [Markdown](Documentation/Plug_Puller_Device_Summary.md), [PDF](Documentation/Plug_Puller_Device_Summary.pdf) |
+| Design rationale | 1.0 | [Markdown](Documentation/Plug_Puller_Design_Rationale.md), [PDF](Documentation/Plug_Puller_Design_Rationale.pdf) |
+| Documentation checklist | 1.0 | [Markdown](Documentation/COMPLIANCE_CHECKLIST.md): the seventeen Makers Making Change items |
+| Change log | 1.0 | [CHANGES.txt](CHANGES.txt); the full history is [CHANGELOG.md](CHANGELOG.md) |
 
-For makers and users:
+How the documents are written and checked is in [`Documentation/README.md`](Documentation/README.md); the record of decisions and open questions is in [`NOTES/`](NOTES/00_DECISION_LOG.md).
 
-| Document | Description |
-| -------- | ----------- |
-| [`docs/guides/one-sided/quick-start.md`](docs/guides/one-sided/quick-start.md) | **Start here for a plug up to 24 mm thick.** Measure or match a card, the four steps, print, assemble, use |
-| [`docs/guides/one-sided/full-guide.md`](docs/guides/one-sided/full-guide.md) | Everything about the one-sided puller: every dial with a picture, fit troubleshooting, every warning, the advanced dials |
-| [`docs/guides/two-sided/quick-start.md`](docs/guides/two-sided/quick-start.md) | **Start here for a thicker plug, a USB-C tip or a round cord plug.** The same path for the two-sided puller |
-| [`docs/guides/two-sided/full-guide.md`](docs/guides/two-sided/full-guide.md) | Everything about the two-sided puller |
-| [`docs/Plug_Puller_One_Sided_Quick_Start.pdf`](docs/Plug_Puller_One_Sided_Quick_Start.pdf) | The one-sided quick start to print, with the measuring form and the paper stencil sheets at 1:1 as its last pages |
-| [`docs/Plug_Puller_One_Sided_Full_Guide.pdf`](docs/Plug_Puller_One_Sided_Full_Guide.pdf) | The one-sided full guide to print |
-| [`docs/Plug_Puller_Two_Sided_Quick_Start.pdf`](docs/Plug_Puller_Two_Sided_Quick_Start.pdf) | The two-sided quick start to print, with the form and the stencil sheet |
-| [`docs/Plug_Puller_Two_Sided_Full_Guide.pdf`](docs/Plug_Puller_Two_Sided_Full_Guide.pdf) | The two-sided full guide to print |
-| [`docs/guides/bom.md`](docs/guides/bom.md) | Zip ties, the strap, filament per tool |
-| [`docs/guides/design-rationale.md`](docs/guides/design-rationale.md) | Why each default is what it is, with its number and its source |
-| [`docs/guides/stencil-sheet.svg`](docs/guides/stencil-sheet.svg) | The 1:1 paper stencil sheet on its own: calibration square, P1–P3 plug silhouettes, mm ruler, finger circles |
-| [`docs/guides/stencil-sheet-2.svg`](docs/guides/stencil-sheet-2.svg) | The second stencil page: the P4 wide appliance plug silhouette |
-| [`docs/guides/one-sided/measuring-form.svg`](docs/guides/one-sided/measuring-form.svg) | The one-sided measuring form sheet on its own; its text is in the quick start |
-| [`docs/guides/two-sided/measuring-form.svg`](docs/guides/two-sided/measuring-form.svg) | The two-sided measuring form sheet on its own |
-| [`docs/Plug_Puller_Outline_Sheets.pdf`](docs/Plug_Puller_Outline_Sheets.pdf) | Every 1:1 outline sheet in one printable PDF with a cover index |
-| [`docs/guides/source/`](docs/guides/source) | The hand-written text of the four guides, one topic per file; edit here, then rebuild |
+Each tool also has its own quick start and full guide, as pages and printable PDFs, with the plug size finder, the measuring form and the paper stencil sheet at true size as their last pages:
 
-For power users (the Advanced and Custom tiers):
+| Tool | Quick start | Full guide |
+| ---- | ----------- | ---------- |
+| One-sided puller | [page](docs/guides/one-sided/quick-start.md), [PDF](docs/Plug_Puller_One_Sided_Quick_Start.pdf) | [page](docs/guides/one-sided/full-guide.md), [PDF](docs/Plug_Puller_One_Sided_Full_Guide.pdf) |
+| Two-sided puller | [page](docs/guides/two-sided/quick-start.md), [PDF](docs/Plug_Puller_Two_Sided_Quick_Start.pdf) | [page](docs/guides/two-sided/full-guide.md), [PDF](docs/Plug_Puller_Two_Sided_Full_Guide.pdf) |
 
-| Document | Description |
-| -------- | ----------- |
-| [Advanced settings, one-sided](docs/guides/one-sided/full-guide.md#advanced-settings) and [two-sided](docs/guides/two-sided/full-guide.md#advanced-settings) | The advanced dials explained, Custom size (one-sided), saved settings, the command line; render modes and console diagnostics are in the reference |
-| [`parameter_mapping.json`](parameter_mapping.json) | Machine-readable Customizer schema of the one-sided puller (79 parameters) |
-| [`parameter_mapping_two_sided.json`](parameter_mapping_two_sided.json) | The same for the two-sided puller (40 parameters) |
-| [`dial_catalog.json`](dial_catalog.json) | Every dial's title, sentence and diagram settings; the source of `docs/dials/` and the dial reference |
+The sheets on their own: the [plug size finder](docs/guides/plug-size-finder.svg), the measuring forms ([one-sided](docs/guides/one-sided/measuring-form.svg), [two-sided](docs/guides/two-sided/measuring-form.svg)), the [paper stencil sheet](docs/guides/stencil-sheet.svg) and every [1:1 outline sheet](docs/Plug_Puller_Outline_Sheets.pdf). The hand-written text of the per-tool guides is in [`docs/guides/source/`](docs/guides/source), one topic per file; edit there, then rebuild.
 
-For contributors and engineers:
+### Design Files
 
-| Document | Description |
-| -------- | ----------- |
-| [`docs/Plug_Puller_Reference.md`](docs/Plug_Puller_Reference.md) | Exhaustive reference: both tools, coordinate frames, the plug side rail, the plate geometry, CSG order, sizes, derivation layer, render modes, warnings |
-| [`docs/makerworld-listing.md`](docs/makerworld-listing.md) | The MakerWorld listing text |
-| [`docs/MAKERWORLD_QUICK_START.md`](docs/MAKERWORLD_QUICK_START.md) | The user guide that goes with the listing |
-| [`docs/guides/describing-pictures.md`](docs/guides/describing-pictures.md) | How every picture's alt text and long description are written, with the sources |
-| [`scripts/README.md`](scripts/README.md) | Every build and check script |
-| [`CHANGELOG.md`](CHANGELOG.md) | Keep-a-Changelog release history |
-| [`okh.yml`](okh.yml) | The Open Know-How manifest |
-
-### Design files
-
-- [`src/Plug_Puller_Parametric.scad`](src/Plug_Puller_Parametric.scad): the one-sided puller, open this in OpenSCAD.
-- [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad): the two-sided puller, open this in OpenSCAD.
+- [`src/Plug_Puller_Parametric.scad`](src/Plug_Puller_Parametric.scad): the one-sided puller; open this in OpenSCAD.
+- [`src/Plug_Puller_Two_Sided.scad`](src/Plug_Puller_Two_Sided.scad): the two-sided puller; open this in OpenSCAD.
 - [`src/fit_sizes.scad`](src/fit_sizes.scad), [`src/presets.scad`](src/presets.scad), [`src/fit_measured.scad`](src/fit_measured.scad): the shared size table, the Medium reference table and routing, and the measurement-to-parameter derivations (one-sided).
-- [`Measuring_Stencil.scad`](Measuring_Stencil.scad): the standalone printable measuring stencil.
-
-### Build files
-
-- [`stl/`](stl): the ready-to-print library (see [`stl/README.md`](stl/README.md)): `Plug-Puller/` holds 21 tools (the presets of both files at three hand sizes; both plates per two-sided file), `Measuring-Stencil/` the sizing cards in Visual and Tactile label modes.
-- [`dist/`](dist): the single-file builds of both pullers for MakerWorld and the web customizer.
+- [`Measuring_Stencil.scad`](Measuring_Stencil.scad): the printable measuring stencil.
+- [`dist/`](dist): the single-file builds of both pullers for MakerWorld and the browser, generated by `scripts/build_flattened.py`.
 - [`presets/`](presets): example saved Customizer parameter sets for both files.
-- [`docs/dials/`](docs/dials/README.md): a diagram per dial, and their index.
 
-Repository layout:
+OpenSCAD writes no STEP file; the parametric sources are the design files.
 
-```
-openscad-plug-puller/
-  Measuring_Stencil.scad           # standalone printable measuring stencil
-  okh.yml                          # Open Know-How manifest
-  src/
-    Plug_Puller_Parametric.scad    # the one-sided puller — open this in OpenSCAD
-    Plug_Puller_Two_Sided.scad     # the two-sided puller — open this in OpenSCAD
-    fit_sizes.scad                 # Small / Medium / Large size table, shared by both files
-    presets.scad                   # PRESET_MEDIUM reference table + routing (one-sided)
-    fit_measured.scad              # measurement -> parameter derivations (one-sided)
-  dist/
-    Plug_Puller_SingleFile.scad    # one-sided single-file build (MakerWorld / web)
-    Plug_Puller_Two_Sided_SingleFile.scad  # two-sided single-file build (MakerWorld / web)
-  presets/
-    Plug_Puller_Parametric.json    # example saved Customizer parameter sets (one-sided)
-    Plug_Puller_Two_Sided.json     # example saved Customizer parameter sets (two-sided)
-  stl/                             # ready-to-print library (see stl/README.md)
-    Plug-Puller/                   # 21 tools: the presets of both files at three sizes
-    Measuring-Stencil/             # sizing cards, in Visual/ and Tactile/ label modes
-  docs/
-    Plug_Puller_Reference.md       # exhaustive engineering reference
-    Plug_Puller_One_Sided_Quick_Start.pdf  # the one-sided quick start, with the form and the stencil sheets
-    Plug_Puller_One_Sided_Full_Guide.pdf   # the one-sided full guide
-    Plug_Puller_Two_Sided_Quick_Start.pdf  # the two-sided quick start
-    Plug_Puller_Two_Sided_Full_Guide.pdf   # the two-sided full guide
-    Plug_Puller_Outline_Sheets.pdf # every 1:1 outline sheet as one printable PDF
-    guides/                        # the BOM, the rationale, the paper stencil sheets, how the pictures are described
-      source/                      # the hand-written text of the guides, one topic per file
-      one-sided/                   # the one-sided quick start and full guide pages, and its form sheet
-      two-sided/                   # the two-sided quick start and full guide pages, and its form sheet
-      outline-sheets/              # printable 1:1 outline sheets (one per preset-and-size combination)
-    dials/                         # a diagram per dial, their index and README
-    images/                        # guide photos and model preview renders
-  dial_catalog.json                # every dial's title, sentence and diagram settings
-  parameter_mapping.json           # one-sided Customizer schema (79 parameters)
-  parameter_mapping_two_sided.json # two-sided Customizer schema (40 parameters)
-  CHANGELOG.md
-  LICENSE                          # PolyForm Noncommercial 1.0.0
-```
+### Build Files
+
+- [`stl/`](stl/README.md): the ready-to-print library: `Plug-Puller/` holds 15 tools (every preset of its tool at three hand sizes; both plates per two-sided file), `Measuring-Stencil/` the sizing cards in Visual and Tactile label modes.
+
+### Video Tutorials
+
+No video is published with this release; the written guides stand on their own.
 
 ## License
 
-[PolyForm Noncommercial 1.0.0](LICENSE). Personal, hobby, educational,
-research, and other noncommercial use is permitted. Contact the
-maintainer for commercial use.
+Copyright (c) 2026 Brennen Johnston.
+
+[PolyForm Noncommercial 1.0.0](LICENSE) (also in [`LICENSES/`](LICENSES)): personal, hobby, educational, research, and other noncommercial use is permitted. Contact the maintainer for commercial use. Downloads from MakerWorld are under CC BY-NC-SA 4.0.
 
 ## Attribution
 
-- The repository structure and the documentation set follow the
-  [OpenAT Template](https://github.com/makersmakingchange/OpenAT-Template)
-  by Makers Making Change.
-- [`braille-stl-generator-openscad`](https://github.com/BrennenJohnston/braille-stl-generator-openscad) — sibling parametric OpenSCAD project; the pipeline conventions (presets.scad, in-model warnings) used here were adapted from it.
-- The hand sizes come from the ANSUR II (2012) hand breadth survey and
-  Rogers (2008) knuckle breadth; the documentation is written to the
-  [Accessible MakerWorld Documentation Standard](https://github.com/BrennenJohnston/accessible-makerworld-doc-standard/blob/main/ACCESSIBLE_MAKERWORLD_DOC_STANDARD.md).
+The device was designed by Brennen Johnston. The hand sizes come from the ANSUR II (2012) hand breadth survey and Rogers (2008) knuckle breadth. The pipeline conventions (presets, in-model warnings) were adapted from the sibling project [`braille-stl-generator-openscad`](https://github.com/BrennenJohnston/braille-stl-generator-openscad). The documentation is written to the Accessible Open AT Documentation Standard and the [Accessible MakerWorld Documentation Standard](https://github.com/BrennenJohnston/accessible-makerworld-doc-standard/blob/main/ACCESSIBLE_MAKERWORLD_DOC_STANDARD.md).
+
+The project was made possible with support from the [Washington Assistive Technology Act Program (WATAP)](https://watap.org/) and the [University of Washington Center for Research and Education on Accessible Technology and Experiences (UW CREATE)](https://create.uw.edu/).
+
+The documentation template was created by Makers Making Change / Neil Squire Society and is used under a CC BY-SA 4.0 license. It is available at: [https://github.com/makersmakingchange/OpenAT-Template](https://github.com/makersmakingchange/OpenAT-Template)
+
+### Contributors
+
+Designers:
+- Brennen Johnston
+
+Testers:
+- Brennen Johnston
+
+<!-- ABOUT MMC START -->
+## About Makers Making Change
+[<img src="https://raw.githubusercontent.com/makersmakingchange/makersmakingchange/main/img/mmc_logo.svg" width="500" alt="Makers Making Change Logo">](https://www.makersmakingchange.com/)
+
+Makers Making Change is a program of [Neil Squire](https://www.neilsquire.ca/), a Canadian non-profit that uses technology, knowledge, and passion to empower people with disabilities.
+
+Makers Making Change leverages the capacity of community based Makers, Disability Professionals and Volunteers to develop and deliver affordable Open Source Assistive Technologies.
+
+ - Website: [www.MakersMakingChange.com](https://www.makersmakingchange.com/)
+ - GitHub: [makersmakingchange](https://github.com/makersmakingchange)
+ - Bluesky: [@makersmakingchange.bsky.social](https://bsky.app/profile/makersmakingchange.bsky.social)
+ - Instagram: [@makersmakingchange](https://www.instagram.com/makersmakingchange)
+ - Facebook: [makersmakechange](https://www.facebook.com/makersmakechange)
+ - LinkedIn: [Neil Squire Society](https://www.linkedin.com/company/neil-squire-society/)
+ - Thingiverse: [makersmakingchange](https://www.thingiverse.com/makersmakingchange/about)
+ - Printables: [MakersMakingChange](https://www.printables.com/@MakersMakingChange)
+
+### Contact Us
+For technical questions, to get involved, or to share your experience we encourage you to [visit our website](https://www.makersmakingchange.com/) or [contact us](https://www.makersmakingchange.com/s/contact).
+<!-- ABOUT MMC END -->

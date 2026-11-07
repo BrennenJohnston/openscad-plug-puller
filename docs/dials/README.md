@@ -18,11 +18,11 @@ Five stages of the one-sided puller, left to right, the top row first, the plug 
 
 `plug_preset`: Plug preset
 
-![Plug preset: before and after, Measure my plug to Standard 3-prong plug - NEMA 5-15; red marks 7 parts, named below.](one-sided/plug_preset.svg)
+![Plug preset: before and after, Measure my plug to Flat 2-prong lamp plug - NEMA 1-15; red marks 5 parts, named below.](one-sided/plug_preset.svg)
 
-Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug preset set to Standard 3-prong plug - NEMA 5-15. Marked in red: 1, the zip-tie holes, the finger holes, the wing openings, the wall notch, the seat, the pocket and the body edge.
+Two top views of the one-sided puller, before left and after right, the plug end at the top. Left: the defaults, a 25 mm wide plug in teal. Right: plug preset set to Flat 2-prong lamp plug - NEMA 1-15. Marked in red: 1, the zip-tie holes: the four small holes beside the pocket. 2, the finger holes: the two large holes in the lower half. 3, the zip-tie holes, the wing openings, the wall notch and the body edge.
 
-Before: Measure my plug. After: Standard 3-prong plug - NEMA 5-15. Moves: body edge, finger holes, pocket, seat, wall notch, wing openings, zip-tie holes.
+Before: Measure my plug. After: Flat 2-prong lamp plug - NEMA 1-15. Moves: body edge, finger holes, wall notch, wing openings, zip-tie holes.
 
 `measure_plug_length`: Plug length
 
@@ -682,9 +682,9 @@ Before: 0. After: 2. Context: `size` = Custom. Section at x = 4.5 mm. Moves: hoo
 
 ### The four steps
 
-![The two-sided puller, the four Customizer steps on a USB-C laptop plug, five stages left to right.](two-sided/storyboard.svg)
+![The two-sided puller, the four Customizer steps on a standard 3-prong plug, five stages left to right.](two-sided/storyboard.svg)
 
-Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. Step 1 - Your Plug: plug preset USB-C laptop tip; red on the arms, the finger lobes and the zip stations. Step 2 - Size: hand size Large; red on the arms, the finger lobes and the zip stations. Step 3 - Attachment: attachment Zip ties; no strap slot on a plug this short, so nothing moved. Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
+Five stages of the two-sided puller, left to right, the top row first, the plug end at the top; arrows numbered 1 to 4 show the steps, and red dashes mark the edges each step moved. Start, the defaults: the tool as the file opens, with a 20 mm wide plug in teal. Step 1 - Your Plug: plug preset Standard 3-prong plug - NEMA 5-15; red on the arms, the finger lobes, the plate edge, the strap slot and the zip stations. Step 2 - Size: hand size Large; red on the arms, the finger lobes, the strap slot, the teeth and the zip stations. Step 3 - Attachment: attachment Zip ties; red on the arms and the zip stations; the strap slot removed, drawn in red from the old outline. Step 4 - Print Layout: both plates side by side in one file, what you print; nothing marked.
 
 ### Step 1 - Your Plug
 

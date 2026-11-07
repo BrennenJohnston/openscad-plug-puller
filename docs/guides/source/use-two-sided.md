@@ -12,5 +12,3 @@ The pictures show a two-sided puller and its plug seated in an outlet, ready to 
 ![The two-sided puller and its orange extension-cord plug seated in a wall outlet, ready to be pulled, no hand on it yet.](../../images/two-sided-in-use-outlet-1.jpg)
 
 ![A gloved hand pulling the two-sided puller and its orange extension-cord plug straight out of a wall outlet, two fingers through the holes.](../../images/two-sided-in-use-outlet.jpg)
-
-A two-sided puller on a USB-C laptop tip works the same way, pulling the tip out of the laptop instead of a wall.

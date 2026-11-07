@@ -1,0 +1,14 @@
+{
+  "pdf": "Documentation/Step_1_Guide_Option_3_Plug_Puller_MakerWorld_Guide.pdf",
+  "pdf_sha256": "dafe973b1f7cb86b329961d12adb7712a47ad3ae1be66f814aed5452e830632d",
+  "inputs": {
+    "Documentation/Step_1_Guide_Option_3_Plug_Puller_MakerWorld_Guide.md": "e8ec171cfad2a66ae91136c633f7e7993a60f0a31fe10cd58e6a6eb21a7bf3c3",
+    "scripts/build_open_at_pdf.py": "272c366f54493dfd1b99eb65bc52c397f9c5b4a4d1a88e4a9fca0959dbaff5ae"
+  },
+  "pages": 4,
+  "bookmarks": 10,
+  "links": 16,
+  "pictures": 0,
+  "captions": 0,
+  "producer": "Skia/PDF m156"
+}

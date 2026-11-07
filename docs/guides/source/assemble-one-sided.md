@@ -8,9 +8,7 @@ The tool goes onto the plug while the plug is in the outlet. You need two zip ti
 4. Pass the tie around the plug body and up through the hole on the other side of the pocket.
 5. Pull the tie tight and cut off the tail.
 6. Fit the second zip tie through the other pair of holes the same way.
-7. Instead of the ties, or as well: thread the strap through the two wing openings and around the plug, and close it. The picture shows a strap holding the tool on a three-prong plug.
-
-   ![The one-sided puller at Medium size held on a black three-prong plug by a strap through its wing openings, on the printer bed beside a printed hand model for scale.](../../images/one-sided-3-prong-plug-medium.jpg)
+7. Instead of the ties, or as well: thread the strap through the two wing openings and around the plug, and close it.
 
 The tool can stay on the plug between uses. The pictures below show the finished one-sided puller strapped to a lamp plug at Small, Medium and Large, next to a printed hand for scale.
 

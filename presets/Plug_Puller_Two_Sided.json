@@ -7,29 +7,6 @@
             "attachment": "Zip ties + Velcro strap",
             "quality": "64"
         },
-        "USB-C laptop plug - measured": {
-            "plug_preset": "Measure my plug",
-            "measure_plug_length": "17",
-            "measure_plug_width_prong_end": "10.25",
-            "measure_plug_head_length": "0",
-            "measure_plug_width_cord_end": "10.25",
-            "measure_cord_thickness": "6.1",
-            "plug_sides": "Rounded sides",
-            "plate_cradle_depth": "1.9",
-            "size": "Medium",
-            "attachment": "Zip ties",
-            "quality": "64"
-        },
-        "USB-C laptop tip": {
-            "plug_preset": "USB-C laptop tip",
-            "size": "Medium",
-            "quality": "64"
-        },
-        "Flat 2-prong lamp plug - NEMA 1-15": {
-            "plug_preset": "Flat 2-prong lamp plug - NEMA 1-15",
-            "size": "Medium",
-            "quality": "64"
-        },
         "Standard 3-prong plug - NEMA 5-15": {
             "plug_preset": "Standard 3-prong plug - NEMA 5-15",
             "size": "Medium",

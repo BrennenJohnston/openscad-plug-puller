@@ -14,8 +14,15 @@ number in a red circle at the line. The page builder is the outline sheets'
 ``Sheet`` class (its dimension lines and leaders); the halo texts are drawn as
 a separate white text underneath so that every SVG rasterizer shows them.
 
-The form's text is built from the same data, the rows as a table, then what
-the sheet shows, one line per numbered arrow; ``build_sheet`` returns it and
+Above the rows, a "Start here" box asks the two questions that come before
+any measuring: how many prongs the plug has (which sends a 3-prong plug to
+the two-sided puller's form and a 2-prong plug or a USB-C tip to the
+one-sided puller's), and which outline on the plug size finder page
+(``scripts/generate_plug_finder.py``) is closest, with a blank for the
+preset's name.
+
+The form's text is built from the same data, the Start here questions, the
+rows as a table, then what the sheet shows, one line per numbered arrow; ``build_sheet`` returns it and
 ``scripts/build_dial_reference.py`` places it in each tool's quick start and
 full guide, under "The measuring form".
 
@@ -62,11 +69,13 @@ TEAL = "#20b2aa"
 TEAL_OPACITY = 0.45
 GRAY = "#555555"
 
-# The left column: rows of 12 mm from y = 34; a dropdown whose boxes need more
-# than one line grows by LINE_H per extra line.
+# The left column: the Start here box from y = 28.5 to START_BOTTOM, then
+# rows of 12 mm from ROW_TOP; a dropdown whose boxes need more than one line
+# grows by LINE_H per extra line.
 COL_X0, COL_X1 = 12.0, 96.0
 CONTENT_X = 19.0
-ROW_TOP = 34.0
+START_TOP, START_BOTTOM = 28.5, 44.5
+ROW_TOP = 46.0
 ROW_H = 12.0
 LINE_H = 3.2
 BOX = 3.0
@@ -79,6 +88,9 @@ LEADER_X = COL_X1 + 2.0
 # The right half: the schematic in page millimetres.
 SCALE = 1.5
 SCH_X0 = 110.0
+# The schematic sits this far below where it sat before the Start here box,
+# so the leaders keep their old slopes.
+SCH_DY = 10.0
 CIRCLE_D = 3.0
 # The two-sided top view's shape: the defaults are one width from end to end,
 # so the head and the narrower cord end are drawn as these shares of the
@@ -87,6 +99,15 @@ HEAD_SHARE = 0.45
 CORD_END_SHARE = 0.6
 FOOTER_Y = 262.0
 HEADER_LINE = "Measure in mm. Fill in the blanks top to bottom, then type them into the Customizer in the same order."
+# The Start here box: the prong count picks the tool, the plug size finder
+# picks the preset.
+OTHER_TOOL = {"one-sided": "two-sided", "two-sided": "one-sided"}
+PRONG_CHOICES = {
+    "one-sided": ("2 prongs or USB-C tip: this form", "3 prongs: two-sided form"),
+    "two-sided": ("3 prongs: this form", "2 prongs or USB-C tip: one-sided form"),
+}
+FINDER_BLANK = "Closest outline on the plug size finder:"
+FINDER_HINT = "Found one? Tick it in row 1 and skip the plug numbers."
 TWIN_INTRO = ("Everything on this sheet is in mm. Fill in the blanks top to bottom, then type the numbers into the "
               "Customizer in the same order. Print the sheet at 100 % and check the 50 mm bar with a ruler.")
 
@@ -226,6 +247,26 @@ def row_height(row: Dict[str, Any]) -> float:
 # ---------------------------------------------------------------------------
 
 
+def draw_start_box(sh: FormSheet, tool: str) -> None:
+    """The two questions before any measuring: the prong count, which sends
+    the plug to the right tool's form, and the closest outline on the plug
+    size finder."""
+    sh.rrect(COL_X0, START_TOP, COL_X1 - COL_X0, START_BOTTOM - START_TOP, 1.5, 0.35)
+    sh.text(COL_X0 + 2.0, START_TOP + 3.8, "Start here: which tool, which preset", NAME_SIZE, "bold")
+    y = START_TOP + 7.6
+    x = COL_X0 + 2.0
+    for choice in PRONG_CHOICES[tool]:
+        sh.rect(x, y - 2.7, BOX, BOX, 0.3)
+        sh.text(x + BOX + 1.0, y - 0.35, choice, OPTION_SIZE, "bold" if "this form" in choice else "normal")
+        x += BOX + 1.0 + text_width(choice, OPTION_SIZE) + 3.5
+    assert x - 3.5 <= COL_X1, f"{tool}: the prong choices run past the column"
+    y += 3.6
+    sh.text(COL_X0 + 2.0, y, FINDER_BLANK, TITLE_SIZE)
+    x_blank = COL_X0 + 2.0 + text_width(FINDER_BLANK, TITLE_SIZE) + 1.5
+    sh.line(x_blank, y + 0.4, COL_X1 - 2.0, y + 0.4, 0.3)
+    sh.text(COL_X0 + 2.0, y + 3.2, FINDER_HINT, OPTION_SIZE, fill=GRAY)
+
+
 def draw_row(sh: FormSheet, k: int, y0: float, row: Dict[str, Any], title: str,
              measure: Optional[Dict[str, Any]]) -> Optional[Tuple[float, float]]:
     """Draw one row at its top y0; return the leader's start point for a
@@ -307,7 +348,7 @@ class Schematic:
         cord = d["measure_cord_thickness"] * SCALE
         x0, x1 = SCH_X0, SCH_X0 + L
         # The top view, the plug lying with its prong end at the left against the wall plate.
-        ty0, ty1 = 46.0, 46.0 + W
+        ty0, ty1 = 46.0 + SCH_DY, 46.0 + SCH_DY + W
         cy = (ty0 + ty1) / 2
         headed = self.tool == "two-sided"
         if headed:
@@ -345,7 +386,7 @@ class Schematic:
         if "measure_plug_thickness_prong_end" in d:
             # The side view stands with its prong end up, to the right, below the top view.
             T = d["measure_plug_thickness_prong_end"] * SCALE
-            sx0, sy0 = 165.0, 104.0
+            sx0, sy0 = 165.0, 104.0 + SCH_DY
             sx1, sy1 = sx0 + T, sy0 + L
             self.body(sx0, sy0, sx1, sy1)
             sh.line(sx0 - 3.0, sy0, sx1 + 3.0, sy0, 0.5)
@@ -357,11 +398,11 @@ class Schematic:
             self.dims["plug_thickness_cord_end"] = ("h", sx0, sx1, sy1 + 5.0, sy1)
             self.circles["plug_thickness_cord_end"] = (sx0 - 3.2, sy1 + 5.0)
             self.words["plug_thickness_cord_end"] = "the plug's thickness at the cord end, the bottom of the side view"
-            cord_c = (190.0, 158.0)
-            bar_y = 174.0
+            cord_c = (190.0, 158.0 + SCH_DY)
+            bar_y = 174.0 + SCH_DY
         else:
-            cord_c = (190.0, 100.0)
-            bar_y = 120.0
+            cord_c = (190.0, 100.0 + SCH_DY)
+            bar_y = 120.0 + SCH_DY
         # The cord's end, a circle.
         cx, cyc = cord_c
         sh.circle(cx, cyc, cord, 0.35, fill=TEAL, opacity=TEAL_OPACITY)
@@ -475,6 +516,7 @@ def build_sheet(tool: str, catalog: Dict[Tuple[str, str], Dict[str, Any]]) -> Tu
     sh.line(150.0, 22.0, 150.0, 25.6, 0.35)
     sh.line(200.0, 22.0, 200.0, 25.6, 0.35)
     sh.text(175.0, 21.6, "50 mm", 2.6, anchor="middle")
+    draw_start_box(sh, tool)
     # The schematic first, so the dimension lines exist before the leaders.
     schematic = Schematic(sh, tool, defaults)
     schematic.draw()
@@ -524,12 +566,19 @@ def build_sheet(tool: str, catalog: Dict[Tuple[str, str], Dict[str, Any]]) -> Tu
 
 def build_twin(tool: str, table: List[Dict[str, Any]], anchors: Dict[int, str], schematic: Schematic) -> str:
     words = TOOL_WORDS[tool]
-    out = ["| # | Customizer name | What you measure | Default | Yours |", "|---|---|---|---|---|"]
+    here, other = PRONG_CHOICES[tool]
+    out = [f"**Start here.** Two tick boxes ask how many prongs the plug has: \"{here}\" or \"{other}\". "
+           f"Then a blank: \"{FINDER_BLANK}\" Lay the plug on the plug size finder page; when an outline in "
+           f"this tool's group matches, write its preset there, tick that preset in row 1 and skip the plug "
+           f"numbers. Otherwise fill in every row.",
+           "",
+           "| # | Customizer name | What you measure | Default | Yours |", "|---|---|---|---|---|"]
     for t in table:
         out.append(f"| {t['k']} | `{t['row']['openscad_name']}` | {cell_text(t['row'], t['title'], t['measure'])} | "
                    f"{default_text(t['row'])} | ________ |")
     out += ["",
-            "**What the sheet shows.** The left column is the numbered list above, one row per dial in the Customizer's "
+            "**What the sheet shows.** Under the title, the Start here box holds the two prong tick boxes and the "
+            "finder blank. Below it, the left column is the numbered list above, one row per dial in the Customizer's "
             "Step order, each with the dial's name, its plain title and either a blank after the default or a tick box "
             "per choice with the default marked. The right half is a schematic plug in teal "
             + (f"drawn from the {words}'s defaults at 1.5 to 1, " if tool == "one-sided" else

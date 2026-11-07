@@ -27,3 +27,13 @@ networkx>=3
 
 # --- Linters used in CI's quick lane (.github/workflows/stl-validation.yml) --
 ruff>=0.4
+
+# --- Local lane: the documentation scripts (not run in CI) -------------------
+# Pillow: scripts/photo_import.py, makerworld_photos.py, forge_screenshots.py.
+# pypdf: scripts/build_open_at_pdf.py's fitting pass, pdf_structure_report.py.
+# python-docx: scripts/makerworld_listing_docx.py.
+# playwright: scripts/forge_screenshots.py (with Microsoft Edge installed).
+Pillow>=10
+pypdf>=4
+python-docx>=1
+playwright>=1.40

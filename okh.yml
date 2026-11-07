@@ -7,7 +7,7 @@ okhv: OKH-LOSHv1.0
 
 name: "Plug Puller: parametric assistive plug remover"
 repo: https://github.com/BrennenJohnston/openscad-plug-puller
-version: 0.14.0
+version: 1.0.0
 license:
   hardware: PolyForm-Noncommercial-1.0.0
   documentation: PolyForm-Noncommercial-1.0.0
@@ -16,19 +16,21 @@ licensor:
   name: Brennen Johnston
 documentation-language: en-US
 date-created: 2026-07-22
-date-updated: 2026-09-27
+date-updated: 2026-10-27
 function: |
-  A handheld 3D-printed tool for pulling an electrical plug out of a wall outlet with a whole
+  A handheld 3D-printed tool for pulling an electrical plug out of an outlet with the whole
   hand instead of a fingertip pinch, for anyone with arthritis, low grip strength, tremor,
   a small hand or one hand. Two finger holes take the pull; the tool grips only the plug's
-  sides and back, never the outlet. It is parametric: type a few ruler measurements of your
-  plug and your hand into the OpenSCAD Customizer form, or pick a measured plug preset, and
-  the tool is shaped to them. A plug up to 24 mm thick gets the one-sided puller, a single
-  printed part with a plug pocket, two finger holes and a cord hook; a thicker plug, a USB-C
-  tip or a round cord plug gets the two-sided puller, two identical plates that zip-tie
-  face to face around the plug. A red tag printed beside the part reports a measurement
-  that cannot work. Ready-to-print STLs cover the common US plug families at three hand
-  sizes, and a printable measuring stencil finds the numbers by matching shapes.
+  sides and back, never the outlet, and stays on its plug. It is parametric: pick a measured
+  plug preset or type the plug's and the hand's measurements into the OpenSCAD Customizer
+  form, and the tool is shaped to them. The tool is chosen by counting the plug's prongs: a
+  plug with 2 prongs or a USB-C tip gets the one-sided puller, a single printed part with a
+  plug pocket, two finger holes and a cord hook; a plug with 3 prongs, or any plug 24 mm
+  thick or more, gets the two-sided puller, two identical toothed plates that zip-tie face
+  to face around the plug. Each tool is its own file. A red tag printed beside the part
+  reports a measurement that cannot work. Ready-to-print STLs cover every preset at three
+  hand sizes, a one-page plug size finder matches a plug to its preset at true size, and a
+  printable measuring stencil finds the numbers by matching shapes.
 
 documentation-readiness-level: ODRL-3
 technology-readiness-level: OTRL-4
@@ -36,27 +38,37 @@ technology-readiness-level: OTRL-4
 documentation-home: https://github.com/BrennenJohnston/openscad-plug-puller#readme
 archive-download: https://github.com/BrennenJohnston/openscad-plug-puller/releases
 
-bom: ./docs/guides/bom.md
+bom: ./Documentation/Plug_Puller_BOM.csv
+manufacturing-instructions: ./Documentation/Step_2_Guide_Option_3_Plug_Puller_Maker_Guide.pdf
+user-manual: ./Documentation/Step_3_Guide_Plug_Puller_User_Guide.pdf
 making-instructions:
-  - path: ./docs/guides/one-sided/quick-start.md
-    title: The one-sided puller's quick start, get the file, measure, the four steps, print, assemble, use
-  - path: ./docs/guides/two-sided/quick-start.md
-    title: The two-sided puller's quick start, the same path for the two-sided puller
+  - path: ./Documentation/Step_1_Guide_Option_1_Plug_Puller_Browser_Customizer_Guide.md
+    title: Step 1, option 1, making the tool in the browser (also as PDF)
+  - path: ./Documentation/Step_1_Guide_Option_2_Plug_Puller_OpenSCAD_Guide.md
+    title: Step 1, option 2, making the tool in the OpenSCAD desktop program (also as PDF)
+  - path: ./Documentation/Step_1_Guide_Option_3_Plug_Puller_MakerWorld_Guide.md
+    title: Step 1, option 3, making the tool in MakerWorld's customizer (also as PDF)
+  - path: ./Documentation/Step_2_Guide_Option_1_Plug_Puller_Visual_Assembly_Guide.md
+    title: Step 2, option 1, the visual assembly guide (also as PDF)
+  - path: ./Documentation/Step_2_Guide_Option_2_Plug_Puller_Assembly_Guide_By_Touch.md
+    title: Step 2, option 2, the assembly guide by touch (also as PDF)
+  - path: ./Documentation/Step_2_Guide_Option_3_Plug_Puller_Maker_Guide.md
+    title: Step 2, option 3, the maker guide (also as PDF)
   - path: ./docs/Plug_Puller_One_Sided_Quick_Start.pdf
-    title: The one-sided quick start to print, with the measuring form and the paper stencil sheets at true size
+    title: The one-sided quick start, with the plug size finder, the measuring form and the paper stencil sheet at true size
   - path: ./docs/Plug_Puller_Two_Sided_Quick_Start.pdf
-    title: The two-sided quick start to print, with the measuring form and the paper stencil sheet at true size
+    title: The two-sided quick start, with the plug size finder, the measuring form and the paper stencil sheet at true size
   - path: ./docs/Plug_Puller_One_Sided_Full_Guide.pdf
     title: The one-sided full guide, every dial with a picture, fit troubleshooting, every warning, the advanced dials
   - path: ./docs/Plug_Puller_Two_Sided_Full_Guide.pdf
     title: The two-sided full guide, every dial with a picture, fit troubleshooting, every warning, the advanced dials
+  - path: ./Documentation/Plug_Puller_Device_Summary.md
+    title: The device summary, what it is, who it is for, the kit, sizes, what changed (also as PDF)
+  - path: ./Documentation/Plug_Puller_Design_Rationale.md
+    title: The design rationale, why each default is what it is (also as PDF)
 operation-instructions:
-  - path: ./docs/guides/one-sided/full-guide.md
-    title: Using the one-sided puller, safety and care, under Use it, Safety and Care
-  - path: ./docs/guides/two-sided/full-guide.md
-    title: Using the two-sided puller, safety and care, under Use it, Safety and Care
-user-manual: ./docs/guides/one-sided/full-guide.md
-manufacturing-instructions: ./docs/guides/one-sided/quick-start.md
+  - path: ./Documentation/Step_3_Guide_Plug_Puller_User_Guide.md
+    title: Step 3, the user guide, the pull, safety, what to do when it does not go well (also as PDF)
 
 design-files:
   - path: ./src/Plug_Puller_Parametric.scad
@@ -68,7 +80,7 @@ design-files:
 
 manufacturing-files:
   - path: ./stl/Plug-Puller/
-    title: Ready-to-print pullers for the common US plug families at three hand sizes
+    title: Ready-to-print pullers, every preset at three hand sizes
   - path: ./stl/Measuring-Stencil/
     title: Ready-to-print measuring stencil cards, Visual and Tactile label modes
   - path: ./dist/
@@ -77,6 +89,7 @@ manufacturing-files:
 tool-list:
   - A 3D printer (a bed of 200 by 200 mm or larger prints the stencil sheets whole)
   - Zip ties
+  - Side cutters for the zip-tie tails
   - A hook-and-loop strap (optional)
 
 software:
@@ -84,7 +97,7 @@ software:
     version: "2026.01.03 nightly (2021.01 or later works)"
     url: https://openscad.org/
 
-image: ./docs/images/two-sided-in-use-outlet.jpg
+image: ./Photos/two-sided/stage-pull-standard-plug.jpg
 
 keywords:
   - assistive-technology
@@ -99,7 +112,7 @@ keywords:
   - openat
 
 attestation:
-  - Built and used by the designer; the presets were measured from real plugs and test-printed; no third-party certification has been performed.
+  - Built and used by the designer; the presets were measured from real plugs; the 2-prong presets were test-printed on the one-sided puller and the 3-prong presets on the two-sided puller, except the new USB-C laptop tip preset; no third-party certification has been performed.
 
 related:
   - name: OpenAT-Template

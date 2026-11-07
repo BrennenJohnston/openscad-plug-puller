@@ -6,14 +6,14 @@
     "tier": "step",
     "quick_start": true,
     "title": "Plug preset",
-    "changes": "Fills in all six plug numbers from a measured reference plug, so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.",
+    "changes": "Fills in all six plug numbers from a measured reference plug (and, for the USB-C tip, the No plate / flush wall notch), so the pocket, the wall notch, the cord hook and the zip-tie and wing positions all take that plug's shape at once.",
     "diagram": {
       "view": "top",
       "style": "trace",
       "before": "Measure my plug",
-      "after": "Standard 3-prong plug - NEMA 5-15",
+      "after": "Flat 2-prong lamp plug - NEMA 1-15",
       "context": {},
-      "plug": "Standard 3-prong plug - NEMA 5-15",
+      "plug": "Flat 2-prong lamp plug - NEMA 1-15",
       "crop": null,
       "dimension": null
     },
@@ -177,7 +177,7 @@
     },
     "note": "The fatter of the two thickness numbers sets the floors, so lowering one alone changes nothing; 24 mm or more sends you to the two-sided puller.",
     "measure": {
-      "how": "The same thin direction, where the cord leaves the plug body, skipping the soft strain relief. On a round extension-cord plug this can be as fat as the prong end.",
+      "how": "The same thin direction, where the cord leaves the plug body, skipping the soft strain relief. On a straight-sided plug, such as a wide appliance plug, it is the same as at the prong end.",
       "typical": [
         8,
         30
@@ -2067,12 +2067,12 @@
     },
     "note": null,
     "measure": {
-      "how": "With the plug in the outlet, ruler from the wall plate face to the plug's back face. On a laptop or charger plug, measure from the device's edge.",
+      "how": "With the plug in the outlet, ruler from the wall plate face to the plug's back face.",
       "typical": [
         15,
         55
       ],
-      "example": 32.5,
+      "example": 46.1,
       "stencil": "R1",
       "anchor": "plug_length"
     }
@@ -2100,12 +2100,12 @@
     },
     "note": null,
     "measure": {
-      "how": "Caliper across the plug body just behind the prongs, the size the two plates close across. On a USB-C or charger tip, just behind the metal tip; on a round plug it is the diameter.",
+      "how": "Caliper across the plug body just behind the prongs, the size the two plates close across. On a round plug it is the diameter.",
       "typical": [
         10,
         40
       ],
-      "example": 20,
+      "example": 24.66,
       "stencil": "R1",
       "anchor": "plug_width_prong_end"
     }
@@ -2140,7 +2140,7 @@
         0,
         25
       ],
-      "example": 15.2,
+      "example": 15.6,
       "stencil": "R1",
       "anchor": "plug_head"
     }
@@ -2173,7 +2173,7 @@
         10,
         40
       ],
-      "example": 11.1,
+      "example": 13.6,
       "stencil": "R1",
       "anchor": "plug_width_cord_end"
     }
@@ -2206,7 +2206,7 @@
         3,
         10
       ],
-      "example": 7,
+      "example": 9.25,
       "stencil": "C1",
       "anchor": "cord"
     }
@@ -2232,7 +2232,7 @@
     },
     "note": null,
     "measure": {
-      "how": "Look at the plug body where the plates will grip it. Rounded sides for a round cord plug, a USB-C or charger tip; Flat sides for a boxy plug.",
+      "how": "Look at the plug body where the plates will grip it. Rounded sides for a round plug body; Flat sides for a boxy plug.",
       "typical": null,
       "example": null,
       "stencil": null,

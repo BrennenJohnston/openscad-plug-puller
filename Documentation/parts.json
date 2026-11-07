@@ -1,0 +1,83 @@
+[
+  {
+    "id": "one-sided-puller",
+    "name": "One-sided puller",
+    "file": "stl/Plug-Puller/Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_Medium.stl",
+    "source": null,
+    "old_names": [
+      "flat tool",
+      "Plug_Puller_Parametric"
+    ],
+    "count": 1,
+    "size_mm": [
+      71.8,
+      71.2,
+      6.3
+    ],
+    "volume_mm3": 12520,
+    "colour_in_photos": "yellow-green",
+    "optional": false,
+    "what_it_does": "Holds a plug with 2 prongs, or a USB-C tip, in its pocket; two fingers in its finger holes pull it straight out.",
+    "feel": "A flat part about 6 mm thick: a shallow pocket and a notch at the plug end, two large round finger holes in the middle, a J-shaped cord hook slot at the cord end, four small zip-tie holes and two curved wing openings around the pocket; the pocket face has rounded edges."
+  },
+  {
+    "id": "two-sided-plate",
+    "name": "Plate",
+    "file": "stl/Plug-Puller/Plug-Puller_Two-Sided_Standard-3-Prong-NEMA-5-15_Medium.stl",
+    "source": null,
+    "old_names": [
+      "clamshell",
+      "shell",
+      "Plug_Puller_Two_Sided"
+    ],
+    "count": 2,
+    "size_mm": [
+      68.0,
+      76.1,
+      4.0
+    ],
+    "volume_mm3": 7740,
+    "colour_in_photos": "green",
+    "optional": false,
+    "what_it_does": "Two identical plates close on a plug with 3 prongs from both sides; their toothed arms grip it and the zip ties hold the pair together.",
+    "feel": "A flat plate about 4 mm thick: two round finger holes and a cord channel at the near end, two arms with rows of small teeth on their inner edges, small zip-tie holes along each arm and a long strap slot outside the teeth; the outer face has rounded edges, the inner face square edges."
+  },
+  {
+    "id": "zip-tie",
+    "name": "Zip tie",
+    "file": null,
+    "source": "any hardware store",
+    "old_names": [],
+    "count": 3,
+    "size_mm": [
+      200,
+      3.6,
+      1.2
+    ],
+    "volume_mm3": null,
+    "colour_in_photos": "black",
+    "optional": false,
+    "what_it_does": "Holds the tool on the plug: three hold the two-sided plates together, two hold the one-sided puller on.",
+    "feel": "A thin plastic strip with a square head at one end; the tail goes through the head and holds."
+  },
+  {
+    "id": "strap",
+    "name": "Hook-and-loop strap",
+    "file": null,
+    "source": "any hardware store",
+    "old_names": [
+      "velcro strap"
+    ],
+    "count": 1,
+    "size_mm": [
+      200,
+      15,
+      2
+    ],
+    "volume_mm3": null,
+    "colour_in_photos": "black",
+    "optional": true,
+    "what_it_does": "Holds the one-sided puller on its plug instead of the zip ties, or as well.",
+    "feel": "A soft flat strap, hooks on one face and loops on the other."
+  }
+]

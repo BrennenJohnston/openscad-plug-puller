@@ -12,7 +12,7 @@ alone when its shape did not change.
 
 ```
 stl/
-  Plug-Puller/                 # 21 tools: 5 plug families x 3 hand sizes, in every file that offers them
+  Plug-Puller/                 # 15 tools: 5 plug families x 3 hand sizes, each in the tool that holds it
   Measuring-Stencil/
     Visual/                    # debossed printed labels (9 files)
     Tactile/                   # raised ADA characters + braille (9 files)
@@ -20,19 +20,21 @@ stl/
 
 ## Plug-Puller/
 
-Pick your **plug family**, then your **hand size** — `Small` / `Medium` /
-`Large`. Medium is the reference device (start there); Small ≈ 5th-percentile
-female hand, Large ≈ 95th-percentile male hand.
+Count your plug's prongs, pick its **plug family**, then your **hand size** —
+`Small` / `Medium` / `Large`. Medium is the reference device (start there);
+Small ≈ 5th-percentile female hand, Large ≈ 95th-percentile male hand. A plug
+with 2 prongs or a USB-C tip takes the one-sided puller; a plug with 3 prongs
+takes the two-sided puller. The plug size finder page
+([`docs/guides/plug-size-finder.svg`](../docs/guides/plug-size-finder.svg),
+print it at 100 %) shows every family at true size.
 
 | Plug family | File pattern | Tool type |
 | ----------- | ------------ | --------- |
+| USB-C laptop tip | `Plug-Puller_USB-C-Laptop-Tip_{Small,Medium,Large}.stl` | one-sided puller (one part), not yet test-printed |
 | Flat 2-prong lamp — NEMA 1-15 | `Plug-Puller_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
-| Standard 3-prong — NEMA 5-15 | `Plug-Puller_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | one-sided puller (one part) |
 | Wide 2-prong appliance plug — NEMA 1-15 | `Plug-Puller_Wide-2-Prong-Appliance_{Small,Medium,Large}.stl` | one-sided puller (one part) |
+| Standard 3-prong — NEMA 5-15 | `Plug-Puller_Two-Sided_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
 | Heavy-duty extension cord — NEMA 5-15 | `Plug-Puller_Two-Sided_Round-Extension-Cord-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
-| USB-C laptop tip | `Plug-Puller_Two-Sided_USB-C-Laptop-Tip_{Small,Medium,Large}.stl` | two-sided puller (**both plates**, Rounded sides) |
-| Flat 2-prong lamp — NEMA 1-15, two-sided | `Plug-Puller_Two-Sided_Flat-2-Prong-Lamp-NEMA-1-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
-| Standard 3-prong — NEMA 5-15, two-sided | `Plug-Puller_Two-Sided_Standard-3-Prong-NEMA-5-15_{Small,Medium,Large}.stl` | two-sided puller (**both plates**) |
 
 > **Each two-sided file holds both plates; flip one after printing.** Then
 > zip-tie the pair face to face around the plug.
@@ -52,10 +54,10 @@ raised ADA-size characters plus a fold-flat Grade 2 braille flap on every card
 | Card | Purpose |
 | ---- | ------- |
 | `All-Cards` | the full packed set — every card on one plate |
-| `P1_Lamp-Plug-Gauge` | flat 2-prong lamp plug silhouette (NEMA 1-15) |
-| `P2_Standard-3-Prong-Gauge` | standard 3-prong plug silhouette (NEMA 5-15) |
-| `P3_Heavy-Duty-Cord-Gauge` | heavy-duty round cord silhouette (NEMA 5-15) |
-| `P4_Wide-2-Prong-Appliance-Gauge` | wide 2-prong appliance plug silhouette (NEMA 1-15) |
+| `P1_Lamp-Plug-Gauge` | flat 2-prong lamp plug silhouette (NEMA 1-15), a one-sided puller preset |
+| `P2_Standard-3-Prong-Gauge` | standard 3-prong plug silhouette (NEMA 5-15), a two-sided puller preset |
+| `P3_Heavy-Duty-Cord-Gauge` | heavy-duty round cord silhouette (NEMA 5-15), a two-sided puller preset |
+| `P4_Wide-2-Prong-Appliance-Gauge` | wide 2-prong appliance plug silhouette (NEMA 1-15), a one-sided puller preset |
 | `R1_Ruler-100mm` | a tactile 100 mm ruler |
 | `C1_Cord-Gauge` | open-slot cord gauge that slides onto an installed cord |
 | `F1_Finger-Sizing-15-25mm` | finger-sizing holes Ø 15–25 mm |

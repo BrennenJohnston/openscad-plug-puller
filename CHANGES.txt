@@ -1,0 +1,8 @@
+Version 1.0.0 | 2026-10-27
+ - The two tools are split by the plug's prong count. The one-sided puller (one printed part) carries the 2-prong plugs and the USB-C tip: presets USB-C laptop tip (new, not yet test-printed), flat 2-prong lamp plug, wide 2-prong appliance plug. The two-sided puller (two plates zip-tied around the plug) carries the 3-prong plugs: presets standard 3-prong plug and heavy-duty extension cord. Test prints showed each tool holding only those plugs.
+ - Every preset is measured with a caliper on its own plug; the two-sided gap keeps a plug's prong-end width along its head.
+ - The one-sided upload file is now Plug_Puller_One_Sided_SingleFile.scad; the help text of each file's plug preset says which plugs it is for and names the other file.
+ - Printing: 15 ready-made tools in stl/Plug-Puller/ (every preset at Small, Medium and Large); flat on the bed, no supports, 0.2 mm layers, 3 to 4 walls, 25 to 35 % infill, PETG or PLA.
+ - Documentation: the Makers Making Change Open AT set in Documentation/ - three Step 1 guides (browser, OpenSCAD, MakerWorld), the Visual Assembly Guide, the Assembly Guide By Touch, the Maker Guide, the User Guide, the Device Summary, the Design Rationale and the bill of materials - each Markdown page printed as a tagged PDF; the guides' photographs in Photos/ and the listing's in MakerWorld_Photos/.
+ - A one-page plug size finder with every preset at true size and a calibration square; the measuring form starts with the prong count and the closest outline.
+ - The full history is in CHANGELOG.md.

@@ -24,3 +24,6 @@ Printed your tool and something is not quite right? Find your symptom below. Eve
 | 16 | A smooth round plug still slips out of the zip-tie hold | Thread a zip tie down one zip-tie hole, around the plug body, up the opposite hole, and cinch it | |
 | 17 | The hook is on the wrong side for your hand | Step 4: Hook side, Left or Right | |
 | 18 | The strap will not thread through the wing opening | Step 3: a smaller Strap width, or a narrower strap; the wing is sized to it | |
+| 19 | A 3-prong plug slips out of the tool | The two-sided puller, a separate file: it holds 3-prong plugs from both sides | |
+
+In test prints of the presets, the one-sided puller held every 2-prong plug well, and 3-prong plugs slipped out of it, which is why they belong to the two-sided puller. The USB-C laptop tip preset is new in version 1.0.0 and has not been test-printed yet; its thickness is an estimate.

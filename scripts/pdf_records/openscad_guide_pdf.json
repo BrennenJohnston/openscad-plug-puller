@@ -1,0 +1,14 @@
+{
+  "pdf": "Documentation/Step_1_Guide_Option_2_Plug_Puller_OpenSCAD_Guide.pdf",
+  "pdf_sha256": "55d25ffb700687b7dab4cb27308a22d35b63852572fa657dea24f040d751d04f",
+  "inputs": {
+    "Documentation/Step_1_Guide_Option_2_Plug_Puller_OpenSCAD_Guide.md": "87ead99e7df5d22f56cbb9ae864c314a37f67861ddc5e1e7c9818cc9c930013f",
+    "scripts/build_open_at_pdf.py": "272c366f54493dfd1b99eb65bc52c397f9c5b4a4d1a88e4a9fca0959dbaff5ae"
+  },
+  "pages": 4,
+  "bookmarks": 10,
+  "links": 16,
+  "pictures": 0,
+  "captions": 0,
+  "producer": "Skia/PDF m156"
+}

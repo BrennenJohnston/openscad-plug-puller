@@ -1,22 +1,17 @@
 """Generate the 1:1 paper measuring-stencil sheet.
 
-The paper alternative to the 3D-printable ``Measuring_Stencil.scad``:
-210 x 279 mm SVG pages (fit A4 and US Letter, the outline sheets'
-conventions). They print at true size as the last pages of each tool's quick
-start and full guide PDFs. Page 1 (``stencil-sheet.svg``) carries:
+The paper alternative to the 3D-printable ``Measuring_Stencil.scad``'s
+ruler and finger cards: one 210 x 279 mm SVG page (fits A4 and US Letter,
+the outline sheets' conventions), printed at true size as one of the last
+pages of each tool's quick start and full guide PDFs. It carries:
 
 * the 50 x 50 mm calibration square,
-* the plug-preset silhouettes that fit one row (P1 / P2 / P3) at exact 1:1
-  scale — width view, thickness view, and cord circle each,
 * a 100 mm ruler (R1),
 * the 18 finger-sizing circles (F1 / F2).
 
-Every further P card goes on a continuation page (``stencil-sheet-2.svg``,
-...) with its own calibration square: a silhouette is never scaled to fit.
-
-The preset plug numbers live in :data:`PLUG_PRESET_DIMS`;
-``tests/test_stencil_data.py`` asserts they match the main SCAD and
-``Measuring_Stencil.scad`` so the three copies cannot drift.
+The paper stand-in for the P plug cards is the plug size finder page
+(``scripts/generate_plug_finder.py``), which shows every preset of both
+tools at 1:1 on one page.
 
 Run from the repo root:
 
@@ -40,41 +35,6 @@ logger = logging.getLogger(__name__)
 FONT = "Helvetica, Arial, sans-serif"
 PAGE_W, PAGE_H = 210.0, 279.0
 DASH_CUT = "1.6,1.1"
-
-# (id, name, length, width wall, width cable, thickness wall,
-#  thickness cable, cord) — Step 1 dropdown order; keep in lock-step with
-# the `_eff_*` ternaries in src/Plug_Puller_Parametric.scad and
-# PLUG_PRESET_DIMS in Measuring_Stencil.scad (drift-tested).
-PLUG_PRESET_DIMS = [
-    ("P1", "Lamp 2-prong NEMA 1-15", 32.5, 20.0, 11.1, 18.6, 8.6, 3.6),
-    ("P2", "Standard 3-prong NEMA 5-15", 46.1, 24.66, 13.6, 18.9, 15.0, 9.25),
-    ("P3", "Heavy-duty cord NEMA 5-15", 51.0, 26.56, 24.5, 27.0, 27.0, 8.25),
-    ("P4", "Wide 2-prong NEMA 1-15", 38.0, 34.0, 34.0, 16.0, 16.0, 5.0),
-]
-SILHOUETTE_GAP = 3.0        # W -> T -> cord spacing inside a block
-SILHOUETTE_BLOCK_GAP = 4.5  # block -> block
-SILHOUETTE_X0 = 9.0
-SILHOUETTE_X_MAX = PAGE_W - 9.0
-
-
-def silhouette_block_width(dims) -> float:
-    _pid, _name, _length, ww, _wc, tw, _tc, cord = dims
-    return ww + SILHOUETTE_GAP + tw + SILHOUETTE_GAP + cord
-
-
-def silhouette_pages() -> List[List[tuple]]:
-    """Split PLUG_PRESET_DIMS into rows that fit one page's width, in order:
-    the first row is page 1, every later row a continuation page."""
-    pages: List[List[tuple]] = [[]]
-    x = SILHOUETTE_X0
-    for dims in PLUG_PRESET_DIMS:
-        w = silhouette_block_width(dims)
-        if pages[-1] and x + w > SILHOUETTE_X_MAX:
-            pages.append([])
-            x = SILHOUETTE_X0
-        pages[-1].append(dims)
-        x += w + SILHOUETTE_BLOCK_GAP
-    return pages
 
 # Finger circles in the same groups as the 3D stencil's F1 / F2 cards
 # (F1 = Ø15-25, F2 = Ø26-32).
@@ -152,23 +112,6 @@ class Svg:
         path.write_text("\n".join(self.parts + ["</svg>"]) + "\n", encoding="utf-8")
 
 
-def draw_trapezoid(
-    svg: Svg, cx: float, y_base: float, base_w: float, top_w: float, h: float
-) -> None:
-    """Isoceles trapezoid, base at y_base (SVG y grows downward, so the base
-    is the BOTTOM edge and the top edge sits at y_base - h)."""
-    svg.polygon(
-        [
-            (cx - base_w / 2, y_base),
-            (cx + base_w / 2, y_base),
-            (cx + top_w / 2, y_base - h),
-            (cx - top_w / 2, y_base - h),
-        ],
-        0.4,
-        DASH_CUT,
-    )
-
-
 def draw_header(svg: Svg) -> None:
     svg.text(PAGE_W / 2, 14, "Plug Puller — Measuring Stencil Sheet", 5.5,
              "bold", "middle")
@@ -185,7 +128,7 @@ def draw_header(svg: Svg) -> None:
     svg.text(72, 32, "1. Measure this square with a ruler.", 3.0)
     svg.text(72, 36.5, "It must be exactly 50 × 50 mm — if not, your", 3.0)
     svg.text(72, 41, "print was scaled: re-print at 100%.", 3.0)
-    svg.text(72, 47.5, "Card legend: the quick start, under Match a card", 2.8,
+    svg.text(72, 47.5, "Plug outlines: the plug size finder page", 2.8,
              fill="#444444")
     svg.text(72, 52, "Works on A4 and US Letter paper.", 2.8, fill="#444444")
 
@@ -203,50 +146,10 @@ def draw_ruler(svg: Svg, x0: float, y0: float, length: float = 100.0) -> None:
             svg.text(x0 + mm, y0 + 9.5, str(mm), 2.6, anchor="middle")
 
 
-def draw_plug_silhouettes(
-    svg: Svg, y_header: float, y_base: float, blocks: List[tuple], continued: bool = False
-) -> None:
-    svg.text(
-        14, y_header,
-        ("2. Plug silhouettes (1:1), continued — hold your plug against W (wide side) and "
-         "T (thin side); if it matches, pick that preset in Step 1."
-         if continued else
-         "2. Plug silhouettes (1:1) — hold your plug against W (wide side) and "
-         "T (thin side); if it matches, pick that preset in Step 1."),
-        3.0, "bold",
-    )
-    tallest = max(length for _pid, _name, length, *_rest in blocks)
-    if y_base - tallest < y_header + 3.0:
-        raise AssertionError(
-            f"Plug silhouettes ({tallest} mm tall) reach the row's heading"
-        )
-    gap = SILHOUETTE_GAP
-    block_gap = SILHOUETTE_BLOCK_GAP
-    x = SILHOUETTE_X0
-    for pid, name, length, ww, wc, tw, tc, cord in blocks:
-        x_w = x + ww / 2
-        x_t = x + ww + gap + tw / 2
-        x_c = x + ww + gap + tw + gap + cord / 2
-        draw_trapezoid(svg, x_w, y_base, ww, wc, length)
-        draw_trapezoid(svg, x_t, y_base, tw, tc, length)
-        svg.circle(x_c, y_base - cord / 2, cord, 0.35, DASH_CUT)
-        svg.text(x_w, y_base + 4.5, "W", 3.4, "bold", "middle")
-        svg.text(x_t, y_base + 4.5, "T", 3.4, "bold", "middle")
-        svg.text(x_c, y_base + 4.5, "cord", 2.6, anchor="middle")
-        svg.text(x, y_base + 10, pid, 4.2, "bold")
-        svg.text(x + 8.5, y_base + 10, name, 2.6, fill="#444444")
-        x = x_c + cord / 2 + block_gap
-
-    if x - block_gap > SILHOUETTE_X_MAX:
-        raise AssertionError(
-            f"Plug silhouette row overflows the page ({x - block_gap:.1f} mm)"
-        )
-
-
 def draw_finger_circles(svg: Svg, y_header: float, row_centers: List[float]) -> None:
     svg.text(
         14, y_header,
-        "3. F1 / F2 — finger circles: smallest circle your middle finger "
+        "2. F1 / F2 — finger circles: smallest circle your middle finger "
         "passes through, minus 5 = finger width.",
         3.0, "bold",
     )
@@ -264,47 +167,21 @@ def draw_finger_circles(svg: Svg, y_header: float, row_centers: List[float]) -> 
 
 
 def build_sheet() -> Svg:
-    """Page 1: the header, the ruler, the first silhouette row and the finger circles."""
-    pages = silhouette_pages()
+    """The page: the header, the ruler and the finger circles."""
     svg = Svg()
     draw_header(svg)
     # Ruler in the header row, right of the calibration square.
     draw_ruler(svg, x0=76, y0=64)
-    # Plug silhouettes: bases on one line, tallest preset (the heavy-duty
-    # plug) is 51 mm.
-    draw_plug_silhouettes(svg, y_header=84, y_base=139, blocks=pages[0])
     # Finger circles: rows sized so the largest circle of each row clears
-    # the next header/footer.
-    draw_finger_circles(svg, y_header=154, row_centers=[166, 191, 220, 252])
-    more = f" · page 1 of {len(pages)}" if len(pages) > 1 else ""
+    # the next row and the footer.
+    draw_finger_circles(svg, y_header=90, row_centers=[106, 136, 172, 212])
     svg.text(
         PAGE_W / 2, 274.5,
         "openscad-plug-puller · measuring stencil sheet · scale 1:1 · "
-        f"prefer plastic? print stl/Measuring-Stencil/{more}",
+        "prefer plastic? print stl/Measuring-Stencil/",
         2.4, anchor="middle", fill="#444444",
     )
     return svg
-
-
-def build_continuation_sheet(page_no: int, blocks: List[tuple], n_pages: int) -> Svg:
-    """A continuation page: the header with its own calibration square and
-    one more row of plug silhouettes (no ruler, no finger circles)."""
-    svg = Svg()
-    draw_header(svg)
-    draw_plug_silhouettes(svg, y_header=86, y_base=137, blocks=blocks, continued=True)
-    svg.text(
-        PAGE_W / 2, 274.5,
-        "openscad-plug-puller · measuring stencil sheet · scale 1:1 · "
-        f"prefer plastic? print stl/Measuring-Stencil/ · page {page_no} of {n_pages}",
-        2.4, anchor="middle", fill="#444444",
-    )
-    return svg
-
-
-def sheet_paths(out: Path) -> List[Path]:
-    """The page files: <out>, then <stem>-2<suffix>, <stem>-3<suffix>, ..."""
-    n = len(silhouette_pages())
-    return [out] + [out.with_name(f"{out.stem}-{k}{out.suffix}") for k in range(2, n + 1)]
 
 
 def main() -> int:
@@ -318,15 +195,8 @@ def main() -> int:
         format="%(asctime)s - %(levelname)s - %(message)s",
     )
 
-    pages = silhouette_pages()
-    paths = sheet_paths(args.out)
-    build_sheet().save(paths[0])
-    logger.info("Wrote %s (%d plug blocks, the ruler and the finger circles)",
-                paths[0], len(pages[0]))
-    for k, (path, blocks) in enumerate(zip(paths[1:], pages[1:]), start=2):
-        build_continuation_sheet(k, blocks, len(pages)).save(path)
-        logger.info("Wrote %s (continuation page: %d plug block%s)",
-                    path, len(blocks), "" if len(blocks) == 1 else "s")
+    build_sheet().save(args.out)
+    logger.info("Wrote %s (the calibration square, the ruler and the finger circles)", args.out)
     return 0
 
 

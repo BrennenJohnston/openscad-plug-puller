@@ -47,3 +47,6 @@ memory-bank/
 
 # OpenSCAD scad-check output
 build/
+
+# Word lock files (the listing's Word copy open in Word)
+~$*

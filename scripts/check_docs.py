@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """The documentation gate: the mechanical rules every person-facing Markdown
-file must meet, checked over ``README.md`` and ``docs/**/*.md``.
+file must meet, checked over ``README.md``, ``stl/README.md``,
+``docs/**/*.md`` and the Open AT document set, ``Documentation/*.md``.
 
 The rules (from the Accessible MakerWorld Documentation Standard, section 1,
 and the AI-AT guardrails' documentation bloat scan):
@@ -50,6 +51,7 @@ RETIRED = ("flat tool", "flat-tool", "heavy-duty clamshell", "clamshell", "step 
            "tool_style", "near the wall", "near the cord")
 COMPLIANCE = ("wcag compliant", "ada compliant", "fully accessible")
 ALT_PREFIXES = ("image of", "photo of", "picture of")
+MMC_START, MMC_END = "<!-- ABOUT MMC START -->", "<!-- ABOUT MMC END -->"
 ALLOW = re.compile(r"<!--\s*docs-gate:\s*allow\s+([^>]+?)\s*-->", re.I)
 
 _IMAGE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
@@ -79,17 +81,27 @@ def gate_files(root: Path = PROJECT_ROOT) -> List[Path]:
     sources (``docs/guides/source/``): those are the pieces the four guide
     pages are assembled from, and it is the assembled pages, which carry
     every word of them, that the gate reads."""
-    files = [root / "README.md"]
+    files = [root / "README.md", root / "stl" / "README.md"]
     source_dir = root / "docs" / "guides" / "source"
     files += sorted(f for f in (root / "docs").rglob("*.md") if source_dir not in f.parents)
+    files += sorted((root / "Documentation").glob("*.md"))
     return [f for f in files if f.exists()]
 
 
 def _prose_lines(text: str) -> List[tuple]:
-    """(line number, text with fenced code and backtick spans blanked)."""
+    """(line number, text with fenced code and backtick spans blanked).
+    The Makers Making Change block of README.md, between its markers, is
+    blanked too: it is their text, rewritten by their workflow."""
     out = []
     in_fence = False
+    in_mmc = False
     for n, line in enumerate(text.splitlines(), 1):
+        if MMC_START in line:
+            in_mmc = True
+        if in_mmc:
+            in_mmc = MMC_END not in line
+            out.append((n, ""))
+            continue
         if _FENCE.match(line):
             in_fence = not in_fence
             out.append((n, ""))
@@ -191,6 +203,10 @@ def check_file(path: Path) -> List[Finding]:
 
 def _check_target(path: Path, n: int, target: str, findings: List[Finding]) -> None:
     if target.startswith(("http://", "https://", "mailto:", "#")):
+        return
+    # A placeholder someone fills later, such as Makers Making Change's
+    # <MMCWebLink>, is written <LikeThis> and is not a file.
+    if re.fullmatch(r"<[A-Za-z]+>", target):
         return
     rel = target.split("#", 1)[0]
     if not rel:

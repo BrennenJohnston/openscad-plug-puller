@@ -1,0 +1,21 @@
+{
+  "pdf": "Documentation/Step_2_Guide_Option_2_Plug_Puller_Assembly_Guide_By_Touch.pdf",
+  "pdf_sha256": "04e2ecb6afc270c7239043286c152074ab114be1aaab60b94cc9bfd25c264a5f",
+  "inputs": {
+    "Documentation/Step_2_Guide_Option_2_Plug_Puller_Assembly_Guide_By_Touch.md": "302a5fdee1730350322f6f0f909c0acf67656501ac3587afa79752a0feaac712",
+    "Photos/two-sided/overview-two-sided-plates.jpg": "5319243e02696a93711835c8d3dd372061f13a97e6e2ea063a4d192c7826375a",
+    "Photos/two-sided/stage-plug-on-first-plate.jpg": "529c458a4907b287f03efae1fcf1230d6eff38367a61a24a8aeca998389213fc",
+    "Photos/two-sided/stage-second-plate-on.jpg": "813c6a4c4f8b8da37efa240697a14aa2369ac39784ff58974fce3c78fa027b07",
+    "Photos/two-sided/stage-zip-ties-threaded.jpg": "06269172b4415c7c2cb8be805252c990434ef0a79726cc8ea5f6b83c63bec976",
+    "Photos/two-sided/stage-zip-ties-pulled.jpg": "58b2e60434ad16d725632f6af4f99c0933978851e507e523b6749cd5a14fff21",
+    "Photos/two-sided/finished-two-sided-heavy-duty-plug.jpg": "03990394a976bf557dfb997070f22f9b7389ca21456cbe478b4c703df4ef2f4b",
+    "Photos/one-sided/finished-one-sided-lamp-plug-small.jpg": "4b6b94a74d98ff197e995e4920111d38b830e1c943fb3a9eb070acca152f7af5",
+    "scripts/build_open_at_pdf.py": "272c366f54493dfd1b99eb65bc52c397f9c5b4a4d1a88e4a9fca0959dbaff5ae"
+  },
+  "pages": 9,
+  "bookmarks": 20,
+  "links": 24,
+  "pictures": 7,
+  "captions": 7,
+  "producer": "Skia/PDF m156"
+}

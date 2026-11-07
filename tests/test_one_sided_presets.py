@@ -1,19 +1,20 @@
-"""Every one-sided `plug_preset` thinner than 24 mm renders clean with its own numbers.
+"""Every one-sided `plug_preset` renders clean with its own numbers.
 
 The one-sided puller's dropdown carries the plugs the owner chose, with
-the labels the owner wrote. Each preset fills in the plug's six
+the labels the owner wrote: the 2-prong plugs and the USB-C tip (3-prong
+plugs belong to the two-sided file). Each preset fills in the plug's six
 numbers (length; width at the prong end and at the cord end; thickness at
-both ends; cord). Only plugs thinner than 24 mm belong here: the heavy-duty
-extension cord stays in the dropdown as the signpost to the two-sided file
-and prints W-20 by design, so it is not in this table.
+both ends; cord), and every one is thinner than 24 mm. The USB-C tip also
+carries the "No plate / flush" wall notch, since a laptop or charger has
+no cover plate.
 
 The green confirmation tag is preview-only geometry and never reaches a CLI
 render or its console, so this suite reads the derived-values echo block
 instead: the pocket runs the plug's length (D-19b), the hook slot is the cord
-plus its 0.7625 mm clearance, held to 3 to 10 mm (D-3; the standard plug's
-9.25 mm cord meets the 10 mm limit), and the wall notch is the prong-end width
-plus twice the 0.835 mm sliding clearance (D-12). Together they prove the
-preset's numbers reached the routing.
+plus its 0.7625 mm clearance, held to 3 to 10 mm (D-3), and the wall notch
+is the prong-end width plus twice the 0.835 mm sliding clearance (D-12) and
+as deep as the preset's plate style (D-13). Together they prove the preset's
+numbers reached the routing.
 
 License: PolyForm Noncommercial 1.0.0
 """
@@ -31,17 +32,20 @@ ONE_SIDED_SCAD = PROJECT_ROOT / "src" / "Plug_Puller_Parametric.scad"
 
 # Presets thinner than 24 mm, in Customizer order, with their six numbers (mm).
 PRESETS: Dict[str, Dict[str, float]] = {
+    "USB-C laptop tip": {
+        "length": 17.0, "width_prong_end": 10.25, "width_cord_end": 10.25,
+        "thickness_prong_end": 6.5, "thickness_cord_end": 6.5, "cord": 6.1,
+        "notch_depth": 1.5,
+    },
     "Flat 2-prong lamp plug - NEMA 1-15": {
         "length": 32.5, "width_prong_end": 20.0, "width_cord_end": 11.1,
         "thickness_prong_end": 18.6, "thickness_cord_end": 8.6, "cord": 3.6,
-    },
-    "Standard 3-prong plug - NEMA 5-15": {
-        "length": 46.1, "width_prong_end": 24.66, "width_cord_end": 13.6,
-        "thickness_prong_end": 18.9, "thickness_cord_end": 15.0, "cord": 9.25,
+        "notch_depth": 3.81,
     },
     "Wide 2-prong appliance plug - NEMA 1-15": {
         "length": 38, "width_prong_end": 34, "width_cord_end": 34,
         "thickness_prong_end": 16, "thickness_cord_end": 16, "cord": 5,
+        "notch_depth": 3.81,
     },
 }
 
@@ -110,3 +114,7 @@ def test_preset_renders_clean_with_its_own_numbers(openscad_runner, tmp_path, la
     expected_notch = spec["width_prong_end"] + 2 * FIT_SLIDE_CLEARANCE
     assert abs(notch - expected_notch) <= TOLERANCE, (
         f"{label}: wall notch {notch} mm, expected the prong-end width plus clearance {expected_notch} mm")
+
+    notch_depth = _derived(console, "plug_wall_notch_height")
+    assert abs(notch_depth - spec["notch_depth"]) <= TOLERANCE, (
+        f"{label}: wall notch {notch_depth} mm deep, expected {spec['notch_depth']} mm")

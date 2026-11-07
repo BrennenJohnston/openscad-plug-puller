@@ -90,7 +90,7 @@ jobs:
           python tests/validate_parameter_schema.py --scad-file src/Plug_Puller_Two_Sided.scad --mapping-file parameter_mapping_two_sided.json
 
       - name: Verify flattened single-file build is fresh (dist/)
-        # dist/Plug_Puller_SingleFile.scad is a committed generated
+        # dist/Plug_Puller_One_Sided_SingleFile.scad is a committed generated
         # artifact (single-file requirement for MakerWorld PMM and the
         # openscad-playground `?src=` path). Fails when src/ changed
         # without regenerating it. Render-level parity against the golden

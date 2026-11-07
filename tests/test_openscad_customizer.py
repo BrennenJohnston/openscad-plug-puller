@@ -51,13 +51,12 @@ EXPECTED_ATTACHMENT_OPTIONS = [
     "Zip ties", "Velcro strap", "Zip ties + Velcro", "None",
 ]
 
-# The one-sided plug presets in Customizer order (the owner's choice of plugs and labels).
-# The heavy-duty cord stays as the signpost to the two-sided file (W-20).
+# The one-sided plug presets in Customizer order (the owner's choice of plugs and labels):
+# 2-prong plugs and the USB-C tip; 3-prong plugs are the two-sided file's.
 ONE_SIDED_PLUG_PRESET_OPTIONS = [
     "Measure my plug",
+    "USB-C laptop tip",
     "Flat 2-prong lamp plug - NEMA 1-15",
-    "Standard 3-prong plug - NEMA 5-15",
-    "Heavy-duty extension cord - NEMA 5-15",
     "Wide 2-prong appliance plug - NEMA 1-15",
 ]
 TWO_SIDED_SIZE_OPTIONS = ["Small", "Medium", "Large", "Measure my hand"]
@@ -66,10 +65,8 @@ TWO_SIDED_ATTACHMENT_OPTIONS = ["Zip ties + Velcro strap", "Zip ties"]
 # plugs, their file and the labels).
 TWO_SIDED_PLUG_PRESET_OPTIONS = [
     "Measure my plug",
-    "Heavy-duty extension cord - NEMA 5-15",
-    "USB-C laptop tip",
-    "Flat 2-prong lamp plug - NEMA 1-15",
     "Standard 3-prong plug - NEMA 5-15",
+    "Heavy-duty extension cord - NEMA 5-15",
 ]
 ONE_SIDED_ONLY_PARAMETERS = [
     "measure_plug_width_wall",

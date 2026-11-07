@@ -1,0 +1,14 @@
+{
+  "pdf": "Documentation/Plug_Puller_Design_Rationale.pdf",
+  "pdf_sha256": "96d7367725ba2d220e251a1350edb6ec6524109470d33c58a08b31fb75c4b516",
+  "inputs": {
+    "Documentation/Plug_Puller_Design_Rationale.md": "b1e074e7b6363af464b199f008d18b9f564b76f3e78e7515778b68a15b64b47b",
+    "scripts/build_open_at_pdf.py": "272c366f54493dfd1b99eb65bc52c397f9c5b4a4d1a88e4a9fca0959dbaff5ae"
+  },
+  "pages": 5,
+  "bookmarks": 10,
+  "links": 14,
+  "pictures": 0,
+  "captions": 0,
+  "producer": "Skia/PDF m156"
+}
